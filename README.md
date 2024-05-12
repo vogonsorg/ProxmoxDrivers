@@ -7,9 +7,6 @@ This repo will ONLY be for the latest working drivers for Proxmox devices AND pa
 The software within this repo have their own copyright and licenses, reference the respective .inf files and copyright metadata for the copyright owners of said software.
 
 The below are the owners of the Coprighted files that I've been able to find manually:
-
-The following are the Copyright owners of the files in this repo:
-
 AlterWare,
 AnaPa Corp,
 BearWindows,
