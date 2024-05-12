@@ -1,0 +1,332 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Client Computer Hardware Installation</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+Client Computer Hardware Installation</h1>
+<P>
+Before you install the Boot Agent, make sure the client computer's hardware is 
+installed properly. To do this, make sure that a compatible network adapter is 
+installed and the Boot Agent software image resides within the network adapter's 
+flash ROM. The following topics guide you through the hardware installation 
+process:</P>
+
+<p class="contents"><a href="#setup">Setup for a Known Configuration</a></p>
+<p class="contents"><a href="#identify_config">Identifying the Client Computer Configuration</a></p>
+<p class="contents"><a href="#flash_wfm_adapters">Flash ROM and Intel WfM-compatible Adapters</a></p>
+<p class="contents"><a href="#flash_upgrades">Installing Flash ROM Upgrades</a></p>
+<br>
+
+<hr>
+
+<h2><a name="setup"></a>Setup for a Known Configuration</h2>
+<P>If you have an Intel <a href="glossary.htm#WfM">WfM</a>-compatible adapter (such as the
+<i> Intel&#174;
+PRO/100 S Desktop Adapter</i>
+or the <i>Intel&#174;  PRO/1000 T Desktop Adapter</i>) installed in your client computer, the flash ROM device is already available in your adapter, and no further installation steps are
+necessary. However, you may still wish to configure the Boot Agent software. To do so,
+see <a HREF="tool_ins.htm" CLASS="XRef"> Intel&#174; Boot Agent Tools Installation
+Suite</a>.</P>
+<table border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><b><i>NOTE</i>:</b>
+      For Intel server adapters, the flash ROM can be enabled using
+      <a href="dos_util.htm"> IBAUtil</a>.</td>
+  </tr>
+</table>
+
+<P>
+If you do not have an Intel WfM-compatible adapter installed on your client computer,
+check the hardware configuration of your client computer. You can use the
+hardware configuration information to determine proper installation through the
+steps indicated in the Boot Agent Installation Procedures table below.
+</P>
+
+<h3 align="center"><a name="install_procedures"></a>Boot Agent Installation Procedures</h3>
+
+<TABLE BORDER="1" cellpadding="4" cellspacing="0">
+  <TR>
+	<TH ROWSPAN="1" COLSPAN="1">
+		<h4>Client Computer Hardware Configuration</h4>
+		</TH>
+	<TH ROWSPAN="1" COLSPAN="1">
+		<h4>Perform These Steps:</h4>
+		</TH>
+  </TR>
+  <TR>
+	<TD COLSPAN="1">
+		<P>
+		A 10/100 adapter is installed in client computer, but no flash ROM device is installed 
+		(or the flash ROM is smaller than 64 KB)</P>
+		</TD>
+	<TD COLSPAN="1" class="numlst">
+	<ol>
+  	  <li>
+    	<p class="numlst">Remove the adapter. The adapter documentation 
+    	gives removal/installation instructions.</li>
+  	  <li>
+    	<p class="numlst">Install a 64 KB (or larger) flash ROM device 
+    	containing a Boot Agent software image. See <a href="#flash_upgrades">Installing Flash ROM
+		Upgrades</a> for installation instructions.</li>
+  	  <li>
+    	<p class="numlst">Reinstall the adapter. The 
+    	adapter documentation gives removal/installation instructions.</li>
+  	</ol>
+  	</TD>
+  </TR>
+  <TR>
+	<TD ROWSPAN="1" COLSPAN="1">
+		<P>
+		Client computer motherboard incorporates compatible LAN on motherboard 
+		(<a href="glossary.htm#LOM">LOM</a>) hardware</P>
+		</TD>
+	<TD ROWSPAN="1" COLSPAN="1" class="numlst">
+		<ol>
+  		  <li>
+    		<p class="numlst">Follow the motherboard manufacturer's 
+    		update instructions to install the <a href="glossary.htm#BIOS"> BIOS</a> code that 
+    		incorporates the Boot Agent software.</li>
+  		  <li>
+    		<p class="numlst">Alternatively, if the 
+    		motherboard has a separate ROM socket that accepts a 64 KB (or larger) flash ROM device 
+    		containing a Boot Agent software image, see <a href="#flash_upgrades">Installing Flash ROM
+			Upgrades</a> for installation instructions. Contact the motherboard manufacturer to get 
+			the code that must be loaded into the flash ROM in this case.</li>
+		</ol>
+		</TD>
+  </TR>
+</TABLE>
+<br>
+
+<hr>
+
+<h2>
+<a name="identify_config"></a>Identifying the Client Computer Configuration</h2>
+<P>
+To determine the hardware configuration of your client computer without removing its cover:</P>
+<ol>
+<LI CLASS="Proc-Step1">
+<p class="numlst">Examine the back panel of the computer to determine if there is a network 
+adapter already installed. The following figure shows the back panel of a
+typical computer and indicates the areas you should examine:</LI>
+</ol>
+
+<p align="center" style="margin-top: 0; margin-bottom: 0">
+<img border="0" src="compback.gif" width="321" height="182">
+
+<ol start="2">
+  <li>
+    <p class="numlst">As shown in the figure, the network connector is an RJ-45 connector. 
+    If there is a network connector in the back panel cluster only, it is possible that the 
+    computer motherboard incorporates compatible LAN on motherboard
+    (<a href="glossary.htm#LOM">LOM</a>) hardware. Contact the motherboard manufacturer to 
+    verify this information. If your motherboard is equipped with LOM hardware, perform either 
+    of the following:</li>
+</ol>
+<blockquote>
+  <ol type="a">
+    <li>
+      <p class="numlst">Follow the motherboard manufacturer's instructions to check if your computer's
+      <a href="glossary.htm#BIOS"> BIOS</a> already handles Boot Agent capability. Otherwise, ask 
+      your manufacturer for a new BIOS upgrade for your system.</li>
+    <li>
+      <p class="numlst">Alternatively, if the motherboard has a separate ROM socket that accepts 
+      a 64 KB (or larger) flash ROM device containing a Boot Agent software image,
+      see <a href="#flash_upgrades">Installing Flash ROM
+Upgrades</a> for installation instructions. Contact the motherboard manufacturer to get the code 
+that must be loaded into the flash ROM in this case.</li>
+  </ol>
+</blockquote>
+<ol start="3">
+  <li>
+    <p CLASS="numlst">If there is no network connector at the back of your computer, you must install 
+    a network adapter and possibly a flash ROM device on the adapter. Refer to the installation 
+    procedures for the adapter for any setup
+    requirements; then follow the procedures in <a href="#flash_upgrades">Installing Flash ROM
+Upgrades</a> before installing the adapter.</li>
+  <li>
+    <p CLASS="numlst">If there is a network connector in one of the add-in board slots, there might 
+    be a compatible network adapter already installed in the computer. Perform the following  steps 
+    to identify all compatible network adapters already installed in your computer:</li>
+</ol>
+<blockquote>
+  <ol type="a">
+    <li>
+      <p class="numlst">Boot your computer to DOS (a DOS Command Prompt window will not work).</li>
+    <li>
+      <p class="numlst">From the drive or directory containing the Boot Agent software, type
+      <code>IBAUTIL</code> and then press <b>Enter</b>.</li>
+      <p class="numlst">If there is no flash ROM device installed, IBAUtil
+      displays the following type of information:</p>
+  		<table border="0" cellspacing="0" cellpadding="4">
+    	  <tr>
+      		<td align="center"><code>===</code></td>
+      		<td align="center"><code>=================</code></td>
+      		<td align="center"><code>======</code></td>
+      		<td align="center"><code>=====</code></td>
+      		<td align="center"><code>============</code></td>
+      		<td align="center"><code>==================</code></td>
+      		<td align="center"><code>====</code></td>
+      		<td align="center"><code>====</code></td>
+    	  </tr>
+    	  <tr>
+      		<td align="center"><code>NIC</code></td>
+      		<td align="center"><code>Network Address</code></td>
+      		<td align="center"><code>Series</code></td>
+      		<td align="center"><code>WOL</code></td>
+      		<td align="center"><code>Boot Agent</code></td>
+      		<td align="center"><code>FLASH Memory</code></td>
+      		<td align="center"><code>Size</code></td>
+      		<td align="center"><code>Valid</code></td>
+    	  </tr>
+    	  <tr>
+      		<td align="center"><code>===</code></td>
+      		<td align="center"><code>=================</code></td>
+      		<td align="center"><code>======</code></td>
+      		<td align="center"><code>=====</code></td>
+      		<td align="center"><code>============</code></td>
+      		<td align="center"><code>==================</code></td>
+      		<td align="center"><code>====</code></td>
+      		<td align="center"><code>====</code></td>
+    	  </tr>
+    	  <tr>
+      		<td align="center"><code>1</code></td>
+      		<td align="center"><code>xxxxxxxxxxxx</code></td>
+      		<td align="center"><code>xxxx</code></td>
+      		<td align="center"><code>No</code></td>
+      		<td align="center"><code>x.x.xx</code></td>
+      		<td align="center"><code>Unknown [8282]</code></td>
+      		<td align="center"><code>1024</code></td>
+      		<td align="center"><code>Yes</code></td>
+    		</tr>
+  		</table>
+		<br>
+		<table border="0" cellpadding="4" cellspacing="0">
+  		  <tr>
+    		<td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    		<td valign="top"><b><i>NOTE</i>:</b>
+			If the flash ROM device installed in the adapter ROM socket is not large enough (64 KB or larger),
+      		IBAUtil returns a message stating that the flash is too small, and does not allow you to proceed.</td>
+  		  </tr>
+		</table>
+  		<p class="numlst">
+    	At this time, assuming there is a large enough flash device installed, IBAUtil
+    	will prompt you to update the flash ROM.</p>
+  		</li>
+    <li><p class="numlst">Update the flash ROM. See
+    <a href="sw_inst.htm#install_dos">Installing/Updating in DOS Environments</a> for instructions.</li>
+    <li>
+      <p class="numlst">If there is no flash device installed, or if the installed flash device is too small,
+      see <a href="#flash_upgrades">Installing Flash ROM Upgrades</a> for instructions.</li>
+  </ol>
+</ol>
+</blockquote>
+
+<hr>
+
+<h2>
+<a name="flash_wfm_adapters"></a>Flash ROM and Intel WfM-compatible Adapters</h2>
+<P>
+All Intel Wired for Management-compatible (<a href="glossary.htm#WfM ">WfM</a>-compatible) adapters are 
+equipped with an integrated flash ROM device. The Boot Agent software image is pre-programmed into the 
+flash ROM device at the factory; therefore, no software installation is required.</P>
+<P>
+Some cases require that you update the flash ROM with a new Boot Agent software
+image. For example, you must update the flash ROM when upgrading to a newer
+version of the Boot Agent software. For
+information about installing or updating flash ROM with a new Boot Agent
+software image, select the desired environment below:</P>
+<ul>
+  <li>
+    <p class="numlst"><a href="sw_inst.htm#install_dos">DOS</a></li>
+  <li>
+    <p class="numlst"><a href="sw_inst.htm#install_windows">Windows</a></li>
+</ul>
+<P>
+In the event that you wish to install flash ROM in an adapter that has an
+empty socket, see <a href="overview.htm#rom_devices">Compatible
+Flash ROM Devices</a> for instructions to access a list of flash ROM devices
+that are compatible with the Intel&#174 Boot Agent.</P>
+
+<hr>
+
+<h2>
+<a name="flash_upgrades"></a>Installing Flash ROM Upgrades</h2>
+<P>
+If your adapter is not equipped with an integrated flash ROM device, install a flash ROM device 
+in your adapter.
+</P>
+<table border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <td valign="top" height="28"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" height="28"><b><i>NOTE</i>:</b> Adding flash ROM or using
+      motherboard supplied flash ROM is applicable only to 10/100 adapters.</td>
+  </tr>
+</table>
+<P>
+To install a flash ROM device:</P>
+<ol>
+  <LI>
+	<p class="numlst">
+	Turn off and unplug your computer. Then, remove its cover.<br>
+	<table border="0" cellpadding="4" cellspacing="0">
+  	  <tr>
+    	<td valign="top" height="28"><img border="0" src="caut2.gif" width="23" height="21"></td>
+    	<td valign="top" height="28"><b><i>CAUTION</i>:</b>
+ 		Turn off and unplug the computer before removing the computer cover. Failure to do so could endanger 
+ 		you and might damage the adapter or computer. Observe appropriate static electricity
+		handling precautions when working with components, adapters, and the computer.</td>
+  	  </tr>
+	</table>
+ </LI>
+ <li>
+    <p CLASS="numlst">
+	Identify the adapter and the adapter slot in which it is installed. Then, remove the adapter 
+	bracket screw.</li>
+  <li>
+    <p CLASS="numlst">
+	Remove the adapter and move it to an area free of static electricity. The following figure shows 
+	how to install the flash ROM device in the socket:
+	<p align="center">
+	&nbsp;<img border="0" src="instrom.gif" width="201" height="136">
+	<br>
+	</li>
+  <li>
+    <p CLASS="numlst">
+	Refer to the figure and install the flash ROM device in the socket of the adapter. Note the 
+	location of the notched corner of the flash ROM device and the corresponding notch in the socket. 
+	There is only one correct orientation for the flash ROM device.</li>
+  <li>
+    <p CLASS="numlst">
+	Reinstall the adapter in the slot from which you removed it. If you are installing the adapter 
+	for the first time, follow the adapter installation
+	instructions and install it in an appropriate PCI expansion slot (refer to the following figure).
+	<p align="center">
+	&nbsp;<img border="0" src="instadpt.gif" width="330" height="319">
+	</li>
+  <li>
+    <p CLASS="numlst">
+	Push the adapter into the slot until the adapter is firmly seated. Then, secure the adapter 
+	bracket with a screw.</li>
+  <li>
+    <p CLASS="numlst">
+	Replace the computer cover and plug in the power cord.</li>
+  <li>
+    <p CLASS="numlst">
+	Turn on the power. The computer <a href="glossary.htm#BIOS"> BIOS</a>  will automatically
+	assign resources to the adapter. If you get a configuration error, see the troubleshooting
+	instructions in the adapter's installation guide.</li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 10/28/02 9:00a <!-- $--> Revision <!--$$Revision:--> 6 <!-- $--></code></p>
+
+</body>
+</html>

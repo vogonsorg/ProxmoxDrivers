@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 Översikt
+2 Navigera i PROSet II=GENERAL_PAGE
+2 Visa adapter- och drivrutinsinformation
+3 Allmän information=General_Information
+3 Kortinformation=Adapter_Details
+3 Drivrutinsinformation=Driver_Information
+1 Konfigurera adaptern
+2 Ange hastighet och duplexinställningar=Set_Speed_and_Duplex
+2 Konfigurera strömförbrukning=Configure_Power_Management
+2 Konfigurera avancerade funktioner=Configure_Advanced_Features
+2 Aktivera IPSec=Enable_IPSec
+2 Spara konfiguration till en fil=SAVERESTORE
+2 Ta bort en adapter=Remove_an_Adapter_Instance
+1 Skapa och konfigurera team
+2 Teamtyper
+3 Om Teaming=Teaming_Info
+3 Teamtyper=Team_Types
+3 Adapterfeltolerans=Adapter_Fault_Tolerance
+3 Växelfeltolerans=Switch_Fault_Tolerance
+3 Anpassningsbar belastningsutjämning=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Statisk=FEC
+3 GEC/LA/802.3ad: Statisk=GEC
+3 IEEE 802.3ad: Dynamisk=Dynamic_3ad
+2 Konfigurera ett team
+3 Skapa ett team=Create_a_New_Team
+3 Testa växelkonfiguration=Test_Switch_Configuration
+3 Konfigurera avancerade inställningar=Teaming_Advanced_Settings
+2 Ändra teamkonfiguration
+3 Ändra adapterteaminginställning=Change_Adapter_Teaming_Mode
+3 Ange en adapter som primär eller sekundär=Specify_an_Adapter_as_Primary_or_Secondary
+3 Lägga till en adapter till ett team=Add_an_Adapter_to_an_Existing_Team
+3 Ta bort en adapter från ett team=Remove_an_Adapter_from_a_Team
+3 Avancerade inställningar för team=Teaming_Advanced_Settings
+2 Visa teamkonfiguration
+3 Team i Nätverkskomponentträdet=Team_Listing
+3 Visa teamkonfiguration=Team_Configuration
+2 Ta bort ett team
+3 Ta bort ett adapterteam=Remove_an_Adapter_Team
+1 Skapa och konfigurera VLAN
+2 Översikt över VLAN=VLAN>main
+2 Konfigurera VLAN
+3 Skapa VLAN=ADD_VLAN
+3 Aktivera GVRP=GVRP_Support
+3 Avancerade inställningar=Advanced_Settings_for_VLANs
+2 Ändra VLAN-egenskaper
+3 Ändra VLAN-egenskaper=Change_VLAN_Properties
+3 Avancerade inställningar=Advanced_Settings_for_VLANs
+2 Ta bort ett VLAN
+3 Ta bort ett VLAN=Remove_a_VLAN
+1 Utföra diagnostik
+2 Översikt=Diagnostics_An_Overview
+2 Diagnostiska tester=Diagnostics
+2 Kabeltest=Testing_the_Cable
+2 Sändning/svar-testet=Sender_Responder_Test
+2 Konfigurera diagnostikloggen=Diagnostic_Log
+1 Använda Intel(R)-tilläggsverktyg
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Översikt=priority_packet_overview
+1 Felsökning
+2 Fliken Felsökning=Troubleshooting
+2 Återställ adapterkonfiguration=RESTORECONFIG
+2 Skaffa support=Support

@@ -1,0 +1,167 @@
+; Copyright (c) 2002-2014 UniATA group
+
+[Version]
+Signature="$Windows NT$"
+Provider=%ALTERWARE%
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Class=SCSIAdapter
+CatalogFile=uniata.cat
+DriverVer=%BUILD_TS%,%DRIVER_VER%
+
+;
+; Source file information
+;
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+; Files for disk UniATA Installation Disk #1 (SCSIAdapter)
+uniata.sys = 1,,
+atactl.exe = 1,,
+
+
+
+[DestinationDirs]
+Sys32DestDir = 11 ; System32
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%ALTERWARE%=UNIATA_HDC
+
+[UNIATA_HDC]
+;DEVLIST
+%PCI\CC_0101.DeviceDesc% = uniata_Inst,,PCI\CC_0101                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0104.DeviceDesc% = uniata_Inst,,PCI\CC_0104                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0105.DeviceDesc% = uniata_Inst,,PCI\CC_0105                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0106.DeviceDesc% = uniata_Inst,,PCI\CC_0106                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0106&PROGIF_01.DeviceDesc% = uniata_Inst,,PCI\CC_0106&PROGIF_01         ; AHCI
+%*PNP0600.PriDeviceDesc% = uniata_Inst_Isa, Primary_IDE_Channel
+%*PNP0600.SecDeviceDesc% = uniata_Inst_Isa, Secondary_IDE_Channel
+%*PNP0600.DeviceDesc%    = uniata_Inst_Isa, *PNP0600                                ; Generic_ESDI_Hard_Disk_Controller   (BAD_IDE)
+%UniATA_Name% = uniata_Inst, ATA_controller
+
+;
+; General installation section
+;
+
+[uniata_Inst]
+AddReg = uniata_Inst.AddReg
+CopyFiles = uniata_Inst.Miniport, Sys32DestDir
+
+
+[uniata_Inst_Isa]
+AddReg = uniata_Inst.AddReg
+CopyFiles = uniata_Inst.Miniport, Sys32DestDir
+LogConfig = esdilc1, esdilc2, esdilc3, esdilc4
+
+[uniata_Inst.AddReg]
+
+;
+; File sections
+;
+
+[uniata_Inst.Miniport]
+uniata.sys
+
+[Sys32DestDir]
+atactl.exe
+
+
+;
+; Service Installation
+;
+
+[uniata_Inst.Services]
+AddService = UniATA, 0x00000002, uniata_Service_Inst, DISABLE_PCIIDE
+
+[uniata_Service_Inst]
+ServiceType    = 1
+StartType      = 0
+ErrorControl   = 0
+LoadOrderGroup = System Bus Extender
+ServiceBinary  = %10%\System32\drivers\uniata.sys
+AddReg         = uniata_EventLog_AddReg, uniata_PNP_Inst_AddReg
+
+[uniata_PNP_Inst_AddReg]
+;HKR, "Parameters\PnpInterface", "1", 0x00010001, 0x00000001
+;HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+HKR, "Parameters\PnpInterface", "SkipRaids", %REG_DWORD%, 0x00000001
+
+[uniata_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+
+[DISABLE_PCIIDE]
+AddReg         = DISABLE_PCIIDE_Reg
+
+[DISABLE_PCIIDE_Reg]
+HKLM, "system\currentcontrolset\services\pciide", "Start", %REG_DWORD%, 0x00000004
+;HKLM, "system\currentcontrolset\control\CriticalDeviceDatabase\pci#CC_0101", "Service", %REG_SZ%, "uniata"
+;HKLM, "system\currentcontrolset\control\CriticalDeviceDatabase\primary_ide_channel", "Service", %REG_SZ%, "uniata"
+;HKLM, "system\currentcontrolset\control\CriticalDeviceDatabase\secondary_ide_channel", "Service", %REG_SZ%, "uniata"
+
+
+[Strings]
+;DEVNAMELIST
+UniATA_Name = "Universal ATA Driver%EDITION% (Win 2003)"
+*PNP0600.PriDeviceDesc  = "Primary IDE Channel (UniATA)"
+*PNP0600.SecDeviceDesc  = "Secondary IDE Channel (UniATA)"
+*PNP0600.DeviceDesc  = "Generic ESDI Hard Disk Controller (UniATA)"
+PCI\CC_0101.DeviceDesc  = "Dual Channel PCI BusMaster IDE Controller (UniATA)"
+PCI\CC_0104.DeviceDesc  = "Generic RAID IDE Controller (UniATA)"
+PCI\CC_0105.DeviceDesc  = "Generic ATA Controller (UniATA)"
+PCI\CC_0106.DeviceDesc  = "Generic Serial ATA Controller (UniATA)"
+PCI\CC_0106&PROGIF_01.DeviceDesc = "Generic AHCI Controller (UniATA)"
+ALTERWARE = "AlterWare"
+
+;*******************************************
+;
+; Non-Localizable Strings
+;
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+IOLOGMSGDLL    = "\IoLogMsg.dll"
+
+DiskId1 = "UniATA Installation disk"
+
+;Resource claiming for non-PnP
+
+[esdilc1]
+ConfigPriority=HARDWIRED
+IOConfig=1f0-1f7(3ff::)
+IOConfig=3f6-3f6(3ff::)
+IRQConfig=14
+
+[esdilc2]
+ConfigPriority=HARDWIRED
+IOConfig=170-177(3ff::)
+IOConfig=376-376(3ff::)
+IRQConfig=15
+
+[esdilc3]
+ConfigPriority=HARDWIRED
+IOConfig=1e8-1ef(3ff::)
+IOConfig=3ee-3ee(3ff::)
+IRQConfig=11
+
+[esdilc4]
+ConfigPriority=HARDWIRED
+IOConfig=168-16f(3ff::)
+IOConfig=36e-36e(3ff::)
+IRQConfig=10
+

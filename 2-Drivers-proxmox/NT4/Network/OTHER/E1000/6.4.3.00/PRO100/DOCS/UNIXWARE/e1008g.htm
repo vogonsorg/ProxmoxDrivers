@@ -1,0 +1,925 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing the Driver for UnixWare</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel PRO/1000 Network Driver for UnixWare</h1>
+
+<p class="contents"><a href="#install">Installation and Configuration</a></p>
+<p class="contents"><a href="#ans">Advanced Network Services</a></p>
+<p class="contents"><a href="#modify_team">Modifying a Team's Configuration</a></p>
+<p class="contents"><a href="#ex_topology">Example Topologies</a></p>
+<p class="contents"><a href="#troubleshooting">Troubleshooting/Technical Notes</a></p>
+<p class="contents"><a href="#contact_info">Contact Information</a></p>
+
+<hr>
+
+<h2><a name="install"></a>Installation and Configuration</h2>
+
+<p>
+When installing and configuring network adapters, you may need to refer to
+SCO* UnixWare* documentation. Have this documentation
+available during the installation process.
+</p>
+
+<p>
+To install the eeE8.pkg file you must be logged in as the root or super user.</p>
+<p>
+To ensure predictable behavior when installing network adapters, remove the
+configuration settings for all adapters and reboot the system prior to
+configuring new adapters or reconfiguring installed adapters (see instructions
+below). For maximum system stability, it is recommended that all network
+adapters be configured with the same driver type.
+</p>
+
+<h3>Recommendations</h3>
+
+<ul>
+  <li>
+    <p class="numlst"><b>Do not select &quot;Cancel&quot; when in the process
+  	of adding an adapter.</b>  To prevent the Network Configuration Manager from hanging and to avoid
+    rebooting, continue installing the adapter. After it's installed, manually
+    remove it.
+
+  </li>
+  <li>
+    <p class="numlst"><b> PCI Hot Plug*-enabled systems require the e1008g (DDI8)
+    driver.</b> And, if you are not using ANS, the adapters must only be configured using the Hot Plug
+    utility. For example:&nbsp;<span class="monospace">  scoadmin hot</span>.
+    PCI Hot Plug capabilities also require a Hot Plug Controller driver and the appropriate PCI Hot Plug
+    ptfs. If you are using
+    ANS, 
+    see the section <a href="#hot_plug_ans">Using Hot Plug and ANS</a>
+    for more information.
+    </p>
+  </li>
+</ul>
+
+<p>
+The Intel PRO/1000 adapter driver for SCO UnixWare is
+packaged in the e1008g.pkg file. To install the e1008g.pkg file and setup the
+e1008g (DDI8) driver for a network adapter, use the following steps:
+</p>
+
+<ol>
+  <li>
+    <p class="numlst">Make sure no other users are logged on and all user
+    applications are closed.</li>
+  <li>
+    <p class="numlst">Start the Network Configuration
+    Manager:
+    <blockquote class="monospace">
+    	netcfg
+    </blockquote>
+    </p></li>
+  <li>
+    <p class="numlst">Remove any adapters that are configured
+    with the old drivers by selecting the <span class="gui">Hardware</span> 
+    menu -&gt; <span class="gui">Remove Network Device</span>.
+    </p>
+    <p class="numlst">
+    Exit the Network Configuration Manager.
+    </p></li>
+  <li>
+    <p class="numlst">
+    Verify that there is not an older version of the driver
+    on the system:
+    <blockquote class="monospace">
+    	pkginfo -l e1008g
+    </blockquote>	
+    <p class="numlst">
+		If there is, remove the driver:
+		</p>
+		<blockquote class="monospace">
+			pkgrm e1008g
+		</blockquote>
+		<p class="numlst">
+		Reboot the system:
+		</p>
+		<blockquote class="monospace">
+			init 6
+		</blockquote>
+		</li>
+  <li>
+    <p class="numlst">
+    If you are installing the new driver from the CD, follow these steps.
+    Otherwise, go to the next step. 
+    </p>
+    <p class="numlst">
+    Mount the CDROM on the system. For example:
+    </p>
+    <blockquote class="monospace">
+    	mkdir /&lt;cdrom_mount_location&gt;<br>
+    	mount -F cdfs -r /dev/cdrom/cdrom1 /&lt;cdrom_mount_location&gt;
+    </blockquote>
+    <p class="numlst">You can install the driver directly from the CDROM or
+    spool the driver from the CDROM so the driver resides on the
+    system. Example of installing the driver directly from the CD:
+    </p>
+    <blockquote class="monospace">
+        pkgadd –d /&lt;cdrom_mount_location&gt;/PRO1000/UNIXWARE/e1008g.pkg
+    </blockquote>    
+	<p class="numlst">
+	Example of spooling the driver from the CD to the system:
+	</p>
+	<blockquote class="monospace">
+		pkgadd -s spool –d /&lt;cdrom_mount_location&gt;/PRO1000/UNIXWARE/e1008g.pkg e1008g
+		<br>
+		pkgadd e1008g
+	</blockquote>
+	</li>
+  <li>
+    <p class="numlst">If you are downloading the latest driver,&nbsp;save the package to a directory on your system; for
+    example, the /tmp directory.
+    </p>
+    <p class="numlst">You can install the driver from this directory or
+    spool the driver from the directory so the driver resides on the
+    system. Example of installing the driver from the directory:
+    </p>
+    <blockquote class="monospace">
+        pkgadd –d /&lt;dir_location&gt;/e1008g.pkg
+    </blockquote>    
+	<p class="numlst">
+	Example of spooling the driver from the directory to the system:
+	</p>
+	<blockquote class="monospace">
+		pkgadd -s spool –d /&lt;dir_location&gt;/e1008g.pkg e1008g
+		<br>
+		pkgadd e1008g
+	</blockquote>
+  </li>
+  <li>
+    <p class="numlst">If you will be creating teams and/or VLANs, continue on
+    with the
+    instructions in Advanced Network Services below. Otherwise, use
+    the Network Configuration Manager to configure the
+    adapters.</li>
+</ol>
+    <p class="numlst">&nbsp;
+
+<hr>
+
+<h2><a name="ans"></a>Advanced Network Services</h2>
+<p>
+Intel <i>Advanced Network Services</i>  (ANS) for UnixWare
+includes teaming and VLANs. To use the ANS features install the
+driver on all adapters that will use ANS.
+</p>
+<p>
+The latest Intel ANS package for UnixWare is available on
+the Intel website at <a href="http://downloadfinder.intel.com/scripts-df/File_Filter.asp?FileName=ians.pkg" target="_blank">http://downloadfinder.intel.com/scripts-df/File_Filter.asp?FileName=ians.pkg</a>.
+<br>
+
+</p>
+
+<h3>
+Recommendations
+
+</h3>
+
+<ul>
+  <li>
+    <p style="margin-top: 12; margin-bottom: 12" class="numlst"><b>ANS
+should only be installed over Intel's e1008g (DDI8) driver. </b>
+Add an ANS team as a protocol
+over Intel's DDI8 driver.
+Trying to add it over a different driver is possible in the Network Configuration Manager, but ANS will
+fail to work.
+  </li>
+  <li>
+    <p style="margin-top: 12; margin-bottom: 12" class="numlst"><b>Do not add a protocol to an adapter that already has ANS configured above it. </b>
+After adding an ANS team as a
+protocol over an adapter, the Network Configuration Manager allows adding other protocols over that
+adapter. This should be avoided as unexpected results may occur; for example,
+    the system will
+not know which of the two protocols to use.
+
+  </li>
+  <li>
+    <p style="margin-top: 12; margin-bottom: 12" class="numlst"><b>For
+    additional information, see the <a href="#ans_guidelines">ANS Usage
+    Guidelines and Limitations</a> in the Troubleshooting section below.</b>
+
+  </li>
+</ul>
+
+<h3>Installing ANS and Configuring the Adapters</h3>
+<p>When using Intel ANS, the configuration process differs. Follow these
+instructions to load ANS onto the system and configure the adapters.&nbsp;</p>
+<ol>
+  <li>
+    <p class="numlst">
+    Copy the iANS.pkg file to any directory on the system, such as in the /tmp
+    directory.</li>
+  <li>
+    <p class="numlst">
+    Install ANS:
+    <blockquote class="monospace">
+    	pkgadd -d /tmp/iANS.pkg
+    </blockquote>
+    </li>
+  <li>
+    <p class="numlst">
+    Reboot the system:
+    <blockquote class="monospace">
+    	init 6
+    </blockquote>
+    </p></li>
+  <li>
+    <p class="numlst">
+    If the base driver has
+    not yet been installed, follow the instructions in <a href="#install">Installation
+    and Configuration</a>
+    to install the driver.</li>
+  <li>
+    <p class="numlst">Start the Network Configuration Manger:
+    <blockquote class="monospace">
+    	netcfg
+    </blockquote>
+    </p></li>
+  <li>
+    <p class="numlst">Go to the <span class="gui">Hardware</span> menu and choose <span class="gui">Add
+    New LAN Adapter</span>. The Network Configuration Manager presents the available adapters and drivers.&nbsp;</li>
+  <li>
+    <p class="numlst"> Select the first adapter to configure. If
+    you have the DDI7 driver on your system, it appears as a
+    configuration option. Make sure you only select an adapter displaying the
+    e1008g (DDI8) driver. Select <span class="gui">Continue</span>.
+
+  </li>
+  <li>
+    <p class="numlst">
+    The Network Driver Configuration window appears. If you are configuring an
+    adapter that supports multiple speed settings, you may change the
+    speed and duplex by selecting <span class="gui">Advanced Options</span>.
+    The default is Auto_Auto. After choosing the speed and duplex, select <span class="gui">OK</span>.
+  	</p>
+	<table border="0" cellpadding="6" cellspacing="0">
+  	  <tr>
+    	<td valign="top">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    	<td valign="top"><em><strong>NOTE</strong>: </em> Adapters that use
+          optical fiber media operate only at 1000 Mbps and full duplex.
+    	</td>
+    </tr>
+	</table>
+  </li>
+  <li>
+    <p class="numlst">
+ The Add
+ protocol window appears. Select the
+    initial protocol for the adapter. For teaming or VLAN operation, select 
+    <span class="gui">iANS team &lt;team_id&gt;</span>. Select <span class="gui">Add</span>.
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+    <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td valign="top"><em><strong>NOTE</strong>: </em> You must select ANS before you select any
+    other protocol in order to use this adapter as part of a virtual adapter. You
+      can configure TCP/IP or IPX/SPX on the virtual adapter after you have successfully
+    configured ANS on your adapters.</td>
+  </tr>
+</table>
+
+  </li>
+  <li>
+    <p class="numlst">In the ANS configuration utility window, choose the
+    priority of the member just added, then select <span class="gui">OK</span>.
+    Priority determines
+    the manner in which the different adapters handle traffic or errors.</li>
+  <li>
+    <p class="numlst">The ANS configuration utility window prompts you to choose
+    the role of the member in the
+    team. The user determines the team configuration only once, during the
+    addition of the first team member. For instructions on configuring the team,
+    go to <a href="#teaming">Teaming and VLANs</a> below.
+
+  </li>
+  <li>
+    <p class="numlst">You may now configure a second
+    adapter from the Hardware menu by selecting <span class="gui">Add New LAN Adapter</span>.
+    Repeat steps 7-11.</li>
+  <li>
+    <p class="numlst">Add the virtual adapter(s) created for the team(s). Select the same
+    protocol for all adapters you add to a team. Instructions for <a href="#add_vadapter"> adding a
+    virtual adapter</a> are included below.</li>
+</ol>
+    <h3>&nbsp;</h3>
+    <h3><a name="teaming"></a>Teaming and VLANs</h3>
+<p>Creating a team with ANS in UnixWare is a two-step process. The
+first step involves adding members to the team, during which process the team's
+configuration is established. During the second step, you add one or more virtual
+adapters and choose the networking
+protocol you wish to use on them.</p>
+    <p>Virtual LANs are not compatible with the
+first generation PRO/1000
+Gigabit Server Adapter.&nbsp;</p>
+<ol>
+  <li>
+    <p class="numlst">After adding the
+    first member to the team, the ANS configuration utility screen appears.
+    Enter a unique team name.
+    </p></li>
+  <li>
+    <p class="numlst">If you want to include VLANs in your team, select VLAN mode
+    on and enter the number of
+    VLANs that will be added. If you choose VLAN mode off, no VLANs will be
+    created; but, a virtual adapter will still be created (Ethernet-iANS Virtual Adapter without 
+    VLAN-PCI Slot 0 Bus 0) which needs to have a protocol installed over it. Instructions for 
+    <a href="#add_vadapter">adding a virtual adapter</a> are included below.
+    </p>
+  </li>
+  <li>
+    <p class="numlst">Select the teaming mode for the
+    team being configured (none, aft, alb, Static Link Aggregation).
+	<table border="0" cellpadding="6" cellspacing="0">
+  	  <tr>
+    	<td valign="top">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    	<td valign="top"><em><strong>NOTE</strong>: </em> Adaptive Load Balancing
+    	(ALB) encompasses Adapter Fault Tolerance (AFT) as well. Static Link 
+        Aggregation includes Gigabit EtherChannel* (GEC) and IEEE 802.3ad static mode
+      	(3ad).</td>
+  	  </tr>
+	</table>
+  </li>
+  <li><p class="numlst">The following options may be 
+  changed by selecting the <span class="gui">Advanced Options</span>
+    button. These settings are generally not changed unless necessary.
+    <blockquote>
+    <table border="1" cellpadding="4" cellspacing="0">
+      <tr>
+        <th width="30%">Option</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td width="30%">Probes mode
+    (on/off)</td>
+        <td> Determines whether ANS probes are used or not</td>
+      </tr>
+      <tr>
+        <td width="30%">Probes addr mode
+    (Broadcast / Multicast)</td>
+        <td> Determines whether ANS probes are sent as
+    broadcast or multicast packets</td>
+      </tr>
+      <tr>
+        <td width="30%">Check timeout
+    (ticks)</td>
+        <td> After sending a probe, <i>n</i> ticks expire before the
+    system verifies that the probe was sent to the other members</td>
+      </tr>
+      <tr>
+        <td width="30%">Send time
+    (ticks)</td>
+        <td> Interval time between probes</td>
+      </tr>
+      <tr>
+        <td width="30%">Max retry
+    count</td>
+        <td> Number of probe retry bursts to transmit if the first probe was not
+    received by team members</td>
+      </tr>
+      <tr>
+        <td width="30%">Receive
+    timeout (ticks)</td>
+        <td> After sending a probe retry burst, <i>n</i> ticks expire before checking to see if the retry probe was transmitted to other
+    team members</td>
+      </tr>
+      <tr>
+        <td width="30%">Rx back cycles</td>
+        <td> Number of probe back cycles to check (determines if probes from previous
+    cycles are valid)</td>
+      </tr>
+      <tr>
+        <td width="30%">Burst size</td>
+        <td>Number of bits, bytes or characters grouped together for
+          transmission</td>
+      </tr>
+      <tr>
+        <td width="30%">Balance
+    interval (ticks)&nbsp;</td>
+        <td> Refresh time of load balancing tables (ALB, GEC)</td>
+      </tr>
+    </table>
+  </blockquote>
+  </li>
+  <li><p class="numlst">Select <span class="gui">OK</span> to complete the configuration.
+  	</p></li>
+</ol>
+<p>To view a team's configuration, choose <span class="gui">Protocol</span> -&gt; <span class="gui">View 
+    protocol configuration</span> from the Network Configuration
+Manager.</p>
+<p>To modify a team's configuration choose <span class="gui">Protocol</span> -&gt; <span class="gui">Modify 
+    protocol configuration</span> from
+    the Network Configuration Manager.</p>
+<p>&nbsp;</p>
+<h3><a name="add_vadapter"></a>Adding Virtual Adapters</h3>
+<p>When creating a VLAN, you must add the adapters in
+the VLAN as virtual adapters. To add a virtual
+adapter for each adapter in the VLAN:</p>
+<ol>
+  <li>
+    <p class="numlst">Start the Network Configuration Manager:
+    <blockquote class="monospace">
+    	netcfg
+    </blockquote>
+    </p></li>
+  <li>
+    <p class="numlst">Select <span class="gui">Add
+    New LAN Adapter</span> from the Hardware menu.</li>
+  <li>
+    <p class="numlst">Select the virtual adapter to add to the VLAN. For example:</li>
+	<blockquote>
+        Ethernet-iANS Virtual Adapter with VLAN - PCI Slot 0 Bus 1
+	</blockquote>
+  <p class="numlst">If several virtual adapters were added in the previous installation stage, 
+  they appear with sequential bus numbers. Additionally, if a virtual adapter is
+  on a different team, its slot number increases.</p>
+  <li>
+    <p class="numlst">Choose the networking protocol to
+    be installed on the virtual adapter. Although ANS is presented by the Network Configuration Manager
+    as an available protocol, ANS cannot be installed and configured
+    over itself on a virtual adapter.
+  </li>
+  <li>
+    <p class="numlst">Repeat these steps for the remaining adapters in the VLAN.</p>
+  </li>
+</ol>
+
+<p>To view a virtual adapter's configuration, choose <span class="gui">Hardware</span> -&gt; 
+ 	<span class="gui">View hardware configuration</span> from the Network Configuration Manager.</p>
+<p>To modify a virtual adapter's configuration, choose <span class="gui">Hardware</span> -&gt; 
+	<span class="gui">Modify hardware configuration</span> from the Network Configuration Manager.
+	This allows you to change the virtual adapter's VLAN ID.</p>
+
+<hr>
+
+<h2 ><a name="modify_team"></a>Modifying a Team's Configuration
+</h2>
+<p>
+Most changes to an active team can be accomplished dynamically,
+without rebooting after the change. Other topology changes require a
+reboot. View the following lists to determine whether your system requires a
+reboot in order for the changes to take effect.
+</p>
+<p>
+Changes that do not require reboot:
+</p>
+<ul>
+  <li>
+    <p class="numlst">Create a new team</p></li>
+  <li>
+    <p class="numlst">Add or remove a member to an existing team (&quot;Hot Add&quot;)</p></li>
+  <li>
+    <p class="numlst">Add a virtual adapter to an existing team</p></li>
+  <li>
+    <p class="numlst">Remove a virtual adapter from an existing team</p></li>
+  <li>
+    <p class="numlst">Replace a member in an existing team</p></li>
+  <li>
+    <p class="numlst">Change VLAN ID</p></li>
+  <li>
+    <p class="numlst">Probe settings (on/off, or other probe parameters)</p></li>
+  <li>
+    <p class="numlst">Balance interval (in ticks)</p></li>
+</ul>
+<p>Changes that do require reboot:</p>
+<ul>
+  <li>
+    <p class="numlst">Change teaming mode (none, aft, alb, gec/3ad)</p></li>
+  <li>
+    <p class="numlst">Probe address mode (broadcast/multicast)</p></li>
+</ul>
+
+<hr>
+
+<h2><a name="ex_topology"></a>Example Topologies</h2>
+<p>These
+examples summarize the actions needed to build two typical topologies:
+    <p><i>For a team without VLAN and with
+    several members:</i>
+<ol>
+  <li>
+    <p class="numlst">Add the first
+    member using <span class="gui">Add New LAN Adapter</span>.</p></li>
+
+  <li>
+    <p class="numlst">Choose teaming modes as desired,
+    and set VLAN mode to <span class="gui">off</span>.</p></li>
+
+  <li>
+    <p class="numlst">Add all the other
+    members in the same manner.</li>
+  <li>
+    <p class="numlst">Add the virtual adapter
+    using <span class="gui">Add New LAN Adapter</span>.</p></li>
+</ol>
+    <p><i>For a team with VLAN and with
+    several members:</i></p>
+<ol>
+  <li>
+    <p class="numlst">Add the first member using <span class="gui">Add New LAN Adapter</span>.</p></li>
+  <li>
+    <p class="numlst">Choose teaming modes as desired,
+    and set VLAN mode to <span class="gui">on</span>.</p></li>
+  <li>
+    <p class="numlst">Enter the number of VLAN IDs you
+    will use.</p></li>
+  <li>
+    <p class="numlst">Add all the other
+    members in the same manner.</p></li>
+  <li>
+    <p class="numlst">Add the virtual adapters using <span class="gui">Add New LAN Adapter</span> 
+    from the Hardware menu. For each adapter
+    added you will be prompted for the virtual adapter's VLAN ID. Do not give
+    two virtual adapters in the same team the same VLAN ID.</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="troubleshooting"></a>Troubleshooting</h2>
+
+<h3>Known Issues</h3>
+
+<table border="1" cellpadding="4" cellspacing="0" width="100%">
+  <tr>
+    <th width="33%">Symptom</th>
+    <th width="67%">Description</th>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left">
+    	Limitations with the Network Configuration Manager cause some PRO/1000 adapter names that are not
+      	installed in the system to appear in the list of adapters.
+      </td>
+    <td width="67%" valign="top" align="left">
+		The Intel&reg; PRO/1000 MT Dual Port Network Connection Adapter is also shown as an 
+		Intel&reg; PRO/1000 MF Server Adapter.
+		<p>
+      	The Intel&reg; PRO/1000 MT Network Connection Adapter is also shown as an Intel&reg;
+    	PRO/1000 F Server Adapter.
+    	</p>
+		<p>
+      	The Intel&reg; PRO/1000 MT Server Adapter is also shown as an Intel
+		PRO/1000 MT Network Connection Adapter.
+		</p>
+		<p>
+      	The e1008g driver may identify certain PRO/100 adapters as PRO/1000 adapters.
+      	</p>
+        <p><u>Workarounds</u>:</p>
+        <ul>
+          <li><p class="numlst">Install and configure all Intel PRO/100 adapters prior to installing PRO/1000 adapters.
+			</li>
+          <li><p class="numlst">If you are installing a MT Dual Port Network Connection
+            Adapter, ignore the entry for the MF Server Adapter when you select <span class="gui">Add New LAN Adapter</span>.</p>
+			</li>
+			<li><p class="numlst">If you are installing a MT Network Connection
+              Adapter, ignore the 
+			entry for the F Server Adapter when you select 
+			<span class="gui">Add New LAN Adapter</span>.</p>
+			</li>
+			<li><p class="numlst">If you are installing a MT Server Adapter, ignore the 
+			entry for the MT Network Connection Adapter when you select 
+			<span class="gui">Add New LAN Adapter</span>.</p>
+			</li>
+   		 </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left">At boot time, a member fails to be added to a team, and the
+		following error messages are seen on the screen: 
+		<p>&quot;<b>Error in handshake with
+		adapter's driver: adapter wasn't opened.&quot; and &quot;[FAILED]:&nbsp;anscfg
+		cmd=add_lower team=... lower=... net=... low_attr=...</b>&quot;.</td>
+    <td width="67%" valign="top" align="left">
+		This is a known SCO bug in which the adapter's driver is
+not opened.
+<p><u>Possible workarounds</u>: The problem usually disappears after a reboot.
+If it does not you can try the following:
+<ul>
+	<li><p class="numlst">Add a different member and reboot if necessary.</p>
+		</li>
+	<li><p class="numlst">Remove some members from the Network Configuration Manager
+      and then adding other members. Reboot if necessary.</p>
+		</li>
+</ul>
+<p>If none of the above helps, try to remove everything from the Network Configuration Manager, 
+reboot and reconfigure everything.
+<p><em><strong>NOTE</strong>: </em> This error message might also be seen when hot adding a member.</td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left"> Hot adding a member to a team fails. The member will not be
+configured in the Network Configuration Manager and the user will see the following message:&nbsp;&nbsp;
+      <p>&quot;<b>Hot add of member ___ failed</b>&quot;.</td>
+    <td width="67%" valign="top" align="left">
+<p> It is possible that the hot-add failed because of a
+legitimate reason (no server adapter in team, adapter that doesn't support
+VLAN in a VLAN-team, etc). In such cases, a relevant error message will be seen
+in the system log. If there is no message in the log, or if the following message is
+seen:&nbsp; "Error in handshake with adapter's driver: adapter wasn't opened",
+then this is an anomaly which is a known issue. It also happens without ANS (in that case, the adapter will be configured in
+the Network Configuration Manager but will not function).<br>
+<br>
+<u>Possible workarounds</u>:
+<ul>
+  <li>
+    <p class="numlst">Hot add the same member again (try
+    several times).</li>
+  <li>
+    <p class="numlst">Hot add a different member.</li>
+  <li>
+    <p class="numlst">Remove some members from the Network Configuration Manager
+    and then add other
+members.</li>
+  <li>
+    <p class="numlst">Reboot.</li>
+</ul>
+<p>If none of the above helps, try to remove everything from the Network Configuration Manager,
+reboot and reconfigure everything.</td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left">The following messages are printed to the system log
+repeatedly while in VLAN mode:&nbsp;
+      <p>"<b>Secondary adapter ___ deactivated / isolated from other team
+members.</b>" and&nbsp;</p>
+      <p> &quot;<b>Secondary adapter ___ rejoined.</b>&quot;.</td>
+    <td width="67%" valign="top" align="left">
+
+<p>
+ VLAN IDs are configured in an ANS team, but some of these IDs are
+not configured in the switch ports to which the team's members are connected.
+This causes ANS probes transmitted on these VLAN IDs to be lost, which causes
+adapters to be deactivated.
+    <p><u>Possible workaround</u>: Configure all the switch ports to
+which the team's members are connected to be 802.3ac/802.1Q VLAN tagged, with
+all the VLAN IDs corresponding to the ones configured in the team.
+      <p><em><strong>NOTE</strong>: </em>Messages of fail-overs
+might also appear.</td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left">The following messages are printed to the system log from
+time to time when transmitting/receiving high-stress traffic:&nbsp;&nbsp;
+      <p>"<b>Secondary
+adapter ___ deactivated / isolated from other team members.</b>" and&nbsp;</p>
+      <p>
+&quot;<b>Secondary adapter ___ rejoined.</b>&quot;</td>
+    <td width="67%" valign="top" align="left">
+
+<p>These message appear when ANS probes are lost.
+<p><u>Possible workaround</u>: Changing the team's probe-settings may solve
+the problem or at least limit it. In the Network Configuration Manager, modify the team's advanced options:&nbsp;
+<ol>
+	<li><p class="numlst">Choose the team.
+		</li>
+	<li><p class="numlst">Select <span class="gui">protocol</span> -&gt; <span class="gui">Modify protocol 
+	configuration</span>, <span class="gui">OK</span>, <span class="gui">Advanced options</span>.
+		</li>
+  	<li><p class="numlst">Change "Max retry count" to 20 (causes more probe retries).
+  		</li>
+  	<li><p class="numlst">Change "Receive timeout" to 1 (less time between each retry).
+  		</li>
+</ol>
+
+      <p><em><strong>NOTE</strong>: </em>Messages of fail-overs
+      might also appear.</td>
+  </tr>
+  <tr>
+    <td width="33%" valign="top" align="left"> At boot time, ANS fails to be configured. The console is filled
+with [FAIL] messages describing the commands that ANS failed to run. In the ANS
+log (etc/*ans/data/log), the following messages are also printed:&nbsp;
+      <p>
+&quot;<b>[***] The last operation failed. Exited with status =...</b>" and&nbsp;</p>
+      <p>&quot;<b>Could
+not open ctrl device...</b>"</td>
+    <td width="67%" valign="top" align="left">
+
+<p>
+<u>Possible workaround</u>:
+<ol>
+  <li>
+    <p class="numlst">Remove everything from the Network Configuration Manager.</li>
+  <li>
+    <p class="numlst">Re-install the ANS package using "pkgadd –d". You do
+    not need to
+remove the package.</li>
+  <li>
+    <p class="numlst">Reboot the system.</li>
+</ol>
+    </td>
+  </tr>
+</table>
+
+<h3>&nbsp;</h3>
+
+<h3><a name="ans_guidelines"></a>ANS Usage Guidelines and Limitations</h3>
+
+<table border="1" cellpadding="4" cellspacing="0" width="100%">
+  <tr>
+    <th width="30%">Recommendation/Limitation</th>
+    <th>
+      <h4>Description</h4>
+    </th>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Tunable Parameters</td>
+    <td valign="top" align="left">
+    <p class="numlst">When the ANS package is installed, two system tunable parameters are altered.
+	This is needed in order to support the maximum number of VLANs that can be
+	configured in ANS (64 VLANs).
+	<br>
+    <table border="0" cellpadding="4" width="75%">
+      <tr>
+        <td width="30%" valign="top" align="left">
+  	<u>Parameter</u></td>
+        <td width="25%" valign="top" align="left">
+	<u>Default value</u></td>
+        <td valign="top" align="left"><u>Value set when ANS is installed</u>
+        </td>
+      </tr>
+      <tr>
+        <td width="33%" valign="top" align="left">
+  	FMOD_RESERVE</td>
+        <td width="25%" valign="top" align="left">50</td>
+        <td valign="top" align="left">114</td>
+      </tr>
+      <tr>
+        <td width="33%" valign="top" align="left">
+	SFNOLIM</td>
+        <td width="25%" valign="top" align="left">64</td>
+        <td valign="top" align="left">172</td>
+      </tr>
+    </table>
+    <p class="numlst">
+	After removing the ANS package, these parameters retain the values set by ANS.
+	This should not affect the user, but the parameters can nevertheless be
+	restored to their default values or to any other value using the SCOAdmin System
+	Tuner or using the 'idtune' command. For more information refer
+    to the idtune man page.</td>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Switching init states:</td>
+    <td valign="top" align="left">
+When the system is in init state 1, do not go directly to init state 3 (using 'init 3'). Instead reboot (using
+'init 6') and bring the system up to
+init state 3. Going directly from init state 1 to init state 3 causes some adapters not to open
+when adding them to the Network Configuration Manager, and therefore hot-add failures might occur.</td>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Throughput limitations:
+    </td>
+    <td valign="top" align="left">
+<p>
+There is a SCO limitation regarding the maximum TCP/IP throughput
+of an adapter. Therefore, when using ALB or GEC mode for TCP/IP traffic, we
+recommend configuring no more than four members in a team <u>PER&nbsp; virtual
+adapter</u>. This is because the virtual adapter's throughput will not exceed the mentioned
+SCO limitation so more members will not improve the total throughput.<br>
+<br>
+If the configuration has more than one virtual adapter in a team (in VLAN mode), the
+throughput of each virtual adapter varies according to the distribution of the
+traffic between the virtual adapters. As a rule of thumb, traffic that is equally
+distributed between all virtual adapters allows better average throughput per
+virtual adapter.<br>
+<br>
+    Examples:</p>
+<ul>
+  <li>
+    <p class="numlst">If you configure a non-VLAN ALB/GEC team with one virtual
+    adapter, 
+		the team should have a maximum of four members.</li>
+  <li>
+    <p class="numlst">If you configure an ALB/GEC team with two virtual
+    adapters, a maximum of eight members should
+		be configured. The utilization depends on the distribution of traffic
+		between the virtual adapters.</li>
+</ul>
+
+    </td>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Hot-remove in GEC mode:
+    </td>
+    <td valign="top" align="left">
+When hot-removing a member in GEC mode, you should also disconnect the
+member's link from the switch. If you
+fail to do this, the switch will keep transmitting to that port (the switch isn't
+aware of the member's removal from the team).</td>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Hot-removing a team's original primary adapter:
+    </td>
+    <td valign="top" align="left">
+A team's MAC address is taken from the MAC address of its original
+primary physical adapter (the adapter that was chosen as primary at boot-time).
+If this adapter is hot-removed from the team, both the team and the adapter will
+have the same MAC address and the following warning will be printed to the
+system log:
+"WARNING: the MAC Address ------ is still in use by Team _".
+In such a case, the removed adapter should not be used anywhere in the network
+until the system is rebooted, or unexpected results may occur.</td>
+  </tr>
+  <tr>
+    <td width="30%" valign="top" align="left">Running /etc/nd stop on a member:
+    </td>
+    <td valign="top" align="left">
+/etc/nd stop should NOT be executed on a
+member's net. If it is executed, the member will become non-operational and
+you will have to remove it from the team and add it back, or reboot, for the
+member to become operational again. The following warning will be printed to the
+system log in this case: "WARNING: Closed member [PCI Slot -,
+(---)] which is still attached to a team! It must be removed to become
+operational again."</td>
+  </tr>
+</table>
+
+<h3>&nbsp;</h3>
+
+<h3><a name="hot_plug_ans"></a>Using PCI Hot Plug and ANS</h3>
+<h4>Requirements</h4>
+<p class="numlst">
+You need a PCI Hot Plug controller driver, such as
+intelhpcd for the Intel Hot Plug Controller, and the latest UnixWare Hot
+Plug patch. (For 7.1.1, use ptf7604e, and for 7.1.0, use ptf7428d or later).
+</p>
+<p class="numlst">
+If you already have the above packages installed, remove them before installing the new drivers.
+</p>
+<ol>
+  <li><p class="numlst">Install the necessary drivers (DDI8 drivers for adapters and ANS).
+  	</p></li>
+  <li><p class="numlst">Reboot the system.
+  	</p></li>
+  <li><p class="numlst">Configure your initial network configuration.
+  	</p></li>
+  <li><p class="numlst">Install the Hot Plug controller driver and the UnixWare Hot Plug patch.
+  	</p></li>
+  <li><p class="numlst">Reboot to rebuild the kernel.
+  	</p></li>
+</ol>
+
+<h4>Using Hot Plug with ANS Team Members</h4>
+<ul>
+  <li>
+    <p class="numlst">Set normal team configurations using the Network Configuration Manager.
+  </li>
+  <li>
+    <p class="numlst">To replace a member adapter: remove it from the team using
+    the Network Configuration Manager, power off the slot using the SCOAdmin Hot Plug manager, remove the
+    adapter, insert the new adapter, power on the slot using the SCOAdmin Hot
+    Plug manager, and add the adapter to the team using the Network Configuration Manager.
+  </li>
+</ul>
+<h4>Limitations of Dynamic Configurations in Hot Plug Computers</h4>
+<p class="numlst">When ANS is used on a computer in which Hot Plug is enabled, the following 
+limitations apply (due to the way the Network Configuration Manager works in these cases):
+</p>    
+<ul>
+	<li><p class="numlst">Building a team and adding virtual adapters require a reboot of the computer.
+		</p></li>
+  	<li><p class="numlst">In order to configure the IPX/SPX protocol over a virtual adapter, the user 
+  		should first configure TCP/IP over it, reboot the system, and only then add the IPX/SPX protocol (the TCP/IP
+  		protocol can then be removed).
+  		</p></li>
+</ul>
+<p class="numlst">
+These limitations can be avoided by temporarily disabling Hot Plug <b>before</b> doing 
+anything that will create virtual adapter resources in the Network Configuration Manager
+(i.e. creating 
+a new team or adding VLANs when modifying a team). Hot Plug can be temporarily disabled using
+'modadmin -U &lt;HPCD_MODULE&gt;' 
+where HPCD_MODULE is hpcd/intelhpcd or any other module name used for your Hot Plug Controller Driver.
+Hot Plug can be enabled again after configuring <b>all</b> virtual adapters by using
+'modadmin -l &lt;HPCD_MODULE&gt;'.
+</p>
+
+<hr>
+
+<h2><a name="contact_info"></a>Contact Information (for base driver support)</h2>
+<p>For information on Intel adapters and drivers:</p>
+<ol>
+  <li>
+    <p class="numlst">Select <b>Support</b> -&gt; <b>Knowledge Center</b> -&gt; <b>Advanced
+    Search</b>.</li>
+  <li>
+    <p class="numlst">Enter <span class="monospace">Intel gigabit</span> in the search box.</li>
+  <li>
+    <p class="numlst">Select the <b>AND keywords</b> option.</li>
+  <li>
+    <p class="numlst">Click the <b>Search</b> button.</li>
+</ol>
+<p>
+For Intel Advanced Networking Services (teaming/VLAN) support email 
+<a href="mailto:unixteam.nic@intel.com">unixteam.nic@intel.com</a>.
+</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/10/04 4:20p <!-- $--> Revision <!--$$Revision:--> 7 <!-- $--></code></p>
+
+</body>
+</html>

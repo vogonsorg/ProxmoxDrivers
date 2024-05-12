@@ -1,0 +1,126 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>NetWare Client32 for DOS</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Novell NetWare Client32* for DOS</h1>
+
+<p class="contents"><a href="#tips">Tips</a></p>
+<p class="contents"><a href="#samples">Sample Files</a></p>
+<p class="contents"><a href="nw_kw100.htm"> Command Line Parameters</a></p>
+
+<hr>
+
+<h2><a name="tips"></a>Tips (Client32 for DOS)</h2>
+
+<ul>
+  <li>
+    <p class="numlst">&nbsp;avoid the following message when loading the driver:
+	<br>
+	<br>
+	"Do you want to load another frame type for a previously loaded board?  Y/N "
+	<br>
+	<br>
+	add the slot number to the LOAD line in STARTNET.BAT. By default it
+   	is located in the \NOVELL\CLIENT32 directory. The only way for the system to&nbsp;determine the slot 
+	number is to put an invalid value on the load line. For example:
+	<blockquote>
+		<span class="monospace">LOAD C:\NOVELL\CLIENT32\CE100B.LAN SPEED=0
+        IOMAPMODE=0 FORCEDUPLEX=0 FRAME=ETHERNET_802.2 SLOT=e</span>
+	</blockquote>
+  	<p class="numlst">When you reboot, you will be prompted with the correct value.
+   	Modify the STARTNET.BAT again, and use that value. If the slot is&nbsp;not specified correctly, only the first frame type
+   	loads. The Speed, Forceduplex and Iomapmode parameters take their default
+   	values when they are not specified.</li>
+  <li>
+    <p class="numlst">CONFIG.SYS must contain the <span class="monospace">LASTDRIVE=Z statement</span>.</li>
+  <li>
+    <p class="numlst">NET.CFG must 
+	contain <span class="monospace">FIRST NETWORK DRIVE = F</span> indented under the NetWare DOS Requester section</li>
+  <li>
+    <p class="numlst">Verify that the PRO/100 
+	or PRO/1000 adapter passes the diagnostics test by running the Diag100.EXE diagnostics program found on the root of the CD. 
+	If the adapter fails diagnostics it will not function correctly running&nbsp;Client32.</li>
+  <li>
+    <p class="numlst">Using the 16-bit ODI 
+	driver with Client32 requires CLIENT32.NLM&nbsp;dated 10/09/96 or later. The driver does not load with older versions.</li>
+  <li>
+    <p class="numlst">If you encounter the error message:
+	<br>
+	<br>
+	"An attempt to load CE100B.LAN failed because the module references an undefined external:
+	MSMHardwareFailure&quot;, you need to update the NetWare client files. Download ODI33x.EXE (where x=latest revision number) from Novell's 
+	electronic services and run the update utility.</li>
+</ul>
+<p>
+
+&nbsp;
+
+<hr>
+
+<h2><a name="samples"></a>Sample Files</h2>
+<p>
+<b>CONFIG.SYS</b>
+</p>
+<p class="monospace">
+DEVICE=C:\DOS\HIMEM.SYS<br>
+BUFFERS=30,0<br>
+FILES=60<br>
+LASTDRIVE=Z (for NETX LASTDRIVE=F or first available drive letter)
+</p>
+<p>
+<b>AUTOEXEC.BAT</b>
+</p>
+<p class="monospace">
+prompt $P$G<br>
+path=c:\dos;C:\NOVELL\CLIENT32\<br>
+SET TEMP=C:\TEMP<br>
+@CALL C:\NOVELL\CLIENT32\STARTNET
+</p>
+<p>
+<b>STARTNET.BAT</b>
+</p>
+<p class="monospace">
+SET NWLANGUAGE=ENGLISH<br>
+C:\NOVELL\CLIENT32\NIOS.EXE<br>
+LOAD C:\NOVELL\CLIENT32\LSLC32.NLM<br>
+LOAD C:\NOVELL\CLIENT32\CMSM.NLM<br>
+LOAD C:\NOVELL\CLIENT32\CE100B.LAN SPEED=0 IOMAPMODE=0 FORCEDUPLEX=0
+FRAME=ETHERNET_802.2 SLOT=2<br>
+LOAD C:\NOVELL\CLIENT32\E100B.LAN SPEED=0 IOMAPMODE=0 FORCEDUPLEX=0
+FRAME=ETHERNET_802.3 SLOT=2<br>
+LOAD C:\NOVELL\CLIENT32\TRANNTA.NLM<br>
+LOAD C:\NOVELL\CLIENT32\IPX.NLM<br>
+LOAD C:\NOVELL\CLIENT32\CLIENT32.NLM
+</p>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="13" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>
+      NOTE</b>:</i> If you are loading multiple frame types, you must specify the slot number of the adapter on the load lines.</td>
+  </tr>
+</table>
+
+<p>   
+<b>NET.CFG</b>
+</p>
+<p class="monospace">
+NetWare DOS Requester<br>
+FIRST NETWORK DRIVE = F<br>
+NETWARE PROTOCOL BIND NDS
+<br>
+<br>
+Protocol IPX<br>
+IPX SOCKETS 40</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/22/04 10:44a <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

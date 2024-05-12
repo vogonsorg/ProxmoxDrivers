@@ -1,0 +1,112 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Removing the Intel Network Driver for Sun Solaris</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Removing the SunSoft Solaris* Driver</h1>
+
+<p class="contents"><a href="#remove_all">Remove Everything</a></p>
+<p class="contents"><a href="#remove_driver">Remove the Driver</a></p>
+<p class="contents"><a href="#remove_reload">Remove and Reload the Drivers</a>
+<br>
+
+</p>
+
+<hr>
+
+<h2><a name="remove_all"></a>Remove Everything</h2>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td>
+      <p><img border="0" src="note.gif" width="28" height="21"></p>
+    </td>
+    <td>
+      <p><b><i>NOTE</i></b>: To remove this package you must have administrative
+      rights.</p>
+    </td>
+  </tr>
+</table>
+<ol>
+  <li><p class="numlst">To completely remove all of the driver files, driver documentation, 
+  	and the driver, use the following command:</p>
+	<blockquote>
+		<code># pkgrm INTCGigaE</code>
+	</blockquote>
+	<p class="numlst">If this procedure fails, use the commands in the <a href="#remove_driver">Remove
+    the Driver</a> section.</p></li>
+  <li><p class="numlst">Then, follow any other prompts.</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="remove_driver"></a>Remove the Driver</h2>
+<ol>
+  <li><p class="numlst">Enter the following at the command line:</p>
+  	<blockquote>
+  		<code># rem_drv e1000g</code>
+  	</blockquote></li>
+  <li><p class="numlst">Reboot the system.</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="remove_reload"></a>Remove
+and Reload the Drivers
+</h2><p>These
+instructions are for experienced users only. Try these instructions if setup or
+pkgrm does not work.</p>
+<p><code>
+# ifconfig e1000g0 down
+<br>
+# ifconfig e1000g0 unplumb
+<br>
+# modinfo | grep e1000g | awk '{print $1}'</code>
+<br>
+<i>
+86
+<br>
+</i><code>#
+modunload –i 86<br>
+# rem_drv e1000g
+<br>
+# add_drv -m '* 0666 root root' -i '&quot;&lt;id_name&gt;&quot;'e1000g</code>&nbsp;
+<i>(where &lt;id_name&gt; is a list of device or subsystem identifiers,
+separated by spaces, that appear in the following format: &quot;pci8086,&lt;device_id&gt;&quot;
+or &quot;pci8086,&lt;subsystem_id&gt;&quot;)</i><code>
+<br>
+# modload –p drv/e1000g
+<br>
+# ifconfig e1000g0 plumb
+<br>
+# ifconfig e1000g0 inet &lt;ip_address&gt; netmask + broadcast + -trailers up
+<br>
+#
+ifconfig –a</code><b>
+<br>
+</b><i>e1000g0:
+flags=863&lt;UP, BROADCAST, NOTRAILERS, RUNNING, MULTICAST&gt;&nbsp;<br>
+mtu 1500
+<br>
+inet &lt;ip_address&gt; netmask ffffff00 broadcast &lt;ip_address&gt;
+ <br>
+ether
+0:90:27:29:99:2b</i></p>
+<p>Ping the IP address from
+a different computer on the network:
+</p>
+<blockquote>
+<p><code>#
+ping &lt;ip_address&gt;</code></p>
+</blockquote>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 11/14/02 3:56p <!-- $--> Revision <!--$$Revision:--> 6 <!-- $--></code></p>
+
+</body>
+</html>

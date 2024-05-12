@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing Intel Network Drivers for Caldera OpenServer</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel PRO/1000 Network Driver for SCO OpenServer*</h1>
+
+<P>The Intel PRO/1000 adapter driver for SCO OpenServer* is packaged in
+the eeG.vol media image volume file. To install the eeG.vol package and
+setup the driver for a network adapter, use the following steps:</P>
+  <ol>
+	<li>
+      <p class="numlst">Copy the eeG.vol file to any directory, such as /tmp.
+      Rename the file as VOL.000.000, and make
+      the file read-only:
+		<blockquote>
+            <code>
+      		cp eeG.vol /tmp/VOL.000.000<br>
+      		chmod 444 /tmp/VOL.000.000
+      		</code>
+      	</blockquote>
+    </li>
+	<li>
+      <p class="numlst">If there is an older version of the driver on the system, you must first remove it. 
+      To do this, run <code>netconfig</code>. Remove all instances of the "Intel ..." adapters. Exit
+      netconfig without opting to relink the kernel. Run <code>custom</code>. Remove the older driver for the Intel adapter.
+      </p></li>
+	<li>
+      <p class="numlst">Install the new driver using the custom utility. To open 
+      the utility, type <code>custom</code>. When asked for the installation media, choose 
+      <span class="gui">media images</span>, and type the directory path to the VOL.000.000 file. (In step 1, if
+      you copied it to /tmp, type <code>/tmp</code>). After the installation of the driver is 
+      complete, exit custom.
+      </p></li>
+    <li>
+      <p class="numlst">Run <code>netconfig</code> and add the adapters. For each adapter that is present in the system, 
+      enter the appropriate TCP/IP parameters. By default, the driver automatically detects the line speed and 
+      duplex mode. If you want to force any of these settings, choose <span class="gui">Advanced Options</span> 
+      and set the speed and duplex modes. Exit netconfig and choose the option
+      to relink the kernel.
+      </p></li>
+    <li>
+      <p class="numlst">Reboot the system.
+      </p></li>
+  </ol>
+  
+<p>
+Other configurable options are available in the Space.c file. Typically, these options
+do not need to be modified. If any of these variables are changed, the kernel has to be re-linked, and
+the system must be rebooted for the new settings to take effect.
+</p>
+  
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 11/07/02 1:47p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

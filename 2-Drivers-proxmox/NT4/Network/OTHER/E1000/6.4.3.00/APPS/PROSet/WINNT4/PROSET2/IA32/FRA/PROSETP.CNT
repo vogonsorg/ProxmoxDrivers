@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Aide Intel(R) PROSet II
+1 Présentation
+2 Navigation dans PROSet II=GENERAL_PAGE
+2 Affichage des informations de la carte et du pilote
+3 Informations générales=General_Information
+3 Détails de la carte=Adapter_Details
+3 Détails du pilote=Driver_Information
+1 Configuration de la carte
+2 Définition de la vitesse et du duplex=Set_Speed_and_Duplex
+2 Configuration de la consommation=Configure_Power_Management
+2 Configuration des fonctionnalités avancées=Configure_Advanced_Features
+2 Activation de la sécurité IP (IPSec)=Enable_IPSec
+2 Enregistrement de la configuration dans un fichier=SAVERESTORE
+2 Suppression d’une carte=Remove_an_Adapter_Instance
+1 Création et configuration d’associations
+2 Types d'associations
+3 À propos de l’agrégation de cartes=Teaming_Info
+3 Types d’associations=Team_Types
+3 Dispositif de tolérance aux pannes de la carte=Adapter_Fault_Tolerance
+3 Dispositif de tolérance aux pannes du commutateur=Switch_Fault_Tolerance
+3 Technologie ALB d'équilibrage de la charge=Adapter_Load_Balancing
+3 FEC/LA/802.3ad : statique=FEC
+3 GEC/LA/802.3ad : statique=GEC
+3 IEEE 802.3ad : dynamique=Dynamic_3ad
+2 Configuration d’une association
+3 Création d’une association=Create_a_New_Team
+3 Test de la configuration du commutateur=Test_Switch_Configuration
+3 Configuration des paramètres avancés=Teaming_Advanced_Settings
+2 Modification de la configuration d’une association
+3 Modification du mode d'agrégation de cartes=Change_Adapter_Teaming_Mode
+3 Spécification d'une carte comme carte principale ou carte secondaire=Specify_an_Adapter_as_Primary_or_Secondary
+3 Ajout d'une carte à une association=Add_an_Adapter_to_an_Existing_Team
+3 Suppression d'une carte d’une association=Remove_an_Adapter_from_a_Team
+3 Paramètres avancés de l'agrégation de cartes=Teaming_Advanced_Settings
+2 Affichage de la configuration d’une association
+3 Associations de l’Arborescence des composants réseau=Team_Listing
+3 Affichage de la configuration d'une association=Team_Configuration
+2 Suppression d’une association
+3 Suppression d’une association de cartes=Remove_an_Adapter_Team
+1 Création et configuration de réseaux virtuels (VLAN)
+2 Présentation des réseaux VLAN=VLAN>main
+2 Configuration d’un réseau VLAN
+3 Création d’un réseau VLAN=ADD_VLAN
+3 Activation du protocole GVRP=GVRP_Support
+3 Paramètres avancés=Advanced_Settings_for_VLANs
+2 Modification des propriétés du réseau VLAN
+3 Modification des propriétés du réseau VLAN=Change_VLAN_Properties
+3 Paramètres avancés=Advanced_Settings_for_VLANs
+2 Suppression d'un réseau VLAN
+3 Suppression d'un réseau VLAN=Remove_a_VLAN
+1 Exécution des diagnostics
+2 Présentation=Diagnostics_An_Overview
+2 Tests de diagnostics=Diagnostics
+2 Test de câble=Testing_the_Cable
+2 Test Envoyeur/Répondeur=Sender_Responder_Test
+2 Configuration du journal de diagnostics=Diagnostic_Log
+1 Utilisation des outils supplémentaires Intel(R)
+2 Agent d'amorçage Boot Agent
+3 Agent d’amorçage Boot Agent=Boot_Agent
+2 Utilitaire Intel(R) Priority Packet
+3 Présentation=priority_packet_overview
+1 Dépannage
+2 Onglet Dépannage=Troubleshooting
+2 Restauration de la configuration d’une carte=RESTORECONFIG
+2 Obtenir de l’aide=Support

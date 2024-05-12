@@ -1,0 +1,254 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="en">
+  <head>
+    <title>Universal ATA driver FAQ</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="Universal ATA driver, FAQ, Trouble">
+    <meta name="description" content="Universal ATA driver FAQ">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=en">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="uniata_faq.php_lang=ru&amp;">RU&nbsp;<img height="12" width="20" alt="ru" src="http://10.0.0.11/alter/img/lang_ru.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<center>
+<h3>UniATA TroubleShooter/FAQ</h3>
+</center>
+
+<ul>
+  <li><a href="uniata_faq.php_lang=en&amp;#doesnt_work">
+          It doesn't work with my (new) machine, HDD, CD/DVD...
+      </a>
+  <li><a href="uniata_faq.php_lang=en&amp;#blue_inst">
+          When installing UniATA in NT4 together with OS
+    (when NT4 setup prompts for <i>Addiditonal SCSI/RAID controllers</i>)
+    the error messages appear...
+      </a>
+  <li><a href="uniata_faq.php_lang=en&amp;#hiber">
+          Hibernate doesn't work after installing UniATA under w2k/XP.
+      </a>
+  <li><a href="uniata_faq.php_lang=en&amp;#build">
+          How to build UniATA from sources ?
+      </a>
+  <li><a href="uniata_faq.php_lang=en&amp;#reg_deinst">
+          How to remove UniATA using direct Registry access ?
+      </a>
+  <li><a href="compat.php_lang=en&amp;">
+          Is my controller supported ?
+      </a>
+</ul>
+
+<center>
+<h4>Answers</h4>
+</center>
+
+<a name="doesnt_work"></a>
+  <b>Q:</b> It doesn't work with my (new) machine, HDD, CD/DVD...
+<br>
+  <b>A:</b> Unplesant thing. But the problem is fixable. I would be very
+thankful, if you attach to your bug-report letter the following information:
+<ul>
+  <li>OS version (e.g. Windows 2000 sp3),
+  <li>UniATA driver version (e.g. uniata 30g),
+  <li>full dump of your PCI devices derived with
+    PciDumpc.exe utility (
+    <a href="http://alter.org.ua/soft/win/ntpcidump/index.php">http://alter.org.ua/soft/win/ntpcidump/index.php</a>
+    )
+  <li>and list of devices, connected to IDE bus (e.g. Primary Master - HDD, Secondary Master -
+CD-ROM, Secondary Slave - ZIP). The list of IDE devices can also be obtained with <b>atactl.exe</b>.
+This utility is included in UniATA package since v 0.30g. It doesn't require driver to be installed.<br>
+</ul>
+  This will help me to find what goes wrong much quicker.
+<br>
+<hr width="10%" align="left">
+
+<a name="blue_inst"></a>
+  <b>Q:</b> When installing UniATA in NT4 together with OS
+(when NT4 setup prompts for <i>Addiditonal SCSI/RAID controllers</i>)
+the following error messages appear:
+<pre>
+  File caused an unexpected error (0) at
+  line 1213 in D:\nt\private\ntos\boot\setup\oemdisk.c.
+
+  Press any key to continue
+.........................
+  File caused an unexpected error (0) at
+  line 1607 in D:\nt\private\ntos\boot\setup\arcdisp.c.
+
+  Press any key to continue
+</pre>
+then Page Fault comes.<br>
+  <b>A:</b>
+  Seems I have fixed it in 29b. But if it doesn't work, try this:<br>
+  After 1st stage of file copying, during reboot, insert floppy/CD
+and boot from it. Then substitute <i>atapi.sys</i> from temporary folder
+for <i>uniata.sys</i> from UniATA distribution (rename it, of course).
+Reboot and continue installation. But already with new ATA driver.
+<br>
+<hr width="10%" align="left">
+
+<a name="hiber"></a>
+  <b>Q:</b> Hibernate doesn't work after installing UniATA under w2k/XP.
+<br>
+  <b>A:</b> I know. Now I'm thinking how to fix it.
+<br>
+<hr width="10%" align="left">
+
+<a name="build"></a>
+  <b>Q:</b> How to build UniATA from sources ?
+<br>
+  <b>A:</b> Since now each archive with sources includes <i>building.txt</i> file. Among
+  this you can read build-related information here:
+<a href="http://alter.org.ua/soft/win/uni_ata/building.txt">http://alter.org.ua/soft/win/uni_ata/building.txt</a>
+<br>
+<hr width="10%" align="left">
+
+<a name="reg_deinst"></a>
+  <b>Q:</b> How to remove UniATA using direct Registry access ?
+<br>
+  <b>A:</b><br>
+  <center><b>NT4</b></center>
+
+  <ul>
+    <li>
+  Set
+<pre class="code">
+[HKLM\System\CurrentControlSet\Services\Atapi]
+"Start"=dword:00000000
+</pre>
+    <li>
+  Remove
+<pre class="code">
+[HKLM\System\CurrentControlSet\Services\UniATA]
+</pre>
+  </ul>
+
+  <center><b>w2k/XP</b></center>
+
+  <ul>
+    <li>
+  Set
+<pre class="code">
+[HKLM\System\CurrentControlSet\Services\Atapi]
+"Start"=dword:00000000
+[HKLM\System\CurrentControlSet\Services\PciIde]
+"Start"=dword:00000000
+[HKLM\System\CurrentControlSet\Services\PciIdex]
+"Start"=dword:00000000
+</pre>
+    <li>
+  Look at
+<pre class="code">
+[HKLM\System\CurrentControlSet\Services\UniATA\Enum]
+</pre>
+    <li>
+  Find there values similar to the following
+<pre class="code">
+"1"="PCI\VEN_1106&DEV_0571&SUBSYS_05711106&REV_06\2&ebb567f&0&39"
+"2"="PCI\VEN_1095&DEV_0649&SUBSYS_06491095&REV_02\2&ebb567f&0&48"
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+</pre>
+  and remember the underlined part of these strings
+    <li>
+  Go to
+<pre class="code">
+[HKLM\System\CurrentControlSet\Enum\PCI]
+</pre>
+  and find there Keys with previously remembered names. In my case these would be
+  the following:
+<pre class="code">
+[HKLM\System\CurrentControlSet\Enum\PCI\VEN_1106&DEV_0571&SUBSYS_05711106&REV_06]
+[HKLM\System\CurrentControlSet\Enum\PCI\VEN_1095&DEV_0649&SUBSYS_06491095&REV_02]
+</pre>
+  and in all sub-Keys change
+<pre class="code">
+[HKLM\System\CurrentControlSet\Enum\PCI\VEN_1106&DEV_0571&SUBSYS_05711106&REV_06\2&ebb567f&0&48]
+"Service"="UniATA"
+</pre>
+  to
+<pre class="code">
+[HKLM\System\CurrentControlSet\Enum\PCI\VEN_1106&DEV_0571&SUBSYS_05711106&REV_06\2&ebb567f&0&48]
+"Service"="Atapi"
+</pre>
+    <li>
+  Remove
+<pre class="code">
+[HKLM\System\CurrentControlSet\Services\UniATA]
+</pre>
+  </ul>
+
+  If <i>CurrentControlSet</i> doesn't exist - this happens when you work in
+  ERD commander or connected to registry from another OS on the same machine -
+  look here:
+<pre class="code">
+[HKEY_LOCAL_MACHINE\SYSTEM\Select]
+"Current"=dword:00000001
+</pre>
+  This value specifies number of the ControlSet, which is used as <i>Current</i>. In this example
+  you should use <i>ControlSet001</i> instead of <i>CurrentControlSet</i>.
+
+<hr width="10%" align="left">
+
+<a href="index.php_lang=en&amp;">UniATA driver home</a><br>
+
+  Mail me here:
+<a href="mailto:alterX@alter.org.ua (remove X)?subject=Uni-ATA">alterX@alter.org.ua (remove X)</a>
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">designed by Alter aka Alexander A. Telyatnikov</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">powered by Apache+PHP under FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>

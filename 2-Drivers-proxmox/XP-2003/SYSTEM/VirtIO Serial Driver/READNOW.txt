@@ -1,0 +1,1 @@
+If you decide to try newer versions of this driver on XP32 then make sure qemu-agent still communicates to proxmox! Versions newer than 51.80.104.17300 don't appear to allow communication to proxmox

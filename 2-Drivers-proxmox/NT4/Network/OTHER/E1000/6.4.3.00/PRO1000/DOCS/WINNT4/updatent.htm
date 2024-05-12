@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+
+<title>Windows NT Update</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<h1>Unattended Update Information for Windows NT*&nbsp;</h1>
+<p>NT 4.0 Unattended Update Files:</p>
+<ul>
+  <li>NTUPDATE.BAT	- Batch file to invoke the update</li>
+  <li>NTUPDATE.INF	- Unattended update install file</li>
+  <li>SETPATH.EXE	- Utility used to set some environment variables for NTUPDATE.BAT</li>
+</ul>
+<p>This update package performs unattended software updates under Windows NT 4.0. It supports upgrading 
+driver software from Release 1.x to Release 2.x or to Release 3.x, or from Release 2.x to Release 3.x
+and future releases.  It does not support downgrading to prior driver versions.&nbsp;</p>
+<p>The batch file, NTUPDATE.BAT, can be invoked via command line options. It upgrades the software silently by copying the files and updating
+the registry and, if specified, restarts the computer.</p>
+<p>The NTUPDATE.BAT batch file can be run from any path but the NT 4.0 OEMSETUP.INF file, the associated software and the NTUPDATE.INF file
+must be located in the same directory.</p>
+<p>The batch file can be executed as stand-alone by providing the command line options or hooked to another package. The NTUPDATE.BAT
+can be invoked as follows:<br>
+<br>
+	&nbsp;&nbsp;&nbsp;
+	NTUpdate SourcePath INFOption RebootOption<br>
+	or&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;
+	NTUpdate SourcePath RebootOption<br>
+	or&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;
+	NTUpdate RebootOption<br>
+	or&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;
+	NTUpdate<br>
+<br>
+where:&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;
+        NTUPDATE is            the name of the batch file&nbsp;<br>
+<br>
+        &nbsp;&nbsp;&nbsp;
+        SourcePath is the absolute path to the upgrade software.                            This is an optional parameter;			    the default is the current directory.<br>
+<br>
+        &nbsp;&nbsp;&nbsp;
+        InfOption is used to pass the INF option for the OEMSETUP.INF file.                            This is an optional parameter;			    if not specified, it is auto-detected.<br>
+<br>
+        &nbsp;&nbsp;&nbsp;
+        RebootOption indicates whether to restart the                            computer after the update is performed.&nbsp;
+The options are:&nbsp;<br>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               0 = no restart<br>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               1 = restart without prompting user<br>
+                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               2 = restart by prompting user<br>
+<br>
+For example, to update to the 3.x software from the location "d:\update3", with no restarting after the update option, type the
+following command:<br>
+        <br>
+&nbsp;&nbsp;&nbsp;
+        NTUPDATE d:\update3 0<br>
+<br>
+During the update, progress bars are displayed.  Update results are written to a log file named after the COMPUTERNAME with a '.log' extension in the,
+%systemroot%\system32 directory, for example:&nbsp;<br>
+<br>
+	&nbsp;&nbsp;&nbsp;
+	"C:\WINNT\SYSTEM32\WORK_STATION_16.LOG".&nbsp;<br>
+<br>
+A zero in this file indicates the update was successful, otherwise the update failed.  The update will take effect at the next restart of the computer.</p>
+<p>NTUPDATE also writes "Pass" or "Fail" to the "Unattended Update" value at registry key: HKEY_LOCAL_MACHINE\SOFTWARE\INTEL\NIC<br>
+<br>
+The batch file will display a usage message with a '?' parameter: NTUPDATE ? In case of a missing required driver file, the computer displays an
+error message.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/07/04 12:20p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+
+</html>

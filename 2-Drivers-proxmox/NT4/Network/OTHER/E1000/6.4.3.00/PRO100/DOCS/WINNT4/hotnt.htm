@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>PCI Hot Plug Support for Windows NT* 4.0</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+PCI Hot Plug Support for Windows NT* 4.0</h1>
+<P CLASS="Body-Text">
+ Intel<sup>&#174</sup> PRO/100 and PRO/1000 network adapters are enabled for use in selected servers equipped with PCI Hot Plug support and running Windows NT 4.0.</P>
+<table cellSpacing="0" cellPadding="6" border="0">
+  <tr>
+    <td vAlign="top" width="28"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td vAlign="top"><em><strong>NOTE</strong>: </em>
+      If you replace an adapter in a PCI Hot Plug slot, do not place the removed adapter back into 
+      the same network until the server has rebooted. The two adapters may have the same Virtual 
+      MAC address and create a conflict.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="28"></td>
+    <td vAlign="top"><em><strong>NOTE</strong>: </em>PCI
+      Hot Plug will only work when you hot plug an identical Intel network adapter.</td>
+  </tr>
+</table>
+<P CLASS="Body-Text">
+For more information on setting up and using PCI Hot Plug support in your server, see your server's documentation.</P>
+
+<h2>Using Hot Plug</h2>
+<p>To use Hot Plug on Windows NT 4.0 systems, you must install
+the Intel DMI 2.0 Service Provider. See the <i>Desktop Management Interface (DMI)</i> 
+and <i>Windows Management Instrumentation (WMI)</i> documentation sections for installation and configuration information.</p>
+<p>To install an adapter using the Hot Plug feature in Windows NT 4.0 on servers
+using IBM's Hot Plug,
+you must first replace the OEMSETUP.INF file in the root directory with the 
+corresponding file in the
+\PRO100\WINNT4 or the \PRO1000\WINNT4 directory of the
+Intel CD.</p>
+<table cellSpacing="0" cellPadding="6" border="0">
+  <tr>
+    <td vAlign="top" width="28"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td vAlign="top"><em><strong>NOTE</strong>: </em>
+      <i> On some systems, replacing the OEMSETUP.INF file will cause a short
+delay when an adapter team is reset.</i></td>
+  </tr>
+</table>
+<p>Use the MAKEDISK utility to create a Windows NT 4.0
+driver diskette. After you have done that, replace the OEMSETUP.INF file on the
+floppy disk with the corresponding file in the
+\PRO100\WINNT4 or the \PRO1000\WINNT4 directory on the Intel CD.</p>
+<p>Use the driver diskette to install the network drivers to be used with Hot Plug.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/27/04 4:38p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

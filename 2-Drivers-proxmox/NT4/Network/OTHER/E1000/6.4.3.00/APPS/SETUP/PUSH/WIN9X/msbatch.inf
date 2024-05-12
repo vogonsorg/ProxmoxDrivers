@@ -1,0 +1,694 @@
+;
+; Answer File Parameters
+; ----------------------
+; You must include the sections below in any answer file you 
+; create, even if the only information in the section is the
+; section name. Otherwise, the Setup program will wait for
+; user input.
+;
+; For new installations, you must specify all the parameters
+; in the answer file because the system doesn't have existing
+; information for the Setup program to use.
+;
+; For more information on msbatch.inf consult the Windows 9x 
+; resource kit
+;
+;  At a minimum you should change the ProductKey= entry in the [Setup]
+;  section, the Name= and Org= entries in the [NameAndOrg] section, and the
+;  ComputerName= entry in the [Network] section.
+ 
+[BatchSetup]
+Version=3.0 (32-bit)
+SaveDate=04/27/98
+
+[Version]
+Signature = "$CHICAGO$"
+
+[Setup]
+ProductType=1
+
+; This specifies the Product ID for your site, which is printed on the
+; Win9x compact disc or your Certification of Authenticity
+;
+; ProductKey="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+
+; This specifies the Product ID for your site, which is printed on the
+; Win9x compact disc or your Certification of Authenticity
+;
+; ProductID="xxxxxx-xxxxxxx-xxxxx"
+; or ProductID="xxxxx-OEM-xxxxxxx-xxxxx" for 9x OEM versions.
+
+
+
+; EBD (Emergency Boot Disk) specifies if a startup disk is
+; to be created during setup. 
+; 
+; 0 = Setup will not create a startup disk. 
+; 1 = Setup will create a startup disk. This is 
+;     also the default.
+;
+EBD=0
+
+; Express specifies whether or not the 
+; user can give input during setup.  The default
+; value is 0.
+; 
+; 0 = setup will ask the user for input. 
+; 1 = setup will not ask the user for input and 
+;     will use only the settings specified in this 
+;     answer file or built-in defaults.  
+;
+Express=1
+
+; InstallType specifies how to install Windows9x.
+; 
+; 0 = Compact
+; 1 = Typical
+; 2 = Portable 
+; 3 = Custom
+;
+InstallType=1
+
+; The value of the parameter "InstallDir" is the directory 
+; where Windows9x is to be installed.  The default value 
+; is the current windows directory, if it is present on 
+; the computer. 
+;
+InstallDir="c:\windows"
+
+; DevicePath specifies if Windows9x should check some 
+; path to find INF files, in addition to the 
+; Windows9x INF directory.  If the value is set to 
+; check a path, INF files can be added to a single 
+; location (the path).  Only specify a path if the 
+; installation source files are on a network directory. 
+;
+; 0 = Do not add a path for INFs. 
+; 1 = Add the path for finding additional INF files. 
+;     Such as motherboard INF to accomodate Intel 430TX and later models
+;
+DevicePath=0
+
+; VRC specifies if setup should overwrite 
+; existing files during setup, regardless of the 
+; dates of all files. 
+;
+; 0 = If a file on the computer that is to be overwritten 
+;     is more recent than its replacement, the user will
+;     be prompted to confirm the operation. 
+; 1 = Files are overwritten regardless of the date. 
+;
+VRC=0
+
+; Listed are some common strings you can use to set the TimeZone
+;
+;	Pacific		Hawaiian
+;	Central		Atlantic
+;	US Eastern	W.Europe
+;	US Mountain	GMT
+;	
+TimeZone="Pacific"
+
+; Uninstall specifies if a pre-existing version of 
+; Windows and MS-DOS should be compressed into a 
+; backup version to be used to automatically uninstall
+; Windows9x.  
+;
+; 0 = The user is not allowed to speciy uninstall 
+;     options and the compressed backup files are not 
+;     created.  
+; 1 = Display the uninstall options for the user to 
+;     select. 
+; 5 = The unistall options are not displayed and the 
+;     pre-existing version of Windows and MS-DOS are 
+;     compressed into a backup version to be used to 
+;      automatically uninstall Windows9x. 
+;
+Uninstall=0
+
+; SaveSuBoot specifies whether to save the SUBOOT directory
+; for server based setup
+; 
+; 0 = Delete SUBoot Directory
+; 1 = Save SUBoot Directory
+;
+SaveSuBoot=1
+
+; PenWinWarning specifies if a warning is to be displayed 
+; if an unknown version of Pen Windows is installed. 
+;
+; 0 = Do not display warning. 
+; 1 = Display warning. 
+;
+PenWinWarning=0
+
+; Other Values
+;
+ShowEula=0
+ChangeDir=0
+OptionalComponents=1
+Network=1
+System=0
+CCP=0
+CleanBoot=0
+Display=0
+NoDirWarn=1
+NoPrompt2Boot=1
+
+[System]
+
+; An INF section name from LOCALE.INF 
+;
+Locale=L0409
+
+; SelectedKeyboard is any value from the  
+; [Keyboard List] section of MULTILNG.INF
+;
+SelectedKeyboard=KEYBOARD_00000409
+
+; DisplChar sets the initial display characteristics
+; 
+; Values <ColorDepth>,<x-resolution>,<y-resolution>
+;
+; Common Values:
+;		  4,640,480 (Default)
+;		 16,640,480
+; 		 24,640,480
+; 		  4,800,600
+; 		 16,800,600
+; 		 24,800,600
+;
+DisplChar=4,640,480
+
+[NameAndOrg]
+
+; Name is a string that is the name 
+; of the user of Windows9x. 
+;
+Name="Your Name"
+
+; Org is a string that is the of the organization to
+; which this license of Windows9x belongs. 
+;
+Org="Company Name"
+
+; Display specifies if the dialog box with Name and 
+; Organization appears during setup. 
+;
+; 0 = The dialog box is not displayed. 
+; 1 = The dialog box is displayed. 
+;
+Display=0
+
+[Network]
+
+; ComputerName is a string which specifies the 
+; computer's network name. 
+;
+; It is important to not have two computers with the same network 
+; name on the network at the same time, or being installed at the
+; same time.  Consequently you can not use this file by itself to
+; deploy Windows9x on multiple computers, without manually changing
+; this value.
+;
+; Different configuration managers exist to overcome
+; this hurdle in enterprise OS deployments.  For more information 
+; on deploying Windows 9x in an enterprise network consult the
+; Windows 9x resource kit
+;
+ComputerName="ComputerName"
+
+; Workgroup is a string which specifes the 
+; workgroup name for the computer on which Windows9x is
+; being installed. 
+;
+Workgroup="WORKGROUP"
+
+; Description is a string which is a description
+; for the computer.  The string is a maximum of 48 
+; characters with no commas. 
+;
+Description="Enter Description"
+
+; Display specifies if the network configuration dialog
+; boxes are to appear in custom setup. 
+;
+; 0 = Do not display the network configuration dialog boxes. 
+; 1 = Display the network configuration dialog boxes. 
+;
+Display=0
+
+; Clients specifies which network clients are to be 
+; installed during setup.  The value for this parameter is a 
+; comma separated list of devices ids used in the INF files.
+; The first client in a comma separated list will be the
+; first to start.  
+;		
+; Two values that may be used in this answer file are:
+; VREDIR  - Client for Microsoft Windows
+; NWREDIR - Microsoft Client* for NetWare*
+;
+Clients=VREDIR
+
+; PrimaryLogon sets the default network client
+; be sure to set this to one of the above values
+;
+PrimaryLogon=VREDIR
+
+; This parameter specifies which network protocols are to 
+; be installed during setup.  The value for this parameter is 
+; a comma separated list of protocol device ids  used 
+; in the INF files.  
+;
+; Standard values used in this answer file are:
+;
+;	NETBEUI  - Microsoft NETBEUI
+;	NWLINK   - IPX/SPX 
+;	NWNBLINK - NetBIOS support for IPX/SPX
+;	MSTCP    - Mircosoft TCP/IP  
+;
+; Other values possible: 
+;
+;	DEC40    - DECnet 4.1 Ethernet* 
+;	DEC40t   - DECnet 4.1 Token Ring* 
+;	DEC50    - DECnet 5.0A Ethernet* 
+;	DEC50t   - DECnet 5.0A Ethernet* 
+;	NFSLINK  - Sun PC NFS* 
+;	NDTOKBAN - Banyan VINES NDIS Token Ring*
+;	NDISBAN  - Banyan VINES NDIS Ethernet*
+;	MSDLC    - Microsoft DLC* 
+;	IPXODI   - Novell IPXODI* 
+;
+Protocols=MSTCP
+
+
+; DefaultProtocol specifies the default protocol.  The value 
+; of this parameter can be a protocol with an associated 
+; network card OR just a protocol.  If a protocol is 
+; listed with a network card, then that protocol is 
+; bound to that network card.  The protocol must be 
+; a protocol device id that is listed in the "Protocol" parameter 
+; of the [Network] section of this answer file.  The network 
+; card must be a network card device id that is listed in 
+; the "Netcard" (which is not used in this default answer file) 
+; parameter of the [Network] section of this answer file.  
+;
+; For example: 
+; DefaultProtocol = MSTCP 
+; specifies Microsoft TCP/IP* as the default protocol. 
+;
+; For example: 
+; DefaultProtocol = MSTCP,<network card id> 
+; would cause an instance of MSTCP to be bound to that  adapter. 
+;
+DefaultProtocol=MSTCP
+
+; Services defines which network services are to 
+; be installed.  The value is a comma separated list
+; of device ids used in the INF files.  
+;
+; The default values used in this answer file are:
+;
+;	VSERVER	   -   File/Printer sharing for Microsoft Networks*
+;
+; Other values possible: 
+;
+;	BKUPAGNT   -   Arcada Backup Exec* agent
+;	CHEYAGNT   -   Cheyenne ARCserve* agent
+;	JADM       -   HP Network Printer for Microsoft*
+;	JANW	   -   HP Network Printer for NetWare*
+;	NMAGENT    -   Microsoft Network Monitor Agent*
+;	NWSERVER   -   File and Printer Shaing for NetWare Networks*
+;	PSERVER    -   Microsoft Print Service for NetWare Networks*
+;	REMOVEREG  -   Microsoft Remote Registry* service
+;	SNMP	   -   Microsoft SNMP* agent
+;
+Services=VSERVER
+
+; Security specifies what kind of security model is 
+; to be used and the type of pass-through agent for 
+; user level security.  The client must be installed with 
+; a security provider in order for this parameter to have the 
+; desired effect. 
+;
+; SHARE    = share level security. 
+; NWSERVER = user level security by a NetWare server. 
+; DOMAIN   = user level security by a Windows NT domain.
+; MSSERVER = user level security by a Windows NT Workstation.
+;
+Security=SHARE
+
+; IgnoreDetectedNetCards specifies if setup uses detected
+; information to configure network cards.  If detected information 
+; is not used, then the value of the parameter "netcards" (which
+; is not used in this default answer file) will
+; be used to configure network cards.
+; 
+; 0 = Use detected information to configure network cards. 
+; 1 = Do not use detected information to configure 
+;     network cards. 
+;
+IgnoreDetectedNetCards=0
+
+; ValidateNetCardResources determines if a dialog box is to
+; be displayed  to have the user respond to resource conflicts.  
+; Resource conflicts include a partial configuration is 
+; found or there is an IRQ conflict involving the network card. 
+;
+; 0 = The dialog box is not displayed. 
+; 1 = The dialog box is displayed.
+; 
+ValidateNetCardResources=1
+
+[MSTCP]
+
+; The DHCP option specifies if TCP/IP should be configured 
+; to use DHCP.
+;
+; 0 = Do not use DHCP.
+; 1 = Use DHCP. 
+;
+DHCP=1
+
+; IPAddress sets the IP address if DHCP is disabled. 
+;
+;IPAddress=128.128.128.128
+		
+
+; This parameter sets the IP subnet mask if DHCP is disabled.
+;
+;IPMask=255.255.255.0
+
+; It is recommended that you choose either DNS or WINS for name resolution.
+; DNS specifies if DNS name resolution is to 
+; be used. 
+;
+; 0 = Do not use DNS name resolution. 
+; 1 = Use DNS name resoluiton. 
+;
+DNS=0
+
+; WINS specifies if WINS for NetBIOS name 
+; resolution is to be used. 
+;
+; 0 = Do not use WINS for NetBIOS name resolution. 
+; 1 = Use WINS for NetBIOS name resolution.
+;
+WINS=1
+
+; DNSServers specifies a comma separated list of DNS 
+; servers to use.  The servers are tried in order.
+;
+;DNSServers=128.128.128.128
+
+; Domain specifies the internet domain the computer is in.
+;  
+;Domain=DomainName
+
+; Hostname specifies the DNS hostname for the computer. 
+;
+;Hostname=ComputerName
+
+; Gateways specifies a comma separated list of IP gateways.
+; The IP gateways are tried in order. 
+;
+;Gateways=128.128.128.128
+
+; PrimaryWINS specifies ip address of the primary WINS name server.
+;
+;PrimaryWINS=128.128.128.128
+
+; SecondaryWINS specifies the secondary WINS name server.
+;  
+;SecondaryWINS=128.128.128.128
+
+LMHOSTS=1
+LMHOSTPath="C:\WINDOWS\lmhosts"
+
+[NWSERVER]
+
+; BrowseMaster specifies if the computer has File and 
+; Printer Sharing for NetWare networks can be elected 
+; browse master.  
+;
+; 0 = The computer with File and 
+;     Printer Sharing for NetWare networks can not 
+;     be elected browse master. 
+; 1 = The computer with File and 
+;     Printer Sharing for NetWare networks can 
+;     be a browse master. 
+; 2 = The computer with File and 
+;     Printer Sharing for NetWare networks is 
+;     the preferred browse master. 
+;
+;BrowseMaster=1
+
+; Use_SAP specifies if the computer with File and 
+; Printer Sharing for NetWare networks will use 
+; Server Advertising Protocol browsing. If Server
+; Advertising Protocol is used, the computer with 
+; File and Printer Sharing for NetWare networks can 
+; be seen by a NetWare client but the computer will 
+; not appear in the Network Neighborhood. 
+;
+; 0 = Do not use Server Advertising Protocol browsing. 
+; 1 = Use Server Advertising Protocol browsing. 
+;
+;Use_SAP=0
+
+[VREDIR]
+
+; ValidatedLogon specifies whether logons are validated
+; on a Windows NT Domain.
+;
+; 0 = Don't validate logons
+; 1 = Validate logon
+ValidatedLogon=0
+
+; LogonDomain is a string that specifies the Windows NT Domain
+;
+LogonDomain=""
+
+[VSERVER]
+
+; LMAnnounce specifies that if the computer has Microsoft
+; File and Printer Sharing, the computer will 
+; announce itself to LAN Manager computers that are 
+; present on the network.  
+;
+; 0 = The computer will not announce itself to the 
+;     LAN Manager computers present on the network. 
+; 1 = The computer will announce itself to the 
+;     LAN Manager computers present on the network. 
+;
+LMAnnounce=0
+
+; MaintainServerList specifies the behavior of the computer 
+; in a browse master electon if that if the computer has
+; Microsoft File and Printer sharing.  
+;
+; 0 = The computer with Microsoft File and Printer sharing 
+;     can not be browse master. 
+; 1 = The computer with Microsoft File and Printer sharing
+;     is the browse master. 
+; 2 = The computer with Microsoft File and Printer sharing
+;     can be the browse master if required. 
+;
+MaintainServerList=2
+
+[OptionalComponents]
+
+; This section contains the optional components that 
+; can be installed on Windows9x.  The optional 
+; components dialog box that appears in Windows9x 
+; during setup has the same parameters that are 
+; in this section.  The value for each parameter in
+; this section is 0 or 1. 
+;
+; 0 = Informs setup NOT to install this option.  
+; 1 = Informs setup TO install this option. 
+;
+
+"Accessibility Options"=1
+"Enhanced Accessibility"=1
+"Briefcase"=0
+"Calculator"=1
+"Desktop Wallpaper"=1
+"Document Templates"=1
+"Games"=1
+"Imaging"=1
+"Mouse Pointers"=1
+"Paint"=1
+"Quick View"=1
+"Windows Scripting Host"=1
+"WordPad"=1
+"Dial-Up Networking"=1
+"Dial-Up Server"=0
+"Direct Cable Connection"=1
+"HyperTerminal"=1
+"Infrared"=0
+"Microsoft Chat 2.0"=0
+"Microsoft NetMeeting"=1
+"Phone Dialer"=1
+"Virtual Private Networking"=0
+"Baseball"=0
+"Dangerous Creatures"=0
+"Inside your Computer"=0
+"Jungle"=0
+"Leonardo de Vinci"=0
+"More Windows"=0
+"Mystery"=0
+"Nature"=0
+"Science"=0
+"Space"=0
+"Sports"=0
+"The 60's USA"=0
+"The Golden Era"=0
+"Travel"=0
+"Underwater"=0
+"Windows 95"=0
+"Desktop Themes Support"=0
+"Microsoft FrontPage Express"=1
+"Microsoft VRML 2.0 Viewer"=1
+"Microsoft Wallet"=1
+"Personal Web Server"=1
+"Web Publishing Wizard"=1
+"Web-Based Enterprise Mgmt"=1
+"Microsoft Outlook Express"=1
+"Baltic"=0
+"Central European"=0
+"Cyrillic"=0
+"Greek"=0
+"Turkish"=0
+"Audio Compression"=1
+"CD Player"=1
+"DVD Player"=1
+"Macromedia Shockwave Director"=1
+"Macromedia Shockwave Flash"=1
+"Media Player"=1
+"Microsoft NetShow Player 2.0"=1
+"Multimedia Sound Schemes"=1
+"Sample Sounds"=1
+"Sound Recorder"=1
+"Video Compression"=1
+"Volume Control"=1
+"AOL"=0
+"AT&T WorldNet Service"=0
+"CompuServe"=0
+"Prodigy Internet"=0
+"The Microsoft Network"=0
+"Additional Screen Savers"=1
+"Flying Windows"=1
+"OpenGL Screen Savers"=1
+"Backup"=1
+"Character Map"=1
+"Clipboard Viewer"=1
+"Disk compression tools"=1
+"Drive Converter (FAT32)"=1
+"Group policies"=1
+"Net Watcher"=1
+"System Monitor"=1
+"System Resource Meter"=1
+"WinPopup"=1
+"TV Viewer"=0
+
+[Printers]
+; This section is used to install one or more printers.  
+; If this section is left blank, the user is not 
+; asked to select a printer the first time that 
+; Windows9x is run. 
+; To install a printer, follow the following format: 
+;
+; <printer name> = <driver model>,<port> 
+;
+; <printer name> = a string in quotes that does not contain \ , ; = 
+; <driver model> = a string in quotes that is the driver name under Windows9x. 
+; <port> 	 = the port the printer is connected 
+;		   to the computer or the unc path
+;		   to a network printer. 
+; 
+; Example : A printer to be called "myprinter" whose 
+;	    driver model is "myprinter driver" and 
+;           is connected to LPT1. 
+;
+;	    "myprinter" = "myprinter driver",LPT1
+;	     *  OTHER PRODUCT AND CORPORATE NAMES MAY BE TRADEMARKS
+;	        OF OTHER COMPANIES AND ARE USED ONLY FOR EXPLANATION
+;	        AND TO THE OWNERS' BENEFIT, WITHOUT INTENT TO INFRINGE. 
+;
+; ------------------------------------------------------------------------------------
+; The remainder of this file contains more options relating to the registry, 
+; installing the Intel(R) NIC, and making sure the setup is as unattended as possible.
+; ------------------------------------------------------------------------------------
+ 
+[InstallLocationsMRU]
+
+[Install]
+AddReg=RunOnce.BatchDelay, Skip.PCMCIA.Wizard
+CopyFiles=Inf.Copy
+
+[RunOnce.BatchDelay]
+
+; The following line automatically installs PROSet II.  Place a semicolon ";"
+; in front of it if you do not wish to install PROSet II.
+
+HKEY_CURRENT_USER,%KEY_RUNONCE%,BatchRun0,,"c:\progra~1\Intel\proset.exe MsiPath=c:\Progra~1\Intel /qn"
+
+HKLM,%KEY_RUNONCE%,BatchRun1,,"%25%\rundll.exe setupx.dll,InstallHinfSection Delete.MSN.Icon 4 %10%\msbatch.inf"
+HKLM,%KEY_RUNONCE%,BatchRun2,,"%25%\rundll.exe setupx.dll,InstallHinfSection Delete.OLS.Icons 4 %10%\msbatch.inf"
+HKLM,%KEY_RUNONCE%,BatchRun3,,"%25%\rundll.exe setupx.dll,InstallHinfSection Delete.Welcome 4 %10%\msbatch.inf"
+HKLM,%KEY_RUNONCE%,BatchRun4,,"%25%\rundll.exe setupx.dll,InstallHinfSection Delete.Regwiz 4 %10%\msbatch.inf"
+
+[Delete.MSN.Icon]
+DelReg=MSN.Icon
+
+[MSN.Icon]
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\explorer\Desktop\NameSpace\{4B876A40-4EE8-11D1-811E-00C04FB98EEC},,,
+
+[Delete.OLS.Icons]
+DelFiles=OLS.Icons
+DelDirs=OLS.Folder
+
+[OLS.Icons]
+aol.lnk
+at&two~1.lnk
+compus~1.lnk
+prodig~1.lnk
+themic~1.lnk
+aboutt~1.txt
+
+[OLS.Folder]
+%25%\Desktop\Online~1
+
+[Delete.Welcome]
+DelReg=Registry.Welcome
+
+[Registry.Welcome]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Run,Welcome,,
+
+[Delete.Regwiz]
+AddReg=Registry.Regwiz
+
+[Registry.Regwiz]
+HKLM,Software\Microsoft\Windows\CurrentVersion\Welcome\Regwiz,@,1,01,00,00,00
+HKLM,Software\Microsoft\Windows\CurrentVersion,RegDone,1,01,00,00,00
+
+[Skip.PCMCIA.Wizard]
+HKLM,System\CurrentControlSet\Services\Class\PCMCIA,SkipWizardForBatchSetup,,1
+
+[Inf.Copy]
+E100B9x.inf
+E100B9xa.inf
+E1000w9x.inf
+
+[DestinationDirs]
+OLS.Icons=25,Desktop\Online~1
+Inf.Copy=17
+
+[load_inf]
+E100B9x.inf
+E100B9xa.inf
+E1000w9x.inf
+
+[Strings]
+KEY_RUNONCE="SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"

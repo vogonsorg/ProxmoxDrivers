@@ -1,0 +1,92 @@
+;
+; OEMSETUP.INF - version 2K.3 (Windows 2000 and above only)
+;
+; This is the INF file for Windows 2000 and above for the SYM_HI based
+; PCI SCSI Cards (895A, 896, Eiger)
+;
+; ********************************************************************
+;                                                                    *
+;   Copyright 2000 LSI Logic, Inc. All rights reserved.              *
+;                                                                    *
+;   This file is property of LSI Logic, Inc. and is licensed for     *
+;   use as is.  The receipt of or possession of this file does not   *
+;   convey any rights to modify its contents, in whole, or in part,  *
+;   without the specific written consent of LSI Logic, Inc.          *
+;                                                                    *
+; ********************************************************************
+
+[version]
+signature="$Windows NT$"
+Class=SCSIAdapter
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Provider=%LSI%
+DriverVer=12/19/2000,4.16.00
+;CatalogFile=sym_hi.cat
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[SourceDisksFiles]
+sym_hi.sys = 1
+;sym_hi.cat = 1
+
+[SourceDisksNames]
+1 = %Floppy_Desc%,,,
+
+[Manufacturer]
+%LSI%=LSI
+
+[LSI]
+%DevDesc1% = SYM_HI_Inst, PCI\VEN_1000&DEV_000A
+%DevDesc2% = SYM_HI_Inst, PCI\VEN_1000&DEV_000B
+%DevDesc3% = SYM_HI_Inst, PCI\VEN_1000&DEV_0012
+
+[Control Flags]
+ExcludeFromSelect = PCI\VEN_1000&DEV_000A
+ExcludeFromSelect = PCI\VEN_1000&DEV_000B
+ExcludeFromSelect = PCI\VEN_1000&DEV_0012
+
+[SYM_HI_Inst]
+CopyFiles = @sym_hi.sys
+AddReg = SYM_HI_AddReg
+
+[SYM_HI_Inst.Services]
+AddService = Sym_hi, %SPSVCINST_ASSOCSERVICE%, SYM_HI_Service_Inst, Miniport_EventLog_Inst
+
+[SYM_HI_Service_Inst]
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_BOOT_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\sym_hi.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = pnpsafe_pci_addreg
+
+[SYM_HI_AddReg]
+HKLM,SYSTEM\CurrentControlSet\Services\Sym_hi\Parameters\Device,MaximumSGList,0x00010001,0x41
+HKLM,SYSTEM\CurrentControlSet\Services\Sym_hi\Parameters\Device,NumberOfRequests,0x00010001,0x80
+
+[pnpsafe_pci_addreg]
+HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[Miniport_EventLog_Inst]
+AddReg = Miniport_EventLog_AddReg
+
+[Miniport_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%%SystemRoot%%\System32\IoLogMsg.dll"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+[Strings]
+LSI = "LSI Logic, Inc."
+DevDesc1 = "Symbios Eiger-based PCI SCSI Adapter; 53C1510 Device"
+DevDesc2 = "Symbios 22910, 21002 PCI SCSI Adapter; 53C896 Device"
+DevDesc3 = "Symbios 8953U PCI SCSI Adapter; 53C895A Device"
+Floppy_Desc = "Symbios High Performance PCI SCSI Install Disk"
+
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_ERROR_NORMAL   = 1
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

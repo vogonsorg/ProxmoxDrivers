@@ -1,0 +1,1414 @@
+;
+;  File name:  CE100B32.LDI
+;  VeRsIoN=1.19 
+;  Intel(R)PRO/100+ Installation Information File
+;  CoPyRiGhT=(c)Copyright 2001 by Intel Corporation, All rights reserved.
+;  Help file for NetWare Server driver
+;
+;- File: CE100B32.LDI
+;- This file handles all PRO/100 family adapters :
+;- PRO/100 PCI Adapter
+;- PRO/100+ Server Adapter
+;- PRO/100+ PCI Adapter
+;- PRO/100+ Management Adapter
+;- PRO/100 S Management Adapter
+;- PRO/100 S Advanced Management adapter
+;- PRO/100 S Server Adapter
+;- PRO/100 S Dual Port Server adapter
+;- PRO/100B PCI with TX Physical Layer
+;- PRO/100B PCI with T4 Physical Layer
+
+
+VER: 1.18
+SYN: 1.00
+
+   DR CE100B32
+   {
+      DES: $CE100B_1
+      HELP: $CE100B_2
+      PAR: 2.00
+      Prod: 'PCI.8086.1229.8086.0001.*'
+      Prod: 'PCI.8086.1229.8086.0002.*'
+      Prod: 'PCI.8086.1229.8086.0003.*'
+      Prod: 'PCI.8086.1229.8086.0004.*'
+      Prod: 'PCI.8086.1229.8086.0005.*'
+      Prod: 'PCI.8086.1229.8086.0006.*'
+      Prod: 'PCI.8086.1229.8086.0007.*'
+      Prod: 'PCI.8086.1229.8086.0008.*'
+	  Prod: 'PCI.8086.1229.8086.0009.*'
+      Prod: 'PCI.8086.1229.8086.000A.*'
+      Prod: 'PCI.8086.1229.8086.000B.*'
+      Prod: 'PCI.8086.1229.8086.000C.*'
+      Prod: 'PCI.8086.1229.8086.000D.*'
+      Prod: 'PCI.8086.1229.8086.000E.*'
+	  Prod: 'PCI.8086.1229.8086.000F.*'
+      Prod: 'PCI.8086.1229.8086.0010.*'
+      Prod: 'PCI.8086.1229.8086.0011.*'
+      Prod: 'PCI.8086.1229.8086.0012.*'
+      Prod: 'PCI.8086.1229.8086.0013.*'
+	  Prod: 'PCI.8086.1229.8086.0030.*'
+	  Prod: 'PCI.8086.1229.8086.0031.*'
+      Prod: 'PCI.8086.1229.8086.0040.*'
+      Prod: 'PCI.8086.1229.8086.0041.*'
+      Prod: 'PCI.8086.1229.8086.0042.*'
+	  Prod: 'PCI.8086.1229.8086.0050.*'
+	  Prod: 'PCI.8086.1229.8086.0070.*'
+      Prod: 'PCI.8086.1229.8086.1009.*'
+	  Prod: 'PCI.8086.1229.8086.100C.*'
+      Prod: 'PCI.8086.1229.8086.1012.*'
+      Prod: 'PCI.8086.1229.8086.1013.*'	  
+      Prod: 'PCI.8086.1229.8086.1014.*'
+      Prod: 'PCI.8086.1229.8086.1015.*'
+      Prod: 'PCI.8086.1229.8086.1016.*'
+      Prod: 'PCI.8086.1229.8086.1017.*'
+	  Prod: 'PCI.8086.1229.8086.1030.*'
+      Prod: 'PCI.8086.1229.8086.1040.*'
+      Prod: 'PCI.8086.1229.8086.1041.*'
+      Prod: 'PCI.8086.1229.8086.1042.*'
+	  Prod: 'PCI.8086.1229.8086.1050.*'
+	  Prod: 'PCI.8086.1229.8086.1051.*'
+	  Prod: 'PCI.8086.1229.8086.1052.*'
+	  Prod: 'PCI.8086.1229.8086.10F0.*'
+	  Prod: 'PCI.8086.1229.8086.2009.*'
+	  Prod: 'PCI.8086.1229.8086.200D.*'
+	  Prod: 'PCI.8086.1229.8086.200E.*'
+	  Prod: 'PCI.8086.1229.8086.200F.*'
+	  Prod: 'PCI.8086.1229.8086.2010.*'
+	  Prod: 'PCI.8086.1229.8086.2011.*'
+	  Prod: 'PCI.8086.1229.8086.2012.*'
+	  Prod: 'PCI.8086.1229.8086.2013.*'
+	  Prod: 'PCI.8086.1229.8086.2014.*'
+	  Prod: 'PCI.8086.1229.8086.2015.*'
+	  Prod: 'PCI.8086.1229.8086.2016.*'
+	  Prod: 'PCI.8086.1229.8086.2017.*'
+	  Prod: 'PCI.8086.1229.8086.2018.*'
+	  Prod: 'PCI.8086.1229.8086.2019.*'
+	  Prod: 'PCI.8086.1229.8086.2101.*'
+	  Prod: 'PCI.8086.1229.8086.2102.*'
+	  Prod: 'PCI.8086.1229.8086.2103.*'
+	  Prod: 'PCI.8086.1229.8086.2104.*'
+	  Prod: 'PCI.8086.1229.8086.2105.*'
+	  Prod: 'PCI.8086.1229.8086.2106.*'
+	  Prod: 'PCI.8086.1229.8086.2107.*'
+	  Prod: 'PCI.8086.1229.8086.2108.*'
+	  Prod: 'PCI.8086.1229.8086.2200.*'
+	  Prod: 'PCI.8086.1229.8086.2201.*'
+	  Prod: 'PCI.8086.1229.8086.2202.*'
+	  Prod: 'PCI.8086.1229.8086.2203.*'
+	  Prod: 'PCI.8086.1229.8086.2204.*'
+	  Prod: 'PCI.8086.1229.8086.2205.*'
+	  Prod: 'PCI.8086.1229.8086.2206.*'
+	  Prod: 'PCI.8086.1229.8086.2207.*'
+	  Prod: 'PCI.8086.1229.8086.2208.*'
+	  Prod: 'PCI.8086.1229.8086.2408.*'
+	  Prod: 'PCI.8086.1229.8086.240F.*'
+	  Prod: 'PCI.8086.1229.8086.2411.*'
+	  Prod: 'PCI.8086.1229.8086.3000.*'
+	  Prod: 'PCI.8086.1229.8086.3001.*'
+	  Prod: 'PCI.8086.1229.8086.3002.*'
+	  Prod: 'PCI.8086.1229.8086.3006.*'
+	  Prod: 'PCI.8086.1229.8086.3007.*'
+	  Prod: 'PCI.8086.1229.8086.3008.*'
+	  Prod: 'PCI.8086.1229.8086.3010.*'
+	  Prod: 'PCI.8086.1229.8086.3011.*'
+	  Prod: 'PCI.8086.1229.8086.3012.*'
+	  Prod: 'PCI.8086.1229.8086.3013.*'
+	  Prod: 'PCI.8086.1229.8086.3014.*'
+
+	  Prod: 'PCI.8086.1229.1028.009B.*'
+
+	  Prod: 'PCI.8086.1229.1014.005C.*'
+      Prod: 'PCI.8086.1229.1014.305C.*'
+      Prod: 'PCI.8086.1229.1014.405C.*'
+      Prod: 'PCI.8086.1229.1014.505C.*'
+      Prod: 'PCI.8086.1229.1014.605C.*'
+      Prod: 'PCI.8086.1229.1014.01BC.*'
+      Prod: 'PCI.8086.1229.1014.0040.*'
+      Prod: 'PCI.8086.1229.1014.0041.*'
+      Prod: 'PCI.8086.1229.1014.105C.*'
+      Prod: 'PCI.8086.1229.1014.705C.*'
+      Prod: 'PCI.8086.1229.1014.805C.*'
+	  Prod: 'PCI.8086.1229.1014.0232.*'
+      Prod: 'PCI.8086.1229.1014.01F1.*'
+      Prod: 'PCI.8086.1229.1014.01F2.*'
+	  Prod: 'PCI.8086.2449.1014.01CE.*'
+	  Prod: 'PCI.8086.2449.1014.01DC.*'
+	  Prod: 'PCI.8086.2449.1014.01EB.*'
+	  Prod: 'PCI.8086.2449.1014.01EC.*'
+	  Prod: 'PCI.8086.2449.1014.0202.*'
+	  Prod: 'PCI.8086.2449.1014.0205.*'
+	  Prod: 'PCI.8086.2449.1014.0217.*'
+	  Prod: 'PCI.8086.2449.1014.0207.*'
+	  Prod: 'PCI.8086.2449.1014.0234.*'
+	  Prod: 'PCI.8086.2449.1014.023D.*'
+	  Prod: 'PCI.8086.2449.1014.0244.*'
+	  Prod: 'PCI.8086.2449.1014.0245.*'
+
+	  Prod: 'PCI.8086.1229.0E11.3001.*'
+	  Prod: 'PCI.8086.1229.0E11.3002.*'
+	  Prod: 'PCI.8086.1229.0E11.3003.*'
+	  Prod: 'PCI.8086.1229.0E11.3004.*'
+	  Prod: 'PCI.8086.1229.0E11.3005.*'
+	  Prod: 'PCI.8086.1229.0E11.3006.*'
+	  Prod: 'PCI.8086.1229.0E11.3007.*'
+	  Prod: 'PCI.8086.1229.0E11.B209.*'
+
+	  Prod: 'PCI.8086.1229.103C.10C0.*'
+	  Prod: 'PCI.8086.1229.103C.10C3.*'
+	  Prod: 'PCI.8086.1229.103C.10CA.*'
+	  Prod: 'PCI.8086.1229.103C.10CB.*'
+	  Prod: 'PCI.8086.1229.103C.1200.*'
+	  Prod: 'PCI.8086.1229.103C.10E3.*'
+	  Prod: 'PCI.8086.1229.103C.10E4.*'
+
+	  Prod: 'PCI.8086.1229.10CF.1115.*'
+	  Prod: 'PCI.8086.1229.10CF.1143.*'
+
+	  Prod: 'PCI.8086.1229.1179.0003.*'
+	  Prod: 'PCI.8086.1229.1179.0001.*'
+
+	  Prod: 'PCI.8086.1229.1186.7801.*'
+
+	  Prod: 'PCI.8086.1229.144D.2502.*'
+	  Prod: 'PCI.8086.1229.144D.2501.*'
+	  Prod: 'PCI.8086.2449.144D.2602.*'
+
+      Prod: 'PCI.8086.2449.8086.3010.*'
+      Prod: 'PCI.8086.2449.8086.3011.*'
+	  Prod: 'PCI.8086.2449.8086.3012.*'
+      Prod: 'PCI.8086.2449.8086.3013.*'
+      Prod: 'PCI.8086.2449.8086.3014.*'
+	  Prod: 'PCI.8086.2449.8086.3015.*'
+	  Prod: 'PCI.8086.2449.8086.3016.*'
+	  Prod: 'PCI.8086.2449.8086.3017.*'
+	  Prod: 'PCI.8086.2449.8086.3018.*'
+
+      Prod: 'PCI.8086.1229.8086.*.*'
+      Prod: 'PCI.8086.1029.8086.*.*'
+      Prod: 'PCI.8086.1229.*.*.01'
+      Prod: 'PCI.8086.1229.*.*.02'
+      Prod: 'PCI.8086.1229.*.*.04'
+      Prod: 'PCI.8086.1229.*.*.05'
+      Prod: 'PCI.8086.1229.*.*.06'
+      Prod: 'PCI.8086.1229.*.*.08'
+      Prod: 'PCI.8086.1229.*.*.09'
+      Prod: 'PCI.8086.1229.*.*.0A'
+      Prod: 'PCI.8086.1229.*.*.0C'
+	  Prod: 'PCI.8086.1229.*.*.0D'
+	  Prod: 'PCI.8086.1229.*.*.0E'
+	  Prod: 'PCI.8086.1229.*.*.0F'
+	  Prod: 'PCI.8086.1229.*.*.10'
+
+	  Prod:	'PCI.8086.2449.0E11.0091.*'
+	  Prod:	'PCI.8086.2449.0E11.0012.*'
+	  Prod:	'PCI.8086.1031.1014.0209.*'
+	  Prod:	'PCI.8086.1031.144D.C000.*'
+	  Prod:	'PCI.8086.1031.144D.C001.*'
+	  Prod:	'PCI.8086.1031.144D.C002.*'
+	  Prod:	'PCI.8086.1031.144D.C003.*'
+	  Prod:	'PCI.8086.1031.107B.5350.*'
+
+
+	  Prod:	'PCI.8086.1031.*.*.*.*'
+	  Prod:	'PCI.8086.1032.*.*.*.*'
+	  Prod:	'PCI.8086.1033.*.*.*.*'
+	  Prod:	'PCI.8086.1034.*.*.*.*'
+	  Prod:	'PCI.8086.1035.*.*.*.*'
+	  Prod:	'PCI.8086.1036.*.*.*.*'
+	  Prod:	'PCI.8086.1037.*.*.*.*'
+	  Prod:	'PCI.8086.1038.*.*.*.*'
+	  Prod:	'PCI.8086.1039.*.*.*.*'
+	  Prod:	'PCI.8086.103A.*.*.*.*'
+	  Prod:	'PCI.8086.103B.*.*.*.*'
+	  Prod:	'PCI.8086.103C.*.*.*.*'
+	  Prod:	'PCI.8086.103D.*.*.*.*'
+	  Prod:	'PCI.8086.103E.*.*.*.*'
+
+	  Prod:	'PCI.8086.1050.*.*.*.*'
+	  Prod:	'PCI.8086.1051.*.*.*.*'
+	  Prod:	'PCI.8086.1052.*.*.*.*'
+	  Prod:	'PCI.8086.1053.*.*.*.*'
+	  Prod:	'PCI.8086.1054.*.*.*.*'
+	  Prod:	'PCI.8086.1055.*.*.*.*'
+	  Prod:	'PCI.8086.1056.*.*.*.*'
+	  Prod:	'PCI.8086.1057.*.*.*.*'
+
+	  Prod:	'PCI.8086.1064.*.*.*.*'
+	  Prod:	'PCI.8086.1065.*.*.*.*'
+	  Prod:	'PCI.8086.1066.*.*.*.*'
+	  Prod:	'PCI.8086.1067.*.*.*.*'
+	  Prod:	'PCI.8086.1068.*.*.*.*'
+	  Prod:	'PCI.8086.1069.*.*.*.*'
+	  Prod:	'PCI.8086.106A.*.*.*.*'
+	  Prod:	'PCI.8086.106B.*.*.*.*'
+
+      ;@# SPROD:    'Intel~ PRO/100B PCI Adapter (TX)',
+      ;@# 			'Intel~ PRO/100B PCI Adapter (T4)',
+      ;@# 			'Intel~ PRO/10+ PCI Adapter',
+      ;@# 			'Intel~ PRO/100 WfM PCI Adapter',
+      ;@# 			'Intel~ 82557-based Integrated Ethernet PCI (10/100)',
+      ;@# 			'Intel~ 82557-based Integrated Ethernet with Wake on LAN*',
+      ;@# 			'Intel~ 82558-based Integrated Ethernet',
+      ;@# 			'Intel~ 82558-based Integrated Ethernet with Wake on LAN*',
+	  ;@#			'Intel~ PRO/100+ PCI Adapter',
+      ;@#           'Intel~ PRO/100+ Management Adapter',
+      ;@#           'Intel~ PRO/100+ Adapter',
+      ;@#           'Intel~ PRO/100+ Management Adapter',
+      ;@#           'Intel~ PRO/100+ Alert on LAN* 2 Management Adapter',
+      ;@#           'Intel~ PRO/100+ Alert on LAN* Management Adapter',
+	  ;@#           'Intel~ PRO/100 Desktop Adapter',
+      ;@#           'Intel~ PRO/100 S Management Adapter',
+      ;@#           'Intel~ PRO/100 S Management Adapter',
+      ;@#           'Intel~ PRO/100 S Advanced Management Adapter',
+      ;@#           'Intel~ PRO/100 S Advanced Management Adapter',
+	  ;@#           'Intel~ PRO/100+ Management Adapter with Alert On LAN* GC',
+	  ;@#           'Intel~ PRO/100 Desktop Adapter',
+      ;@#           'Intel~ PRO/100 Desktop Adapter',
+      ;@#           'Intel~ PRO/100 S Desktop Adapter',
+      ;@#           'Intel~ PRO/100 Desktop Adapter',
+	  ;@#           'Intel~ PRO/100 S Desktop Adapter',
+	  ;@#           'Intel~ PRO/100 M Desktop Adapter',
+      ;@#           'Intel~ PRO/100+ Server Adapter',
+	  ;@#           'Intel~ PRO/100+ Server Adapter (PILA8470B)',
+      ;@#           'Intel~ PRO/100 S Server Adapter',
+      ;@#           'Intel~ PRO/100 S Server Adapter',
+      ;@#           'Intel~ PRO/100 Dual Port Server Adapter',
+	  ;@#           'Intel~ PRO/100 S Dual Port Server Adapter',
+	  ;@#           'Intel~ PRO/100 S Dual Port Server Adapter',
+	  ;@#           'Intel~ PRO/100+ Dual Port Server Adapter',
+	  ;@#           'Intel~ PRO/100+ Management Adapter with Alert On LAN* G Server',
+      ;@#           'Intel~ PRO/100 S Server Adapter',
+      ;@#           'Intel~ PRO/100 S Server Adapter',
+      ;@#           'Intel~ PRO/100 Server Adapter',
+	  ;@#           'Intel~ PRO/100 S Server Adapter',
+	  ;@#           'Intel~ PRO/100 Server Adapter',
+	  ;@#           'Intel~ PRO/100 Server Adapter',
+	  ;@#			'Intel~ PRO/100+ Dual Port Server Adapter',
+	  ;@#           'Intel~ PRO/100 S Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 CardBus II',
+	  ;@#           'Intel~ PRO/100 LAN+Modem56 CardBus II',
+	  ;@#           'Intel~ PRO/100 SR Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 S Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 SR Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 R Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 R Mobile Adapter',
+	  ;@#			'Intel~ PRO/100 S Mobile Adapter',
+	  ;@#			'Intel~ PRO/100 S Combo Mobile Adapter',
+	  ;@#			'Intel~ PRO/100 SR Mobile Adapter',
+	  ;@#			'Intel~ PRO/100 SR Combo Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 P Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 P Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 Network Connection',
+	  ;@#           'Intel~ PRO/100 Network Connection',
+	  ;@#           'Intel~ PRO/100 P Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 P Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100+ Mini PCI',
+	  ;@#           'Intel~ PRO/100+ Mini PCI',
+	  ;@#           'Intel~ PRO/100 SP Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 SP Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 P Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100+ Mini PCI',
+	  ;@#           'Intel~ PRO/100+ Mini PCI',
+	  ;@#           'Intel~ PRO/100+ Mini PCI',
+	  ;@#           'Intel~ 82559 Fast Ethernet LAN on Motherboard',
+	  ;@#           'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@#           'Intel~ 82559 Fast Ethernet LOM with Alert on LAN* 2',
+	  ;@#           'Intel~ PRO/100 S Network Connection',
+	  ;@#           'Intel~ PRO/100 S Network Connection',
+	  ;@#           'Intel~ PRO/100 Network Connection',
+	  ;@#			'Intel~ PRO/100 S Network Connection',
+	  ;@#			'Intel~ PRO/100 Network Connection',
+	  ;@#			'Intel~ PRO/100 Network Connection',
+	  ;@#			'Intel~ PRO/100 SP Mobile Combo Adapter',
+	  ;@#			'Intel~ PRO/100 SP Mobile Combo Adapter',
+
+	  ;@#			'Intel~ 82559 Based Network Connection',
+
+	  ;@# 			'IBM~ IBM 10/100 EtherJet PCI Adapter',
+      ;@# 			'IBM~ IBM 10/100 EtherJet PCI Management Adapter',
+      ;@# 			'IBM~ IBM 10/100 EtherJet PCI Adapter with Alert on LAN',
+      ;@# 			'IBM~ IBM 10/100 EtherJet Secure Management Adapter',
+      ;@# 			'IBM~ IBM 10/100 EtherJet Secure Management Adapter',
+      ;@# 			'Intel~ 82559 Fast Ethernet LAN On Motherboard',
+      ;@# 			'Intel~ PRO/100 S Desktop Adapter',
+      ;@# 			'Intel~ PRO/100 S Desktop Adapter',
+      ;@# 			'IBM~ IBM Netfinity 10/100 Ethernet Adapter',
+      ;@# 			'IBM~ IBM Netfinity 10/100 Ethernet Security Adapter',
+      ;@# 			'IBM~ IBM Netfinity 10/100 Ethernet Security Adapter',
+	  ;@# 			'IBM~ 10/100 Dual Port Server Adapter',
+	  ;@# 			'IBM~ IBM 10/100 Ethernet Server Adapter',
+      ;@# 			'IBM~ IBM 10/100 Ethernet Server Adapter',
+      ;@#			'Intel~ PRO/100 VE Desktop Connection',
+      ;@#			'Intel~ PRO/100 VE Desktop Connection',
+      ;@#			'Intel~ PRO/100 VE Desktop Connection',
+      ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 S Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@# 			'Intel~ 82559 Fast Ethernet LOM with Alert on LAN*',
+	  ;@#			'Intel~ PRO/100 S Mobile LAN on Motherboard',
+
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+	  ;@#			'HP~ HP NetServer 10/100TX PCI LAN Adapter',
+
+	  ;@#			'Intel~ 8255x-based PCI Ethernet Adapter (10/100)',
+	  ;@#			'Intel~ 8255x-based PCI Ethernet Adapter (10/100)',
+
+	  ;@#			'Intel~ 8255x-based Fast Ethernet',
+	  ;@#			'Intel~ PRO/100 S Network Connection',
+
+	  ;@#			'Intel~ PRO/100 VE Adapter',
+
+	  ;@#			'Samsung~ SEM-2100IL MiniPCI LAN Adapter',
+	  ;@#			'Samsung~ SEM-2000 MiniPCI LAN Adapter',
+	  ;@#			'Samsung~ HomePNA 1M CNR',
+
+      ;@#           'Intel~ PRO/100 VE Desktop Adapter',
+      ;@#           'Intel~ PRO/100 VM Desktop Adapter',
+	  ;@#           'Intel~ 82562EH based Phoneline Network Connection',
+      ;@#           'Intel~ PRO/100 VE Network Connection',
+      ;@#           'Intel~ PRO/100 VM Network Connection',
+	  ;@#           'Intel~ 82562EH based Phoneline Network Connection',
+	  ;@#           'Intel~ PRO/100 P Mobile Combo Adapter',
+	  ;@#           'Intel~ PRO/100 P Mobile Adapter',
+	  ;@#           'Intel~ PRO/100 Network Connection',
+
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+      ;@# 			'Intel~ PRO/100 PCI Adapter',
+	  ;@#			'Intel~ PRO/100 S Server Adapter',
+	  ;@#			'Intel~ PRO/100 S Server Adapter',
+	  ;@#			'Intel~ PRO/100 M Desktop Adapter',
+	  ;@#			'Intel~ PRO/100 M Desktop Adapter',
+
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Desktop Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ 82562EH based Phoneline Network Connection',
+	  ;@#			'Intel~ 82562EH based Phoneline Network Connection',
+	  ;@#			'Intel~ Gilad 2',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 ICH5 Lan Reserved',
+	  ;@#			'Intel~ PRO/100 ICH5 Lan Reserved'
+
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 VE Network Connection',
+	  ;@#			'Intel~ PRO/100 VM Network Connection',
+	  ;@#			'Intel~ PRO/100 ICH6 Lan Reserved',
+	  ;@#			'Intel~ PRO/100 ICH6 Lan Reserved'
+
+      ;@# Client:        E100BODI.COM, CE100B32.LAN, E100B.LAN
+
+      ;@# Alias:         CE100B32.LAN, E100B.LAN
+
+      FILE: CE100B32.LAN
+
+      ;comment in the next line to copy IANS.LAN
+      OF: IANS.lan
+
+      PR SLOT REQ
+      {
+         HELP:  $CE100B_3
+         TYP:  DEC (5)
+         VAL:   1 - 65535
+         DEF:  UND
+      }
+
+      PR SPEED OPT
+      {
+         DES:   "Speed"
+         TYP:  DEC (3)
+         HELP:  $CE100B_4
+         VAL:   0, 10, 100
+         DEF:   0
+         OUT:   'SPEED=%s'
+      }
+
+      PR FORCEDUPLEX OPT
+      {
+         DES:   "Force Duplex"
+         HELP:  $CE100B_5
+         TYP:  DEC (1)
+         VAL:   0, 1, 2
+         DEF:   0
+         OUT:   'FORCEDUPLEX=%s'
+      }
+
+      PR IOMAPMODE OPT
+      {
+         DES:   "IO Map Mode"
+         HELP:  $CE100B_6
+         TYP:  DEC (1)
+         VAL:   0, 1
+         DEF:   0
+         OUT:   'IOMAPMODE=%s'
+      }
+
+      ;to include TXTHRESHOLD, please uncomment out this line
+      ;PR    TXTHRESHOLD    OPT
+      ;and comment out this one.
+      PR    TXTHRESHOLD    HID
+      {
+         DES:    "Transmit Threshold"
+         Help:   $CE100B_12
+         TYP:    DEC (3)
+         VAL:    0-200
+         DEF:    0
+         Out:    'TXTHRESHOLD=%s'
+      }
+
+
+      FR FrameSelect
+      {
+         HELP:  $CE100B_7
+
+         CD:    $CE100B_8
+         CH:    'Ethernet_802.2'
+         CD:    $CE100B_9
+         CH:    'Ethernet_802.3'
+         CD:    $CE100B_10
+         CH:    'Ethernet_SNAP'
+         CD:    $CE100B_11
+         CH:    'Ethernet_II'
+
+         DEF:   1,2,3,4
+      }
+
+	  PR    RXFIFO    HID
+      {
+         DES:    "Receive FIFO"
+         TYP:    DEC (2)
+         VAL:    0-15
+         DEF:    8
+         Out:    'RXFIFO=%s'
+      }
+
+	  PR    TXFIFO    HID
+      {
+         DES:    "Transmit FIFO"
+         TYP:    DEC (2)
+         VAL:    0-15
+         DEF:    8
+         Out:    'TXFIFO=%s'
+      }
+
+	  PR    ADAPTIVEIFS    HID
+      {
+         DES:    "Adaptive IFS"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    1
+         Out:    'ADAPTIVEIFS=%s'
+      }
+
+	  PR    IFS    HID
+      {
+         DES:    "IFS"
+         TYP:    DEC (3)
+         VAL:    0-254
+         DEF:    0
+         Out:    'IFS=%s'
+      }
+
+	  PR    TXDMACOUNT    HID
+      {
+         DES:    "Transmit DMA Count"
+         TYP:    DEC (3)
+         VAL:    0-127
+         DEF:    0
+         Out:    'TXDMACOUNT=%s'
+      }
+		
+	  PR    RXDMACOUNT    HID
+      {
+         DES:    "Receive DMA Count"
+         TYP:    DEC (3)
+         VAL:    0-127
+         DEF:    0
+         Out:    'RXDMACOUNT=%s'
+      }
+
+	  PR    PHYADDRESS    HID
+      {
+         DES:    "PHY Address"
+         TYP:    DEC (2)
+         VAL:    0-32
+         DEF:    1
+         Out:    'PHYADDRESS=%s'
+      }
+
+	  PR    ENHANCED    HID
+      {
+         DES:    "Enhanced  Operation"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    1
+         Out:    'ENHANCED=%s'
+      }
+
+	  PR    LOADALL    HID
+      {
+         DES:    "All adapters will load presently"
+         TYP:    DEC (5)
+         VAL:    0 - 65535
+         DEF:    0
+         Out:    'LOADALL=%s'
+      }
+
+	  PR    POLL    HID
+      {
+         DES:    "Adapter polling mode"
+         TYP:    DEC (1)
+         VAL:    0, 1, 2
+         DEF:    0
+         Out:    'POLL=%s'
+      }
+
+	  PR    IFG    HID
+      {
+         DES:    "Inter-frame spacing"
+         TYP:    DEC (2)
+         VAL:    6-15
+         DEF:    6
+         Out:    'IFG=%s'
+      }
+
+	  PR    OS    HID
+      {
+         DES:    "Extended Express Server box workaround"
+         TYP:    DEC (1)
+         VAL:    0, 1, 2, 3, 4
+         DEF:    0
+         Out:    'OS=%s'
+      }
+
+	  PR    MCWA    HID
+      {
+         DES:    "The Multicast Workaround"
+         TYP:    DEC (2)
+         VAL:    0-10
+         DEF:    2
+         Out:    'MCWA=%s'
+      }
+
+	  PR    SFT    HID
+      {
+         DES:    "Splash III"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'SFT=%s'
+      }
+
+	  PR    CONGENB    HID
+      {
+         DES:    "Congestion control feature"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'CONGENB=%s'
+      }
+
+	  PR    SPURIOUS    HID
+      {
+         DES:    "Spurious Operation"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'SPURIOUS=%s'
+      }
+
+	  PR    EQUOFF    HID
+      {
+         DES:    "Errata workaround"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'EQUOFF=%s'
+      }
+
+	  PR    AUTOPOLARITY    HID
+      {
+         DES:    "Auto polarity workaround"
+         TYP:    DEC (1)
+         VAL:    0, 1, 2
+         DEF:    2
+         Out:    'AUTOPOLARITY=%s'
+      }
+
+	  PR    SELFTEST    HID
+      {
+         DES:    "Software self-test command"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'SELFTEST=%s'
+      }
+
+	  PR    CPUSPEED    HID
+      {
+         DES:    "CPU Saver algorithm"
+         TYP:    DEC (5)
+         VAL:    1 - 65535
+         DEF:    1536
+         Out:    'CPUSPEED=%s'
+      }
+
+	  PR    MWI    HID
+      {
+         DES:    "Memory Write and Invalidate"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'MWI=%s'
+      }
+
+	  PR    UCODE    HID
+      {
+         DES:    "Loading of microcode"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    0
+         Out:    'UCODE=%s'
+      }
+
+	  PR    PERSIST    HID
+      {
+         DES:    "Persistency technology"
+         TYP:    DEC (1)
+         VAL:    0, 1, 2
+         DEF:    2
+         Out:    'PERSIST=%s'
+      }
+
+	  PR    FLOWCONTROL    HID
+      {
+         DES:    "Flow control"
+         TYP:    DEC (1)
+         VAL:    0, 1, 2, 3
+         DEF:    2
+         Out:    'FLOWCONTROL=%s'
+      }
+
+	  PR    SETATTENTIONSTATE    HID
+      {
+         DES:    "Message generation"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    1
+         Out:    'SETATTENTIONSTATE=%s'
+      }
+
+	  PR    CHECKLINKINTERVAL    HID
+      {
+         DES:    "Time between link checks"
+         TYP:    DEC (2)
+         VAL:    1-30
+         DEF:    4
+         Out:    'CHECKLINKINTERVAL=%s'
+      }
+
+	  PR    CHECKLINK    HID
+      {
+         DES:    "Time between link checks"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    1
+         Out:    'CHECKLINK=%s'
+      }
+
+	  PR    NOVLANOFFLOAD    HID
+      {
+         DES:    "Disable hardware vlan tag"
+         TYP:    STR (13)
+         Out:    'NOVLANOFFLOAD'
+      }
+
+	  PR    DISABLETXCID    HID
+      {
+         DES:    "TX Complete Interrupt"
+         TYP:    STR (12)
+         Out:    'DISABLETXCID'
+      }
+
+	  PR    MAXTXCID    HID
+      {
+         DES:    "Max Tx Complete interrupt delay"
+         TYP:    DEC (2)
+         VAL:    1-31
+         DEF:    23
+         Out:    'MAXTXCID=%s'
+      }
+
+	  PR    STATICCID    HID
+      {
+         DES:    "Apply the Tx CID value"
+         TYP:    STR (9)
+         Out:    'STATICCID'
+      }
+
+	  PR    RXCHECKSUM    HID
+      {
+         DES:    "RX checksum offload"
+         TYP:    DEC (1)
+         VAL:    0, 1
+         DEF:    1
+         Out:    'RXCHECKSUM=%s'
+      }
+
+	  PR    TXBUFFERS    HID
+      {
+         DES:    "Number of Command Blocks"
+         TYP:    DEC (2)
+         VAL:    20-64
+         DEF:    20
+         Out:    'TXBUFFERS=%s'
+      }
+
+	  PR    RXBUFFERS    HID
+      {
+         DES:    "Number of Receive Descriptors"
+         TYP:    DEC (2)
+         VAL:    30-64
+         DEF:    30
+         Out:    'RXBUFFERS=%s'
+      }
+   }
+
+DLANG: 4
+;English
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100+ Dual Port Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Autodetect), 10 Mbps, or 100 Mbps."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Autodetect), 1 (HALFDUPLEX), 2 (FULLDUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+LANG: 6
+;French
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "Ce pilote prend en charge les cartes r‚seau
+                          EtherExpress(MC) PRO PCI suivantes ->\n
+                          carte PRO/100+ PCI\n
+                          carte PRO/100+ Management\n
+			  carte PRO/100 S Management\n
+			  carte PRO/100 S Advanced Management adapter\n
+			  carte PRO/100 S Server Adapter\n
+			  carte PRO/100 S Dual Port Server adapter\n
+                          carte PRO/100+ Server\n
+                          carte PRO/100B avec TX Physical Layer\n
+                          carte PRO/100B avec T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Num‚ro d'emplacement de la carte.
+                          Pour les cartes PCI, il s'agit de l'emplacement
+                          du dispositif."
+
+       $CE100B_4 = "Annulation de d‚bit de ligne pour la carte.
+                          D‚sactive l'auton‚gotiation. Doit ˆtre forc‚e
+                          si le mode duplex est pr‚cis‚. Les options valides
+                          sont 0 (auto), 10 et 100."
+
+       $CE100B_5 = "Force le mode de fonctionnement duplex int‚gral.
+                          Le paramŠtre SPEED doit ˆtre pr‚cis‚ et valide
+                          pour ce mot-cl‚. Les options valides sont 0 (auto),
+                          1 (semi) et 2 (duplex)."
+
+       $CE100B_6 = "Force la carte … utiliser le mode de mappage E/S.
+                          Le mode par d‚faut est mappage m‚moire.
+                          Les options valides sont 0 (d‚faut) et 1."
+
+       $CE100B_7 = "Le pilote adopte par d‚faut le format de trame 802.2.
+                          Vous pouvez utiliser cette valeur par d‚faut ou
+                          s‚lectionner des 3 autres options
+                          => 802.3, Ethernet II et Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+LANG: 7
+;German
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "Dieser Treiber untersttzt die folgenden
+                          EtherExpress(TM)-Adapter der PRO-PCI-Familie ->\n
+                          PRO/100+-PCI-Adapter\n
+                          PRO/100+-Management-Adapter\n
+			  PRO/100 S Management Adapter\n
+			  PRO/100 S Advanced Management adapter\n
+			  PRO/100 S Server Adapter\n
+			  PRO/100 S Dual Port Server adapter\n
+                          PRO/100+-Server-Adapter\n
+                          PRO/100B Adapter mit physikalischer TX-Schicht\n
+                          PRO/100B Adapter mit physikalischer T4-Schicht\n\n"
+
+       $CE100B_3 = "Steckplatznummer fr den Adapter.
+                          Bei PCI-Adaptern bezeichnet dies die Ger„teposition."
+
+       $CE100B_4 = "Die fr den Adapter vorrangige Leitungsgeschwindigkeit.
+                          Deaktiviert die automatische Absprache.
+                          Muá bei Angabe der Betriebsart Vollduplex
+                          festgelegt werden. Zul„ssige Optionen sind
+                          0 (Automatisch), 10 und 100."
+
+       $CE100B_5 = "Legen Sie die Betriebsart Vollduplex fest.
+                          SPEED muá fr dieses Schlsselwort festgelegt
+                          und zul„ssig sein. Zul„ssige Optionen sind
+                          0 (Automatisch), 1 (HALBDUPLEX), 2 (DUPLEX)."
+
+       $CE100B_6 = "Legen Sie fest, daá der Treiber die der E/A zugeordnete
+                          Betriebsart verwendet. Die Standardbetriebsart ist
+                          speicherbezogen. Zul„ssige Optionen sind
+                          0 (STANDARD) und 1."
+
+       $CE100B_7 = "Standardm„áig wird fr den Treiber das Rahmenformat 802.2
+                          eingestellt. Sie k”nnen diese Standardeinstellung
+                          bentzen oder von den anderen drei Optionen w„hlen
+                          => 802.3, Ethernet II oder Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+LANG: 8
+;Italian
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "Questo driver supporta i seguenti adattatori
+                          EtherExpress(TM) PRO PCI ->\n
+                          Adattatore PRO/100+ PCI\n
+                          Adattatore PRO/100+ Management\n
+			  Adattatore PRO/100 S Management\n
+			  Adattatore PRO/100 S Advanced Management adapter\n
+			  Adattatore PRO/100 S Server Adapter\n
+			  Adattatore PRO/100 S Dual Port Server adapter\n
+                          Adattatore PRO/100+ Server\n
+                          Adattatore PRO/100B con TX Physical Layer\n
+                          Adattatore PRO/100B con T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Numero slot per l'adattatore.
+                          Per gli adattatori PCI, si riferisce alla posizione
+                          del dispositivo."
+
+       $CE100B_4 = "Superamento della velocit… di linea per l'adattatore.
+                          Disabilita l'autonegoziazione. Deve essere forzata
+                          se viene specificata la modalit… duplex.
+                          Opzioni valide sono 0 (Auto), 10 o 100."
+
+       $CE100B_5 = "Forzare la modalit… di funzionamento a Full duplex.
+                          La VELOCITA' deve essere specificata e valida per
+                          la parola chiave. Opzioni valide sono
+                          0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Forzare il driver ad usare la modalit… mappata di I/O.
+                          La modalit… predefinita Š mappata in memoria.
+                          Opzioni valide sono 0 (DEFAULT) o 1."
+
+       $CE100B_7 = "Il driver Š impostato per default al formato frame 802.2.
+                          Utilizzare il valore predefinito oppure scegliere
+                          dalle altre 3 opzioni => 802.3, Ethernet II e
+                          Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG: 14
+;Spanish
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "Este controlador admite los siguientes adaptadores
+                          EtherExpress(TM) de la familia PRO PCI ->\n
+                          adaptador PRO/100+ PCI\n
+                          adaptador PRO/100+ Management\n
+			  adaptador PRO/100 S Management\n
+			  adaptador PRO/100 S Advanced Management adapter\n
+			  adaptador PRO/100 S Server Adapter\n
+			  adaptador PRO/100 S Dual Port Server adapter\n
+                          adaptador PRO/100+ Server\n
+                          adaptador PRO/100B con capa f¡sica TX\n
+                          adaptador PRO/100B con capa f¡sica T4\n\n"
+
+       $CE100B_3 = "N£mero de ranura para el adaptador.
+                          Para adaptadores PCI, se refiere a la ubicaci¢n
+                          del dispositivo."
+
+       $CE100B_4 = "Alteraci¢n de velocidad de l¡nea para el adaptador.
+                          Anula la negociaci¢n autom tica. Debe forzarse si
+                          se especifica el modo d£plex.
+                          Las opciones v lidas son 0 (autom tico), 10 o 100."
+
+       $CE100B_5 = "Fuerza el modo de operaci¢n a d£plex completo.
+                          Debe especificarse un valor para SPEED que sea
+                          v lido para esta palabra clave. Las opciones v lidas
+                          son 0 (autom tico), 1 (medio), 2 (completo)."
+
+       $CE100B_6 = "Fuerza el controlador a utilizar el modo asignado de E/S.
+                          El modo predeterminado es asignado de acuerdo
+                          con la memoria. Las opciones v lidas son
+                          0 (PREDETERMINADO) o 1"
+
+       $CE100B_7 = "El controlador tiene el valor predeterminado de formato
+                          de trama 802.2. Puede utilizar este valor
+                          predeterminado o seleccionar de las otras 3
+                          opciones => 802.3, Ethernet II y Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG: 9
+;Japanese
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "‚±‚ÌLANƒhƒ‰ƒCƒo‚ÍAˆÈ‰º‚ÌIntel EtherExpress(TM)
+                         PRO PCIƒAƒ_ƒvƒ^‚ðƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·B\n
+                         ¥ PRO/100+ PCI ƒAƒ_ƒvƒ^\n
+                         ¥ PRO/100+ Management ƒAƒ_ƒvƒ^\n
+			 ¥ PRO/100 S Management ƒAƒ_ƒvƒ^\n
+			 ¥ PRO/100 S Advanced Management adapter ƒAƒ_ƒvƒ^\n
+			 ¥ PRO/100 S Server Adapter ƒAƒ_ƒvƒ^\n
+			 ¥ PRO/100 S Dual Port Server adapter ƒAƒ_ƒvƒ^\n
+                         ¥ PRO/100+ Server ƒAƒ_ƒvƒ^\n
+                         ¥ PRO/100B with TX Physical Layer\n
+                         ¥ PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "ƒAƒ_ƒvƒ^‚ÌƒXƒƒbƒg”Ô†B
+                         PCI ƒAƒ_ƒvƒ^‚Å‚ÍAƒfƒoƒCƒXEƒƒP[ƒVƒ‡ƒ“‚ðŽ¦‚µ‚Ü‚·B"
+
+       $CE100B_4 = "ƒAƒ_ƒvƒ^‚Ì’ÊM‘¬“xŽæÁBŽ©“®”FŽ¯‚ð–³Œø‚É‚µ‚Ü‚·B
+                          ƒfƒ…ƒvƒŒƒbƒNƒXƒ‚[ƒhŽw’èŽž‚ÍA•K‚¸Žw’è‚µ‚Ä‚­‚¾‚³‚¢B
+                          —LŒø‚È’l‚Í 0(Ž©“®), 10 ‚Ü‚½‚Í 100 ‚Å‚·B"
+
+       $CE100B_5 = "‹­§“I‚É‘S“ñdƒ‚[ƒh‚ðÝ’è‚µ‚Ü‚·B
+                          [Speed]‚ð•K‚¸Žw’è‚µ‚ÄA‚±‚ÌƒL[ƒ[ƒh‚ð—LŒø‚É‚µ‚Ä‚­‚¾‚³‚¢B
+                          —LŒø‚È’l‚Í 0(Ž©“®”FŽ¯), 1(”¼“ñd), 2(‘S“ñd) ‚Å‚·B"
+
+       $CE100B_6 = "ƒhƒ‰ƒCƒo‚ðI/Oƒ}ƒbƒvEƒ‚[ƒh‚ÅŽg—p‚µ‚Ü‚·B
+                          ƒfƒtƒHƒ‹ƒg‚ÍAƒƒ‚ƒŠ[ƒ}ƒbƒvEƒ‚[ƒh‚Å‚·B
+                          —LŒø‚È’l‚Í 0(ƒfƒtƒHƒ‹ƒg) ‚Ü‚½‚Í 1 ‚Å‚·B"
+
+       $CE100B_7 = "ƒfƒtƒHƒ‹ƒg‚ÌƒtƒŒ[ƒ€EƒtƒH[ƒ}ƒbƒg‚ÍA802.2‚Å‚·B
+                            ‚±‚Ì‘¼‚ÉƒIƒvƒVƒ‡ƒ“‚Æ‚µ‚ÄA802.3AEthernet II‚¨‚æ‚ÑEthernet SNAP
+                            ‚ÌƒtƒŒ[ƒ€EƒtƒH[ƒ}ƒbƒg‚ªŽg—p‚Å‚«‚Ü‚·B"
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG:   12
+;Portugese
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following EtherExpress(TM)
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG:   10
+;Korean
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following EtherExpress(TM)
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG:   1
+;Chinese (simplified)
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following EtherExpress(TM)
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+LANG:   16
+;Chinese (traditional)
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following EtherExpress(TM)
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+LANG:   13
+;Russian
+
+       $CE100B_1 = "Intel(R) 8255x PCI Adapter (CHSM spec 1.11)"
+
+       $CE100B_2 = "This driver supports the following EtherExpress(TM)
+                         PRO PCI family adapters ->\n
+                         PRO/100+ PCI Adapter\n
+                         PRO/100+ Management Adapter\n
+			 PRO/100 S Management Adapter\n
+			 PRO/100 S Advanced Management adapter\n
+			 PRO/100 S Server Adapter\n
+			 PRO/100 S Dual Port Server adapter\n
+                         PRO/100+ Server Adapter\n
+                         PRO/100B with TX Physical Layer\n
+                         PRO/100B with T4 Physical Layer\n\n"
+
+       $CE100B_3 = "Slot number for the adapter.\n
+                          For PCI adapters, this refers to the Device Location."
+
+       $CE100B_4 = "Line speed override for the adapter. Disables
+                          auto-negotiation. Must be forced if duplex mode is specified.\n
+                          Valid options are 0 (Auto), 10, or 100."
+
+       $CE100B_5 = "Force the operating mode to Full Duplex.\n
+                          SPEED must be specified and valid for this keyword.\n
+                          Valid options are 0 (Auto), 1 (HALF), 2 (DUPLEX)."
+
+       $CE100B_6 = "Force the driver to use I/O mapped mode.\n
+                          The default mode is memory-mapped.\n
+                          Valid options are 0 (DEFAULT) or 1."
+
+       $CE100B_7 = "The driver defaults to 802.2 frame format. You
+                            may use this default or select from the other 3
+                            options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE100B_8 = "E100B 802.2"
+
+       $CE100B_9 = "E100B 802.3"
+
+       $CE100B_10 = "E100B SNAP"
+
+       $CE100B_11 = "E100B E_II"
+
+       $CE100B_12 = "Force the hardware to wait for more of the outgoing
+                          frame to be transferred to the card before
+                          transmitting onto the wire.  The range is
+                          1(8 Bytes) to 200 (1600 Bytes, wait until full
+                          frame DMAed)."
+
+
+;DrIvEr DeScRiPtIoN EnD
+

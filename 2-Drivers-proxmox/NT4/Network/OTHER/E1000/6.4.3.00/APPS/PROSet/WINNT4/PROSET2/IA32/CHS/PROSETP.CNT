@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title 英特尔(R) PROSet II 帮助
+1 概述
+2 巡航 PROSet II=GENERAL_PAGE
+2 查看适配器和驱动程序信息
+3 一般信息=General_Information
+3 适配器详情=Adapter_Details
+3 驱动程序详情=Driver_Information
+1 配置适配器
+2 设定速度和双工=Set_Speed_and_Duplex
+2 配置电源使用=Configure_Power_Management
+2 配置高级功能=Configure_Advanced_Features
+2 启用 IPSec=Enable_IPSec
+2 保存配置至文件=SAVERESTORE
+2 移除适配器=Remove_an_Adapter_Instance
+1 创建和配置组
+2 组类型
+3 关于分组=Teaming_Info
+3 组类型=Team_Types
+3 适配器容错=Adapter_Fault_Tolerance
+3 交换器容错=Switch_Fault_Tolerance
+3 适应性负载平衡=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: 静态=FEC
+3 GEC/LA/802.3ad: 静态=GEC
+3 IEEE 802.3ad: 动态=Dynamic_3ad
+2 设定组
+3 创建组=Create_a_New_Team
+3 测试交换器配置=Test_Switch_Configuration
+3 配置高级设置=Teaming_Advanced_Settings
+2 更改组配置
+3 更改适配器分组模式=Change_Adapter_Teaming_Mode
+3 指定适配器为主或次=Specify_an_Adapter_as_Primary_or_Secondary
+3 添加适配器至组=Add_an_Adapter_to_an_Existing_Team
+3 从组中移除适配器=Remove_an_Adapter_from_a_Team
+3 配置列组高级功能=Teaming_Advanced_Settings
+2 查看分组配置
+3 网络组件树中的组=Team_Listing
+3 查看组配置=Team_Configuration
+2 移除组
+3 移除适配器组=Remove_an_Adapter_Team
+1 创建和配置 VLAN
+2 VLAN 概述=VLAN>main
+2 设定 VLAN
+3 创建 VLAN=ADD_VLAN
+3 启用 GVRP=GVRP_Support
+3 高级设置=Advanced_Settings_for_VLANs
+2 更改 VLAN 属性
+3 更改 VLAN 属性=Change_VLAN_Properties
+3 高级设置=Advanced_Settings_for_VLANs
+2 移除 VLAN
+3 移除 VLAN=Remove_a_VLAN
+1 执行诊断
+2 概述=Diagnostics_An_Overview
+2 诊断测试=Diagnostics
+2 电缆测试=Testing_the_Cable
+2 发送方响应方测试=Sender_Responder_Test
+2 设置诊断日志=Diagnostic_Log
+1 使用英特尔(R) 添加工具
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 英特尔(R) 优先性数据包
+3 概述=priority_packet_overview
+1 故障检修
+2 故障检修选项卡=Troubleshooting
+2 恢复适配器配置=RESTORECONFIG
+2 获得支持=Support

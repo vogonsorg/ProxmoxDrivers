@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II ヘルプ
+1 概要
+2 PROSet II の操作方法=GENERAL_PAGE
+2 アダプタおよびドライバ情報を表示する
+3 一般情報=General_Information
+3 アダプタの詳細=Adapter_Details
+3 ドライバの詳細=Driver_Information
+1 アダプタを設定する
+2 速度およびデュプレックスを設定する=Set_Speed_and_Duplex
+2 電力消費量を設定する=Configure_Power_Management
+2 高度機能を設定する=Configure_Advanced_Features
+2 IPSec をオンにする=Enable_IPSec
+2 設定をファイルに保存する=SAVERESTORE
+2 アダプタを削除する=Remove_an_Adapter_Instance
+1 チームを作成および設定する
+2 チームのタイプ
+3 チーム化について=Teaming_Info
+3 チームのタイプ=Team_Types
+3 アダプタ フォルト トレランス=Adapter_Fault_Tolerance
+3 スイッチ フォルト トレランス=Switch_Fault_Tolerance
+3 アダプティブ ロード バランシング=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: 静的=FEC
+3 GEC/LA/802.3ad: 静的=GEC
+3 IEEE 802.3ad: 動的=Dynamic_3ad
+2 チームを設定する
+3 チームを作成する=Create_a_New_Team
+3 スイッチ設定をテストする=Test_Switch_Configuration
+3 高度設定=Teaming_Advanced_Settings
+2 チーム設定を変更する
+3 アダプタ チーム モードを変更する=Change_Adapter_Teaming_Mode
+3 アダプタをプライマリまたはセカンダリに指定する=Specify_an_Adapter_as_Primary_or_Secondary
+3 チームにアダプタを追加する=Add_an_Adapter_to_an_Existing_Team
+3 チームからアダプタを削除する=Remove_an_Adapter_from_a_Team
+3 チーム化の高度設定=Teaming_Advanced_Settings
+2 チーム設定を表示する
+3 ネットワーク コンポーネント ツリーにおけるチーム=Team_Listing
+3 チーム設定を表示する=Team_Configuration
+2 チームを削除する
+3 アダプタ チームを削除する=Remove_an_Adapter_Team
+1 VLAN を作成および設定する
+2 VLAN の概要=VLAN>main
+2 VLAN を設定する
+3 VLAN を作成する=ADD_VLAN
+3 GVRP をオンにする=GVRP_Support
+3 高度設定=Advanced_Settings_for_VLANs
+2 VLAN プロパティを変更する
+3 VLAN プロパティを変更する=Change_VLAN_Properties
+3 高度設定=Advanced_Settings_for_VLANs
+2 VLAN を削除する
+3 VLAN を削除する=Remove_a_VLAN
+1 診断を実行する
+2 概要=Diagnostics_An_Overview
+2 診断テスト=Diagnostics
+2 ケーブルのテスト=Testing_the_Cable
+2 センダー・レスポンダ テスト=Sender_Responder_Test
+2 診断ログを設定する=Diagnostic_Log
+1 Intel(R) アドオン ツールを使用する
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 概要=priority_packet_overview
+1 トラブルシューティング
+2 [トラブルシューティング] タブ=Troubleshooting
+2 アダプタの設定を復元する=RESTORECONFIG
+2 サポートを受ける=Support

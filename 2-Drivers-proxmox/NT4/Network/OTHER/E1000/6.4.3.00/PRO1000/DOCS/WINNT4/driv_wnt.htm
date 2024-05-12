@@ -1,0 +1,269 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing Intel Network Drivers for Microsoft Windows NT</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+Intel Network Drivers for Windows NT* 4.0</h1>
+<ul>
+  <li>
+    <p class="numlst"><a href="#Installing Drivers">Installing the Driver</a></li>
+  <li>
+    <p class="numlst"><a href="#Updating Drivers">Updating the Driver</a></li>
+  <li>
+    <p class="numlst"><a href="#Removing Adapters">Removing Adapters</a></li>
+  <li>
+    <p class="numlst"><a href="#Troubleshooting">Troubleshooting</a></li>
+</ul>
+<hr>
+<h2>
+<a name="Installing Drivers">Installing the Driver</a> </h2>
+
+<p>
+Install drivers for Intel adapters using the Network Setup Utility. </p>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top" align="center" width="13">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"><font face="Arial"><em><strong>NOTE</strong></em>: </font>
+        Before installing drivers, make sure that you have installed service pack 5 or later.<p><font face="Arial"><em><strong>NOTE</strong>: </em></font>When installing adapters on a
+          Windows NT* system that does not have any other adapters installed, you must install Networking support. To successfully install
+          Networking and the adapter drivers, you can either:</p>
+          <ul>
+            <li>Copy the required NT 4.0 Networking files to the hard drive and use the 
+            Product  CD to install the adapter driver, or</li>
+            <li>Use the NT 4.0 CD to install Networking and create setup disks to complete  driver installation. To create setup disks, click
+              <b> Create Install Disk</b> from the  Autorun screen.</li>
+          </ul>
+        </td>
+    </tr>
+</table>
+
+  <h3>
+
+  <b>
+  <a name="NSU"></a>
+  Installation with the Network Setup Utility
+  </b>
+</h3>
+
+<ol>
+  <li>
+    <p CLASS="numlst">Double-click the <b> Network</b> icon in the Control Panel.
+    The Network Setup Wizard displays.</li>
+  <li>
+    <p CLASS="numlst">In the Network Adapter screen, click <b>Select from list</b>.
+    The Select Network Adapter dialog displays.</li>
+  <li>
+    <p CLASS="numlst">Click <b> Have Disk</b>.
+    The Insert Disk dialog box displays.</li>
+  <li>
+    <p CLASS="numlst">Enter the path to your Product CD or installer package and click <b>OK</b>.<br>
+    <br>
+    If you downloaded drivers from the <a href="support.htm">support website</a>, enter the path of the directory containing the
+    drivers.</li>
+  <li>
+    <p CLASS="numlst">Follow the onscreen instructions to finish driver
+    installation. When the adapter is added, it appears in the Network adapters list.</li>
+  <li>
+    <p CLASS="numlst">Click <b> OK.</b> </p>
+  </li>
+  <li>
+    <p CLASS="numlst">Click <b>Close</b>. When prompted, restart Windows NT.</p>
+  </li>
+</ol>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top"><font face="Arial" size="2">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></font></td>
+        <td valign="top"><font face="Arial" size="2"><em><strong>NOTE</strong>: </em>You
+          can now install the Intel&#174 PROSet software to configure advanced settings and set up
+          teams, VLANs, and other features. For NT 4.0, Intel PROSet is automatically installed with the
+          Intel base driver.</font></td>
+    </tr>
+</table>
+
+<h3><font face="Arial"><a name="Multiple">Installing Additional Adapters</a></font></h3>
+
+  <p class="Body-Text">You can install drivers for multiple adapters using
+  the Network Setup Utility.&nbsp;</p>
+
+  <p class="Body-Text">To install multiple adapter drivers, specify a driver for
+  each adapter physically installed in the computer when completing the Network
+  Wizard. Repeat the procedure above for each adapter.</p>
+
+<h3><a name="Advanced"></a>Advanced Settings for Windows</h3>
+<p class="Proc-Step">To view or change advanced settings for your
+driver/adapter, use Intel PROSet. Advanced settings
+vary by adapter, and are described in the Intel PROSet Help.&nbsp;</p>
+
+<hr>
+
+<h2><a name="Updating Drivers">Updating the Driver</a></h2>
+
+<p class="Body-text">You can update drivers using the Product CD, the
+Network Properties window, or over a network.</p>
+<h3>Updating with the Product CD</h3>
+<p>You can update drivers using the autorun program on the Product CD.&nbsp;</p>
+<ol>
+  <li>
+    <p class="numlst">Insert the Product CD in the CD-ROM drive.&nbsp;The CD autorun program starts.&nbsp;<br>
+    <br>
+    If you downloaded drivers from the <a href="support.htm">support website</a>, browse to the
+    directory containing the downloaded files and extract the files. The autorun 
+    automatically starts.</p>
+  <li>
+    <p class="numlst">Click <b>Install Base Driver</b>. A message asking you to
+    continue with the update displays.</p>
+  </li>
+  <li>
+    <p class="numlst">Click <b>OK</b>. When prompted, restart the computer.</p>
+  </li>
+</ol>
+<h3>Update drivers in the Network Properties window</h3>
+
+<ol>
+  <li>
+    <p CLASS="numlst">Double-click the <b> Network</b> icon in the Control Panel.</li>
+  <li>
+    <p CLASS="numlst">Click the <b> Adapters</b> tab.</li>
+  <li>
+    <p CLASS="numlst">Select the adapter from the adapter list and click <b>
+    Update</b>.</li>
+  <li>
+    <p CLASS="numlst">Type the drive letter for the Product CD or specify the
+    download directory and click <b>OK</b>.</li>
+</ol>
+
+<p class="numlst">If you are installing a driver in a computer with existing
+Intel adapters, be sure to update all the adapters and ports with the same new
+software. This procedure ensures that all adapters function correctly.</p>
+
+<h3><a name="Network">Updating Drivers Over a Network</a></h3>
+<p>To install or update drivers from a remote computer:</p>
+<ol>
+  <li>
+    <p class="numlst">Select a networked computer that has a CD-ROM drive.</p>
+  <li>
+    <p class="numlst">Insert the Product CD in the CD-ROM drive.&nbsp;If the CD autorun screen displays, ignore it.</p>
+  <li>
+    <p class="numlst">Specify the CD-ROM drive as a shared device. Refer to
+    your OS documentation for the specific steps.</li>
+  <li>
+    <p class="numlst">At a computer that requires updated drivers, select <b>Start</b>
+    -&gt; <b>Run</b>.&nbsp;</li>
+  <li>
+    <p>In the Run dialog, type:<br>
+    <i>\\Computer\share</i>\APPS\SETUP\SETUPBD\W98-WS32<font face="Courier New">\</font>SetupBD.exe<font face="Courier New">
+    </font>&lt;Enter&gt;<br>
+    <br>
+    Where:<br>
+    &nbsp;<i>computer</i> is the name or IP address of the computer that has the
+    Product CD loaded (see step 1).<br>
+    &nbsp;<i>share</i> is the name of the share you defined for the CD-ROM drive
+    (see step 2).</li>
+  <li>
+    <p class="numlst">When prompted, restart the computer.</li>
+</ol>
+
+<hr>
+
+<h2><a name="Removing Adapters">Removing Adapters</a></h2>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top"><font face="Arial" size="2">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></font></td>
+        <td valign="top"><b><i>NOTE</i></b><i>: Y</i>ou must remove the adapter from
+          any teams and uninstall (or disable) the Intel network drivers using the Network
+          control panel before removing the
+          adapter. If you remove
+          the physical adapter prior to removing it from the Network control
+          panel, the adapter is not removed and remains as
+          a phantom adapter.</td>
+    </tr>
+</table>
+
+<p>After ensuring the adapter is not part of a team, remove the adapter
+from the Network Control Panel:
+<ol>
+  <li>
+    <p CLASS="numlst">From the Control Panel, double-click the <b> Network</b> icon.</li>
+  <li>
+    <p CLASS="numlst">Click the <b> Adapters</b> tab and highlight the adapter to
+    remove.</li>
+  <li>
+    <p CLASS="numlst">Click <b>Remove</b>.</li>
+  <li>
+    <p CLASS="numlst">Click <b>OK</b>.</li>
+</ol>
+
+<table border="0" cellpadding="6" cellspacing="0">
+    <tr>
+        <td valign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"><b><i>NOTE</i></b><i>: </i>If you are
+          removing the last adapter to use the Intel network driver, the
+          installer program asks you if you want to remove Intel PROSet. Click <b>Yes</b>.</td>
+    </tr>
+</table>
+
+<ol>
+  <li value="5">
+    <p class="numlst">Shut-down the computer and unplug the power cable.</li>
+  <li>
+    <p class="numlst">Disconnect the network cable from the adapter.</li>
+  <li>
+    <p class="numlst">Open the case and remove the adapter.&nbsp;</li>
+  <li>
+    <p class="numlst">Close the case.</li>
+  <li>
+    <p class="numlst">Reattach the power cable, and power-up the
+    computer.</li>
+</ol>
+
+<hr>
+
+<h2><a name="Troubleshooting">Troubleshooting</a></h2>
+<p>If Windows NT reports an error or you cannot connect to the network, try the
+suggestions here first. For further troubleshooting tips, click Troubleshooting in the Table of
+Contents.</p>
+<ul>
+  <li>
+    <p class="numlst">Make sure that you use the drivers for this adapter.
+    Drivers are located on the Product CD and on <a href="support.htm">support website</a>.&nbsp;</p>
+  </li>
+  <li>
+    <p class="numlst">In your computer’s BIOS settings, make sure &quot;Plug
+    and Play OS?&quot; is set to <b>NO</b>.&nbsp;</p>
+  </li>
+  <li>
+    <p class="numlst">Make sure the drivers are loaded and the protocols are
+    bound. Check the Settings in the Control Panel’s Network/Bindings dialog
+    box.&nbsp;</p>
+  </li>
+  <li>
+    <p class="numlst">Check the Windows NT Event Viewer for error messages.&nbsp;</p>
+  </li>
+  <li>
+    <p class="numlst">Test the adapter with the Intel PROSet configuration
+    utility that was installed on your system when you installed the adapter. To
+    start Intel PROSet, double-click the <b>Intel PROSet</b> icon in the Windows Control
+    Panel. To run diagnostics, select the adapter and click the <b> Diagnostics</b> tab,
+    then click <b> Run Tests</b>. For additional information, click <b> Help</b> in the
+    Intel PROSet window.&nbsp;</p>
+  </li>
+</ul>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 3/17/04 5:54p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

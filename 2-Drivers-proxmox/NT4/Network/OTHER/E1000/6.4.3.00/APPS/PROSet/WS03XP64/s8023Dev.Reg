@@ -1,0 +1,567 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229]
+"DisplayName"="Intel(R) PRO/100 PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860001]
+"DisplayName"="Intel(R) PRO/100B PCI Adapter (TX)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860002]
+"DisplayName"="Intel(R) PRO/100B PCI Adapter (T4)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860003]
+"DisplayName"="Intel(R) PRO/10+ PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860004]
+"DisplayName"="Intel(R) PRO/100 WfM PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860005]
+"DisplayName"="Intel 82557-based Integrated Ethernet PCI (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860006]
+"DisplayName"="Intel 82557-based Integrated Ethernet with Wake on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860007]
+"DisplayName"="Intel 82558-based Integrated Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860008]
+"DisplayName"="Intel 82558-based Integrated Ethernet with Wake on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860009]
+"DisplayName"="Intel(R) PRO/100+ PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000A]
+"DisplayName"="Intel(R) PRO/100+ Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000B]
+"DisplayName"="Intel(R) PRO/100+ Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000C]
+"DisplayName"="Intel(R) PRO/100+ Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000D]
+"DisplayName"="Intel(R) PRO/100+ Alert on LAN* 2 Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000E]
+"DisplayName"="Intel(R) PRO/100+ Alert on LAN* Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086000F]
+"DisplayName"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860011]
+"DisplayName"="Intel(R) PRO/100 S Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860012]
+"DisplayName"="Intel(R) PRO/100 S Advanced Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860013]
+"DisplayName"="Intel(R) PRO/100 S Advanced Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860030]
+"DisplayName"="Intel(R) PRO/100+ Management Adapter with Alert On LAN* GC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860031]
+"DisplayName"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860040]
+"DisplayName"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860041]
+"DisplayName"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860042]
+"DisplayName"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860050]
+"DisplayName"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860051]
+"DisplayName"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860060]
+"DisplayName"="Intel(R) PRO/100 S+ Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860070]
+"DisplayName"="Intel(R) PRO/100 M Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80860071]
+"DisplayName"="Intel(R) PRO/100 M Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861009]
+"DisplayName"="Intel(R) PRO/100+ Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086100C]
+"DisplayName"="Intel(R) PRO/100+ Server Adapter (PILA8470B)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861012]
+"DisplayName"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861013]
+"DisplayName"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861014]
+"DisplayName"="Intel(R) PRO/100 Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861015]
+"DisplayName"="Intel(R) PRO/100 S Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861016]
+"DisplayName"="Intel(R) PRO/100 S Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861017]
+"DisplayName"="Intel(R) PRO/100+ Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861030]
+"DisplayName"="Intel(R) PRO/100+ Management Adapter with Alert On LAN* G Server"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861040]
+"DisplayName"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861041]
+"DisplayName"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861042]
+"DisplayName"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861050]
+"DisplayName"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861051]
+"DisplayName"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861052]
+"DisplayName"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80861060]
+"DisplayName"="Intel(R) PRO/100 S+ Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_808610F0]
+"DisplayName"="Intel(R) PRO/100+ Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862009]
+"DisplayName"="Intel(R) PRO/100 S Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086200D]
+"DisplayName"="Intel(R) PRO/100 CardBus II"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086200E]
+"DisplayName"="Intel(R) PRO/100 LAN+Modem56 CardBus II"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086200F]
+"DisplayName"="Intel(R) PRO/100 SR Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862010]
+"DisplayName"="Intel(R) PRO/100 S Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862011]
+"DisplayName"="Intel(R) PRO/100 Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862012]
+"DisplayName"="Intel(R) PRO/100 Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862013]
+"DisplayName"="Intel(R) PRO/100 SR Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862014]
+"DisplayName"="Intel(R) PRO/100 R Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862015]
+"DisplayName"="Intel(R) PRO/100 R Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862016]
+"DisplayName"="Intel(R) PRO/100 S Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862017]
+"DisplayName"="Intel(R) PRO/100 S Combo Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862018]
+"DisplayName"="Intel(R) PRO/100 SR Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862019]
+"DisplayName"="Intel(R) PRO/100 SR Combo Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862100]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI Type 3A"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862101]
+"DisplayName"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862102]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862103]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862104]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862105]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862106]
+"DisplayName"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862107]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862108]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862200]
+"DisplayName"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862201]
+"DisplayName"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862202]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862203]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862204]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862205]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862206]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862207]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862208]
+"DisplayName"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862402]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862407]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862408]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862409]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_8086240F]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862410]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862411]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862412]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80862413]
+"DisplayName"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863000]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LAN on Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863001]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863002]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN* 2"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863006]
+"DisplayName"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863007]
+"DisplayName"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863008]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863010]
+"DisplayName"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863011]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863012]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863013]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_80863014]
+"DisplayName"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_01]
+"DisplayName"="IBM 10/100 EtherJet PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_02]
+"DisplayName"="IBM 10/100 EtherJet PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_04]
+"DisplayName"="IBM NetFinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_05]
+"DisplayName"="IBM NetFinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_101401BC]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LAN On Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_101401F1]
+"DisplayName"="IBM 10/100 Ethernet Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_101401F2]
+"DisplayName"="IBM 10/100 Ethernet Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014023F]
+"DisplayName"="Intel PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10140232]
+"DisplayName"="IBM 10/100 Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10140207]
+"DisplayName"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014105C]
+"DisplayName"="IBM Netfinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014305C]
+"DisplayName"="IBM 10/100 EtherJet PCI Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014405C]
+"DisplayName"="IBM 10/100 EtherJet PCI Adapter with Alert on LAN"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014505C]
+"DisplayName"="IBM 10/100 EtherJet Secure Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014605C]
+"DisplayName"="IBM 10/100 EtherJet Secure Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014705C]
+"DisplayName"="IBM Netfinity 10/100 Ethernet Security Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1014805C]
+"DisplayName"="IBM Netfinity 10/100 Ethernet Security Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113001]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113002]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113003]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113004]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113005]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113006]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E113007]
+"DisplayName"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B01E]
+"DisplayName"="Compaq NC3120 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B01F]
+"DisplayName"="Compaq NC3122 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B02F]
+"DisplayName"="Compaq NC1120 Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B04A]
+"DisplayName"="Compaq 10/100 TX PCI Intel WOL UTP Controller"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0C6]
+"DisplayName"="Compaq NC3161 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0C7]
+"DisplayName"="Compaq NC3160 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0D7]
+"DisplayName"="Compaq NC3121 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0DD]
+"DisplayName"="Compaq NC3131 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0DE]
+"DisplayName"="Compaq NC3132 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B0E1]
+"DisplayName"="Compaq NC3133 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B134]
+"DisplayName"="Compaq NC3163 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B13C]
+"DisplayName"="Compaq NC3162 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B144]
+"DisplayName"="Compaq NC3123 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B163]
+"DisplayName"="Compaq NC3134 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B164]
+"DisplayName"="Compaq NC3135 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_0E11B209]
+"DisplayName"="Intel(R) PRO/100 S Mobile LAN on Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10C0]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10C3]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10CA]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10CB]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10E3]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C10E4]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C1200]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103C1273]
+"DisplayName"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10338000]
+"DisplayName"="NEC PC-9821X-B06(PCI) or compatible/Intel 82557-based Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10338016]
+"DisplayName"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1033801F]
+"DisplayName"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10338026]
+"DisplayName"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10338063]
+"DisplayName"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10338064]
+"DisplayName"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_103380C4]
+"DisplayName"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10250009]
+"DisplayName"="ACER NIC-559A PRO/100+ with WOL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1025001A]
+"DisplayName"="ACER NIC-559A PRO/100+ with Alert On LAN 2*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1025001B]
+"DisplayName"="ACER T62L158 PRO/100+ with Alert On LAN 2*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_1028009B]
+"DisplayName"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A0019]
+"DisplayName"="Fujitsu Siemens Computers 82558-based Onboard Ethernet with WoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A0031]
+"DisplayName"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82558"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A0037]
+"DisplayName"="Fujitsu Siemens Computers 82559-based Onboard Ethernet with WoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A004B]
+"DisplayName"="Fujitsu Siemens Computers 82559-based Onboard Ethernet with WoL and AoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A6608]
+"DisplayName"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82558"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_110A6618]
+"DisplayName"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82559C"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10CF1115]
+"DisplayName"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10CF1143]
+"DisplayName"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_10CF1188]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_144D2502]
+"DisplayName"="Samsung SEM-2100iL MiniPCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_144D2501]
+"DisplayName"="Samsung SEM-2000 MiniPCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_11790001]
+"DisplayName"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1229\SUBSYS_11790003]
+"DisplayName"="Intel 8255x-based Fast Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863010]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863011]
+"DisplayName"="Intel(R) PRO/100 VM Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863012]
+"DisplayName"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863013]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863014]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863015]
+"DisplayName"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863016]
+"DisplayName"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863017]
+"DisplayName"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_80863018]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_101401CE]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_101401DC]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_101401EB]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_101401EC]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140202]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140205]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140209]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140217]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140234]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_1014023D]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140244]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140245]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140265]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10140267]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_1014026A]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_0E110012]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_0E110091]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_10CF1188]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_144D2503]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_144D2601]
+"DisplayName"="Samsung HomePNA 1M PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_144D2602]
+"DisplayName"="Samsung HomePNA 1M CNR"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_1179FF01]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_15099011]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_14A42126]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_14A42149]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_14A42147]
+"DisplayName"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_109F315D]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_109F3181]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_2449\SUBSYS_11867801]
+"DisplayName"="Intel(R) PRO/100 VE Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1031]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1031\SUBSYS_10140209]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1031\SUBSYS_1014022D]
+"DisplayName"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1032]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1033]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1034]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1035]
+"DisplayName"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1036]
+"DisplayName"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1037]
+"DisplayName"="Formally used for Gilad2"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1038]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1039]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_103A]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_103B]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_103C]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_103D]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_103E]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1050]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1051]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1052]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1053]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1054]
+"DisplayName"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1055]
+"DisplayName"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1059]
+"DisplayName"="Intel(R) PRO/100 M Mobile Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1030\SUBSYS_80861030]
+"DisplayName"="Intel(R) InBusiness 10/100 Network Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000\SUBSYS_80861000]
+"DisplayName"="Intel(R) PRO/1000 Gigabit Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000\SUBSYS_10140119]
+"DisplayName"="IBM Netfinity Gigabit Ethernet SX Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000\SUBSYS_0E11B0DF]
+"DisplayName"="Compaq NC6132 Gigabit Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000\SUBSYS_0E11B0E0]
+"DisplayName"="Compaq NC6133 Gigabit Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000\SUBSYS_0E11B123]
+"DisplayName"="Compaq NC6134 Gigabit NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1000]
+"DisplayName"="Intel(R) 82542-based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1001\SUBSYS_80861003]
+"DisplayName"="Intel(R) PRO/1000 F Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1001\SUBSYS_101401EA]
+"DisplayName"="IBM Gigabit Ethernet SX Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1001\SUBSYS_0E11004A]
+"DisplayName"="Compaq NC6136 Gigabit Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1004\SUBSYS_0E110049]
+"DisplayName"="Compaq NC7132 Gigabit Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1004\SUBSYS_0E11B1A4]
+"DisplayName"="Compaq NC7131 Gigabit Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1004\SUBSYS_80861004]
+"DisplayName"="Intel(R) PRO/1000 T Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1004\SUBSYS_80862004]
+"DisplayName"="Intel(R) PRO/1000 T Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1004\SUBSYS_101410F2]
+"DisplayName"="IBM Total Storage Gigabit Ethernet Copper Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008\SUBSYS_80861107]
+"DisplayName"="Intel(R) PRO/1000 XT Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008\SUBSYS_80862107]
+"DisplayName"="Intel(R) PRO/1000 XT Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008\SUBSYS_80863108]
+"DisplayName"="Intel(R) PRO/1000 XT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008\SUBSYS_80862110]
+"Intel(R) PRO/1000 XT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008\SUBSYS_10140269]
+"IBM iSeries 1000/100/10 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1008]
+"DisplayName"="Intel(R) 82544EI-based Netwrok Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1009\SUBSYS_80861109]
+"DisplayName"="Intel(R) PRO/1000 XF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1009\SUBSYS_80862109]
+"DisplayName"="Intel(R) PRO/1000 XF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1009\SUBSYS_10140268]
+"DisplayName"="IBM iSeries Gigabit Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1009]
+"Intel(R) 82544EI-based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100C\SUBSYS_80861112]
+"DisplayName"="Intel(R) PRO/1000 T Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100C\SUBSYS_80862112]
+"DisplayName"="Intel(R) PRO/1000 T Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100C]
+"DisplayName"="Intel(R) PRO/1000 T Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100D\SUBSYS_8086110D]
+"DisplayName"="Intel(R) 82544GC-based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100D]
+"DisplayName"="Intel(R) 82544GC-based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_8086001E]
+"DisplayName"="Intel(R) PRO/1000 MT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_8086002E]
+"DisplayName"="Intel(R) PRO/1000 MT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_8086003E]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_0E1100BD]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_10140265]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_10140267]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E\SUBSYS_1014026A]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100E]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100F\SUBSYS_80861001]
+"DisplayName"="Intel(R) PRO/1000 MT Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_100F]
+"DisplayName"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1010\SUBSYS_80861011]
+"DisplayName"="Intel(R) PRO/1000 MT Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1010\SUBSYS_80861012]
+"DisplayName"="Intel® PRO/1000 MF Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1012\SUBSYS_80861012]
+"DisplayName"="Intel® PRO/1000 MF Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1010]
+"DisplayName"="Intel(R) PRO/1000 MT Dual Port Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1011\SUBSYS_80861002]
+"DisplayName"="Intel(R) PRO/1000 MF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1011\SUBSYS_80861003]
+"DisplayName"="Intel(R) PRO/1000 MF Server Adapter (LX)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_1015]
+"DisplayName"="Intel(R) PRO/1000 MT Mobile Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_101D\SUBSYS_80861000]
+"DisplayName"="Intel(R) PRO/1000 MT Quad Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_101D]
+"DisplayName"="Intel(R) PRO/1000 MT Quad Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSetWired\NCS\SyncLayer\8023Adapters\VEN_8086&DEV_5201]
+"DisplayName"="Intel(R) PRO/100 Intelligent Server Adapter"

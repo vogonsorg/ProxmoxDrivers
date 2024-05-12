@@ -1,0 +1,202 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Troubleshooting Procedures</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Troubleshooting Procedures</h1>
+<P class="contents"><a href="#issues">Common Issues</a></P>
+<P class="contents"><a href="#diag_pxe_rpl">Diagnostics Information for Pre-boot PXE or RPL Environments</a></P>
+<br>
+
+<hr>
+
+<h2><a name="issues"></a>Common Issues</h2>
+<P>
+The following list of problems and associated solutions covers a representative set of problems 
+that you might encounter while using the Boot Agent.
+If you are experiencing a problem that is not listed in this section, contact
+<a target="_blank" href="http://support.intel.com">Intel Customer Support</a> either 
+by telephone or over the World Wide Web.</P>
+
+<h4><i>After booting, my computer experiences problems</i></h4>
+<P>
+After the Boot Agent product has finished its sole task (remote booting), it no longer 
+has any effect on the client computer operation.
+Thus, any issues that arise after the boot process is complete are most likely
+not related to the Boot Agent product.</P>
+<P>
+If you are having problems with the local (client) or network operating system, contact 
+the operating system manufacturer for assistance. If you are having problems with some 
+application program, contact the application manufacturer for assistance. If you are 
+having problems with any of your computer's hardware or with the
+<a href="glossary.htm#BIOS">BIOS</a>, contact your computer system manufacturer for
+assistance.</P>
+
+<h4><i>Cannot change boot order</i></h4>
+<P>
+If you are accustomed to redefining your computer's boot order using the
+motherboard BIOS setup program, the default settings of the Boot Agent setup program can 
+override that setup. To change the boot sequence, you must first override the Boot Agent 
+setup program defaults. To start the Boot Agent
+configuration setup program, press <b>Ctrl+S</b> during the time the initialization
+message appears. (<b>Ctrl+S</b> is not available on many LOM systems, including
+Dell.) A configuration setup menu appears allowing you to set
+configuration values for the Boot Agent. If you do not press <b>Ctrl+S</b>, the Boot Agent 
+software proceeds with the boot process, eventually bringing up the
+operating system. To change your computer's boot order setting, see
+<a href="config.htm#pxe_rpl">Configuring the Boot Agent in a Pre-boot PXE or RPL Environment</a>.
+</P>
+
+<h4><i>Flash device wrong size</i></h4>
+<P>
+This can occur as an error message when using <a href="dos_util.htm">IBAUtil</a>. The 
+full version of Boot Agent software cannot be loaded into a flash ROM device smaller than 
+64 KB. If a 32 KB (or smaller) flash ROM device is detected in the adapter, the
+flash update software returns this message. Assuming the device is
+socketed, remove the &quot;too small&quot; device and install a blank 64 KB (or larger) 
+flash ROM device. See <a href="hw_inst.htm#flash_wfm_adapters">Installing Flash ROM
+Upgrades</a> for more information.</P>
+
+<h4><i>My computer does not complete POST</i></h4>
+<P>
+If your computer fails to boot with an adapter installed, but <i>does</i> boot
+when you remove the adapter, try moving the adapter to another computer and <a href="dos_util.htm#Example 3:">using
+IBAUtil to disable the flash chip</a>.</P>
+<P>If this does not work, the problem may be occurring before the Boot Agent
+software even begins operating. In this case, there may be a BIOS problem with
+your computer. Contact your computer manufacturer's customer support group for
+help in correcting your problem.</P>
+<h4>
+<i>
+Not getting a prompt to go to Boot Agent setup program</i></h4>
+<P>
+This is actually a feature of the Boot Agent product. As part of the Boot
+Agent's Configuration Setup Program, two of the options, Show Setup Prompt and
+Setup Wait Time, allow the boot process to proceed after <a href="glossary.htm#POST">POST</a>
+without interruption by the Ctrl+S prompt as follows:</P>
+
+<blockquote>
+	<pre>Press Ctrl+S to enter the Setup Menu.</pre>
+</blockquote>
+
+<P>
+If the Show Setup Prompt has previously been set to <b>Disabled</b>
+and/or if the Setup Menu Wait Time option is set to zero seconds, the prompt
+does not display after POST. However, even though you are not prompted to press 
+<b>Ctrl+S</b>, you can still enter the Configuration Setup Menu to customize
+configuration settings as follows:</P>
+<p class="numlst">Repeatedly press <b> Ctrl+S</b> <i>immediately</i>
+after POST until the Configuration Setup Menu appears.</p>
+
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B> If the Configuration Setup Menu does not appear after repeated pressings
+      of <b>Ctrl+S</b>, you were likely not fast enough. In this case, reboot and try
+      again. (<b>Ctrl+S</b> is not available on many LOM systems, including
+      Dell.)</TD>
+  </tr>
+</TABLE>
+
+<p class="numlst">&nbsp;While in the Configuration Setup
+Menu, you can restore the prompt message as follows:</p>
+<ul>
+  <li>
+    <p class="numlst">If Show Setup Prompt has been set to <b>Disabled</b>,
+    change it to <b>Enabled</b>.<br>
+    --and/or--</li>
+  <li>
+    <p class="numlst">If Setup Menu Wait Time is set to zero
+    seconds, change it to any of the wait time values that exceed zero seconds.
+    See the list of possible Set Menu Wait Time values shown in the
+    <a href="config.htm#settings">Boot
+    Agent Configuration Settings table</a>.</li>
+</ul>
+
+<h4><i>There are configuration/operation problems with the boot process</i></h4>
+<P>
+If your PXE client receives a DHCP address, but then fails to boot, you know the
+PXE client is working correctly. Check your network or PXE server configuration
+to troubleshoot the problem. Contact
+<a target="_blank" href="http://support.intel.com">Intel Customer Support</a> 
+if you need further assistance.</P>
+
+<hr>
+
+<h2><a name="diag_pxe_rpl"></a>Diagnostics Information for Pre-boot PXE or RPL Environments</h2>
+<p>Anytime the configuration setup menu is displayed (see
+<a href="config.htm#pxe_rpl">Configuring
+the Boot Agent in a Pre-boot PXE or RPL Environment</a>), you may press the <b>D</b> 
+key to display <i>diagnostics</i> information on the screen. The information
+displayed appears similar to that shown in the lower half of the screen image
+below. This information can be helpful during interaction with
+<a target="_blank" href="http://support.intel.com">Intel Customer Support</a> 
+personnel or your IT team members. Once you press the <b>D</b> key, the
+information displayed remains until you reboot your computer.</p>
+
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>   
+      Actual diagnostics information may vary, depending upon the adapter(s)
+      installed in your computer.
+    </TD>
+  </tr>
+</TABLE>
+
+<p align="center"><img border="0" src="diagnost.gif" width="434" height="300"></p>
+<p>
+Diagnostics information may include the following items:</p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+  <tr>
+    <td width="20%" align="center">
+      <h4>Item</h4>
+    </td>
+    <td align="center">
+      <h4>Description</h4>
+    </td>
+  </tr>
+  <tr>
+    <td width="20%">PWA Number</td>
+    <td>The Printed Wire Assembly number of the
+      device as stored in the <a href="glossary.htm#EEPROM">EEPROM</a>.</td>
+  </tr>
+  <tr>
+    <td width="20%">MAC Address</td>
+    <td>The individual address of the device as stored in the <a href="glossary.htm#EEPROM">EEPROM</a>.</td>
+  </tr>
+  <tr>
+    <td width="20%">I/O</td>
+    <td>The I/O address for PCI access determined by
+      the software. On cards without an I/O address, all zeroes are displayed.</td>
+  </tr>
+  <tr>
+    <td width="20%">Memory</td>
+    <td>The memory map PCI access address determined
+      by the software.</td>
+  </tr>
+  <tr>
+    <td width="20%">Slot</td>
+    <td>The slot number reported by the <a href="glossary.htm#BIOS">BIOS</a>.
+      <p>
+      <b><i>NOTE</i>:</b>
+      The number displayed is the BIOS version of the PCI slot number.
+      Therefore, actual positions of <a href="glossary.htm#NIC">NICs</a> within slots may not be displayed as
+      expected. Slots are not always enumerated
+      in an obvious manner, and this will only report what is indicated by the <a href="glossary.htm#BIOS">BIOS</a>.</p>
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 2/10/04 12:03p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

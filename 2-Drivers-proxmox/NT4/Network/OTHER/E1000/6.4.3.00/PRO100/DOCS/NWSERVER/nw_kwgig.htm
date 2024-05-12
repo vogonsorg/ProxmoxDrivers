@@ -1,0 +1,259 @@
+<HTML>
+
+<HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1252">
+<TITLE>NetWare Command Line Parameters and Keywords</TITLE>
+<link rel="stylesheet" type="text/css" href="style.css">
+</HEAD>
+
+<BODY>
+
+<h1>NetWare* Command Line Parameters and Keywords</h1>
+
+<h2>CE1000 (Server Driver)</h2>
+
+<p>
+The following NetWare* keywords are applicable for the CE1000 driver.
+</p>
+<p>
+To view the keywords for Advanced Network Services (ANS), such as VLANs,
+please <a href="nw_akeys.htm">click here</a>.
+</p>
+
+<table border="1" cellspacing="0" cellpadding="6" >
+  <tr>
+    <th><b>Parameter</b>
+    </th>
+    <th><b>Values</b>
+    </th>
+    <th><b>Default Value</b>
+    </th>
+    <th><b>Description</b>
+    </th>
+  </tr>
+  <tr>
+    <td class="monospace">Slot</td>
+    <td>1-valid slot#</td>
+    <td>None</td>
+    <td valign="top">
+      This is a standard keyword parameter predefined by NetWare to specify the
+      physical slot of the installed adapter. When multiple adapters reside in a system, the SLOT keyword
+      is used to distinguish which physical adapter is being loaded. If multiple adapters do exist in a system and the command line does
+      not contain the SLOT keyword, the system will build a list of adapter
+      slots and prompt the user to select an adapter to be loaded.
+	</td>
+  </tr>
+  <tr>
+    <td class="monospace">Frame</td>
+    <td>ethernet_802.2 ethernet_802.3 ethernet_snap ethernet_ii</td>
+    <td>ethernet_802.2</td>
+    <td valign="top">Configures the adapter to process the valid NetWare
+      Ethernet frame.</td>
+  </tr>
+  <tr>
+    <td class="monospace">Speed</td>
+    <td>0, 10, 100</td>
+    <td>0</td>
+    <td valign="top">On copper-based adapters, forces the line speed to the
+      specified value in Mbps. If
+      this parameter is not specified, or is set to 0, the adapter will auto-negotiate 
+      to the best possible link based on link partner. Gig speed can only be achieved by 
+      auto-negotiation. This setting has no effect on fiber adapters which are defined to be 1000 Mbps.
+	</td>
+  </tr>
+  <tr>
+    <td class="monospace">ForceDuplex</td>
+    <td>0 – 2</td>
+    <td>0</td>
+    <td valign="top">On copper-based adapters, forces the duplex mode.
+      1 - indicates half duplex, 2 - indicates full duplex. If this parameter is not
+      specified, or is set to 0, the adapter will auto-negotiate to the best
+      possible link.&nbsp; If it cannot auto-negotiate, it will default to half-duplex. 
+      This setting has no effect on fiber adapters which are defined to be full duplex.
+	</td>
+  </tr>
+  <tr>
+    <td class="monospace">Autoneg</td>
+    <td>0 - 255</td>
+    <td>0</td>
+    <td valign="top">Controls auto-negotiation on copper-based adapters.
+      When this parameter is used, the Speed and Forceduplex parameters must NOT
+      be specified. This setting has no effect on fiber adapters which are
+      defined to not negotiate speed or duplex to any value but 1000 Mbps, full
+      duplex.
+	</td>
+  </tr>
+  <tr>
+    <td class="monospace">FlowControl</td>
+    <td>0 - 3</td>
+    <td>3</td>
+    <td valign="top">Controls the ability of the adapter to advertise flow control
+      capabilities. Default is to allow both TX and RX flow control.&nbsp;0 is
+      off, 1 is RX, 2 is TX, 3 is both.</td>
+  </tr>
+  <tr>
+    <td class="monospace">Jumbo</td>
+    <td>0-16128</td>
+    <td>0</td>
+    <td valign="top">Enables jumbo frames and sets the maximum frame size. Setting this parameter to 0 disables jumbo frames and
+      causes the adapter to use standard 1514 bytes frames. This feature is available in NetWare 6.0 
+    and above.</td>
+  </tr>
+  <tr>
+    <td class="monospace">RxChecksum</td>
+    <td>0-1</td>
+    <td>0</td>
+    <td valign="top">When set to ‘1' the driver and hardware can
+      “offload” the calculation of the TCP or UDP checksum values for
+      received TCP or UDP packets, when the stack supports such operation.  When set to ‘0' the checksum is calculated normally by
+      the TCP/UDP protocol layers.  Non TCP/UDP packets (such as IPX) are not affected by this parameter.  This option only works on
+      supported OS versions.  Unlike other keywords, this setting is tracked on a per-frame-type
+      basis, and only works on Ethernet II and Ethernet SNAP frame.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">WaitForLink</td>
+    <td>0 -1</td>
+    <td>0</td>
+    <td valign="top">
+      <p style="text-indent: 0; word-spacing: 0; margin: 0">Controls whether or 
+      not the driver will wait for link before finishing initialization.&nbsp; A 
+      value of 1 causes the driver to wait until auto-negotiation is complete 
+      before finishing initialization and returning to the command prompt.&nbsp; A 
+      value to 0 will cause the driver to initialize faster, but also may cause 
+      it to display incorrect link information when it loads.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">Poll</td>
+    <td>0 - 2</td>
+    <td>0</td>
+    <td valign="top">Controls whether or not the driver loads in polling mode.0 means no 
+    polling (e.g. interrupt mode), 1 means polling
+      is forced on, and 2 means auto-detect. In this case, the driver will query the OS to determine whether or
+      not polling is supported and will enable polling support accordingly. If supported by the OS, polling 
+      can decrease CPU usage by the driver when under heavy network load.
+      </td>
+  </tr>
+  <tr>
+    <td class="monospace">Persist</td>
+    <td>0 - 2</td>
+    <td>2</td>
+    <td valign="top">Controls
+      whether the driver remains persistent during a hot plug event. Setting this parameter to 0 disables persistency; the driver will
+      always unload during Hot Plug Operations. Setting
+      this parameter to 1 forces the driver to remain persistent during hot plug
+      events. The default value, 2, sets the driver in auto-persistency
+      mode. In this mode, the
+      driver will only remain persistent when it is used with iANS
+      (teaming/VLANs)
+      </td>
+  </tr>
+  <tr>
+    <td class="monospace"><span class="TrkFieldValue">TxDescriptors</span></td>
+    <td>32-128</td>
+    <td>96</td>
+    <td valign="top">TxDescriptors tells the hardware where the fragments of a
+   transmit packet are in host memory. A transmit packet can use 1 or more
+   descriptors. Most transmits require 3 or 4 descriptors. Each descriptor is 16
+   bytes.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace"><span class="TrkFieldValue">RxDescriptors</span></td>
+    <td>
+      8-128 (parameter must be in multiples of 8)</td>
+    <td>
+      64
+    </td>
+    <td valign="top">
+      RxDescriptors tells the hardware where to DMA received packets. For each RX
+      buffer, the driver will also allocate a receive descriptor. Each descriptor is
+   16 bytes and each buffer is 2048 bytes.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">
+      PMEDisable</td>
+    <td>
+      0-1</td>
+    <td>
+      0</td>
+    <td valign="top">
+      Enable/Disable the waking of the system by asserting PME when a Magic 
+      Packet is received while powered down.</td>
+  </tr>
+  <tr>
+    <td class="monospace">
+      CoalesceBuffers</td>
+    <td>
+      32-128</td>
+    <td>
+      96</td>
+    <td valign="top">
+      Coalesce Buffers are used to copy fragments of a transmit packet into 
+      contiguous memory before assigning them a transmit descriptor. This 
+      reduces the number of transmit descriptors required for each packet 
+      transmission.</td>
+  </tr>
+  </table>
+
+<h2>E1000ODI (Gigabit ODI client for DOS)</h2>
+<p>The following NetWare Keywords are applicable for the E1000ODI driver.
+
+<table border="1" cellspacing="0" cellpadding="6" >
+  <tr>
+    <th><b>Parameter</b></th>
+    <th><b>Values</b></th>
+    <th><b>Default Value</b></th>
+    <th><b>Description</b></th>
+  </tr>
+  <tr>
+    <td class="monospace">SpeedDuplex</td>
+    <td>0 - 3</td>
+    <td>auto-detected during initialization
+    </td>
+    <td>0=Force speed to 10Mb and duplex to half.<br>
+      1=Force speed to 10Mb and duplex to full.<br>
+      2=Force speed to 100Mb and duplex to half.<br>
+      3=Force speed to 100Mb and duplex to full.
+      <p>
+      &gt;3=ignored + error message displayed.
+      </p>
+      <p>
+      Auto-detection by the controller is disabled and the speed and duplex
+      modes are set as specified. The controller will not be able to auto-detect
+      the mode until the driver is reloaded.
+      </p>
+      <p>
+      If the SpeedDuplex mode does not match the actual mode of the port in
+      use, the driver may or may not function for certain levels of traffic, and
+      then begin to lose frames.
+      </p>
+      <p>
+      <i>The SpeedDuplex parameter is valid
+      for copper-based controllers and will be ignored when used on a
+      fiber-based adapter. Gigabit copper adapters currently cannot be forced to
+      1000 Mb due to limitations in the IEEE specification.</i>
+      </p>
+	</td>
+  </tr>
+  <tr>
+    <td class="monospace">Slot</td>
+    <td>0 - FFFFh</td>
+    <td>auto-configure if possible</td>
+    <td>The driver uses the value of the parameter to determine which adapter to control
+      <p>
+      If the value does not correctly indicate a valid slot number or the
+      adapter is already in use, an error message is displayed and the driver
+      treats this as a fatal error. 
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/27/04 5:05p <!-- $--> Revision <!--$$Revision:--> 14 <!-- $--></code></p>
+
+</BODY>
+</HTML>

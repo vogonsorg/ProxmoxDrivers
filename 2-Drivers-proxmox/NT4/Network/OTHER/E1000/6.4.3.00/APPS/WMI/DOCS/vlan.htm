@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The VLAN Schema</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">The VLAN Schema</font></h1>
+<br><br>
+<img src="vlan.gif" width="566" height="438">
+<br><br>
+
+<h2><font color="#0000FF">IANet_802dot1QVLANService</font></h2>
+<p><b>Purpose</b><br>
+This class is used to hold the IEEE 802.1Q properties of a network adapter.  The class implements the CIM class CIM_802dot1QVLANService.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each adapter or team that supports IEEE 802.1Q.  Each adapter can have just one IANet_802dot1QVLANService. Some teams, such as multi-vendor fault tolerant teams, do not support this service. 
+
+<p><b>Anomaly</b><br>
+A team with no VLANs does not have a VLAN service unless you enumerate it within the context of a valid session. For teams, the 802.3QvlanService instance will appear only in the following situations:
+<ul><li>If the team already has VLANs</li>
+<li>If the team does not have VLANs and you use a session handle in the context while enumerating this class.</li></ul>
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class. If the adapter does not have an instance associated with it, then the adapter does not support this service.
+
+<p><b>Removing Instances</b><br>
+You cannot delete instances of this class.
+
+<p><b>Modifying Properties</b><br>
+There are no modifiable properties of this class.
+
+<p><b>Associations</b><br>
+Each instance of this class will be associated with one IANet_EthernetAdapter using an instance of IANet_DeviceServiceImplementation.  
+
+<p>Each instance of IANet_802dot1QVLANService can support several VLANs; each VLAN will be associated with the instance using IANet_VLANFor association. 
+
+<p><b>Methods</b><br>
+<b>uint16 CreateVLAN( [in] uint32 VLANNumber, [in] string Name,   [out] IANet_VLAN REF VLANpath );</b> &mdash; Used to create a VLAN on the adapter or team.  The client must supply the VLAN number and the VLAN name, and will get the object path of the newly created VLAN.
+
+<h2><font color="#0000FF">IANet_VLAN</h2></font>
+<p><b>Purpose</b><br>
+This class holds the information for each Intel VLAN. This class implements CIM_VLAN.
+
+<p><b>Instances</b><br>
+An instance of this class will exist for each Intel VLAN.
+
+<p><b>Creating Instances</b><br>
+To create a VLAN, call <b>CreateVLAN</b> on the appropriate instance of IANet_802dot1QVLANService.
+
+<p><b>Removing Instances</b><br>
+You can remove an instance of this class to remove the corresponding VLAN.
+
+<p><b>Modifying Properties</b><br>
+You can modify the VLANNumber and Caption attribute.  
+
+<p><b>Associations</b><br>
+Each instance is associated with an instance of IANet_802dot1QVLANService, and therefore to one instance of IANet_EthernetAdapter, using the class IANet_VLANFor. 
+
+<p>Each instance can be associated with several IANet_Configuration instances to group a set of settings for the VLAN.  For this Provider release, there is only one IANet_Configuration object per VLAN.
+
+<p>Each instance can be associated with one IANet_IPProtocolEndpoint to provide the IP settings for the VLAN using the class IANet_VLANProtocolDependency.
+
+<p><b>Methods</b><br>
+None	
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Event Notifications</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Event Notifications</font></h1>
+<p><img src="event.gif" width="578" height="418">
+
+<h2><font color="#0000FF">Concrete Event Classes</h2></font>
+
+<h3><font color="#0000FF">IANet_802dot3AdapterEvent</h3></font>
+<p><b>Purpose</b><br>
+This event notifies the client about a change in the status or configuration of an adapter.  
+
+<p><b>Triggers</b><br>
+The event occurs after an adapter status changes or after you have changed an adapter setting and called <b>Apply</b>.
+
+<p><b>Event Data</b><br>
+AdapterPath contains the object path of the adapter that caused the event.
+
+
+<h3><font color="#0000FF">IANet_802dot3TeamEvent</h3></font>
+
+<p><b>Purpose</b><br>
+This event notifies the client about a change in the status or configuration of a team.
+
+<p><b>Triggers</b><br>
+The event occurs:
+<ul><li>After the status of an adapter changes.</li>
+<li>After you have changed a team setting and called <b>Apply</b>.</li>
+<li>After the team configuration has been changed and you call <b>Apply</b>.</li></ul>
+  
+<p><b>Event Data</b><br>
+TeamPath contains the object path of the team that caused the event.
+
+
+<h3><font color="#0000FF">IANet_802dot3VlanEvent</h3></font>
+<p><b>Purpose</b><br>
+This event notifies the client about a change in the status or configuration of a VLAN.
+
+<p><b>Triggers</b><br>
+The event occurs:
+<ul><li>After the status of a VLAN changes.</li>
+<li>After you have changed a VLAN setting and called <b>Apply</b>.</li>
+<li>After the VLAN configuration has been changed and you call <b>Apply</b>.</li></ul>
+
+<p><b>Event Data</b><br>
+VlanPath contains the object path of the VLAN that caused the event.
+
+<h2><font color="#0000FF">Registering For Events</h2></font>
+<p>Applications should use <b>IWbemServices:: ExecNotificationQuery</b> or <b>IWbemServices:: ExecNotificationQueryAsync</b> to request notifications for events. The following queries are examples of event notification queries. This list is not exhaustive as many queries are possible.
+
+<ul><li><b>SELECT * FROM IANet_Event</b> &mdash; Used to request all events.</li>
+<li><b>SELECT * FROM IANet_AdapterEvent</b> &mdash; Used to request all adapter events.</li>
+<li><b>SELECT * FROM IANet_TeamEvent</b> &mdash; Used to request all team events.</li>
+<li><b>SELECT * FROM IANet_SessionEvent</b> &mdash; Used to request all session events.</li>
+<li><b>SELECT * FROM IANet_VlanEvent</b> &mdash; Used to request all VLAN events.</li>
+<li><b>SELECT * FROM IANet_InternalErrorEvent</b> &mdash; Used to request all internal events.</li>
+<li><b>SELECT * FROM IANet_AdapterEvent WHERE AdapterPath={IANet_EthernetAdapter object path}</b> &mdash; Used to request adapter events for a particular adapter.</li></ul>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

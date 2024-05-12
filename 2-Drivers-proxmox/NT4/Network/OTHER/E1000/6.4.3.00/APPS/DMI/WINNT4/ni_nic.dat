@@ -1,0 +1,32 @@
+#****************************************************************************
+# File	:    ni_nic.dat
+# Date  :    09/23/1998
+# Description:  Input file for DMI Event Solution and Threshold. 
+#
+# Following are the possible Event Solutions for various Event Type is each 
+# Event Class:
+#
+# Event Class: Intel|NIC_HEALTH|001 
+# Supported Event Types:
+#			0x02 = "Cable unplugged/No LAN activity"
+#			0x10 = "Adapter initialization failure"
+# Supported Event Solutions:
+#			0x00 = "Unknown"
+#			0x01 = "No action is required at this time."
+#			0x02 = "Reboot"
+#			0x04 = "Reload the Driver"
+#			0x08 = "Plug in the Cable"
+#			0x10 = "Check Adapter hardware"
+# 
+# NB: Refer the MIF file "NI_NIC.MIF" for all Event Types and their solutions
+# in each Event Class.
+# **IMPORTANT NOTE**:
+# Comments should begin with "#" and configuration entries should begin with "$"
+#*****************************************************************************
+#
+# EVENT CLASS			EVENT TYPE		EVENT SOLUTION		EVENT THRESHOLD
+#----------------------------------------------------------------------------
+$ Intel|NIC_HEALTH|001		2				8					3
+
+
+

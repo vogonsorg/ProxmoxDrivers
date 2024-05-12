@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 Overview
+2 Navigate PROSet II=GENERAL_PAGE
+2 View adapter and driver information
+3 General information=General_Information
+3 Adapter details=Adapter_Details
+3 Driver details=Driver_Information
+1 Configure the adapter
+2 Set speed and duplex=Set_Speed_and_Duplex
+2 Configure power usage=Configure_Power_Management
+2 Configure advanced features=Configure_Advanced_Features
+2 Enable IPSec=Enable_IPSec
+2 Save configuration to a file=SAVERESTORE
+2 Remove an adapter=Remove_an_Adapter_Instance
+1 Create and configure teams
+2 Team types
+3 About teaming=Teaming_Info
+3 Team types=Team_Types
+3 Adapter Fault Tolerance=Adapter_Fault_Tolerance
+3 Switch Fault Tolerance=Switch_Fault_Tolerance
+3 Adaptive Load Balancing=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Static=FEC
+3 GEC/LA/802.3ad: Static=GEC
+3 IEEE 802.3ad: Dynamic=Dynamic_3ad
+2 Set up a team
+3 Create a team=Create_a_New_Team
+3 Test switch configuration=Test_Switch_Configuration
+3 Configure advanced settings=Teaming_Advanced_Settings
+2 Change team configuration
+3 Change adapter teaming mode=Change_Adapter_Teaming_Mode
+3 Specify an adapter as Primary or Secondary=Specify_an_Adapter_as_Primary_or_Secondary
+3 Add an adapter to a team=Add_an_Adapter_to_an_Existing_Team
+3 Remove an adapter from a team=Remove_an_Adapter_from_a_Team
+3 Teaming advanced settings=Teaming_Advanced_Settings
+2 View team configuration
+3 Teams in the Network Component Tree=Team_Listing
+3 View team configuration=Team_Configuration
+2 Remove a team
+3 Remove an adapter team=Remove_an_Adapter_Team
+1 Create and configure VLANs
+2 VLAN overview=VLAN>main
+2 Set up VLAN
+3 Create VLAN=ADD_VLAN
+3 Enable GVRP=GVRP_Support
+3 Advanced settings=Advanced_Settings_for_VLANs
+2 Change VLAN properties
+3 Change VLAN properties=Change_VLAN_Properties
+3 Advanced settings=Advanced_Settings_for_VLANs
+2 Remove a VLAN
+3 Remove a VLAN=Remove_a_VLAN
+1 Perform diagnostics
+2 Overview=Diagnostics_An_Overview
+2 Diagnostic tests=Diagnostics
+2 Cable test=Testing_the_Cable
+2 Sender Responder test=Sender_Responder_Test
+2 Setting up the diagnostic log=Diagnostic_Log
+1 Use Intel(R) add-on tools
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Overview=priority_packet_overview
+1 Troubleshooting
+2 Troubleshooting tab=Troubleshooting
+2 Restore adapter configuration=RESTORECONFIG
+2 Get support=Support

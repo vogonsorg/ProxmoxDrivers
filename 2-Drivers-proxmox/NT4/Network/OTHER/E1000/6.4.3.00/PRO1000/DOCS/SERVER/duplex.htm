@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Set Up Speed and Duplex</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Set Up Speed and Duplex</h1>
+<p>In the default mode, an Intel PRO/100 adapter or PRO/1000 adapter using
+copper connections will attempt to auto-negotiate with its link partner to
+determine the best setting. If the adapter cannot establish link with the link partner
+using auto-negotiation, you may need to manually configure the adapter and link
+partner to the identical setting to establish link and pass packets. This should
+only be needed when attempting to link with an older switch that does not
+support auto-negotiation or one that has been forced to a specific speed or
+duplex
+mode.</p>
+<p>The settings available when auto-negotiation is disabled are:</p>
+<ul msimagelist>
+  <li>
+    <p class="numlst"><b>10 Mbps or 100 Mbps Full duplex</b> (requires a full
+    duplex link partner set to full duplex). The adapter can send and receive
+    packets at the same time. You must set this mode manually (see below).</p>
+  <li>
+    <p class="numlst"><b>10 Mbps or 100 Mbps Half duplex</b> (requires a link
+    partner set to half duplex). The adapter performs one operation at a time;
+    it either sends or receives. You must set this mode manually (see below).</p>
+  </li>
+</ul>
+<table border="0" cellPadding="4" cellSpacing="0">
+    <tr>
+      <td vAlign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+      <td vAlign="top"><b><i>CAUTION</i></b>: Only experienced network administrators should
+        force speed and duplex manually.</td>
+    </tr>
+</table>
+    <p class="numlst">Your link partner must match the setting you choose.</p>
+<table border="0" cellPadding="4" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+      <td vAlign="top"><b><i>NOTE</i></b>: You cannot change the speed or duplex
+        of Intel PRO/1000 adapters that use fiber cabling.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Manually Configuring Duplex and Speed Settings</h2>
+<p>If your switch supports the NWay* standard, and both the adapter and switch
+are set to auto-negotiate, full duplex configuration is automatic, and no action
+is required on your part. Not all switches support auto-negotiation. Check with
+your network system administrator to verify whether your switch supports this
+feature.</p>
+<p>Configuration is specific to the driver you’re loading for your operating
+system. To set a specific Link Speed and Duplex mode, click the left column link
+to the
+appropriate operating system.</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><b><i>NOTE</i></b>: Per the IEEE specification, gigabit speed cannot be forced. It
+        can only be auto-negotiated.&nbsp;</td>
+    </tr>
+    <tr>
+      <td vAlign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+      <td vAlign="top"><b><i>CAUTION</i></b>: The settings at the switch must
+        always match the adapter settings.&nbsp;Adapter performance may suffer
+        or your adapter may not operate if you configure the adapter differently
+        from your switch.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 12/30/02 12:38p <!-- $--> Revision <!--$$Revision:--> 9 <!-- $--></code></p>
+
+</body>
+</html>

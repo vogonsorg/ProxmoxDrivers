@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Quality of Service (QoS)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1><a name="QoS">Quality of Service (QoS)</a></h1>
+<p>QoS allows the adapter to send and receive IEEE 802.3ac tagged frames.
+802.3ac tagged frames include 802.1p priority-tagged frames and 802.1Q VLAN-tagged
+frames. In order to implement QoS, the adapter must be connected to a switch
+that supports and is configured for QoS. Priority-tagged frames allow
+programs that deal with real-time events to make the most efficient use of network bandwidth. High priority
+packets are processed before lower priority packets.&nbsp;</p>
+<p>To implement QoS, the adapter must be connected to a switch that
+supports and is configured for 802.1p QoS.&nbsp;</p>
+<p>Tagging is enabled and disabled using the &quot;QoS Packet Tagging&quot;
+field in the <b>Advanced </b> tab in the Device Manager.&nbsp;</p>
+<p>Once QoS is enabled in Device Manager, you can specify levels of priority based
+on IEEE 802.1p/802.1Q frame tagging.</p>
+<p>Microsoft* Windows 2000 has its own utility for 802.1p packet prioritization. For more
+information on the Windows 2000 utility, see the Windows 2000 system help. Use
+the <b>Index</b> tab and search for the term &quot;QoS.&quot; Select the
+&quot;Windows 2000 Administration Tools&quot; topic.</p>
+<p>Additional information is available at the QoS WMI Provider page.</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td align="middle" vAlign="top"><img border="0" height="21" src="note.gif" width="28"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em>The first generation
+        Intel PRO/1000 Gigabit Server Adapter (PWLA 8490) does not support QoS
+        frame tagging.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 3/03/04 3:04p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+
+</html>

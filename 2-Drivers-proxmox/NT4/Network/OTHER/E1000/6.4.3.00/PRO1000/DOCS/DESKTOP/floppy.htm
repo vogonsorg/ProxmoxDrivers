@@ -1,0 +1,190 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Creating an Installation Disk</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+Make an Installation Diskette</h1>
+<P CLASS="Body-Text">Installation disks are useful when you are loading drivers on systems that do not have a CD
+drive or a network connection.&nbsp;You can create installation disks using the
+MAKEDISK utility or by directly copying the appropriate files to a floppy disk.</P>
+<P CLASS="Body-Text">The MAKEDISK utility copies the appropriate driver software 
+for desktop, server, and mobile&nbsp; LAN products, for the following operating
+systems:</P>
+<ul>
+  <li>
+    <p CLASS="numlst">Windows*</li>
+  <li>
+    <p CLASS="numlst">NetWare* (from the command prompt only)</li>
+  <li>
+    <p CLASS="numlst">DOS and OS2</li>
+</ul>
+<table border="0" cellpadding="4" width="100%" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="21"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> Each adapter supports a specific subset of these 
+    operating systems. </td>
+  </tr>
+  <tr>
+    <td width="21"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> Some of these installations may require two floppy 
+    disks. </td>
+  </tr>
+</table>
+<P CLASS="Body-Text">You can run MAKEDISK from either a command prompt or the autorun program on the 
+Product CD. If you downloaded the software package from the 
+<a href="support.htm">support website</a>, extracting the files automatically 
+starts the autorun program.</P>
+<h3>Running MAKEDISK from the Autorun screen</h3>
+<ol>
+  <li>
+    <p class="numlst">Insert the Product CD in the CD-ROM drive. The CD's autorun program 
+    automatically starts. If you are starting with a downloaded installation 
+    package, navigate to the respective directory using your Windows Explorer 
+    program.</li>
+  <li>
+    <p class="numlst">To start the autorun program manually, double-click
+    Autorun.exe in the root directory of the  CD or downloaded software package.</li>
+  <li>
+    <p class="numlst">Click <b>Make Driver Disk</b>. The Intel(R) PRO Adapter 
+    Install Disk Creation window is displayed.</li>
+  <li>
+    <p class="numlst">Select the target operating system in the Platform to copy 
+    for box. The target operating system is the operating system running on the 
+    target system. At some point in the future, you can use the installation 
+    disk you created in this process to install drivers on this system. </li>
+  <li>
+    <p class="numlst">In the Adapter Type box, select the type of adapter you 
+    will be installing.</li>
+  <li>
+    <p class="numlst">In the Copy Location box, enter the drive and/or 
+    directory. The files and associated drivers will be copied to this location.</li>
+  <li>
+    <p class="numlst">Insert a blank disk into the disk drive then click <b>
+    Copy</b>. &nbsp;</li>
+  <li>
+    <p class="numlst">Repeat steps 1 through 7 until you have created all 
+    necessary installation disks.</li>
+  <li>
+    <p class="numlst">Click <b>Exit</b>.</li>
+</ol>
+    <h3>Running MAKEDISK from a command prompt window</h3>
+<ol>
+  <li>
+    <p class="numlst">Insert a formatted floppy disk in your disk drive.</p>
+  <li>
+    <p class="numlst">For Netware, skip to step 3.<br>
+    For Windows 98, Windows Me, and Windows 95, select Run from the Start menu and
+    then type &quot;command&quot; in the Run dialog. Click <b>OK</b>.<br>
+    For Windows Server 2003, Windows XP, Windows 2000, select Run from the Start
+    menu and then type &quot;cmd&quot; in the Run dialog. Click <b>OK</b>.</p>
+  <li>
+    <p class="numlst">In the command prompt window, switch to the CD drive. If 
+    you downloaded the software from the website, navigate to the download 
+    directory. For example, type:<font face="Courier New"><br>
+    E: </font>&lt;Enter&gt;</p>
+  <li>
+    <p class="numlst">Change the active directory to <font face="Courier New">\APPS\MAKEDISK</font>.</p>
+  <li>
+    <p class="numlst">At the command line type:<br>
+    <font face="Courier New">MAKEDISK </font><i>OS</i><font face="Courier New"> </font>
+    <i>Destination</i><font face="Courier New"> </font>&lt;Enter&gt;</p>
+  </li>
+</ol>
+<p class="numlst">where <i>OS</i> is the operating system driver to be copied, and
+<i>Destination </i>is the destination floppy drive letter (e.g.,
+<font face="Courier New">A:</font>). If you want this program to run in silent 
+mode, add the text Silent to the end of the command line. In silent mode, 
+warnings are not displayed and the batch file will not wait for user input. Use the parameter listed below that matches
+your operating system, adapter type, and computing platform:</p>
+<div align="left">
+  <table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+      <td nowrap></td>
+      <td colspan="2" align="center">
+        <p align="center">Intel&#174 PRO/1000 adapters</td>
+      <td colspan="2" align="center">
+        <p align="center">Intel&#174 PRO/100 adapters</td>
+    </tr>
+    <tr>
+      <td nowrap></td>
+      <td align="center">IA-32 platforms</td>
+      <td align="center">Intel<sup>&reg;</sup> Itanium<sup>&#174;</sup>-based platforms</td>
+      <td align="center">IA-32 platforms</td>
+      <td align="center">Intel<sup>&reg;</sup> Itanium<sup>&#174;</sup>-based platforms</td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft Windows Server 2003</td>
+      <td align="center"><font face="Courier New"><b>WS0332GIG</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0364GIG</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0332FE</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0364FE</b></font></td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft Windows XP</td>
+      <td align="center"><font face="Courier New"><b>WS0332GIG</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0364GIG</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0332FE</b></font></td>
+      <td align="center"><font face="Courier New"><b>WS0364FE</b></font></td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft Windows 2000</td>
+      <td align="center"><font face="Courier New"><b>W2KGIG</b></font></td>
+      <td align="center">&nbsp;</td>
+      <td align="center"><font face="Courier New"><b>W2KFE</b></font></td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft Windows NT 4.0</td>
+      <td align="center"><font face="Courier New"><b>NT</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+      <td align="center"><font face="Courier New"><b>NT</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft Windows 95, 98, ME</td>
+      <td align="center"><font face="Courier New"><b>W9X</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+      <td align="center"><font face="Courier New"><b>W9X</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+    </tr>
+    <tr>
+      <td nowrap>Novell Netware</td>
+      <td align="center"><b><font face="Courier New">NW</font></b></td>
+      <td align="center">&nbsp;</td>
+      <td align="center"><b><font face="Courier New">NW</font></b></td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td nowrap>Microsoft MS-DOS* and IBM* OS/2</td>
+      <td align="center"><font face="Courier New"><b>DOS</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+      <td align="center"><font face="Courier New"><b>DOS</b></font></td>
+      <td align="center"><font face="Courier New"><b>&nbsp;</b></font></td>
+    </tr>
+  </table>
+</div>
+
+
+
+<table border="0" cellpadding="4" width="100%" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <td width="21"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> If you select Windows NT 4.0, MAKEDISK copies the 
+    Intel® PROSet utility as well as the base driver files, and requires two 
+    floppy disks.&nbsp;For all other Windows versions, only the drivers are copied, 
+    and require one floppy disk. NetWare and DOS selections also require one 
+    floppy disk.&nbsp; </td>
+  </tr>
+</table>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 3/17/04 6:23p <!-- $--> Revision <!--$$Revision:--> 7 <!-- $--></code></p>
+
+</body>
+</html>

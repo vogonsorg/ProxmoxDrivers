@@ -1,0 +1,290 @@
+Intel(R) Boot Agent Release Notes
+July 2, 2003
+======================================================================
+
+DISCLAIMER:
+-----------
+
+This BOOTAGNT.TXT as well as the software described in it is furnished under
+license and may only be used or copied in accordance with the terms of the
+license. The information in this manual is furnished for informational
+use only, is subject to change without notice, and should not be construed
+as a commitment by Intel Corporation. Intel Corporation assumes no
+responsibility or liability for any errors or inaccuracies that may appear
+in this document or any software that may be provided in association with
+this document.
+Except as permitted by such license, no part of this document may be
+reproduced, stored in a retrieval system, or transmitted in any form or
+by any means without the express written consent of Intel Corporation.
+
+Introduction
+------------
+
+The Intel Boot Agent is a software product that allows your networked
+client computer to boot using a program code image supplied by a
+remote server. PC vendors can implement the Intel Boot Agent to
+accommodate various environments and protocols. 
+
+Implementation support for the Boot Agent includes:
+
+• Multi-protocol boot ROM(Read Only Memory) code designed for remote booting
+from Fast Ethernet and Gigabit Ethernet Adapters, as well as LOM, or 
+LAN on Motherboard implementations
+
+• Complies with the Pre-boot eXecution Environment(PXE) Version 2.0, also 
+called PXE 2.0 and 2.1 Specification
+
+• Some versions of the Boot Agent also include support for Remote
+Program Load (RPL) runtime and loader software
+
+
+Some important Features offered by the Intel Boot Agent are:
+
+• Same user interface for Fast Ethernet and Gigabit Ethernet Adapters
+
+• Compliant with the Wired for Management Baseline 2.0 (WfM 2.0)
+specification
+
+• Compatible with legacy boot agent environments that use BOOTP
+protocol
+
+• Customizable in pre-boot, Windows*, and DOS environments
+
+For more detailed information, refer to the Intel Boot Agent
+online user's guide.
+
+
+Installing the Boot Agent Software
+----------------------------------
+
+Most Intel WfM-compatible adapters, such as the Intel PRO/100 S
+Desktop Adapter or the Intel PRO/1000 T Desktop Adapter, have a
+factory-installed, integrated flash ROM device that has been
+pre-programmed with a Boot Agent software image. However, you may
+still wish to configure the Boot Agent Software. To do so, see the
+Intel Boot Agent online user guide.
+
+NOTE: The Intel PRO/1000 XT Server Adapter flash ROM can be enabled if
+needed using the IBAUTIL utility.
+
+In the event that you wish to install flash ROM in an adapter that has
+an empty socket (Intel PRO/100 adapters only), access the list of
+compatible flash ROM devices that are compatible with the Intel Boot
+Agent from Intel's support website as follows:
+
+1. Access Intel Customer Support's website at
+http://support.intel.com.
+
+2. Click the Search button.
+
+3. Enter Boot Agent as your search string, and indicate that you want
+to search through all types of documents.
+
+4. Click Intel Boot Agent - Top Technical Issues to select the Boot
+Agent Home page.
+
+5. Click How do I get a Boot ROM for the Intel PRO/100B or PRO/100+
+adapters that only come with a socket?
+
+In cases involving hardware upgrades, once a flash ROM device is
+available within the client computer, a valid Boot Agent software
+image must be installed onto the flash ROM device. The way in which
+the Boot Agent software image is installed within the flash ROM depends
+upon your hardware configuration.
+
+• If your computer includes the network adapter on its motherboard,
+the Boot Agent software will need to be available as part of a
+motherboard BIOS. Contact your computer or motherboard manufacturer
+to upgrade your motherboard BIOS code. Alternatively, it is possible
+that the motherboard has a ROM socket with a 64 KB (or larger) flash
+ROM device. In this case, contact the motherboard manufacturer to get
+the code that must be loaded into the flash ROM.
+
+• If your computer uses a flash ROM-equipped adapter, use one of the
+following procedures to install or update the Boot Agent software:
+
+  - Installing/Updating in DOS Environments
+
+  - Installing/Updating in Windows Environments Using Intel PROSet II
+
+
+Installing/Updating the Boot Agent in DOS Environments
+-------------------------------------------------------
+
+Perform the following steps to install the Boot Agent software in a
+DOS environment:
+
+1. The following operation requires use of a DOS-bootable floppy disk
+containing an executable image of the IBAUTIL.EXE utility. If you do
+not have IBAUTIL.EXE on your DOS bootable floppy disk, copy it to your
+system disk from the CD ROM that came with your product under the
+\BOOTAGNT directory, or acquire the most up-to-date version from
+Intel's website at http://support.intel.com.
+
+2. Using your DOS bootable floppy disk, boot your computer to a DOS
+prompt.
+
+CAUTION: The next several steps require that your computer be booted
+only to DOS, and not from a Windows "DOS box". These steps cannot be
+performed from a DOS Command Prompt window or using a DOS task within
+Windows.
+
+NOTE: If the flash ROM device installed in the adapter ROM socket is
+already programmed (not blank), you may need to take steps to enable
+your computer to boot from the floppy drive. If necessary, disable the
+network boot function from either the BIOS Setup program or the Boot
+Agent's configuration setup menu. Then, reboot to the DOS bootable
+floppy disk containing the IBAUTIL utility that you just prepared.
+
+3. Type IBAUTIL -up and press Enter.
+
+The following message appears showing a list of all compatible network
+adapters found in your system, assuming both the adapter and the flash
+ROM device are properly installed:
+
+IBAUTIL vx.xx - Intel PCI NIC BOOT FLASH Update Utility
+Copyright (C) 1995 - 2003  Intel Corporation. All rights reserved.
+
+NIC Network Address   PWA Number   Series  FLASH Memory      Size  Valid
+=== ================= ============ ======  ================= ====  =====
+ 1    00D0B7D36018     748565-005   1229   SST 39VF512        64   Yes
+
+ 2    000347003E35     A19845-003   1004   ATMEL AT49LV040   512   Yes
+ 
+Select NIC to update or ESC to quit:
+
+4. Type the number that corresponds to the Ethernet address of the
+desired adapter to continue. The next question appears:
+
+Select Option (U)pdate or (R)estore:
+
+5. Type U (Update) if you want the IBAUTIL utility to update the flash
+ROM device with the current version of Boot Agent software. Type R
+(Restore) if you want IBAUTIL to write a previously stored flash image
+file onto the flash ROM device.
+
+NOTE: As part of the Update operation, IBAUTIL creates a backup file on
+the floppy disk. Make sure that the write-enable tab on the floppy
+disk is properly set. Also, prior to the Restore operation, make sure
+that a flash image file is available in the same directory as the
+IBAUTIL utility. This file will have an automatically generated filename
+with a .FLS extension.
+
+If you select the U (Update) response, this prompt appears:
+
+Create Restore Image? (Y)es or (N)o:
+
+6. Type Y (yes) to create a backup of the current contents of the
+flash ROM device (not yet updated) onto a file. If such a file already
+exists, you'll be asked if you want to overwrite the file. If you type
+Y (yes), the flash image file is overwritten with the current contents
+of the flash ROM. The new Boot Agent image is then written into the
+flash ROM device used by the adapter. The process takes approximately
+one minute. 
+
+NOTE: The IBAUTIL utility automatically names the flash image file
+(backup file) as XXXXXXXX.FLS, where XXXXXXXX are the last eight
+digits of the adapter's Ethernet address. So, if you selected 1 (the
+first NIC listed) in step 4 above, the backup file's name would be
+B7D36018.FLS.
+
+--or--
+
+Type N (no) to cause IBAUTIL to proceed without first saving a copy of
+the current contents of the flash ROM device onto a file. IBAUTIL asks
+you to confirm your choice as follows:
+
+Continue Update without Restore Image? (Y)es or (N)o:
+
+If you type N (no), IBAUTIL cancels the update, leaving the flash
+contents unchanged, and then asks you whether you want to reboot or
+return to the DOS prompt. If you type Y (yes), a new Boot Agent image
+is written into the flash ROM device used by the adapter. The process
+takes approximately one minute, and then IBAUTIL prompts you with the
+following question: 
+
+Press <Enter> to reboot your computer, <Q> to quit without reboot.
+
+7. Either press Enter to reboot or Q to return to the DOS prompt
+without rebooting.
+
+
+Updating the Boot Agent in Windows Environments
+-------------------------------------------------
+For instructions on updating the Boot Agent in a Windows environment,
+refer to the online Intel Boot Agent User's Guide.
+
+
+Configuration Setup
+-------------------
+
+The Intel Boot Agent software provides configuration options that
+allow you to customize the behavior of the Boot Agent software.
+Changing the Boot Agent configuration will usually be required only
+the first time you add a new network adapter to a client computer
+within your network.
+
+The Boot Agent supports PXE and RPL configuration in pre-boot, Windows,
+and DOS environments. In each of these environments, a single user interface
+allows you to configure the Boot Agent from a PXE and RPL BIOS on both
+Fast Ethernet and Gigabit adapters. 
+
+For instructions on configuring the Boot Agent for the desired
+environment, refer to the following sections within the Intel Boot
+Agent User's Guide:
+
+• Configuring the Boot Agent in a Pre-Boot Environment
+
+• Configuring the Boot Agent in a Windows Environment
+
+• Configuring the Boot Agent in a DOS Environment
+
+
+Auxiliary DOS Utilities
+-----------------------
+
+The Intel PROSet II configuration and diagnostic utility requires use
+of the Windows operating environment. For systems without Windows,
+Intel provides utilities for installing and configuring the Boot Agent
+using the DOS environment. These utilities include:
+
+• The IBAUTIL utility backs up the current flash ROM image to a file and
+copies a new Boot Agent image file into the flash ROM using a
+simplified, menu-based user interface.
+
+• The IBACFG provides an alternative means for modifying the
+adapter configuration settings.
+
+The above utilities are available on Intel Customer Support's web
+site. These utilities are also located on the CD-ROM in the directory:
+
+\BOOTAGNT
+
+For additional information about using these utilities, refer to the
+Auxiliary DOS Utilities section of the Intel Boot Agent User's
+Guide.
+
+NOTE: These utilities should be run from a DOS startup disk and not
+from within Windows. Operation when Windows is loaded may be
+unreliable.
+
+CAUTION: If you use a third-party (non-Intel) boot ROM solution with
+an Intel adapter and run Intel Boot Agent utilities, you may corrupt
+the contents of your flash ROM, rendering it useless.
+
+
+Troubleshooting
+---------------
+
+Once installed, the Boot Agent product has very few potential areas
+where problems can arise. For a list of potential problems that you
+might encounter while using the Boot Agent, as well as corrective
+actions, refer to the Troubleshooting Procedures section of the
+Intel Boot Agent User's Guide.
+
+
+Copyright (c) 2003 Intel Corporation
+All rights reserved.
+
+* Other names and brands may be claimed as the property of others.
+---End of BOOTAGNT.TXT---

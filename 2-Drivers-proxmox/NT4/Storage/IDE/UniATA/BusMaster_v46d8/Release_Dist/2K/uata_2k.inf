@@ -1,0 +1,902 @@
+; Copyright (c) 2002-2014 UniATA group
+
+[Version]
+Signature="$Windows NT$"
+Provider=%ALTERWARE%
+ClassGUID={4D36E97B-E325-11CE-BFC1-08002BE10318}
+Class=SCSIAdapter
+CatalogFile=uniata.cat
+DriverVer=04/07/2016,0.46.4.8
+
+;
+; Source file information
+;
+
+[SourceDisksNames]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+; Files for disk UniATA Installation Disk #1 (SCSIAdapter)
+uniata.sys = 1,..\,
+atactl.exe = 1,..\,
+uata_2k.inf = 1,,
+
+;Class Install
+[ClassInstall32.NT]
+AddReg=HDC_Class
+
+[HDC_Class]
+HKR,,,,%HDCClassName%
+HKR,,Icon,,"-9"
+HKR,,Installer32,,"SysSetup.Dll,HdcClassInstaller"
+
+[DestinationDirs]
+Sys32DestDir = 11 ; System32
+DefaultDestDir = 12 ; DIRID_DRIVERS
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%ALTERWARE%=UNIATA_HDC
+
+[UNIATA_HDC]
+;Well-known adapters
+%PCI\VEN_1191&DEV_0005.DeviceDesc%=uniata_Inst, PCI\VEN_1191&DEV_0005
+%PCI\VEN_1191&DEV_0006.DeviceDesc%=uniata_Inst, PCI\VEN_1191&DEV_0006
+%PCI\VEN_1191&DEV_0007.DeviceDesc%=uniata_Inst, PCI\VEN_1191&DEV_0007
+%PCI\VEN_1191&DEV_0008.DeviceDesc%=uniata_Inst, PCI\VEN_1191&DEV_0008
+%PCI\VEN_1191&DEV_0009.DeviceDesc%=uniata_Inst, PCI\VEN_1191&DEV_0009
+%PCI\VEN_10b9&DEV_5289.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5289
+%PCI\VEN_10b9&DEV_5288.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5288
+%PCI\VEN_10b9&DEV_5287.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5287
+%PCI\VEN_10b9&DEV_5281.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5281
+%PCI\VEN_10b9&DEV_5228&REV_c5.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5228&REV_c5
+%PCI\VEN_10b9&DEV_5229&REV_c5.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5229&REV_c5
+%PCI\VEN_10b9&DEV_5229&REV_c4.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5229&REV_c4
+%PCI\VEN_10b9&DEV_5229&REV_c2.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5229&REV_c2
+%PCI\VEN_10b9&DEV_5229&REV_20.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5229&REV_20
+%PCI\VEN_10b9&DEV_5229.DeviceDesc%=uniata_Inst, PCI\VEN_10b9&DEV_5229
+%PCI\VEN_1022&DEV_7401.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_7401
+%PCI\VEN_1022&DEV_7409.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_7409
+%PCI\VEN_1022&DEV_7411.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_7411
+%PCI\VEN_1022&DEV_7441.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_7441
+%PCI\VEN_1022&DEV_7469.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_7469
+%PCI\VEN_1022&DEV_208f.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_208f
+%PCI\VEN_1022&DEV_209a.DeviceDesc%=uniata_Inst, PCI\VEN_1022&DEV_209a
+%PCI\VEN_1002&DEV_4349.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4349
+%PCI\VEN_1002&DEV_4369.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4369
+%PCI\VEN_1002&DEV_4376.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4376
+%PCI\VEN_1002&DEV_436e.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_436e
+%PCI\VEN_1002&DEV_4379.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4379
+%PCI\VEN_1002&DEV_437a.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_437a
+%PCI\VEN_1002&DEV_438c.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_438c
+%PCI\VEN_1002&DEV_4380.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4380
+%PCI\VEN_1002&DEV_439c.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_439c
+%PCI\VEN_1002&DEV_4390.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4390
+%PCI\VEN_1002&DEV_4391.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4391
+%PCI\VEN_1002&DEV_4392.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4392
+%PCI\VEN_1002&DEV_4393.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4393
+%PCI\VEN_1002&DEV_4394.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4394
+%PCI\VEN_1002&DEV_4395.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_4395
+%PCI\VEN_1002&DEV_780c.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_780c
+%PCI\VEN_1002&DEV_7800.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_7800
+%PCI\VEN_1002&DEV_7801.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_7801
+%PCI\VEN_1002&DEV_7802.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_7802
+%PCI\VEN_1002&DEV_7803.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_7803
+%PCI\VEN_1002&DEV_7804.DeviceDesc%=uniata_Inst, PCI\VEN_1002&DEV_7804
+;%PCI\VEN_1103&DEV_0004&REV_05.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0004&REV_05
+;%PCI\VEN_1103&DEV_0004&REV_03.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0004&REV_03
+;%PCI\VEN_1103&DEV_0004&REV_02.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0004&REV_02
+;%PCI\VEN_1103&DEV_0004.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0004
+;%PCI\VEN_1103&DEV_0005&REV_01.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0005&REV_01
+;%PCI\VEN_1103&DEV_0005.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0005
+;%PCI\VEN_1103&DEV_0006&REV_01.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0006&REV_01
+;%PCI\VEN_1103&DEV_0007&REV_01.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0007&REV_01
+;%PCI\VEN_1103&DEV_0008&REV_07.DeviceDesc%=uniata_Inst, PCI\VEN_1103&DEV_0008&REV_07
+%PCI\VEN_8086&DEV_1230.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1230
+%PCI\VEN_8086&DEV_7010.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_7010
+%PCI\VEN_8086&DEV_7111.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_7111
+%PCI\VEN_8086&DEV_7199.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_7199
+%PCI\VEN_8086&DEV_84ca.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_84ca
+%PCI\VEN_8086&DEV_7601.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_7601
+%PCI\VEN_8086&DEV_2421.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2421
+%PCI\VEN_8086&DEV_2411.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2411
+%PCI\VEN_8086&DEV_244a.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_244a
+%PCI\VEN_8086&DEV_244b.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_244b
+%PCI\VEN_8086&DEV_248a.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_248a
+%PCI\VEN_8086&DEV_248b.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_248b
+%PCI\VEN_8086&DEV_24cb.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_24cb
+%PCI\VEN_8086&DEV_24ca.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_24ca
+%PCI\VEN_8086&DEV_24db.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_24db
+%PCI\VEN_8086&DEV_24d1.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_24d1
+%PCI\VEN_8086&DEV_24df.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_24df
+%PCI\VEN_8086&DEV_25a2.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_25a2
+%PCI\VEN_8086&DEV_25a3.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_25a3
+%PCI\VEN_8086&DEV_25b0.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_25b0
+%PCI\VEN_8086&DEV_266f.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_266f
+%PCI\VEN_8086&DEV_2651.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2651
+%PCI\VEN_8086&DEV_2652.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2652
+%PCI\VEN_8086&DEV_2653.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2653
+%PCI\VEN_8086&DEV_27df.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27df
+%PCI\VEN_8086&DEV_27c0.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c0
+%PCI\VEN_8086&DEV_27c1.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c1
+%PCI\VEN_8086&DEV_27c3.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c3
+%PCI\VEN_8086&DEV_27c4.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c4
+%PCI\VEN_8086&DEV_27c5.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c5
+%PCI\VEN_8086&DEV_27c6.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_27c6
+%PCI\VEN_8086&DEV_269e.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_269e
+%PCI\VEN_8086&DEV_2680.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2680
+%PCI\VEN_8086&DEV_2681.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2681
+%PCI\VEN_8086&DEV_2682.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2682
+%PCI\VEN_8086&DEV_2683.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2683
+%PCI\VEN_8086&DEV_2820.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2820
+%PCI\VEN_8086&DEV_2821.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2821
+%PCI\VEN_8086&DEV_2822.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2822
+%PCI\VEN_8086&DEV_2824.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2824
+%PCI\VEN_8086&DEV_2825.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2825
+%PCI\VEN_8086&DEV_2828.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2828
+%PCI\VEN_8086&DEV_2829.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2829
+%PCI\VEN_8086&DEV_282a.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_282a
+%PCI\VEN_8086&DEV_2850.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2850
+%PCI\VEN_8086&DEV_2920.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2920
+%PCI\VEN_8086&DEV_2926.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2926
+%PCI\VEN_8086&DEV_2921.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2921
+%PCI\VEN_8086&DEV_2922.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2922
+%PCI\VEN_8086&DEV_2923.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2923
+%PCI\VEN_8086&DEV_2925.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2925
+%PCI\VEN_8086&DEV_2928.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2928
+%PCI\VEN_8086&DEV_2929.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2929
+%PCI\VEN_8086&DEV_292a.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_292a
+%PCI\VEN_8086&DEV_292d.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_292d
+%PCI\VEN_8086&DEV_3a20.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a20
+%PCI\VEN_8086&DEV_3a26.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a26
+%PCI\VEN_8086&DEV_3a22.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a22
+%PCI\VEN_8086&DEV_3a25.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a25
+%PCI\VEN_8086&DEV_3a00.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a00
+%PCI\VEN_8086&DEV_3a06.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a06
+%PCI\VEN_8086&DEV_3a02.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a02
+%PCI\VEN_8086&DEV_3a05.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3a05
+%PCI\VEN_8086&DEV_3b20.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b20
+%PCI\VEN_8086&DEV_3b21.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b21
+%PCI\VEN_8086&DEV_3b22.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b22
+%PCI\VEN_8086&DEV_3b23.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b23
+%PCI\VEN_8086&DEV_3b25.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b25
+%PCI\VEN_8086&DEV_3b26.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b26
+%PCI\VEN_8086&DEV_3b28.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b28
+%PCI\VEN_8086&DEV_3b29.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b29
+%PCI\VEN_8086&DEV_3b2c.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b2c
+%PCI\VEN_8086&DEV_3b2d.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b2d
+%PCI\VEN_8086&DEV_3b2e.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b2e
+%PCI\VEN_8086&DEV_3b2f.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_3b2f
+%PCI\VEN_8086&DEV_1c00.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c00
+%PCI\VEN_8086&DEV_1c01.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c01
+%PCI\VEN_8086&DEV_1c02.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c02
+%PCI\VEN_8086&DEV_1c03.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c03
+%PCI\VEN_8086&DEV_1c04.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c04
+%PCI\VEN_8086&DEV_1c05.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c05
+%PCI\VEN_8086&DEV_1c08.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c08
+%PCI\VEN_8086&DEV_1c09.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1c09
+%PCI\VEN_8086&DEV_1d00.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1d00
+%PCI\VEN_8086&DEV_1d02.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1d02
+%PCI\VEN_8086&DEV_1d04.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1d04
+%PCI\VEN_8086&DEV_1d06.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1d06
+%PCI\VEN_8086&DEV_2826.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2826
+%PCI\VEN_8086&DEV_1d08.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1d08
+%PCI\VEN_8086&DEV_1e00.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e00
+%PCI\VEN_8086&DEV_1e01.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e01
+%PCI\VEN_8086&DEV_1e02.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e02
+%PCI\VEN_8086&DEV_1e03.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e03
+%PCI\VEN_8086&DEV_1e04.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e04
+%PCI\VEN_8086&DEV_1e05.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e05
+%PCI\VEN_8086&DEV_1e06.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e06
+%PCI\VEN_8086&DEV_1e07.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e07
+%PCI\VEN_8086&DEV_1e08.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e08
+%PCI\VEN_8086&DEV_1e09.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e09
+%PCI\VEN_8086&DEV_1e0e.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e0e
+%PCI\VEN_8086&DEV_1e0f.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_1e0f
+%PCI\VEN_8086&DEV_8c00.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c00
+%PCI\VEN_8086&DEV_8c01.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c01
+%PCI\VEN_8086&DEV_8c02.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c02
+%PCI\VEN_8086&DEV_8c03.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c03
+%PCI\VEN_8086&DEV_8c04.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c04
+%PCI\VEN_8086&DEV_8c05.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c05
+%PCI\VEN_8086&DEV_8c06.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c06
+%PCI\VEN_8086&DEV_8c07.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c07
+%PCI\VEN_8086&DEV_8c08.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c08
+%PCI\VEN_8086&DEV_8c09.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c09
+%PCI\VEN_8086&DEV_8c0e.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c0e
+%PCI\VEN_8086&DEV_8c0f.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_8c0f
+%PCI\VEN_8086&DEV_811a.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_811a
+%PCI\VEN_8086&DEV_2323.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_2323
+%PCI\VEN_8086&DEV_23a3.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_23a3
+%PCI\VEN_8086&DEV_23a1.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_23a1
+%PCI\VEN_8086&DEV_23a6.DeviceDesc%=uniata_Inst, PCI\VEN_8086&DEV_23a6
+%PCI\VEN_197b&DEV_2360.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2360
+%PCI\VEN_197b&DEV_2361.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2361
+%PCI\VEN_197b&DEV_2362.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2362
+%PCI\VEN_197b&DEV_2363.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2363
+%PCI\VEN_197b&DEV_2365.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2365
+%PCI\VEN_197b&DEV_2366.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2366
+%PCI\VEN_197b&DEV_2368.DeviceDesc%=uniata_Inst, PCI\VEN_197b&DEV_2368
+%PCI\VEN_11ab&DEV_6101.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6101
+%PCI\VEN_11ab&DEV_6102.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6102
+%PCI\VEN_11ab&DEV_6111.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6111
+%PCI\VEN_11ab&DEV_6121.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6121
+%PCI\VEN_11ab&DEV_6141.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6141
+%PCI\VEN_11ab&DEV_6145.DeviceDesc%=uniata_Inst, PCI\VEN_11ab&DEV_6145
+%PCI\VEN_1b4b&DEV_9123.DeviceDesc%=uniata_Inst, PCI\VEN_1b4b&DEV_9123
+%PCI\VEN_10de&DEV_01bc.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_01bc
+%PCI\VEN_10de&DEV_0065.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0065
+%PCI\VEN_10de&DEV_0085.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0085
+%PCI\VEN_10de&DEV_008e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_008e
+%PCI\VEN_10de&DEV_00d5.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_00d5
+%PCI\VEN_10de&DEV_00e5.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_00e5
+%PCI\VEN_10de&DEV_00e3.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_00e3
+%PCI\VEN_10de&DEV_00ee.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_00ee
+%PCI\VEN_10de&DEV_0035.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0035
+%PCI\VEN_10de&DEV_0036.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0036
+%PCI\VEN_10de&DEV_003e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_003e
+%PCI\VEN_10de&DEV_0053.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0053
+%PCI\VEN_10de&DEV_0054.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0054
+%PCI\VEN_10de&DEV_0055.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0055
+%PCI\VEN_10de&DEV_0265.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0265
+%PCI\VEN_10de&DEV_0266.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0266
+%PCI\VEN_10de&DEV_0267.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0267
+%PCI\VEN_10de&DEV_036e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_036e
+%PCI\VEN_10de&DEV_037e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_037e
+%PCI\VEN_10de&DEV_037f.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_037f
+%PCI\VEN_10de&DEV_03ec.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_03ec
+%PCI\VEN_10de&DEV_03e7.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_03e7
+%PCI\VEN_10de&DEV_03f6.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_03f6
+%PCI\VEN_10de&DEV_03f7.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_03f7
+%PCI\VEN_10de&DEV_0448.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0448
+%PCI\VEN_10de&DEV_044c.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_044c
+%PCI\VEN_10de&DEV_044d.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_044d
+%PCI\VEN_10de&DEV_044e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_044e
+%PCI\VEN_10de&DEV_044f.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_044f
+%PCI\VEN_10de&DEV_045c.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_045c
+%PCI\VEN_10de&DEV_045d.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_045d
+%PCI\VEN_10de&DEV_045e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_045e
+%PCI\VEN_10de&DEV_045f.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_045f
+%PCI\VEN_10de&DEV_0560.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0560
+%PCI\VEN_10de&DEV_0550.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0550
+%PCI\VEN_10de&DEV_0551.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0551
+%PCI\VEN_10de&DEV_0552.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0552
+%PCI\VEN_10de&DEV_0553.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0553
+%PCI\VEN_10de&DEV_0554.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0554
+%PCI\VEN_10de&DEV_0555.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0555
+%PCI\VEN_10de&DEV_0556.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0556
+%PCI\VEN_10de&DEV_0557.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0557
+%PCI\VEN_10de&DEV_0558.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0558
+%PCI\VEN_10de&DEV_0559.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0559
+%PCI\VEN_10de&DEV_055a.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_055a
+%PCI\VEN_10de&DEV_055b.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_055b
+%PCI\VEN_10de&DEV_0584.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0584
+%PCI\VEN_10de&DEV_056c.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_056c
+%PCI\VEN_10de&DEV_07f0.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f0
+%PCI\VEN_10de&DEV_07f1.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f1
+%PCI\VEN_10de&DEV_07f2.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f2
+%PCI\VEN_10de&DEV_07f3.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f3
+%PCI\VEN_10de&DEV_07f4.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f4
+%PCI\VEN_10de&DEV_07f5.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f5
+%PCI\VEN_10de&DEV_07f6.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f6
+%PCI\VEN_10de&DEV_07f7.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f7
+%PCI\VEN_10de&DEV_07f8.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f8
+%PCI\VEN_10de&DEV_07f9.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07f9
+%PCI\VEN_10de&DEV_07fa.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07fa
+%PCI\VEN_10de&DEV_07fb.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_07fb
+%PCI\VEN_10de&DEV_0759.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0759
+%PCI\VEN_10de&DEV_0ad0.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad0
+%PCI\VEN_10de&DEV_0ad1.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad1
+%PCI\VEN_10de&DEV_0ad2.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad2
+%PCI\VEN_10de&DEV_0ad3.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad3
+%PCI\VEN_10de&DEV_0ad4.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad4
+%PCI\VEN_10de&DEV_0ad5.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad5
+%PCI\VEN_10de&DEV_0ad6.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad6
+%PCI\VEN_10de&DEV_0ad7.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad7
+%PCI\VEN_10de&DEV_0ad8.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad8
+%PCI\VEN_10de&DEV_0ad9.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ad9
+%PCI\VEN_10de&DEV_0ada.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ada
+%PCI\VEN_10de&DEV_0adb.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0adb
+%PCI\VEN_10de&DEV_0ab4.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab4
+%PCI\VEN_10de&DEV_0ab5.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab5
+%PCI\VEN_10de&DEV_0ab6.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab6
+%PCI\VEN_10de&DEV_0ab7.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab7
+%PCI\VEN_10de&DEV_0ab8.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab8
+%PCI\VEN_10de&DEV_0ab9.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0ab9
+%PCI\VEN_10de&DEV_0aba.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0aba
+%PCI\VEN_10de&DEV_0abb.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0abb
+%PCI\VEN_10de&DEV_0abc.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0abc
+%PCI\VEN_10de&DEV_0abd.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0abd
+%PCI\VEN_10de&DEV_0abe.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0abe
+%PCI\VEN_10de&DEV_0abf.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0abf
+%PCI\VEN_10de&DEV_0d84.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d84
+%PCI\VEN_10de&DEV_0d85.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d85
+%PCI\VEN_10de&DEV_0d86.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d86
+%PCI\VEN_10de&DEV_0d87.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d87
+%PCI\VEN_10de&DEV_0d88.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d88
+%PCI\VEN_10de&DEV_0d89.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d89
+%PCI\VEN_10de&DEV_0d8a.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8a
+%PCI\VEN_10de&DEV_0d8b.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8b
+%PCI\VEN_10de&DEV_0d8c.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8c
+%PCI\VEN_10de&DEV_0d8d.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8d
+%PCI\VEN_10de&DEV_0d8e.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8e
+%PCI\VEN_10de&DEV_0d8f.DeviceDesc%=uniata_Inst, PCI\VEN_10de&DEV_0d8f
+%PCI\VEN_100b&DEV_0502.DeviceDesc%=uniata_Inst, PCI\VEN_100b&DEV_0502
+%PCI\VEN_100b&DEV_002d.DeviceDesc%=uniata_Inst, PCI\VEN_100b&DEV_002d
+%PCI\VEN_105a&DEV_4d33.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_4d33
+%PCI\VEN_105a&DEV_4d38.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_4d38
+;%PCI\VEN_105a&DEV_0d38.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_0d38
+;%PCI\VEN_105a&DEV_0d30.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_0d30
+;%PCI\VEN_105a&DEV_4d30.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_4d30
+;%PCI\VEN_105a&DEV_4d68.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_4d68
+;%PCI\VEN_105a&DEV_4d69.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_4d69
+;%PCI\VEN_105a&DEV_6268.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6268
+;%PCI\VEN_105a&DEV_6269.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6269
+;%PCI\VEN_105a&DEV_1275.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_1275
+;%PCI\VEN_105a&DEV_5275.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_5275
+;%PCI\VEN_105a&DEV_7275.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_7275
+;%PCI\VEN_105a&DEV_3318.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3318
+;%PCI\VEN_105a&DEV_3319.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3319
+;%PCI\VEN_105a&DEV_3371.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3371
+;%PCI\VEN_105a&DEV_3375.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3375
+;%PCI\VEN_105a&DEV_3376.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3376
+;%PCI\VEN_105a&DEV_3377.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3377
+;%PCI\VEN_105a&DEV_3373.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3373
+;%PCI\VEN_105a&DEV_3372.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3372
+;%PCI\VEN_105a&DEV_3571.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3571
+;%PCI\VEN_105a&DEV_3d75.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3d75
+;%PCI\VEN_105a&DEV_3574.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3574
+;%PCI\VEN_105a&DEV_3570.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3570
+;%PCI\VEN_105a&DEV_3d73.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3d73
+;%PCI\VEN_105a&DEV_6617.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6617
+;%PCI\VEN_105a&DEV_6626.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6626
+;%PCI\VEN_105a&DEV_6629.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6629
+;%PCI\VEN_105a&DEV_6620.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_6620
+;%PCI\VEN_105a&DEV_3571.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3571
+;%PCI\VEN_105a&DEV_3d75.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3d75
+;%PCI\VEN_105a&DEV_3574.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3574
+;%PCI\VEN_105a&DEV_3570.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3570
+;%PCI\VEN_105a&DEV_3d73.DeviceDesc%=uniata_Inst, PCI\VEN_105a&DEV_3d73
+%PCI\VEN_1166&DEV_0211.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0211
+%PCI\VEN_1166&DEV_0212&REV_92.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0212&REV_92
+%PCI\VEN_1166&DEV_0212.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0212
+%PCI\VEN_1166&DEV_0213.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0213
+%PCI\VEN_1166&DEV_0217.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0217
+%PCI\VEN_1166&DEV_0214.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0214
+%PCI\VEN_1166&DEV_024b.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_024b
+%PCI\VEN_1166&DEV_024a.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_024a
+%PCI\VEN_1166&DEV_0240.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0240
+%PCI\VEN_1166&DEV_0241.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0241
+%PCI\VEN_1166&DEV_0242.DeviceDesc%=uniata_Inst, PCI\VEN_1166&DEV_0242
+%PCI\VEN_1095&DEV_3114.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_3114
+%PCI\VEN_1095&DEV_3512&REV_02.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_3512&REV_02
+%PCI\VEN_1095&DEV_3112&REV_02.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_3112&REV_02
+%PCI\VEN_1095&DEV_0240&REV_02.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0240&REV_02
+%PCI\VEN_1095&DEV_3512.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_3512
+%PCI\VEN_1095&DEV_3112.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_3112
+%PCI\VEN_1095&DEV_0240.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0240
+%PCI\VEN_1095&DEV_0680.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0680
+%PCI\VEN_1095&DEV_0649.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0649
+%PCI\VEN_1095&DEV_0648.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0648
+%PCI\VEN_1095&DEV_0646&REV_07.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0646&REV_07
+%PCI\VEN_1095&DEV_0646.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0646
+%PCI\VEN_1095&DEV_0640.DeviceDesc%=uniata_Inst, PCI\VEN_1095&DEV_0640
+%PCI\VEN_1039&DEV_5513&REV_c2.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_5513&REV_c2
+%PCI\VEN_1039&DEV_5513.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_5513
+%PCI\VEN_1039&DEV_5518.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_5518
+%PCI\VEN_1039&DEV_0601.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_0601
+%PCI\VEN_1039&DEV_1183.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_1183
+%PCI\VEN_1039&DEV_1182.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_1182
+%PCI\VEN_1039&DEV_0183.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_0183
+%PCI\VEN_1039&DEV_0182.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_0182
+%PCI\VEN_1039&DEV_0181.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_0181
+%PCI\VEN_1039&DEV_0180.DeviceDesc%=uniata_Inst, PCI\VEN_1039&DEV_0180
+%PCI\VEN_1106&DEV_0571.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_0571
+%PCI\VEN_1106&DEV_0581.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_0581
+%PCI\VEN_1106&DEV_5324.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_5324
+%PCI\VEN_1106&DEV_3164.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_3164
+%PCI\VEN_1106&DEV_3149.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_3149
+%PCI\VEN_1106&DEV_3249.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_3249
+%PCI\VEN_1106&DEV_0591.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_0591
+%PCI\VEN_1106&DEV_5337.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_5337
+%PCI\VEN_1106&DEV_5372.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_5372
+%PCI\VEN_1106&DEV_7372.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_7372
+%PCI\VEN_1106&DEV_3349.DeviceDesc%=uniata_Inst, PCI\VEN_1106&DEV_3349
+%PCI\VEN_1080&DEV_c693.DeviceDesc%=uniata_Inst, PCI\VEN_1080&DEV_c693
+%PCI\VEN_16ca&DEV_0001.DeviceDesc%=uniata_Inst, PCI\VEN_16ca&DEV_0001
+%PCI\VEN_1078&DEV_0000.DeviceDesc%=uniata_Inst, PCI\VEN_1078&DEV_0000
+%PCI\VEN_1078&DEV_0002.DeviceDesc%=uniata_Inst, PCI\VEN_1078&DEV_0002
+%PCI\VEN_1078&DEV_0102.DeviceDesc%=uniata_Inst, PCI\VEN_1078&DEV_0102
+%PCI\VEN_1042&DEV_1000.DeviceDesc%=uniata_Inst, PCI\VEN_1042&DEV_1000
+%PCI\VEN_1042&DEV_1001.DeviceDesc%=uniata_Inst, PCI\VEN_1042&DEV_1001
+%PCI\VEN_1283&DEV_8172.DeviceDesc%=uniata_Inst, PCI\VEN_1283&DEV_8172
+%PCI\VEN_1283&DEV_8213.DeviceDesc%=uniata_Inst, PCI\VEN_1283&DEV_8213
+%PCI\VEN_1283&DEV_8212.DeviceDesc%=uniata_Inst, PCI\VEN_1283&DEV_8212
+%PCI\VEN_1283&DEV_8211.DeviceDesc%=uniata_Inst, PCI\VEN_1283&DEV_8211
+%PCI\VEN_169c&DEV_0044.DeviceDesc%=uniata_Inst, PCI\VEN_169c&DEV_0044
+%PCI\VEN_3388&DEV_8013.DeviceDesc%=uniata_Inst, PCI\VEN_3388&DEV_8013
+;%PCI\VEN_ffff&DEV_ffff&REV_ff.DeviceDesc%=uniata_Inst, PCI\VEN_ffff&DEV_ffff&REV_ff
+;Compatible adapters
+;DEVLIST
+%PCI\CC_0101.DeviceDesc% = uniata_Inst,,PCI\CC_0101                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0104.DeviceDesc% = uniata_Inst,,PCI\CC_0104                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0105.DeviceDesc% = uniata_Inst,,PCI\CC_0105                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0106.DeviceDesc% = uniata_Inst,,PCI\CC_0106                             ; Device ID for generic Dual PCI IDE  (UNKNOWN_PCI_IDE)
+%PCI\CC_0106&PROGIF_01.DeviceDesc% = uniata_Inst,,PCI\CC_0106&PROGIF_01         ; AHCI
+%*PNP0600.PriDeviceDesc% = uniata_Inst, Primary_IDE_Channel
+%*PNP0600.SecDeviceDesc% = uniata_Inst, Secondary_IDE_Channel
+%*PNP0600.DeviceDesc%    = uniata_Inst, *PNP0600                                ; Generic_ESDI_Hard_Disk_Controller   (BAD_IDE)
+%UniATA_Name% = uniata_Inst, ATA_controller
+
+;
+; General installation section
+;
+
+[DISABLE_PCIIDE]
+HKLM, system\currentcontrolset\services\pciide, "Start", %REG_DWORD%, 0x00000004
+HKLM, system\currentcontrolset\services\pciidex, "Start", %REG_DWORD%, 0x00000004
+;HKLM, system\currentcontrolset\control\CriticalDeviceDatabase\pci#CC_0101, "Service", %REG_SZ%, "uniata"
+;HKLM, system\currentcontrolset\control\CriticalDeviceDatabase\primary_ide_channel, "Service", %REG_SZ%, "uniata"
+;HKLM, system\currentcontrolset\control\CriticalDeviceDatabase\secondary_ide_channel, "Service", %REG_SZ%, "uniata"
+;HKLM, system\currentcontrolset\services\atapi, "Start", %REG_DWORD%, 0x00000004
+
+[uniata_Inst]
+AddReg = DISABLE_PCIIDE
+CopyFiles = uniata_Inst.Miniport,Sys32DestDir
+
+;
+; File sections
+;
+
+[uniata_Inst.Miniport]
+uniata.sys
+
+[Sys32DestDir]
+atactl.exe
+
+
+;
+; Service Installation
+;
+
+[uniata_Inst.Services]
+AddService = UniATA, %SPSVCINST_ASSOCSERVICE%, uniata_Service_Inst
+
+[uniata_Service_Inst]
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_BOOT_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+LoadOrderGroup = System Bus Extender
+ServiceBinary  = %12%\uniata.sys
+AddReg         = uniata_EventLog_AddReg
+
+[uniata_Inst.PosDup]            ;; BUGBUG: What does this do?
+*PNP0600
+
+;[uniata_PNP_Inst_AddReg]
+;HKR, "Parameters\PnpInterface", "1", 0x00010001, 0x00000001
+;HKR, "Parameters\PnpInterface", "5", 0x00010001, 0x00000001
+
+[uniata_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,%11%%IOLOGMSGDLL%
+HKR,,TypesSupported,%REG_DWORD%,7
+
+
+[Strings]
+;Well-known adapters
+PCI\VEN_1191&DEV_0005.DeviceDesc="Acard ATP850 ATA-33 controller (SCSI)"
+PCI\VEN_1191&DEV_0006.DeviceDesc="Acard ATP860A ATA-66 controller (SCSI)"
+PCI\VEN_1191&DEV_0007.DeviceDesc="Acard ATP860R ATA-66 controller (SCSI)"
+PCI\VEN_1191&DEV_0008.DeviceDesc="Acard ATP865A ATA-133 controller (SCSI)"
+PCI\VEN_1191&DEV_0009.DeviceDesc="Acard ATP865R ATA-133 controller (SCSI)"
+PCI\VEN_10b9&DEV_5289.DeviceDesc="ALI M5289 SATA controller (SCSI)"
+PCI\VEN_10b9&DEV_5288.DeviceDesc="ALI M5288 SATA2 controller (SCSI)"
+PCI\VEN_10b9&DEV_5287.DeviceDesc="ALI M5287 SATA controller (SCSI)"
+PCI\VEN_10b9&DEV_5281.DeviceDesc="ALI M5281 SATA controller (SCSI)"
+PCI\VEN_10b9&DEV_5228&REV_c5.DeviceDesc="ALI M5228 UDMA6 ATA-133 controller (SCSI)"
+PCI\VEN_10b9&DEV_5229&REV_c5.DeviceDesc="ALI M5229 UDMA6 ATA-133 controller (SCSI)"
+PCI\VEN_10b9&DEV_5229&REV_c4.DeviceDesc="ALI M5229 UDMA5 ATA-100 controller (SCSI)"
+PCI\VEN_10b9&DEV_5229&REV_c2.DeviceDesc="ALI M5229 UDMA4 ATA-66 controller (SCSI)"
+PCI\VEN_10b9&DEV_5229&REV_20.DeviceDesc="ALI M5229 UDMA2 ATA-33 controller (SCSI)"
+PCI\VEN_10b9&DEV_5229.DeviceDesc="ALI M5229 WDMA2 IDE DMA controller (SCSI)"
+PCI\VEN_1022&DEV_7401.DeviceDesc="AMD 755 ATA-33 controller (SCSI)"
+PCI\VEN_1022&DEV_7409.DeviceDesc="AMD 756 ATA-66 controller (SCSI)"
+PCI\VEN_1022&DEV_7411.DeviceDesc="AMD 766 ATA-100 controller (SCSI)"
+PCI\VEN_1022&DEV_7441.DeviceDesc="AMD 768 ATA-100 controller (SCSI)"
+PCI\VEN_1022&DEV_7469.DeviceDesc="AMD 8111 ATA-133 controller (SCSI)"
+PCI\VEN_1022&DEV_208f.DeviceDesc="AMD CS5535 ATA-66 controller (SCSI)"
+PCI\VEN_1022&DEV_209a.DeviceDesc="AMD CS5536 ATA-100 controller (SCSI)"
+PCI\VEN_1002&DEV_4349.DeviceDesc="ATI IXP200 ATA-100 controller (SCSI)"
+PCI\VEN_1002&DEV_4369.DeviceDesc="ATI IXP300 ATA-133 controller (SCSI)"
+PCI\VEN_1002&DEV_4376.DeviceDesc="ATI IXP400 ATA-133 controller (SCSI)"
+PCI\VEN_1002&DEV_436e.DeviceDesc="ATI IXP300 SATA controller (SCSI)"
+PCI\VEN_1002&DEV_4379.DeviceDesc="ATI IXP400 SATA controller (SCSI)"
+PCI\VEN_1002&DEV_437a.DeviceDesc="ATI IXP400 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_438c.DeviceDesc="ATI IXP600 ATA-133 controller (SCSI)"
+PCI\VEN_1002&DEV_4380.DeviceDesc="ATI IXP600 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_439c.DeviceDesc="ATI IXP700 ATA-133 controller (SCSI)"
+PCI\VEN_1002&DEV_4390.DeviceDesc="ATI IXP700 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_4391.DeviceDesc="ATI IXP700 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_4392.DeviceDesc="ATI IXP700 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_4393.DeviceDesc="ATI IXP700 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_4394.DeviceDesc="ATI IXP700/800 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_4395.DeviceDesc="ATI IXP700/800 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_780c.DeviceDesc="ATI Hudson-2 ATA-133 controller (SCSI)"
+PCI\VEN_1002&DEV_7800.DeviceDesc="ATI Hudson-2 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_7801.DeviceDesc="ATI Hudson-2 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_7802.DeviceDesc="ATI Hudson-2 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_7803.DeviceDesc="ATI Hudson-2 SATA2 controller (SCSI)"
+PCI\VEN_1002&DEV_7804.DeviceDesc="ATI Hudson-2 SATA2 controller (SCSI)"
+;PCI\VEN_1103&DEV_0004&REV_05.DeviceDesc="HighPoint HPT372 ATA-133 controller (SCSI)"
+;PCI\VEN_1103&DEV_0004&REV_03.DeviceDesc="HighPoint HPT370 ATA-100 controller (SCSI)"
+;PCI\VEN_1103&DEV_0004&REV_02.DeviceDesc="HighPoint HPT368 ATA-66 controller (SCSI)"
+;PCI\VEN_1103&DEV_0004.DeviceDesc="HighPoint HPT366 ATA-66 controller (SCSI)"
+;PCI\VEN_1103&DEV_0005&REV_01.DeviceDesc="HighPoint HPT372 ATA-133 controller (SCSI)"
+;PCI\VEN_1103&DEV_0005.DeviceDesc="HighPoint HPT372 ATA-66 controller (SCSI)"
+;PCI\VEN_1103&DEV_0006&REV_01.DeviceDesc="HighPoint HPT302 ATA-133 controller (SCSI)"
+;PCI\VEN_1103&DEV_0007&REV_01.DeviceDesc="HighPoint HPT371 ATA-133 controller (SCSI)"
+;PCI\VEN_1103&DEV_0008&REV_07.DeviceDesc="HighPoint HPT374 ATA-133 controller (SCSI)"
+PCI\VEN_8086&DEV_1230.DeviceDesc="Intel PIIX IDE DMA controller (SCSI)"
+PCI\VEN_8086&DEV_7010.DeviceDesc="Intel PIIX3 IDE DMA controller (SCSI)"
+PCI\VEN_8086&DEV_7111.DeviceDesc="Intel PIIX3 ATA-33 controller (SCSI)"
+PCI\VEN_8086&DEV_7199.DeviceDesc="Intel PIIX4 ATA-33 controller (SCSI)"
+PCI\VEN_8086&DEV_84ca.DeviceDesc="Intel PIIX4 ATA-33 controller (SCSI)"
+PCI\VEN_8086&DEV_7601.DeviceDesc="Intel ICH0 ATA-33 controller (SCSI)"
+PCI\VEN_8086&DEV_2421.DeviceDesc="Intel ICH ATA-66 controller (SCSI)"
+PCI\VEN_8086&DEV_2411.DeviceDesc="Intel ICH ATA-66 controller (SCSI)"
+PCI\VEN_8086&DEV_244a.DeviceDesc="Intel ICH2 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_244b.DeviceDesc="Intel ICH2 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_248a.DeviceDesc="Intel ICH3 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_248b.DeviceDesc="Intel ICH3 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_24cb.DeviceDesc="Intel ICH4 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_24ca.DeviceDesc="Intel ICH4 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_24db.DeviceDesc="Intel ICH5 EB ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_24d1.DeviceDesc="Intel ICH5 EB1 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_24df.DeviceDesc="Intel ICH5 EB2 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_25a2.DeviceDesc="Intel 6300ESB ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_25a3.DeviceDesc="Intel 6300ESB1 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_25b0.DeviceDesc="Intel 6300ESB2 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_266f.DeviceDesc="Intel ICH6 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_2651.DeviceDesc="Intel ICH6 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_2652.DeviceDesc="Intel ICH6 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_2653.DeviceDesc="Intel ICH6M SATA controller (SCSI)"
+PCI\VEN_8086&DEV_27df.DeviceDesc="Intel ICH7 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_27c0.DeviceDesc="Intel ICH7 S1 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_27c1.DeviceDesc="Intel ICH7 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_27c3.DeviceDesc="Intel ICH7 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_27c4.DeviceDesc="Intel ICH7M R1 SATA controller (SCSI)"
+PCI\VEN_8086&DEV_27c5.DeviceDesc="Intel ICH7M SATA controller (SCSI)"
+PCI\VEN_8086&DEV_27c6.DeviceDesc="Intel ICH7M SATA controller (SCSI)"
+PCI\VEN_8086&DEV_269e.DeviceDesc="Intel 63XXESB2 ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_2680.DeviceDesc="Intel 63XXESB2 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2681.DeviceDesc="Intel 63XXESB2 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2682.DeviceDesc="Intel 63XXESB2 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2683.DeviceDesc="Intel 63XXESB2 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2820.DeviceDesc="Intel ICH8 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2821.DeviceDesc="Intel ICH8 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2822.DeviceDesc="Intel ICH8 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2824.DeviceDesc="Intel ICH8 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2825.DeviceDesc="Intel ICH8 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2828.DeviceDesc="Intel ICH8M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2829.DeviceDesc="Intel ICH8M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_282a.DeviceDesc="Intel ICH8M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2850.DeviceDesc="Intel ICH8M ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_2920.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2926.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2921.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2922.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2923.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2925.DeviceDesc="Intel ICH9 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2928.DeviceDesc="Intel ICH9M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2929.DeviceDesc="Intel ICH9M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_292a.DeviceDesc="Intel ICH9M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_292d.DeviceDesc="Intel ICH9M SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a20.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a26.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a22.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a25.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a00.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a06.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a02.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3a05.DeviceDesc="Intel ICH10 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b20.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b21.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b22.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b23.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b25.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b26.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b28.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b29.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b2c.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b2d.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b2e.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_3b2f.DeviceDesc="Intel 5 Series/3400 SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c00.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c01.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c02.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c03.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c04.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c05.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c08.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1c09.DeviceDesc="Intel Cougar Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1d00.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1d02.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1d04.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1d06.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_2826.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1d08.DeviceDesc="Intel Patsburg SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e00.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e01.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e02.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e03.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e04.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e05.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e06.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e07.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e08.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e09.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e0e.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_1e0f.DeviceDesc="Intel Panther Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c00.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c01.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c02.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c03.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c04.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c05.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c06.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c07.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c08.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c09.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c0e.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_8c0f.DeviceDesc="Intel Lynx Point SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_811a.DeviceDesc="Intel SCH ATA-100 controller (SCSI)"
+PCI\VEN_8086&DEV_2323.DeviceDesc="Intel DH98xxCC SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_23a3.DeviceDesc="COLETOCRK SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_23a1.DeviceDesc="COLETOCRK SATA2 controller (SCSI)"
+PCI\VEN_8086&DEV_23a6.DeviceDesc="COLETOCRK SATA2 controller (SCSI)"
+PCI\VEN_197b&DEV_2360.DeviceDesc="JMB360 SATA2 controller (SCSI)"
+PCI\VEN_197b&DEV_2361.DeviceDesc="JMB361 ATA-133 controller (SCSI)"
+PCI\VEN_197b&DEV_2362.DeviceDesc="JMB362 SATA2 controller (SCSI)"
+PCI\VEN_197b&DEV_2363.DeviceDesc="JMB363 ATA-133 controller (SCSI)"
+PCI\VEN_197b&DEV_2365.DeviceDesc="JMB365 ATA-133 controller (SCSI)"
+PCI\VEN_197b&DEV_2366.DeviceDesc="JMB366 ATA-133 controller (SCSI)"
+PCI\VEN_197b&DEV_2368.DeviceDesc="JMB368 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6101.DeviceDesc="Marvell 88SX6101 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6102.DeviceDesc="Marvell 88SX6102 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6111.DeviceDesc="Marvell 88SX6111 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6121.DeviceDesc="Marvell 88SX6121 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6141.DeviceDesc="Marvell 88SX6141 ATA-133 controller (SCSI)"
+PCI\VEN_11ab&DEV_6145.DeviceDesc="Marvell 88SX6145 ATA-133 controller (SCSI)"
+PCI\VEN_1b4b&DEV_9123.DeviceDesc="Marvell 88SX9123 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_01bc.DeviceDesc="nVidia nForce ATA-100 controller (SCSI)"
+PCI\VEN_10de&DEV_0065.DeviceDesc="nVidia nForce2 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0085.DeviceDesc="nVidia nForce2 Pro ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_008e.DeviceDesc="nVidia nForce2 Pro S1 SATA controller (SCSI)"
+PCI\VEN_10de&DEV_00d5.DeviceDesc="nVidia nForce3 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_00e5.DeviceDesc="nVidia nForce3 Pro ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_00e3.DeviceDesc="nVidia nForce3 Pro S1 SATA controller (SCSI)"
+PCI\VEN_10de&DEV_00ee.DeviceDesc="nVidia nForce3 Pro S2 SATA controller (SCSI)"
+PCI\VEN_10de&DEV_0035.DeviceDesc="nVidia nForce MCP ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0036.DeviceDesc="nVidia nForce MCP S1 SATA controller (SCSI)"
+PCI\VEN_10de&DEV_003e.DeviceDesc="nVidia nForce MCP S2 SATA controller (SCSI)"
+PCI\VEN_10de&DEV_0053.DeviceDesc="nVidia nForce CK804 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0054.DeviceDesc="nVidia nForce CK804 S1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0055.DeviceDesc="nVidia nForce CK804 S2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0265.DeviceDesc="nVidia nForce MCP51 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0266.DeviceDesc="nVidia nForce MCP51 S1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0267.DeviceDesc="nVidia nForce MCP51 S2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_036e.DeviceDesc="nVidia nForce MCP55 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_037e.DeviceDesc="nVidia nForce MCP55 S1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_037f.DeviceDesc="nVidia nForce MCP55 S2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_03ec.DeviceDesc="nVidia nForce MCP61 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_03e7.DeviceDesc="nVidia nForce MCP61 S1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_03f6.DeviceDesc="nVidia nForce MCP61 S2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_03f7.DeviceDesc="nVidia nForce MCP61 S3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0448.DeviceDesc="nVidia nForce MCP65 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_044c.DeviceDesc="nVidia nForce MCP65 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_044d.DeviceDesc="nVidia nForce MCP65 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_044e.DeviceDesc="nVidia nForce MCP65 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_044f.DeviceDesc="nVidia nForce MCP65 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_045c.DeviceDesc="nVidia nForce MCP65 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_045d.DeviceDesc="nVidia nForce MCP65 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_045e.DeviceDesc="nVidia nForce MCP65 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_045f.DeviceDesc="nVidia nForce MCP65 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0560.DeviceDesc="nVidia nForce MCP67 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0550.DeviceDesc="nVidia nForce MCP67 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0551.DeviceDesc="nVidia nForce MCP67 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0552.DeviceDesc="nVidia nForce MCP67 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0553.DeviceDesc="nVidia nForce MCP67 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0554.DeviceDesc="nVidia nForce MCP67 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0555.DeviceDesc="nVidia nForce MCP67 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0556.DeviceDesc="nVidia nForce MCP67 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0557.DeviceDesc="nVidia nForce MCP67 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0558.DeviceDesc="nVidia nForce MCP67 A8 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0559.DeviceDesc="nVidia nForce MCP67 A9 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_055a.DeviceDesc="nVidia nForce MCP67 AA SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_055b.DeviceDesc="nVidia nForce MCP67 AB SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0584.DeviceDesc="nVidia nForce MCP67 AC SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_056c.DeviceDesc="nVidia nForce MCP73 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_07f0.DeviceDesc="nVidia nForce MCP73 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f1.DeviceDesc="nVidia nForce MCP73 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f2.DeviceDesc="nVidia nForce MCP73 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f3.DeviceDesc="nVidia nForce MCP73 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f4.DeviceDesc="nVidia nForce MCP73 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f5.DeviceDesc="nVidia nForce MCP73 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f6.DeviceDesc="nVidia nForce MCP73 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f7.DeviceDesc="nVidia nForce MCP73 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f8.DeviceDesc="nVidia nForce MCP73 A8 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07f9.DeviceDesc="nVidia nForce MCP73 A9 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07fa.DeviceDesc="nVidia nForce MCP73 AA SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_07fb.DeviceDesc="nVidia nForce MCP73 AB SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0759.DeviceDesc="nVidia nForce MCP77 ATA-133 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad0.DeviceDesc="nVidia nForce MCP77 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad1.DeviceDesc="nVidia nForce MCP77 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad2.DeviceDesc="nVidia nForce MCP77 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad3.DeviceDesc="nVidia nForce MCP77 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad4.DeviceDesc="nVidia nForce MCP77 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad5.DeviceDesc="nVidia nForce MCP77 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad6.DeviceDesc="nVidia nForce MCP77 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad7.DeviceDesc="nVidia nForce MCP77 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad8.DeviceDesc="nVidia nForce MCP77 A8 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ad9.DeviceDesc="nVidia nForce MCP77 A9 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ada.DeviceDesc="nVidia nForce MCP77 AA SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0adb.DeviceDesc="nVidia nForce MCP77 AB SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab4.DeviceDesc="nVidia nForce MCP79 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab5.DeviceDesc="nVidia nForce MCP79 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab6.DeviceDesc="nVidia nForce MCP79 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab7.DeviceDesc="nVidia nForce MCP79 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab8.DeviceDesc="nVidia nForce MCP79 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0ab9.DeviceDesc="nVidia nForce MCP79 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0aba.DeviceDesc="nVidia nForce MCP79 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0abb.DeviceDesc="nVidia nForce MCP79 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0abc.DeviceDesc="nVidia nForce MCP79 A8 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0abd.DeviceDesc="nVidia nForce MCP79 A9 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0abe.DeviceDesc="nVidia nForce MCP79 AA SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0abf.DeviceDesc="nVidia nForce MCP79 AB SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d84.DeviceDesc="nVidia nForce MCP89 A0 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d85.DeviceDesc="nVidia nForce MCP89 A1 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d86.DeviceDesc="nVidia nForce MCP89 A2 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d87.DeviceDesc="nVidia nForce MCP89 A3 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d88.DeviceDesc="nVidia nForce MCP89 A4 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d89.DeviceDesc="nVidia nForce MCP89 A5 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8a.DeviceDesc="nVidia nForce MCP89 A6 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8b.DeviceDesc="nVidia nForce MCP89 A7 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8c.DeviceDesc="nVidia nForce MCP89 A8 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8d.DeviceDesc="nVidia nForce MCP89 A9 SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8e.DeviceDesc="nVidia nForce MCP89 AA SATA2 controller (SCSI)"
+PCI\VEN_10de&DEV_0d8f.DeviceDesc="nVidia nForce MCP89 AB SATA2 controller (SCSI)"
+PCI\VEN_100b&DEV_0502.DeviceDesc="National Geode SC1100 ATA-33 controller (SCSI)"
+PCI\VEN_100b&DEV_002d.DeviceDesc="National Geode CS5535 ATA-66 controller (SCSI)"
+PCI\VEN_105a&DEV_4d33.DeviceDesc="Promise PDC20246 ATA-33 controller (SCSI)"
+PCI\VEN_105a&DEV_4d38.DeviceDesc="Promise PDC20262 ATA-66 controller (SCSI)"
+;PCI\VEN_105a&DEV_0d38.DeviceDesc="Promise PDC20263 ATA-66 controller (SCSI)"
+;PCI\VEN_105a&DEV_0d30.DeviceDesc="Promise PDC20265 ATA-100 controller (SCSI)"
+;PCI\VEN_105a&DEV_4d30.DeviceDesc="Promise PDC20267 ATA-100 controller (SCSI)"
+;PCI\VEN_105a&DEV_4d68.DeviceDesc="Promise PDC20268 ATA-100 controller (SCSI)"
+;PCI\VEN_105a&DEV_4d69.DeviceDesc="Promise PDC20269 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_6268.DeviceDesc="Promise PDC20270 ATA-100 controller (SCSI)"
+;PCI\VEN_105a&DEV_6269.DeviceDesc="Promise PDC20271 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_1275.DeviceDesc="Promise PDC20275 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_5275.DeviceDesc="Promise PDC20276 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_7275.DeviceDesc="Promise PDC20277 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_3318.DeviceDesc="Promise PDC20318 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3319.DeviceDesc="Promise PDC20319 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3371.DeviceDesc="Promise PDC20371 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3375.DeviceDesc="Promise PDC20375 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3376.DeviceDesc="Promise PDC20376 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3377.DeviceDesc="Promise PDC20377 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3373.DeviceDesc="Promise PDC20378 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3372.DeviceDesc="Promise PDC20379 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3571.DeviceDesc="Promise PDC20571 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3d75.DeviceDesc="Promise PDC20575 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3574.DeviceDesc="Promise PDC20579 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3570.DeviceDesc="Promise PDC20771 SATA2 controller (SCSI)"
+;PCI\VEN_105a&DEV_3d73.DeviceDesc="Promise PDC40775 SATA2 controller (SCSI)"
+;PCI\VEN_105a&DEV_6617.DeviceDesc="Promise PDC20617 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_6626.DeviceDesc="Promise PDC20618 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_6629.DeviceDesc="Promise PDC20619 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_6620.DeviceDesc="Promise PDC20620 ATA-133 controller (SCSI)"
+;PCI\VEN_105a&DEV_3571.DeviceDesc="Promise PDC40518 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3d75.DeviceDesc="Promise PDC40519 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3574.DeviceDesc="Promise PDC40718 SATA controller (SCSI)"
+;PCI\VEN_105a&DEV_3570.DeviceDesc="Promise PDC40719 SATA2 controller (SCSI)"
+;PCI\VEN_105a&DEV_3d73.DeviceDesc="Promise PDC40779 SATA2 controller (SCSI)"
+PCI\VEN_1166&DEV_0211.DeviceDesc="ServerWorks ROSB4 ATA-33 controller (SCSI)"
+PCI\VEN_1166&DEV_0212&REV_92.DeviceDesc="ServerWorks CSB5 ATA-100 controller (SCSI)"
+PCI\VEN_1166&DEV_0212.DeviceDesc="ServerWorks CSB5 ATA-66 controller (SCSI)"
+PCI\VEN_1166&DEV_0213.DeviceDesc="ServerWorks CSB6 ATA-100 controller (SCSI)"
+PCI\VEN_1166&DEV_0217.DeviceDesc="ServerWorks CSB6 ATA-66 controller (SCSI)"
+PCI\VEN_1166&DEV_0214.DeviceDesc="ServerWorks HT1000 ATA-100 controller (SCSI)"
+PCI\VEN_1166&DEV_024b.DeviceDesc="ServerWorks HT1000 SATA controller (SCSI)"
+PCI\VEN_1166&DEV_024a.DeviceDesc="ServerWorks HT1000 SATA controller (SCSI)"
+PCI\VEN_1166&DEV_0240.DeviceDesc="ServerWorks K2 SATA controller (SCSI)"
+PCI\VEN_1166&DEV_0241.DeviceDesc="ServerWorks Frodo4 SATA controller (SCSI)"
+PCI\VEN_1166&DEV_0242.DeviceDesc="ServerWorks Frodo8 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_3114.DeviceDesc="SiI 3114 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_3512&REV_02.DeviceDesc="SiI 3512 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_3112&REV_02.DeviceDesc="SiI 3112 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_0240&REV_02.DeviceDesc="SiI 3112 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_3512.DeviceDesc="SiI 3512 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_3112.DeviceDesc="SiI 3112 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_0240.DeviceDesc="SiI 3112 SATA controller (SCSI)"
+PCI\VEN_1095&DEV_0680.DeviceDesc="SiI 0680 ATA-133 controller (SCSI)"
+PCI\VEN_1095&DEV_0649.DeviceDesc="CMD 649 ATA-100 controller (SCSI)"
+PCI\VEN_1095&DEV_0648.DeviceDesc="CMD 648 ATA-66 controller (SCSI)"
+PCI\VEN_1095&DEV_0646&REV_07.DeviceDesc="CMD 646U2 ATA-33 controller (SCSI)"
+PCI\VEN_1095&DEV_0646.DeviceDesc="CMD 646 IDE DMA controller (SCSI)"
+PCI\VEN_1095&DEV_0640.DeviceDesc="CMD 640 IDE controller (SCSI)"
+PCI\VEN_1039&DEV_5513&REV_c2.DeviceDesc="SiS ATA-xxx  controller (SCSI)"
+PCI\VEN_1039&DEV_5513.DeviceDesc="SiS ATA-xxx  controller (SCSI)"
+PCI\VEN_1039&DEV_5518.DeviceDesc="SiS 962/3  controller (SCSI)"
+PCI\VEN_1039&DEV_0601.DeviceDesc="SiS ATA-xxx  controller (SCSI)"
+PCI\VEN_1039&DEV_1183.DeviceDesc="SiS 1183 SATA  controller (SCSI)"
+PCI\VEN_1039&DEV_1182.DeviceDesc="SiS 1182  controller (SCSI)"
+PCI\VEN_1039&DEV_0183.DeviceDesc="SiS 183 RAID  controller (SCSI)"
+PCI\VEN_1039&DEV_0182.DeviceDesc="SiS SATA 182  controller (SCSI)"
+PCI\VEN_1039&DEV_0181.DeviceDesc="SiS SATA 181  controller (SCSI)"
+PCI\VEN_1039&DEV_0180.DeviceDesc="SiS SATA 180  controller (SCSI)"
+PCI\VEN_1106&DEV_0571.DeviceDesc="VIA ATA-xxx  controller (SCSI)"
+PCI\VEN_1106&DEV_0581.DeviceDesc="VIA UATA-xxx  controller (SCSI)"
+PCI\VEN_1106&DEV_5324.DeviceDesc="VIA SATA-xxx  controller (SCSI)"
+PCI\VEN_1106&DEV_3164.DeviceDesc="VIA 6410  controller (SCSI)"
+PCI\VEN_1106&DEV_3149.DeviceDesc="VIA 6420  controller (SCSI)"
+PCI\VEN_1106&DEV_3249.DeviceDesc="VIA 6421  controller (SCSI)"
+PCI\VEN_1106&DEV_0591.DeviceDesc="VIA 8237A  controller (SCSI)"
+PCI\VEN_1106&DEV_5337.DeviceDesc="VIA 8237S  controller (SCSI)"
+PCI\VEN_1106&DEV_5372.DeviceDesc="VIA 8237  controller (SCSI)"
+PCI\VEN_1106&DEV_7372.DeviceDesc="VIA 8237  controller (SCSI)"
+PCI\VEN_1106&DEV_3349.DeviceDesc="VIA 8251  controller (SCSI)"
+PCI\VEN_1080&DEV_c693.DeviceDesc="Cypress 82C693 IDE DMA controller (SCSI)"
+PCI\VEN_16ca&DEV_0001.DeviceDesc="Cenatek Rocket Drive IDE DMA controller (SCSI)"
+PCI\VEN_1078&DEV_0000.DeviceDesc="Cyrix 5510 IDE DMA controller (SCSI)"
+PCI\VEN_1078&DEV_0002.DeviceDesc="Cyrix 5520 IDE DMA controller (SCSI)"
+PCI\VEN_1078&DEV_0102.DeviceDesc="Cyrix 5530 ATA-33 controller (SCSI)"
+PCI\VEN_1042&DEV_1000.DeviceDesc="RZ 100x IDE controller (SCSI)"
+PCI\VEN_1042&DEV_1001.DeviceDesc="RZ 100x IDE controller (SCSI)"
+PCI\VEN_1283&DEV_8172.DeviceDesc="IT8172 ATA-33 controller (SCSI)"
+PCI\VEN_1283&DEV_8213.DeviceDesc="IT8213F ATA-133 controller (SCSI)"
+PCI\VEN_1283&DEV_8212.DeviceDesc="IT8212F ATA-133 controller (SCSI)"
+PCI\VEN_1283&DEV_8211.DeviceDesc="IT8211F ATA-133 controller (SCSI)"
+PCI\VEN_169c&DEV_0044.DeviceDesc="Netcell SR3000/5000 ATA-33 controller (SCSI)"
+PCI\VEN_3388&DEV_8013.DeviceDesc="HiNT VXII EIDE IDE DMA controller (SCSI)"
+;PCI\VEN_ffff&DEV_ffff&REV_ff.DeviceDesc="(null) IDE controller (SCSI)"
+;Compatible adapters
+;DEVNAMELIST
+UniATA_Name = "Universal ATA Driver (Win 2000) (Win2003)"
+*PNP0600.PriDeviceDesc  = "Primary IDE Channel (UniATA)"
+*PNP0600.SecDeviceDesc  = "Secondary IDE Channel (UniATA)"
+*PNP0600.DeviceDesc  = "Generic ESDI Hard Disk Controller (UniATA)"
+PCI\CC_0101.DeviceDesc  = "Dual Channel PCI BusMaster IDE Controller (UniATA)"
+PCI\CC_0104.DeviceDesc  = "Generic RAID IDE Controller (UniATA)"
+PCI\CC_0105.DeviceDesc  = "Generic ATA Controller (UniATA)"
+PCI\CC_0106.DeviceDesc  = "Generic Serial ATA Controller (UniATA)"
+PCI\CC_0106&PROGIF_01.DeviceDesc = "Generic AHCI Controller (UniATA)"
+ALTERWARE = "AlterWare"
+
+;*******************************************
+;
+; Non-Localizable Strings
+;
+HDCClassName            = "SCSI/RAID controllers"
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_ERROR_NORMAL   = 1
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+IOLOGMSGDLL    = "\IoLogMsg.dll"
+
+DiskId1 = "UniATA Installation disk"
+

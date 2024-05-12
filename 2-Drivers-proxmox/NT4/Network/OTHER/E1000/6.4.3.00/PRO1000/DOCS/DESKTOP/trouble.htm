@@ -1,0 +1,549 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Troubleshooting</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+Performance and Troubleshooting</h1>
+<p>
+This section contains the following topics:
+<ul>
+  <li>
+    <p class="numlst"><a href="#Performance Issues">PCI Bus Performance
+    Issues</a></li>
+  <li>
+    <p class="numlst"><a href="#Common Problems">Common Problems and Solutions</a></li>
+  <li>
+    <p class="numlst"><a href="#Multiple Adapters">Multiple Adapters</a></li>
+  <li>
+    <p class="numlst"><a href="#PCI Common">
+PCI Configuration Troubleshooting</a></li>
+  <li>
+    <p class="numlst"><a href="#Other Performance Issues">Other Performance
+    Issues</a></li>
+</ul>
+
+<h2>
+<a name="Performance Issues">PCI Bus Performance Issues</a></h2>
+<ul>
+  <li>
+    <p class="numlst">
+The entire bus will operate at the speed of the slowest PCI card installed in
+the bus.&nbsp;</li>
+</ul>
+<hr>
+
+<h2>
+<a name="Common Problems"></a>Common Problems and Solutions</h2>
+
+<p>
+In addition to the table below, review the product release
+notes.
+<TABLE BORDER="1" cellpadding="6" cellspacing="0">
+<TR>
+<TH ROWSPAN="1" COLSPAN="1" width="150" valign="top">
+<P CLASS="CellHeading">
+Problem
+</TH>
+<TH ROWSPAN="1" COLSPAN="1" valign="middle">
+<P CLASS="CellHeading">
+Solution
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1" width="150" valign="top">
+<P CLASS="CellBody">
+Your computer cannot find the adapter
+</TD>
+<TD ROWSPAN="1" COLSPAN="1" class="numlst" valign="middle">
+<UL>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Make sure the adapter is seated firmly in the slot.</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Download the latest drivers from the Intel support web site: <a href="http://www.intel.com/network" target="_blank">http://www.intel.com/network</a></LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Try a different PCI bus master slot.&nbsp;</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Check to see if your motherboard has the latest BIOS.</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Make sure your PCI slots are v2.2 compatible.&nbsp;</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Try rebooting the computer. </LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Try a different Intel adapter. </LI>
+</UL>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1" width="150" valign="top">
+<P CLASS="CellBody">
+Diagnostics pass but the connection fails
+</TD>
+<TD ROWSPAN="1" COLSPAN="1" class="numlst" valign="middle">
+<UL>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Check the responding link partner.</LI>
+        <LI>
+          <p class="numlst">Make sure the cable is securely
+          attached, is the proper type and does not exceed the
+          recommended lengths.&nbsp;</LI>
+        <LI>
+          <p class="numlst">Try another cable.</LI>
+        <LI>
+          <p class="numlst">Try running the Sender-Responder diagnostic Test.</LI>
+        <LI>
+          <p class="numlst">Make sure the duplex mode and speed setting on
+          the adapter matches the setting on the switch.</LI>
+</UL>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1" width="150" valign="top">
+<P CLASS="CellBody">
+Another adapter stops working after you installed the Intel PRO/1000 adapter
+</TD>
+<TD ROWSPAN="1" COLSPAN="1" class="numlst" valign="middle">
+<UL>
+        <LI>
+          <p class="numlst">Make sure the cable connections are correct.</LI>
+        <LI>
+          <p class="numlst">Make sure your PCI BIOS is current. See <a href="#PCI Common">PCI
+          Installation Tips</a>.</LI>
+        <LI>
+          <p class="numlst">Check for interrupt conflicts and sharing problems. Make sure the other adapter supports shared
+          interrupts. Also, make sure your operating system supports shared interrupts.</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Unload all PCI device drivers, then reload all drivers.</LI>
+        <LI>
+          <p class="numlst">Try reseating all adapters.</LI>
+</UL>
+</TD>
+</TR>
+<TR>
+<TD COLSPAN="1" width="150" valign="top">
+Adapter unable to connect to switch at 1000 Mbps, instead connects at 100 Mbps&nbsp;
+</TD>
+<TD COLSPAN="1" valign="middle">
+<p align="center">
+<i>This is applicable only to copper-based connections.&nbsp;</i> 
+<ul>
+  <li>
+    <p class="numlst">Try another cable.</li>
+  <li>
+    <p class="numlst">Make sure the link partner is set to auto-negotiate. &nbsp;</li>
+  <li>
+    <p class="numlst">Verify that switch is IEEE 802.3ab-compliant (gigabit over copper) and that you are running the latest operating system revision for your switch.&nbsp;</li>
+</ul>
+</TD>
+</TR>
+<TR>
+<TD COLSPAN="1" width="150" valign="top">
+<P CLASS="CellBody">
+The adapter stops working without apparent cause
+</TD>
+<TD COLSPAN="1" class="numlst" valign="middle">
+<UL>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+The network driver files may be damaged or deleted. Reinstall the
+drivers. </LI>
+        <LI>
+          <p class="numlst">Try reseating the adapter in its slot or
+          different slot, if necessary.</LI>
+        <LI>
+          <p class="numlst">Try rebooting the computer.</LI>
+        <LI>
+          <p class="numlst">Try another cable.</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Try a different adapter.</LI>
+        <LI>
+          <p class="numlst">Run the adapter and network tests described under
+          &quot;Test
+          the Adapter&quot;.</LI>
+</UL>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1" width="150" valign="top">
+<P CLASS="CellBody">
+The Link indicator light is off
+</TD>
+<TD ROWSPAN="1" COLSPAN="1" class="numlst" valign="middle">
+      <UL>
+        <LI>
+          <p class="numlst">Run the adapter and network tests described under
+          &quot;Test
+          the Adapter&quot;.</LI>
+<LI CLASS="Cell-Bullet">
+<p class="numlst">
+Make sure you loaded the adapter driver.</LI>
+        <LI>
+          <p class="numlst">Check all connections at the adapter and the switch.</LI>
+        <LI>
+          <p class="numlst">Try another port on the
+          switch.</LI>
+        <LI>
+          <p class="numlst">Make sure the cable is securely attached. Also make
+          sure that it is the proper type and does not exceed the recommended lengths.&nbsp;</LI>
+        <LI>
+          <p class="numlst">Make sure that the link partner is configured to
+          auto-negotiate (or forced to match adapter).</LI>
+        <LI>
+          <p class="numlst">Verify that the switch is IEEE 802.3ab-compliant.</LI>
+      </UL>
+</TD>
+</TR>
+  <tr>
+    <td vAlign="top" width="150">The link light is on, but communications
+      are not properly established</td>
+    <td valign="middle">
+      <ul>
+        <li>
+          <p class="numlst">Make sure the proper (and latest) driver is
+          loaded.&nbsp;</li>
+        <li>
+          <p class="numlst">Both the adapter and its link partner must be set to either
+          auto-detect or manually
+          set to the same speed and duplex settings.&nbsp;&nbsp;</li>
+      </ul>
+      <blockquote>
+          <p class="numlst"> The adapter's link indicator
+          light may be on even if
+          communications between the adapter and its link partner have not been
+          properly established. Technically, the link indicator
+          light
+          represents the presence of a carrier signal but not necessarily the
+          ability to properly communicate with a link partner.&nbsp; This is
+          expected behavior and is consistent with IEEE's specification for
+          physical layer operation.
+      </blockquote>
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="150">RX or TX light is off</td>
+    <td valign="middle">
+      <ul>
+        <li>
+          <p class="numlst">Make sure you've loaded the network drivers.
+        <li>
+          <p class="numlst">Network may be idle; try creating traffic while
+          monitoring the lights.
+        <li>
+          <p class="numlst">Try another adapter.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="150">The diagnostic utility reports the adapter is
+      &quot;Not enabled by BIOS&quot;</td>
+    <td valign="middle">
+      <ul>
+        <li>
+          <p class="numlst">The PCI BIOS isn't configuring the adapter
+          correctly. Try <a href="#PCI Common">PCI Installation Tips</a>.</li>
+        <li>
+          <p class="numlst">Try another PCI slot.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="150">The computer hangs when the drivers are loaded</td>
+    <td valign="middle">
+          <p class="numlst">Try changing the PCI BIOS interrupt settings. See <a href="#PCI Common">PCI
+          Installation Tips</a>.
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" width="150">Event viewer message: A device attached
+      to the system is not functioning</td>
+    <td valign="middle">
+      <p align="left" class="numlst">If there is a BIOS setting for &quot;Plug and Play
+        OS&quot;, it should be set to &quot;NO&quot; for all versions of
+          Windows*.&nbsp;
+    </td>
+  </tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+Install prompting for Prodd.vxd and Prokddp.vxd files in Windows&nbsp;2000<br>
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    If you use the Add/Remove Programs icon in the Windows Control Panel to remove an Intel adapter, and then try to install drivers from a later
+    Product CD, you may see a prompt asking for the following files:<br>
+    &quot;Prodd.vxd&quot;<br>
+    &quot;Prokddp.vxd&quot;
+    <p>This is because Windows is attempting to install the files associated with the earlier driver, which are not present on the later 
+    Product CD.
+    <p>To resolve this problem, finish the installation and choose "Skip" when prompted for a missing file.  Then, instead of removing the driver,
+    update it with the later Product CD.
+    <p>For instructions on updating the adapter driver, see the &quot;<a href="drivers.htm">Install the Network
+    Drivers</a>&quot; section in
+    this online guide.&nbsp;
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+<span class="107550522-25042001">Windows 2000, Windows XP, or Windows Server 2003:
+Unable to remove PROSet in SAFE mode</span>
+</TD>
+<TD COLSPAN="1" class="numlst" valign="middle">
+If you experience computer hangs (blue screens) after configuring network
+adapters with the Intel&#174 PROSet utility, try the following:
+<ol>
+  <li>
+    <p class="numlst">Start Windows in Safe mode</p>
+  <li>
+    <p class="numlst">Go to the Intel PROSet utility, and disable the network
+    adapters and teams.</p>
+  <li>
+    <p class="numlst">Restart the computer.</p>
+  <li>
+    <p class="numlst">Windows should be operating normally if the problem was
+    caused by the disabled adapters. If Windows is not operating normally,
+    discontinue the instructions in this section and troubleshoot Windows using
+    the troubleshooting tools offered by your operating system.</p>
+  <li>
+    <p class="numlst">If Windows is operating normally, uninstall Intel PROSet
+    and then reinstall it. To do this, follow the steps below.</p>
+  </li>
+</ol>
+<blockquote>
+  <ol type="a">
+    <li>
+      <p class="numlst">Start Windows in Safe mode.</p>
+    <li>
+      <p class="numlst">Use Intel PROSet to disable all teaming instances, if
+      any.</p>
+    <li>
+      <p class="numlst">Restart the computer in Normal mode.</p>
+    <li>
+      <p class="numlst">Using Intel PROSet, remove all teams and VLANs shown.</p>
+    <li>
+      <p class="numlst">Go to the Control Panel, select Add/Remove Programs.</p>
+    <li>
+      <p class="numlst">Select Intel PROSet and remove it.</p>
+    <li>
+      <p class="numlst">Reinstall Intel PROSet by inserting the Product CD and
+      clicking <b>Install Software</b>.</p>
+    </li>
+  </ol>
+</blockquote>
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+Windows XP or Windows Server 2003 gives an error "Device cannot start (CODE 10)" when you install or update drivers for your gigabit adapter.&nbsp;
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    Windows XP and Windows Server 2003 ship with some older plug-and-play drivers for gigabit adapters already present. Because XP has trouble replacing a driver file on-the-fly, updating these drivers with Intel's latest drivers may cause this error message. Rebooting your computer will clear the error and allow you to use the full functionality of your adapter.&nbsp;
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+After upgrading operating systems, Intel PROSet is no longer available
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    If you are upgrading Windows operating systems and you have Intel PROSet software installed, it will be deleted in the
+    process. You will need to reinstall Intel PROSet.
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+In Windows XP or Windows Server 2003, IP addresses are lost or Intel PROSet becomes unstable with
+bridging enabled
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    With bridging enabled, Intel PROSet does not retain adapter IP address information.<br>
+    <br>
+    If changes are made to any Intel PROSet advanced feature after enabling bridging, the Intel PROSet
+    software becomes unstable.
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+Terminal Server support
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    When using Terminal Server, make sure only one session of Intel PROSet is
+    open at any one time. Simultaneous sessions are not supported in Intel PROSet.
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+<p>The IPv6 protocol does not seem to work after updating adapter drivers on
+Windows 2000 Advanced Servers.
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+  <p>When using a Windows 2000 Advanced Server SP1 with IPv6 bound to the adapter,
+  you must unbind the IPv6 protocol from the adapter before updating drivers. This is a result of the operating system implementation of the IPv6 protocol.
+  To update an adapter using the IPv6 protocol:
+  <ol>
+    <li> 
+      <p class="numlst"> Unbind the IPv6 protocol from the adapter. To find the
+      IPv6 setting, click <b>Start</b> &gt; <b>Settings</b> &gt; <b>Control
+      Panel</b> &gt; <b>Network and Dial-Up connections</b> &gt;&nbsp;<b>Local
+      Area Connection &lt;#&gt;</b>, where &lt;#&gt; is the connection number. Right-click the Connection number to open&nbsp;the Adapter Properties dialog box. Clear the IPv6 checkbox then click OK.</li>
+    <li> 
+      <p class="numlst"> Update drivers.&nbsp;</li>
+    <li> 
+      <p class="numlst"> Bind the IPv6 protocol to the adapter. In the Adapter Properties dialog box,
+   click the IPv6 checkbox. See step one for detailed instructions on finding
+   the IPv6 option.
+    </li>
+  </ol>
+
+</TD>
+</tr>
+</TABLE>
+
+<hr>
+
+<h3><b>Other Items to Check</b></h3>
+<ul>
+  <li>
+    <p CLASS="numlst">
+Use the drivers that came with your adapter, or download the latest ones from
+the <a href="support.htm">support website</a>.</li>
+  <li>
+    <p CLASS="numlst">Make sure the cable is installed properly. The network cable must be securely attached at all connections. If the cable is attached but the problem persists, try a different cable.&nbsp;
+    <ul>
+      <li>
+        <p CLASS="numlst">For copper connections, make sure the cable is a
+        4-pair Category-5 or better.&nbsp;</li>
+    </ul>
+  </li>
+  <li>
+    <p CLASS="numlst">Make sure the link partners match or are set to
+    auto-negotiate. Make sure the updated driver is loaded.</li>
+  <li>
+    <p CLASS="numlst">Test the adapter. Run the adapter and network tests described in Test the Adapter.</li>
+  <li>
+    <p CLASS="numlst">Check the Common problems table and try the  recommended solutions</li>
+</ul>
+<P CLASS="Body-Text">
+If none of these works, check the Late-breaking News document that came with the adapter or check the 
+<a href="support.htm">support website</a> to connect to online services.
+
+<hr>
+
+<h2><a name="Multiple Adapters">Multiple Adapters</a></h2>
+<p>When configuring a multi-adapter environment, you must upgrade all Intel
+adapters in the computer to the latest software.
+<p>If the computer has trouble detecting all adapters, consider the following:
+<ul>
+  <li>
+    <p class="numlst">If you enable Wake On LAN (WOL) on more than two adapters,
+    the Wake on LAN* (WOL) feature may overdraw your system’s auxiliary power
+    supply, resulting in the inability to boot the system and other
+    unpredictable problems. For multiple desktop/management adapters, it is
+    recommended that you install one adapter at a time and use the IBAUtil
+    utility (ibautil.exe in \APPS\BOOTAGNT) to disable the WOL feature on adapters
+    that do not require WOL capabilities. On most server adapters, the WOL
+    feature is disabled by default.
+  </li>
+  <li>
+    <p class="numlst">Adapters with Intel Boot Agent enabled will require a
+    portion of the limited start up memory for each adapter enabled. Disable the
+    service on adapters that do not need to boot PXE or RPL.
+  </li>
+</ul>
+
+<hr>
+
+<h2>
+<a name="PCI Common"></a>PCI and PCI-X Configuration Troubleshooting</h2>
+<p CLASS="numlst">If the adapter is not recognized by your OS or if it does not
+work you may need to change some BIOS Setup program settings. Try the following
+only if you are having problems with the adapter.&nbsp;
+<ul>
+  <li>
+    <p class="numlst">You may need to change the Plug and Play setting in your
+    computer's BIOS. See your computer's manual for instructions on how to
+    access.&nbsp;</li>
+  <li>
+    <p CLASS="numlst">Enable the PCI slot. In some PCI computers, you may need to use the
+    BIOS Setup program to enable the PCI slot.&nbsp;</li>
+  <li>
+    <p CLASS="numlst"> You must install the
+    network
+    adapter in a bus master slot. Some BIOS Setup programs require you to enable the slot for
+    bus master/master. Check your
+    BIOS Setup program and the computer's documentation to make sure the slot is set for
+    bus master/master.</li>
+  <li>
+    <p CLASS="numlst">Configure the slot for level-triggered interrupts. The PCI slot the adapter is using must be configured for level-triggered interrupts instead of edge-triggered interrupts. Check your
+    BIOS Setup program to make sure triggering is set up.</li>
+  <li>
+    <p CLASS="numlst">Reserve interrupts and/or memory addresses into the BIOS. This prevents PCI cards from trying to use the same settings as ISA cards. Check your
+    BIOS Setup program; there may be IRQ options such as Enable for ISA or Disable for PCI.</li>
+</ul>
+<P CLASS="Body-Text">
+Here are some examples of BIOS Setup program parameters:
+<blockquote>
+<P CLASS="Figure-text">
+<b>
+PCI slot #</b>:	Slot where the adapter is installed (1-3)<br>
+<b>Master</b>:	ENABLED<br>
+<b>Slave</b>:	ENABLED<br>
+<b>Latency timer</b>:	40 - 80<br>
+<b>Interrupt</b>:	Choose any one of several that the BIOS Setup provides.<br>
+<b>Edge-level</b>:	Level
+</blockquote>
+<P CLASS="Body-Text">
+The exact wording of the parameters varies with different computers.
+<hr>
+<h2>
+<a name="Other Performance Issues">Other Performance Issues</a></h2>
+<P>
+Attaining gigabit speeds requires that many components are operating at peak
+efficiency. Among them are the following:
+<ul>
+  <li>
+    <p class="numlst"><b>Cable quality and length</b>. Do not exceed the maximum
+    recommended length for your cable type. Shorter lengths provide better
+    results. Straighten kinks and check for damaged sections of cable.&nbsp;</li>
+  <li>
+    <p class="numlst"><b>Bus speed and traffic</b></li>
+  <li>
+    <p class="numlst"><b>Processor speed and load</b></li>
+  <li>
+    <p class="numlst"><b>Available memory</b></li>
+  <li>
+    <p class="numlst"><b>Transmission frame size</b> (see Jumbo
+    Frames)</li>
+  <li>
+    <p class="numlst"><b>Operating System</b> - Features will vary by OS
+    compatibility, such as offloading and multiprocessor threading.</li>
+</ul>
+
+<table border="0" cellpadding="6" cellspacing="0">
+    <tr>
+        <td valign="top" width="28">
+        <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"><b><i>NOTE</i></b>: On NT4.0 computers, some
+        applications may cause incorrect behavior and even blue screen at
+        deserialized drivers. This is an operating system bug admitted by
+        Microsoft that currently won't be fixed in NT 4.0. This bug was fixed for
+        Windows 2000 and later. Intel's base drivers are not affected.</td>
+    </tr>
+</table>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 12/22/03 11:34a <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code>
+
+</body>
+</html>

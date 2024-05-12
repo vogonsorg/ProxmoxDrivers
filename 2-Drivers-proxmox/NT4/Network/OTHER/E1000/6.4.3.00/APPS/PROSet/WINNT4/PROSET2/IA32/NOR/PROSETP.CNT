@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Hjelp for Intel(R) PROSet II
+1 Oversikt
+2 Navigere i PROSet II=GENERAL_PAGE
+2 Vise kort- og driverinformasjon
+3 Generell informasjon=General_Information
+3 Kortdetaljer=Adapter_Details
+3 Driverdetaljer=Driver_Information
+1 Konfigurere kortet
+2 Angi hastighet og duleks=Set_Speed_and_Duplex
+2 Konfigurere strømforbruk=Configure_Power_Management
+2 Konfigurere avanserte funksjoner=Configure_Advanced_Features
+2 Aktivere IPSec=Enable_IPSec
+2 Lagre konfigurasjon i en fil=SAVERESTORE
+2 Fjerne et kort=Remove_an_Adapter_Instance
+1 Opprette og konfigurere grupper
+2 Gruppetyper
+3 Om gruppering=Teaming_Info
+3 Gruppetyper=Team_Types
+3 Feiltoleranse for kort=Adapter_Fault_Tolerance
+3 Feiltoleranse for svitsj=Switch_Fault_Tolerance
+3 Dynamisk belastningsfordeling=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Statisk=FEC
+3 GEC/LA/802.3ad: Statisk=GEC
+3 IEEE 802.3ad: Dynamisk=Dynamic_3ad
+2 Sette opp en gruppe
+3 Opprette en gruppe=Create_a_New_Team
+3 Teste svitsjkonfigurasjon=Test_Switch_Configuration
+3 Konfigurere avanserte innstillinger=Teaming_Advanced_Settings
+2 Endre gruppekonfigurasjon
+3 Endre grupperingsmodus for kort=Change_Adapter_Teaming_Mode
+3 Angi et kort som primært eller sekundært=Specify_an_Adapter_as_Primary_or_Secondary
+3 Legge til et kort i en gruppe=Add_an_Adapter_to_an_Existing_Team
+3 Fjerne et kort fra en gruppe=Remove_an_Adapter_from_a_Team
+3 Avanserte gruppeinnstillinger=Teaming_Advanced_Settings
+2 Vise gruppekonfigurering
+3 Grupper i nettverkskomponenttreet=Team_Listing
+3 Vise gruppekonfigurering=Team_Configuration
+2 Fjerne en gruppe
+3 Fjerne en kortgruppe=Remove_an_Adapter_Team
+1 Opprette og konfigurere virtuelle lokalnettverk
+2 Oversikt over virtuelle lokalnettverk=VLAN>main
+2 Sette opp virtuelt lokalnettverk
+3 Opprette virtuelt lokalnettverk=ADD_VLAN
+3 Aktivere GVRP=GVRP_Support
+3 Avanserte innstillinger=Advanced_Settings_for_VLANs
+2 Endre VLAN-egenskaper
+3 Endre VLAN-egenskaper=Change_VLAN_Properties
+3 Avanserte innstillinger=Advanced_Settings_for_VLANs
+2 Fjerne et VLAN
+3 Fjerne et VLAN=Remove_a_VLAN
+1 Utføre analyser
+2 Oversikt=Diagnostics_An_Overview
+2 Diagnosetester=Diagnostics
+2 Kabeltest=Testing_the_Cable
+2 Sender Svarer-test=Sender_Responder_Test
+2 Konfigurere diagnoseloggen=Diagnostic_Log
+1 Bruke tilleggsverktøy fra Intel
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Oversikt=priority_packet_overview
+1 Feilsøking
+2 Kategorien Feilsøking=Troubleshooting
+2 Gjenopprette kortkonfigurasjon=RESTORECONFIG
+2 Få støtte=Support

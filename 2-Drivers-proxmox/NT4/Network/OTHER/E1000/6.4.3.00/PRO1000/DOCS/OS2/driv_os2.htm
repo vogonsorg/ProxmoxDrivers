@@ -1,0 +1,278 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Install the Drivers</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>IBM OS/2* and LAN Requestor</h1>
+<P class="contents"><a href="#overview">Overview</a></P>
+<P class="contents"><a href="#install">Installation</a></P>
+<P class="contents"><a href="#install_dos"> Installation under DOS</a></P>
+<P class="contents"><a href="#adv_settings">Advanced Settings for PROTOCOL.INI</a></P>
+<P class="contents"><a href="#ex_config">Example PROTOCOL.INI</a></P>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+
+<P>Location of files:</P>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <tr>
+	<th align="left">10/100</th>
+	<th align="left">Gigabit</th>
+  </tr>
+  <tr>
+	<td align="left">
+		\OS2\E100B.OS2 (OS/2* driver)<br>
+		\OS2\E100BEO2.NIF<br>
+		<br>
+		or<br>
+		<br>
+		\DOS\E100B.DOS   (DOS driver)<br>
+		\DOS\E100BEDS.NIF (DLR and LSP installation file)
+	</td>
+	<td align="left">
+		\OS2\E1000.OS2 (OS/2* driver)<br>
+ 		\OS2\E1000.NIF<br>
+		<br>
+		or<br>
+		<br>
+		\DOS\E1000.DOS (DOS driver)<br>
+		\DOS\E1000.NIF (DLR and LSP installation file)
+	</td>
+  </tr>
+</table>
+<br>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top">
+    	<img border="0" src="note.gif" width="28" height="21">
+    </td>
+    <td valign="top">
+    	<i><b>NOTE</b>:</i> LAN Requester needs DOS 3.3 through 5, but if you're using DOS 
+    	6.0 or higher, run SETVER.EXE prior to using the executable files found on the DOS 
+    	LAN Requester disks. See your DOS manual if you need help with SETVER.EXE.
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr>
+
+<h2><a name="install"></a>Installation</h2>
+<h3> LAN Server and OS/2 Requester (4.0 or 3.0)</h3>
+<ol>
+  <li><p class="numlst">
+  	Run the MPTS utility with LAN Server 4.0 or OS/2 Requester 4.0 (Run the LAPS utility with 
+  	LAN Server 3.0 or OS/2 Requester 3.0).</p></li>
+  <li><p class="numlst">
+  	Click <b>Install</b>.</p></li>
+  <li><p class="numlst">
+  	When prompted, insert the Configuration and Drivers disk in the drive, specify &lt;drive>:\OS2 
+  	for driver location, and click <b>OK</b>.</p></li>
+  <li><p class="numlst">
+  	When Install reads the E100BE02.NIF (10/100 Mbit) or E1000.NIF (gigabit) file, installation is 
+  	complete. Click <b>OK</b>. The adapter driver has been copied to your system.</p></li>
+  <li><p class="numlst">
+  	Click <b>Configure</b> from the MPTS window.</p></li>
+  <li><p class="numlst">
+  	At the Configure window, make sure the LAN adapters and protocols option is selected, then click
+	<b>CONFIGURE</b>.</p></li>
+  <li><p class="numlst">
+	At the LAPS Configuration window, select the Intel adapter (OS/2 driver: E100B.OS2 for 10/100 Mbit, 
+	or E1000.OS2 for gigabit) from the Network Adapters window.</p></li>
+  <li><p class="numlst">
+  	Click <b> Add</b> in the Network Adapter window to add the Intel PCI adapter to the current 
+  	configuration.</p></li>
+  <li><p class="numlst">
+  	Select your desired protocol(s) from the Protocol window and click <b>Add</b> to add the protocol(s) 
+  	to the current configuration.</p></li>
+  <li><p class="numlst">
+  	Click <b> OK</b> when you're done and follow the prompts to exit MPTS. Your CONFIG.SYS is automatically 
+  	updated.</p></li>
+  <li><p class="numlst">
+	Restart the computer for the changes to take effect.</p></li>
+</ol>   
+     
+<hr>
+
+<h2><a name="install_dos"></a> Installation under DOS&nbsp;</h2>
+<h3>DOS LAN Services</h3>
+<p>
+Due to a problem with the DLS installation utility, you need to complete the following steps 
+before executing the installation of DLS:
+</p>
+<ol>
+	<li><p class="numlst">
+     	On DLS Diskette 1, make a directory off the root called NDIS.</p></li>
+	<li><p class="numlst">
+     	Copy the file E100B.DOS (10/100 Mbit) or E1000.DOS (for gigabit) from the \DOS directory 
+     	of the Configuration and Drivers disk into this new directory \DOS on DLS disk 1.</p></li>
+	<li><p class="numlst">
+  	 	Run the DOS LAN Services installation program at the DOS workstation. Follow the prompts.</p></li>
+	<li><p class="numlst">
+		When presented with an adapter list, select Network card not shown in list below.</p></li>
+	<li><p class="numlst">
+		When prompted for the location of the OEMSETUP.INF file, insert the Configuration and Drivers 
+		disk in your drive and enter &lt;drive&gt;:\DOS as the path.</p></li>
+	<li><p class="numlst">
+		Select the Intel adapter from the list. Follow the prompts.</p></li>
+	<li><p class="numlst">
+		Enter your machine name, user name and domain name.</p></li>
+	<li><p class="numlst">
+		Set the options as you need; then highlight &quot;The listed options are correct&quot; and 
+		press &lt;Enter&gt;.</p></li>
+	<li><p class="numlst">
+		Accept the defaults on the next screen, highlight &quot;The listed options are correct&quot; 
+		and press &lt;Enter&gt;.</p></li>
+	<li><p class="numlst">
+		Set the Speed, Duplex mode, or Slot Device if needed. We recommend accepting the defaults. 
+		Then, highlight &quot;The listed options are correct&quot; and press Enter.</p></li>
+	<li><p class="numlst">
+		You may be asked to insert DLS disks. Follow the prompts to complete the installation and 
+		restart your computer for changes to take effect.</p></li>
+</ol>
+
+<h3>General Installation under DOS - LAN Support Program (LSP)</h3>
+<ol>
+  <li><p class="numlst">
+	Run DXMAID from the LAN Support Program disk.</p></li>
+  <li><p class="numlst">
+	Follow the prompts and instructions.</p></li>
+  <li><p class="numlst">
+	When prompted, insert the Configuration and Drivers disk and enter the pathname &lt;drive>:\DOS.</p></li>
+  <li><p class="numlst">
+	The default configuration is suitable for most environments. We recommend accepting the defaults.</p></li>
+  <li><p class="numlst">
+  	After the installation is complete, restart your computer for the changes to take effect.</p></li>
+</ol>
+
+<h3>General Installation under DOS - DOS LAN Requester</h3>
+<ol>
+  <li><p class="numlst">
+  	Run the DOS LAN Requester installation program at the DOS workstation. Follow the prompts to 
+  	configure your DOS LAN Requester as required.</p></li>
+  <li><p class="numlst">
+  	After the installation is complete, restart your computer for the changes 
+  	to take effect.</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="adv_settings"></a>Advanced Settings for PROTOCOL.INI</h2>
+<P>
+<b>DRIVERNAME</b>: (required) If you have a single adapter, use the syntax
+in the Sample Configuration File section.  If you are installing
+multiple adapters, each adapter must have a unique driver name.
+Additional instances of the driver would be referenced by
+DRIVERNAME=E100Bx$ (for 10/100 Mbit) or
+DRIVERNAME=E1000Bx$ (for gigabit), where "x" is a unique number 2 through 9.
+</p>
+<table border="1" cellpadding="6" cellspacing="0">
+    <tr>
+      <th align="left">10/100-Specific Settings</th>
+      <th align="left">Gigabit-Specific Settings</th>
+    </tr>
+    <tr>
+      <td align="left" valign="top">
+      <b>SPEED</b>: (optional; parameters are [Auto / 10 / 100]) The parameter
+      disables Auto-Speed Detect and causes the adapter to function at
+      the speed indicated. If the FORCEDUPLEX parameter is assigned to
+      either 1 or 2, the SPEED parameter is required because auto-speed
+      sensing is disabled if the duplex mode is forced. Auto-negotiate
+      devices cannot detect speed changes in this configuration until
+      the driver is reloaded.
+      <br><br>
+      	Syntax: <span class="monospace>SPEED = [Auto | 10 | 100]</span>
+      	<br><br>
+		Example: <span class="monospace>SPEED = 100</span>
+		<br><br>
+		Before changing speed and duplex, make sure the link partner is able
+		to operate at the configured settings. A mismatch between the adapter
+		and link partner might cause communication failure.
+		<br><br>
+		<b>FORCEDUPLEX</b>: Full duplex and auto-negotiate capabilities vary between
+      	the PRO/100&nbsp;TX and the PRO/100 T4 adapters.
+      	<br><br>
+		PRO/100+ TX adapter: Supports auto-negotiate, full
+		and half duplex at 10 or 100 Mbps.
+		<br><br>
+		PRO/100B T4 adapter: Supports full and half duplex
+		at 10 Mbps; supports only half duplex at 100 Mbps. Auto-negotiate is not a valid 
+		option at either speed.
+		<br><br>
+		The FORCEDUPLEX parameter disables Auto-Negotiate capability and forces the
+      	adapter to operate in Half or Full Duplex mode. The SPEED parameter must be specified 
+      	and must be valid if the default of Auto-negotiate is changed. Options for FORCEDUPLEX 
+      	are Auto (for auto-negotiate), 1 (for half), 2 (for full).
+      	<br><br>
+      	Syntax: <span class="monospace">FORCEDUPLEX = [Auto | 1 | 2] </span>(1 = Half; 2 = Full)
+      	<br><br>
+      	Example: <span class="monospace">FORCEDUPLEX = 2</span>
+      	</td>
+      <td align="left" valign="top"><b>SPEEDDUPLEX</b>: (optional; parameters are [10 HALF / 
+      10 FULL / 100 HALF / 100 FULL]) The driver can configure the adapter for 10, 100, 
+      or 1000 Mbps. Assigning a value to this parameter will override the Auto-Speed-Sense 
+      feature of the driver. Leave the field blank to enable the Auto-Speed-Sense feature. 
+      Note that speed of 10 or 100 is only valid for Copper based NICs.
+      </td>
+    </tr>
+</table>
+<P>
+<b>SLOT</b>: (required for multiple adapters) This parameter is optional if
+only one adapter is present.  If it is specified but is incorrect,
+a message indicates that the value doesn't match the configuration
+but the driver finds the adapter and loads anyway.
+</p>
+<p>
+This parameter is required if more than one adapter is present in
+either one bus or multiple PCI buses of a system. The parameter
+tells the driver which adapter it controls. The SLOT number is the
+encoded value of the PCI adapter's device location. To determine
+the slot number, load the driver with only the DRIVERNAME
+parameter specified.  The driver reports all the slots that have
+PCI adapter(s) installed. You can determine which card is in which
+slot by using SETUP.EXE and matching the Ethernet addresses of the adapter 
+to the device number specified in View Configuration. [Example: SLOT=0x1C]
+</p>
+<p>
+<b>NODE</b>: (optional) This value sets the adapter's Individual Address,
+overriding the value read from the adapter EEprom. The address
+must consist of 12 hexadecimal digits, enclosed in double quotes. The
+value must not duplicate that of any other device on the network.
+Additionally, the value cannot be all zeros nor have the
+Multicast bit set. So, use only the hexadecimal digits 2, 6, A, or
+E as the second digit of the twelve required in the NODE ADDRESS
+parameter. Use any hexadecimal digits in all other positions. [Example: NODE ="02AA00123456"]
+</p>
+
+<hr>
+
+<h2><a name="ex_config"></a>Example PROTOCOL.INI</h2>
+<p>
+<span class="monospace">DRIVERNAME = E1000$</span>&nbsp; (or <span class="monospace">DRIVERNAME = E100b$</span>)
+</p>
+<p class="monospace">
+NODE = &quot;02AA00123456&quot; ; override the burned in MAC address<br>
+SPEEDDUPLEX = 0 ; 10Mbps half duplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1 ; 10Mbps full duplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 2 ; 100Mbps half duplex<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 3 ; 100Mbps full duplex<br>
+SLOT = 7 ; set this for each NIC if using more than one
+</p>
+<p class="monospace">
+CACHEFLUSH = 1 ; set this if doing an unattended installation of Windows NT 4.0 using this 
+driver to make the initial connection
+</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 8/23/02 10:01a <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

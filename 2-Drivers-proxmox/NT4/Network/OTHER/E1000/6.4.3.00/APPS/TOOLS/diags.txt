@@ -1,0 +1,111 @@
+Intel(R) DIAGS Release Notes
+============================
+
+March 1, 2004
+
+
+DISCLAIMER
+==========
+
+This software is furnished under license and may only be used or copied
+in accordance with the terms of the license.  The information in this
+manual is furnished for informational use only, is subject to change
+without notice, and should not be construed as a commitment by Intel
+Corporation.  Intel Corporation assumes no responsibility or liability
+for any errors or inaccuracies that may appear in this document or any
+software that may be provided in association with this document.  Except
+as permitted by such license, no part of this document may be reproduced,
+stored in a retrieval system, or transmitted in any form or by any means
+without the express written consent of Intel Corporation.
+
+
+Contents
+========
+
+- OVERVIEW
+- RUNNING THE UTILITY
+- CUSTOMER SUPPORT
+
+
+OVERVIEW
+========
+
+Intel's diagnostic software lets you test the adapter to see if there are
+any problems with the adapter hardware, the cabling, or the network
+connection. You can also use diagnostics to isolate problems during
+troubleshooting.  DIAGS is a single program that operates identically
+under multiple operating systems.
+
+These utilities are designed to test hardware operation and confirm the
+adapter's ability to communicate with another adapter in the same network,
+primarily confirming cabling. They should not be used to judge performance.
+
+They can test the adapter whether or not there is a responder on the network.
+In order to do a thorough test, however, you should set-up a second system on
+the network as a responder prior to starting a test.
+
+
+RUNNING THE UTILITY
+===================
+
+- DIAGS.EXE runs under MS-DOS* v6.22 or later. (It will not run from a DOS
+  window in IBM OS/2* or a Microsoft* Windows* product.)
+
+- DIAGS32.EFI runs in a 32 bit EFI system.
+
+- DIAGS64.EFI runs in a 64 bit EFI system (Intel® Itanium™-based system).
+
+- diags32 runs on 32-bit Redhat 8.0 and 9.0 distributions of Linux.
+
+Running on DOS and EFI:
+
+1. Boot to DOS or EFI.
+
+2. Switch the active volume to this disk.
+
+3. From the command prompt, type the following and press <Enter>
+        "DIAGS" for DOS
+        "DIAGS32" for EFI32
+        "DIAGS64" for EFI64
+
+Installing on Linux:
+
+    1. Log in as root and create a temporary directory to build driver.
+
+    2. Copy ‘install’ and ‘iqvlinux.tar.gz’ to the temporary directory.
+       These files are on the installation CD.
+
+    3. CD to the temporary directory and run ‘.\install.’  The driver has been
+       installed now, so the files in the temporary directory can be removed.
+
+    4. Copy diags32 from the installation CD.
+
+
+CUSTOMER SUPPORT
+================
+
+- Main Intel web support site: http://support.intel.com
+
+- Network products information: http://www.intel.com/network
+
+- Worldwide access: Intel has technical support centers worldwide.  Many
+  of the centers are staffed by technicians who speak the local languages.
+  For a list of all Intel support centers, the telephone numbers, and the
+  times they are open, visit http://www.intel.com/support/9089.htm.
+
+- Telephone support: US and Canada: 1-916-377-7000
+  (7:00 - 17:00 M-F Pacific Time)
+
+
+Legal / Disclaimers
+===================
+
+Copyright (C) 2003-2004, Intel Corporation.  All rights reserved.
+
+Intel Corporation assumes no responsibility for errors or omissions in this
+document.  Nor does Intel make any commitment to update the information
+contained herein.
+
+* Other product and corporate names may be trademarks of other companies and
+are used only for explanation and to the owners' benefit, without intent to
+infringe.

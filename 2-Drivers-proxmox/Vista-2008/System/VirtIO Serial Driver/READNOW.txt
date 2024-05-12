@@ -1,0 +1,1 @@
+If you decide to try newer versions of this driver then make sure qemu-agent still communicates to proxmox!

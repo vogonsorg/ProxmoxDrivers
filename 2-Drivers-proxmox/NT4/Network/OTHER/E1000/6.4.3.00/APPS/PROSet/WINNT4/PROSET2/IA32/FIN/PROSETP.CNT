@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Intel(R) PROSet II Ohje
+1 Yleiskatsaus
+2 PROSet II -ohjelman navigointi=GENERAL_PAGE
+2 Näytä sovittimen ja ohjaimen tiedot
+3 Yleistiedot=General_Information
+3 Sovittimen tiedot=Adapter_Details
+3 Ohjaimen tiedot=Driver_Information
+1 Määritä sovitin
+2 Aseta nopeus ja suuntaisuus=Set_Speed_and_Duplex
+2 Määritä virrankäyttö=Configure_Power_Management
+2 Määritä lisäominaisuudet=Configure_Advanced_Features
+2 Ota käyttöön IPSec=Enable_IPSec
+2 Tallenna kokoonpano tiedostoon=SAVERESTORE
+2 Poista sovitin=Remove_an_Adapter_Instance
+1 Luo ja määritä ryhmät
+2 Ryhmätyypit
+3 Tietoja ryhmittämisestä=Teaming_Info
+3 Ryhmätyypit=Team_Types
+3 Sovittimen vikasieto=Adapter_Fault_Tolerance
+3 Kytkimen vikasieto=Switch_Fault_Tolerance
+3 Mukautuva kuormituksen tasaus=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Staattinen=FEC
+3 GEC/LA/802.3ad: Staattinen=GEC
+3 IEEE 802.3ad: Dynaaminen=Dynamic_3ad
+2 Määritä ryhmä
+3 Luo ryhmä=Create_a_New_Team
+3 Testaa kytkimen kokoonpano=Test_Switch_Configuration
+3 Määritä lisäasetukset=Teaming_Advanced_Settings
+2 Muuta ryhmän kokoonpanoa
+3 Muuta sovitinryhmätila=Change_Adapter_Teaming_Mode
+3 Määritä sovitin ensisijaiseksi tai toissijaiseksi=Specify_an_Adapter_as_Primary_or_Secondary
+3 Lisää sovitin ryhmään=Add_an_Adapter_to_an_Existing_Team
+3 Poista sovitin ryhmästä=Remove_an_Adapter_from_a_Team
+3 Ryhmittämisen lisäasetukset=Teaming_Advanced_Settings
+2 Näytä ryhmän kokoonpano
+3 Ryhmät verkkokomponenttipuussa=Team_Listing
+3 Näytä ryhmän kokoonpano=Team_Configuration
+2 Poista ryhmä
+3 Poista sovitinryhmä=Remove_an_Adapter_Team
+1 Luo ja määritä VLAN-verkot
+2 VLAN-verkon yleiskatsaus=VLAN>main
+2 Määritä VLAN
+3 Luo VLAN=ADD_VLAN
+3 GVRP:n käyttöönottaminen=GVRP_Support
+3 Lisäasetukset=Advanced_Settings_for_VLANs
+2 VLAN-ominaisuuksien muuttaminen
+3 Muuta VLAN-ominaisuuksia=Change_VLAN_Properties
+3 Lisäasetukset=Advanced_Settings_for_VLANs
+2 VLAN-verkon poistaminen
+3 Poista VLAN-verkko=Remove_a_VLAN
+1 Diagnostiikan suorittaminen
+2 Yleiskatsaus=Diagnostics_An_Overview
+2 Diagnostiikkatestit=Diagnostics
+2 Kaapelitesti=Testing_the_Cable
+2 Lähettäjä-vastaaja-testi=Sender_Responder_Test
+2 Diagnostiikkalokin määrittäminen=Diagnostic_Log
+1 Käytä Intelin(R) lisätyökaluja
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R)-prioriteettipaketti
+3 Yleiskatsaus=priority_packet_overview
+1 Vianmääritys
+2 Vianmääritys-välilehti=Troubleshooting
+2 Palauta sovittimen kokoonpano=RESTORECONFIG
+2 Tuen saanti=Support

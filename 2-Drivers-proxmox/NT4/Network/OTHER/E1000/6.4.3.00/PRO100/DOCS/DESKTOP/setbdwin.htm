@@ -1,0 +1,679 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Unattended Update</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1> Command line install for base driver and Intel&#174 PROSet</h1>
+
+<p class="contents"><a href="#install_methods">Installation methods</a></p>
+<p class="contents"><a href="#install_base_driver">Base driver installation</a></p>
+<p class="contents"><a href="#install_proset">Intel PROSet installation</a></p>
+<p class="contents"> <a href="#msiexec"> Msiexec.exe command line options</a></p>
+
+<hr>
+
+<h2> <a name="install_methods"></a> Installation methods</h2>
+<p>
+The base driver install utility allows unattended install of base drivers
+from a command line (SetupBD.exe). The Intel PROSet installation is based on
+the Microsoft* Windows Installer (MSI) Service. There are two MSI packages (PROSet.msi
+and PROSet64.msi) in the release that can be used to install Intel PROSet on
+32-bit Operating Systems and 64-bit Operating Systems individually with command
+line supports.
+</p>
+<p>
+The
+MSI package installation requires Windows Installer Service to be installed into the
+system first. Windows* 2000, Windows ME, Windows XP32 and Windows XP64 operating
+systems have Windows Installer Service installed by default. However, Windows
+Installer Service is required to be installed in Windows 98, Windows 98SE and
+Windows NT 4.0*. A bootstrap program (PROSet.exe) can be used to install Windows
+Installer Service first on Windows 98 and 98SE.
+</p>
+
+<hr>
+
+<h2><a name="install_base_driver"></a>Base driver installation</h2>
+<h3>Command line options</h3>
+<p>
+SetupBD.exe supports the following command line options. Examples are shown below.
+</p>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <td><b>Option</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <tr>
+    <td><b>/s</b></td>
+    <td>silent install with no reboot</td>
+  </tr>
+  <tr>
+    <td><b>/r</b></td>
+    <td>force reboot (must be used with the /s option)</td>
+  </tr>
+  <tr>
+    <td><b>/u</b></td>
+    <td>uninstall</td>
+  </tr>
+  <tr>
+    <td><b>/infdir </b><i>directory_name</i> </td>
+    <td>search for inf files only in the specified directory</td>
+  </tr>
+</table>
+<p>Examples:</p>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <td><b>Option</b></td>
+    <td><b>Description</b></td>
+  </tr>
+  <tr>
+    <td valign="top">SetupBD</td>
+    <td valign="top">
+<p>
+ Installs and/or updates the driver(s) and displays the GUI. On Windows NT40 ,Windows 98 and 
+Windows ME reboot options are displayed. No reboot is required for other OSs.
+</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">SetupBD /s</td>
+    <td valign="top"> Installs and/or updates the driver(s) silently.</td>
+  </tr>
+  <tr>
+    <td valign="top">SetupBD /s /r</td>
+    <td valign="top">Installs and/or updates the driver(s) silently and forces a reboot.</td>
+  </tr>
+  <tr>
+    <td valign="top">SetupBD /u</td>
+    <td valign="top">Uninstalls all drivers from the system.</td>
+  </tr>
+  <tr>
+    <td valign="top">SetupBD /infdir x:\infdir</td>
+    <td valign="top">Installs and/or updates the driver(s), looks for inf files only in the 
+specified directory</td>
+  </tr>
+</table>
+
+<h3>Other information</h3>
+
+<table border="0" cellpadding="4" id="table1">
+  <tr>
+    <td valign="top">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><b>NOTE</b>:</i>  If you uninstall an adapter's driver 
+	from Windows Device Manager, you must reboot before using SetupBD.exe to 
+	install a new driver.</td>
+  </tr>
+</table>
+<p>
+The "/r" option can only be used with silent install (i.e. with the &quot;/s&quot; 
+option).
+The Reboot option is not available through command line or
+through the button options for Operating Systems like Windows 2000, Windows XP32
+and Windows XP64, since a system restart is not required after
+driver installation.
+</p>
+<p>
+On the Windows NT 4.0 operating system, Intel PROSet, NMS and ANS are included 
+in the driver installation. You are not required to install
+Intel PROSet separately after installing the drivers.
+</p>
+<p>
+When invoked without the /infdir option, SetupBD makes
+some assumptions about where to search for the required inf files. If you don't 
+use the /infdir option, maintain the relative
+CD directory structure.
+</p>
+
+<h3>
+Modifying SetupBD.ini</h3>
+
+<p>
+Specify inf file locations with the SetupBD.ini file. This file can be modified to point to the inf files wherever they 
+have been copied. SetupBD.ini must be in the same folder as SetupBD.exe. </p>
+
+<p>
+The SetupBD.ini file has these keywords: LevelstoRoot, 
+InfSectionName, and InfDir. While the values of the keywords can be modified, 
+the keywords themselves cannot. The SetupBD.ini file begins with the keyword 
+LevelstoRoot:</p>
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Config]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LevelsToRoot=4</p>
+
+<p>
+The value in LevelsToRoot refers to how many directory levels the root of the 
+media is 
+located above the SetupBD.ini file. For example, on the Product CD, go 4 levels up 
+to the root, the access PRO100\WIN98_ME to look for the associated .inf files. If you move the inf file, you may need to 
+change the LevelsToRoot value.</p>
+
+<p>
+The SetupBD.ini file then lists operating systems, followed by their associated 
+keywords. For example:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [Win98]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InfSectionName=Intel<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InfDir=PRO100\WIN_98ME<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InfDir=PRO1000\WIN_98ME</p>
+
+<p>
+Modify the section of SetupBD.ini that corresponds to the OS you are 
+installing onto. The above example refers to the Windows 98 OS.&nbsp; 
+InfSectionName is the name included inside the inf. This is reserved for Intel 
+adapters and should not be 
+changed.</p>
+
+<p>
+InfDir points to the path on the media where the .inf is located. There are two 
+paths listed: one for Pro100; and one for Pro1000. If you change the location of 
+the .inf, this path must be modified.</p>
+
+<p>
+In Windows NT there is an additional keyword:</p>
+
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NMSDir=PRO100\WINNT4\NMS</p>
+
+<p>
+This keyword points to the location of NMS. Its value can be changed, as long as 
+it points to the location of the MS files.</p>
+
+<hr>
+
+<h2><a name="install_proset"></a>Intel PROSet installation</h2>
+<p>
+This section describes how to install Intel PROSet from the command line. It describes all the
+command line options supported in PROSet.msi. The instructions are primarily for NCS Intel PROSet
+installation (Windows 
+2000 and beyond operating systems).
+</p>
+<p>
+<b>Notes:</b>
+</p>
+<ul>
+  <li>
+    <p class="numlst">This release ships NCS (Network Configuration Services)
+    Intel PROSet on Windows 2000 and beyond. Intel PROSet II is shipped on the CD 
+    only for Windows 98, 98SE, and ME.</li>
+  <li>
+    <p class="numlst">Intel PROSet can be installed with PROSet.exe or
+    msiexec.exe. Intel recommends using PROSet.exe. PROSet.exe detects the 
+	system's language, searches for the appropriate transform file, and applies 
+	it to MSI package. The transform file translates the installation
+    instructions to the language associated with your operating system.</P>
+  </li>
+</ul>
+<h3>Command line options</h3>
+<p>
+This section describes how to install Intel PROSet using PROSet.msi / PROSet64.msi and 
+msiexec.exe from the command line. For more information on msiexec.exe command line parameters, refer to the
+<a href="#msiexec"> msiexec.exe command line options</a> section.
+</p>
+<p>
+Windows Installer Service is installed by default in Windows 2000, XP32 and XP64. 
+msiexec.exe is under System32 folder. When System32 is not in the current PATH, the 
+full path to msiexec.exe should be specified in the command line. For example:
+</p>
+<blockquote class="monospace">
+C:\WINNT\System32\msiexec.exe /i PROSet.msi /qn /liew c:\temp\install.log
+</blockquote>
+<p>
+Most commonly used msiexec.exe command line options:
+</p>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <td valign="top">
+<b>Option</b>
+    </td>
+    <td valign="top"><b>Description</b></td>
+  </tr>
+  <tr>
+    <td valign="top">
+<b>/i</b>
+    </td>
+    <td valign="top">install;</td>
+  </tr>
+  <tr>
+    <td valign="top"><b>/x</b> </td>
+    <td valign="top">uninstall;</td>
+  </tr>
+  <tr>
+    <td valign="top"><b>/q[r|n]</b> </td>
+    <td valign="top"> silent install. ("r", reduced GUI, show progress bar information only; "n",
+fully silent.)</td>
+  </tr>
+  <tr>
+    <td valign="top"><b>/liew</b>
+ </td>
+    <td valign="top">
+<p>
+<b>/l</b> --- log file option. Following are log switches:
+</p>
+      <table border="0" cellpadding="4" cellspacing="0">
+        <tr>
+          <td>
+<b>"i"</b> </td>
+          <td> log only status messages;</td>
+        </tr>
+        <tr>
+          <td><b>"w"</b> </td>
+          <td> log only non-fatal warnings;</td>
+        </tr>
+        <tr>
+          <td><b>"e"</b> </td>
+          <td> log all error messages.</td>
+        </tr>
+        <tr>
+          <td><b>"a"</b> </td>
+          <td> log the start of all actions.</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+	<b>TRANSFORMS</b>
+ </td>
+    <td valign="top">
+	A property used to apply transforms (a .mst file) to an MSI package. Syntax example:
+	<br>
+	<blockquote class="monospace">
+        TRANSFORMS=2052.mst
+	</blockquote>
+    Applies a Chinese language transform to MSI package, so the
+	installer displays Chinese strings during installation.
+    </td>
+  </tr>
+</table>
+
+<h4>Silent install / upgrade command line syntax</h4>
+<blockquote class="monospace">
+<p>
+The following launches a typical installation of PROSet.msi.
+</p>
+	&lt;Full path to msiexec.exe&gt; /i &lt;Full path to PROSet.msi&gt; /qn /liew &lt;Full
+	path to install.log&gt;
+</blockquote>
+<h4>Silent uninstall command line syntax</h4>
+<blockquote class="monospace">
+<p>
+The following uninstalls all the Intel PROSet components. It can be used when the path 
+to PROSet.msi is available.
+</p>
+	&lt;path to msiexec.exe&gt; /x &lt;path to PROSet.msi&gt; /qn /liew &lt;path
+	to uninstall.log&gt;
+</blockquote>
+<blockquote class="monospace">
+<p>
+The following uninstalls all the Intel PROSet components. It can be used when the path to 
+PROSet.msi is not available but the ProductCode of MSI package is known.
+</p>
+	&lt;path to msiexec.exe&gt; /x &lt;ProductCode of PROSet.msi&gt; /qn /liew &lt;path to
+	uninstall.log&gt;
+</blockquote>
+<h4>Command line options supported by PROSet.msi</h4>
+<p>
+PROSet.msi provides public properties that can be used to change Intel PROSet install 
+selections from the command line.</p>
+<p>
+By setting the properties in the command line, you can disable and hide some 
+features in PROSet.msi, or force some feature to be selected/displayed. This provides 
+the flexibility to install different components/features in Intel PROSet.
+</p>
+<p>
+Following is the list of public properties provided by PROSet.msi:
+</p>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <td valign="top"><b>Property</b></td>
+    <td valign="top"><b>Definition</b></td>
+  </tr>
+  <tr>
+    <td valign="top">
+	<b>TRAYICON</b>
+    </td>
+    <td valign="top">
+		<p>
+		"0" , hide PRONotify, installer will not launch PRONotify after install. It will 
+		not be hooked up in Run key.
+		</p>
+		<p>
+		"1", default value, always launch PRONotify after install/upgrade.
+		</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+	<b>ANS</b>
+    </td>
+    <td valign="top">"0", deselect / hide ANS.
+		<p>
+		&quot;1&quot;, select ANS.</p>
+      <p><i><b>NOTE</b>:</i> In this release, it is set to "1" by default. It is always installed by 
+		default in this release.
+		</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+	<b>FMTI</b>
+    </td>
+    <td valign="top">
+		<p>
+		"0", deselect / hide FTMI DLL feature.
+		</p>
+		<p>
+		"1", select FTMI DLL feature.
+		</p>
+		<p>
+		"2", default value.
+		</p>
+        <p><i><b>NOTE</b>:</i> It is always installed by default in this release.
+		</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+	<b>CIMV2</b>
+    </td>
+    <td valign="top">
+		<p>
+		"0", deselect / hide CIMV2 support feature.
+		</p>
+		<p>
+		"1", select CIMV2 support feature.
+		</p>
+		<p>
+		"2", default value.
+		</p>
+        <p><i><b>NOTE</b>:</i> It is deselected in this release by default. To turn it on from command line,
+		set CIMV2=1.
+		</p>
+    </td>
+  </tr>
+  </table>
+<br>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><p><b>NOTE</b>:</i> Public properties are case sensitive. All 
+    characters are uppercase with no white space between characters. For example:
+    </p>
+	<blockquote class="monospace">
+		msiexec.exe /i PROSet.msi /qn CIMV2=1
+	</blockquote>
+	<p>
+	Any white space in "CIMV2=1" makes the setting invalid. "cimv2=1" is not a valid setting.
+	</p></td>
+  </tr>
+</table>
+
+<h3>Use PROSet.exe utility to simplify command lines</h3>
+<p>
+PROSet.exe is a setup utility used for language support in installing Intel PROSet. It detects the system language, searches for the appropriate transform
+file 
+in the same folder, and then launches PROSet.msi in the language specific to the
+operating system. The transform file translates the installation instructions to
+the language associated with your operating system.
+</p>
+<p>
+PROSet.exe also takes the install options from the command line and applies them
+to the PROSet.msi 
+command line installation. Following is an example of PROSet.exe command line:
+</p>
+<blockquote class="monospace">
+    PROSet.exe /qn CIMV2=1</blockquote>
+<p>
+It is same as:
+</p>
+<blockquote class="monospace">
+	C:\WINNT\System32\msiexec.exe /i PROSet.msi /qn CIMV2=1 
+	TRANSFORMS=1033.mst</b>
+</blockquote>
+<p>Which detects the system's language and searches for the appropriate transform file.
+For example, when it is launched 
+in Chinese (simplified) operating systems, it is equal to:
+</p>
+<blockquote class="monospace">
+	C:\WINNT\System32\msiexec.exe /i PROSet.msi /qn CIMV2=1  
+	TRANSFORMS=2052.mst
+</blockquote>
+<p>
+This displays Chinese (Simplified) strings during installation, and it also installs
+the Chinese (Simplified) version of  Intel PROSet in the system.
+</p>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><p><b>NOTE</b>:</i>  The name of PROSet.exe is subject to change, but the functions will not 
+be changed.
+    </p>
+    </td>
+  </tr>
+</table>
+
+<h3>Command line install examples</h3>
+<p>
+This section describes some examples used in install command lines.
+</p>
+<p>
+Assume that C:\WINNT\System32 is in the system32 folder and PROSet.msi
+is under the D:\Apps\PROSet\WS03XP32 folder. You can modify the paths for different
+operating systems and CD layouts and apply the command line examples.
+</p>
+<ol>
+	<li><p class="numlst">How to install Intel PROSet silently on XP32:</p>
+      <blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP32\PROSet.msi 
+			/qn /liew C:\ install.log<p>
+    	</blockquote>
+            <p class="numlst">The following launches a typical install silently. In this release, it installs 
+			Intel PROSet with ANS and FTMI DLL by default.</p>
+					<blockquote class="monospace">D:\Apps\PROSet\WS03XP32\PROSet.exe /qn /liew C:\install.log</p></blockquote>
+
+	</li>
+	<li><p class="numlst">How to install Intel PROSet silently on XP64:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP64\PROSet64.msi
+            /qn /liew C:\ install.log
+		</blockquote>
+		<p class="numlst">Another way to do this is:</p>
+		<blockquote class="monospace">
+            D:\Apps\PROSet\WS03XP64\PROSet.exe /qn /liew C:\install.log
+		</blockquote>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><p><b>NOTE</b>:</i> ANS is selected by default 
+		always. CIMV2 support is deselected in typical install.
+    </p>
+    </td>
+  </tr>
+</table>
+
+	</li>
+	<li><p class="numlst">How to install Intel PROSet silently with CIMV2 support:</p>
+		<p class="numlst">Set the CIMV2 public property to "1" in the command line, for example:</p>
+		<p class="numlst">For XP32 and Windows Server 2003 Operating System, use:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP32\PROSet.msi
+            /qn CIMV2=1 /liew C:\ install.log
+		</blockquote>
+		<p class="numlst">It is same as:</p>
+		<blockquote class="monospace">
+            D:\Apps\PROSet\WS03XP32\PROSet.exe /qn CIMV2=1 /liew
+      		C:\install.log
+      	</blockquote>
+		<p class="numlst">For XP64, use:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP64\PROSet64.msi
+            /qn 
+			CIMV2=1 /liew C:\ install.log
+		</blockquote>
+      <p class="numlst">It is same as:</p>
+		<blockquote class="monospace">
+            D:\Apps\PROSet\WS03XP64\PROSet.exe /qn CIMV2=1 /liew C:\install.log
+		</blockquote>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><p><b>NOTE</b>:</i>  There is no white space in "CIMV2=1" and all characters are in uppercase.
+    </p>
+    </td>
+  </tr>
+</table>
+	</li>
+	<li><p class="numlst">How to install  components but deselect ANS:</p>
+		<p class="numlst">Set the ANS=0 in the command line, for example:</p>
+		<p class="numlst">For XP32 and Windows Server 2003 Operating System, use:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP32\PROSet.msi
+            /qn ANS=0 /liew C:\ install.log
+		</blockquote>
+		<p class="numlst">It is same as:</p>
+		<blockquote class="monospace">
+            D:\Apps\PROSet\WS03XP32\PROSet.exe /qn ANS=0  /liew C:\install.log
+		</blockquote>
+	</li>
+	<li><p class="numlst">How to apply a transform file to MSI using msiexec.exe:</p>
+		<p class="numlst">Set the TRANSFORMS=filename.mst in the command line.
+        For example:</p>
+		<p class="numlst">For XP32 and Windows Server 2003 Chinese (Simplified) Operating System, use PROSet.msi 
+			from this release:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP32\PROSet.msi
+            /qn 
+			TRANSFORMS=2052.mst /liew C:\ install.log
+		</blockquote>
+		<blockquote class="monospace">
+            D:\Apps\PROSet\WS03XP32\PROSet.exe /qn /liew C:\install.log
+		</blockquote>
+		<table border="0" cellpadding="4">
+  		  <tr>
+    		<td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    		<td valign="top"><i><b>NOTE</b>:</i> Intel recommends using PROSet.exe to install
+              Intel PROSet. PROSet.exe detects the system's language, searches
+              for the appropriate transform file, and applies it to MSI package.</td>
+  		  </tr>
+		</table>
+	</li>
+	<li><p class="numlst">How to hide PRONotify and prevent installer from launching it:</p>
+		<p class="numlst">Set TRAYICON=0 in command line, for example:</p>
+		<blockquote class="monospace">
+            C:\WINNT\System32\msiexec.exe /i D:\Apps\PROSet\WS03XP32\PROSet.msi
+            /qn TRAYICON=0 /liew C:\ install.log
+		</blockquote>
+		<p class="numlst">Prevents installer from launching PRONotify. PRONotify is also
+			unhooked in Run key. In next reboot, PRONotify will not be launched.</p>
+	</li>
+</ol>
+
+<h3>Command line uninstall examples</h3>
+
+<p><b>NOTE:</b> Do not use the &quot;ANS&quot; option when uninstalling Intel
+PROSet from a command line.</p>
+<ol>
+	<li><p class="numlst">How to uninstall Intel PROSet from command line when PROSet.msi path is available:</p>
+		<p class="numlst">First get the path of PROSet.msi in the local system or any other image path when 
+			you installed Intel PROSet, then use msiexec.exe to uninstall Intel PROSet.</p>
+		<p class="numlst">For example, assume System folder is C:\Windows\System, and PROSet.msi is in 
+			d:\unattend, then the command line will be:</p>
+		<blockquote class="monospace">
+			C:\Windows\System\msiexec.exe /x d:\unattend\PROSet.msi /qn /liew d:\unattend\uninst.log
+		</blockquote>
+	</li>
+	<li><p class="numlst">How to uninstall Intel PROSet using product code:</p>
+		<p class="numlst">(Following product codes are used for this release  only, they 
+			are subject to change in each new release)</p>
+		<p class="numlst"><b>Release 6.4 and later product codes</b>:</p>
+		<p class="numlst">Uninstall Intel PROSet on Windows 2000 and XP32:</p>
+		<blockquote class="monospace">
+			msiexec /x {EF4EF65F-4D62-44D7-82C9-1AECCBA74C50} /qn
+		</blockquote>
+		<p class="numlst">Uninstall Intel PROSet on XP64:</p>
+		<blockquote class="monospace">
+			msiexec /x {DFB82058-3E67-4B2B-83C3-636E3CE134BE} /qn
+		</blockquote>
+		<p class="numlst">Uninstall Intel PROSet II on Windows 98, 98SE, ME</p>
+		<blockquote class="monospace">
+			msiexec /x {2B8D4AFB-05D0-49F3-82E3-B7F4D1043CEF} /qn</b>
+		</blockquote>
+	</li>
+</ol>
+
+<h3>Command line reinstall / repair</h3>
+<p>If you need to repair an Intel PROSet installation, uninstall the application
+and then reinstall it. See the uninstall and install examples above for more
+information.</p>
+
+<h3>Command line supports on Windows 98, 98SE and ME</h3>
+<p>
+Intel PROSet II is shipped for Windows 98, 98SE and ME.
+</p>
+<p>Windows 98 and 98SE do not have Windows Installer Service installed by default. 
+You can use the PROSet.exe located in
+the same folder as the PROSet.msi file to install Windows Installer Service, if needed, and then launch PROSet.msi. 
+Intel recommends you use PROSet.exe 
+for command line installs.
+</p>
+
+<p><b>Command line install examples</b>:</p>
+<p>
+This will install Intel PROSet.
+</p>
+<blockquote class="monospace">
+	PROSet.exe /qn /liew C:\inst.log
+</blockquote>
+<p><b>Command line uninstall examples</b>:</p>
+<blockquote class="monospace">
+	msiexec.exe /x D:\apps\PROSet\WN98SEME\PROSet.msi /qn REBOOT= ReallySuppress
+</blockquote>
+<blockquote class="monospace">
+	msiexec.exe /x {2B8D4AFB-05D0-49F3-82E3-B7F4D1043CEF} /qn REBOOT= ReallySuppress
+</blockquote>
+
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><b>NOTE</b>:</i>  Uninstalling Intel PROSet II on
+      Windows 98, 98SE and ME requires a reboot
+to clean up the cached MSI package. You can suppress the reboot from the command line.
+      Upgrading Intel PROSet II in these Operating Systems also requires a reboot.</td>
+  </tr>
+</table>
+<br>
+
+<hr>
+
+<h2><a name="msiexec"></a>msiexec.exe command line options</h2>
+<p>
+Refer to Microsoft's web site for the most current information on msiexec.exe
+command line options: <a href="http://msdn.microsoft.com/library" target="_blank">http://msdn.microsoft.com/library</a>
+</p>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><i><b>NOTES</b>:</i> Not all command line options Microsoft provides with msiexec.exe have
+been tested or are necessarily supported for Intel PROSet installation.</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td valign="top"> Msiexec also sets an error level on return that corresponds to system
+error codes: <a href="http://msdn.microsoft.com/library" target="_blank">http://msdn.microsoft.com/library</a>
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" SIZE="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/02/04 1:45p <!-- $--> Revision <!--$$Revision:--> 10 <!-- $--> </code></p>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+# Example 6: 2 Adapter ALB team, 5 VLANs, 1 Frametype, 2 Protocols.
+
+# NOTE: This example file is for PRO/100 adapters. For PRO/1000 adapters, 
+#       replace "CE100B" with "CE1000".
+
+# Teaming and VLAN can be implemented at the same time.  The script gets
+# large quickly so this example will only use one frametype.  So that both IP
+# and IPX can be bound to it, the Ethernet_II frametype will be used instead
+# of Novell's default 802.2.  A homogenous team of 2 load balanced PRO/100
+# Server adapters configured as members of 5 different VLANs will be used here.
+
+; load TCPIP.NLM.  Must be done before IP is bound.
+
+LOAD TCPIP
+
+; Load the base drivers for each adapter in the team.
+
+LOAD CE100B SLOT=1 FRAME=ETHERNET_II NAME=Primary_II
+LOAD CE100B SLOT=2 FRAME=ETHERNET_II NAME=Secondary_II
+
+
+; Load iANS.LAN with the VLANID keyword once for each VLAN that the server is
+; intended to communicate with.  Assign a name so that each instance can
+; referenced when binding the network protocols.
+
+LOAD iANS FRAME=ETHERNET_II VLANID=10 NAME=V10 TEAM=1
+LOAD iANS FRAME=ETHERNET_II VLANID=20 NAME=V20 TEAM=1
+LOAD iANS FRAME=ETHERNET_II VLANID=30 NAME=V30 TEAM=1
+LOAD iANS FRAME=ETHERNET_II VLANID=40 NAME=V40 TEAM=1
+LOAD iANS FRAME=ETHERNET_II VLANID=50 NAME=V50 TEAM=1
+
+; Bind iANS to each physical adapter.
+
+BIND iANS PRIMARY_II PRIMARY
+BIND iANS SECONDARY_II
+
+; Create the team in load balancing mode.
+
+LOAD iANS COMMIT MODE=ALB
+
+; Bind both IPX and IP to iANS for each VLAN.
+; IPX first.
+
+BIND IPX V10 NET=1011
+BIND IPX V20 NET=2011
+BIND IPX V30 NET=3011
+BIND IPX V40 NET=4011
+BIND IPX V50 NET=5011
+
+; And IP
+
+BIND IP V10 ADDR=23.17.10.1 MASK=FF.FF.0.0
+BIND IP V20 ADDR=23.18.20.1 MASK=FF.FF.0.0
+BIND IP V30 ADDR=23.19.30.1 MASK=FF.FF.0.0
+BIND IP V40 ADDR=23.20.40.1 MASK=FF.FF.0.0
+BIND IP V50 ADDR=23.21.50.1 MASK=FF.FF.0.0
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.

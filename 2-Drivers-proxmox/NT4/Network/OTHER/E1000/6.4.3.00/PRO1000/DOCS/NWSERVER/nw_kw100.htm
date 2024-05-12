@@ -1,0 +1,287 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Netware Command Line Parameters and Keywords -- C100</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>NetWare* Command Line Parameters and Keywords</h1>
+<p>
+The following NetWare* keywords are applicable for the PRO/100 adapter drivers. These parameters 
+are used with the <span class="monospace">LOAD &lt;driver&gt;</span> command (in net.cfg or startnet.bat).
+</p>
+
+<p>
+To view the keywords for Advanced Network Services (ANS), such as VLANs, 
+<a href="nw_akeys.htm">click here</a>.</p>
+
+<p><b>Syntax:&nbsp; </b><span class="monospace">&lt;command&gt;=&lt;parameter&gt;</span></p>
+
+<p>
+<b>Example usage</b> (server adapters):&nbsp; <span class="monospace">Load CE100b 
+Speed=100 ForceDuplex=2 Name=eo83</span>
+</p>
+<p>
+<b>Example usage</b> (desktop adapters):&nbsp;&nbsp;<span class="monospace">Load CE100b 
+Speed 100 ForceDuplex 2 Name eo83</span>
+</p>
+
+<table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <th>
+      <p><b>Parameter</b></p>
+    </th>
+    <th>
+      <p><b>Values</b></p>
+    </th>
+    <th>
+      <p><b>Default Value</b></p>
+    </th>
+    <th>
+      <p><b>Description</b></p>
+    </th>
+  </tr>
+  <tr>
+    <td class="monospace">SPEED</td>
+    <td>10, 100</td>
+    <td>10</td>
+    <td>
+
+<p>
+           The adapter automatically senses speed. If it is unable to auto-sense
+           (including no network cable), SPEED defaults to 10. Make sure to
+           match the adapter to the
+           speed/duplex of your switch (if set). If you don't have an
+           auto-negotiating switch and are forcing the&nbsp;duplex mode, you
+           must specify the speed. You must set SPEED to either 10
+           or 100 if you're setting FORCEDUPLEX to either half or
+           full.</p>
+
+<p>
+   Syntax:&nbsp; <span class="monospace">SPEED=&lt;value&gt;</span></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">FORCEDUPLEX</td>
+    <td>0 = autonegotiate
+      <p>1 = half duplex</p>
+      <p>2 = full duplex</p>
+    </td>
+    <td>depends on card type</td>
+    <td>
+
+<p>
+   Duplex Support and Default listed by Card Type:</p>
+
+<p>
+   <b>Auto-negotiate</b>: The adapter negotiates the switch.<br>
+   <b>
+   Full duplex</b>: The adapter sends and receives packets at the same&nbsp;time. <br>
+   <b>
+   Half duplex</b>: The adapter communicates in one direction at a time.</p>
+
+<p>
+  <i><b>NOTE</b>:</i> If you use the FORCEDUPLEX command, you must also set the SPEED parameter to either 10 or 100.</p>
+
+<p>
+         Syntax:&nbsp; <span class="monospace">FORCEDUPLEX=&lt;value&gt;</span></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">SLOT</td>
+    <td>1-valid slot #</td>
+    <td>None</td>
+    <td>
+
+<p>
+      This is a standard keyword parameter predefined by NetWare to specify the
+      physical slot of the installed adapter. When multiple adapters reside in a
+      system, the SLOT keyword is used to distinguish which physical adapter is
+      being loaded. If multiple adapters do exist in a system and the command
+      line does not contain the SLOT keyword, the system will build a list of
+      adapter slots and prompt the user to select an adapter to be loaded.</p>
+
+<p>
+  Syntax:  <span class="monospace">SLOT=&lt;value&gt;</span></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">FRAME</td>
+    <td>Ethernet_802.2 Ethernet_802.3 Ethernet_II Ethernet_SNAP</td>
+    <td> Ethernet_802.2</td>
+    <td>
+
+<p>
+   Configures the adapter to process the valid NetWare Ethernet frame.</p>
+
+<p> Syntax:  <span class="monospace">FRAME=&lt;value&gt;</span></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">TXTHRESHOLD</td>
+    <td>0-200</td>
+    <td> 16</td>
+    <td>
+   Represents the threshold for transmits from extender SRAM
+   FIFO (output buffer).
+   If &lt;value&gt; is 16 then the bytes are set at 128 (16x8). In this case, the LAN&nbsp;controller transmits after 
+   copying 128 bytes from the host memory.&nbsp;The maximum number that you can specify is 200 (200x8=1600 bytes)&nbsp;which ensures there will not be any
+      underruns.
+      <p>
+      Syntax: <span class="monospace">TXTHRESHOLD=&lt;value&gt;</span>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">NODE</td>
+    <td>n/a</td>
+    <td> The adapter's assigned address (UAA Universal Address)</td>
+    <td>
+   Specifies a locally administered address (LAA) unique to each&nbsp;adapter. The node address is a 12-digit 
+   hexadecimal number; the second digit must be one of the following digits: 2, 6, A, or E.
+      <p>
+   02AA => LAA, 02 is set by the driver if not specified.<br>
+   00A0 => Typical Intel address (default)</p>
+      <p>Syntax: <span class="monospace">NODE=xNxxxxxxxxxx</span>&nbsp; (where N must = 2, 6, A, or E; x = hexadecimal number)</p>
+      <p><i><b>NOTE: </b></i><span style="color: blue">&nbsp;</span>The IEEE 
+      standard is LLAs start with 0004000000.&nbsp; Otherwise the first 8 digits are 
+      the vender id.</p>
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">FLOWCONTROL</td>
+    <td>
+      0 = off<br>
+      1 = RX flow control<br>
+      2 = TX flow control<br>
+      3 = RX/TX flow control</td>
+    <td> 2</td>
+    <td>
+   Controls the ability of the adapter to advertise flow control capabilities.
+   Default is to allow TX flow control.&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">POLL</td>
+    <td>
+      0 -2</td>
+    <td> 1</td>
+    <td>
+   Controls whether or not the driver loads in polling mode. 0 means no polling
+   (e.g. interrupt mode), 1 means polling is forced on, and 2 means auto-detect.
+   In this case, the driver will query the OS to determine whether or not
+   polling is supported and will enable polling support accordingly. If
+   supported by the OS, polling can decrease CPU usage by the driver when under
+   heavy network load.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">PERSIST</td>
+    <td>
+      0 - 2</td>
+    <td> 0</td>
+    <td>
+   Controls whether the driver remains persistent during a hot plug event.
+   Setting this parameter to 0 disables persistency; the driver will always
+   unload during Hot Plug operations. Setting this parameter to 1 forces the driver to
+   remain persistent during hot plug events. Setting this parameter to 2 sets
+   the driver in auto-persistency mode. In this mode, the driver will only
+   remain persistent when it is used with ANS (teaming/VLANs)
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">TxBuffers</td>
+    <td>
+      8 - 65535</td>
+    <td> 96</td>
+    <td>
+   TXBuffers tells the hardware where the fragments of a
+   transmit packet are in host memory. A transmit packet can use 1 or more
+   descriptors. Most transmits require 3 or 4 descriptors. Each descriptor is 16
+   bytes.
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">RxBuffers</td>
+    <td>
+      8 - 65535</td>
+    <td> 64</td>
+    <td>
+   RXBuffers tells the hardware where to DMA received packets. For each RX
+   buffer, the driver will also allocate a receive descriptor. Each descriptor is
+   16 bytes and each buffer is 2048 bytes.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4">The following keywords are for protocol.ini
+      configuration when using NETX and VLM.</td>
+  </tr>
+  <tr>
+    <td class="monospace">
+EARLYRECV
+      <p>(client only)</td>
+    <td>0 - 1</td>
+    <td>1</td>
+    <td valign="top">
+
+<p>
+   This determines whether the driver enables early receives. Early receives allows a frame to start being processed before it is
+   completely received into host memory. Value of 0 disables early receives,
+                        1 enables early receives.</p>
+
+<p> Syntax: <span class="monospace">EARLYRECV &lt;value&gt;</span></p>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">
+IRQMODE</td>
+    <td>0 - 2</td>
+    <td>0</td>
+    <td valign="top">
+   This parameter enables or disables interrupt sharing mode of the
+   driver. It has the capability to automatically select the
+   enabled or disabled state depending on system configuration. If
+   the IRQ assigned to the driver is not being shared with another
+   device, then interrupt sharing is disabled.  If the IRQ assigned
+   to the driver is being shared, then the interrupt sharing is
+   enabled. IRQMODE is valid for VLM clients only.
+      <p>
+Where &lt;value&gt; is 0 automatically selects interrupt sharing mode,
+                  1 interrupt sharing is disabled,
+                  2 interrupt sharing is enabled</p>
+      <p>Syntax: <span class="monospace">IRQMODE &lt;value&gt;</span></p>
+    </td>
+  </tr>
+  <tr>
+    <td class="monospace">Protocol
+      <p>(client only)</p>
+    </td>
+    <td>E0 (Ethernet_802.2)
+      <p>
+      0 (Ethernet_802.3)</p>
+      <p>
+      8137 (Ethernet_II or Ethernet_SNAP)</p>
+      </td>
+    <td>EO (NetWare 5.x and 6.x)
+      <p>0 (Prior versions of NetWare; not supported)</p>
+    </td>
+    <td valign="top">
+   Indicates the standard protocol in use. This parameter is for VLM clients only.
+   <p>Syntax: <span class="monospace">Protocol E0</span></td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/27/04 4:47p <!-- $--> Revision <!--$$Revision:--> 7 <!-- $--></code></p>
+
+</body>
+</html>

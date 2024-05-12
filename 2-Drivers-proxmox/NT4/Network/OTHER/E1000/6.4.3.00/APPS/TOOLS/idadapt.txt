@@ -1,0 +1,234 @@
+IDADAPT - Intel PCI NIC Identification Utility
+May 12, 2003
+====================================================================
+
+DISCLAIMER:
+-----------
+
+This IDADAPT.TXT as well as the software described in it is furnished under
+license and may only be used or copied in accordance with the terms of the
+license. The information in this manual is furnished for informational
+use only, is subject to change without notice, and should not be construed
+as a commitment by Intel Corporation. Intel Corporation assumes no
+responsibility or liability for any errors or inaccuracies that may appear
+in this document or any software that may be provided in association with
+this document.
+Except as permitted by such license, no part of this document may be
+reproduced, stored in a retrieval system, or transmitted in any form or
+by any means without the express written consent of Intel Corporation.
+
+
+CONTENTS
+--------
+- OVERVIEW
+- RUNNING THE UTILITY
+- USAGE NOTES
+- EXAMPLES
+- LIMITATIONS
+- DRIVER TO PCI ID CROSS REFERENCE
+
+
+OVERVIEW
+--------
+
+The Intel PCI NIC Identification Utility identifies Intel PCI adapters
+and provides adapter properties and assigned resources. You can readily
+use this information in batch, script and configuration files for
+automation purposes.
+
+The utility returns the following values:
+
+- Slot number. PCI slot number reported by the adapter; returned in decimal
+  format.
+- SLOTX. PCI slot number reported by the adapter; For Gigabit solutions it is
+  returned in hexidecimal format.
+- PCI device ID. Adapters sharing the same PCI device ID can use the same
+  driver. See the table at the end of this document showing the
+  relationship between drivers and PCI device IDs.
+- SSID - PCI Subsystem ID and the Subvendor ID displayed in hexidecimal.
+- MAC address. 12-digit Ethernet ID assigned to the adapter. This number
+  is also printed on the adapter label.
+- Revision ID.  Adapters with the same device ID may be distinguished with 
+  the revision ID.
+
+RUNNING THE UTILITY
+-------------------
+
+To run IDADAPT.EXE, you must start the computer in DOS. This utility
+should not be run from a DOS session within any version of Microsoft
+Windows*, or in any other non-DOS operating system.
+
+IDADAPT.EXE can be run with no command line options, or with either of the
+following command line options:
+
+	/?
+	Displays help information
+
+	/B:<filename>
+	Creates a file containing the adapter properties with the name
+	specified. This file is in the format of a DOS batch file. If this
+	file is named with the extension of .BAT, it can be executed as a
+	batch file. Executing this batch file will create environment
+	variables from the adapter properties.
+
+	/VERSION
+        Displays IDADAPT version information and the diagnostic library version
+        information.
+
+USAGE NOTES
+-----------
+
+Running the utility with no command line parameters displays the adapter
+properties on the screen. For example, if you enter IDADAPT in a computer
+with 2 Intel PCI adapters installed, the display would resemble the
+following:
+NIC1 SLOT=43 SLOTX=0068 PCI ID=1229 SSID=10118086 MAC=0002B31FE072 RevID=65
+NIC2 SLOT=47 SLOTX=0069 PCI ID=1031 SSID=10118086 MAC=0090270AAF73 RevID=32
+
+In this example, the first adapter has the following properties:
+- Logical slot is 43
+- SLOTX is 0068
+- PCI device ID is 1229
+- SSID is 10118086
+- MAC address is 0002B31FE072
+- The revision ID is 65
+
+If the utility does not find any adapters, it reports "No supported
+adapters were found" and returns an error level of 1. You can use the
+error level for conditional branching in batch files.
+
+If you run the utility using /B:<filename>, it creates a file with the
+name you specified. This file contains adapter properties in a batch
+file format. This is an example batch file:
+SET NIC1_SLOT=43
+SET NIC1_SLOTX=0068
+SET NIC1_PCIID=1229
+SET NIC1_SSID=10118086
+SET NIC1_MAC=0002B31FE072
+SET NIC1_REVID=65
+SET NIC2_SLOT=47
+SET NIC2_SLOTX=0069
+SET NIC2_PCIID=1031
+SET NIC2_SSID=10118086
+SET NIC2_MAC=0090270AAF73
+SET NIC2_REVID=32
+
+If the name you assign to the file ends in .BAT, it can be executed in DOS.
+Executing the file sets environment variables for each property of each
+adapter.
+
+Once the environment variables are created by the batch file, you can
+insert the values into configuration files as needed. See examples below.
+
+When using this batch file, remember that about 64 bytes of environment
+space will be needed for each adapter found. Insure that you make
+sufficient environment space available in your configuration.
+
+EXAMPLES
+---------
+
+1
+-
+To create a startup disk that loads a Packet Driver named PCKTDRVR.COM
+on the second found NIC, the AUTOEXEC.BAT file might contain the following:
+IDADAPT /B:INTELSET.BAT
+IF ERRORLEVEL 1 GOTO NO_NIC
+CALL INTELSET.BAT
+PCKTDRVR 0x60 %NIC2_SLOT%
+GOTO END
+:NO_NIC
+ECHO NO ADAPTER FOUND!!
+PAUSE
+:END
+
+2
+-
+To create a startup disk that automatically detects the adapter model
+and loads the proper DOS ODI driver, the AUTOEXEC.BAT file might contain
+the following:
+IDADAPT /B:INTELSET.BAT
+IF ERRORLEVEL 1 GOTO NO_NIC
+CALL INTELSET.BAT
+LSL
+IF "%NIC1_PCIID%" == "1229" GOTO PRO100
+IF "%NIC1_PCIID%" == "2449" GOTO PRO100
+IF "%NIC1_PCIID%" == "1000" GOTO PRO1000
+IF "%NIC1_PCIID%" == "1001" GOTO PRO1000
+IF "%NIC1_PCIID%" == "1002" GOTO PRO1000
+IF "%NIC1_PCIID%" == "1003" GOTO PRO1000
+IF "%NIC1_PCIID%" == "1004" GOTO PRO1000
+GOT0 NO_NIC
+:PRO100
+E100BODI
+GOTO CONTINUE
+:PRO1000
+E1000ODI
+GOTO CONTINUE
+:CONTINUE
+IPXODI
+VLM /V4
+GOTO END
+:NO_NIC
+ECHO !! NO SUITABLE ADAPTER FOUND !!
+PAUSE
+:END
+
+
+LIMITATIONS
+-----------
+
+This utility is designed to work with Intel PCI adapters. It
+should work with any modern Intel PCI bus adapter, as well as LAN on
+Motherboard designs based on Intel 10/100 and 10/100/1000 silicon.
+
+It does not work with any Intel CardBus, PCMCIA, ISA, EISA or MCA bus
+adapters, or obsolete (products released prior to 1996) Intel network
+adapters of any architecture.
+
+IDADAPT.EXE will detect and return information on a maximum of sixteen
+adapters in a computer.
+
+DRIVER TO PCI ID CROSS REFERENCE
+--------------------------------
+
+ ---------------------------------------------------------------
+|PCI ID	| ADAPTER FAMILY 	| NDIS 2 driver	| DOS ODI driver|
+|----------------------------------------------------------------
+| 1000	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1001	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1002	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1003	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1004	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1005	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1006	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1007	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1008	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1009	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100A	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100B	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100C	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100D	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100E	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 100F	| PRO/1000		| E1000.DOS	| E1000ODI.COM	|
+| 1229	| PRO/100+/S families  	| E100B.DOS	| E100BODI.COM	|
+| 1030	| InBusiness 10/100	| D100IB.DOS	| N/A		|
+| 1031	| PRO/100 V family    	| E100B.DOS	| E100BODI.COM	|
+| 103A	| PRO/100 V family   	| E100B.DOS	| E100BODI.COM	|
+| 103B	| PRO/100 V family    	| E100B.DOS	| E100BODI.COM	|
+| 103C	| PRO/100 V family    	| E100B.DOS	| E100BODI.COM	|
+| 103D	| PRO/100 V family   	| E100B.DOS	| E100BODI.COM	|
+| 103E	| PRO/100 V family    	| E100B.DOS	| E100BODI.COM	|
+| 2449	| PRO/100 V family    	| E100B.DOS	| E100BODI.COM	|
+ ---------------------------------------------------------------
+
+
+Copyright (C) 2003-2004, Intel Corporation.
+All rights reserved.
+
+
+* Other product and corporate names may be trademarks of other companies
+  and are used only for explanation and to the owners' benefit, without
+  intent to infringe.
+
+---End of IDADAPT.TXT---
+

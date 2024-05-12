@@ -1,0 +1,1 @@
+"%~dp0spice-vdagent-x86-0.10.0.msi" /norestart

@@ -1,0 +1,402 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>FreeBSD Driver for the Intel(R) PRO/1000 Family of Adapters</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>FreeBSD* Driver for the Intel&reg; PRO/1000 Family of Adapters</h1>
+
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#adapters">Supported Adapters</a></p>
+<p class="contents"><a href="#install">Building and Installation</a></p>
+<p class="contents"><a href="#speed_duplex">Speed and Duplex Configuration</a></p>
+<p class="contents"><a href="#add_configs">Additional Configurations</a></p>
+<p class="contents"><a href="#limitations">Known Limitations</a></p>
+<p class="contents"><a href="#support">Support</a></p>
+
+<p>
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+This file describes the FreeBSD* driver, version 1.7.x, for the Intel&reg;
+PRO/1000 Family of Adapters. This driver has been developed for use with FreeBSD,
+version 4.7 through 4.9.</p>
+<p>
+For questions related to hardware requirements, refer to the documentation&nbsp;supplied with your Intel PRO/1000 adapter. All hardware requirements listed&nbsp;apply 
+for use with
+FreeBSD.
+</p>
+
+<hr>
+
+<a name="adapters"></a><h2>Supported Adapters</h2>
+
+<p>
+To verify that your Intel adapter is supported, find the board ID number on the 
+adapter. Look for a label that has a barcode and a number in the format of 
+123456-001 (six digits hyphen three digits).&nbsp;
+For more information on how to identify your adapter, go to the Adapter &amp;
+Driver ID Guide at:
+</p>
+
+<blockquote>
+    <p><a href="http://support.intel.com/support/network/adapter/index.htm">
+    http://support.intel.com/support/network/adapter/index.htm </a></p>
+</blockquote>
+
+<p>
+For the latest Intel network drivers for FreeBSD, see:
+<blockquote>
+    <a href="http://appsr.intel.com/scripts-df/support_intel.asp" target="_blank">
+	http://appsr.intel.com/scripts-df/support_intel.asp</a>
+</blockquote>
+
+<hr>
+
+<a name="install"></a><h2>Building and Installation</h2>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" align="left"><i><b>NOTE</b>:</i>   The driver can be
+      installed as a dynamic loadable kernel module or compiled into the kernel.
+      You must have kernel sources installed in order to compile the driver module.</td>
+  </tr>
+</table>
+
+<p>    
+In the instructions below, x.x.x is the driver version as indicated in the name of the driver
+tar file.
+</p>
+
+<ol>
+  <li><p class="numlst">Move the base driver tar file to the directory of your choice. For
+   example, use /home/username/em or /usr/local/src/em.</p>
+  </li>
+  <li><p class="numlst">
+  	Untar/unzip the archive:
+	<blockquote class="monospace">
+		tar xvfz em-x.x.x.tar.gz
+	</blockquote>
+  <p>This will create an em-x.x.x directory.</li>
+  <li><p class="numlst">To create a loadable module, perform the following 
+  steps. </p>
+<table border="0" cellpadding="4" width="863">
+  <tr>
+    <td width="30" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" align="left" width="811"><i><b>NOTE</b>:</i> To compile the driver into 
+    the kernel, proceed to step 4.</td>
+  </tr>
+</table>
+    <ol type="a">
+    	<li><p class="numlst">To compile the module<br>
+&nbsp;&nbsp;&nbsp; cd em-x.x.x<br>
+&nbsp;&nbsp;&nbsp; make</p>
+        </li>
+		<li><p class="numlst">To install the compiled module in system 
+        directory:<br>
+&nbsp;&nbsp;&nbsp; make install</p>
+			</li>
+	    <li>If you want the driver to load automatically when the system is 
+        booted:<br>
+&nbsp;&nbsp;&nbsp; 1. Follow steps a and b above to compile and install the 
+        module<br>
+&nbsp;&nbsp;&nbsp; 2. Edit /boot/loader.conf, and add the following line.<dl>
+          <dd>&nbsp; if_em_load=&quot;YES&quot;</dd>
+        </dl>
+        </li>
+	</ol></li>
+  <li><p class="numlst">
+    To compile the driver into the kernel, enter: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cd em-x.x.x/src<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cp if_em&nbsp; */usr/src/sys/dev/em<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cp 
+    Makefile.kernel&nbsp; /usr/src/sys/mocules/em/Makefile<p class="numlst">   
+   	Edit the /usr/src/sys/conf/files.i386 file, and add the following lines only 
+    if they do not already exist:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dev/em/if_em.c 
+    optional em<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dev/em/if_em_hw.c optional em<p class="numlst">
+   Remove the following lines from the /usr/src/sys/conf/files.i386 file, if  they exist:
+   <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dev/em/if_em_hw.c optional em<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dev/em/if_em_phy.c optional em</p>
+    <p class="numlst">Edit the kernel configuration file (i.e., GENERIC or
+    MYKERNEL) in /usr/src/sys/i386/conf, and ensure the following line is
+    present: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; device em</p>
+	<p class="numlst">
+	Compile and install the kernel. The system must be rebooted for the kernel
+    updates to take effect. For additional information on compiling the kernel,
+    consult the FreeBSD operating system documentation. <br>
+&nbsp;</p>
+</li>
+  <li><p class="numlst">
+	To assign an IP address to the interface, enter the following: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ifconfig em&lt;interface_num&gt; &lt;IP_address&gt;<br>
+&nbsp;</li>
+  <li><p class="numlst">
+	Verify that the interface works. Enter the following, where &lt;IP_address>
+   	is the IP address for another machine on the same subnet as the interface
+   	that is being tested:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ping &lt;IP_address&gt;<br>
+&nbsp;<p>
+	</p>
+  </li>
+  <li><p class="numlst">To configure the IP address to remain after reboot, edit
+    /etc/rc.conf, and create the appropriate ifconfig_em&lt;interface_num&gt;&nbsp;entry:
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ifconfig_em&lt;interface_num&gt;=&quot;&lt;ifconfig_settings&gt;&quot;<p class="numlst">
+	Example usage: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ifconfig_em0=&quot;inet 102.168.10.1 netmask 
+    255.255.255.0&quot;<br>
+&nbsp;<table border="0" cellpadding="4" width="100%">
+  	  <tr>
+    	<td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    	<td valign="top" align="left"><i><b>NOTE</b>:</i> For assistance, see the ifconfig man page.</td>
+  	  </tr>
+	</table>
+  </li>
+</ol>
+
+<hr>
+
+<a name="speed_duplex"></a><h2>Speed and Duplex Configuration</h2>
+<p>
+By default, the adapter auto-negotiates the speed and duplex of the&nbsp;connection. If there is a specific need, the ifconfig utility can be used to&nbsp;configure the speed and duplex
+settings on the adapter. Example usage:
+<blockquote>
+    <p class="monospace">
+	ifconfig em&lt;interface_num> &lt;IP_address> media 100baseTX mediaopt&nbsp;full-duplex
+	</p>
+</blockquote>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" align="left"><i><b>NOTE</b>:</i> Only use mediaopt to set the driver to full-duplex. If mediaopt is         not specified and you are not running at gigabit speed, the driver         defaults to half-duplex.</td>
+  </tr>
+</table>
+<p>
+This driver supports the following media type options:
+</p>
+
+<table border="1" cellpadding="4" width="85%" cellspacing="0">
+  <tr>
+    <th width="20%">Media Type</th>
+    <th width="50%">Description</th>
+  </tr>
+  <tr>
+    <td width="20%">
+   autoselect</td>
+    <td width="50%">  Enables auto-negotiation for speed and duplex</td>
+  </tr>
+  <tr>
+    <td width="20%">10baseT/UTP</td>
+    <td width="50%">  Sets speed to 10 Mbps. Use the ifconfig mediaopt
+                      option to select full-duplex mode</td>
+  </tr>
+  <tr>
+    <td width="20%">
+   100baseTX</td>
+    <td width="50%">  Sets speed to 100 Mbps. Use the ifconfig mediaopt
+                      option to select full-duplex mode</td>
+  </tr>
+  <tr>
+    <td width="20%">
+   1000baseTX</td>
+    <td width="50%">  Sets speed to 1000 Mbps. In this case, the driver
+                      supports only full-duplex mode</td>
+  </tr>
+  <tr>
+    <td width="20%">
+   1000baseSX</td>
+    <td width="50%">Sets speed to 1000 Mbps. In this case, the driver supports
+      only full-duplex mode</td>
+  </tr>
+</table>
+
+<p>
+For more information on the ifconfig utility, see the ifconfig man page.
+</p>
+
+<hr>
+
+<a name="add_configs"></a><h2>Additional Configurations</h2>
+<p>
+The driver supports Transmit/Receive Checksum Offload and Jumbo Frames on all
+but the 82542-based adapters. For specific adapters, refer to
+the <a href="#adapters"> Supported Adapters</a> section.
+</p>
+<h3>
+Jumbo Frames
+</h3>
+<p>
+To enable Jumbo Frames, use the ifconfig utility to increase the MTU beyond
+1500 bytes.
+</p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" align="left"><i><b>NOTES</b>:</i> Only enable Jumbo Frames if your network infrastructure,
+      including switches, supports them.</td>
+  </tr>
+  <tr>
+    <td width="21" valign="top" align="center"></td>
+    <td valign="top" align="left">The Jumbo Frames setting on the switch must be
+      set to at least 22 bytes larger than that of the MTU.&nbsp; </td>
+  </tr>
+</table>
+<p>
+The Jumbo Frames MTU range for Intel Adapters is 1500 to 16114. The default MTU 
+range is 1500. To modify the setting, enter the following: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ifconfig em&lt;interface_num&gt; &lt;hostname 
+or IP address? MTU 9000<p>
+To confirm the MTU used between two specific devices, use: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; route get &lt;destination_IP_address&gt;</p>
+
+<h3>VLANs</h3>
+<p>To create a new VLAN interface:</p>
+<blockquote class="monospace">
+	ifconfig &lt;vlan_name&gt; create
+</blockquote>
+<p>To associate the VLAN interface with a physical interface and assign
+an IP address, netmask, and VLAN ID:</p>
+<blockquote class="monospace">
+	ifconfig &lt;vlan_name&gt; &lt;ip_address&gt; netmask &lt;subnet_mask&gt;
+vlan &lt;vlan_id&gt; vlandev &lt;physical_interface&gt;
+</blockquote>
+<p>Example:</p>
+<blockquote class="monospace">
+	ifconfig vlan10 10.0.0.1 netmask 255.255.255.0 vlan10 vlandev em0
+</blockquote>
+<p>In this example, all packets will be marked on egress with&nbsp; 802.1Q VLAN
+tags, specifying a VLAN ID of 10.</p>
+<p>To remove a VLAN interface:</p>
+<blockquote class="monospace">
+	ifconfig &lt;vlan_name&gt; destroy
+</blockquote>
+
+<h3>Polling</h3>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top" align="left"><i><b>NOTES</b>:</i> DEVICE POLLING is only valid for non-SMP kernels.</td>
+  </tr>
+  <tr>
+    <td width="21" valign="top" align="center"></td>
+    <td valign="top" align="left">The driver has to be built into the kernel for DEVICE POLLING to be 
+    	enabled in the driver.</td>
+  </tr>
+</table>
+<p>
+To enable polling in the driver, add the following options to the kernel
+configuration, and then recompile the kernel:
+</p>
+<blockquote class="monospace">
+	options DEVICE_POLLING<br>
+	options HZ=1000
+</blockquote>
+<p>
+At runtime:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use sysctl kern.polling.enable=1 to 
+turn on</p>
+<p>
+To turn of:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use sysctl kern.polling.enable=0</p>
+<h3>Checksum Offload</h3>
+<p>Checksum offloading is not supported on 82542 Gigabit adapters. <br>
+<br>
+Checksum offloading supports both TCP and UDP packets and is supported for both 
+transmit and receive. Furthermore, receive checksum offload of UDP fragments is 
+supported on all 82570/82571Gigabit adapters.<br>
+<br>
+Checksum offloading can be enabled or disabled using ifconfig. Both transmit and 
+receive offloading will be either enabled or disabled together. You cannot 
+enable/disable one without the other.</p>
+<p>To enable checksum offloading:</p>
+<blockquote>
+  <p>ifconfig &lt;interface_num&gt; rxcsum </p>
+</blockquote>
+<p>To disable checksum offloading:</p>
+<blockquote>
+  <p><span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">
+  ifconfig &lt;</span>interface_num<span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">&gt; 
+  -rxcsum </span></p>
+</blockquote>
+<p>To confirm the current setting:</p>
+<blockquote>
+  <p><span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">
+  ifconfig &lt;</span>interface_num<span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">&gt;</span></p>
+</blockquote>
+<p>Look for the presence or absence of the following line:</p>
+<blockquote>
+  <p><span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">
+  options=3 &lt;RXCSUM,TXCSUM&gt;</span></p>
+</blockquote>
+
+<hr>
+
+<a name="limitations"></a><h2>Known Limitations</h2>
+<p>
+There are known performance issues with this driver when running UDP
+traffic with Jumbo Frames.&nbsp;
+</p>
+
+<h3>
+82541/82547 can't link or is slow to link with some link partners</h3>
+
+<p>
+There is a known compatibility issues where time to link is slow or link is not 
+established between 82541/82547 controllers and some switches.&nbsp; Known 
+switches include:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Planex 
+FXG-08TE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I-O Data 
+ETG-SH8<br>
+<br>
+To improve time to link, the driver can be compiled with the following changes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Edit ./em.x.x.x/src/if_em.h to uncomment the #define EM_MASTER_SLAVE&nbsp; from 
+within the comments. For example, change:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from /* #define EM_MASTER_SLAVE 2 */<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to #define EM_MASTER_SLAVE 2 <br>
+Using one of the following options:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 = Master 
+mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 = Slave 
+mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 = Auto 
+master/slave<br>
+Option 2 is the recommended setting.<br>
+<br>
+Recompile the module.<br>
+&nbsp;&nbsp;&nbsp;
+a. To compile the module:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cd em-x.x.x<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make clean<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make<br>
+<br>
+&nbsp;&nbsp;&nbsp;
+b. To install the compiled module in system directory:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make install</p>
+
+<hr>
+
+<a name="support"></a><h2>Support</h2>
+<p>
+For general information and support, go to the <a href="support.htm">support website</a>
+<p>
+If an issue is identified, support is through email only at: <a href="mailto:freebsdnic@mailbox.intel.com"> freebsdnic@mailbox.intel.com</a>.
+</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/08/04 10:31a <!-- $--> Revision <!--$$Revision:--> 9 <!-- $--></code></p>
+
+</body>
+</html>

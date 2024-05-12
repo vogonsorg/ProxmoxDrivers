@@ -1,0 +1,63 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Executing Methods in IANet_DiagTest</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Executing Methods in IANet_DiagTest</font></h1>
+
+<h2><font color="#0000FF">Executing RunTest, and Other Methods in WbemTest</font></h2>
+<p>The RunTest method from the MOF file is as follows:
+
+<p><font face="Courier">uint32<br>
+RunTest([IN] CIM_ManagedSystemElement ref SystemElement,<br>
+[IN] CIM_DiagnosticSetting ref Setting,<br>
+[OUT] CIM_DiagnosticResult ref Result);</font>
+
+<p>The first two parameters are In parameters. You must get the object path
+of both objects referenced. You must also get the object path of the IANet_DiagTest object, which is
+exporting the RunTest object.
+
+<ol><li>From the main WBEM test dialog box, click <b>Connect</b>.</li>
+<li>Enter the appropriate Server\Namespace. Namespaces IntelNCS and CimV2 are supported.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test and enter <font face="Courier">IANet_DiagTest</font>.</li>
+<li>Double-click the instance of IANet_DiagTest. The name will be in the form
+X@[AdapterGUID}, where X is the test name and AdapterGUID will be the Adapter Name, same as the Name key of the IANet_EthernetAdapter.</li>
+<li>The following is an example of the object path retrieved:<br>
+   <font face="Courier">\\MYCOMPUTER\root\Cimv2:IANet_DiagTest.Name=&quot;1@{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test
+and enter <font face="Courier">IANet_EthernetAdapter</font>.</li>
+<li>Double-click on the adapter to be tested.</li>
+<li>The following is an example of the object path retrieved:<br>
+  <font face="Courier">\\MYCOMPUTER\root\cimv2:IANet_EthernetAdapter.DeviceID=&quot;{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test and enter <font face="Courier">IANet_DiagSetting</font>.</li>
+<li>Double-click on the setting that represents the adapter/test combination.</li>
+<li>The following is an example of the object path retrieved:<br>
+   <font face="Courier">\\MYCOMPUTER\root\cimv2:IANet_DiagSetting.SettingID=&quot;1@{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>From the main WBEM test dialog box, click <b>Execute Method</b>.</li>
+<li>Paste the IANet_DiagTest object path into the dialog box. Click <b>OK</b>.</li>
+<li>Select the test in the drop-down box under method.</li>
+<li>Click the <b>Edit In Parameters</b> button.</li>
+<li>For RunTest, Setting and SystemElement are the In
+parameters. Paste the previously saved Setting and Adapter object paths and close.</li>
+<li>Click the <b>Execute</b> button.</li>
+<li>Enumerate the IANet_DiagResult class, in the same manner as the In parameters.</li>
+<li>Examine the selected result object as needed.</li></ol>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

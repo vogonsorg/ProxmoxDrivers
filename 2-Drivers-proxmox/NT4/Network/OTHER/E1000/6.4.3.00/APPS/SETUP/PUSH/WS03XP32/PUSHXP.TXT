@@ -1,0 +1,277 @@
+Push Install Instructions for Windows* XP
+
+- Introduction 
+
+- Setting up an install directory on the file server 
+
+- Instructions for Creating VLANs(Optional)
+
+- Deployment methods 
+
+- Microsoft documentation for unattended installations of Windows XP 
+
+- Sample unattend.txt file for Windows XP 
+
+- Directory structure for unattended installation files. 
+
+--------------------------------------------------------------------------------
+
+Introduction
+
+A "Push", or unattended installation of Windows provides a means for network 
+administrators to easily install Windows XP on similarly equipped systems. 
+The network administrator can create a bootable diskette that will automatically 
+log into a central server and install the operating system from an image of the 
+Windows installation directory stored on that server. 
+
+This page provides instructions for a basic unattended installation of Windows 
+XP that includes the installation of drivers for the Intel(R) PRO/100 and 
+Intel(R) PRO/1000 adapters. 
+
+As part of the unattended installation, you can create VLANs. If 
+you wish to create one or more VLANs as part of the unattended 
+installation, you must also follow the instructions in the "Instructions for 
+Creating VLANs (Optional)" section of this document. 
+
+The elements necessary for the Windows XP unattended installation are:
+
+- A Windows XP server with a shared image of the Windows Installation CD. If
+  you wish to create VLANS as part of the unattended installation, you need
+  to create a configuration file with the VLAN information in it.  To create
+  this file you need a sample system that has the same of adapter(s) that will
+  be in the systems receiving the push installation.  On the sample system,
+  use Intel(R) PROSet to set up the adapters in the VLAN configuration you
+  want. This system could also be the Windows XP system mentioned above. For
+  clarity, this system is referred to in this document as the configured
+  system.
+- An unattended installation configuration file that provides Windows setup 
+  with information it needs to complete the installation. The name of this 
+  file is UNATTEND.TXT 
+- A DOS boot disk that contains Microsoft Network Client software, which is 
+  used to connect to the Windows server. This disk also includes AutoExec 
+  commands to automatically start the Windows installation. 
+
+--------------------------------------------------------------------------------
+
+Setting up an install directory on the file server
+
+The server must be setup with a distribution folder that holds the required 
+Windows XP files. Clients must also be able to read this folder when connecting 
+via TCP/IP or IPX.
+
+For illustration purposes, the examples in this readme use the network share 
+D:\PUSHXP. To create this share:
+
+1) Create a directory on the server, (EX: D:\PUSHXP).  
+2) Use the My Computer applet in Windows XP to locate the D:\PUSHXP folder.  
+3) Right-click the folder and select Sharing. Select Share this folder. 
+4) Give it a share name (EX: PUSHXP). This share name will be used to connect 
+   to this directory from the remote target systems. By default, the permissions 
+   for this share will be for "Everyone" to have "Full Control".  
+5) Adjust permissions as necessary and click OK.  
+
+To prepare the distribution folder:
+
+1) Copy the entire contents of the Windows XP CD to D:\PUSHXP. Use Windows 
+   Explorer or XCOPY to maintain the same directory structure as on the CD. 
+   When the copy is complete, the Windows XP installation files should be 
+   in the D:\PUSHXP directory. The I386 and other installation directories 
+   should be subdirectories of the D:\PUSHXP directory. 
+2) Copy Unattend.txt from the Intel CD (found in \APPS\SETUP\PUSH\XP) into 
+   the shared directory D:\PUSHXP\I386.  
+3) Edit the Unattend.txt file with Notepad or another text-editor to include 
+   your customizations. At a minimum you should change the items in the 
+   [UserData] section of the file. 
+4) Create the driver install directory structure and copy the driver files 
+   to it. 
+
+NOTE: The PUSHCOPY.BAT file provided with the drivers in the APPS\SETUP\PUSH 
+directory copy the appropriate files for the installation. PUSHCOPY also 
+copies the components needed to perform the automated installations contained 
+in the [GuiRunOnce] section of the sample UNATTEND.TXT file. These include an 
+unattended installation of the Intel(R) PROSet configuration and diagnostic 
+utility. 
+
+Example: From a Windows XP command prompt where e: is the drive letter of 
+your CDROM drive: 
+e:
+cd push 
+	(you must be in the APPS\SETUP\PUSH\XP directory to run PUSHCOPY)
+pushcopy D:\PUSHXP\I386 XP
+
+The above command creates the $OEM$ directory structure and copy all the 
+necessary files to install the driver and Intel PROSet. However, Intel 
+PROSet is not installed unless the line:
+
+; Command0="c:\drivers\net\Intel\Proset.msi /qn" 
+
+is uncommented from unattend.txt.
+
+See the "Directory structure for unattended installation files" of this 
+document for more information about the directory structure and file layout 
+of the $OEM$ directory.
+
+----------------------------------------------------------------------------
+
+Instructions for Creating VLANs (Optional)
+
+1) Copy SavRes.vbs from the Intel CD to the configured system. The file is 
+   located in the APPS\WMI\ directory on the Intel CD. 
+2) Open a command prompt on the configured system and navigate to the 
+   directory containing SavRes.vbs. 
+3) Run the following command: cscript SavRes.vbs save. A configuration file 
+   called WmiConf.txt is created in the same directory. 
+4) On the Windows XP Server , create a directory in the $OEM$\$1 directory 
+   called WMIScr. For example, on Windows XP, the directory is 
+   $OEM$\$1\WMIScr. 
+5) Copy the SavRes.vbs and WmiConf.txt files to the WMIScr directory. 
+6) Edit the GUIRunOnce section in the unattend.txt file in the following 
+   way. After the command to install Intel PROSet and the drivers, add the 
+   following command:  
+
+          Command1="%systemroot%\system32\cmd.exe /c cscript c:\wmiscr\savres.vbs restore c:\wmiscr\wmiconf.txt > c:\wmiscr\output.txt"
+
+
+ 
+--------------------------------------------------------------------------------
+
+Deployment methods
+
+Make sure that you have a copy of a network bootable MS-DOS floppy that connects 
+to the Z:\PUSHXP directory, uses it to boot the destination system (the one you 
+want to push install to), and connects to this shared network directory. 
+
+Run the command from the \\Server\PUSHXP\i386 prompt: 
+winnt /u:Z:\I386\unattend.txt /s:Z:\I386 /t:c 
+where Z: equals mapped drive. 
+
+NOTE: In the above procedure, setup runs the installation in unattended mode 
+and also detects the plug and play network adapters. All driver files are 
+copied from the shared directory to the target system directories and 
+installation of the OS and Network Adapters continues without user 
+intervention. 
+
+If you installed VLANs as part of the unattended installation, view the 
+results of the script execution in the output.txt file. This file is in 
+the same directory as the SavRes.vbs file.
+
+--------------------------------------------------------------------------------
+
+Microsoft Documentation for Unattended Installations of Windows XP
+
+For a complete description of the parameters supported in Unattend.txt see the 
+DEPLOY.CHM document in the DEPLOY.CAB cabinet file on the Windows XP CD. To 
+obtain the document, use Internet Explorer 5.0 or greater to open DEPLOY.CAB 
+in the \SUPPORT\TOOLS directory on the CD.  
+
+Other documents and utilities in the DEPLOY.CAB file provide details and tools 
+for setting up a variety of unattended installation methods. 
+
+--------------------------------------------------------------------------------
+
+Sample unattend.txt file for Windows XP
+ 
+[Unattended]
+UnattendMode=FullUnattended
+OemSkipEula=Yes
+OemPreinstall=Yes
+OemPnPDriversPath=\drivers\net\INTEL
+TargetPath= *
+DriverSigningPolicy=Ignore
+Filesystem=LeaveAlone
+OverwriteOemFilesOnUpgrade=No
+
+; This switch prevents the user setup dialog from running when XP
+; starts for the first time.
+UnattendSwitch=Yes
+
+[GuiUnattended]
+AdminPassword=*
+AutoLogon=Yes
+AutoLogonCount=1
+OEMSkipRegional=1
+TimeZone=4
+OemSkipWelcome=1
+
+[UserData]
+FullName=Name
+OrgName=Organization
+ComputerName=Computer1
+; PRODUCT ID is required for most installations.
+ProductID="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+
+[GuiRunOnce]
+; *** command to install PROSet - uncomment to install PROSet after push install
+; Command0="c:\drivers\net\INTEL\Proset.msi /qn"
+
+[Identification]
+JoinWorkgroup=WORKGROUP
+; *Use the following for a domain installation
+; JoinDomain=MYDOMAIN
+; CreateComputerAccountInDomain=Yes
+; DomainAdmin=Installer
+; DomainAdminPassword=install
+
+[Networking]
+InstallDefaultComponents=Yes
+
+--------------------------------------------------------------------------------
+
+Directory Structure for Unattended Installation Files
+The following directory structure is created by PUSHCOPY.BAT to place the files 
+necessary for the installation of the driver and Intel PROSet. The directory 
+D:\PUSHXP refers to the location of the files from the Windows XP installation 
+CD. 
+
+D:\PUSHXP\I386\$OEM$\$1\DRIVERS\NET\INTEL
+(From the PRO100\WS03XP2K directory of the Intel CD)
+
+E100B325.INF
+E100B325.DIN
+E100B325.SYS
+E100B325.CAT
+E100BMSG.DLL
+INTELNIC.DLL
+PROUNSTL.EXE
+
+(From the PRO1000\WS03XP2K directory of the Intel CD)
+
+E1000325.INF
+E1000325.DIN
+E1000325.SYS
+E1000325.CAT
+E1000MSG.DLL
+ETCOINST.DLL
+ASFSTUP.DLL
+
+      ;  The following file will also be present if your Intel Driver CD 
+      ;  supports the  
+      ;      Intel(R) PRO/1000 MT Quad Port Server Adapter
+      ;  and the
+      ;      Intel(R) PRO/1000 MT Quad Port Network Connection
+      ;
+
+E101D325.INF
+
+(From the \APPS\PROSET\WS03XP2K directory on the Intel CD)
+
+ANSM2KXP.INF
+ANSP2KXP.INF
+IANSMSG.DLL
+IANSWXP.SYS
+IANS2KXP.CAT
+PROSET.EXE
+PROSET.MSI
+S8023DEV.REG
+*.MST ; International Language files
+
+(From the \APPS\SETUP\PUSH\WS03XP32 directory on the Intel CD)
+
+UNATTEND.TXT
+PUSHXP.TXT
+
+; To activate the PROSet installation once the above 
+; directories have been created and populated, uncomment the 
+; line:
+; Command0="c:\drivers\net\INTEL\Proset.msi /qn"
+; in the [GuiRunOnce] section of Unattend.txt

@@ -1,0 +1,77 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>WMI</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">WMI</font></h1>
+<p>Web-Based Enterprise Management (WBEM) is a Desktop Management Task Force (DMTF) initiative intended to provide enterprise system managers with a standardized, cost-effective method for end station management. The WBEM initiative encompasses a multitude of tasks, ranging from simple workstation configuration to full-scale enterprise management across multiple platforms. Central to the initiative is the Common Information Model (CIM), an extensible data model for representing objects that exist in typical management environments, and the Managed Object Format (MOF) language for defining and storing modeled data.
+
+<p>Windows Management Instrumentation (WMI) is an implementation of the WBEM initiative for Microsoft* Windows* platforms.
+
+<p>WMI consists of three main components:
+
+<ul><li>Core &mdash; These components are part of the Operating System. They are required for a WMI-enabled application to work, and must be installed in order to use the SDK.</li>
+<li>SDK &mdash; The SDK contains tools to browse the WMI schema, extend the schema, create providers, register and use
+  the WMI events. It also provides documentation useful for developing applications that will use
+  the WMI. The SDK is installed as part of the Microsoft Platform SDK installation
+  process and is supported on Windows NT4 SP4 or SP5, Windows 2000, Windows Me, Windows XP and Windows Server 2003.</li>
+<li>Tools &mdash; The Microsoft WMI Tools provide developers with the
+  tools needed to build a whole new generation of management
+  applications and solutions. It is filled with documents and tools to
+  guide you through the process of accessing management data from WMI.</li></ul>
+
+<p>The WMI architecture consists of the following components:
+<ul><li>Management applications</li>
+<li>Managed objects</li>
+<li>Providers</li>
+<li>Management infrastructure (consisting of the Windows Management and Windows Management repository)</li>
+<li>Windows Management API (which uses COM/DCOM to enable providers and management applications to communicate with the Windows Management infrastructure.</li></ul>
+
+<p>Management applications process or display data from managed objects, which are logical or physical enterprise components. These components are modeled using CIM and accessed by applications through Windows Management.  
+Providers use the Windows Management API to supply Windows Management with data from managed objects, to handle requests from applications and to generate notification of events. 
+
+<p>The management infrastructure consists of Windows Management (for handling the communication between management applications and providers) and the Windows Management repository (for storing data). The Windows Management repository holds static management data.  Dynamic data is generated only on request from the providers. Data is placed in
+the repository using either the MOF language compiler or the Windows Management API. 
+
+<p>Applications and providers communicate through Windows Management using the Windows Management API, which supplies services
+such as event notification and query processing.
+
+<p>The following diagram shows the interrelationship of the WMI
+architecture components:
+<br><br>
+<img src="wmi.gif" width="416" height="458"><br><br>
+
+<h2><font color="#0000FF">Common Information Model (CIM Schema)</h2></font>
+
+<p>The Common Information Model (CIM) presents a consistent and unified view of all types of logical and physical objects in a managed environment. Managed objects are represented using object-oriented constructs such as classes. The classes include properties that describe data and methods that describe behavior. The CIM is designed by the DMTF to be operating system and platform
+independent. The WBEM technology includes an extension of the CIM for the Microsoft Windows operating system platforms. Please refer to the DMTF CIM schema on DMTF web site for more information.
+
+<p>The CIM defines three levels of classes: 
+<ul><li>Classes representing managed objects that apply to all areas of management. These classes provide a basic vocabulary for analyzing and describing managed systems and are part of what is referred to as the core model.</li>
+<li>Classes representing managed objects that apply to a specific management area but are independent of a particular implementation or technology. These classes are part of what is referred to as the common model.</li> 
+<li>Classes representing managed objects that are technology-specific additions to the common model. These classes typically apply to specific platforms such as UNIX or the Microsoft Win32
+  environment, referred to as the extended model. </li></ul>
+
+<p>All classes can be related by inheritance, where a child class includes data and methods from its parent class. Inheritance relationships are not typically visible to the management application using them, nor are the applications required to know the inheritance hierarchy. Class hierarchies can be obtained using applications that are included in the WMI Tools (see the WMI Tools at http://www.microsoft.com for more information).
+
+<p>Windows Management also supports association classes. Association classes link two different classes to model a user-defined relationship, and are visible to management applications. Windows Management defines association classes to support system classes. Third-party developers can also define association classes for their management environment. 
+
+<p>WBEM supports the concept of schemas to group the classes and instances that are used within a particular management environment. The Platform SDK includes two schemas: the CIM schema and the Microsoft Win32 schema. The CIM schema contains the class definitions for the first two levels of the CIM. These classes represent managed objects that are part of every management environment regardless of platform. The Win32 schema contains class definitions for managed objects that are part of a typical Win32 environment. 
+
+<p>For additional information on CIM, visit http://www.dmtf.org.
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

@@ -1,0 +1,55 @@
+; Extended OS/2 NIF file
+
+[E1000]
+   Type = NDIS
+   Title = Intel(R) PRO/1000 Network Connection
+   Version = 3.60
+   Drivername = E1000$
+   Xports = NETBEUI LANDD
+   Copyfile = e1000.msg
+
+[FILE]
+   Name = E1000.OS2
+
+[SPEEDDUPLEX]
+   display = "Media Speed & Duplex"
+   type = Decimal
+   set = 0, 1, 2, 3
+   optional = YES
+   editable = YES
+   help = "The driver can configure the adapter for 10, 100, or 1000 Mbps.
+ Assigning a value to this parameter will override the Auto-Speed-Sense feature
+ of the driver.  Leave the field blank to enable the Auto-Speed-Sense feature.
+ Note that speed of 10 or 100 is only valid for Copper based NICs.
+ 0 = 10 half; 1 = 10 full; 2 = 100 half; 3 = 100 full."
+
+[SLOT]
+   display = "Slot/Device Identifier"
+   type = Hexadecimal
+   range = 0-1FFF
+   optional = YES
+   editable = YES
+   help = "This parameter is only required in systems with more than one
+ adapter installed. If you are installing more than one PCI adapter: 1) complete
+ the configuration process, but leave the Slot field blank for each driver;
+ 2) restart the system and record the list of Slots that each driver displays;
+ 3) complete the configuration by assigning one of the values from the list to
+ the Slot parameter of each driver. Leave the field blank if you have only one
+ adapter installed."
+
+[NODE]
+   display = "Locally Administered Address"
+   type = String
+   strlength = 12
+   optional = YES
+   editable = YES
+   help = "Use this parameter to set the network address used by the adapter."
+
+[UPDRBOOT]
+   display = "Update Remote Boot Protocol"
+   type = Decimal
+   set = 0, 1, 2
+   optional = YES
+   editable = YES
+   help = "Use this parameter to change the Intel Boot Agent protocol setting. The setting will
+ be updated the next time the driver is started. Valid values are: 0 (no change), 1 (PXE) or 2 (RPL)."

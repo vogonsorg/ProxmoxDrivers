@@ -1,0 +1,1419 @@
+///// Ni_Nic.mif, Version 8-24-2001
+///// Version 3.00.17.0004 
+
+
+Language = "en|US|iso8859-1"
+
+Start Component
+	Name = "Intel Ethernet LAN Adapter(s)"
+	Description = "DMI instrumentation for NDIS 3.x (or better) network adapters."
+Start Path
+	Name = "NDIS Instrumentation"
+	Win32 = Direct-Interface
+End Path
+
+// Common Definitions
+
+Start Enum
+  Name = "BOOL"
+    0 = "False"
+    1 = "True"
+End Enum
+
+// Included from Systems Standard Groups Definition
+	Start Group
+		Name = "ComponentID"
+		Class = "Intel|ComponentID|001"
+		ID = 1
+		Description = "This group defines the attributes common to all components. This group is required."
+		Start Attribute
+			Name = "Manufacturer"
+			ID = 1
+			Description = "Manufacturer of this system."
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString
+			Value = "Intel Corporation"
+		End Attribute
+		Start Attribute
+			Name = "Product"
+			ID = 2
+			Description = "Product name for this system."
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString(128)
+			Value = "Ethernet LAN Adapter"
+		End Attribute
+		Start Attribute
+			Name = "Version"
+			ID = 3
+			Description = "Version number of this system."
+			Access = Read-Only
+			Storage = Specific
+			Type = DisplayString
+			Value = "Unsupported"
+		End Attribute
+		Start Attribute
+			Name = "Serial Number"
+			ID = 4
+			Description = "Serial number for this system."
+			Access = Read-Only
+			Storage = Specific
+			Type = DisplayString
+			Value = "Unsupported"
+		End Attribute
+		Start Attribute
+			Name = "Installation"
+			ID = 5
+			Description = "The time and date when this component was installed."
+			Access = Read-Only
+			Storage = Specific
+			Type = Date
+			Value = ""
+		End Attribute
+		Start Attribute
+			Name = "Verify"
+			ID = 6
+			Description = "A code that provides a level of verification that the component is still installed and working."
+			Access = Read-Only
+			Storage = Common
+			Type = Start ENUM
+				0 = "An error occurred; check status code."
+				1 = "This component does not exist."
+				2 = "Verification is not supported."
+				3 = "Reserved."
+				4 = "This component exists, but the functionality is untested."
+				5 = "This component exists, but the functionality is unknown."
+				6 = "This component exists, and is not functioning correctly."
+				7 = "This component exists, and is functioning correctly."
+			End ENUM
+			Value = 1
+		End Attribute
+	End Group
+
+	Start Group
+		Name = "Network Adapter Driver Group"
+		Class = "Intel|Network Adapter Driver|001"
+		ID = 2
+		Key = 1
+		Start Attribute
+			Name = "Driver Index"
+			ID = 1
+			Access = Read-Only
+			Storage = Common
+			Type = Integer
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Software Name"
+			ID = 2
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Software Version"
+			ID = 3
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Software Description"
+			ID = 4
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Size"
+			ID = 5
+			Access = Read-Only
+			Storage = Common
+			Type = Integer
+			Value = Unsupported
+		End Attribute
+		Start Attribute
+			Name = "Driver Interface Type"
+			ID = 6
+			Access = Read-Only
+			Storage = Common
+			Type = Start ENUM
+				1 = "Other"
+				2 = "IPX"
+				3 = "ODI"
+				4 = "NDIS"
+				5 = "Packet Driver"
+				6 = "LANtastic"
+				7 = "UNIX"
+				8 = "Appletalk"
+				9 = "IBM Lan Support Program"
+				10 = "LLC"
+				11 = "Netbios"
+				12 = "Pathworks (DLL)"
+			End ENUM
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Interface Version"
+			ID = 7
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Driver Interface Description"
+			ID = 8
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+	End Group
+
+	Start Group
+		Name = "Network Adapter 802 Port Group"
+		Class = "Intel|Network Adapter 802 Port|001"
+		ID = 3
+		Key = 1
+		Start Attribute
+			Name = "Port Index"
+			ID = 1
+			Access = Read-Only
+			Storage = Common
+			Type = Integer
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Permanent Network Address"
+			ID = 2
+			Access = Read-Only
+			Storage = Specific
+			Type = DisplayString  (50)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Current Network Address"
+			ID = 3
+			Access = Read-Only
+			Storage = Specific
+			Type = DisplayString  (50)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Connector Type"
+			ID = 4
+			Access = Read-Only
+			Storage = Common
+			Type = Start ENUM
+				1 = "Unknown"
+				2 = "AUI"
+				3 = "UTP category 3"
+				4 = "UTP category 4"
+				5 = "UTP category 5"
+				6 = "BNC"
+				7 = "STP RJ45"
+				8 = "STP DB9"
+				9 = "Fiber MIC"
+				10 = "Apple AUI"
+			End ENUM
+			Value = Unsupported
+		End Attribute
+		Start Attribute
+			Name = "Data Rate"
+			ID = 5
+			Access = Read-Only
+			Storage = Common
+			Type = Integer
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Packets Transmitted"
+			ID = 6
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Bytes Transmitted"
+			ID = 7
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = Unsupported
+		End Attribute
+		Start Attribute
+			Name = "Total Packets Received"
+			ID = 8
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Bytes Received"
+			ID = 9
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = Unsupported
+		End Attribute
+		Start Attribute
+			Name = "Total Transmit Errors"
+			ID = 10
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Receive Errors"
+			ID = 11
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Host Errors"
+			ID = 12
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Total Wire Errors"
+			ID = 13
+			Access = Read-Only
+			Storage = Specific
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+	End Group
+
+Start Group
+    Name = "Intel Network Adapter Instrumentation Group"
+    Class = "Intel|Network Adapter Instrumentation|001"
+    ID = 4
+    Start Attribute
+        Name = "MIF Id"
+        ID = 1
+        Access = Read-Only
+        Storage = Common
+        Type = Integer
+        Value = 1
+    End Attribute
+    Start Attribute
+        Name = "Version"
+        ID = 2
+        Access = Read-Only
+        Storage = Common
+        Type = DisplayString (256)
+        Value = *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+Start Group
+    Name = "Intel Network Adapter Driver Extensions Group"
+    Class = "Intel|Network Adapter Driver Extensions Group|001"
+    ID = 5
+    Key = 1
+    Start Attribute
+        Name = "Index"
+	ID = 1
+	Access = Read-Only
+	Storage = Common
+	Type = Integer
+	Value = *"NDIS Instrumentation"
+	End Attribute
+    Start Attribute
+        Name = "Driver File Path"
+        ID = 2
+        Access = Read-Only
+        Storage = Common
+        Type = DisplayString (256)
+        Value = *"NDIS Instrumentation"
+    End Attribute
+    Start Attribute
+        Name = "Driver File Date"
+        ID = 3
+        Access = Read-Only
+        Storage = Common
+        Type = DisplayString (256)
+        Value = *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+Start Group
+		Name = "Intel Ether-like Group"
+		Class = "Intel|Ether-like|001"
+		ID = 6
+		Key = 1
+		Start Attribute
+			Name = "Index"
+			ID = 1
+			Access = Read-Only
+			Storage = Common
+			Type = Integer
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Alignment Errors"
+			ID = 2
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "FCS Errors"
+			ID = 3
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Single Collision Frames"
+			ID = 4
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Multiple Collision Frames"
+			ID = 5
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "SQE Test Errors"
+			ID = 6
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Deferred Transmissions"
+			ID = 7
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Late Collisions"
+			ID = 8
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Excessive Collisions"
+			ID = 9
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Internal Mac Transmit Errors"
+			ID = 10
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Carrier Sense Errors"
+			ID = 11
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Frame Too Longs"
+			ID = 12
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "Internal Mac Receive Errors"
+			ID = 13
+			Access = Read-Only
+			Storage = Common
+			Type = Counter64
+			Value = *"NDIS Instrumentation"
+		End Attribute
+		Start Attribute
+			Name = "EtherChipSet"
+			ID = 14
+			Access = Read-Only
+			Storage = Common
+			Type = DisplayString (256)
+			Value = *"NDIS Instrumentation"
+		End Attribute
+End Group
+
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           Intel|VLAN Group|001				//
+    // Instrumented By: NI													   //
+    // WfM Required?    No                                                     //
+///   /////////////////////////////////////////////////////////////////////////////
+
+Start Group
+    Name = "Intel VLAN Group"
+    Class = "Intel|VLAN Group|001"
+    ID = 7
+    Key = 1
+    
+    Start Attribute
+        Name = "VLAN Id"
+        ID = 1
+        Access = Read-Only
+        Storage = Common
+        Type = Integer
+        Value = *"NDIS Instrumentation"
+    End Attribute
+    Start Attribute
+        Name = "VLAN Name"
+        ID = 2
+        Access = Read-Only
+        Storage = Common
+        Type = DisplayString (256)
+        Value = *"NDIS Instrumentation"
+    End Attribute
+	Start Attribute
+        Name = "Type of VLAN"
+        ID = 3
+        Access = Read-Only
+        Storage = Common
+        Type = Start ENUM
+			1 = "ISL Standard"
+			2 = "IEEE Standard"
+		End ENUM
+	Value = *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+
+/////////////////////////////////////////////////////////////////////////////
+    // Group:           Intel|NIC_HEALTH|001					    //
+    // Instrumented By: NI											//
+    // WfM Required?    No                                          //
+///   /////////////////////////////////////////////////////////////////////////////
+
+Start Group
+    Name = "NIC Health Contributor"
+    Class = "Intel|NIC_HEALTH|001"
+    ID =8
+    Description = "This group defines various attributes for the NIC Generated Events."
+	Key = 1
+	Start Attribute
+        Name = "Event Type"
+        ID = 1
+        Description = "The type of event that has occurred."
+        Type = Start Enum
+			0x00 = "Unknown"
+            0x01 = "LAN Controller hardware Failure."
+            0x02 = "Cable unplugged/No LAN activity"
+            0x04 = "S/W error"
+			0x08 = "Link Down"
+			0x10 = "Adapter initialization failure"
+			0x20 = "Line up"
+			0x40 = "Line down"
+			0x80 = "Link up"
+		End Enum
+        Access = Read-Only
+        Storage = Specific
+        Value = *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+		Name = "Device Number"
+		ID = 2
+		Access = Read-Only
+		Storage = Common
+		Type = Integer
+		Value = *"NDIS Instrumentation"
+		End Attribute
+
+    Start Attribute
+        Name = "Event Solution"
+        ID = 3
+        Description = "A solution to the problem that caused the event."
+        Type = Start Enum
+            0x00 = "Unknown"
+            0x01 = "No action is required at this time."
+            0x02 = "Reboot"
+			0x04 = "Reload the Driver"
+			0x08 = "Plug in the Cable"
+			0x10 = "Check Adapter hardware"
+        End Enum
+        Access = Read-Only
+        Storage = Specific
+        Value = *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Device Instance"
+        ID = 4
+        Description = "Name of the instance of the Device"
+        Access = Read-Only
+        Storage = Common
+ 		Type = DisplayString (256)
+		Value = *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           EventGeneration|Intel^^NIC_HEALTH|001				//
+    // Instrumented By: NI													//
+    // WfM Required?    No                                                  //
+    /////////////////////////////////////////////////////////////////////////////
+Start Group
+        Name = "Event Generation (NIC)"
+        Class = "EventGeneration|Intel^^NIC_HEALTH|002"
+        Key = 5
+        Start Attribute
+            Name = "Event Type"
+            ID = 1
+            Description = "The type of event that has occurred."
+            Type = Start Enum
+				0x00 = "Unknown"
+                0x01 = "LAN Controller hardware Failure."
+                0x02 = "Cable unplugged/No LAN activity"
+                0x04 = "S/W error"
+				0x08 = "Link Down"
+				0x10 = "Adapter initialization failure"
+				0x20 = "Line up"
+			    0x40 = "Line down"
+				0x80 = "Link up"
+        	End Enum
+            Access = Read-Only
+            Storage = Specific
+            Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Event Severity"
+            ID = 2
+            Description = "The severity of this event."
+            Type = Start Enum
+                0x01 = "Monitor"
+                0x02 = "Information"
+                0x04 = "OK"
+                0x08 = "Non-Critical"
+                0x10 = "Critical"
+                0x20 = "Non-Recoverable"
+            End Enum
+            Access = Read-Only
+            Storage = Specific
+            Value = 0x02
+        End Attribute
+        Start Attribute
+            Name = "Is Event State-Based?"
+            ID = 3
+            Description = "The value of this attribute "
+                "determines whether the Event being reported "
+                "is a state-based Event or not. If the value "
+                "of this attribute is TRUE then the Event is "
+                "state-based. Otherwise the Event is not "
+                "state-based." 
+		    Type = Start ENUM
+			    0 = "False"
+			    1 = "True"
+		    End ENUM
+            Access = Read-Only
+            Storage = Common
+            Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Event State Key"
+            ID = 4
+            Description = "A unique, single integer key into the Event "
+                "State group if this is a state-based Event. "
+                "If this is not a state-based Event then this "
+                "this attribute's value is not defined."
+            Type = Integer
+            Access = Read-Only
+            Storage = Common
+            Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Associated Group"
+            ID = 5
+            Description = "The class name of the group that is associated "
+                "with the events defined in this Event "
+                "Generation group."
+            Type = String (256)
+            Access = Read-Only
+            Storage = Common
+	    Value = "Intel|NIC_HEALTH|001"
+        End Attribute
+        Start Attribute
+            Name = "Event System"
+            ID = 6
+            Description = "The major functional aspect of the product "
+                "causing the fault."
+            Type = Start Enum
+                0x00 = "Unknown"
+                0x01 = "Adapter"
+            End Enum 
+            Access = Read-Only
+            Storage = Common
+            Value = 1
+        End Attribute
+        Start Attribute
+            Name = "Event Subsystem"
+            ID = 7
+            Description = "The minor functional aspect of the product "
+            "causing the fault."
+            Type = Start Enum
+                0x00 = "Unknown"
+                0x01 = "Driver"
+                0x02 = "OS"
+            End Enum 
+            Access = Read-Only
+            Storage = Common
+            Value = 1
+        End Attribute
+End Group
+
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           Intel|Teaming Events Group|001  					   //
+    // Instrumented By: NI													   //
+    // WfM Required?    No                                                     //
+///   /////////////////////////////////////////////////////////////////////////////
+
+Start Group
+    Name = "Teaming Events Group"
+    Class = "Intel|Teaming Events Group|001"
+    ID =10
+    Description = "This group defines various attributes for the Teaming Generated Events."
+	Key = 1
+
+   	Start Attribute
+		Name = "Team ID"
+		ID = 1
+        Description = "The ID of the Team where event occurs."
+        	Access = Read-Only
+		Storage = Common
+		Type = Integer
+		Value = *"NDIS Instrumentation"
+	End Attribute
+
+	Start Attribute
+        Name = "Event Type"
+        ID = 2
+        Description = "The type of event that has occurred."
+        Type = Start Enum
+			0x000 = "Unknown"
+			0x001 = "The Primary Adapter is switching over and the Secondary Adapter took over"
+			0x002 = "The Primary adapter became active"
+			0x004 = "Secondary Adapter is deactivated from the team"
+			0x008 = "The last Adapter has lost link. Network connection has been lost"
+			0x010 = "Preferred Primary Adapter has been detected"
+			0x020 = "The team only has one active adapter"
+			0x040 = "The Secondary adapter has re-joined the team"
+			0x080 = "Preferred Primary Adapter has taken over"
+			0x100 = "Network Connection restored"
+		End Enum
+        Access = Read-Only
+        Storage = Common
+        Value = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+        Name = "Team Mode"
+        ID = 3
+        Description = "The configuration mode of the team"
+        Type = Start Enum
+            0x00 = "Fault Tolerance Only (AFT)"
+            0x01 = "Load Balancing(ALB)"
+			0x02 = "Fast EtherChannnel(TM) (FEC)"
+			0x03 = "Gigabit EtherChannel*/Link Aggregation"
+			0x04 = "IEEE 802.3ad"
+			0x05 = "Switch Fault Tolerance (SFT)"
+        End Enum
+        Access = Read-Only
+        Storage = Common
+        Value = *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+        Name = "Team Size"
+        ID = 4
+        Description = "Total number of adapters in the team"
+        Access = Read-Only
+        Storage = Common
+        Type = Integer
+        Value = *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           EventGeneration|Intel^^Teaming Events Group|002				//
+    // Instrumented By: NI													//
+    // WfM Required?    No                                                  //
+    /////////////////////////////////////////////////////////////////////////////
+Start Group
+        Name = "Event Generation (TEAMING)"
+        Class = "EventGeneration|Intel^^Teaming Events Group|002"
+        Key = 5
+        Start Attribute
+            Name = "Event Type"
+            ID = 1
+            Description = "The type of event that has occurred."
+			Type = Start Enum
+				0x000 = "Unknown"
+				0x001 = "The Primary Adapter is switching over and the Secondary Adapter took over"
+				0x002 = "The Primary adapter became active"
+				0x004 = "Secondary Adapter is deactivated from the team"
+				0x008 = "The last Adapter has lost link. Network connection has been lost"
+				0x010 = "Preferred Primary Adapter has been detected"
+				0x020 = "The team only has one active adapter"
+				0x040 = "The Secondary adapter has re-joined the team"
+				0x080 = "Preferred Primary Adapter has taken over"
+				0x100 = "Network Connection restored"
+			End Enum
+			Access = Read-Only
+			Storage = Specific
+			Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Event Severity"
+            ID = 2
+            Description = "The severity of this event."
+            Type = Start Enum
+                0x01 = "Monitor"
+                0x02 = "Information"
+                0x04 = "OK"
+                0x08 = "Non-Critical"
+                0x10 = "Critical"
+                0x20 = "Non-Recoverable"
+            End Enum
+            Access = Read-Only
+            Storage = Specific
+            Value = 0x02
+        End Attribute
+        Start Attribute
+            Name = "Is Event State-Based?"
+            ID = 3
+            Description = "The value of this attribute "
+                "determines whether the Event being reported "
+                "is a state-based Event or not. If the value "
+                "of this attribute is TRUE then the Event is "
+                "state-based. Otherwise the Event is not "
+                "state-based." 
+		    Type = Start ENUM
+			    0 = "False"
+			    1 = "True"
+		    End ENUM
+            Access = Read-Only
+            Storage = Specific
+            Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Event State Key"
+            ID = 4
+            Description = "A unique, single integer key into the Event "
+                "State group if this is a state-based Event. "
+                "If this is not a state-based Event then this "
+                "this attribute's value is not defined."
+            Type = Integer
+            Access = Read-Only
+            Storage = Common
+            Value = 0
+        End Attribute
+        Start Attribute
+            Name = "Associated Group"
+            ID = 5
+            Description = "The class name of the group that is associated "
+                "with the events defined in this Event "
+                "Generation group."
+            Type = String (256)
+            Access = Read-Only
+            Storage = Common
+	    Value = "Intel|Teaming Events Group|001"
+        End Attribute
+        Start Attribute
+            Name = "Event System"
+            ID = 6
+            Description = "The major functional aspect of the product "
+                "causing the fault."
+            Type = Start Enum
+                0x000 = "Unknown"
+                0x001 = "Adapter"
+            End Enum 
+            Access = Read-Only
+            Storage = Common
+            Value = 1
+        End Attribute
+        Start Attribute
+            Name = "Event Subsystem"
+            ID = 7
+            Description = "The minor functional aspect of the product "
+            "causing the fault."
+            Type = Start Enum
+                0x000 = "Unknown"
+                0x001 = "Driver"
+                0x002 = "OS"
+            End Enum 
+            Access = Read-Only
+            Storage = Common
+            Value = 1
+        End Attribute
+End Group
+
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           Intel|Teaming Group|001					   //
+    // Instrumented By: NI													   //
+    // WfM Required?    No                                                     //
+///   /////////////////////////////////////////////////////////////////////////////
+
+Start Group
+    Name = " Teaming Group"
+    Class = "Intel|Teaming Group|001"
+    ID =12
+    Description = "This group defines various attributes for an AFT/ALB/FEC Team."
+	Key = 1
+
+   	Start Attribute
+		Name = "Team ID"
+		ID = 1
+        Description = "The ID of the team."
+		Access = Read-Only
+		Storage = Common
+		Type = Integer
+		Value = *"NDIS Instrumentation"
+		End Attribute
+
+    Start Attribute
+        Name = "Team Mode"
+        ID = 2
+        Description = "The configuration mode of the team"
+        Type = Start Enum
+            0x00 = "Fault Tolerance Only (AFT)"
+            0x01 = "Load Balancing(ALB)"
+			0x02 = "Fast EtherChannnel(TM) (FEC)"
+			0x03 = "Gigabit EtherChannel*/Link Aggregation"
+			0x04 = "IEEE 802.3ad"
+			0x05 = "Switch Fault Tolerance (SFT)"
+        End Enum
+        Access = Read-Only
+        Storage = Common
+        Value = *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+        Name = "Team Size"
+        ID = 3
+        Description = "Total number of adapters in the team"
+        Access = Read-Only
+        Storage = Common
+        Type = Integer
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+        Name = "Current Primary Adapter"
+        ID = 4
+        Description = "ID of the current Primary member of the Team"
+        Access = Read-Only 
+        Storage = Common
+        Type = Integer
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+        Name = "Original Primary Adapter"
+        ID = 5
+        Description = "ID of the original Primary member of the Team since last reset."
+        Access = Read-Only
+        Storage = Common
+        Type = Integer
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+   	Start Attribute
+        Name = "Preferred Primary Adapter"
+        ID = 6
+        Description = "ID of the current designated Preferred Primary adapter in the team."  
+        	      "This may be NULL if not set."
+        Access = Read-only
+        Storage = Common
+        Type = Integer
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+End Group
+
+///////////////////////////////////////////////////////////////////////////////////
+    // Group:           Intel|Teaming Member Group |001					   //
+    // Instrumented By: NI													   //
+    // WfM Required?    No                                                     //
+///   /////////////////////////////////////////////////////////////////////////////
+
+Start Group
+    Name = "Teaming Member Group"
+    Class = "Intel|Teaming Member Group|001"
+    ID =13
+    Description = "This group defines various attributes for each AFT/ALB/FEC member."
+	Key = 4
+
+ 	Start Attribute
+        Name = "Board Type"
+        ID = 1
+        Description = "The board type of this adapter."
+        Access = Read-Only
+        Storage = Common
+ 		Type = DisplayString (250)
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Adapter Status"
+        ID = 2
+        Description = "The current status of the adapter."
+        Access = Read-Only
+        Storage = Common
+ 		Type = Start Enum
+            0x00 = "Active"
+            0x01 = "Inactive"
+        End Enum
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Adapter Function"
+        ID = 3
+        Description = "The current role played by the adapter in the team."
+        Access = Read-Only
+        Storage = Common
+        Type = Start Enum
+            0x00 = "Standby"	
+            0x01 = "Primary"
+	End Enum
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Adapter ID"
+        ID = 4
+        Description = "ID of the adapter."
+        Access = Read-Only
+        Storage = Common
+ 		Type = Integer
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Permanent MAC Address"
+        ID = 5
+        Description = "The permanent MAC address as stored in the EEPROM."
+        Access = Read-Only
+        Storage = Common
+ 		Type = DisplayString  (50)
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+ 	Start Attribute
+        Name = "Current MAC Address"
+        ID = 6
+        Description = "The current MAC address utilized by the Team Member. This can change etc."
+        Access = Read-Only
+        Storage = Common
+ 		Type = DisplayString  (50)
+        Value =  *"NDIS Instrumentation"
+    End Attribute
+
+End Group
+
+
+Start Group
+	Name = "Intel FlowControl and TCO Group"
+	Class = "Intel|FlowControl and TCO Group|001"
+	ID = 14
+	Key = 1
+	Start Attribute
+		Name = "Index"
+		ID = 1
+		Access = Read-Only
+		Storage = Common
+		Type = Integer
+		Value = *"NDIS Instrumentation"
+	End Attribute
+	Start Attribute
+		Name = "FC Transmit Pause"
+		ID = 2
+		Description = "Number of Flow Control frames transmitted by the device."
+		Access = Read-Only
+		Storage = Common
+		Type = Counter64
+		Value = *"NDIS Instrumentation"
+	End Attribute
+	Start Attribute
+		Name = "FC Receive Pause"
+		ID = 3
+		Description = "Number of Flow Control frames received by the device."
+		Access = Read-Only
+		Storage = Common
+		Type = Counter64
+		Value = *"NDIS Instrumentation"
+	End Attribute
+	Start Attribute
+		Name = "FC RCV Unsupported"
+		ID = 4
+		Description = "Number of MAC Control frames received by the device that are not Flow Control Pause frames."
+		Access = Read-Only
+		Storage = Common
+		Type = Counter64
+		Value = *"NDIS Instrumentation"
+	End Attribute
+	Start Attribute
+		Name = "Transmit TCO Frames"
+		ID = 5
+		Description = "Number of TCO frames transmitted."
+		Access = Read-Only
+		Storage = Common
+		Type = Counter64
+		Value = *"NDIS Instrumentation"
+	End Attribute
+	Start Attribute
+		Name = "Receive TCO Frames"
+		ID = 6
+		Description = "Number of TCO frames received."
+		Access = Read-Only
+		Storage = Common
+		Type = Counter64
+		Value = *"NDIS Instrumentation"
+	End Attribute
+End Group
+
+// IBM Failover Control Information Instrumentation Code
+// This is the software component information group
+
+Start Group
+    Name  = "IBM Failover Control"
+    Class = "IBM|Failover Control|001"
+    ID    = 15
+    KEY   = 2
+
+    Start Attribute
+      Name        = "Failover Group Name"
+      ID          = 1
+      Description = "The Name of the Failover Group."
+      Type        = String(64)
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Failover Group Index"
+      ID          = 2
+      Description = "The Group Index that will be used in the Adapter Table to "
+                    "identify the Adapters in this Failover Group."
+      Type        = Integer
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+End Group
+
+// The table group which carries information such as Failover Adapter Number,
+// and Failover Adapter Control for each failover adapter. 
+Start Group
+    Name  = "IBM Failover Adapter Table"
+    Class = "IBM|Failover Adapter Table|001"
+    ID    = 16
+    Key   = 1
+
+    Start Attribute
+      Name        = "Failover Adapter Number"
+      ID          = 1
+      Type        = Integer
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Failover Adapter Name"
+      ID          = 2
+      Type        = String(64)
+      Access      = Read-Only
+      Storage     = Common
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Failover Group Index"
+      ID          = 3
+      Type        = Integer
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Slot Index"
+      ID          = 4
+      Type        = Integer
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "System State"
+      ID          = 5
+      Type        = Start Enum
+                      0 = "Disabled"
+                      1 = "Enabled"
+                    End Enum
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Failover State"
+      ID          = 6
+      Type        = Start Enum
+                      0 = "None"
+                      1 = "Primary"
+                      2 = "Secondary"
+                    End Enum
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Active State"
+      ID          = 7
+      Type        = Start Enum
+                      0 = "Inactive"
+                      1 = "Active"
+                      2 = "Failed"
+                      3 = "Hot_Swap_Pending"
+		      4 = "Hot_Swap_Pending_Reinit"
+                    End Enum
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Allow Remote Management"
+      ID          = 8
+      Type        = Start Enum
+                      0 = "No"
+                      1 = "Yes"
+                    End Enum
+      Access      = Read-Only
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Failover Adapter Control"
+      ID          = 9
+      Type        = Start Enum	  
+                      0 = "Force Secondary to Primary"
+                      1 = "Force Primary to Secondary"
+                    End Enum
+      Access      = Read-Write
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Event Type"
+      ID          = 10
+      Description = "The type of event that has occurred"
+      Type        = Start Enum
+                      0 = "Unknown Failover Control Event"
+                      1 = "Adapter Failover"
+                      2 = "Refresh required"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Capability"
+      ID          = 11
+      Description = "Denotes which capabilities distinguish this version from others."
+      Type        = Start Enum
+                      0 = "Reserved"
+                      1 = "Hot Swap Supported"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+    Start Attribute
+      Name        = "Hot Swap Control"
+      ID          = 12
+      Description = "Changes the adapter state to/from Hot_Swap_Pending"
+      Type        = Start Enum
+                      0 = "Begin Hot Swap"
+                      1 = "End Hot Swap"
+                      2 = "Initialize Adapter"
+                    End Enum
+      Access      = Read-Write
+      Storage     = Specific
+      Value       = *"NDIS Instrumentation"
+    End Attribute
+
+End Group
+
+// Failover Adapter Control Standard Event Group Definition.
+
+  // Group Definition
+Start Group
+  Name  = "Event Generation (IBM Failover)"
+  Class = "EventGeneration|IBM^^Failover Adapter Table|002"
+  Key   = 5
+
+    Start Attribute
+      Name        = "Event Type"
+      ID          = 1
+      Description = "The type of Failover Event that has occurred"
+      Type        = Start Enum
+                      0 = "Unknown Failover Control Event"
+                      1 = "Adapter Failover"
+                      2 = "Refresh required"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = 0
+    End Attribute
+
+    Start Attribute
+      Name        = "Event Severity"
+      ID          = 2
+      Description = "The severity of this event"
+      Type        = Start Enum
+                      0x001 = "Monitor"
+                      0x002 = "Information"
+                      0x004 = "OK"
+                      0x008 = "Non-Critical"
+                      0x010 = "Critical"
+                      0x020 = "Non-Recoverable"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = 002
+    End Attribute
+
+    Start Attribute
+      Name        = "Event Is State-Based"
+      ID          = 3
+      Description = "The value of this attribute determines"
+                    "whether the Event being reported is a "
+                    "state-based Event or not.  If the value of"
+                    "this attribute is True then the EVENT is "
+                    "state-based.  Otherwise the Event is not"
+                    "state-based."
+      Type        = "BOOL"
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = "False"
+    End Attribute
+
+    Start Attribute
+      Name        = "Event State key"
+      ID          = 4
+      Description = "A unique, single integer key into the"
+                    "Event State group if this is a state-based"
+                    "Event.  If this is not a state-based Event then"
+                    "this attribute's value is not defined."
+                    "This attribute holds the key identifying a row of the"
+                    "Event State group within the Component in which the event"
+                    "generator group is located.  The current state attribute"
+                    "within the row contains the current state of this state"
+                    "based event.  The current state can be one of the four"
+                    "severities: OK, Non-Critical, Critical, and Non-Recoverable."
+      Type        = Integer
+      Access      = Read-only
+      Storage     = Common
+      Value       = 1 
+    End Attribute
+
+    Start Attribute
+      Name        = "Associated Group"
+      ID          = 5
+      Description = "The class name of the group that is associated"
+                    "with the events defined in this Event Generation"
+                    "group"
+      Type        = String
+      Access      = Read-Only
+      Storage     = Common
+      Value       = "IBM|Failover Adapter Table|001"
+    End Attribute
+
+    Start Attribute
+      Name        = "Event System"
+      ID          = 6
+      Description = "The major functional aspect of the product causing"
+                    "the fault."
+      Type        = Start Enum
+                      0x1 = "Failover Adapter Number"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = 0
+    End Attribute
+
+    Start Attribute	
+      Name        = "Event Subsystem"
+      ID          = 7
+      Description = "The minor functional aspect of the"
+                    "product causing the fault."
+      Type        = Start Enum
+                      0x1 = "Failover Group Index"
+                    End Enum
+      Access      = Read-Only
+      Storage     = Specific
+      Value       = 0
+    End Attribute		   
+
+End Group // EventGeneration group
+
+Start Table
+        Name = "Event Generation (NIC)"
+        Class = "EventGeneration|Intel^^NIC_HEALTH|002"
+        ID = 9
+	{ , , , , , , }
+End Table
+
+
+Start Table
+        Name = "Event Generation (TEAMING)"
+        Class = "EventGeneration|Intel^^Teaming Events Group|002"
+        ID = 11
+	{ , , , , , , }
+End Table
+
+Start Table
+        Name = "Event Generation (IBM Failover)"
+        Class = "EventGeneration|IBM^^Failover Adapter Table|002"
+        ID    = 17
+	{ , , , , , , }
+End Table    
+
+
+End Component

@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Locales and Localization</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Locales and Localization</font></h1>
+<p>There are two aspects to WMI and CDM Provider localization &mdash; localized MOF files and localized attribute data.
+
+<h2><font color="#0000FF">Localized MOF Files</h2></font>
+<p>All the MOF files used by the Providers are localized according to the Microsoft* Windows* Management Instrumentation (WMI) globalization model. To accomplish this, each class definition is separated as follows:
+<ul><li>A language-neutral version that contains only the basic class definition in the <b>.mof</b> file.</li>
+<li>A language-specific version that contains localized information, such as property descriptions that are specific to a locale in the corresponding <b>.mfl</b> file.</li></ul>
+
+<h3><font color="#0000FF">Supported Languages</font></h3>
+
+<p>Chinese (Taiwan)<br>
+Chinese (PRC)<br>
+Danish<br>
+Dutch (Netherlands)<br>
+English (United States)<br>
+Finnish<br>
+French (France)<br>
+German (Germany)<br>
+Italian (Italy)<br>
+Japanese<br>
+Norwegian (Bokmal)<br>
+Portuguese (Brazil)<br>
+Spanish (Spain - Modern)<br>
+Swedish
+
+<h3><font color="#0000FF">Class Storage</h3></font>
+<p>The language-specific class definitions are stored in a child sub-namespace beneath the namespace that contains a language-neutral basic class definition. For example, for the WMI and CDM Provider, a child namespace <b>ms_409</b> will exist beneath the
+<b>root/Intelncs</b> namespace for the English locale. Similarly, there exists a child sub-namespace for each supported language beneath the
+<b>root/Intelncs</b> namespace. 
+
+<h3><font color="#0000FF">Localized MOF Support in cimv2 Namespace</h3></font>
+<p>For <b>root/cimv2</b> namespaces, the Providers' classes (i.e., IANet_ classes) are derived from base classes added to this namespace by WMI. A sub-namespace with language-specific class definitions for base classes pre-exist beneath the <b>root/cimv2</b> namespace. The IA_Net language-specific class definitions will be added to this existing child namespace. Due to this dependency on base classes, MOF localization is done only in the default system locale.  
+
+<h3><font color="#0000FF">Runtime Support</h3></font>
+<p>To retrieve localized data, a WMI application can specify the locale using a strLocale parameter in
+<b>SWbemLocator::ConnectServer</b> and <b>IWbemLocator::ConnectServer</b> calls. If the locale is not specified, the default locale for that system will be used. (e.g. MS_409 for US English). This locale is used to select the correct namespace when adding in the English strings. 
+
+<p>In addition, <b>IWbemServices::GetObject</b>, <b>SwbemServices.GetObject</b>, <b>IWbemServices:: ExecQuery</b>, and <b>SWbemServices.ExecQuery</b> must specify the WBEM_FLAG_USE_AMENDED_QUALIFIERS flag to request localized data along with the basic definition. This is required in all functions that produce displayable values using value maps,
+display descriptions or other amended qualifiers from the MOF files.
+
+<h2><font color="#0000FF">Localized Attribute Data</h2></font>
+<p>To get localized attribute data (such as error messages), the
+Providers need to know the locale of the caller for every call. For this to work correctly, the client must add the locale to the context object that is passed for every call (see <i><a href="namecon.htm">Namespace and Context</a></i> on WBEM context). If the
+Providers
+need to return a localizable string, then it will attempt to load a resource DLL that is appropriate for the client's locale. If there is no appropriate resource DLL, then the
+Providers will return strings in US English.
+
+
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

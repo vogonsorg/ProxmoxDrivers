@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Microsoft FrontPage 6.0">
+<link rel="stylesheet" type="text/css" href="style.css">
+<TITLE> Intel&#174; Network Adapters Quick Installation Guide</TITLE>
+</HEAD>
+<BODY>
+<H1>
+<font color="#000000">
+Intel&#174; PRO Network Adapter Installation</font></H1>
+<p>
+<i>Revision 04/2004</i></p>
+<DIV>
+<hr>
+<DIV>
+<h2>
+<font color="#000000">
+Install the Intel PCI, PCI-X, or PCI-Express* Adapter</font></h2>
+<ol>
+  <li>
+    <p class="numlst"><font color="#000000">Turn off the computer and unplug the power cord.</font></li>
+  <li>
+    <p class="numlst"><font color="#000000">Remove the computer cover and the 
+    adapter slot cover from the slot that matches your adapter.</font></li>
+  <li>
+    <p class="numlst"><font color="#000000">For <b>PCI Express</b> adapters: insert the 
+    adapter edge connector into the PCI Express slot and secure the bracket to 
+    the chassis.<br>
+    For <b>PCI and PCI-X</b> adapters: firmly place the adapter edge connector into the PCI slot 
+    until it is fully inserted. Secure the bracket to the chassis. </font></li>
+  <li>
+    <p class="numlst">Replace the computer cover. Plug in the power cord.</li>
+</ol>
+    <h2>Attach the Network Cable</h2>
+</DIV>
+<DIV>
+</DIV>
+<p><font color="#000000"><b>Intel&#174 PRO/100 and PRO/1000 copper adapters:</b> Connect the 
+network cable or cables to the adapter using Category 3, 4, or 5 Twisted Pair Ethernet (TPE) network cable for 10 Mbps networks.
+    Use Category 5 (4 pair) cable for 100 or 1000 Mbps networks and for any residential networks.<br>
+<br>
+    <b>Intel&#174 PRO/1000 fiber adapters with SC connector:</b> Remove and save the fiber optic connector cover. Insert a 1000Base-SX duplex type SC fiber optic connector into the TX/RX ports on the 
+adapter bracket.<br>
+<br>
+    <b>Intel&#174 PRO/1000 fiber adapters with LC connector:</b> Remove and save the fiber optic connector cover.
+    Insert an LC connector into the adapter, with correct cabling for your
+    adapter type <span class="295061618-17042002">(1000BASE-SX
+    or 1000BASE-LX). Conversion cables to other connector
+    types (such as SC) may be used if the cabling matches the optical
+    specifications of the adapter, including length limitations.<br>
+<br>
+    </span>
+</font>
+Start your computer and follow the driver installation instructions below.
+</DIV>
+<h2>
+<font color="#000000">
+Install the Drivers and </font>Extensions</h2>
+<p>
+<i>
+<font color="#000000">
+Note:  Intel PRO/1000 Server Adapters do not operate with Windows* 95, Windows 98* 
+and Windows Me* 
+computers.</font></i></p>
+<h3><font color="#000000">Windows Operating Systems (except Windows NT* 4.0)</font></h3>
+<font COLOR="#231f20">
+<p ALIGN="LEFT">Note that you must have administrative rights to the operating 
+system to install the drivers. </p>
+<ol>
+  <li>
+<p ALIGN="LEFT" class="numlst">The adapter is detected and Windows either installs a Windows 
+resident driver or starts the <b>Found New Hardware </b>wizard.</p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">If the wizard 
+starts, follow the prompts to install the driver from the CD in this package.  </p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">If 
+a Windows resident driver installs (wizard does not appear), update the driver 
+by inserting the Intel CD and clicking the <b>Install Drivers </b>button when 
+the <b>Intel PRO Network Connections </b>autorun window appears.</p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">When the <b>
+Install Options </b>dialog appears, choose <b>Advanced Network Services </b>if 
+you need to set up teams or VLANs.</p>
+  </li>
+</ol>
+</font>
+<DIV>
+<h3><font color="#000000">Windows NT 4.0</font></h3>
+<P>
+<font color="#000000">
+Note:  the Intel PROSet utility software is automatically installed during the adapter driver installation.</font></P>
+<ol>
+  <li>
+    <p CLASS="numlst"><font color="#000000">Start Windows NT 4.0, double-click the Network icon in the Control Panel, click the Adapters tab, and click Add.</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">When you see a list of adapters, instead of choosing an adapter from the list, insert 
+    the CD provided with your adapter or point to your other media and click Have Disk.</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">If the CD Autorun screen appears, close it, and continue.</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">Specify the path, click OK, and continue the installation. Upon completion,
+    the new Intel adapter appears in the Network Adapters list.</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">Click Close to finish.</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">Restart your computer.</font></p>
+  </li>
+</ol>
+</DIV>
+<h3>
+<font color="#000000">
+Linux*</font> </h3>
+<p>To build a binary RPM* package of this driver, run&nbsp;'rpmbuild -tb &lt;filename.tar.gz&gt;'. 
+Replace &lt;filename.tar.gz&gt; with the&nbsp;specific file name of the driver.</p>
+<table cellPadding="4" width="100%" border="0">
+  <tr>
+    <td vAlign="top" align="middle" width="21">
+    &nbsp;</td>
+    <td><i><b>NOTES</b>:</i> For the build to work properly, the currently 
+    running kernel MUST match the version and configuration of the installed 
+    kernel sources. If you have just recompiled the kernel reboot the system 
+    now.
+    <p>RPM functionality has been tested only in Red Hat distributions.<p>For 
+    Intel PRO/100 adapters, use e100 as driver name.</td>
+  </tr>
+</table>
+<ol>
+  <li>
+  <p class="numlst">Move the base driver tar file to the directory of your 
+  choice. For example, use '/home/username/e1000' or '/usr/local/src/e1000'.
+  </li>
+  <li>
+  <p class="numlst">Untar/unzip the archive, where &lt;x.x.x&gt; is the version number 
+  for the driver tar file: </p>
+  <blockquote>
+    <p class="numlst">tar zxf e1000-&lt;x.x.x&gt;.tar.gz </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">Change to the driver src directory, where &lt;x.x.x&gt; is the 
+  version number for the driver tar: </p>
+  <blockquote>
+    <p class="numlst">cd e1000-&lt;x.x.x&gt;/src/ </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">Compile the driver module: </p>
+  <blockquote>
+    <p class="numlst">make install </p>
+  </blockquote>
+  <p class="numlst">The binary will be installed as:</p>
+  <blockquote>
+    <p class="numlst">/lib/modules/&lt;kernel_version&gt;/kernel/drivers/net/e1000.o</p>
+  </blockquote>
+  <p class="numlst">The install locations listed above are the default 
+  locations. They might not be correct for certain Linux distributions. For more 
+  information, go to <a href="../LINUX/ldistrib.htm">ldistrib.htm</a>.</li>
+  <li>
+  <p class="numlst">Install the module: </p>
+  <blockquote>
+    <p class="numlst">insmod e1000 &lt;parameter&gt;=&lt;value&gt; </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">Assign an IP address to the interface by entering the 
+  following, where &lt;x&gt; is the interface number: </p>
+  <blockquote>
+    <p class="numlst">ifconfig eth&lt;x&gt; &lt;IP_address&gt; </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">Verify that the interface works. Enter the following, where 
+  &lt;IP_address&gt; is the IP address for another machine on the same subnet as the 
+  interface that is being tested: </p>
+  <blockquote>
+    <p class="numlst">ping &lt;IP_address&gt; </p>
+  </blockquote>
+  </li>
+</ol>
+<h3>
+<font color="#000000">
+Other Operating Systems</font> </h3>
+<P><font color="#000000">To install other drivers, see the <i>User's Guide</i> 
+on the adapter CD or visit your customer support web site: <a href="http://support.intel.com">http://support.intel.com</a>.</font></P>
+<DIV>
+<hr>
+<P CLASS="Proc-Step"><font color="#000000">*<a href="legaldis.htm">Legal
+Information</a></font></P>
+</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,383 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing Intel Network Drivers for Novell NetWare</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel PRO/1000 Network Driver for Novell NetWare*</h1>
+
+<p class="contents"><a href="#install">Installing the Driver</a></p>
+
+<p class="contents"><a href="#speed_duplex">Configuring Speed and Duplex</a></p>
+<p class="contents"><a href="#jumbo_frames">Jumbo Frames</a></p>
+<p class="contents"><a href="#wake_on_pme">Wake on PME</a></p>
+<p class="contents"><a href="#install_mult">Installing Multiple Adapters</a></p>
+<p class="contents"><a href="nw_kwgig.htm">Command Line Parameters</a></p>
+<p class="contents"><a href="team_nw.htm">Teaming and VLAN</a></p>
+<p class="contents"><a href="nw_snmp.htm">SNMP Agent Extension</a></p>
+
+<hr>
+
+<h2><a name="install"></a>Installing the Driver</h2>
+<h3>
+Support Pack Requirements</h3>
+<ul>
+	<li>For Novell NetWare* 5.1 and Novell NetWare 6.0, have Consolidated 
+	Support Pack 10 installed.</li>
+	<li>For Novell NetWare 6.5 have Support Pack 1 installed.</li>
+</ul>
+<h3>
+Installing the Driver</h3>
+<p>
+The Intel PRO/1000 adapter driver for Novell NetWare 5.x and 6.x is
+packaged in the ce1000.lan file. To install the ce1000.lan package and setup the
+driver for a network adapter, use the following steps.</p>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"> 
+        <p><i><b>NOTE</b>:</i> Prior to installing, either load
+          the DOS or NetWare drivers for your server's CD-ROM drive or create a floppy disk from the  CD on a different computer.
+          For more information, refer to the Make a Driver Disk section of this guide.</td>
+    </tr>
+</table>
+
+<ol>
+  <li>
+  <p class="numlst">From the NetWare console, type <span class="monospace">
+  NWCONFIG for </span>
+  <span style="FONT: 10pt Arial; COLOR: #000000; TEXT-DECORATION: none">(NW5.x, 
+  NW6.x)</span> and press 
+  &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">From the Configuration Options screen choose
+  <span class="gui">Driver options</span>, and press &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">Choose <span class="gui">Configure network drivers</span>, and press &lt;Enter&gt;. If any drivers are already loaded, a list of them appears.
+  </li>
+  <li>
+  <p class="numlst"> <span class="gui">Select an additional driver</span>, and press &lt;Enter&gt;. A list of drivers
+  should appear.</li>
+  <li>
+  <p class="numlst">Insert the  CD or floppy disk you have created, and choose
+  <span class="gui">Install an unlisted driver</span> by pressing &lt;Insert&gt;. 
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em>To mount a CD, use <i>cdrom</i>.</td>
+    </tr>
+  </table>
+ </li>
+  <li>
+  <p class="numlst">If you're using a floppy disk, insert the disk in drive A 
+  and press&nbsp;&lt;Enter&gt;. If you have mounted the CD as a NetWare volume press &lt;F3&gt;, 
+  and&nbsp;enter the source path (PRO1001000:/pro1000/nwserver/).&nbsp; </li>
+  <li>
+  <p class="numlst">The driver name is displayed: Intel(R) 8254x Based Network
+  Connection. 
+  Press &lt;Enter&gt; to select it. </li>
+  <li>
+  <p class="numlst">A prompt appears asking if you want to copy the driver.&nbsp;Select <span class="gui">Yes</span> and press &lt;Enter&gt;.</li>
+  <li>
+  <p class="numlst">The next screen asks for parameters for loading the driver. 
+  To&nbsp;modify any driver parameters or protocols, highlight <span class="gui">
+  Select/Modify&nbsp;driver parameters and protocols</span>, and press &lt;Enter&gt;. If you 
+  have multiple adapters,&nbsp;enter the slot number for the adapter you are 
+  currently configuring.&nbsp;When finished configuring the driver, select
+  <span class="gui">Save parameters and load&nbsp;driver to continue</span>. </p>
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top">
+      <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTES</strong>: </em>If your system contains 
+      a single network adapter, you may enter any number for the slot. The 
+      driver will automatically detect the correct slot number and load 
+      successfully.</td>
+    </tr>
+    <tr>
+      <td vAlign="top">&nbsp;</td>
+      <td vAlign="top">If your system contains more than one network adapter, 
+      you can find the valid slot numbers for your adapters by pressing 
+      &lt;Alt&gt;-&lt;Esc&gt; to switch to&nbsp;the console screen in NetWare. Type
+      <span class="monospace">LOAD CE1000</span> 
+      and press &lt;Enter&gt;. The driver 
+      will attempt to load and prompt you with the available slot&nbsp;numbers.
+        To abort the driver load, note 
+      the slot numbers, and press &lt;Esc&gt;.&nbsp;Use 
+      &lt;Alt&gt;-&lt;Esc&gt; to switch back to the Install screen and enter the 
+      correct&nbsp;slot number.</td>
+    </tr>
+  </table>
+  </li>
+  <li>
+  <p class="numlst">To complete the driver installation process, go back to 
+  the&nbsp;Configuration Options screen by pressing &lt;Esc&gt; until you see&nbsp;the 
+  Configuration Options screen. </li>
+  <li>
+  <p class="numlst">Choose <span class="gui">Exit</span> to return to the server 
+  console prompt.</li>
+</ol>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"><b><i>NOTES</i></b><i>:</i> If the adapter cannot transmit or receive after installation, you 
+        may need to modify the frame type or LOAD and BIND statements in the AUTOEXEC.NCF file.</td>
+    </tr>
+	<tr>
+        <td valign="top"></td>
+        <td valign="top">If you are installing multiple adapters, repeat the driver
+          installation process for each adapter in the server.</td>
+    </tr>
+	<tr>
+        <td valign="top"></td>
+        <td valign="top">Some switches can take several seconds to auto-negotiate and establish
+          a link with the adapter. This may result in a false &quot;could not
+          establish link&quot; error message. Use the monitor or check the
+          adapter lights to determine valid connection information.</td>
+    </tr>
+</table>
+<h3>Installing with Netware 6.x</h3>
+<p>If you are using Netware 6.x the following installation instructions apply:</p>
+<ol>
+  <li>
+  <p class="numlst">From the NetWare console, type <b>HDETECT</b>, and press &lt;Enter&gt;.
+  </li>
+  <li>
+  <p class="numlst">From the first NetWare Installation screen (displaying 
+  Platform Support and Hot Plug modules) choose <b>Continue</b>, 
+  and press &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">From the second NetWare Installation screen (displaying 
+  Network Boards) choose <b>Modify</b>, 
+  and press &lt;Enter&gt;. Then choose <b>Network Boards</b> and press &lt;Enter&gt;.</li>
+  <li>
+  <p class="numlst">At the next screen (displaying only Network Boards) choose
+  <b>Modify</b>.</li>
+  <li>
+  <p class="numlst">Choose <b>Add</b> by pressing &lt;Insert&gt;.</li>
+  <li>
+  <p class="numlst">Insert the  CD or floppy disk you have created, and 
+  choose <b>Install an Unlisted Driver </b>by pressing &lt;Insert&gt;.</li>
+  <li>
+  <p class="numlst">Go to step #6 in the above <a href="#install">installation 
+  instructions</a> and follow through step #11.</li>
+</ol>
+
+<hr>
+
+<h2><a name="speed_duplex"></a>Configuring Speed and Duplex</h2>
+<p>
+The default setting for auto-negotiation is enabled. Change this only to
+match your link partner.
+</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><i><b>NOTES</b>:</i> If you disable auto-negotiation the adapter
+        will not operate at gigabit speed (1000 Mbps).</td>
+    </tr>
+    <tr>
+      <td vAlign="top"></td>
+      <td vAlign="top"> You cannot change the speed or duplex
+        of Intel PRO/1000 adapters that use fiber cabling.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Setting Speed and Duplex</h3>
+<p>Use keyword commands in AUTOEXEC.NCF to force speed and duplex modes as
+follows:</p>
+<blockquote>
+  <p><span class="monospace">Speed = 10 | 100</span>&nbsp; <i>(10 Mbps, 100 Mbps)</i></p>
+</blockquote>
+<p>This should be followed by one of the following:</p>
+<blockquote>
+  <p><span class="monospace">Forceduplex = 1 | 2 </span><i>(half, full)<br>
+  </i><span class="monospace">Autoneg = </span><i>see table below for settings
+  and values</i></p>
+</blockquote>
+<p>
+These keywords are not available in INETCFG. To use these or any of the
+advanced keywords, either configure the drivers manually, or
+change them in AUTOEXEC.NCF.
+</p>
+<p>
+The default setting is auto-negotiation. In this mode, the adapter advertises
+all supported speed and duplex combinations and will link at the highest common
+speed/duplex combination.
+</p>
+<p>
+If you manually set (force) speed to 10 or 100, you must force <b>both</b>
+speed and duplex, and auto-negotiation must be disabled. Also, ensure that the
+link partner settings match these settings. When the Speed and Forceduplex
+parameters are forced, the Autoneg parameter is ignored.
+</p>
+<h3>Using Autoneg</h3>
+<p>
+Use the Autoneg parameter when more control is required. This
+parameter is a bitmap, based on the following table, that specifies which speed
+and duplex settings the adapter advertises to a link partner. When this parameter
+is used, the Speed and Forceduplex parameters must not be specified.
+</p>
+<b>
+<table border="1" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td align="middle" vAlign="top">
+        <p><b>Setting</b></p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">1000 Full</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">N/A</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">100 Full</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">100 Half</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">10 Full</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">10 Half</p>
+      </td>
+    </tr>
+    <tr>
+      <td align="middle" vAlign="top">
+        <p><b>Value</b></p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">32</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">16</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">8</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">4</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">2</p>
+      </td>
+      <td align="middle" vAlign="top">
+        <p align="center">1</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</b>
+<p>This parameter is the sum of the values of each setting to advertise. For
+example, to advertise 1000-Full, 100-Full, and 100-Half modes, the parameter
+would be set to 32 + 8 + 4 = 44.</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+      <td vAlign="top"><b><i>CAUTION</i></b>: When the Speed and Forceduplex
+        keywords are used, Autoneg is disabled. To ensure that link is
+        established correctly, auto-negotiation must be disabled on the link
+        partner, and the link should be forced to the same speed and duplex mode
+        used on the adapter.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<hr>
+
+<h2><a name="jumbo_frames"></a>Jumbo Frames</h2>
+
+<p>Restrictions:</p>
+    <ul>
+      <li>
+      <p class="numlst">Jumbo Frames are only supported on NetWare 6 and above. 
+      </li>
+      <li>
+      <p class="numlst">Jumbo Frames are supported only with gigabit adapters operating 
+    	with gigabit links. Additionally, your switch infrastructure must
+      support Jumbo Frames.
+      </li>
+      <li>
+      <p class="numlst">Jumbo Frames are not supported on the first generation Intel 
+      	PRO/1000 Gigabit Server Adapter (82542-based adapter). Jumbo Frames are 
+      also not supported for 82544-based adapters installed in PCI-X slots.  
+      </li>
+      <li>
+      <p class="numlst">Jumbo Frames only work with IP, and Ethernet II must be the only frame type loaded for the board.
+      </li>
+      <li>
+      <p class="numlst">The MAXIMUM PHYSICAL RECEIVE PACKET SIZE setting must be set to the size of the jumbo frame.
+      </li>
+</ul>
+<table border="0" cellPadding="6" cellSpacing="0">
+    <tr>
+      <td vAlign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+      <td vAlign="top"><i><b>IMPORTANT: </b></i>Before creating a team, adding 
+      or removing team members, or changing advanced settings of a team member, 
+      make sure each team member has been configured similarly. Settings to 
+      check include VLANs and QoS Packet Tagging, Jumbo Frames, and the various 
+      offloads. <i>Pay particular attention when using different adapter models 
+      or adapter versions, as adapter capabilities vary.</i></td>
+    </tr>
+</table>
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top">
+      <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em></td>
+    </tr>
+  </table>
+<p>
+Also see the discussion of Jumbo Frames in the Teaming and VLANs section.
+</p>
+<h3>Set Up</h3>
+<p>To set up for Jumbo Frames, use the following commands:</p>
+<blockquote class="monospace">
+	SET MAXIMUM PHYSICAL RECEIVE PACKET SIZE = &lt;jumbo frame size&gt;<br>
+	LOAD CE1000 FRAMETYPE=ETHERNET_II JUMBO = &lt;jumbo frame size&gt;
+</blockquote>
+<p>At the switch, make sure you set the Jumbo Frame size to be <b>at least 22
+bytes larger</b> than that of the server.</p>
+
+<hr>
+
+<h2><a name="wake_on_pme"></a>Wake on PME</h2>
+<p>The Intel driver includes the Wake on PME assertion feature for NetWare 5.x
+and 6.x systems. This feature allows users to select a single adapter in a
+system and configure that adapter to wake a system from an off state.</p>
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top">
+      <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em>Wake on PME is enable by
+        default.<em> </em><span class="TrkFieldValue">To disable Wake on PME, 
+      enter the option pmedisable=1 on the command line.</span></td>
+    </tr>
+  </table>
+<hr>
+
+<h2><a name="install_mult"></a>Installing Multiple Adapters</h2>
+<p>The <b>server</b> drivers use the PCI slot number to identify
+each installed adapter. You can correlate the PCI slot number to the port by
+using the Ethernet address that is printed on a label on the adapter.</p>
+
+<p>If you are installing a driver in a computer with existing
+Intel adapters, the drivers are updated automatically.&nbsp;</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/21/04 3:56p <!-- $--> Revision <!--$$Revision:--> 17 <!-- $--></code></p>
+
+</body>
+</html>

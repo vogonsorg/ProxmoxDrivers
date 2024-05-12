@@ -1,0 +1,981 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Intel Advanced Networking Services (ANS) for Linux</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel&reg; Advanced Network Services (ANS) for Linux* Operating Systems</h1>
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#install">Installing
+ANS</a></p>
+<p class="contents"><a href="#config">Configuring ANS</a></p>
+<p class="contents"><a href="#parameters">Network Parameters Boot Configuration</a></p>
+<p class="contents"><a href="#build_tree">Structure of the ANS Build Tree</a></p>
+<p class="contents"><a href="#ex_file">Example Setup</a></p>
+<p class="contents"><a href="#Known">Known Issues</a></p>
+<p class="contents"><a href="#trouble">Troubleshooting</a> </p>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>This file describes the Intel&reg; <i> Advanced Network Services</i> (ANS) package,
+version 3.4.x, for Linux* systems. Intel ANS provides both <a href="#teaming">teaming</a>
+(including <a href="#mvt">Multi-Vendor Teaming</a>), and IEEE <a href="#vlans">VLAN</a>
+capabilities.&nbsp;
+</p>
+
+<p>
+For ANS support, this package version must be used with the Linux base driver
+version e100-3.0.x for PRO/100 adapters and/or driver version 
+e1000-5.3.x or later for PRO/1000 adapters. Base drivers provided in some distributions
+do not contain the MII interface that is necessary for ANS.
+</p>
+This package is intended for 2.4.7 and higher kernels; it was tested primarily 
+on the Red Hat* Enterprise Linux ES 2.1 kernel 2.4.9-e.27 and&nbsp; Red Hat 
+Enterprise Linux ES 3 kernel 2.4.21-4.EL on SMP Intel processor-based systems. 
+This package includes support for Itanium™-based systems.
+
+<p>
+This version of ANS may be configured with the PROCfg command-line utility. This 
+reporting and configuration tool reduces the command-line input required with the 
+manual configuration method described in this document. At this time, PROCfg is 
+only available for 32-bit architectures (<a href="http://support.intel.com" target="_blank">http://support.intel.com</a>).
+</p>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  ANS was not tested with drivers that are statically 
+    linked into the kernels; it was only tested with loadable modules.</td>
+  </tr>
+</table>
+
+<h3><a name="teaming"></a>Teaming</h3>
+
+<p>This package supports the following teaming modes:
+</p>
+
+<blockquote>
+<p>
+<b>Adapter Fault Tolerance (AFT)</b>. Default mode when a team is created and 
+the mode is not specified. A secondary adapter in the team automatically takes 
+over on any failure of the primary connection (cable, adapter or port). Only one 
+network adapter is active at a time. After a failover, if the connection to the 
+former primary adapter is restored, and it was set to be the preferred primary, 
+control passes automatically back to that primary adapter, otherwise no failback 
+is performed. May mix speed and duplex capabilities and settings. May use a hub 
+or switch.</p>
+<p>
+<b>Switch Fault Tolerance (SFT)</b>. Provides a fail-over between
+switches when each adapter in the team is connected to a separate switch. 
+Spanning Tree Protocol (STP) must be turned on
+in the switches and the forward delay parameter of ANS must be defined 
+according to the switch settings. We recommend that you set the ANS forward delay 
+parameter to twice the value of the STP forward delay configured on the switch. SFT teaming mode has been tested with the following
+configuration only: exactly two members in a team connected to two switches, with one
+member set as preferred primary and the other as preferred secondary; the
+switches’ setup was similar to that in the following diagram:
+</p>
+<img border="0" src="sft.jpg" width="375" height="243">
+<p>
+<b>Adaptive Load Balancing (ALB)</b>. Includes Receive Load Balancing (RLB). A team of 2-8 
+adapters that performs receive and transmit load balancing with no required switch configuration. 
+Supports mixed-speed/duplex settings among team members. Includes fault tolerance. An ALB team may be created with or without RLB enabled.
+</p>
+<p>If RLB is enabled (default), all active adapters with the highest speeds load 
+balance the IPv4 received traffic, and the primary adapter receives traffic 
+using any protocol. Receive Load balancing is achieved by using the Address 
+Resolution Protocol (ARP). Therefore, all packets coming from clients behind a 
+router will be assigned the same receiving member that the router was assigned. 
+For ALB teams with RLB disabled, only the primary adapter receives.</p>
+<p>
+<b>Static Link Aggregation</b>. A team of 2-8 adapters that provides increased 
+transmission and reception throughput. This mode also includes adapter fault 
+tolerance and load balancing (only routed protocols). This teaming mode requires 
+a switch with Intel<sup>®</sup> Link Aggregation or Cisco* FEC or GEC 
+capability. This team replaces the following team modes from prior software 
+releases: Fast EtherChannel*/Link Aggregation (FEC) and Gigabit EtherChannel*/Link 
+Aggregation (GEC). All adapters in a Link Aggregation team running in static 
+mode must run at the same speed and must be connected to a Static Link 
+Aggregation capable switch. If the speed capability of adapters in a Static Link 
+Aggregation team are different, the speed of the team is dependent on the 
+switch.&nbsp;Spanning Tree Protocol must be turned off.</p>
+
+<p>
+<b>IEEE 802.3ad: dynamic (802.3ad)</b>. This mode is the IEEE standard for the
+technology incorporated into Cisco's FEC* method. ANS support for dynamic 802.3ad
+teaming is similar to that for Static Link Aggregation teaming. In addition to the benefits 
+of Link Aggregation, IEEE 802.3ad Dynamic Link Aggregation generally offers the 
+following advantages: Automatic Configuration, Rapid Configuration and 
+Reconfiguration, and Deterministic Behavior. It consists of a team of 2-8 
+adapters that simultaneously receive and transmit data. Aggregation groups 
+include only members with full duplex and the same speed. Includes fault 
+tolerance and load balancing. Requires a switch that supports the IEEE 802.3ad 
+dynamic standard. Must match switch aggregation requirements.
+</p>
+
+<p><b>NONE</b>. A team of one Intel adapter that adds VLAN
+support on top of one existing interface. Does not require an
+Intel server adapter. VLAN-enabled must be set.
+</p>
+<font COLOR="#0000ff"></font>
+</blockquote>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTES</b>:</i> You must have at least one Intel PRO/100 or 
+    PRO/1000 server adapter to form a team.<p>For AFT, SFT, and ALB, you may 
+    specify which adapters in a team you want to use as the primary and 
+    secondary adapters. The primary one is the main adapter used in a team. For 
+    AFT/SFT, the primary one is the only adapter used until a failure occurs. 
+    For ALB, the primary one is the adapter that both transmits and receives. 
+    For ALB+RLB, the primary adapter is the only adapter that receives non-IPv4 
+    traffic. In a team of more than two adapters, the secondary adapter fills 
+    the primary's role if the primary adapter fails. Also, fail back will not 
+    occur unless the primary has been specified. If the priority is not 
+    specified before the team is activated, the adapter with the highest 
+    supported speed is chosen. If all adapters support the same speed, the last 
+    one added is the primary adapter.</td>
+  </tr>
+  </table>
+
+<h3>Probes</h3>
+<p>ANS supplies a periodic probes mechanism for checking the health of the 
+system and discovering connectivity problems. The probes mechanism can help 
+detect situations of wrong switch configuration: e.g., a port is disabled or has 
+a wrong VLAN setting that otherwise would not be detected by ANS. Without probes 
+enabled, ANS can only detect link loss and hardware/software failures reported 
+by the base driver. You can use the probes mechanism for confirming your 
+system's connectivity after configuration changes. Probes can be used in all 
+non-Link Aggregation teaming modes, including AFT, SFT, and ALB(+RLB). Fine 
+tuning of the probe parameters can scale failover time and enhance the system's 
+reliability. Probes are on by default in teams with three or more adapters, and 
+off by default otherwise. The team must include at least two adapters for the 
+probes mechanism to work. If you create a team of two members and later add a 
+third member, probes will not be enabled by default. See the PROCfg or ianscfg 
+man page for information on how to change probes parameters. </p>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTES</b>:</i>&nbsp; The probes mechanism can only indicate that 
+    there is connectivity between the members of the team. They do not indicate 
+    that there is connectivity to other clients on the network. When probes are 
+    enabled and the forward delay parameter of ANS is set the status of the 
+    probes will override the forward delay, and a member will be activated as 
+    soon as it transmits and receives probes successfully even if the forward 
+    delay is not up yet. In systems where connectivity between members does not 
+    indicate that the switch is ready to forward traffic to other clients (if 
+    forward delay could vary for different ports on the switch), probes must be 
+    turned off for the forward delay to be effective. </td>
+  </tr>
+  </table>
+
+<p>&nbsp;</p>
+
+<h3><a name="mvt"></a>Multi-Vendor Teaming</h3>
+<p>
+<i>Multi-Vendor Teaming</i>  (MVT) adds the capability to include non-Intel adapters from&nbsp;selected vendors in a team (AFT, SFT, ALB(+RLB), 
+Static Link Aggregation, 802.3ad). MVT cannot be used with VLANs.
+</p>
+
+<p>
+In order to activate MVT, you must have at least one Intel server adapter&nbsp;in the team that is designated as the primary adapter. Adapters from&nbsp;other vendors must be properly loaded. Use the same command line parameters
+for building the team as with all Intel adapters. All members in an MVT
+operate on a common feature set.
+</p>
+
+<p>
+Base driver is required to support Ethtool version 1.2.<br>
+<br>
+For high availability (link loss detection and current speed/duplex), the base 
+driver is also required to include support for one of the following options:</p>
+
+<ul>
+  <li>ethtool version 1.4</li>
+  <li>MII (for 10/100 adapters only)</li>
+  <li>Update of the netif_carrier flag when link status changes</li>
+</ul>
+<blockquote>
+
+<p>
+ANS defaults to the netif_carrier option if ethtool and MII support was not 
+found.</p>
+
+</blockquote>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTES</b>:</i>  For RLB teams, some adapters produced by non-Intel vendors do not 
+    support setting the MAC address of the device while it is open. Therefore, swapping MAC 
+    addresses during failover is impossible. This creates a problem when RLB is enabled, as 
+    each team member must use a unique MAC address. As a workaround, ANS sets the non-Intel 
+    adapter to work in promiscuous mode when it becomes the primary after a failover occurs. 
+    The adapter will stay promiscuous as long as the MAC address that it is using differs 
+    from that of the adapter's hardware.</td>
+  </tr>
+  <tr>
+    <td width="21" valign="top" align="center"></td>
+    <td>         Using ALB and RLB with non-Intel adapters requires the use of a switch instead of a hub. 
+    Adding to an ANS team an adapter controlled by the tg3 driver in Red Hat 2.1 
+    has been found to cause a system panic due to incompatibility. This problem 
+    was not found with the tg3 driver in Red Hat 3 or with the tg3 driver in the 
+    2.4.23 vanilla kernel. 
+    <p>Removing from an ANS team an active Broadcom NetExtreme 5700 or 5701 
+    Gigabit adapter was found to cause reboot of the system on some occasions 
+    due to incompatibility.</td>
+  </tr>
+  </table>
+<h3><a name="vlans"></a>VLANs</h3>
+<p>
+IEEE 802.3ac Virtual LANs (VLANs) are based on the addition of a tag to the packet header. All
+equipment on the network that passes this traffic must be capable of handling
+the extra length. Settings on the adapter must match the VLAN settings on the
+switch. 
+There is a limit of 64 VLANs per server; however, VLAN IDs may be numbered from 1
+to 4094.
+</p>
+
+<table border="0" cellPadding="2" cellspacing="1">
+  <tr>
+	<td align="left" vAlign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+	<td align="left" vAlign="top"><i><b>NOTE</b>:</i> When using ANS VLANs, the native VLAN module 
+		provided with the kernel (8021q.o) must NOT be loaded.</td>
+  </tr>
+  <tr>
+	<td align="left" vAlign="top"></td>
+	<td align="left" vAlign="top">VLAN hardware off-loading is supported only for kernels that support VLAN hwaccel. These 
+         include stock Red Hat 7.3 and later distribution kernels, or any 2.4.19 or later kernel. 
+         For older kernels, ANS implements software VLAN tagging and stripping. For VLAN hardware 
+         off-loading (enhanced performance) on older kernels you must use ANS driver version 
+    1.2.x to 2.0.x, plus the appropriate base driver version(s) for that ANS driver.</td>
+  </tr>
+  <tr>
+	<td align="left" vAlign="top"></td>
+	<td align="left" vAlign="top"> Due to a third-party limitation, adding VLANs when the IPv6 module 
+	is loaded might cause a network connectivity failure.</td>
+  </tr>
+</table>
+
+<p>
+<b>Setting VLANs statically:</b>
+<br>
+When working with VLAN tagging, all the ports on the switch connected to the server 
+should be configured to be tagged. In some Cisco
+switches it is possible to configure ports to be both tagged and untagged at the
+same time; although, this configuration will result in communication loss.
+</p>
+<p>
+When adding new VLAN IDs to an active team the switch ports attached to the team's 
+members must be configured with the new VLAN IDs prior to adding them to the ANS team. 
+Otherwise, ANS might disable members that are not sensing probes on the new VLAN IDs 
+because the switch is not configured accordingly.
+</p>
+
+<p>
+<b>Setting VLANs dynamically - GVRP:</b>
+<br>
+VLANs may be set dynamically with the GARP VLAN Registration Protocol (GVRP).
+GVRP is an industry-standard protocol designed to dynamically create and manage
+VLAN information from device to device. With GVRP, a single switch is manually
+configured with all the desired VLANs for the network, and all other switches on
+the network obtain the VLAN information dynamically.
+</p>
+<p>
+If GVRP is enabled in the team and in the switch, the switch ports connected
+to the server should not be marked as tagged, but will be dynamically 
+configured by ANS whenever VLAN IDs are added and removed from the team.
+</p>
+
+<hr>
+
+<h2><a name="install"></a>Installing ANS</h2>
+<p>
+Installation assumes all necessary build tools, kernel sources, and headers 
+are in place and properly configured.
+</p>
+
+<p>
+To compile and install the base driver package(s), see the readme included with those drivers.
+Ensure no other base drivers are loaded or
+		compiled into the kernel for any of the Intel adapters (e.g., eepro, eepro100,
+eexpress, e100, e1000). Ensure the configuration
+		files have been edited to alias the new driver(s). See the <a href="#ex_file"> Example Setup</a> section for an example
+		file.
+</p>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Not for use with eepro100 (module removal may be necessary).</td>
+  </tr>
+</table>
+
+<p>
+Verify that all interfaces are working and that you have the base driver file(s), e100.o and/or e1000.o, located in:
+</p>
+<blockquote>
+  <p>/lib/modules/&lt;kernel_version&gt;/kernel/drivers/net/</p>
+</blockquote>
+
+<p>
+The locations listed above may vary for certain Linux distributions. For
+exceptions, refer to <a href="ldistrib.htm">ldistrib.htm</a>.
+</p>
+
+<p>
+To uninstall ANS, see <a href="#removing">Removing ANS</a>.</p>
+
+<ol>
+  <li>
+    <p class="numlst">Login as root.</li>
+  <li>  
+    <p class="numlst">Copy the iANS-x.x.x.tar.gz package file to a directory of your choice.
+    &quot;x.x.x&quot; specifies the iANS version number.</li>
+  <li>  
+    <p class="numlst">Open the package file by running 'tar xzf
+    iANS-x.x.x.tar.gz'.
+    This creates a subdirectory for iANS-x.x.x under the current directory.</li>
+  <li>  
+    <p class="numlst">Enter the iANS-x.x.x/src directory. Run 'make' to compile the module.
+	<table border="0" cellpadding="4">
+	  <tr>
+		<td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+		<td><i><b>NOTE</b>:</i> SMP/UP and MODVERSIONS are determined by 'make'. If there is a 
+    	mismatch between the configuration for the kernel source tree and the running kernel, a 
+    	warning is displayed. Run 'make options' to list the options available for overriding the 
+    	source tree settings. Options include SMP, MODVERSIONS, and DEBUG (not listed). DEBUG values 
+    	are 0 (debugging is off - default) and 1 (debugging is on).</td>
+  	  </tr>
+	</table></li>
+  <li>
+    <p class="numlst">Run 'make install'.
+	<table border="0" cellpadding="4">
+	  <tr>
+		<td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+		<td><i><b>NOTE</b>:</i> The default file locations are determined by 'make'. If there is a 
+		mismatch between the configuration for the kernel source tree and the running kernel, a 
+		warning is displayed. Either reboot to a kernel that matches the kernel source tree 
+		or set the symbolic link, usr/src/linux, to point to the kernel source tree that matches 
+		the running kernel.</td>
+  	  </tr>
+	</table>
+    <p class="numlst">  
+    For a list of files and their default locations, see the Structure of the ANS Build Tree section in this file.
+    </li>
+</ol>
+
+<h3><a name="removing"></a>Removing ANS</h3>
+<p>
+Follow these instructions to remove ANS:
+</p>
+<ol>
+  <li>
+  <p class="numlst">Login as root.</li>
+  <li>
+  <p class="numlst">Run 'ifconfig' to see every open virtual adapter configured in the system.</li>
+  <li>
+  <p class="numlst">For each open virtual adapter, run 'ifconfig &lt;vadapter_name> down'.</li>
+  <li>
+  <p class="numlst">Remove the ANS module by running 'rmmod ians'.</li>
+  <li>
+  <p class="numlst">Remove or disable each virtual adapter’s network boot file, as&nbsp;described 
+  in the Network Parameters Boot Configuration, Configuring ANS section.</li>
+  <li>
+  <p class="numlst">From the iANS-x.x.x/src directory, run 'make uninstall' to remove all the files.</li>
+</ol>
+  
+<hr>
+
+<h2><a name="config"></a>Configuring ANS</h2>  
+<p>
+You can choose one of these three methods for configuring ANS:
+</p>  
+
+<ol>
+  <li>
+	<p class="numlst"><a href="procfg.htm">PROCfg</a> 
+	Utility. Provides a simplified configuration tool that reduces 
+	the amount of command-line input.</li>
+  <li>
+	<p class="numlst"><a href="#config_scripted">Scripted</a>. Suggested for new
+    users.	</li>
+  <li>
+	<p class="numlst"><a href="#config_manual">Manual</a>, using the ianscfg
+    utility.</li>
+</ol>
+  
+<h3>Modifying ANS</h3>
+<p>
+ANS configuration and topology may be changed, with a few limitations.
+After a team is activated, you may change member priorities, add or remove team members,
+add or remove virtual adapters, or remove a team entirely. You may not:</p>
+<ul>
+  <li><p class="numlst">Change the team mode.</li>
+  <li><p class="numlst">Enable or disable RLB teaming mode.</li>
+  <li><p class="numlst">Remove or add VLAN support.</li>
+  <li><p class="numlst">Enable or disable GVRP.</li>
+  <li><p class="numlst">Remove a team's last virtual adapter.</li>
+  <li><p class="numlst">Remove the last member of a team with open virtual adapters.</li>
+  <li><p class="numlst">Remove the last server adapter of a team with open virtual adapters.</li>
+</ul>
+
+<p>
+If a team is left with no server adapter or with no members at all, it goes
+into an idle state until members are added. During such an idle period, resources used by the team are not freed.
+</p>
+
+<p>
+For instructions on modifying ANS, see the instructions in either the <a href="#config_scripted">scripted</a>
+or <a href="#config_manual">manual</a> configuration methods.
+</p>
+
+<h3>
+Hot Add/Remove of Members</h3>
+
+<p>
+A member can be added or removed from a team when it is up and active with 
+certain limitations:</p>
+
+<p>
+<b>Hot Add:</b></p>
+
+<ol>
+  <li>The member must support the team's capabilities such as mtu size, vlan, 
+  speed etc.</li>
+  <li>The number of members in a team is limited to 8 members.</li>
+  <li>For Static Link Aggregation teams, the member should be added to the team with link down. The 
+  reason is that when a port is added to a switch channel before the adapter is 
+  added to the ANS team, disconnections will occur because the switch will start 
+  forwarding traffic to the port before the member is actually configured. The 
+  opposite, where the member is first added to the ANS team and then added to 
+  the switch channel, is also problematic because ANS will forward traffic to 
+  the member before the port is added to the switch channel. </li>
+</ol>
+
+<p>
+<b>Hot Remove:</b></p>
+
+<ol>
+  <li>You cannot remove the last member of a team with open virtual adapters.</li>
+  <li>You cannot remove the last server adapter of a team with open virtual 
+  adapters.</li>
+  <li>For Static Link Aggregation teams, the member should be removed from the team with link down for 
+  the same reason as described for hot add.</li>
+</ol>
+
+<h3><a name="config_scripted"></a>Scripted Configuration</h3>
+<p>
+For ease of configuration, Intel supplies an interactive script to help 
+configure an ANS topology. The script offers only the basic and most common 
+configuration capabilities. To be able to use all available configuration options, 
+refer to the Manual Configuration section, and to the ianscfg man page.
+</p>
+<p>
+Before using the interactive script to create and modify an ANS topology, ensure 
+the necessary base drivers (e.g. e100, e1000) are loaded.
+</p>
+<p>
+To use the script, enter:
+</p>
+<blockquote class="monospace">
+	ianstool
+</blockquote>	
+<p>
+You will be prompted with an interactive menu, offering several possible actions 
+to be performed on the topology. These actions include:
+</p>
+<ol>
+  <li>
+    <p class="numlst">
+Adding a team</li>
+  <li>
+    <p class="numlst">
+Deleting an existing team</li>
+  <li>
+    <p class="numlst">
+Viewing an existing team’s status</li>
+  <li>
+    <p class="numlst">
+Configuring an existing team’s topology (i.e. adding/removing members and virtual adapters)</li>
+  <li>
+    <p class="numlst">
+Saving the current topology</li>
+</ol>
+<p>
+The script will prompt you for necessary information, such as the teaming mode, as you go along. As noted above, the script does not offer all&nbsp;possible configuration options that are available in ANS. For information on configuring options that are not available with the script, refer to the
+Manual Configuration section.
+</p>
+
+<h3><a name="config_manual"></a>Manual Configuration</h3>
+
+<ol>
+	<li><p class="numlst">After the required base drivers are loaded, bring down any
+      Ethernet adapters      that are to be added to a team.
+		<blockquote>
+        <table border="1" cellpadding="4" cellspacing="0">
+          <tr>
+            <th>Command</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td><p class="monospace">ifconfig -a</p></td>
+            <td>lists all current network devices</td>
+          </tr>
+          <tr>
+            <td><p class="monospace">ifconfig ethx down</p></td>
+            <td> brings down adapters so ANS may use them</td>
+          </tr>
+        </table>
+      </blockquote>
+
+	<table border="0" cellpadding="4" width="100%">
+  	  <tr>
+    	<td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+    	<td><i><b>NOTE</b>:</i> Do not change the configuration of Ethernet adapters that are not added
+          to teams. This ensures that the network device name assignment remains
+          consistent after rebooting.</td>
+  	  </tr>
+	</table>
+	</li>
+	<li><p class="numlst">Load the ANS module:</p>
+	<blockquote class="monospace">
+		insmod ians
+	</blockquote>
+	</li>
+	<li><p class="numlst">Use the ianscfg utility to create and modify
+      teams and VLANs. Refer to the ianscfg man page for specific usage
+      details.</li>
+	<li>
+      <p class="numlst">Activate your teams using ianscfg, if you have not done so
+      already. 
+      Activate your virtual adapter(s), using:</p>
+      <blockquote class="monospace">
+      		ifconfig &lt;vadapter_name&gt; &lt;IPaddr&gt; [netmask &lt;NETMASK&gt;] [broadcast &lt;BROADCAST&gt;]
+      </blockquote>
+      <p class="numlst">At this point you should be able to send and receive packets via
+      the virtual adapter(s).
+    </li>
+  <li>
+      <p class="numlst">You can save the ANS topology or restore a previously saved
+      topology using ianscfg. See the man page for details.
+  </li>
+  <li>
+      <p class="numlst">If you want the new configurations to take affect after each reboot, follow the
+		instructions in Saving ANS Configuration Across Reboots.</p>
+  </li>
+</ol>
+  
+<h3><a name="saving"></a>Unattended Save Across Reboots</h3>
+<p><span style="mso-fareast-font-family:&quot;MS Mincho&quot;">You can also save
+an ANS configuration across reboots from a previously <o:p></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+&quot;MS Mincho&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">saved file or manually modified file, using the command:</span></p>
+<blockquote>
+  <blockquote>
+<p>
+<span style="mso-fareast-font-family:&quot;MS Mincho&quot;">ianscfg –b [-f
+&lt;file name&gt;]</span>
+</p>
+  </blockquote>
+</blockquote>
+<p><span style="mso-fareast-font-family:&quot;MS Mincho&quot;">Using this
+command will set the system to load the ANS configuration in the<o:p> specified
+file after the next boot. This is done without communication with<o:p>
+</o:p>
+ </span> <span style="mso-fareast-font-family:&quot;MS Mincho&quot;">the ANS
+module at all – in fact, the ANS module does not have to be loaded<o:p>
+</o:p>
+</span> <span style="mso-fareast-font-family:&quot;MS Mincho&quot;">when this
+command is issued. Because of this, if the file specifies an illegal<o:p>
+</o:p>ANS
+configuration, there is no way to detect it until the ANS module will try<o:p>
+</o:p>
+ </span> <span style="mso-fareast-font-family:&quot;MS Mincho&quot;">(unsuccessfully)
+to load the configuration at the next boot. Since some<o:p>
+</o:p>distributions
+suppress messages during the boot sequence, you might need to<o:p> </span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+&quot;MS Mincho&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">check your system’s log to find if any errors occurred during boot.</span></p>
+
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+	<td width="21" valign="top" align="center">
+		<img border="0" src="note.gif" width="28" height="21"></td>
+	<td><i><b>NOTES</b>:</i> Saving the configuration across reboots either creates
+		or modifies the network configuration files for the participating adapters. For
+      SuSE* 8.0 (and up) distributions, these files’ locations and formats are
+		assumed to be as specified in the Network Parameters Boot Configuration section,
+		under _SuSE*_. For other distributions, the location and format are assumed to
+		be as specified in the same section, under _RedHat*_. If your distribution uses a
+		different location/format for network configuration files (e.g. SuSE*
+      7.x),
+      ianscfg’ most likely will not be able to save the configuration across
+		reboots.</td>
+  </tr>
+  <tr>
+	<td width="21" valign="top" align="center">
+	</td>
+	<td> If you modify the configuration such that some of the virtual adapters
+		that previously existed no longer exist, the system will still make an
+		(unsuccessful) attempt to load those (now non-existent) virtual adapters when
+		you next boot the machine. To avoid this behavior, either use your
+		distribution’s network configuration tools (e.g. netconf, setup) to disable
+		(or remove) those virtual adapters, or simply remove the relevant network
+		configuration files as specified in the Network Parameters Boot Configuration
+      section.</td>
+  </tr>
+  <tr>
+	<td width="21" valign="top" align="center">
+	&nbsp;</td>
+	<td> When saving your configuration across reboots, ANS creates a 
+    configuration file called '/etc/ians/ians-modules.conf'. You can safely 
+    remove this file if you no longer wish your ANS configuration to be 
+    automatically loaded after each reboot.</td>
+  </tr>
+</table>
+
+<hr>
+
+<h2><a name="parameters"></a>Network Parameters Boot Configuration</h2>
+<p>
+If you want your virtual adapters' network parameters (i.e. IP address, netmask, etc.) to load 
+after the next reboot, you must first ensure you have saved your topology to load on the next 
+reboot. For details, see the Scripted Configuration and Manual Configuration sections.
+</p>
+<p>
+You can save your virtual adapters' network parameters for boot in one of two ways:
+</p>
+<ol>
+  <li>
+    <p class="numlst"> Using the network and system configuration tools that are provided by your distribution 
+  (e.g. netconf, setup, etc.)</li>
+  <li>
+    <p class="numlst">Manually edit or create the virtual adapters' boot configuration files
+    (usually named 
+  		ifcfg-&lt;vadapter name>). This can be slightly different for different distributions. 
+  		Following are specific examples for common distributions. If you have a different Linux 
+  		distribution, the configuration files' location and syntax should still be similar (if 
+  		nor identical) to one of the examples shown below. You should find the directory that 
+  		includes the adapters' configuration files in your distribution, and follow the syntax 
+  		of the other configuration files there.</p>
+	<p class="numlst"><b>Red Hat</b>:</p>
+		<ul>
+		  <li><p class="numlst">The files reside in /etc/sysconfig/network-scripts/.</li>
+		  <li><p class="numlst">Sample file content (for file ifcfg-&lt;vadapter_name>):</p>
+			<blockquote>
+            DEVICE="&lt;vadapter_name>"<br>
+            BOOTPROTO="none"<br>
+            ONBOOT="yes"<br>
+            IPADDR="&lt;IP_address>"<br>
+            NETMASK="&lt;netmask>"
+          </blockquote>
+			</li></ul>
+	<p class="numlst"><b>SuSE</b>:</p>
+		<ul>
+		  <li><p class="numlst">The files reside in /etc/sysconfig/network/.</li>
+		  <li><p class="numlst">Sample file content (for file ifcfg-&lt;vadapter_name>):</p>
+			<blockquote>
+				STARTMODE="onboot"<br>
+				IPADDR="&lt;IP_address>"<br>
+				NETMASK="&lt;netmask>"
+			</blockquote>
+		</li></ul>
+  </li>
+</ol>
+
+<hr>
+
+<h2><a name="build_tree"></a>Structure of the ANS Build Tree</h2>
+<ul>
+  <li><p class="numlst">Kernel dependant source files (src/*.[ch], src/lib/*.[ch])</li>
+  <li><p class="numlst">Kernel independent precompiled object file (bin/[ARCH]/ians_core.o)</li>
+  <li><p class="numlst">Makefiles</li>
+  <li><p class="numlst">ANS configuration utility (bin/[ARCH]/ianscfg)</li>
+  <li><p class="numlst">Configuration scripts (bin/iansonboot, bin/ianstool)</li>
+</ul>
+   
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> [ARCH] is either "ia32" or "ia64".</td>
+  </tr>
+</table>
+
+<h3>Distribution of files</h3>
+<p>By default, the components are distributed as follows:</p>
+<ul>
+  <li><p class="numlst">/lib/modules/&lt;kernel_version&gt;/kernel/drivers/net/ians.o</li>
+  <li><p class="numlst">/usr/sbin/ianscfg</li>
+  <li><p class="numlst">/usr/sbin/ianstool</li>
+  <li><p class="numlst">/usr/sbin/iansonboot</li>
+  <li><p class="numlst">/usr/share/man/man1/ianscfg.1.gz</li>
+</ul>
+
+<hr>
+
+<h2><a name="ex_file"></a>Examples</h2>
+
+<h3>modules.conf</h3>
+<blockquote>
+     <p class="monospace">
+     #alias eth0 eepro100<br>
+     #alias eth1 eepro100<br>
+     #alias eth2 eepro100<br>
+     alias eth0 e100<br>
+     alias eth1 e100<br>
+     alias eth2 e100<br>
+     alias parport_lowlevel parport_pc<br>
+     alias scsi_hostadapter aic7xxx
+     </p>
+</blockquote>
+
+<h3>Script for Setting up AFT Mode with VLANs: (two PRO/100 adapters)</h3>
+<p class="monospace">
+  insmod e100<br>
+  insmod ians<br>
+<br>
+  ianscfg -a -t team1 -M AFT -V<br>
+<br>
+  ianscfg -at team1 -m eth0 -p primary<br>
+  ianscfg -at team1 -m eth1 -p secondary<br>
+<br>
+  ianscfg -at team1 -v vadapt1 -i 10&nbsp;<br>
+  ianscfg -at team1 -v vadapt2 -i 15<br>
+<br>
+  ianscfg -c team1<br>
+<br>
+  ianscfg -s<br>
+<br>
+  ifconfig vadapt1 192.168.1.1 netmask 255.255.255.0<br>
+  ifconfig vadapt2 192.168.2.1 netmask 255.255.255.0
+</p>
+
+<hr>
+
+<h2><a name="Known"></a>Known Issues</h2>
+<h3>Multiple Interfaces on Same Ethernet Broadcast Network</h3>
+<p>Due to the default ARP behavior on Linux, it is not possible to have one 
+system on two IP networks in the same Ethernet broadcast domain <br>
+(non-partitioned switch) behave as expected. All Ethernet interfaces will 
+respond to IP traffic for any IP address assigned to the system.<br>
+This results in unbalanced receive traffic.<br>
+<br>
+If you have multiple interfaces in a server, either turn on ARP filtering by 
+entering:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_filter<br>
+(this only works if your kernel's version is higher than 2.4.5), <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or,<br>
+<br>
+install the interfaces in separate broadcast domains (either in different 
+switches or in a switch partitioned to VLANs).</p>
+<h3>DHCP is not supported on 802.3ad teams</h3>
+<p>802.3ad and DHCP are not compatible in this release. Use DHCP with a non-AD 
+configuration.</p>
+
+<h3>DHCP Sometimes Fails to Configure a Virtual Adapter's IP Address</h3>
+
+<p>&quot;Service network restart&quot; will fail to configure a virtual adapter IP with DHCP if the virtual adapter interface name is lexicographically smaller than the 
+interface names of team members (physical adapters). The system's network 
+service runs the network scripts according to their lexicographical order, so 
+the lexicographical order of the interface names determines whether the virtual 
+adapters or members are brought up first. For successful DHCP configuration of a 
+virtual adapter IP, the members interfaces must be up and running before the 
+DHCP negotiation for the virtual adapter's IP starts.</p>
+
+<hr>
+
+<h2><a name="trouble"></a>Troubleshooting</h2>
+ 
+    <table border="0" cellpadding="4" width="100%">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i>  For distribution-specific issues, see <a href="ldistrib.htm">ldistrib.htm</a>.</td>
+      </tr>
+    </table>
+<ol>
+  <li>
+    <p class="numlst">Always bind the protocol to the virtual adapter and NOT to the physical 
+    adapter for adapters that are in a team. Also, when changing settings such as the MTU or 
+    MAC address, always apply them to the virtual adapter. Intel ANS cannot prevent such 
+    operations, and failing to do as recommended might lead to unpredictable results.</li>
+  <li>
+    <p class="numlst">If you receive the error message, "module not loaded," during configuration of 
+    the team, this means that the target module does not match the running kernel. Enter the 
+    iANS-x.x.x/src directory and run:</p>
+    <blockquote class="monospace">
+         make veryclean<br>
+         make install
+    </blockquote>
+	</li>
+  <li>
+    <p class="numlst">If you have unsuccessfully attempted to add an adapter to
+    a team with Jumbo Frames, check the adapter's ability to operate with Jumbo
+    Frames.
+  <li>
+  	<p class="numlst">If you receive the error message, "Intel Advanced Network Services
+    (iANS) has determined you have selected network adapters that are
+    not eligible to participate as members of an iANS team.  Please
+    install Intel Server Adapters in your system and re-install the
+    advanced server features.", this indicates that either:
+    </p>
+    <ol type="a">
+      <li>
+      	<p class="numlst">the team needs at least one Intel server adapter, or</p>
+      	</li>
+      <li>
+      	<p class="numlst">at least one adapter is from another vendor and is not capable
+       of participating in the team.</p>
+       </li>
+	</ol>
+	</li>       
+  <li>
+  	<p class="numlst">When trying to compile the driver by running make install, the
+    following error may occur:</p>
+  	<blockquote>    
+  		<p>"Linux kernel source not configured - missing version.h&quot;</p>
+  	</blockquote>
+    <p class="numlst">To solve this issue, create the version.h file by going to the
+    Linux source tree and doing a 'make include/linux/version.h'.
+   
+    </li>
+  <li><p class="numlst">PCI Hot Plug Add/Remove.</p>
+	<ol type="a">
+		<li><p class="numlst">When executing a PCI Hot Plug&nbsp;Remove operation on an adapter that is
+		part of an ANS team, the adapter is automatically removed from the team.
+		</li>
+		<li><p class="numlst">When reactivating an adapter with a PCI Hot Plug Add operation, 
+		the new interface should be manually added back into the team by an ANS Hot 
+		Add operation.</li>
+	</ol>
+  </li>
+  <li><p class="numlst">If you are running an AFT/SFT/ALB team and 
+  receive the following messages numerous times, &quot;Adapter ethx does not sense 
+  any probes. Possible reason: Adapter deactivated, Adapter isolated, 
+  Partitioned team.&quot; and then, &quot;Adapter ethx rejoined.&quot;, probe packets are being 
+  dropped (by the kernel queues, switch, etc.) resulting in the ANS team losing 
+  probes. This could happen  in a  healthy system that is under heavy 
+  stress.</p>
+  <p class="numlst">As a workaround, disable the probes by issuing the following command:</p>
+  <blockquote>
+  	<p>ianscfg -P -t &lt;team_name&gt; -d</p>
+  </blockquote>
+  </li>
+  <li><p class="numlst">Different switches react differently when the switch manager disables a 
+  	switch port. Some switches react with a link loss of the disabled port. Others do not change the link status at all; they simply stop traffic.
+    If the link status is not affected when a port is disabled 
+  	then ANS cannot always detect that a switch port that is connected to an ANS member has 
+  	been disabled by the switch manager. ANS detects that the port has been disabled even though 
+  	no link status change occurs only if one of two conditions exist:
+  	</p>
+  	<ol type="a">
+ 		<li><p class="numlst">Probes are enabled and there are more than two enabled and active 
+ 			members in the team (relevant to AFT, SFT, and ALB teaming modes only). ANS detects that 
+ 			the member attached to the disabled port is missing probes while others are receiving 
+ 			and transmitting probes successfully.
+ 			</li>
+ 		<li><p class="numlst">Teaming mode is 802.3ad - ANS deactivates the member attached to the 
+ 			disabled port since no LACPDUs will be received by ANS on the disabled port.
+ 			</li>
+ 		</ol>
+    <p class="numlst">To avoid problems of fault tolerance in Static Link 
+    Aggregation and ALB teaming modes, the 
+ 		switch manager should physically disconnect the link on the disabled port or remove the 
+ 		member connected to the disabled port from the team. In AFT and SFT modes it is enough to set an 
+ 		active member that is attached to an enabled port to be the preferred primary and make sure 
+ 		that the priority of the member attached to the disabled port is "none".
+ 		</li>
+ 	<li><p class="numlst">When setting a new MAC address for an AFT/ALB team (for
+    the virtual adapter), if the new MAC address is already in use by a member
+    of the team and that MAC address was not chosen as the team's MAC address
+    upon committing the team, then traffic might become unstable. Intel ANS does
+    not automatically check for duplicate MAC addresses. Therefore, before
+    setting a new MAC address in this type of scenario, ensure that the intended
+    MAC address is not the same as those used for members of the team.</li>
+ 	<li>
+      <p class="numlst">If you load the ipv6 module when there are already
+      active ANS teams, then <o:p>the ipv6 module will automatically add the default IPv6 link address to
+      all <o:p>network interfaces, including ANS’s member interfaces, and ANS’s
+      virtual <o:p>interfaces. This might cause duplicate entries in the IPv6 routing table, <o:p>
+      </o:p>
+      which might affect the way the kernel chooses the correct interface to
+      send <o:p>IPv6 traffic through. To fix this, run:<span style="mso-fareast-font-family:&quot;MS Mincho&quot;"><o:p>
+      </o:p>
+      <o:p>
+      </o:p>
+      </span></p>
+      <blockquote>     
+        <p>     ifconfig &lt;ethX&gt;</p>
+      </blockquote>
+      <p class="MsoPlainText"><span style="mso-fareast-font-family:&quot;MS Mincho&quot;">where
+      &lt;ethX&gt; is an ANS team member interface. For every IPv6 address that
+      is <o:p></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+&quot;MS Mincho&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">listed there, in the form:</span></p>
+      <p class="MsoPlainText"><span style="mso-fareast-font-family:&quot;MS Mincho&quot;"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span style="mso-spacerun: yes">
+      </span>inet6 addr: &lt;addr&gt;/&lt;prefix len&gt; Scope:&lt;scope&gt;<o:p>
+      </o:p>
+      </span></p>
+      <p class="MsoPlainText"><span style="mso-fareast-font-family:&quot;MS Mincho&quot;">&nbsp;<o:p>remove it by running:<o:p>
+      </o:p>
+      <o:p>
+      </o:p>
+      </span></p>
+      <p class="MsoPlainText"><span style="mso-fareast-font-family:&quot;MS Mincho&quot;"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;<span style="mso-spacerun: yes">
+      </span>ifconfig &lt;ethX&gt; del &lt;addr&gt;/&lt;prefix len&gt;<o:p>
+      </o:p>
+      </span></p>
+      <p class="MsoPlainText"><span style="mso-fareast-font-family:&quot;MS Mincho&quot;">If
+      the ipv6 module was already loaded in your system and you’ve manually <o:p>closed and then opened member interfaces of an ANS team, the same problem<o:p>
+      </o:p></span><span style="font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+&quot;MS Mincho&quot;;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:
+HE">will occur. Fix it as listed above for each member you’ve manually
+      changed.</span></p>
+      </li>
+  <li>
+      <p class="MsoPlainText">Multiple identical packets received by non-Intel 
+      adapters in AFT/ALB team: <font face="Times New Roman">When connecting an 
+      AFT/ALB team with MVT members to a hub (and sometimes to a switch) the 
+      ethernet frames that are designated to the address of the team will be 
+      received by the primary member and all MVT members, without filtering. 
+      Possible lower throughput and higher cpu usage may occur. This happens 
+      because non-Intel adapters do not allow setting their MAC address after 
+      activation and therefore are set to the team's address by default.</font></p>
+      </li>
+  <li>
+      <p class="MsoPlainText"><font face="Times New Roman">Inconsistent Rx 
+      rebalancing when hot adding an adapter in RLB mode: When hot adding a 
+      member to an RLB team, Rx balancing may not occur immediately. This may be 
+      because ARP packets were lost or ignored by the clients. Re-balancing 
+      occurs periodically every 5 minutes; the new added member will share the 
+      load at that time.</font></p>
+      </li>
+  <li>
+      <p class="MsoPlainText"><font face="Times New Roman">When restoring the 
+      link for one of the adapters in a team, there may be some traffic loss if 
+      there is a forwarding delay period between the link up indication and the 
+      time at which the link is actually capable of&nbsp; forwarding traffic. 
+      The forwarding delay can vary from one system to another and in many cases 
+      is negligible. If your system does experience forward delay then you can 
+      configure an equivalent forward delay in ANS such that a member will not 
+      be activated until the delay is up. See the ianscfg man page for more 
+      information on how to configure forward delay.</font></p>
+      </li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/28/04 11:40a <!-- $--> Revision <!--$$Revision:--> 14 <!-- $--></code></p>
+
+</body>
+
+</html>

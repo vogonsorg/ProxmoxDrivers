@@ -1,0 +1,262 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Virtual LANs</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+ Virtual LANs</h1>
+
+<p>The term VLAN (Virtual Local Area Network) refers to a collection of devices
+that communicate as if they were on the same physical LAN. Any set of ports
+(including all ports on the switch) can be considered a VLAN. LAN segments are 
+not restricted by the hardware that physically connects them.</p>
+<table border="0" width="100%">
+  <tr>
+    <td width="37%"><img src="vlan.gif" width="286" height="152"></td>
+    <td width="63%">
+VLANs offer the ability to group computers together into logical workgroups. This can simplify network administration when connecting clients to servers that are geographically dispersed across the building, campus, or enterprise network.
+<P CLASS="Body-Text">
+Typically, VLANs consist of co-workers within the same department but in different locations, groups of users running the same network protocol, or a cross-functional team working on a joint project.&nbsp;</P>
+      <p>&nbsp;</td>
+  </tr>
+</table>
+<p CLASS="Body-Text">By using VLANs on your network, you can:</p>
+<ul msimagelist>
+  <li>
+    <p CLASS="numlst">Improve network performance</li>
+  <li>
+    <p CLASS="numlst">Limit broadcast storms</li>
+  <li>
+    <p CLASS="numlst">Improve LAN configuration updates (adds, moves, and changes)</li>
+  <li>
+    <p CLASS="numlst">Minimize security problems</li>
+  <li>
+    <p CLASS="numlst">Ease your management task</li>
+</ul>
+
+    <h2>VLAN Support Matrix</h2>
+    <p>The following table identifies the combinations of Intel adapters
+    and operating
+    systems that support IEEE 802.1Q VLANs.</p>
+<table border="1" cellpadding="6" cellspacing="0">
+  <tr>
+    <td>
+      <p align="right"><b>Operating System</b>&#9658;</p>
+      <p align="left">&#9660;<b>Intel product</b></td>
+    <td align="center" valign="top">
+      <p align="center">Windows* &nbsp;<br>
+ (NT*&nbsp;4.0,&nbsp;2000,&nbsp;XP, Windows Server 2003 Server)</p>
+    </td>
+    <td align="center" valign="top">
+      <p align="center">NetWare*</td>
+    <td align="center" valign="top">
+      <p align="center">UnixWare* (7.x&nbsp;ddi8)<br>
+      and&nbsp; OpenUnix* 8</p>
+    </td>
+    <td align="center" valign="top">
+      <p align="center">&nbsp;Linux*</p>
+    </td>
+    <td align="center" valign="top">
+      Solaris*
+    </td>
+    <td align="center" valign="top">
+      FreeBSD*
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Intel</b><sup>&reg;</sup> 
+      <b> PRO/1000 Adapters</b>
+    </td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      Intel<sup>&reg;</sup> PRO/1000 Server Adapter (original)
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      Intel<sup>&reg;</sup> PRO/1000 XT, XF, T, F, MT, MF Server Adapters
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">Yes</td>
+  </tr>
+  <tr>
+    <td>
+      Intel<sup>&reg;</sup> PRO/1000 MT Desktop Adapters
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">Yes</td>
+  </tr>
+  <tr>
+    <td>
+      Intel<sup>&reg;</sup> PRO/1000 T, Desktop Adapters
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">Yes</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Intel</b><sup>&reg;</sup> 
+      <b> PRO/100 Adapters</b>
+    </td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100+ Management Adapter</p>
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100+ Server Adapter</p>
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100+ Dual Port Server Adapter</p>
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100 S Desktop Adapter
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100 S Server Adapter
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100 S Dual Port Server Adapter
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+  <tr>
+    <td>
+      <p align="left">Intel<sup>&reg;</sup> PRO/100 VE and VM Desktop Adapters&nbsp;and Network Connections
+    </td>
+    <td align="center">Yes</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+    <td align="center">No</td>
+  </tr>
+</table>
+
+    <p class="numlst">
+&nbsp;
+
+<table border="0" cellpadding="6" cellspacing="0" width="100%">
+    <tr>
+        <td valign="top" height="28">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td valign="top"><b><i>NOTE</i></b>: Solaris and FreeBSD support only
+          Intel PRO/1000 adapters.</td>
+    </tr>
+</table>
+
+<ul>
+  <li>
+    <p class="numlst">
+To set up IEEE VLAN membership (multiple VLANs), the adapter must be attached
+      to a switch with IEEE 802.1Q VLAN capability.</li>
+  <li>
+    <p class="numlst">
+In most environments, a maximum of 64 VLANs per server can be set up. </li>
+  <li>
+    <p class="numlst">
+VLANs can co-exist with teaming (if the adapter supports both). If you do this,
+the team must be defined first, then you can set up your VLAN.</li>
+  <li>
+    <p class="numlst">
+The Intel PRO/100 VE and VM Desktop Adapters and Network Connections can be used in a switch based VLAN but
+do not support IEEE Tagging.</li>
+</ul>
+
+<table border="0" cellpadding="6" cellspacing="0" width="100%">
+    <tr>
+        <td valign="top" height="28"><img border="0" src="caution.gif" width="28" height="21"></td>
+        <td valign="top"><b><i>CAUTION</i></b>: When using IEEE 802 VLANs,
+          settings must match between the switch and those adapters using the
+          VLANs.</td>
+    </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 3/17/04 6:37p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

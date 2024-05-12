@@ -1,0 +1,112 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>NetWare SNMP Agent Extension</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>SNMP Agent Extension for NetWare*</h1>
+<p>
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#prereqs">Prerequisites</a></p>
+<p class="contents"><a href="#install">Installation Instructions</a></p>
+<p class="contents"><a href="#commands">Available Commands</a></p>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+The LANAgent module extends the SNMP agent for NetWare* to provide information on Intel adapters. Additional information regarding 
+server features, such as teaming and VLANs, is provided through the Intel Advanced Networking Services
+(iANS) module.
+</p>
+<p>
+The following information describes how to enable the NetWare SNMP module to support the
+INTEL&reg; LAN ADAPTERS MIB.
+</p>
+
+<hr>
+
+<h2><a name="prereqs"></a>Prerequisites</h2>
+<p>
+For optimal performance by the SNMP agent, install the Intel PRO/100 and/or PRO/1000 adapter drivers (ce100b,
+ce1000) and/or the Intel ANS module (iANS).
+</p>
+<p>
+The SNMP agent package is compliant with the following driver versions:
+</p>
+<ul>
+  <li>CE100b.lan: ver 4.11 and above</li>
+  <li>CE1000.lan: ver 3.03 and above</li>
+  <li>iANS.lan  : ver 4.14 and above</li>
+  </ul>
+
+<hr>
+
+<h2><a name="install"></a>Installation Instructions</h2>
+<ol>
+	<li><p class="numlst">At the server prompt enter:</p>
+		<blockquote class="monospace">
+			Load &lt;path\&gt;LANAgent
+		</blockquote>
+    </li>
+	<li><p class="numlst">Configure the SNMP community name according to the Novell* documentation.
+      For example, to enable GET and SET for any community name enter:</p>
+		<blockquote class="monospace">
+			Load SNMP ControlCommunity=
+		</blockquote>
+      <p class="numlst">For more information, go to <a href="http://support.novell.com" target="_blank">http://support.novell.com</a>
+      and search for &quot;Providing SNMP and ConnectView Support&quot;.
+	</p></li>
+	<li><p class="numlst">Register to receive Traps by adding the IP address of the management 
+	station to the list in the SYS:\ETC\TRAPTARG.CFG file.
+	</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="commands"></a>Available Commands</h2>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <td align="left"><b>Command</b></td>
+    <td align="left"><b>Default</b></td>
+    <td align="left"><b>Description</b></td>
+  </tr>
+  <tr>
+    <td valign="top" align="left">
+      <p class="monospace">-h</p>
+      <p class="monospace">help</p>
+    </td>
+    <td valign="top" align="left">n/a</td>
+    <td valign="top" align="left">View the help description.</td>
+  </tr>
+  <tr>
+    <td class="monospace" valign="top" align="left">cache_time=&lt;nn&gt;</td>
+    <td valign="top" align="left">50 (5 seconds)</td>
+    <td valign="top" align="left">Define a time period in which the data structure is considered valid. Two consecutive 
+    queries within that time will not cause update of the data. &lt;nn&gt; is an integer value 
+    set to 1/10 second.</td>
+  </tr>
+  <tr>
+    <td class="monospace" valign="top" align="left">trap_time=&lt;nn&gt;</td>
+    <td valign="top" align="left">10 (1 second)</td>
+    <td valign="top" align="left">Define the time period between two consecutive trap checks. The units are the same as for
+      cache_time.</td>
+  </tr>
+  <tr>
+    <td class="monospace" valign="top" align="left">status</td>
+    <td valign="top" align="left">n/a</td>
+    <td valign="top" align="left"> View the current values for cache_time and trap_time.</td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 11/11/02 11:03a <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

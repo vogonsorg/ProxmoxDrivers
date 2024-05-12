@@ -1,0 +1,140 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="ru">
+  <head>
+    <title>Universal ATA driver for Windows NT4/2000/XP</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="UniATA, PnP, port, miniport, hardware dependency">
+    <meta name="description" content="Universal ATA driver for Windows NT4/2000/XP">
+    <meta charset="KOI8-R">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=ru">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="uniata_pnp.php_lang=en&amp;">EN&nbsp;<img height="12" width="20" alt="en" src="http://10.0.0.11/alter/img/lang_en.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<h4>Идеология Port/Miniport</h4>
+
+  <p>Разработчики Windows NT очень любят Port/Miniport модель драйверов.</p>
+
+  <p>_Port_ драйвер (почти) всегда загружен. Он занимается общением с ОС,
+реализует общую функциональность для драйверов определенного класса устройств
+(например работа с прерываниями, получение аппаратных ресурсов - портов ввода вывода,
+диапазонов памяти, и т.п.,
+занимается регистрацией устройства в системе, и т.д.). С другой стороны,
+_Port_ драйвер экспортирует удобное (не всегда :) API для _MiniPort_ драйвера (см. ниже).</p>
+
+  <p>_MiniPort_ драйвер может загружаться автоматически или
+при помощи PnP-manager'а. _MiniPort_ содержит код поиска и инициализации устройств,
+а также обрабатывает набор стандартных для данного класса устройств запросов,
+передаваемых _Port_ драйвером.</p>
+
+  <p>Например если scsiminiport (atapi, uniata)
+проинформировал scsiport о найденых устройствах и их параметрах,
+то scsiport создаст необходимые device object'ы, настроит обработчик
+прерываний и сообщит операционной системе о найденом оборудовании.</p>
+
+<h4>UniATA</h4>
+
+  <p>Первая версия использовала scsiport.sys для регистрации в системе
+найденых устройств и требуемых ими ресурсов. Всю грязную работу
+(создание device object'ов, инициализация обработчика прерываний,
+управление очередью запросов и т.п. делал scsiport.sys.</p>
+
+  <p>Позже, когда возникла необходимлсть борьбы с ограничениями scsiport'а
+(невозможность поиска неизвестных, но IDE-совместимых PCI устройств,
+проблемы с PIO/DMA на одном канале, пересортировка очереди, параллельное функционирование
+IDE каналов на контроллерах с 1 прерыванием) пришлось использовать Kernel API вместо
+scsiport API.</p>
+
+  <p>На текущий момент основная проблема - PnP млдель драйверов в w2k/XP.
+Изначально UniATA разрабатывался для того, чтобы работать на _любом_ IDE-совместимом
+контроллере на _любом_ компьютере без переустановки драйверов.
+При установке драйвера устройства PnP manager запоминает для
+кагого оборудования этот драйвер предназначается. При последующих загрузках
+операционки PnP manager строит список оборудования и смотрит в registry, какой
+драйвер следует загрузить. Если попытаться подключить HDD к другой плате (с
+другим контроллером), PnP manager не сможет найти подходящего драйвера -
+вот и приехали.</p>
+
+  <p>Другое дело - устройства, о существовании которых нужно просто знать
+(non pnp-enumerated). Драйвер такого устройства будет загружен в любом случае.
+Если такой драйвер просканирует PCI шину на предмет IDE контроллеров и
+сообщит о найденых ScsiPort'у, PnP manager решит, что в системе есть не pnp-совместимые
+устройства и заблокирует Sleep/Hibernate вместе с IDE hot-swap.</p>
+
+  <p>Все эти грабли произростают из архитектуры scsiport'а.</p>
+
+  <p>В резельтате обсуждения с Виталием мы пришли к следующему выводу:
+Для w2k/XP UniATA требуется собственный аналог scsiport, который
+будет всегда показывать операционке либо 1 (виртуальный) контроллер с кучей шин,
+либо набор виртуальных (и железо-независимых) контроллеров.
+Поиск совместимых устройств бедут производиться в тайне от ОС (и главное - PnP manager'а).</p>
+
+  <p>Таким образом мы получим логический(ие) контроллер(ы) с неизменной нумерацией
+как это было в NT4.
+(Мне кажется, что это была гораздо более надежная и правильная архитектура)</p>
+
+  <p>Еще потребуется драйвер-заглушка, который будет устанавливаться для каждого
+найденого устройства. Сам этот драйвер не будет ничего делать,
+PnP manager будет счастлив, а всей работой с устройством по-прежнему будет заниматься
+основной драйвер вируального контроллера.</p>
+
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Автор: Alter (Александр А. Телятников)</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Сервер: Apache+PHP под FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>

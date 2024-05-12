@@ -1,0 +1,44 @@
+; ****************************************************************************
+; ****************************************************************************
+; **    Filename:  TxtSetup.OEM
+; ****************************************************************************
+; ****************************************************************************
+
+[Disks]
+disk1 = "Intel Matrix Storage Manager driver", iaStor.sys, \
+
+[Defaults]
+scsi = iaStor
+
+;----------- Component Section -----------
+
+[scsi]
+iaAHCI = "Intel(R) SATA AHCI Controller"
+iaStor = "Intel(R) SATA RAID Controller"
+
+;-------------------------------------------
+[Files.scsi.iaAHCI]
+driver = disk1, iaStor.sys, iaStor
+inf    = disk1, iaAHCI.inf
+catalog = disk1, iaAHCI.cat
+
+[Files.scsi.iaStor]
+driver = disk1, iaStor.sys, iaStor
+inf    = disk1, iaStor.inf
+catalog = disk1, iaStor.cat
+
+;-------------------------------------------
+
+[Config.iaStor]
+value = "", tag, REG_DWORD, 1b
+value = "", ErrorControl, REG_DWORD, 1
+value = "", Group, REG_SZ, "SCSI miniport"
+value = "", Start, REG_DWORD, 0
+value = "", Type, REG_DWORD, 1
+
+;-------------------------------------------------------
+[HardwareIds.scsi.iaAHCI]
+id = "PCI\VEN_8086&CC_0106","iaStor"
+
+[HardwareIds.scsi.iaStor]
+id = "PCI\VEN_8086&CC_0104","iaStor"

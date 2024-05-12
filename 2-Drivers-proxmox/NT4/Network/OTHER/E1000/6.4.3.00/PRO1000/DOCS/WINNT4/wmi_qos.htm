@@ -1,0 +1,281 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Quality of Service (QoS)</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>QoS WMI Provider 1.0 and<br>
+Intel<sup>&reg;</sup> PRO QoS
+(PRO 10/100 Adapters Only)</h1>
+<ul>
+  <li>
+<p class="numlst"><a href="#Overview">Overview</a>
+
+  </li>
+  <li>
+<p class="numlst"><a href="#System Requirements">System Requirements</a>
+
+  </li>
+  <li>
+<p class="numlst"><a href="#Installation">Installation</a> 
+
+  </li>
+  <li>
+<p class="numlst"><a href="#Uninstall Procedure">Uninstall Procedure</a>
+
+  </li>
+  <li>
+<p class="numlst"><a href="#Usage with Applications">Usage with Applications</a>
+
+  </li>
+  <li>
+<p class="numlst"><a href="#Supported Standards">Supported Standards</a>
+
+  </li>
+  <li>
+<p class="numlst"><a href="#Known Issues">Known Issues</a>
+
+  </li>
+</ul>
+<h2><a name="Overview">Overview</a></h2>
+
+<p>The Intel<sup>&nbsp; </sup>PRO Quality of Service (QoS) Windows Management
+Instrumentation (WMI) Provider is a set of software modules that
+allow WMI-based management applications to manage the QoS
+capabilities of Intel<sup> </sup>PRO network adapters. QoS WMI Provider
+uses WMI, an instrumentation technology for the
+Microsoft Windows platform. 
+
+<p>WMI is the middleware layer that allows measurement and
+instrumentation information to be collected from kernel mode
+data providers. This information is then provided to local or
+remote user-mode data consumers through the use of a common set
+of interfaces (Web-based Enterprise Management called WBEM). WMI
+is a data-independent pipeline between the data consumer and
+the data provider that makes no assumptions about the format
+of the data. 
+
+<p>The QoS WMI Provider lets WMI-aware management applications
+set up priority filters to process high priority network
+traffic before normal traffic. By prioritizing traffic at the
+host or entry point of the network, network devices can base
+forwarding decisions on priority information defined in the
+packet. 
+
+<p>WMI-aware management applications using QoS WMI Provider
+functionality can configure priority filters on the target
+system to do the following: 
+
+<ul>
+  <li>
+<p class="numlst">Tag packets with priority levels for forwarding behaviors. 
+
+  </li>
+  <li>
+<p class="numlst">Drop incoming packets that match certain criteria. 
+
+  </li>
+  <li>
+<p class="numlst">Obtain statistics such as number of packets or number of bytes
+that were tagged with a particular priority. 
+
+  </li>
+</ul>
+<h2><a name="System Requirements">System Requirements</a></h2>
+
+<ul>
+  <li>
+<p class="numlst">Any Intel<sup>®</sup> PRO/100 Adapter and its related driver
+software. 
+
+  </li>
+  <li>
+<p class="numlst">Microsoft* WMI Core. 
+
+  </li>
+  <li>
+<p class="numlst">Windows* NT4 (SP4), Windows 98 (SP1 and later), Windows 
+Millennium.. 
+
+  </li>
+  <li>
+<p class="numlst">For Adapter Teaming features (AFT and ALB support), the latest NDIS 
+drivers on the Product CD or downloaded from the <a href="support.htm">support 
+website</a>.</li>
+</ul>
+<p>The WMI Core components are part of the operating system. These
+pieces are required for a WMI-enabled application to work.
+
+<p>The QoS WMI Provider supports all Intel PCI PRO 10/100 adapters except
+for 82557 based adapters.
+
+<p>The QoS WMI Provider does not support any PRO 1000 adapters.
+
+<h2><a name="Installation">Installation</a></h2>
+
+<p>To install QoS WMI Provider, double-click on the setup program found in the 
+&quot;\APPS\WBEM\WIN9X\QOS&quot; for Windows 98 or the “\APPS\WBEM\WINNT4\QOS” for Windows 
+NT directory on the Intel CD. WMI Core components must be installed before QoS 
+WMI Provider is installed. If QoS WMI Provider does not find the WMI Core 
+component's registry keys, installation fails. If Microsoft WMI Core is not 
+installed, install it and restart the QoS WMI Provider installer. </p>
+
+<p>The most recently released version of Microsoft WMI Core can be
+downloaded from: <a href="http://www.microsoft.com">http://www.microsoft.com</a>
+
+<h2><a name="Uninstall Procedure">Uninstall Procedure</a></h2>
+
+<p>To Uninstall QoS WMI Provider:
+
+<ul>
+  <li>
+<p class="numlst">From the Control Panel, double click on the Add/Remove Programs icon.
+
+  </li>
+  <li>
+<p class="numlst">On the Install/Uninstall tab, select &quot;Intel PRO Quality
+of Service (QoS) WMI Provider (Build 1.0)&quot;.
+
+  </li>
+  <li>
+<p class="numlst">Click the &quot;Add/Remove...&quot; button.
+
+  </li>
+</ul>
+<h1><a name="Usage with Applications">Usage with Applications</a></h1>
+
+<p>WMI-based management applications such as WBEM CIM studio and WBEM
+Object browser in the WMI SDK can be used to access QoS WMI Provider 
+functionality both locally and remotely. This applies to Windows NT 4.0 (SP4 and 
+later).<p>On Windows 95, Windows 98 or Windows Millennium operating systems.&nbsp; 
+You must
+carefully configure client systems to allow remote access of QoS WMI
+Provider functionality.
+
+<p>To do this, you will need to edit the Windows 95, Windows 98 or Windows Millennium
+system registry to remotely access QoS WMI Provider functionality.
+
+<table border="0" cellpadding="6" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+  <tr>
+    <td valign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+    <td valign="top"><i><b>CAUTION</b></i>: Editing the system's registry incorrectly can cause
+serious problems that may require you to reinstall your operating
+system. Be very careful when editing the following registry
+entries. Back up any important data before beginning this
+process. Be aware that enabling DCOM applications to connect
+anonymously to your Windows9x or Millennium system may violate
+your network's security policies. Consult with your system
+administrator before making these changes.</td>
+  </tr>
+</table>
+<ul>
+  <li>
+<p class="numlst">Open regedit (Start-Run-regedit) on the Windows 95, Windows 98 system, and ensure
+that the following values are set correctly.
+
+  <ul>
+    <li>
+<p class="numlst">HKLM\software\microsoft\OLE\EnableDCOM should be set to its
+default of &quot;Y&quot;.
+
+    </li>
+    <li>
+<p class="numlst">HKLM\software\microsoft\OLE\EnableRemoteConnect should be
+changed to &quot;Y&quot;.
+
+    </li>
+    <li>
+<p class="numlst">HKLM\software\microsoft\wbem\cimom\AutostartWin9x should be
+changed to &quot;2&quot;.
+
+    </li>
+    <li>
+<p class="numlst">HKLM\software\microsoft\wbem\cimom\EnableAnonConnections
+should be changed to &quot;1&quot;. 
+
+    </li>
+    <li>
+<p class="numlst">Exit the registry editor and restart the Windows 95, Windows
+98 or 
+Millennium system.
+
+    </li>
+  </ul>
+  </li>
+  <li>
+<p class="numlst">Log onto the Windows 95, 98 or Millennium system remotely from
+Windows NT 4.0, 2000, XP or Windows Server 2003 using WBEM CIM
+Studio from the WMI SDK. 
+
+  <ul>
+    <li>
+<p class="numlst">Enter the UNC name of the Windows 95, Windows 98 or Millennium system in
+the &quot;Machine name&quot; box and click &quot;Connect.&quot; 
+
+    </li>
+    <li>
+<p class="numlst">In the WBEM CIM Studio login window, choose &quot;Options&quot; to see
+the full set of login choices.
+
+    </li>
+    <li>
+<p class="numlst">Leave &quot;Login as current user&quot; checked. 
+
+    </li>
+    <li>
+<p class="numlst">Leave &quot;impersonation level&quot; set to impersonate.
+
+    </li>
+    <li>
+<p class="numlst">For &quot;authentication level&quot;, choose &quot;None.&quot; Click OK.
+
+    </li>
+  </ul>
+  </li>
+</ul>
+<p>This should allow you to connect to your Windows 95, 98 or
+Millennium system remotely. 
+
+<h2><a name="Supported Standards">Supported Standards</a></h2>
+
+<p>The QoS WMI Provider implements the CIM specification that was
+submitted to DMTF for adoption into CIM 2.4 specification.
+
+<h2><a name="Known Issues">Known Issues</a></h2>
+
+<ul>
+  <li>
+<p class="numlst">Under some circumstances, the process winmngt.exe may not start
+on a Windows 95, 98 or Millennium system. This results in a browsing
+machine being unable to connect to the Windows machine.
+The browser (CIM Studio or other) may show an error &quot;the RPC server
+is unavailable&quot;. If pview95.exe shows that winmngt.exe is not
+executing, double click the file to begin execution. This may be&nbsp;
+fixed permanently by upgrading to a newer version of the WBEM core.
+
+  </li>
+  <li>
+<p class="numlst">All WBEM classes share the same access. There is currently no method to
+define per-class security. Therefore, it is not possible to restrict
+access to the QoS provider without restricting access to all WBEM classes.
+Consult Microsoft's WBEM/WMI documentation for information on setting
+appropriate security.
+
+  </li>
+  <li>
+<p class="numlst">It is possible to create filters that conflict. For example, adding the
+same filter with two different names will cause one filter to be ignored.
+Ensure that any filters added will not conflict with existing filters.
+
+  </li>
+</ul>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 2/06/04 9:55a <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+
+<<< Double Driver Version History >>>
+--------------------------------------------------------------------------------
+
+  < Version history >
+
+    > » major changes
+    + » added
+    ^ » updated
+    ~ » improved
+    ! » bug fixed/removed
+
+
+<<< Details >>>
+--------------------------------------------------------------------------------
+
+
+  < Double Driver Version 3.0 (September 2009) >
+    
+    > Portable by default with stealth mode
+    ^ Print setup dialog
+    ^ Graphical user interface
+    ! Fixed: problem identifying some drivers
+    ! Fixed: sorting on date
+
+
+  < Double Driver Version 2.1 (December 2008) >
+    
+    + Ability to build Double Driver Portable
+    + Compressed (zipped) folder output option
+    + Single file self extract (executable) output option
+
+
+  < Double Driver Version 2.0 (September 2008) >
+    
+    + Restore dialog
+    + Print dialog
+    + Shortcut to Files and Settings Transfer Wizard
+    ^ Graphical user interface (GUI)
+    ~ Restore drivers easily in one go
+    ! Fixed: save list on Vista
+
+
+  < Double Driver Version 1.3.1 (August 2008) >
+    
+    ! Fixed: Vista installation issue
+
+
+  < Double Driver Version 1.3 (July 2008) >
+    
+    + Generate report (log) file
+    ~ Extract additional files if available
+    ! Fixed: error extracting drivers
+
+
+  < Double Driver Version 1.2 (March 2008) >
+    
+    + Autoselect individual provider
+    ~ Deeper search for installed drivers
+    ~ Categorize the backup destination folder by the driver class
+    ! Fixed: minor bugs
+
+
+  < Double Driver Version 1.1 (February 2005) >
+
+    + Manual search for missing files
+    ! Fixed: compatibility issue with Windows 9x
+
+
+  < Double Driver Version 1.0 (First Release - August 2004) >
+
+    + View installed drivers 
+    + Backup drivers 
+    + Restore drivers 
+    + Save drivers list 
+    + Print drivers list
+
+
+--------------------------------------------------------------------------------
+*** Copyright © 2004-2009 Budy Setiawan Kusumah. All rights reserved. ***

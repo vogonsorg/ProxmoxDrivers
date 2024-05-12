@@ -1,0 +1,271 @@
+Windows* NT 4.0 Push Install Instructions
+
+- Introduction 
+
+- Setting up an install directory on the file server 
+
+- Performing the unattended installation 
+
+- Sample Unattend.txt file 
+
+- References 
+
+- Directory structure for unattended installation files 
+
+- Removing unnecessary localized files 
+
+--------------------------------------------------------------------------------
+
+Introduction
+
+A "Push", or unattended installation of Windows NT 4.0 provides a means for 
+network administrators to easily install Windows NT 4.0 on similarly equipped 
+systems. The network administrator can create a bootable diskette that 
+automatically logs into a central server and installs the operating system 
+from an image of the Windows NT 4.0 installation directory stored on that 
+server. 
+
+This document provides instructions for a basic unattended installation of 
+Windows NT 4.0 that includes the installation of drivers for the Intel(R) 
+PRO/100 and Intel(R) PRO/1000 adapters. 
+
+The elements necessary for the Windows NT 4.0 unattended installation are:
+
+- A Windows NT 4.0 Server with a shared image of the \I386 directory. The 
+  \I386 directory contains the Windows NT 4.0 image. 
+- An unattended installation configuration file that provides Windows NT 4.0 
+  setup with information it needs to complete the installation. The name of 
+  this file is UNATTEND.TXT. 
+- A DOS boot diskette that contains Microsoft Network Client software for 
+  connecting to the remote computer and AutoExec commands to automatically 
+  start the Windows NT 4.0 installation.  The AutoExec commands should log
+  on to the Windows NT 4.0 Server and invoke the Windows NT setup command
+ "w:\I386\WINNT /S:w:\I386 /U:w:\I386\UNATTEND.TXT"  
+  Where "w:" is the drive letter mapped by the Network Client software
+
+This document provides instructions for setting up the shared installation 
+directory on the remote computer and making changes to the UNATTEND.TXT file.
+
+--------------------------------------------------------------------------------
+
+Setting up an install directory on the file server
+
+1) Create a directory on the remote computer's hard disk for the installation 
+   files (EX: "NT40.INS"). Make this directory shared (e.g., with shared 
+   name "NT40.INS"). 
+2) Create a user (EX: "USERID" with a password "password") and grant read and 
+   view rights for the NT40.INS directory. 
+3) Use a CD-ROM drive at the remote computer to xcopy the i386 directory with 
+   Windows NT 4.0 installation files to the shared directory NT40.INS. Use 
+   Windows Explorer or XCOPY /s to preserve the directory structure of the 
+   installation files. When the copy is complete, the installation files 
+   should reside in the NT40.INS\i386 directory. 
+4) Copy the sample UNATTEND.TXT file from the Intel CD to the NT40.INS\i386 
+   directory. The sample can be found on the Intel CD in the 
+   APPS\SETUP\PUSH\WINNT directory. Modify the installation answer file 
+   UNATTEND.TXT as required by your specific system and desired Windows NT 
+   configurations. Note that UNATTEND.TXT may be read-only. If so, change 
+   the permissions before editing the file so you can write to the file, for 
+   example attrib -r unattend.txt. A sample UNATTEND.TXT file with comments 
+   is included with this document. At a minimum you should update the items in 
+   the [UserData] section.  
+5) Change drives to the CD-ROM drive. EX: D:, where D: is the drive letter of 
+   the CD-ROM drive. 
+6) Change directories to the \APPS\SETUP\PUSH directory on the Intel CD: 
+   (CD \APPS\SETUP\PUSH) 
+7) Run the PUSHCOPY.BAT file. For example, PUSHCOPY C:\NT40.INS\i386 NT 
+   where C:\ and NT40.INS are modified to reflect the remote computer's 
+   directory structure.  
+
+This creates the $OEM$ directory structure and copies the necessary files to 
+it.
+
+--------------------------------------------------------------------------------
+
+Performing the Unattended Installation
+
+Boot up your DOS network client diskette. After connecting to the network:
+
+1) Input a user name when prompted. For example, "UserID". 
+2) Input a password when prompted. For example, "password". 
+3) After the Windows NT 4.0 installation begins, wait until the copy operation 
+   labeled "Setup is copying files..." in the line-drawn characters box appears, 
+   then remove the diskette from the drive. This allows the unattended 
+   installation to continue after the setup program reboots the system.
+
+For Windows NT, the following are installed:
+
+Adapter drivers 
+Intel(R) PROSet II 
+
+--------------------------------------------------------------------------------
+
+Sample Unattend.txt file 
+
+UNATTEND.TXT
+
+;  Windows NT 4.0 Unattended Installation sample
+
+[Unattended]
+OemPreinstall = yes
+NoWaitAfterTextMode = 1
+NoWaitAfterGUIMode = 1
+FileSystem = LeaveAlone
+ExtendOEMPartition = 0
+ConfirmHardware = no
+NtUpgrade = no
+Win31Upgrade = no
+TargetPath = winnt
+OverwriteOemFilesOnUpgrade = no
+OemSkipEULA = yes
+
+[GuiUnattended]
+OemSkipWelcome = 1
+OEMBlankAdminPassword = 1
+TimeZone = "(GMT-08:00) Pacific Time (US & Canada)"
+
+[UserData]
+FullName = "Userid"
+OrgName = "Organization"
+ComputerName = COMPUTER
+ProductId = "xxx-xxxxxxx"
+;or Product key if you are using OEM versions
+
+[Display]
+ConfigureAtLogon = 0
+BitsPerPel = 8
+XResolution = 640
+YResolution = 480
+VRefresh = 60
+AutoConfirm = 1
+
+[Network]
+InstallAdapters = SelectedAdaptersSection
+InstallProtocols = ProtocolsSection
+InstallServices = ServicesSection
+JoinWorkgroup = workgroup
+
+[SelectedAdaptersSection]
+E100B = E100BParameters, ..\$OEM$\Net\PRO100\WINNT4
+E1000 = E1000Parameters, ..\$OEM$\NET\PRO1000\WINNT4
+
+[E100BParameters]
+; For Cardbus configuration
+;MemoryAddress = 0x0C000000		; sample parameter only
+;InterruptNumber = 11   		; sample parameter only
+;IOBaseAddress = 0x0F00    		; sample parameter only
+;MemoryMappedBaseAddress = 0x00000000	; sample parameter only
+
+; Other configuration parameters
+;BusNumber = 4				; sample parameter only
+;SlotNumber = 10			; sample parameter only
+;SpeedDuplex = 0			; 0 = Auto Detect
+;			       		  1 = 10Mbps/Half Duplex
+;					  2 = 10Mbps/Full Duplex
+;					  3 = 100Mbps/Half Duplex
+;					  4 = 100Mbps/Full Duplex
+
+[E1000Parameters]
+
+
+[ProtocolsSection]
+TC = TCParamSection
+
+[TCParamSection]
+DHCP = yes
+
+[ServicesSection]
+
+;  - End of unattend.txt sample
+
+--------------------------------------------------------------------------------
+
+References
+
+- Microsoft Windows NT Resource Kit - Microsoft Press 19NT 
+- Microsoft TechNet CD-ROM, April 1997 
+- Microsoft support web page at http://support.microsoft.com/support. 
+  Article ID : Q155197, Q156795 
+
+--------------------------------------------------------------------------------
+
+Directory structure for unattended installation files
+
+The following directory structure is created by PUSHCOPY.BAT. The files are
+placed in the correct directory location for the installation of the driver and 
+Intel PROSet II. The directory D:\NT40.INS\I386 refers to the location of the 
+files copied from the \I386 directory on the Windows NT 4.0 installation CD. 
+
+D:\NT40.INS\I386\$OEM$\NET\PRO100\WINNT4
+
+(From the \PRO100\WINNT4 directory of the Intel CD)
+
+The entire directory structure of the PRO100\WINNT4 subdirectory of the Intel 
+CD is copied.
+
+D:\NT40.INF\I386\$OEM$\NET\PRO1000\WINNT4
+
+(From the \PRO1000\WINNT4\DRIVERS directory of the Intel CD)
+
+The entire directory structure of the PRO1000\WINNT4 subdirectory of the Intel 
+CD is copied. 
+
+D:\NT40.INF\I386\$OEM$\NET\APPS\PROSET\WINNT4
+
+(From the \APPS\PROSET\WINNT4 directory of the Intel CD)
+
+The entire directory structure of the APPS\PROSET\WINNT4 subdirectory of the Intel 
+CD is copied. 
+
+--------------------------------------------------------------------------------
+
+Removing unnecessary localized files 
+
+To support a variety of national languages, Intel PROSet II includes a number of 
+localized files. During installation, the Operating System's language is 
+detected. The installation program selects the files for that language and 
+installs them. 
+
+You can reduce the time required for an unattended installation by removing the 
+localized files for languages that will not be used. This reduces the number of 
+files copied to the target system and speeds up the MSDOS  portion of the 
+installation. 
+
+This operation takes place AFTER PushCopy has been run to copy the driver 
+installation files to the unattended installation server. There are two steps to 
+this process. 
+
+Step 1: Identify the language(s) you wish to install.  
+
+Intel PROSet II supports 15 languages. 
+
+CHS = Chinese Simplified
+CHT = Chinese Traditional
+DAN = Danish
+DEU = German
+ENU = English 
+ESN = Spanish
+FIN = Finnish
+FRA = French
+ITA = Italian
+JPN = Japanese
+KOR = Korean
+NLD = Dutch
+NOR = Norwegian
+PTV = Brazilian Portugese
+SVE = Swedish 
+
+Select the language(s) you wish to support and note the 3-letter abbreviation 
+for the language(s) in the list above. 
+
+Step 2: Remove the languages you do not need from the installation image. 
+
+a) Using File Manager on the Unattended Installation Server, navigate to the 
+   i386\$OEM$\NET directory in the unattended installation image. 
+b) Navigate to the APPS\PROSET\WINNT4\NMS\IA32 directory and use File Manager to delete the 
+   language folders you do not need. 
+c) Navigate to the APPS\PROSET\WINNT4\PROSET2\IA32 directory and use File Manager to delete 
+   the language folders you do not need. 
+d) After this operation is complete, the unattended installation requires less 
+   time since fewer files are copied from the installation server to the target 
+   system. 

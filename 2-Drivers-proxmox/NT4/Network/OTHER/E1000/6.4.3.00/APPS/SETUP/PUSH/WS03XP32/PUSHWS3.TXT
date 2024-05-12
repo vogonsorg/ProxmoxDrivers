@@ -1,0 +1,286 @@
+Push Install Instructions for Windows Server 2003
+ 
+- Introduction
+
+- Setting up an Install Directory on the File Server
+
+- Instructions for Creating Teams and VLANs(Optional)
+
+- Deployment Methods
+
+- Microsoft Documentation for Unattended Installations of Windows Server 
+  2003
+
+- Sample unattend.txt File for Windows Server 2003
+
+- Directory Structure for Unattended Installation Files
+
+----------------------------------------------------------------------------
+
+Introduction
+
+A "Push", or unattended installation of Windows Server 2003  provides a 
+means for network administrators to easily install Windows Server 2003 on 
+similarly equipped systems. The network administrator can create a bootable 
+diskette that will automatically log into a central server and install the 
+operating system from an image of the Windows Server 2003 installation 
+directory stored on that server. This document provides instructions for a 
+basic unattended installation of Windows Server 2003 (32-bit version) that 
+includes the installation of drivers for the Intel(R) PRO/100 and Intel 
+PRO/1000 adapters.
+
+As part of the unattended installation, you can create teams and VLANs. If 
+you wish to create one or more teams/VLANs as part of the unattended 
+installation, you must also follow the instructions in the "Instructions for 
+Creating Teams and VLANs (Optional)" section of this document. 
+
+The elements necessary for the Windows Server 2003 unattended installation 
+are:
+
+- A Windows Server 2003 system with a shared image of the Windows Server 
+  2003 Installation CD. If you want to create teams/VLANs as part of the 
+  unattended installation, you need to create a configuration file with the 
+  team/VLAN information in it. To create this file, you need a sample system 
+  that has the same type of adapters that will be in the systems receiving the 
+  push installation. On the sample system, use Intel(R) PROSet to set up 
+  the adapters in the teaming/VLAN configuration you want. This system could 
+  also be the Windows Server 2003 mentioned above. For clarity, this system is 
+  referred to in this page as the configured system. 
+- An unattended installation configuration file that provides Windows Server 
+  2003 setup with information it needs to complete the installation. The 
+  name of this file is UNATTEND.TXT.
+- A DOS boot diskette that contains Microsoft Network Client software for 
+  connecting to the Windows Server 2003 system and AutoExec commands to 
+  automatically start the Windows Server 2003 installation. 
+
+--------------------------------------------------------------------------------
+
+Setting up an Install Directory on the File Server
+
+The server must be setup with a distribution folder that holds the required 
+Windows Server 2003 files and which clients can reach when connecting via 
+TCP/IP or IPX.
+
+For illustration purposes, the examples in this readme use the network 
+share D:\PUSHWS03. To create this share:
+
+1) Create a directory on the server, (EX: D:\PUSHWS03). 
+2) Use the My Computer applet in Windows Server 2003 to locate the 
+   D:\PUSHws03 folder.  
+3) Right-click the folder and select Sharing.  
+4) Select Share this folder, then give it a share name (EX: PUSHWS03). This 
+   share name will be used to connect to this directory from the remote 
+   target systems. By default, the permissions for this share is for 
+   Everyone to have Full Control. 
+5) Adjust permissions as necessary and click OK. 
+
+To prepare the distribution folder:
+
+1) Copy the entire contents of the Windows Server 2003 CD to D:\PUSHWS03.
+2) Use Windows Explorer or XCOPY to maintain the same directory structure as 
+   on the Windows Server 2003 CD. When the copy is complete, the Windows 
+   Server 2003 installation files should be in the D:\PUSHWS03 directory and 
+   the I386 and other installation directories should be subdirectories of 
+   the D:\PUSHWS03 directory. 
+3) Copy Unattend.txt from the Intel CD (found in APPS\SETUP\PUSH\WS03XP32) 
+   into the shared directory D:\PUSHWS03\I386. 
+4) Edit the Unattend.txt file with Notepad or another text-editor to 
+   include your customizations. At a minimum you should change the items in 
+   the [UserData] section of the file.  For Server Installations the [LicenseFilePrintData]
+   section should be edited to specify the License type, and the number of users if
+   the license type is PerServer. 
+5) Create the driver install directory structure and copy the driver files 
+   to it. 
+
+NOTE: The PUSHCOPY.BAT file provided with the drivers in the 
+\APPS\SETUP\PUSH directory copies the appropriate files for the 
+installation. PUSHCOPY also copies the components needed to perform the 
+automated installations contained in the [GuiRunOnce] section  of the sample 
+UNATTEND.TXT file. These include an unattended installation of the Intel 
+PROSet configuration and diagnostic utility. 
+
+Example: From a Windows Server 2003 command prompt where e: is the drive 
+letter of your CD-ROM drive:
+e:
+cd \APPS\SETUP\PUSH
+	(you must be in the \APPS\SETUP\PUSH directory to run PUSHCOPY)
+pushcopy D:\PUSHWS03\I386 WS03
+
+The above command creates the $OEM$ directory structure and copies all the 
+necessary files to install the driver and Intel PROSet. However, Intel 
+PROSet is not installed unless the line: 
+
+; Command0="c:\drivers\net\Intel\Proset.msi /qn"
+
+is uncommented from unattend.txt.
+
+See the "Directory Structure for Unattended Installation Files" section of 
+this document for more information about the directory structure and file 
+layout of the $OEM$ directory.
+ 
+----------------------------------------------------------------------------
+
+Instructions for Creating Teams and VLANs (Optional)
+
+1) Copy SavRes.vbs from the Intel CD to the configured system. The file is 
+   located in the APPS\WMI\ directory on the Intel CD. 
+2) Open a command prompt on the configured system and navigate to the 
+   directory containing SavRes.vbs. 
+3) Run the following command: cscript SavRes.vbs save. A configuration file 
+   called WmiConf.txt is created in the same directory. 
+4) On the Windows Server 2003, create a directory in the $OEM$\$1 directory 
+   called WMIScr. For example, on Windows Server 2003, the directory is 
+   $OEM$\$1\WMIScr. 
+5) Copy the SavRes.vbs and WmiConf.txt files to the WMIScr directory. 
+6) Edit the GUIRunOnce section in the unattend.txt file in the following 
+   way. After the command to install Intel PROSet and the drivers, add the 
+   following command:  
+
+          Command1="%systemroot%\system32\cmd.exe /c cscript c:\wmiscr\savres.vbs restore c:\wmiscr\wmiconf.txt > c:\wmiscr\output.txt"
+
+
+----------------------------------------------------------------------------
+
+Deployment Methods
+
+Make sure that you have a copy of a network bootable MS-DOS* floppy that 
+connects to the Z:\PUSHWS03 directory. Use it to boot the destination system 
+(the one you want to push install to) and connect to this shared network 
+directory. Run this command at the \\Server\PUSHWS03\i386) prompt: 
+winnt /u:Z:\I386\unattend.txt /s:Z:\I386 /t:c 
+where Z: equals mapped drive 
+
+NOTE: In the above procedure, setup runs the installation in unattended mode 
+and also detects the plug and play network adapters. All driver files are 
+copied from the shared directory to the target system directories and 
+installation of the OS and Network Adapters continues without user 
+intervention. 
+
+If you installed teams/VLANs as part of the unattended installation, view the 
+results of the script execution in the output.txt file. This file is in 
+the same directory as the SavRes.vbs file.
+
+----------------------------------------------------------------------------
+
+Microsoft Documentation for Unattended Installations of Windows Server 2003
+
+For a complete description of the parameters supported in Unattend.txt see 
+the DEPLOY.CHM document in the DEPLOY.CAB cabinet file on the  Windows 
+Server 2003 CD. To obtain the document, use Internet Explorer 5.0 or greater 
+to open DEPLOY.CAB in the \SUPPORT\TOOLS directory on the CD. 
+
+Other documents and utilities in the DEPLOY.CAB file provide details and 
+tools for setting up a variety of unattended installation methods. 
+
+--------------------------------------------------------------------------------
+
+Sample Unattend.txt file for Windows Server 2003
+
+[Unattended]
+UnattendMode=FullUnattended
+OemSkipEula=Yes
+OemPreinstall=Yes
+OemPnPDriversPath=\drivers\net\INTEL
+TargetPath= *
+DriverSigningPolicy=Ignore
+Filesystem=LeaveAlone
+OverwriteOemFilesOnUpgrade=No
+
+; This switch prevents the user setup dialog from running when 
+; Windows Server 2003 starts for the first time.
+UnattendSwitch=Yes
+
+[GuiUnattended]
+AdminPassword=*
+AutoLogon=Yes
+AutoLogonCount=1
+OEMSkipRegional=1
+TimeZone=4
+OemSkipWelcome=1
+
+[UserData]
+FullName=Name
+OrgName=Organization
+ComputerName=Computer1
+; PRODUCT ID is required for most installations.
+ProductID="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+
+[GuiRunOnce]
+; *** command to install PROSet - uncomment to install PROSet after push 
+; install 
+; Command0="c:\drivers\net\INTEL\Proset.msi /qn"
+
+[Identification]
+JoinWorkgroup=WORKGROUP
+; *Use the following for a domain installation
+; JoinDomain=MYDOMAIN
+; CreateComputerAccountInDomain=Yes
+; DomainAdmin=Installer
+; DomainAdminPassword=install
+
+[Networking]
+InstallDefaultComponents=Yes
+
+----------------------------------------------------------------------------
+
+Directory Structure For Unattended Installation Files
+
+The following directory structure is created by PUSHCOPY.BAT to place the 
+files necessary for the installation of the driver and Intel PROSet. The 
+directory D:\PUSHWS03 refers to the location of the files from the Windows 
+Server 2003 installation CD.
+
+D:\PUSHWS03\I386\$OEM$\$1\DRIVERS\NET\INTEL
+
+(From the PRO100\WS03XP2K directory of the Intel CD)
+
+E100B325.INF
+E100B325.DIN
+E100B325.SYS
+E100B325.CAT
+E100BMSG.DLL
+INTELNIC.DLL
+PROUNSTL.EXE
+
+(From the PRO1000\WS03XP2K directory of the Intel CD)
+
+E1000325.INF
+E1000325.DIN
+E1000325.SYS
+E1000325.CAT
+E1000MSG.DLL
+ETCOINST.DLL
+ASFSTUP.DLL
+
+      ;  The following file will also be present if your Intel Driver CD 
+      ;  supports the  
+      ;      Intel(R) PRO/1000 MT Quad Port Server Adapter
+      ;  and the
+      ;      Intel(R) PRO/1000 MT Quad Port Network Connection
+      ;
+
+
+E101D325.INF
+
+(From the \APPS\PROSET\WS03XP2K directory on the Intel CD)
+
+ANSM2KXP.INF
+ANSP2KXP.INF
+IANSMSG.DLL
+IANSWXP.SYS
+IANS2KXP.CAT
+PROSET.EXE
+PROSET.MSI
+S8023DEV.REG
+*.MST (International language files)
+*.CAB
+
+(From the \APPS\SETUP\PUSH\WS03XP32 directory on the Intel CD)
+
+UNATTEND.TXT
+PUSHWS3.TXT
+
+; To activate the Intel PROSet installation once the above directories have
+; been created and populated, uncomment the line:
+; Command0="c:\drivers\net\INTEL\Proset.msi /qn"
+; in the [GuiRunOnce] section of Unattend.txt

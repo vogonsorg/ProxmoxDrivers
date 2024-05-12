@@ -1,0 +1,30 @@
+:Base PROSETFS.hlp
+:Title Intel PROSet Help
+1 General Tab
+2 General=General
+2 General for PRO/100 VE, VM and 82562EH Adapters=PRO_100V_General
+2 Adapter Details=Adapter_Details
+1 Advanced Settings Tab
+2 Advanced Settings for PRO/1000 adapters=Driver_Settings
+2 Link Configuration for PRO/1000 adapters=PRO_1000_Link_Configuration
+2 Advanced Settings for PRO/100, PRO/100+ and PRO/100 S adapters=PRO100_settings
+2 Advanced Settings for PRO/100 VE, VM and 82562EH adapters=PRO_100V_Advanced_Settings
+2 Advanced Settings for 82562EH based phoneline adapter=Intel_82562EH_Advanced_Settings
+2 Advanced Settings for PRO/100 Intelligent Server adapters=INTELLIGENT_SETTINGS
+2 Advanced Settings for PRO/10 and PRO/10+ adapters=Advanced_Settings_for_PRO_10_Adapters
+1 Network Driver Tab
+2 Driver Information=Driver_Information
+2 Driver Settings=Driver_Settings
+1 Diagnostics Tab
+2 Diagnostics=Diagnostics
+2 Diagnostics for PRO/100, PRO/100+ and PRO/100 S adapters=PRO100_diagnostics
+2 Sender Responder Test=Sender_Responder_Test
+1 Support Tab
+2 Support=Support
+1 CardBus Adapters
+2 CardBus Detected=CB_Detected>main
+2 CardBus Resources=CB_Resources>main
+1 MiniPCI Adapters
+2 Overview=mini_PCI
+1 Troubleshooting Tab
+2 Troubleshooting=Troubleshooting

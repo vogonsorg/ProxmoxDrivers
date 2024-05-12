@@ -1,0 +1,122 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The Team Schema</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+<!--
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">The Team Schema</font></h1>
+<p>The Team Schema describes how the Ethernet adapters are grouped together into teams.
+<br><br>
+<img src="team.gif" width="535" height="376">
+<br><br>
+
+<h2><font color="#0000FF">IANet_TeamOfAdapters</font></h2>
+
+<p><b>Purpose</b><br>
+This class implements the CIM_RedundancyGroup class. This class has members that describe the type of the team, the number of adapters in the team, and the maximum number of adapters that can be in the team.
+
+<p><b>Instances</b><br>
+There is an instance of this class for each Intel Team. 
+
+<p><b>Creating Instances</b><br>
+To create an empty team, create an instance of IANet_TeamOfAdapters. You must set the correct <b>TeamingMode</b> 
+and set <b><span style="FONT-WEIGHT: bold">ManageabilityEnabled</span></b> to 
+true<font color="navy"><span style="COLOR: navy"> </span></font>before calling <b>IWbemServices::PutInstance()</b> to create the object in the
+Providers. The Providers return a string containing the object path of the new object. 
+Setting <b>ManageabilityEnabled</b> to true enables Manageability Failover.<p>
+<b><font face="Arial" size="2"><span style="font-weight: bold; font-size: 10pt">
+Note: </span></font></b>Adapters in a Manageability Failover team must be 
+Manageability Teaming capable and one of the adapters must be enabled to IPMI or 
+PT manageability mode. Use IANet_EthernetAdapter.ManageabilityPort and 
+IANet_EthernetAdapter.ManageabilityMode attributes to determine manageability 
+capabilities of an adapter. </p>
+
+<p><b>Removing Instances</b><br>
+Correspondingly, to remove a team, delete the instance of IANet_TeamOfAdapters. The
+Providers will delete the associations to the team members and the virtual adapter and settings for the team.
+
+<p><b>Modifying Properties</b><br>
+Use <b>Put()</b> to change the value of the <b>TeamingMode</b> property, then call <b>PutInstance()</b> to update the team.
+
+<p><b>ManageabilityEnabled</b><br>
+This setting enables the creation of a manageability failover team.<p><b>Associations</b><br>
+Each  adapter in a team is associated with the team's instance of IANet_TeamOfAdapters using an instance of IANet_TeamMemberAdapter. 
+The virtual adapter for the team is associated with this class using an instance of IA_NetNetworkVirtualAdapter.
+
+<p><b>Methods</b><br>
+This class instance supports the following methods:
+<ul>
+  <li><b>TestSwitchConfiguration</b> &mdash; Tests the switch configuration to ensure that the team is functioning correctly with the switch. This test can be used to check that link partners (i.e., a device that an adapter links to, such as another adapter, hub, switch, etc.) support the chosen adapter teaming mode. For example, if the adapter is a member of a Link Aggregration team, this test can verify that link partners connected to the adapter support Link Aggregation.
+
+  </li>
+  <li><b>PollStatus</b> — Use this method to determine adapter capabilities that 
+  frequently change. Such capabilities include but are not limited to link speed 
+  and adapter status.</li>
+  <li><b>AddMemberAdapters</b> — Adds an arbitrary number of adapters to the 
+  team. The input parameter is a&nbsp; reference to an array of 
+  IANet_EthernetAdapter which is added to this team.</li>
+  </ul>
+  <h2><font color="#0000FF">IANet_TeamedMemberAdapter</font></h2>
+
+<p><b>Purpose</b><br>
+This class is used to associate the adapter with the team, and determines the function of the adapter in the team and establishes that the adapter is currently active in the team.  This class implements the CIM class CIM_NetworkAdapterRedundancyComponent.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each adapter that is a member of a team.
+
+<p><b>Creating Instances</b><br>
+To add an adapter to a team, create an instance of IANet_TeamedMemberAdapter to associate the adapter with the team.   
+
+<p><b>Removing Instances</b><br>
+To remove an adapter from the team, remove the instance of IANet_ TeamedMemberAdapter. The adapter will no longer be part of the team and may be bound to an IP protocol endpoint after the <b>Apply()</b> function is called.
+
+<p><b>Modifying Properties</b><br>
+The <b>AdapterFunction</b> property of this class may be modified to describe how the adapter is used within a team.
+
+<p><b>Associations</b><br>
+This is an association class.
+
+<p><b>Methods</b><br>
+There are no supported methods on this class.
+
+<h2><font color="#0000FF">IANet_NetworkVirtualAdapter</font></h2>
+
+<p><b>Purpose</b><br>
+This class is used to associate the team's IANet_TeamOfAdapters with the IANet_EthernetAdapter that represents the virtual adapter for the team.  The class implements the CIM class CIM_ CIM_NetworkVirtualAdapter.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each Intel team that has been bound to a virtual adapter.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class. To create a team, create an instance of IANet_TeamOfAdapters. This class will not exist until after you have called <b>IANet_NetService .Apply()</b> within the context of a valid session and the IANet_EthernetAdapter instance has been created.
+
+<p><b>Removing Instances</b><br>
+You cannot delete instances of this class.
+
+<p><b>Associations</b><br>
+This is an association class.
+
+<p><b>Methods</b><br>
+There are no supported methods on this class.
+
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

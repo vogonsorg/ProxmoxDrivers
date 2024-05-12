@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 Oversigt
+2 Naviger PROSet II=GENERAL_PAGE
+2 Vis adapter- og driveroplysninger
+3 Generelle oplysninger=General_Information
+3 Adapterdetaljer=Adapter_Details
+3 Driverdetaljer=Driver_Information
+1 Konfigurer adapteren
+2 Sæt hastighed og duplex=Set_Speed_and_Duplex
+2 Konfigurer strømforbrug=Configure_Power_Management
+2 Konfigurer avancerede funktioner=Configure_Advanced_Features
+2 Aktiver IPSec=Enable_IPSec
+2 Gem konfiguration til en fil=SAVERESTORE
+2 Fjern en adapter=Remove_an_Adapter_Instance
+1 Opret og konfigurer team
+2 Teamtyper
+3 Om teaming=Teaming_Info
+3 Teamtyper=Team_Types
+3 Adapterfejltolerance=Adapter_Fault_Tolerance
+3 Omskifterfejltolerance=Switch_Fault_Tolerance
+3 Adaptive Load Balancing=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Static=FEC
+3 GEC/LA/802.3ad: Static=GEC
+3 IEEE 802.3ad: Dynamic=Dynamic_3ad
+2 Definer et team
+3 Opret et team=Create_a_New_Team
+3 Konfiguration af testomskifter=Test_Switch_Configuration
+3 Konfigurer avancerede indstillinger=Teaming_Advanced_Settings
+2 Ret teamkonfiguration
+3 Ret adapter-teaming-tilstand=Change_Adapter_Teaming_Mode
+3 Angiv en adapter som primær eller sekundær=Specify_an_Adapter_as_Primary_or_Secondary
+3 Tilføj en adapter til et team=Add_an_Adapter_to_an_Existing_Team
+3 Fjern en adapter fra et team=Remove_an_Adapter_from_a_Team
+3 Teaming - Avancerede indstillinger=Teaming_Advanced_Settings
+2 Vis teamkonfiguration
+3 Team i netværkskomponenttræet=Team_Listing
+3 Vis teamkonfiguration=Team_Configuration
+2 Fjern et team
+3 Fjern et adapterteam=Remove_an_Adapter_Team
+1 Opret og konfigurer VLANer
+2 VLAN-oversigt=VLAN>main
+2 Definer VLAN
+3 Opret VLAN=ADD_VLAN
+3 Aktiver GVRP=GVRP_Support
+3 Avancerede indstillinger=Advanced_Settings_for_VLANs
+2 Ret VLAN-egenskaber
+3 Ret VLAN-egenskaber=Change_VLAN_Properties
+3 Avancerede indstillinger=Advanced_Settings_for_VLANs
+2 Fjern et VLAN
+3 Fjern et VLAN=Remove_a_VLAN
+1 Udfør diagnostik
+2 Oversigt=Diagnostics_An_Overview
+2 Diagnostiktest=Diagnostics
+2 Kabeltest=Testing_the_Cable
+2 Afsender-/svarertest=Sender_Responder_Test
+2 Definition af diagnostik-log=Diagnostic_Log
+1 Brug Intel(R) add-on-værktøjer
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Oversigt=priority_packet_overview
+1 Problemløsning
+2 Fanen Problemløsning=Troubleshooting
+2 Genopret adapterkonfiguration=RESTORECONFIG
+2 Få support=Support

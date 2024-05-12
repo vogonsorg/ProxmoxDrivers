@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Jumbo Frames</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1><a name="Jumbo Frames">Jumbo Frames</a></h1>
+<table border="0" cellPadding="6" cellSpacing="0">
+    <tr>
+      <td align="middle" vAlign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>:</em> Jumbo Frames are 
+      supported at 1000 Mbps only. Using Jumbo Frames at 10 or 100 Mbps may 
+      result in poor performance or loss of link.</td>
+    </tr>
+</table>
+<p>Jumbo frames are Ethernet frames that are larger than 1518 bytes. You can use
+Jumbo Frames to reduce server CPU utilization and increase throughput. However, additional latency may be
+introduced.&nbsp;</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+    <tr>
+      <td align="middle" vAlign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>:</em> End-to-end network hardware must support this capability; otherwise, packets
+will be dropped.</td>
+    </tr>
+</table>
+<p>Jumbo Frames can be implemented simultaneously with VLANs and teaming.</p>
+<p>To configure Jumbo Frames at the switch, consult your network administrator
+or switch user's guide.</p>
+<p><b>Restrictions</b>:</p>
+<ul>
+  <li>
+    <p class="numlst">Jumbo frames are not supported in multi-vendor team 
+    configurations. </p>
+  <li>
+    <p class="numlst">Supported protocols are limited to IP (TCP, UDP).</p>
+  <li>
+    <p class="numlst">Jumbo frames require compatible switch connections that
+    forward Jumbo Frames. Contact your switch vendor for more information.</p>
+  </li>
+  <li>
+    <p class="numlst">When standard sized Ethernet frames (64 to 1518 bytes) are
+    used, there is no benefit to configuring Jumbo Frames.</p>
+  <li>
+    <p class="numlst">The Jumbo Frames setting on the switch must be set to at least 8 bytes larger than the adapter
+        setting for Windows* operating systems, and at least 22 bytes larger for
+        all other operating systems.</p>
+</ul>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/28/04 5:02p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+
+</html>

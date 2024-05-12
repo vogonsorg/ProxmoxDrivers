@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>WMI NIC Provider</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<b>
+<h1>Intel&#174 PRO Network Adapters WMI Provider</b></h1>
+<ul>
+  <li>
+    <p class="numlst"><a href="#Overview">Overview</a></li>
+  <li>
+    <p class="numlst"><a href="#System Requirements">System Requirements</a></li>
+  <li>
+    <p class="numlst"><a href="#Installation">Installation</a></li>
+  <li>
+    <p class="numlst"><a href="#Supported Standards">Supported Standards</a></li>
+  <li>
+    <p class="numlst"><a href="#Known Issues">Known Issues</a></li>
+</ul>
+<u><font FACE="Courier New">
+<hr>
+</font></u><b>
+<h2><a name="Overview">Overview</a></h2>
+</b>
+<p>The Intel&#174 PRO Network Adapters WMI Provider enables WMI-based management
+applications such as PROSet to monitor and configure the status of PCI network
+adapters. Intel&#174 PRO Network Adapters WMI Provider uses WMI, a user-level
+instrumentation technology for the Microsoft Windows* platform. For Windows
+2000, XP and Windows Server 2003 this is a newer version of the provider, which supports a
+newer schema with more advanced features.</p>
+<p>Windows Management Instrumentation (WMI) is a middleware layer that allows
+measurement and instrumentation information to be collected from kernel mode
+data providers. This information can then be provided to local or remote
+user-mode data consumers through the use of a common set of interfaces
+(Web-based Enterprise Management called WBEM). WMI is a data-independent
+pipeline between the data consumer and the data provider that makes no
+assumptions about the format of the data.</p>
+<p>A guide is available on this distribution, which contains
+detailed information on the Intel&#174 PRO Network Adapters WMI Provider, also
+referred to as Network Configuration Services (NCS) WMI Providers. This guide is
+located in \APPS\WMI\DOCS. Navigate to this directory and double-click <b>index.htm</b>.
+You should read this document in conjunction with the MOF files also found in
+\APPS\WMI.
+The technical reference paper describes the external view of NCS WMI providers
+so WMI-based management applications could use it to manage the network
+configuration for the Intel adapters.</p>
+<u><font FACE="Courier New">
+<hr>
+</font></u><b>
+<h2><a name="System Requirements">System Requirements</a></h2>
+</b>
+<ul>
+  <li>
+    <p class="numlst">Any Intel&#174 PRO/100 or PRO/1000 adapter and related driver
+    software</li>
+  <li>
+    <p class="numlst">Windows 2000, XP or Windows Server 2003</li>
+</ul>
+<p>The Intel&#174 PRO Network Adapters WMI Provider supports all Intel PRO/100 and
+PRO/1000 adapters.</p>
+<u><font FACE="Courier New">
+<hr>
+</font></u><b>
+<h2><a name="Installation">Installation</a></h2>
+</b>
+<p>The Intel&#174 PRO Network Adapters WMI Provider are installed as part of
+Intel&#174 PROSet software installation. See the Installing Intel&#174 PROSet section
+for more information on how to install Intel&#174 PROSet.</p>
+<p>Intel&#174 PROSet <b>Typical </b>Setup Type registers the Intel&#174 PRO Network
+Adapters WMI Provider into the root\IntelNCS namespace. To register Intel&#174 PRO
+Network Adapters WMI Provider into the Microsoft standard root\cimv2 namespace
+use <b>Custom </b>Setup Type and choose <b>WMI CIMv2 Support</b>.</p>
+<b>
+<h2><a name="Supported Standards">Supported Standards</a></h2>
+</b>
+<p>The Intel&#174 PRO Network Adapters WMI Provider supports the standards based
+CIM 2.5 specification.</p>
+<u><font FACE="Courier New">
+<hr>
+</font></u><b>
+<h2><a name="Known Issues">Known Issues</a></h2>
+</b>
+<p>This Intel PRO Network Adapters WMI Provider cannot jointly operate with the
+Intel&#174 DMI-SNMP instrumentation.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small">
+<code>Last modified on <!--$$Modtime:--> 4/07/03 11:49a <!-- $-->  
+Revision <!--$$Revision:--> 5 <!-- $--></code>
+
+
+</body>
+</html>

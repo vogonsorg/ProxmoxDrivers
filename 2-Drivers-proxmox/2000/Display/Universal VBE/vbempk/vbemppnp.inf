@@ -1,0 +1,333 @@
+; vbemp5.inf
+;
+; Installation file (.inf) for the VBE Miniport device.
+;
+; (c) Copyright 2006 AnaPa Corp 
+;
+
+[Version]
+Signature="$Windows NT$"
+Provider=%AnaPa%
+ClassGUID={4D36E968-E325-11CE-BFC1-08002BE10318}
+Class=Display
+CatalogFile=vbemp5.cat
+DriverVer=01/01/2015, 15.01.00.0001
+
+[DestinationDirs]
+DefaultDestDir   = 11
+Vbemp.Miniport  = 12  ; drivers
+Vbemp.Display   = 11  ; system32
+
+;
+; Driver information
+;
+
+[Manufacturer]
+%AnaPa%   = AnaPa.Mfg, NTx86, NTIA64, NTamd64
+
+[AnaPa.Mfg]
+%AnaPa.DeviceDesc0% = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (VGA) = Vbemp, PCI\CC_0300
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (XGA) = Vbemp, PCI\CC_0301
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (3D) = Vbemp, PCI\CC_0302
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter = Vbemp, PCI\CC_0380
+%AnaPa.DeviceDesc0% - Standard Graphics Adapter (VGA) = Vbemp, *PNP0900
+%AnaPa.DeviceDesc0% - VGA = Vbemp, *PNP0917
+%AnaPa.DeviceDesc0% - SVGA = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% (3dfx Interactive) = Vbemp, PCI\VEN_121A&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_3D3D&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_104C&CC_0300
+%AnaPa.DeviceDesc0% (Acer Labs) = Vbemp, PCI\VEN_10B9&CC_0300
+%AnaPa.DeviceDesc0% (Alliance) = Vbemp, PCI\VEN_1142&CC_0300
+%AnaPa.DeviceDesc0% (AMD) = Vbemp, PCI\VEN_100B&CC_0300
+%AnaPa.DeviceDesc0% (ARK Logic) = Vbemp, PCI\VEN_EDD8&CC_0300
+%AnaPa.DeviceDesc0% (ATI, AMD) = Vbemp, PCI\VEN_1002&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_1005&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_4005&CC_0300
+%AnaPa.DeviceDesc0% (BrookTree) = Vbemp, PCI\VEN_109E&CC_0300
+%AnaPa.DeviceDesc0% (Chips & Tech) = Vbemp, PCI\VEN_102C&CC_0300
+%AnaPa.DeviceDesc0% (Cirrus Logic) = Vbemp, PCI\VEN_1013&CC_0300
+%AnaPa.DeviceDesc0% (Chromatic Research) = Vbemp, PCI\VEN_110B&CC_0300
+%AnaPa.DeviceDesc0% (Compaq) = Vbemp, PCI\VEN_0E11&CC_0300
+%AnaPa.DeviceDesc0% (Cyrix MediaGX) = Vbemp, PCI\VEN_1078&CC_0300
+%AnaPa.DeviceDesc0% (IIT) = Vbemp, PCI\VEN_1061&CC_0300
+%AnaPa.DeviceDesc0% (InteGraphics) = Vbemp, PCI\VEN_10EA&CC_0300
+%AnaPa.DeviceDesc0% (Intel) = Vbemp, PCI\VEN_8086&CC_0300
+%AnaPa.DeviceDesc0% (iXMICRO) = Vbemp, PCI\VEN_10E0&CC_0300
+%AnaPa.DeviceDesc0% (Macronix) = Vbemp, PCI\VEN_10D9&CC_0300
+%AnaPa.DeviceDesc0% (Matrox) = Vbemp, PCI\VEN_102B&CC_0300
+%AnaPa.DeviceDesc0% (NeoMagic) = Vbemp, PCI\VEN_10C8&CC_0300
+%AnaPa.DeviceDesc0% (Number Nine) = Vbemp, PCI\VEN_105D&CC_0300
+%AnaPa.DeviceDesc0% (nVidia) = Vbemp, PCI\VEN_10DE&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_12D2&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_104A&CC_0300
+%AnaPa.DeviceDesc0% (OAK) = Vbemp, PCI\VEN_104E&CC_0300
+%AnaPa.DeviceDesc0% (Paradise/Phillips) = Vbemp, PCI\VEN_101C&CC_0300
+%AnaPa.DeviceDesc0% (Rendition) = Vbemp, PCI\VEN_1163&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_107D&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_5333&CC_0300
+%AnaPa.DeviceDesc0% (Sierra) = Vbemp, PCI\VEN_10A8&CC_0300
+%AnaPa.DeviceDesc0% (Sigma Designs) = Vbemp, PCI\VEN_1236&CC_0300
+%AnaPa.DeviceDesc0% (Silicon Motion) = Vbemp, PCI\VEN_126F&CC_0300
+%AnaPa.DeviceDesc0% (SiS Corp) = Vbemp, PCI\VEN_1039&CC_0300
+%AnaPa.DeviceDesc0% (Trident) = Vbemp, PCI\VEN_1023&CC_0300
+%AnaPa.DeviceDesc0% (Tritech) = Vbemp, PCI\VEN_1292&CC_0300
+%AnaPa.DeviceDesc0% (Tseng Labs) = Vbemp, PCI\VEN_100C&CC_0300
+%AnaPa.DeviceDesc0% (VIA Corp) = Vbemp, PCI\VEN_1106&CC_0300
+%AnaPa.DeviceDesc0% (VMware) = Vbemp, PCI\VEN_15AD&CC_0300
+%AnaPa.DeviceDesc0% (Weitek) = Vbemp, PCI\VEN_100E&CC_0300
+%AnaPa.DeviceDesc0% (WinBond) = Vbemp, PCI\VEN_1050&CC_0300
+
+[AnaPa.Mfg.NTx86]
+%AnaPa.DeviceDesc0% = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (VGA) = Vbemp, PCI\CC_0300
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (XGA) = Vbemp, PCI\CC_0301
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter = Vbemp, PCI\CC_0380
+%AnaPa.DeviceDesc0% - Standard Graphics Adapter (VGA) = Vbemp, *PNP0900
+%AnaPa.DeviceDesc0% - VGA = Vbemp, *PNP0917
+%AnaPa.DeviceDesc0% - SVGA = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% (3dfx Interactive) = Vbemp, PCI\VEN_121A&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_3D3D&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_104C&CC_0300
+%AnaPa.DeviceDesc0% (Acer Labs) = Vbemp, PCI\VEN_10B9&CC_0300
+%AnaPa.DeviceDesc0% (Alliance) = Vbemp, PCI\VEN_1142&CC_0300
+%AnaPa.DeviceDesc0% (AMD) = Vbemp, PCI\VEN_100B&CC_0300
+%AnaPa.DeviceDesc0% (ARK Logic) = Vbemp, PCI\VEN_EDD8&CC_0300
+%AnaPa.DeviceDesc0% (ATI, AMD) = Vbemp, PCI\VEN_1002&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_1005&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_4005&CC_0300
+%AnaPa.DeviceDesc0% (BrookTree) = Vbemp, PCI\VEN_109E&CC_0300
+%AnaPa.DeviceDesc0% (Chips & Tech) = Vbemp, PCI\VEN_102C&CC_0300
+%AnaPa.DeviceDesc0% (Cirrus Logic) = Vbemp, PCI\VEN_1013&CC_0300
+%AnaPa.DeviceDesc0% (Chromatic Research) = Vbemp, PCI\VEN_110B&CC_0300
+%AnaPa.DeviceDesc0% (Compaq) = Vbemp, PCI\VEN_0E11&CC_0300
+%AnaPa.DeviceDesc0% (Cyrix MediaGX) = Vbemp, PCI\VEN_1078&CC_0300
+%AnaPa.DeviceDesc0% (IIT) = Vbemp, PCI\VEN_1061&CC_0300
+%AnaPa.DeviceDesc0% (InteGraphics) = Vbemp, PCI\VEN_10EA&CC_0300
+%AnaPa.DeviceDesc0% (Intel) = Vbemp, PCI\VEN_8086&CC_0300
+%AnaPa.DeviceDesc0% (iXMICRO) = Vbemp, PCI\VEN_10E0&CC_0300
+%AnaPa.DeviceDesc0% (Macronix) = Vbemp, PCI\VEN_10D9&CC_0300
+%AnaPa.DeviceDesc0% (Matrox) = Vbemp, PCI\VEN_102B&CC_0300
+%AnaPa.DeviceDesc0% (NeoMagic) = Vbemp, PCI\VEN_10C8&CC_0300
+%AnaPa.DeviceDesc0% (Number Nine) = Vbemp, PCI\VEN_105D&CC_0300
+%AnaPa.DeviceDesc0% (nVidia) = Vbemp, PCI\VEN_10DE&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_12D2&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_104A&CC_0300
+%AnaPa.DeviceDesc0% (OAK) = Vbemp, PCI\VEN_104E&CC_0300
+%AnaPa.DeviceDesc0% (Paradise/Phillips) = Vbemp, PCI\VEN_101C&CC_0300
+%AnaPa.DeviceDesc0% (Rendition) = Vbemp, PCI\VEN_1163&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_107D&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_5333&CC_0300
+%AnaPa.DeviceDesc0% (Sierra) = Vbemp, PCI\VEN_10A8&CC_0300
+%AnaPa.DeviceDesc0% (Sigma Designs) = Vbemp, PCI\VEN_1236&CC_0300
+%AnaPa.DeviceDesc0% (Silicon Motion) = Vbemp, PCI\VEN_126F&CC_0300
+%AnaPa.DeviceDesc0% (SiS Corp) = Vbemp, PCI\VEN_1039&CC_0300
+%AnaPa.DeviceDesc0% (Trident) = Vbemp, PCI\VEN_1023&CC_0300
+%AnaPa.DeviceDesc0% (Tritech) = Vbemp, PCI\VEN_1292&CC_0300
+%AnaPa.DeviceDesc0% (Tseng Labs) = Vbemp, PCI\VEN_100C&CC_0300
+%AnaPa.DeviceDesc0% (VIA Corp) = Vbemp, PCI\VEN_1106&CC_0300
+%AnaPa.DeviceDesc0% (VMware) = Vbemp, PCI\VEN_15AD&CC_0300
+%AnaPa.DeviceDesc0% (Weitek) = Vbemp, PCI\VEN_100E&CC_0300
+%AnaPa.DeviceDesc0% (WinBond) = Vbemp, PCI\VEN_1050&CC_0300
+
+[AnaPa.Mfg.NTamd64]
+%AnaPa.DeviceDesc0% = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (VGA) = Vbemp, PCI\CC_0300
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (XGA) = Vbemp, PCI\CC_0301
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter = Vbemp, PCI\CC_0380
+%AnaPa.DeviceDesc0% - Standard Graphics Adapter (VGA) = Vbemp, *PNP0900
+%AnaPa.DeviceDesc0% - VGA = Vbemp, *PNP0917
+%AnaPa.DeviceDesc0% - SVGA = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% (3dfx Interactive) = Vbemp, PCI\VEN_121A&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_3D3D&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_104C&CC_0300
+%AnaPa.DeviceDesc0% (Acer Labs) = Vbemp, PCI\VEN_10B9&CC_0300
+%AnaPa.DeviceDesc0% (Alliance) = Vbemp, PCI\VEN_1142&CC_0300
+%AnaPa.DeviceDesc0% (AMD) = Vbemp, PCI\VEN_100B&CC_0300
+%AnaPa.DeviceDesc0% (ARK Logic) = Vbemp, PCI\VEN_EDD8&CC_0300
+%AnaPa.DeviceDesc0% (ATI, AMD) = Vbemp, PCI\VEN_1002&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_1005&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_4005&CC_0300
+%AnaPa.DeviceDesc0% (BrookTree) = Vbemp, PCI\VEN_109E&CC_0300
+%AnaPa.DeviceDesc0% (Chips & Tech) = Vbemp, PCI\VEN_102C&CC_0300
+%AnaPa.DeviceDesc0% (Cirrus Logic) = Vbemp, PCI\VEN_1013&CC_0300
+%AnaPa.DeviceDesc0% (Chromatic Research) = Vbemp, PCI\VEN_110B&CC_0300
+%AnaPa.DeviceDesc0% (Compaq) = Vbemp, PCI\VEN_0E11&CC_0300
+%AnaPa.DeviceDesc0% (Cyrix MediaGX) = Vbemp, PCI\VEN_1078&CC_0300
+%AnaPa.DeviceDesc0% (IIT) = Vbemp, PCI\VEN_1061&CC_0300
+%AnaPa.DeviceDesc0% (InteGraphics) = Vbemp, PCI\VEN_10EA&CC_0300
+%AnaPa.DeviceDesc0% (Intel) = Vbemp, PCI\VEN_8086&CC_0300
+%AnaPa.DeviceDesc0% (iXMICRO) = Vbemp, PCI\VEN_10E0&CC_0300
+%AnaPa.DeviceDesc0% (Macronix) = Vbemp, PCI\VEN_10D9&CC_0300
+%AnaPa.DeviceDesc0% (Matrox) = Vbemp, PCI\VEN_102B&CC_0300
+%AnaPa.DeviceDesc0% (NeoMagic) = Vbemp, PCI\VEN_10C8&CC_0300
+%AnaPa.DeviceDesc0% (Number Nine) = Vbemp, PCI\VEN_105D&CC_0300
+%AnaPa.DeviceDesc0% (nVidia) = Vbemp, PCI\VEN_10DE&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_12D2&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_104A&CC_0300
+%AnaPa.DeviceDesc0% (OAK) = Vbemp, PCI\VEN_104E&CC_0300
+%AnaPa.DeviceDesc0% (Paradise/Phillips) = Vbemp, PCI\VEN_101C&CC_0300
+%AnaPa.DeviceDesc0% (Rendition) = Vbemp, PCI\VEN_1163&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_107D&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_5333&CC_0300
+%AnaPa.DeviceDesc0% (Sierra) = Vbemp, PCI\VEN_10A8&CC_0300
+%AnaPa.DeviceDesc0% (Sigma Designs) = Vbemp, PCI\VEN_1236&CC_0300
+%AnaPa.DeviceDesc0% (Silicon Motion) = Vbemp, PCI\VEN_126F&CC_0300
+%AnaPa.DeviceDesc0% (SiS Corp) = Vbemp, PCI\VEN_1039&CC_0300
+%AnaPa.DeviceDesc0% (Trident) = Vbemp, PCI\VEN_1023&CC_0300
+%AnaPa.DeviceDesc0% (Tritech) = Vbemp, PCI\VEN_1292&CC_0300
+%AnaPa.DeviceDesc0% (Tseng Labs) = Vbemp, PCI\VEN_100C&CC_0300
+%AnaPa.DeviceDesc0% (VIA Corp) = Vbemp, PCI\VEN_1106&CC_0300
+%AnaPa.DeviceDesc0% (VMware) = Vbemp, PCI\VEN_15AD&CC_0300
+%AnaPa.DeviceDesc0% (Weitek) = Vbemp, PCI\VEN_100E&CC_0300
+%AnaPa.DeviceDesc0% (WinBond) = Vbemp, PCI\VEN_1050&CC_0300
+
+[AnaPa.Mfg.NTIA64]
+%AnaPa.DeviceDesc0% = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (VGA) = Vbemp, PCI\CC_0300
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter (XGA) = Vbemp, PCI\CC_0301
+%AnaPa.DeviceDesc0% - Standard PCI Graphics Adapter = Vbemp, PCI\CC_0380
+%AnaPa.DeviceDesc0% - Standard Graphics Adapter (VGA) = Vbemp, *PNP0900
+%AnaPa.DeviceDesc0% - VGA = Vbemp, *PNP0917
+%AnaPa.DeviceDesc0% - SVGA = Vbemp, NOPNP
+%AnaPa.DeviceDesc0% (3dfx Interactive) = Vbemp, PCI\VEN_121A&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_3D3D&CC_0300
+%AnaPa.DeviceDesc0% (3DLabs) = Vbemp, PCI\VEN_104C&CC_0300
+%AnaPa.DeviceDesc0% (Acer Labs) = Vbemp, PCI\VEN_10B9&CC_0300
+%AnaPa.DeviceDesc0% (Alliance) = Vbemp, PCI\VEN_1142&CC_0300
+%AnaPa.DeviceDesc0% (AMD) = Vbemp, PCI\VEN_100B&CC_0300
+%AnaPa.DeviceDesc0% (ARK Logic) = Vbemp, PCI\VEN_EDD8&CC_0300
+%AnaPa.DeviceDesc0% (ATI, AMD) = Vbemp, PCI\VEN_1002&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_1005&CC_0300
+%AnaPa.DeviceDesc0% (Avance Logic) = Vbemp, PCI\VEN_4005&CC_0300
+%AnaPa.DeviceDesc0% (BrookTree) = Vbemp, PCI\VEN_109E&CC_0300
+%AnaPa.DeviceDesc0% (Chips & Tech) = Vbemp, PCI\VEN_102C&CC_0300
+%AnaPa.DeviceDesc0% (Cirrus Logic) = Vbemp, PCI\VEN_1013&CC_0300
+%AnaPa.DeviceDesc0% (Chromatic Research) = Vbemp, PCI\VEN_110B&CC_0300
+%AnaPa.DeviceDesc0% (Compaq) = Vbemp, PCI\VEN_0E11&CC_0300
+%AnaPa.DeviceDesc0% (Cyrix MediaGX) = Vbemp, PCI\VEN_1078&CC_0300
+%AnaPa.DeviceDesc0% (IIT) = Vbemp, PCI\VEN_1061&CC_0300
+%AnaPa.DeviceDesc0% (InteGraphics) = Vbemp, PCI\VEN_10EA&CC_0300
+%AnaPa.DeviceDesc0% (Intel) = Vbemp, PCI\VEN_8086&CC_0300
+%AnaPa.DeviceDesc0% (iXMICRO) = Vbemp, PCI\VEN_10E0&CC_0300
+%AnaPa.DeviceDesc0% (Macronix) = Vbemp, PCI\VEN_10D9&CC_0300
+%AnaPa.DeviceDesc0% (Matrox) = Vbemp, PCI\VEN_102B&CC_0300
+%AnaPa.DeviceDesc0% (NeoMagic) = Vbemp, PCI\VEN_10C8&CC_0300
+%AnaPa.DeviceDesc0% (Number Nine) = Vbemp, PCI\VEN_105D&CC_0300
+%AnaPa.DeviceDesc0% (nVidia) = Vbemp, PCI\VEN_10DE&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_12D2&CC_0300
+%AnaPa.DeviceDesc0% (nvidia) = Vbemp, PCI\VEN_104A&CC_0300
+%AnaPa.DeviceDesc0% (OAK) = Vbemp, PCI\VEN_104E&CC_0300
+%AnaPa.DeviceDesc0% (Paradise/Phillips) = Vbemp, PCI\VEN_101C&CC_0300
+%AnaPa.DeviceDesc0% (Rendition) = Vbemp, PCI\VEN_1163&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_107D&CC_0300
+%AnaPa.DeviceDesc0% (S3 Graphics) = Vbemp, PCI\VEN_5333&CC_0300
+%AnaPa.DeviceDesc0% (Sierra) = Vbemp, PCI\VEN_10A8&CC_0300
+%AnaPa.DeviceDesc0% (Sigma Designs) = Vbemp, PCI\VEN_1236&CC_0300
+%AnaPa.DeviceDesc0% (Silicon Motion) = Vbemp, PCI\VEN_126F&CC_0300
+%AnaPa.DeviceDesc0% (SiS Corp) = Vbemp, PCI\VEN_1039&CC_0300
+%AnaPa.DeviceDesc0% (Trident) = Vbemp, PCI\VEN_1023&CC_0300
+%AnaPa.DeviceDesc0% (Tritech) = Vbemp, PCI\VEN_1292&CC_0300
+%AnaPa.DeviceDesc0% (Tseng Labs) = Vbemp, PCI\VEN_100C&CC_0300
+%AnaPa.DeviceDesc0% (VIA Corp) = Vbemp, PCI\VEN_1106&CC_0300
+%AnaPa.DeviceDesc0% (VMware) = Vbemp, PCI\VEN_15AD&CC_0300
+%AnaPa.DeviceDesc0% (Weitek) = Vbemp, PCI\VEN_100E&CC_0300
+%AnaPa.DeviceDesc0% (WinBond) = Vbemp, PCI\VEN_1050&CC_0300
+
+;
+; General installation section
+;
+
+[Vbemp]
+AddReg=Vbemp.AddReg
+CopyFiles=Vbemp.Miniport, Vbemp.Display
+
+[Vbemp.AddReg]
+
+
+;
+; File sections
+;
+
+[Vbemp.Miniport]
+Vbemp.sys
+
+[Vbemp.Display]
+;framebuf.dll
+
+;
+; Service Installation
+;
+
+[Vbemp.Services]
+AddService = Vbemp, 0x00000002 , Vbemp_Service_Inst, Vbemp_EventLog_Inst
+
+[Vbemp_Service_Inst]
+DisplayName    = %Vbemp.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 1                  ; SERVICE_SYSTEM_START
+ErrorControl   = 0                  ; SERVICE_ERROR_IGNORE
+LoadOrderGroup = Video
+ServiceBinary  = %12%\Vbemp.sys
+
+
+[Vbemp_EventLog_Inst]
+AddReg = Vbemp_EventLog_AddReg
+
+[Vbemp_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\Vbemp.sys"
+HKR,,TypesSupported,0x00010001,7
+
+
+;
+; Software Installation
+;
+
+[Vbemp.SoftwareSettings]
+AddReg = Vbemp_SoftwareDeviceSettings
+
+[Vbemp_SoftwareDeviceSettings]
+HKR,, InstalledDisplayDrivers,     %REG_MULTI_SZ%, framebuf, modex
+HKR,, VgaCompatible,               %REG_DWORD%,    0
+HKR,, Acceleration.Level,          %REG_DWORD%,    5
+HKR,, VBE_DDC,                     %REG_DWORD%,    1
+HKR,, VBE_USWC,                    %REG_DWORD%,    1
+
+
+
+;
+; Source file information
+;
+
+[SourceDisksNames.x86]
+1 = %DiskId1%,,,""
+
+[SourceDisksFiles]
+; Files for disk AnaPa Corp Installation Disk #1 (Display)
+Vbemp.sys = 1,,
+;framebuf.dll = 1
+;modex.dll = 1
+
+
+
+[Strings]
+
+;
+; Non-Localizable Strings
+;
+
+REG_SZ         = 0x00000000
+REG_MULTI_SZ   = 0x00010000
+REG_EXPAND_SZ  = 0x00020000
+REG_BINARY     = 0x00000001
+REG_DWORD      = 0x00010001
+SERVICEROOT    = "System\CurrentControlSet\Services"
+
+;
+; Localizable Strings
+;
+
+AnaPa.DeviceDesc0 = "VBE Miniport"
+DiskId1 = "AnaPa Corp Installation Disk (Display)"
+AnaPa = "AnaPa Corp"
+Vbemp.SvcDesc="VBE Miniport"

@@ -1,0 +1,295 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Updating the Configuration</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Updating the Configuration</font></h1>
+<p>In most cases, to update the configuration, the client application will need to get a session handle from the IANet_NetService class and store this handle in an IWbemContext context object.  Changes to the configuration will only occur when the <b>Apply</b> method on the IANet_NetService is called.  There are some exceptions to this requirement:
+<ul><li>Changes to the boot agent class will occur immediately as they are made and do not require a session handle.</li>
+<li>Certain method calls (e.g. identify adapter) cause an operation to be carried out before <b>Apply</b> is called.</li></ul>
+
+<p>For some operations you can use the PreCheck qualifier in the context to check to see if an operation is allowed.  This is to allow a user interface to disable certain controls or menu items if required.
+
+<h2><font color="#0000FF">Changing the Adapter, ANS Team or VLAN Settings</h2></font>
+<p>Changing the adapter, team or VLAN:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To change an adapter, VLAN or Team setting, the client must first get the object path of the setting that it will change.  This is best done by enumerating the settings on the object and storing the <b>__PATH</b> attribute of the setting (see above).
+
+<p>The easiest way for the client to update a setting is to: 
+<ol><li>Get an instance of the setting object from the WMI.</li>
+<li>Modify the CurrentValue attribute (using <b>IWbemClassObject::Put()</b>).</li>
+<li>Call <b>IWbemServices::PutInstance()</b> to pass the modified instance back to the WMI Provider. <b>PutInstance</b> must be called with the flag WBEM_FLAG_UPDATE_ONLY.</li></ol>
+
+<p>The WMI Provider will validate the CurrentValue and return WBEM_E_FAIL if the validation failed.  The exact reason for the failure will be returned in the Description attribute of the IANet_ExtendedStatus object.	
+
+<p>Setting specific descriptions include:
+<ul><li>The integer setting value was less than the minimum allowed.</li>
+<li>The integer setting value was greater than the maximum allowed.</li>
+<li>The integer setting value is not one of the allowable steps.</li>
+<li>The length of the string setting is bigger than the maximum allowed.</li>
+<li>The setting value is not one of the allowable values.</li></ul>
+
+<p>The last description is returned when the current value for IANet_SettingEnum, IANet_SettingSlider or IANet_SettingMultiSelection is not one of the allowable values.
+
+<p>The only attribute for a setting that the client can change is CurrentValue.  The WMI Provider will ignore changes made to any of the other values.
+
+<p>There are no supported methods on the setting class. To make changes to a setting modify the CurrentValue property, call <b>PutInstance</b>.
+
+	
+<h2><font color="#0000FF">Creating a New (Empty) ANS Team</h2></font>
+Creating a new team:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To create a new team, create an instance of IANet_TeamOfAdapters (i.e., use <b>IWbemServices::GetObject()</b> to get a class object for IANet_TeamOfAdapters and then use <b>IWbemServices::SpawnInstance()</b> to create an instance of this object).
+
+<p>Then, use <b>IWbemClassObject::Put</b> to set the TeamMode attribute in the instance to be the desired team type (e.g., AFT).  Finally, call <b>IWbemServices::PutInstance()</b> to create the team, passing the flag  WBEM_FLAG_CREATE_ONLY.
+
+<p>The object path for the new team is stored in the <b>IWbemCallResultObject</b> that is passed back to you when the call has completed. The method <b>IWbemCallResult::GetResultString</b> will get the new object path.
+
+<p>If this action fails, the client should check the IANet_ExtendedStatus to get the failure reasons.  	
+
+<p>The virtual IANet_EthernetAdapter and IANet_IPProtocolEndpoint classes for the team are not available until after the call to <b>Apply</b>. The settings for the team can be accessed using the IANet_Configuration object associated with the new IANet_TeamOfAdapters.
+
+<h3>Creating a Manageabililty Failover Team</h3>
+<p>To create a Manageability Failover Team, set ManageabilityEnabled 
+setting to true. This feature is supported on a limited number of adapters. A 
+team is created with one IPMI enabled adapter and one or more other adapters 
+that are not IPMI enabled.<h2><font color="#0000FF">Adding an Adapter to an ANS Team</h2></font>
+<p>Adding an adapter to a team:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To add an adapter to a team, create an instance of IANet_TeamedMemberAdapter (i.e., use <b>IWbemServices::GetObject()</b> to get a class object for IANet_TeamedMemberAdapter and then use <b>IWbemServices::SpawnInstance()</b> to create an instance of this object).
+
+<p>The following attributes in the object must be set using IWbemClassObject::Put():
+<ul><li>GroupComponent must be set to be the full object path of the IANet_TeamOfAdapters to which the adapter is to be added.</li>
+<li>PartComponent must be set to be the full object path of the IANet_EthernetAdapter that is to be added to the team.</li></ul>
+
+<p>You can also set the priority for the adapter in the team. Finally, call <b>IWbemServices::PutInstance()</b> to add the adapter to the team, passing the flag WBEM_FLAG_CREATE_ONLY. If this action fails, check IANet_ExtendedStatus for the error code.  	
+
+<p><b>Note</b>: Another way to add an adapter to a team is to use the <b>AddMemberAdapters</b> method. 
+The input parameter is a reference to an array of IANet_EthernetAdapter.<h2><font color="#0000FF">Removing an Adapter from an 
+ANS Team</h2></font>
+<p>Removing an adapter from a team:
+<ul><li>Requires Session Handle.</li>
+<li>PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To remove an adapter from a team, delete the IANet_TeamedMemberAdapter instance that associates the adapter to the team using <b>IWbemServices::DeleteInstance()</b>. If this action fails, check IANet_ExtendedStatus for the error code.  	
+
+<h2><font color="#0000FF">Deleting an ANS Team</h2></font>
+<p>Deleting a team:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To delete a team, delete the IANet_TeamOfAdapters instance using <b>IWbemServices::DeleteInstance()</b>. If this action fails, check IANet_ExtendedStatus to get the error code.  	
+
+<h2><font color="#0000FF">Changing the Mode of an ANS Team</h2></font>
+<p>Changing the mode of a team:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To change the mode of a team, get the instance of  IANet_TeamOfAdapters for the team (e.g., use <b>IWbemServices::GetObject</b> using the object path of the team). Then, use <b>IWbemClassObject::Put</b> to change the TeamMode attribute for the team. Finally, call <b>IWbemClassObject:: PutInstance</b> to tell the
+WMI Provider to update the team mode, passing the flag WBEM_FLAG_UPDATE_ONLY. If this action fails, check IANet_ExtendedStatus to get the error code.  	
+
+<h2><font color="#0000FF">Changing an Adapter's Priority within an ANS Team</h2></font>
+<p>Changing an adapter's priority within a team:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To change the priority of an adapter, the client should first get the instance of IANet_TeamedMemberAdapter for the adapter. (e.g. use <b>IWbemServices::GetObject</b> using the object path). The client can then use <b>IWbemClassObject::Put</b> to change the AdapterFunction attribute for the adapter. Finally the client needs to call <b>IWbemClassObject:: PutInstance</b> to tell the
+WMI Provider to update the adapter's priority. If this action fails, the client should check the IANet_ExtendedStatus for the error code.  	
+
+<h2><font color="#0000FF">Uninstalling an Adapter</h2></font>
+<p>Uninstalling an adapter:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To uninstall an adapter, call <b>IWbemServices::DeleteInstance</b>, passing the object path of the adapter to uninstall.    
+
+<h2><font color="#0000FF">Creating a VLAN</h2></font>
+<p>Creating a VLAN:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To create a VLAN, call the <b>CreateVLAN</b> method on the IANet_802dot1QVLANService for the adapter to which the VLAN is to be added.  The following arguments must be passed to the method:
+<ul><li>VLANNumber, which is the number of the VLAN. (Range 1- 4094)</li>
+<li>Name, which is a user-definable name to identify the VLAN.</li></ul>
+
+<p>The function will return the object path of the newly created VLAN in the Out parameter VLANpath. If this action fails, check IANet_ExtendedStatus for the error code.  	
+
+<h2><font color="#0000FF">Changing the Attributes of a VLAN</h2></font>
+<p>Changing the attributes of a VLAN:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>The client can change the VLANNumber and VLANName attributes for a VLAN. To change the priority of an adapter, first get the instance of  IANet_VLAN  for the adapter (e.g. use <b>IWbemServices::GetObject</b> using the object path).
+
+<p>Then, change VLANNumber or VLANName to the desired values. Finally, call <b>IWbemClassObject:: PutInstance</b> to tell the
+WMI Provider to update the attributes, passing the flag WBEM_FLAG_UPDATE_ONLY. If this action fails, check the IANet_ExtendedStatus for the error code.  	
+
+<h2><font color="#0000FF">Deleting a VLAN</h2></font>
+<p>Deleting a VLAN:
+<ul><li>Requires Session Handle.</li>
+<li> PreCheck is available.</li>
+<li>Requires an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>To delete a VLAN, call <b>IWbemServices::DeleteInstance</b> passing the object path of the VLAN to delete.    
+
+<h2><font color="#0000FF">Updating the Boot Agent </h2></font>
+<p>Updating the boot agent:
+<ul><li>Does not require Session Handle.</li>
+<li> PreCheck is not available.</li>
+<li>Does not require an <b>Apply</b> call before operation is executed.</li></ul>
+
+<p>The client can update the Boot Agent Image by using methods calls. To read/write flash image, first get the instance of IANet_BootAgent for the adapter (e.g., use <b>IWbemServices::GetObject</b> using the object path).
+
+<p>Then, execute ReadFlash() to read the existing flash boot ROM image or ProgramFlash() to update the flash boot ROM image. If this action fails, check the IANet_ExtendedStatus for the error code.  
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=213 valign=top style='width:159.95pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WMI methods</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p style='tab-stops:39.75pt'><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt;'>Update
+  or Insert a boot ROM image for the adapter</span>
+  </td>
+  <td width=213 valign=top style='width:250.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><b>uint32
+  ProgramFlash(</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[IN,</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>           </span>ValueMap
+  {&quot;0&quot;,&quot;1&quot;} , </span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>           </span>Values {&quot;Check Version&quot;,
+  &quot;Write Flash&quot;}: Amended</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>]</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>uint32 Action,</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[IN]</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>uint8
+  NewFlashData[],<span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[OUT] </span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>string
+  strErrorMessage</span>
+  <br><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>);</span></b>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>If “Check Version”
+  action is specified, this method will return with a warning message, if boot
+  ROM image being updated as in NewFlashData[] is older than one already
+  present on NIC.</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'></span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>If “Write” action
+  is specified, this updates the FLASH ROM on the NIC with NewFlashData[]. </span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>This method is used
+  to update the Flash ROM on the NIC.<span style='mso-spacerun:yes'> 
+  </span>This will cause the NIC to stop communicating with the network while
+  the flash is updated.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;
+  mso-bidi-font-size:10.0pt;'>Read boot ROM image</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><b>uint32 ReadFlash(
+  [OUT] uint8 FlashData[] );</span></b>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>FlashData[]
+  contains the Flash ROM image on the NIC. </span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>This method reads
+  the Flash ROM on the NIC which can be saved into a file.</span>
+  </td>
+ </tr>
+</table>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

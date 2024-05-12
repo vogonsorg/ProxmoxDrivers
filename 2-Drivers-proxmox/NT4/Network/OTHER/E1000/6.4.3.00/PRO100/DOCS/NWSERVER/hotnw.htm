@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>PCI Hot Plug Support for NetWare*</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1>
+PCI Hot Plug Support for NetWare*</h1>
+<P CLASS="Body-Text">
+ Intel network adapters are enabled for use in selected servers equipped with
+PCI Hot Plug support and running NetWare* 5.x and 6.x*</P>
+<table cellSpacing="0" cellPadding="6" border="0">
+  <tr>
+    <td vAlign="top" width="28"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td vAlign="top"><em><strong>NOTES</strong>: </em>
+      If you replace an adapter in a Hot Plug slot, do not place the removed adapter back into 
+      the same network until the server has rebooted. The two adapters may have the same
+      virtual 
+      MAC address and create a conflict.<p>PCI
+      Hot Plug only works between identical Intel network adapters.</p>
+    <p>Hot swapping is supported. In other words, you can remove an adapter and 
+    replace it with another adapter of the same type in the same slot.</td>
+  </tr>
+  </table>
+<P CLASS="Body-Text">
+For more information on setting up and using Hot Plug support in your server, see your server's documentation.</P>
+
+<h2>Using Hot Plug</h2>
+<p>Make sure you have the latest NetWare support pack installed before using Hot Plug.
+If your server
+uses any teaming features (with ANS), the driver will be loaded persistently.
+If teaming options are not used, the driver will unload when the slot power is
+off and reload when the slot is powered again. The keyword, PERSIST, can be used
+to control this behavior as follows:</p>
+<p>&nbsp;&nbsp;&nbsp; 0 = Never persist<br>
+&nbsp;&nbsp;&nbsp; 1 = Always persist<br>
+&nbsp;&nbsp;&nbsp; 2 = Auto persist (default). Base driver remains loaded only
+if ANS loaded.</p>
+<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top" width="28"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></font></td>
+      <td vAlign="top"><font face="Arial" size="2"><em><strong>NOTE</strong>: </em>If
+        you are not using teaming (ANS) or VLANs, use option 1 – always
+        persist.</font></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/26/04 9:07a <!-- $--> Revision <!--$$Revision:--> 6 <!-- $--></code></p>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Configuration Setup</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+<h1>
+Configuration Setup</h1>
+
+<P>
+The Intel&#174 Boot Agent software provides configuration options that allow you to customize 
+the behavior of the Boot Agent software. You can configure the Boot Agent in any of the 
+following environments:
+</P>
+
+<ul>
+  <LI CLASS="Bulleted"><p class="numlst"><a href="#pxe_rpl">A pre-boot environment</a> (before operating system is loaded)</LI>
+  <LI CLASS="Bulleted"><p class="numlst"><a href="#windows">A Windows* environment</a></LI>
+  <LI CLASS="Bulleted"><p class="numlst"><a href="#dos">A DOS environment</a></LI>
+</ul>
+
+<p>
+The Boot Agent supports PXE and RPL in pre-boot, Windows*, and DOS environments.&nbsp;In
+each of these environments, a single user interface allows you to configure PXE and RPL
+protocols on
+both Fast Ethernet and Gigabit adapters.
+</p>
+
+<hr>
+
+<h2><a name="pxe_rpl"></a>Configuring the Boot Agent in a Pre-Boot PXE or RPL Environment</h2>
+<P>
+You can customize the behavior of the Boot Agent software through a pre-boot 
+(operating system independent) configuration
+setup program contained within the adapter's flash ROM. You can access this 
+pre-boot configuration setup program each time the client computer cycles through 
+the boot process. The boot process is triggered
+whenever any of the following boot events occur:
+</P>
+
+<ul>
+  <LI CLASS="Bulleted"><p class="numlst">Power on</LI>
+  <LI CLASS="Bulleted"><p class="numlst">Hard reset (Reset button on system, if available)</LI>
+  <LI CLASS="Bulleted"><p class="numlst">Soft reset (<b>Ctrl+Alt+Del</b>)</LI>
+  <LI CLASS="Bulleted"><p class="numlst">Operating system or application-initiated system restart</LI>
+</ul>
+
+<P>
+When the boot process begins, the screen clears and the computer begins its Power 
+On Self Test (POST) sequence. Shortly after completion of the POST, the Boot Agent 
+software stored in flash ROM executes. The Boot Agent then displays an initialization 
+message, similar to the one below, indicating that it is active:
+</P>
+
+<blockquote>
+  <pre>Initializing Intel(R) Boot Agent Version X.X.XX
+PXE 2.0 Build 083 (WfM 2.0)</pre>
+  <pre>Press Ctrl+S to enter the Setup Menu.(<b>Ctrl+S</b> is not available on many LOM systems, including Dell. Use IBACfg instead.)</pre>
+</blockquote>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>   
+	This display may be hidden by the manufacturer's splash screen. Consult 
+	your manufacturer's documentation for details.
+    </TD>
+  </tr>
+</TABLE>
+
+<P>
+To customize the behavior of the Boot Agent software in a pre-boot, <a href="glossary.htm#PXE"> PXE</a> or
+<a href="glossary.htm#RPL ">RPL</a>
+environment:
+</P>
+
+<ol>
+  <LI CLASS="Proc-Step1"><p class="numlst">Press <b>Ctrl+S</b>  <i> immediately</i> after 
+  the initialization message appears. (<b>Ctrl+S</b> is not available on many
+    LOM systems, including Dell. Use IBACfg instead.) A configuration setup menu appears allowing you 
+  to set configuration values for the Boot Agent. The configuration setup menu is the 
+  same for both kinds of adapters and looks similar to the screen image below.</LI>
+</ol>
+
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>     
+	Immediately after the initialization message appears, and before any subsequent messages appear, 
+	you have several seconds in which to press
+      <b>Ctrl+S </b> to display the Boot Agent's configuration setup menu. If you do not press
+      <b>Ctrl+S</b>, the Boot Agent software will proceed with the boot process, eventually bringing 
+      up the operating system. If you miss your opportunity to press
+      <b>Ctrl+S</b> within the allowed number of seconds, reboot the computer to try again.&nbsp;
+      If you select a <b> Setup Menu Wait Time</b> setting of zero and/or a <b> Show Setup Prompt</b> 
+      setting of <b>Disabled</b>, you will
+      <i> not</i> be prompted to press <b>Ctrl+S</b>, even though you can still enter the configuration 
+      setup menu using this key combination. (<b>Ctrl+S</b> is not available on
+      many LOM systems, including Dell. Use IBACfg instead.)
+    </TD>
+  </tr>
+</TABLE>
+
+<blockquote>
+<P align="center">
+<img border="0" src="cnfsetup.gif" width="435" height="300">
+</P>
+<P>
+The configuration setup menu shows a list of configuration settings on the left and their 
+corresponding values on the right. Key descriptions near the bottom of the menu indicate how to change
+values for the configuration settings. For each selected setting, a brief &quot;mini-Help&quot; 
+description of its function appears just above the key descriptions.
+</P>
+</blockquote>
+
+<ol start="2">
+  <li><p CLASS="numlst">Highlight the setting you need to change by using the arrow keys.</li>
+  <li><p CLASS="numlst">Once you have accessed the setting you want to change, press the 
+  	spacebar until the desired value appears.</li>
+  <li><p CLASS="numlst">If you want to change additional settings, repeat steps 2 and 3.</li>
+  <li><p CLASS="numlst">Once you have completed your changes, press <b>F4</b> to update 
+  	the adapter with the new values. Any changed configuration values are applied as the
+	boot process resumes.&nbsp;</li>
+</ol>
+
+<P>
+The table below provides a list of configuration settings, their possible values, 
+and their detailed descriptions:
+</P>
+
+<h3 align="center"><a name="settings"></a>Boot Agent Configuration Settings</h3>
+<TABLE BORDER="1" cellpadding="4" cellspacing="0">
+  <TR>
+	<TH ROWSPAN="1" COLSPAN="1">
+		<h4 style="margin-top: 5; margin-bottom: 5">Configuration Setting</h4></TH>
+	<TH ROWSPAN="1" COLSPAN="1">
+		<h4 style="margin-top: 5; margin-bottom: 5">Possible Values</h4></TH>
+	<TH width="60%">
+		<h4 style="margin-top: 5; margin-bottom: 5">Description</h4></TH>
+  </TR>
+  <TR>
+	<TD COLSPAN="1">
+		<P CLASS="CellBody">Network Boot Protocol</P></TD>
+	<TD COLSPAN="1"><P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		PXE (Preboot eXecution Environment)</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		RPL (Remote Program Load)</P>
+		</TD>
+	<TD width="60%">
+		<p style="margin-top: 6; margin-bottom: 6">
+		Controls whether the RPL or PXE boot protocol will be used.
+		<p style="margin-top: 6; margin-bottom: 6">
+		Select <a href="glossary.htm#PXE"> PXE</a> for use with <a href="glossary.htm#WfM ">
+		WfM</a>-compatible network management programs, such as LANDesk* Management 
+		Suite, Windows* 2000 RIS, and Linux*.
+		<p>Select <a href="glossary.htm#RPL ">RPL</a> for legacy-style remote
+		booting, as well as for Novell* Netware* remote boot solutions.</p>
+		<p>
+		<B><I>NOTE</I>:</B> Depending on the configuration of the Boot Agent, this parameter may not be changeable.</p>
+		</TD>
+  </TR>
+  <TR>
+	<TD COLSPAN="1">
+		<P CLASS="CellBody">Boot Order</P>
+		</TD>
+	<TD COLSPAN="1">
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Use BIOS Setup Boot Order</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Try network first, then local drives</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">Try local drives first, then network</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Try network only</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Try local drives only</P>
+		</TD>
+	<TD width="60%">
+		<P CLASS="CellBody" style="margin-left: 0; margin-top: 6; margin-bottom: 6">
+		Sets the boot order in which devices are selected during boot up if the computer
+		does not have its own control method.&nbsp;</P>
+		<P CLASS="CellBody" style="margin-left: 0; margin-top: 6; margin-bottom: 6">
+ 		If your client computer's <a href="glossary.htm#BIOS"> BIOS</a> supports the BIOS Boot Specification (BBS), or allows
+ 		<a href="glossary.htm#PnP">PnP</a>-compliant selection of the boot order in the BIOS setup program, then this setting will always be
+		<b>Use BIOS Setup Boot Order </b> and cannot be changed. In this case, refer to the BIOS setup manual specific to your
+		client computer to set up boot options.</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		If your client computer does not have a BBS- or PnP-compliant BIOS, you can select any one of the
+		other possible values listed for this setting except for <b>Use BIOS Setup Boot Order</b>.</P>
+		</TD>
+  </TR>
+  <TR>
+	<TD ROWSPAN="1" COLSPAN="1">
+		<P CLASS="CellBody">Show Setup Prompt</P>
+		</TD>
+	<TD ROWSPAN="1" COLSPAN="1">
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Enabled</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Disabled</P>
+		</TD>
+	<TD width="60%">
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Controls whether or not the Boot Agent displays the Ctrl-S prompt after <a href="glossary.htm#POST">POST</a>.&nbsp;</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		If you select <b>Enabled</b>, the <b>Ctrl+S</b> prompt appears after POST so that you
+		can press <b>Ctrl+S</b> within the number of seconds allowed by the <b>Setup Menu Wait
+		Time</b> setting to display the configuration setup menu.</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		If you select <b>Disabled</b> and/or the Setup Menu Wait Time setting is
+		zero, the <b>Ctrl+S</b> setup prompt will not appear during the boot process. However, you can
+		display the configuration setup menu by repeatedly pressing <b>Ctrl+S</b> <i>immediately</i>
+		after POST until the menu appears. If the configuration setup menu does not appear after
+		repeated pressings of <b>Ctrl+S</b>, you were likely not fast enough. In this case,
+		reboot and try again. (<b>Ctrl+S</b> is not available on many LOM
+        systems, including Dell. Use IBACfg instead.)</P>
+		</TD>
+  </TR>
+  <TR>
+	<TD ROWSPAN="1" COLSPAN="1">
+		<P CLASS="CellBody">Setup Menu Wait Time</P>
+		</TD>
+	<TD ROWSPAN="1" COLSPAN="1">
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		0 seconds</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		2 seconds</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		3 seconds</P>
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		5 seconds</P>
+		</TD>
+	<TD width="60%">
+		<P CLASS="CellBody" style="margin-top: 6; margin-bottom: 6">
+		Controls the number of seconds the Boot Agent waits for you to press <b>Ctrl+S</b>, so
+		as to suspend the boot process and then configure the way the Boot Agent
+		operates. If you select a <b>Setup
+		Menu Wait Time</b> setting of zero and/or a <b> Show Setup Prompt </b>setting of <b>Disabled</b>,
+		the <b>Ctrl+S</b> setup prompt will not appear during the boot process. However, you
+		can still display the configuration setup menu by repeatedly pressing <b>Ctrl+S</b>
+		<i>immediately</i>
+		after <a href="glossary.htm#POST">POST</a>
+		until the menu appears. If the configuration setup menu does not appear after
+		repeated pressings of <b>Ctrl+S</b>, you were likely not fast enough. In this case,
+		reboot and try again. (<b>Ctrl+S</b> is not available on many LOM
+        systems, including Dell. Use IBACfg instead.)</P>
+		</TD>
+  </TR>
+</TABLE>
+
+<p style="margin-top: 0; margin-bottom: 0">
+&nbsp;</p>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>     
+      If, during PXE or RPL boot, more than one adapter is installed in a computer and you 
+      want to boot from the boot ROM located on a specific adapter, you can do so by removing 
+      the adapter from the BIOS Boot Order or disabling the flash by running <code>IBAUTIL
+      -FlashDisable</code> on the desired adapter.
+    </TD>
+  </tr>
+</TABLE>
+
+<p>
+Anytime the configuration setup menu is displayed, you may press the <b>D</b> 
+key to display <i>diagnostics</i> information in the lower
+half of the screen. This information can be helpful during interaction with
+<a target="_blank" href="http://support.intel.com">Intel Customer Support</a> 
+personnel or your IT team members. Once you press the <b>D</b> key, the
+information displayed remains until you leave the configuration setup screen
+(either by pressing <b>F4</b>, pressing the <b>Esc</b> key, or by rebooting the 
+computer). For more information about how to interpret
+the information displayed, refer to <a href="trouble.htm#diag_pxe_rpl">Diagnostics
+Information for Pre-boot PXE or RPL Environments</a>.
+</p>
+
+<hr>
+
+<h2>
+<a name="windows"></a>Configuring the Boot Agent in a Windows* Environment</h2>
+<P>
+If you use Windows on your client computer, you can use the Intel&#174 PROSet 
+program to configure and update the Boot Agent software. The
+Intel PROSet
+program is available under the standard Windows Control Panel facility. The
+Intel PROSet program provides a special tab, called the <i> Boot Agent tab</i>, 
+used for configuring and updating the Boot Agent software.
+</P>
+<P>
+To access the Intel PROSet Boot Agent tab:
+</P>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>   Changing the Boot Agent configuration 
+    settings requires Intel PROSet Version 4.0 or higher, and involves changes to the
+      Windows network device driver. Updating configuration settings will temporarily 
+      disable the operation of the Windows network device driver. Depending on what 
+      software is installed on your system, you may need to reboot the computer following 
+      this operation. To use Intel PROSet, you must use Intel Driver Release 4.0 or later.
+    </TD>
+  </tr>
+</TABLE>
+
+<ol>
+  <li>
+    <p CLASS="numlst">
+    Open Intel PROSet by double-clicking the icon on the lower-right corner of
+    the desktop.
+  </li>
+  <li>
+    <p CLASS="numlst">
+	Select the appropriate adapter and click the <b> Boot Agent</b> tab.
+	The Boot Agent tab appears. If the tab does not appear, update your network driver or 
+	make sure you have Intel PROSet Version 4.0 or higher.</li>
+	<p>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" height="82"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top" height="82">
+      <B><I>NOTES</I>:</B>   Intel PROSet allows you to change configuration settings for PXE and
+      RPL environments. Therefore, if you select an adapter
+      that operates in PXE or
+      RPL environments from the devices listed under Network Components on the left side of
+      the Intel PROSet screen below, you may view or change configuration 
+      settings that appear on the right side of the screen. Not all
+      configuration settings are available for some flash ROMs.<p>
+      <span style="font-size: 10.0pt; font-family: Arial">You can also use Intel 
+      PROSet to update the boot ROM for any selected device that displays the 
+      Boot Agent tab in PROSet. To do so, press the <b>Update Boot Agent</b> 
+      button on the right side of the screen.</span></TD>
+  </tr>
+</TABLE>
+	<p align="center" style="margin-top: 12">
+	<img border="0" src="proset.gif" width="484" height="318">
+	</p>
+  <li>
+    <p CLASS="numlst">The Boot Agent tab shows a list of current configuration
+	parameters and their corresponding values. To change configuration parameters,
+	double-click the configuration setting and press <b>Ctrl+S</b>. Corresponding
+	configuration values appear for the selected setting in a drop-down box. A brief
+	description of the setting’s function appears in the Description box below
+	it. See <a href="#settings">Boot Agent Configuration Settings</a> for a list of 
+	configuration parameters, their possible values, and detailed descriptions.</p></li>
+  <li>
+    <p CLASS="numlst">
+	Select a setting you want to change from the <b> Setting</b> selection box.</p></li>
+  <li>
+    <p CLASS="numlst">
+	Select a value for that setting from the <b> Value</b> drop-down list.
+  	</p></li>
+  <li>
+    <p CLASS="numlst">
+    Repeat the preceding two steps to change any additional settings.
+    </p>
+  </li>
+  <li>
+    <p CLASS="numlst">
+	Once you have completed your changes, click <b> Apply Settings</b> to immediately update 
+	the adapter with the new values.
+	</p>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>  Exiting Intel PROSet by clicking the
+      <b> OK</b> button also updates the adapter with the new values.
+    </TD>
+  </tr>
+</TABLE>
+    <p class="numlst">If the Windows network device driver is active (loaded and
+    enabled) and you click <b>Update Boot Agent</b>, a dialog box appears.</p>
+  	<p class="numlst">
+	If the Windows network device driver is inactive (disabled or not loaded), a 
+    dialog box appears.</p>
+  </li>
+  <li>
+    <p CLASS="numlst">
+	In either case, click <b> Yes</b> to continue with the configuration update process. Clicking
+	<b> Yes</b> updates the adapter with the new settings. If the network driver is loaded on the 
+	adapter, be sure to reboot the system after the update operation completes.</p></li>
+</ol>
+
+<hr>
+
+<h2>
+<a name="dos"></a>Configuring the Boot Agent in a DOS Environment</h2>
+<P>
+You can use the IBACFG.EXE program to configure the Boot Agent software in a DOS environment.
+This executable provides a more user-friendly method for configuring Boot Agent
+images than does IBAUtil. IBACfg controls the same settings as those offered on
+the configuration setup menu when you press <b>Ctrl+S</b> after <a href="glossary.htm#POST">POST</a>
+for PXE implementations.</P>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTES</I>:</B>   IBACFG.EXE does not work with
+      EMM386.EXE.
+    </TD>
+  </tr>
+  <tr>
+    <TD valign="top" width="28"></TD>
+    <TD valign="top">Himem.sys must be loaded in your boot disk's config.sys in order for
+      the Boot Agent utilities to work properly.
+    </TD>
+  </tr>
+</TABLE>
+<P style="margin-top: 0; margin-bottom: 0">
+&nbsp;</P>
+<table border="0" cellpadding="4">
+  <tr>
+    <td valign="top"><img border="0" src="caution.gif" width="28" height="21"></td>
+    <td valign="top"><b><i>CAUTION</i>:</b> If you attempt to configure the Boot
+      Agent in a DOS environment where the boot source is a <a href="glossary.htm#LOM">LOM</a>
+      or a <a href="glossary.htm#NIC">NIC</a> without <a href="glossary.htm#Flash">flash</a>
+      <a href="glossary.htm#ROM">ROM</a>, you will receive a warning message. This message indicates that
+      any configuration settings you've changed may not take effect if you do not have
+      the Boot Agent image built into the system BIOS.</td>
+  </tr>
+</table>
+<P>
+To configure the Boot Agent in a DOS environment:</P>
+<ol>
+<LI CLASS="Proc-Step1">
+<p class="numlst">
+Boot your computer to a DOS prompt. IBACfg must be run with the computer booted
+to DOS only. This utility cannot be run in a DOS window in any Microsoft
+Windows* product or in DOS compatibility mode in IBM OS/2*.</LI>
+  <li>
+    <p CLASS="numlst">
+	Insert a CD-ROM or floppy diskette containing the IBACfg utility.</li>
+  <li>
+    <p CLASS="numlst">
+	Make the directory containing IBACFG.EXE the current directory.</li>
+  <li>
+    <p CLASS="numlst">Enter the following command to invoke the IBACfg utility:</p>
+    <blockquote>
+    	<code>IBACfg</code>
+	</blockquote>
+	<p class="numlst">
+	A list of NICs will be displayed as in the following screen:
+	</p>
+	<p align="center" style="margin-top: 0">
+	<img border="0" src="baconf01.gif" width="500" height="299">
+	</p></li>
+  <li>
+    <p CLASS="numlst">
+		Use the up/down arrow keys to highlight the NIC to be configured and 
+		press <b>Enter</b> to continue.
+    </p>
+  	<p class="numlst">
+	The Configuration Setup Menu is displayed. This menu shows a list of configuration settings on the 
+	left and their corresponding values on the right. Key descriptions near the bottom of the menu indicate 
+	how to change setting values. For each selected setting, a brief &quot;mini-Help&quot; description of 
+	its function also appears near the bottom of the menu.
+	</p>
+	<p align="center" style="margin-top: 0"><img border="0" src="baconf05.gif" width="500" height="301">
+	</p></li>
+  <li>
+    <p CLASS="numlst">
+	Select the setting you want to change by pressing the up/down arrow keys to highlight the setting. Press
+	<b>Enter</b> to display a list of possible values for the setting.
+	</p>
+	<p align="center" style="margin-top: 0"><img border="0" src="baconf03.gif" width="220" height="81"></p>
+	</li>
+  <li>
+    <p CLASS="numlst">
+    Highlight the value you want by pressing the up/down arrow keys. Press
+	<b>Enter</b> to select the value.</li>
+  <li>
+    <p CLASS="numlst">
+    If you want to change additional settings, repeat the preceding two steps.</p></li>
+  <li>
+    <p CLASS="numlst">
+	Once you have completed your changes, select the <b>Save and Exit</b> option from the 
+	menu and press <b>Enter</b>.  A save dialog box is displayed if changes have been made.
+	</li>
+</ol>
+<p>
+See <a href="#settings">Boot Agent Configuration Settings</a> for a list of configuration settings, 
+their possible values, and a description of the effects of each value.
+</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 2/10/04 12:06p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

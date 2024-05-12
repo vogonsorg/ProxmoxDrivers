@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Remote Wake-Up</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Remote Wake-Up and Wake-On-LAN (WOL)</h1>
+<h2><b>Microsoft* Windows Products
+</b></h2>
+<p>Microsoft* Windows NT* and Windows
+95 are not ACPI-capable. Some settings are not available in these operating
+systems.&nbsp;</p>
+<p>Microsoft Windows 98, Windows Me,
+Windows 2000, Windows XP*, and Windows Server 2003 for 32-bit systems are ACPI-capable. These operating systems do not
+support wake from S5 state, only from standby. When shutting down the system,
+they shutdown ACPI devices including the Intel PRO adapters. This
+disarms the adapters remote wake up capability. However, in some ACPI-capable
+computers, the BIOS may have a setting that allows you to override the OS and
+wake from an S5 state anyway. If there is no support for wake from S5 state in
+your BIOS settings, you are limited to Wake From Standby when using
+these operating systems in ACPI computers.</p>
+<p>The advanced  tab in the Intel<sup>&#174</sup> PROSet
+software includes a setting called Enable PME for
+some adapters. To explicitly allow wake up
+with a Magic Packet from shutdown under APM power management mode, set this to
+Enable. See Intel PROSet online help for more details.</p>
+<p>In
+ACPI-capable versions of Windows, the Intel PROSet advanced settings also include
+a setting called Wake on Settings. This controls the type of packets that
+wake up the system from standby. See Intel PROSet online help for a complete
+explanation.</p>
+<p>In
+ACPI computers running ACPI-aware operating systems such as Windows 2000, make
+sure the wake on standby option is enabled. To enable wake on standby, open the
+Device Manager and then navigate to the adapter properties tab Power Management.
+Check the setting “Allow this device to bring the computer out of standby”.</p>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><b><i>NOTE</i></b>:&nbsp; The Legacy OS Wakeup Support feature
+      is not available in early versions of the Intel<sup>&#174</sup> Boot Agent. To update your Boot Agent to the latest version, download 100PBOOT.EXE from 
+    the <a href="support.htm">support website</a> and follow the included instructions.</td>
+  </tr>
+</table>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 3/03/04 2:58p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

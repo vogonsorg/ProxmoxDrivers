@@ -1,0 +1,162 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Windows 2000 Update</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<h1>Unattended Update Information for Windows* 98 and Me</h1>
+<hr>
+<h2>A note about Operating System support for the Intel(R) PRO/1000 T <br>
+Desktop Adapter</h2>
+<p>The drivers for the Intel(R) PRO/1000 T Desktop Adapter are only supported 
+for Windows 98 Second Edition and Windows Millennium edition. The original 
+Windows 98 does not support the NDIS 5 driver specification to which the driver 
+was written.</p>
+<h2>A note about computer names in Microsoft networks</h2>
+<p>There cannot be more than one computer with a particular name on the network 
+at any time, even during installation. Consequently to deploy Windows 9x on 
+multiple computers, you must manually change the value of the computer name.<br>
+<br>
+Different configuration managers exist to overcome this hurdle in enterprise OS 
+deployments. For more information on deploying Windows 98/ME in an enterprise 
+network, consult the Windows 98 resource kit.</p>
+<h2>Setting up an install directory on the file server</h2>
+<p>Note: The network share Z:\PUSH is used here as an example path to the 
+distribution folder. The distribution folder is where the setup files (Setup.exe 
+and .CAB files) for Windows 9x reside. During the first step of the install, the 
+client will connect to the distribution folder with IPX or TCP/IP.<br>
+<br>
+Before an unattended server based setup of Windows 9x can occur, a directory 
+needs to be prepared.<br>
+<br>
+1. Copy the Win9x setup folder from the Windows CD to Z:\PUSH. Use Explorer, 
+Winfile or XCOPY in order to maintain the same <br>
+directory structure as on the CD.<br>
+<br>
+2. Use the pushcopy.bat batch file located in the \APPS\SETUP\PUSH directory on 
+the Product CD to copy the necessary files to Z:\PUSH.<br>
+<br>
+Note: PUSHCOPY.BAT must be run from the \APPS\SETUP\PUSH directory on the 
+product CD or 
+from the download directory. The command to copy the Windows 98/ME files to the Z:\PUSH directory 
+is:<br>
+<br>
+PUSHCOPY Z:\PUSH W9X<br>
+<br>
+Note: By default pushcopy.bat copies all of the files required to install the 
+driver and PROSet II and PROSet II will be installed during the push 
+installation. Comment out the following line in the [RunOnce.BatchDelay] section 
+if you do not to install PROSet II.<br>
+<br>
+HKEY_CURRENT_USER,%KEY_RUNONCE%,BatchRun0,,&quot;c:\progra~1\Intel\proset.exe MsiPath=c:\Progra~1\Intel 
+/qn&quot;<br>
+<br>
+3. Review the copy of MSBATCH.INF within the Z:\PUSH directory. Make any changes 
+needed to customize the install. At a minimum you should change the ProductKey= 
+entry in the [Setup] section, the Name= and Org= entries in the [NameAndOrg] 
+section, and&nbsp; the ComputerName= entry in the [Network] section.<br>
+<br>
+Note: Be sure to read the comments in the [RunOnce.BatchDelay]<br>
+section and uncomment the appropriate batch commands for your<br>
+installation.</p>
+<h2>Deployment Methods</h2>
+<p>There are many ways to perform an unattended installation or upgrade 
+including but not limited to:<br>
+<br>
+- Setting up a login script that executes a setup statement when each user logs 
+in<br>
+<br>
+- Inserting an object in an email message that runs setup when the&nbsp; user 
+clicks it<br>
+<br>
+- Using Microsoft SMS server to run Windows 9x Setup<br>
+<br>
+- Inserting a floppy that shares a drive on the network and runs setup from the 
+shared drive<br>
+<br>
+- Copying the files to a local drive and then running an unattended setup from 
+there<br>
+<br>
+- Use the Boot Strap Agent and an installed PXE Server. See the Boot Agent Users 
+Guide for deployment suggestions and strategies for each OS.<br>
+<br>
+Each Network Administrator should determine the easiest way to accomplish 
+this goal for his or her own network.<br>
+<br>
+To avoid possible areas where an unattended installation might be halted we 
+recommend you use one of the following setup command lines for Windows 98 or 
+Windows Millennium respectively:<br>
+<br>
+Note: Do not include the argument &quot;/ID&quot; if there is any doubt that there is 
+sufficient free hard disk space.<br>
+<br>
+Windows 98:<br>
+SETUP /IS /ID /IM /IE /IW<br>
+- &quot;/IV&quot; turns off billboards and speeds up the setup.<br>
+- &quot;/ID&quot; turns off free diskspace check<br>
+<br>
+Windows Millennium:<br>
+SETUP /IS /ID /IM /IE /IW /IV</p>
+<h2>Where to get help</h2>
+<p>The Windows Resource kits contains detailed information on unattended setups&nbsp; 
+and deploying Windows 98 in an enterprise environment.<br>
+<br>
+Microsoft's support web site is also a good source:<br>
+<a href="http://search.support.microsoft.com/">
+http://search.support.microsoft.com/</a></p>
+<h2>Files needed for the unattended installation of drivers and PROSet II</h2>
+<p>The following files are copied into the Z:\PUSH directory by the PUSHCOPY.BAT 
+copy utility. The directory structure must be maintained to achieve a successful 
+installation.<br>
+<br>
+Z:\PUSH<br>
+<br>
+(From the PRO100\WIN98_ME directory of the Product CD or download directory)<br>
+<br>
+8255INDI.DLL<br>
+8255XDEL.EXE<br>
+E100B9x.INF<br>
+E100b9x.DIN<br>
+E100b9xa.INF<br>
+E100BNT5.SYS<br>
+E100BNT.SYS<br>
+E100B9x.CAT<br>
+WOL558.VXD<br>
+E100B9xa.CAT<br>
+<br>
+(From the PRO1000\WIN98_ME directory of the Product CD or the download directory)<br>
+<br>
+E1000w9x.CAT<br>
+E1000W9x.INF<br>
+E1000W9x.DIN<br>
+E1000W9X.SYS<br>
+<br>
+(From the APPS\SETUP\PUSH\Win9x directory on the Product CD or download 
+directory)<br>
+<br>
+MSBATCH.INF<br>
+CUSTOM.INF<br>
+<br>
+(From the PRO100\DOS directory on the Product CD or download directory)<br>
+<br>
+E100BODI.COM<br>
+<br>
+(From the APPS\TOOLS directory on the Product CD or download directory)<br>
+<br>
+DIAG100.EXE<br>
+DIAG1000.EXE<br>
+<br>
+(From the APPS\PROSET\WN98SEME directory on the Product CD or download directory)<br>
+<br>
+PROSET.EXE<br>
+PROSET.MSI<br>
+INSTMSIA.EXE</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/20/04 12:22p <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

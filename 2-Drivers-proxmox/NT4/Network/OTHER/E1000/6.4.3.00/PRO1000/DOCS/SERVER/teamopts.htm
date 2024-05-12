@@ -1,0 +1,459 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Teaming</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>ANS Teaming</h1>
+
+<p>ANS Teaming, a feature of the Advanced Network Services (ANS) component, lets you  take advantage of multiple adapters in 
+a system by grouping
+them together. ANS teaming can use features like fault tolerance and load 
+balancing to ensure that traffic passes between the system and the network, even 
+if an adapter should fail.</p>
+
+<h2>Setting Up Adapter Teaming</h2>
+
+<p>Before you can set up ANS teaming in Windows*, you must install Intel<sup>&reg;</sup>
+PROSet software.</p>
+
+<p>For more information on setting up adapter teams and Intel PROSet software,
+see the links in the contents frame on the left.</p>
+
+<h2>ANS Teaming Modes</h2>
+
+<p>Some adapters do not support all of the teaming modes listed below.</p>
+
+<ul>
+    <li>
+      <p class="numlst"><a href="#AFT Overview">Adapter Fault Tolerance (AFT)</a>
+      - provides automatic redundancy for a server's network connection. If the primary adapter
+      fails, the secondary adapter takes over. Adapter Fault Tolerance supports
+      two to eight adapters per team. This teaming mode works with any hub or
+      switch, and all team members must be connected to the same device.</li>
+    <li>
+      <p class="numlst"><a href="#SFT Overview">Switch
+      Fault Tolerance (SFT)</a>  - provides a failover relationship between two
+      adapters when each adapter is connected to a separate switch. Switch Fault
+      Tolerance supports two adapters per team. Spanning Tree Protocol (STP)
+      must be enabled when you create a team in SFT mode. This
+      teaming mode works with any switch.</li>
+    <li>
+      <p class="numlst"><a href="#ALB Overview">Adaptive Load Balancing (ALB)</a>
+      - provides load balancing of transmit traffic and adapter fault tolerance.
+      In Windows operating systems, you can also enable or disable receive load
+      balancing (RLB) in ALB teams. This teaming mode works with
+      any&nbsp;switch.</li>
+    <li>
+      <p class="numlst"><a href="#FEC">Static Link Aggregation</a>
+      - provides increased transmission and reception throughput in a
+      team of two to eight adapters. This mode also
+      includes adapter fault tolerance and load balancing (only routed
+      protocols). This teaming mode requires a switch with Intel<sup>&reg;</sup>
+      Link Aggregation or Cisco* FEC or GEC capability. This team replaces the 
+      following team modes from prior software releases: Fast EtherChannel*/Link 
+      Aggregation (FEC) and Gigabit EtherChannel*/Link Aggregation (GEC). All 
+      adapters in a Link Aggregation team running in static mode must run at the 
+      same speed and must be connected to a Static Link Aggregation capable 
+      switch. If the speed capability of adapters in a Static Link Aggregation 
+      team are different, the speed of the team is dependent on the switch.&nbsp; <a href="#Dynamic">IEEE 802.3ad</a>  - creates
+      one or more teams using dynamic Link Aggregation with mixed-speed
+      adapters. Like the static Link Aggregation modes, Dynamic 802.3ad teams
+      increase transmission and reception throughput and provide fault tolerance.
+      This teaming mode requires a switch that fully supports the IEEE 802.3ad
+      standard.&nbsp;</li>
+</ul>
+
+<p><a href="#mvt">Multi-Vendor Teaming (MVT)</a>
+ -&nbsp;adds the capability to include adapters from selected other vendors in a
+team. If you are using a Windows-based computer, you can team adapters that
+appear in
+      Intel<sup>&reg;</sup>
+ PROSet.
+
+<p>Teaming modes are available only on computers running Windows NT* 4.0, 
+Windows 2000, Windows Server 2003, and Netware* and Linux*.<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+
+<img src="caution.gif" width="28" height="21">
+
+    </td>
+    <td valign="top">
+
+<b><i>IMPORTANT</i></b>: Be sure to use the latest available drivers on all 
+adapters. Also, when you create a team, use Intel PROSet.
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+
+<img src="caution.gif" width="28" height="21">
+
+    </td>
+    <td valign="top">
+
+<b><i>IMPORTANT</i></b>: For optimal performance, you must disable the Spanning
+Tree Protocol (STP) when using AFT, ALB, Static Link Aggregation, or IEEE 802.3ad&nbsp; mode teaming.
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+
+<img src="caution.gif" width="28" height="21"></td>
+    <td valign="top">
+
+<b><i>IMPORTANT</i></b>: When you create a team, a virtual adapter instance is 
+created. In Windows, the virtual adapter appears in both the Device Manager and 
+Network and Dial-up Connections. Each virtual adapter instance appears as &quot;Advanced Network Services Virtual Adapter.&quot;&nbsp;<b>Do not attempt to modify
+          (except to change protocol configuration) or remove these
+          virtual adapter instances using Device Manager or Network and Dial-up
+          Connections.</b>   Changing or removing virtual adapters might result
+in system anomalies.
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+
+<img src="caution.gif" width="28" height="21"></td>
+    <td valign="top">
+
+<b><i>IMPORTANT</i></b>: Before creating a team, adding or removing team
+members, or changing advanced settings of a team member, make sure each team
+member has been configured similarly. Settings to check include VLANs and QoS
+Packet Tagging, Jumbo Frames, and the various offloads. These settings are
+available in Intel PROSet's <b>Advanced </b> tab. <i>Pay particular
+attention when using different adapter models or adapter versions, as adapter
+capabilities vary.</i>
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+
+<img src="caution.gif" width="28" height="21"></td>
+    <td valign="top">
+
+<p><b><i>IMPORTANT</i></b>: If team members implement Advanced features differently, failover and team
+functionality will be affected. To avoid team implementation issues:</p>
+<ul>
+  <li>
+  <p class="numlst">Create teams that use similar adapter types and models.</li>
+  <li>
+  <p class="numlst">Reload the team after adding an adapter or changing any
+  Advanced features. One way to reload the team is to select a new preferred
+  primary adapter. Although there will be a temporary loss of network
+  connectivity as the team reconfigures, the team will maintain its network
+  addressing schema.</li>
+</ul>
+
+    </td>
+  </tr>
+</table>
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+
+<p class="Body-Text"><img border="0" src="note.gif" width="28" height="21"></p>
+
+    </td>
+    <td valign="top">
+
+<p class="Body-Text"><em><strong>NOTE</strong>: </em>Teaming is supported on
+Intel PRO/100 and PRO/1000 server adapters, and certain server-oriented models
+from other manufacturers. If you are using a Windows-based computer, adapters
+that appear in
+      Intel<sup>&reg;</sup>
+ PROSet may be included in a team.</p>
+
+<p class="Body-Text">Teaming is also supported on the Intel PRO/1000 T and MT Desktop
+Adapters if  at least one server adapter or Intel integrated connection is installed in the
+computer.&nbsp;</p>
+
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+
+<p class="Body-Text"><img border="0" src="note.gif" width="28" height="21"></p>
+
+    </td>
+    <td valign="top">
+
+<p class="Body-Text"><em><strong>NOTE</strong>: </em>Microsoft Windows NT 4.0
+does not support Plug and Play (PnP). Any change in network configuration
+requires a system reboot in order to take effect. Hot Plug operations for an adapter
+that is part of an Advanced Networking Services (ANS) or Express&nbsp; team is only available in Windows 2000, Windows Server 2003, NetWare 
+and Linux.</p>
+
+    </td>
+  </tr>
+</table>
+
+    <h2><a name="primary_and_secondary">Primary and Secondary Adapters</a></h2>
+<p>Teaming modes that do not require a switch with the same capabilities (AFT, SFT, ALB/RLB) use a primary adapter. In all of these modes except RLB, the primary is the only adapter that receives traffic.</p>
+<p>If the primary adapter fails, another adapter will take over its duties. If you are using more than two adapters, and you want a specific adapter to take over if the primary fails, you must specify a secondary adapter.</p>
+<p>There are two types of primary and secondary adapters:</p>
+<ul>
+  <li>
+    <p class="numlst"><b>Default primary adapter:</b>  If you do not specify a preferred primary
+    adapter, the software will choose an adapter of the highest capability
+    (model and speed) to act as the default primary. If a failover occurs, another
+    adapter becomes the primary. Once the problem with the original primary is
+    resolved, the traffic will not
+    automatically restore to the default (original) primary adapter in most modes. The
+    adapter will, however, rejoin the team as a non-primary.</li>
+  <li>
+    <p class="numlst"><b>Preferred Primary/Secondary adapters:</b>  You can specify a preferred adapter in Intel PROSet.
+    Under normal conditions, the Primary adapter handles all traffic. The
+    Secondary adapter will receive fallback traffic if the primary fails. If the Preferred Primary adapter fails, but is later restored
+    to an active status, control is automatically switched back to the Preferred Primary adapter.</li>
+</ul>
+<p><b>To specify a preferred primary or secondary adapter</b></p>
+<ol>
+  <li> 
+    <p class="numlst"> In Intel PROSet, expand a team listing.</li>
+  <li>
+    <p class="numlst">Right-click on the adapter team member you want to use as the preferred primary or secondary adapter.</li>
+  <li>
+    <p class="numlst">Click <b> Preferred Primary</b> or <b> Preferred Secondary</b> on the menu that appears.</li>
+  <li>
+    <p class="numlst">Click <b> Apply</b> or <b> OK</b> to set.</li>
+</ol>
+<p>The adapter's preferred setting appears in the Priority column on Intel PROSet's Team Configuration. A "1" indicates a preferred primary adapter, and a "2" indicates a preferred secondary adapter.</p>
+<h2>Adapters Supported</h2>
+<p>Teaming options are supported on Intel PRO/100 and PRO/1000 server adapters,
+and on Intel desktop adapters <i>if</i>  there is at least one server adapter
+installed. Selected adapters from other manufacturers are also supported. If you are using a Windows-based
+computer, adapters that appear in
+      Intel PROSet may be included in a team.<h4>Compatibility
+Notes</h4>
+<p>Intel test labs found that:
+<ul>
+  <li>
+    <p class="numlst">Hot Plug operations with non-Intel adapters that are part 
+    of a team causes system instability. For
+    this reason it is recommended that you restart the system or reload the team
+    after performing Hot Plug operations with a non-Intel adapter that is part 
+    of a team.</li>
+  <li>
+    <p class="numlst">Some advanced features, including hardware offloading, are automatically disabled when
+    non Intel adapters
+    are team members to assure a common feature set.</li>
+</ul>
+
+<h2><a name="AFT Overview">Adapter Fault Tolerance (AFT)</a></h2>
+
+<p>Adapter Fault Tolerance (AFT) provides the safety of an additional backup 
+link between the server and switch. In the case of switch port, cable, or 
+adapter failure, network connectivity is maintained.</p>
+<p>Adapter
+Fault Tolerance is implemented with a primary adapter and one or more backup, or
+secondary adapters. During normal operation, the backup adapters are in standby.
+If the link to the primary adapter fails, the link to the secondary adapter
+automatically takes over. For more information, see <a href="#primary_and_secondary">Primary
+and Secondary Adapters</a>.</p>
+<p>To use Adapter Fault Tolerance, you must have at least
+one Intel PRO/100 or one PRO/1000 server adapter in your team, and all adapters
+linked to the same switch or hub.</p>
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+
+<p class="Body-Text"><img border="0" src="note.gif" width="28" height="21"></p>
+
+    </td>
+    <td valign="top">
+
+<p class="Body-Text"><i><b>NOTE:</b></i> You can mix gigabit and 10/100 adapters in an AFT team.&nbsp;</p>
+
+    </td>
+  </tr>
+</table>
+
+<h2><a name="SFT Overview">Switch Fault Tolerance (SFT)</a></h2>
+
+<p>Switch Fault Tolerance (SFT) teaming allows you to connect each of two teamed
+adapters to a separate switch.</p>
+<p>Switch Fault Tolerance can detect failures when they occur:</p>
+<ul>
+  <li><p class="numlst">On either teamed adapter</li>
+  <li><p class="numlst">On either cable connecting the teamed adapter to its switch</li>
+  <li><p class="numlst">On switch ports connected to the adapters, if link is
+    lost</li>
+</ul>  
+<p>In SFT teams, one adapter is the primary adapter and one
+adapter is the secondary adapter. During normal operation, the secondary adapter
+is in standby mode. In standby, the adapter is inactive and waiting for failover
+to occur. It does not transmit or receive other network traffic. If the primary
+adapter loses connectivity, the secondary adapter automatically takes over.</p>
+<p>In SFT mode, each adapter in the team can operate at a different speed than
+the other.</p>
+
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+
+<p class="Body-Text"><img border="0" src="note.gif" width="28" height="21"></p>
+
+    </td>
+    <td valign="top">
+
+<p class="Body-Text"><b><i>NOTE:</i></b>   SFT is available for both 32-bit and Intel&#174 Itanium&#174 
+-based systems running Windows 2000 and Windows Server 2003. SFT is also 
+available for 32-bit systems running Windows NT 4.0 and Novell NetWare*.</p>
+
+    </td>
+  </tr>
+</table>
+
+<h2><a name="ALB Overview">Adaptive Load Balancing (ALB)</a></h2>
+
+<p class="MsoPlainText">Adaptive Load Balancing (ALB) uses software to balance
+routable traffic among a team of two to eight adapters (must include at least
+one server adapter) connected to the same switch. On computers running Windows
+NT 4.0, Windows 2000, and Windows Server 2003, ALB balances routable transmit traffic. With Receive
+Load Balancing (RLB) enabled, it balances IP receive traffic. The software analyzes the send
+and transmit loading on each adapter and balances the rate across the adapters
+based on destination address. Adapter teams configured for ALB also provide the
+benefits of fault tolerance.</p>
+
+<table border="0" cellpadding="6" cellspacing="0">
+    <tr>
+        <td valign="top"><img src="note.gif" width="28" height="21"></td>
+        <td valign="top"><em><strong>NOTE</strong>: </em>ALB does not load balance
+          non-routed protocols such as NetBEUI and some IPX* traffic.</td>
+    </tr>
+    <tr>
+        <td valign="top"><img src="note.gif" width="28" height="21"></td>
+        <td valign="top"><em><strong>NOTE</strong>: </em>You
+          can create an ALB team with mixed speed adapters. The load is balanced
+          according to the adapter's capabilities and the bandwidth of the
+          channel.</td>
+    </tr>
+</table>
+
+<h2><a name="FEC">Static Link Aggregation</a></h2>
+<p>Static Link Aggregation is a performance technology
+developed by Cisco to increase throughput between switches. This mode works
+with:</p>
+<ul>
+  <li>
+    <p class="numlst">Cisco FEC-capable and GEC-capable switches using the PAgP
+    protocol</li>
+  <li>
+    <p class="numlst">Intel switches capable of Link
+    Aggregation</li>
+  <li>
+    <p class="numlst">Other switches capable of static 802.3ad</li>
+</ul>
+<p>The transmission speed will never exceed the adapter
+base speed to any single address (per specification). Teams can contain 2 to 8
+adapters, but must match the capability of the switch. Adapter teams configured
+for static Link Aggregation also provide the benefits of fault tolerance and
+load balancing. You do not need to set a primary in these modes.</p>
+<h2><a name="Dynamic">IEEE 802.3ad</a> <i>Dynamic Mode</i></h2>
+<p class="MsoPlainText">802.3ad is an adopted IEEE standard.&nbsp;Teams can
+contain two to eight adapters, and you can have a maximum of two IEEE 802.3ad <i>dynamic</i>
+ teams per server. You must use 802.3ad switches (in dynamic mode, aggregation
+can go across switches). Adapter teams configured for IEEE 802.3ad also provide
+the benefits of fault tolerance and load balancing. Under 802.3ad, all protocols
+can be load balanced.</p>
+<p>Dynamic mode supports multiple aggregators, and they are
+formed either by different speeds on the same switch (teams based on speed) or
+by using multiple switches (provides some redundancy between switches). Only one
+team will be active at a time.</p>
+<table cellSpacing="0" cellPadding="6" border="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em>Once you choose<em> </em>an
+        aggregator, it remains in force until all adapters in that aggregator
+        lose link.</td>
+    </tr>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><i><b>NOTE</b></i>: In some switches,
+        copper and fiber adapters cannot belong to the same aggregator
+        in an IEEE 802.3ad configuration.
+        If there are copper and fiber adapters installed in a system, the switch might
+        configure the copper
+        adapters in one aggregator and the fiber-based
+        adapters in another. If
+        you experience this behavior, for best performance you should use 
+        either copper <em>or</em> fiber-based adapters in a system.</td>
+    </tr>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"> If multiple switches are used, all team members connected to the
+      same switch must operate at the same speed.</td>
+    </tr>
+  </tbody>
+</table>
+<h3><strong>Before
+you begin</strong></h3>
+<ul>
+  <li>
+    <p class="numlst">Verify that the switch fully supports the IEEE 802.3ad standard.</li>
+  <li>
+<p class="numlst">
+Check
+your switch documentation for port dependencies. Some switches require pairing
+to start on a primary port.</li>
+  <li>
+<p class="numlst">
+Check your speed and duplex settings to ensure the adapter and switch are
+running at full duplex, either forced or set to auto-negotiate. Both the adapter
+and the switch must have the same speed and duplex configuration.&nbsp;The full
+duplex requirement is part of the IEEE 802.3ad specification: <a href="http://standards.ieee.org/">http://standards.ieee.org/</a>.&nbsp;<br>
+If needed, change your speed or duplex setting <em><i>before</i></em>&nbsp;you
+link the adapter to the switch. Although you can change speed and duplex
+settings after the team is created,&nbsp;Intel recommends you disconnect the
+cables until settings are in effect. In some cases, switches or servers might
+not appropriately recognize modified speed or duplex settings if settings are
+changed when there is an active link to the network.&nbsp;</li>
+  <li>
+<p class="numlst">
+If you are configuring a VLAN, check your switch documentation for VLAN
+compatibility notes. Not all switches support simultaneous dynamic 802.3ad teams
+and VLANs. If you choose to set up VLANs,&nbsp;configure&nbsp;teaming and VLAN&nbsp;settings
+on the adapter&nbsp;<em><i>before </i></em>you&nbsp;link the adapter&nbsp;to the
+switch.&nbsp;Setting up&nbsp;VLANs after the switch has created an active
+aggregator&nbsp;affects VLAN functionality.</li>
+</ul>
+<h2><a name="mvt">Multi-Vendor Teaming (MVT)</a></h2>
+<p>MVT allows teaming with a combination of Intel and non-Intel adapters. This
+feature is currently available under Linux, Netware*, and Windows (NT 4.0, 2000, and
+Windows Server 2003).&nbsp;</p>
+<p> If you are using a Windows-based computer, adapters that appear in
+      Intel<sup>&reg;</sup>
+ PROSet can be included in a team.</p>
+<h3>MVT Design Considerations</h3>
+<ul>
+  <li>
+    <p class="numlst">In order to activate MVT, you must have at least one Intel server adapter in the team, which must be designated as the primary adapter.&nbsp;</li>
+  <li>
+    <p class="numlst">A multi-vendor team can be created for any team mode, but not for
+    VLANs.&nbsp;</li>
+  <li>
+    <p class="numlst">All members in a MVT must operate on a common feature set (lowest common denominator).&nbsp;</li>
+  <li>
+    <p class="numlst">For MVT teams, manually verify that the frame setting for 
+    the non-Intel adapter is the same as the frame settings for the Intel 
+    adapters.</li>
+</ul>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/25/04 2:15p <!-- $--> Revision <!--$$Revision:--> 17 <!-- $--></code></p>
+
+</body>
+</html>

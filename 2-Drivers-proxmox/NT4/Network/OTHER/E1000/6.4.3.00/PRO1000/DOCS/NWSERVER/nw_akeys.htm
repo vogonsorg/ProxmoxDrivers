@@ -1,0 +1,307 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Netware Command Line Parameters and Keywords -- C100</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>NetWare* ANS Command Line Parameters and Keywords</h1>
+<p>The following NetWare keywords are
+applicable for the Netware ANS driver.&nbsp;</p>
+
+  <table border="0" cellpadding="6" cellspacing="0">
+    <tr>
+      <td valign="top">
+      <img border="0" src="note.gif" width="28" height="21"></td>
+      <td valign="top"><em><strong>NOTE</strong>: </em> Always type IANS before the keyword and include the team 
+  number in the command line if more&nbsp;than one team exists.&nbsp;</td>
+    </tr>
+  </table>
+
+<p>
+See also <a href="nw_ians.htm">EXAMPLES</a> files for usage.
+</p>
+
+<table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <th>
+      <p><b>Parameter</b></p>
+    </th>
+    <th>
+      <b>Description</b>
+    </th>
+    <th>
+      <p><b>Example</b></p>
+    </th>
+  </tr>
+  <tr>
+    <td>HELP or -h<br> -h&lt;keyword&gt;</td>
+    <td>Used alone, this command shows a list of all known ANS keywords.
+      If it is followed by a keyword, a specific help message is displayed for that keyword.&nbsp;</td>
+    <td><code>-h probes</code></td>
+  </tr>
+  <tr>
+    <td>STATUS</td>
+    <td>Displays the status of the team. If more than one team
+      exists, the team name must be included.&nbsp; 
+    </td>
+    <td><code>load ians status team=1</code> 
+    </td>
+  </tr>
+  <tr>
+    <td>NAME</td>
+    <td>Gives user the ability to set a unique string identifier for each virtual adapter 
+      (team or VLAN). 
+    </td>
+    <td><code>load ians frame=ethernet_II
+      name=server1</code></td>
+  </tr>
+  <tr>
+    <td>TEAM</td>
+    <td>Assigns unique numeric identifier for each virtual adapter (team or
+      VLAN). The number can be 
+      user-assigned or machine-generated. Range = 0-9999. Default = 1 and 
+      increments by one.</td>
+    <td> &nbsp;</td>
+  </tr>
+  <tr>
+    <td>MODE</td>
+    <td>Sets the teaming type for the given team. Modes=AFT | ALB | SFT | FEC |
+      GEC | AD. Default=AFT.
+      <br>
+      <table border="0" cellpadding="0">
+        <tr>
+          <td width="10%" valign="top">AFT&nbsp;</td>
+          <td valign="top"> Adapter Fault Tolerance</td>
+        </tr>
+        <tr>
+          <td width="10%" valign="top">ALB&nbsp;</td>
+          <td valign="top"> Adaptive Load Balancing</td>
+        </tr>
+        <tr>
+          <td width="10%" valign="top">SFT&nbsp;</td>
+          <td valign="top"> Switch Fault Tolerance</td>
+        </tr>
+        <tr>
+          <td width="10%" valign="top">FEC -</td>
+          <td valign="top"> Fast EtherChannel (*used here to include Intel Link Aggregation and static 802.3ad)</td>
+        </tr>
+        <tr>
+          <td width="10%" valign="top">GEC&nbsp;</td>
+          <td valign="top"> Gigabit EtherChannel (*used here to include Intel Link Aggregation and static 802.3ad)</td>
+        </tr>
+        <tr>
+          <td width="10%" valign="top">AD&nbsp;</td>
+          <td valign="top"> IEEE 802.3ad teaming mode</td>
+        </tr>
+      </table>
+    </td>
+    <td> <code>load ians commit mode=ALB team=2</code></td>
+  </tr>
+  <tr>
+    <td>
+BIND</td>
+    <td>Matches physical adapters to specific drivers and virtual adapters to protocols.</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+COMMIT</td>
+    <td>Used after binding all underlying base drivers as team members before binding 
+      to the protocol. 
+    </td>
+    <td><code>load ians commit mode=ALB team=2</code></td>
+  </tr>
+  <tr>
+    <td>RECOMMIT</td>
+    <td>Used to dynamically add members or VLANs to an existing team.</td>
+    <td> &nbsp;</td>
+  </tr>
+  <tr>
+    <td>REMOVETEAM</td>
+    <td>Used to remove any team by number except the last team.</td>
+    <td><code>ians removeteam=2</code>
+    </td>
+  </tr>
+  <tr>
+    <td>PRIMARY</td>
+    <td>Allows user to set the primary adapter. If not specified,
+      the default is the first team member.&nbsp;</td>
+    <td><code>bind ians ce100b primary</code>
+    </td>
+  </tr>
+  <tr>
+    <td>SECONDARY</td>
+    <td>Allows user to set the secondary adapter.</td>
+    <td><code>bind ians ce100b secondary</code>
+    </td>
+  </tr>
+  <tr>
+    <td>NO_DEFAULT_PRIMARY</td>
+    <td>Allows user to block the software from choosing the first
+      team member as the primary.</td>
+    <td><code>bind ians no_default_primary</code>
+    </td>
+  </tr>
+  <tr>
+    <td>SMPMODE</td>
+    <td>Enables SMP awareness. Values=SMP | NONSMP. Default matches the machine. Use only 
+      on first load ians line.
+    </td>
+    <td><code>load ians smpmode=smp frame=ethernet_II</code>
+    </td>
+  </tr>
+  <tr>
+    <td>TX_ECBS_TO_USE</td>
+    <td>Sets the number of ECBs (buffers) in RAM for each virtual adapter (team or VLAN). Range
+      = 0-9999; Default = 64. Use on load line.</td>
+    <td>&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td>MAX_TX_QUEUE</td>
+    <td>Sets the depth of the transmit queues.&nbsp;Range = 0-9999. Default = 1000</td>
+    <td>&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td>RESET LBN</td>
+    <td>Resets a particular virtual adapter (logical board number).</td>
+    <td>&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td>DELAY</td>
+    <td>Sets the time interval, in minutes, before actual commit. Range = 0-5. Default
+      = 0.</td>
+    <td><code>load ians commit mode=ALB delay=5</code>
+    </td>
+  </tr>
+</table>
+<p>The following commands are specific to certain modes only. Probe settings are only applicable in AFT and ALB&nbsp;modes.</p>
+<p>When setting intervals for different probe commands, note that a
+&quot;tic&quot; is a unit of time equal to 110 milliseconds.</p>
+  
+  <table border="0" cellpadding="6" cellspacing="0">
+    <tr>
+      <td valign="top">
+      <img border="0" src="note.gif" width="28" height="21"></td>
+      <td valign="top"><em><strong>NOTE</strong>: </em> Always include the team number in the command line if more than one team exists.</td>
+    </tr>
+  </table>
+
+
+<p>
+&nbsp;
+
+<table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse" bordercolor="#111111">
+  <tr>
+    <th>
+      <p><b>Parameter</b></p>
+    </th>
+    <th align="center">
+      <b>Valid Range</b>
+    </th>
+    <th align="center">
+      <b>Default Value</b>
+    </th>
+    <th>
+      <p><b>Description</b></p>
+    </th>
+  </tr>
+  <tr>
+    <td>VLANID</td>
+    <td align="center">1 - 4095</td>
+    <td align="center">n/a</td>
+    <td>Creates a virtual adapter with a specific VLAN number (must match network).</td>
+  </tr>
+  <tr>
+    <td>REMOVEVLANID</td>
+    <td align="center">&nbsp; 
+    </td>
+    <td align="center">&nbsp; 
+    </td>
+    <td>Removes the set VLANID 
+    </td>
+  </tr>
+  <tr>
+    <td>PROBES</td>
+    <td align="center">ON | OFF BROADCAST | MULTICAST 
+    </td>
+    <td align="center">ON, BROADCAST 
+    </td>
+    <td>Allows checking for link state between team members (optional). Only for AFT or ALB teams of more than 1 adapter using 
+      ETHERNET_II or ETHERNET_SNAP.</td>
+  </tr>
+  <tr>
+    <td>PROBE_RETRY_COUNT</td>
+    <td align="center">0 - 9999</td>
+    <td align="center">7</td>
+    <td> Number of times probes will be resent before deciding the
+      link is down.&nbsp;</td>
+  </tr>
+  <tr>
+    <td>PROBE_BURST_SIZE</td>
+    <td align="center">1 - 9999</td>
+    <td align="center">3</td>
+    <td>Number of back to back probes to send (to attempt to get through heavy traffic).</td>
+  </tr>
+  <tr>
+    <td>PROBE_SET_DEFAULT</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td> Resets all probe-related parameters except PROBES</td>
+  </tr>
+  <tr>
+    <td>PROBE_SEND_INTERVAL</td>
+    <td align="center">4 - 9998</td>
+    <td align="center">18 tics</td>
+    <td> Sets the time interval between probe transmissions.</td>
+  </tr>
+  <tr>
+    <td>PROBE_CHECK_INTERVAL</td>
+    <td align="center">0 - 9998</td>
+    <td align="center">2 tics</td>
+    <td> Sets the time interval between probe checks (returns).</td>
+  </tr>
+  <tr>
+    <td>PROBE_RECHECK_INTERVAL</td>
+    <td align="center">0 - 9998</td>
+    <td align="center">2 tics</td>
+    <td> Sets the time interval between probe checks during retries.</td>
+  </tr>
+  <tr>
+    <td>BALANCE_INTERVAL</td>
+    <td align="center">18 - 1080 
+    </td>
+    <td align="center">180 tics 
+    </td>
+    <td>Sets the amount of time between load balance checks (not
+      AFT and SFT).</td>
+  </tr>
+  <tr>
+    <td>STFORWARD_DELAY</td>
+    <td align="center">0 - 255</td>
+    <td align="center">15 
+    </td>
+    <td>Sets the SFT failover delay for SFT mode. Should be the max spanning
+      tree forward delay for the switches connected to the server. Range =
+      0-255. Default = 15.</td>
+  </tr>
+  <tr>
+    <td>RLBMODE</td>
+    <td align="center">Enable/Disable</td>
+    <td align="center">Enable</td>
+    <td>Enable/disable the receive load balancing in the ALB team mode.</td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/30/03 10:09a <!-- $--> Revision <!--$$Revision:--> 9 <!-- $--></code></p>
+
+</body>
+</html>

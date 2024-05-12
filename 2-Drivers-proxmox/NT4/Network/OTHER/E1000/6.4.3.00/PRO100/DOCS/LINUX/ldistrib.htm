@@ -1,0 +1,144 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Linux Distribution Issues</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Troubleshooting -- Using Intel&#174 Network Adapters with Linux*</h1>
+
+<p class="contents">
+<a href="#overview">Overview</a>
+
+<p class="contents">
+<a href="#SuSE SLES 8">SUSE* LINUX Enterprise Server 8</a><p class="contents">
+<a href="#Suse 9">SUSE LINUX Enterprise Server 9</a><p class="contents">
+<a href="#rh_71">
+Red Hat* 7.1</a>
+
+<p class="contents">
+<a href="#suse_71">SUSE 7.1</a>
+<p class="contents"><a href="#Linux ACPI">ACPI enable may cause Dual Port 
+Pro/1000 adapters to fail</a>
+<p class="contents"><a href="#Linux_SNMP">Linux 
+SNMP: Set operation fails on Red Hat Enterprise Linux 3</a><p class="contents">&nbsp;<hr>
+
+<h2>
+<a name="overview"></a>Overview</h2>
+<p>
+This file describes Linux distribution-specific issues. For general information
+and support, see the <a href="support.htm">Support</a> page.
+</p>
+<p>If an issue is identified with the released source code on the supported
+kernel with a supported adapter, email the specific information related to the
+issue to
+<a href="mailto:linux.nics@intel.com">linux.nics@intel.com</a>.
+</p>
+
+<hr>
+
+<h2><a name="SuSE SLES 8"></a>SUSE LINUX Enterprise Server 8</h2>
+<h3>SUSE LINUX Enterprise Server 8 IA64 cause unresolved symbols</h3>
+<p>If you get unresolved symbol errors when loading the e1000 driver, perform<br>
+the following:</p>
+<ol>
+	<li>cd /usr/src/linux</li>
+	<li>make cloneconfig</li>
+	<li>make dep</li>
+</ol>
+<p>Then rebuild the driver.</p>
+
+<hr>
+
+<h2><a name="Suse 9"></a>SUSE Linux Enterprise Server 9 warning message during 
+driver build</h2>
+<p>While building the driver on SuSE Linux Enterprise Server 9 installations, 
+the following warning may be displayed. It is safe to ignore this message. The<br>
+driver will load and function normally.<br>
+<br>
+Symbol version dump /usr/src/linux-2.6.5-7.69-obj/ia64/default/Module.symvers is 
+missing, modules will have CONFIG_MODVERSIONS disabled. </p>
+
+<hr>
+
+<h2><a name="rh_71"></a>Red Hat Linux 7.1</h2>
+<h3>Creating an RPM from tar / zipped File</h3>
+<p>
+When trying to generate an RPM from the .tar.gz file, a segmentation fault
+(core dump) occurs. This failure occurs because Red Hat 7.1 uses version 4.0.2
+of the RPM utility. This version does not have the ability to handle
+parameterized macros, which are used within the e100 and e1000 spec files to
+generate an&nbsp; RPM. Updating the RPM utility to a more current version
+resolves the issue. The utility can be obtained from <a href="http://www.rpm.org">http://www.rpm.org</a>.
+</p>
+
+<hr>
+
+<h2><a name="Linux ACPI"></a>ACPI enable may cause Dual Port PRO/1000 
+Adapters to fail</h2>
+<p>If ACPI is turned on in the kernel, dual port adapters may not work. This is 
+due to a limitation in ACPI. Currently, this affects all new versions of SuSE 
+and the United Linux family.</p>
+
+<hr>
+
+<h2><a name="Linux_SNMP">Linux SNMP</a>: Set operation fails on Red Hat 
+Enterprise Linux 3</h2>
+<p>Running the set operation using Red Hat Enterprise Linux 3 fails when using 
+the net-snmp-5.0.8 package. This issue has been fixed in net-snmp-5.0.9 package.</p>
+<p>Red Hat Enterprise Linux AS Release 2.1 Distribution</p>
+<p>If there are errors while compiling the driver, do the following (step 3 is 
+optional):</p>
+<ol>
+	<li>cd /usr/src/linux-2.4.9-e.34</li>
+	<li>run 'uname -r' to obtain determine the configuration of the running 
+	kernel.</li>
+	<li>cp an appropriate config file from configs directory.</li>
+	<li>make {oldconfig | menuconfig}<br>
+	<br>
+	All that needs to be done is to accept the given values (that is, enter 
+	menuconfig and exit immediately if so desired) and save the resulting 
+	configuration.<br>
+&nbsp;</li>
+	<li>edit the Makefile and fix the EXTRAVERSION to match the one from step 2.</li>
+	<li>make dep<br>
+&nbsp;</li>
+</ol>
+<p>While building the driver, ignore the warning:</p>
+<p class="monospace">/lib/modules/2.4.9-e.34/build/include/linux/rhconfig.h:31:60:<br>
+operator '(' has no left operand</p>
+
+<hr>
+
+<h2>Red Hat Enterprise Linux AS Release 2.1 Distribution</h2>
+<p>If there are errors while compiling the driver, do the following<br>
+(step 3 is optional):</p>
+<ol>
+	<li>cd /usr/src/linux-2.4.9-e.34</li>
+	<li>run 'uname -r' to determine the configuration of the running kernel. 
+	example: 2.4.9 </li>
+	<li>run 'uname -m' to determine the current machine/processor architecture. 
+	example: i686</li>
+	<li>4. run 'uname -v' to determine the kernel configuration.<br>
+	example: #1 SMP Tue Jun 1 10:06:39 PDT 2004</li>
+	<li>determine the appropriate config file from configs directory based on 
+	steps 2 and 3.<br>example: root@localhost src-new-ophir]# ls -lx /usr/src/linux-2.4.9-e.34/configs/kernel-2.4.9-athlon.config</li>
+	<li>copy the config file to the current directory as .config.</li>
+	<li>run make {oldconfig | menuconfig}<br><br>You can make changes to the kernel configuration, or accept the given values 
+	and you must save the resulting configuration.</li>
+	<li>edit the Makefile and fix the EXTRAVERSION to match the one from step 2.</li>
+	<li>make dep</li>
+	<li>return to the directory where the driver source is located and build the 
+	driver, using instructions located in the readme file.<br><br>While building the driver, ignore the warning:<br>/lib/modules/2.4.9-e.34/build/include/linux/rhconfig.h:31:60:<br>operator '(' has no left operand<br>
+	<br>NOTE: If you have never built a Linux kernel before, we recommend visiting 
+	Red Hat's web site at www.redhat.com</li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/22/04 9:20a <!-- $--> Revision <!--$$Revision:--> 7 <!-- $--></code></p>
+
+</body>
+</html>

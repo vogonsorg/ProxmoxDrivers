@@ -1,0 +1,52 @@
+; vmmouse.inf
+;
+; VMware Virtual Mouse Driver INF for Windows NT 4.0 
+;
+; (c) Copyright 1999 Microsoft
+; (c) Modifications Copyright 2002-2008 VMware, Inc.
+;
+
+[Version]
+Signature="$Windows NT$"
+Class=Mouse
+ClassGUID={4D36E96F-E325-11CE-BFC1-08002BE10318}
+Provider=%VMMouse.Mfg%
+DriverVer=08/06/2008, 12.4.0.3
+
+[DestinationDirs]
+DefaultDestDir = 12 
+
+[Manufacturer]
+%VMMouse.Mfg%  = Model 
+
+[Model]
+%VMMouse.SvcDesc% = VMMouse, *PNP0F03, *PNP0F13
+
+[VMMouse]
+CopyFiles = VMMouse.CopyFiles, mouclass.CopyFiles
+
+[VMMouse.Services]
+AddService = i8042prt, 0x00000002, i8042prt_Service_Inst, i8042prt_EventLog_Inst ; Port Driver
+
+[VMMouse.CopyFiles]
+vmmouse.sys
+
+[i8042prt_Service_Inst]
+DisplayName    = %VMMouse.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 1                  ; SERVICE_SYSTEM_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\vmmouse.sys
+LoadOrderGroup = Keyboard Port
+
+[i8042prt_EventLog_Inst]
+AddReg = i8042prt_EventLog_AddReg
+
+[i8042prt_EventLog_AddReg]
+HKR,,EventMessageFile,0x00020000,"%%SystemRoot%%\System32\IoLogMsg.dll;%%SystemRoot%%\System32\drivers\vmmouse.sys"
+HKR,,TypesSupported,0x00010001,7
+
+[Strings]
+VMMouse.Mfg = "VMware, Inc."
+VMMouse.SvcDesc = "VMware Pointing Device"
+

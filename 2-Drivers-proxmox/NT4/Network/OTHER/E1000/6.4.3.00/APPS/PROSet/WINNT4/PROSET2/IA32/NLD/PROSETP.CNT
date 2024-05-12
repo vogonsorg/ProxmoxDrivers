@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 Overzicht
+2 Navigeren in PROSet II=GENERAL_PAGE
+2 Informatie over de adapter en het stuurprogramma weergeven
+3 Algemene informatie=General_Information
+3 Details adapter=Adapter_Details
+3 Details stuurprogramma=Driver_Information
+1 Adapter configureren
+2 Snelheid en duplexmodus instellen=Set_Speed_and_Duplex
+2 Energieverbruik configureren=Configure_Power_Management
+2 Geavanceerde voorzieningen configureren=Configure_Advanced_Features
+2 IPSec inschakelen=Enable_IPSec
+2 Configuratie opslaan in een bestand=SAVERESTORE
+2 Adapter verwijderen=Remove_an_Adapter_Instance
+1 Teams maken en configureren
+2 Soorten teams
+3 Info over teaming=Teaming_Info
+3 Soorten teams=Team_Types
+3 Fouttolerantie adapters=Adapter_Fault_Tolerance
+3 Fouttolerantie switches=Adapter_Fault_Tolerance
+3 Adaptieve taakverdeling=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Statisch=FEC
+3 GEC/LA/802.3ad: Statisch=GEC
+3 IEEE 802.3ad: Dynamisch=Dynamic_3ad
+2 Team instellen
+3 Team maken=Create_a_New_Team
+3 Test Switchconfiguratie=Test_Switch_Configuration
+3 Geavanceerde instellingen configureren=Teaming_Advanced_Settings
+2 Teamconfiguratie wijzigen
+3 Modus adapterteam wijzigen=Change_Adapter_Teaming_Mode
+3 Adapter opgeven als primair of secundair=Specify_an_Adapter_as_Primary_or_Secondary
+3 Adapter toevoegen aan een team=Add_an_Adapter_to_an_Existing_Team
+3 Adapter verwijderen uit een team=Remove_an_Adapter_from_a_Team
+3 Geavanceerde instellingen voor teams=Teaming_Advanced_Settings
+2 Teamconfiguratie weergeven
+3 Teams in het overzicht van de netwerkcomponenten=Team_Listing
+3 Teamconfiguratie weergeven=Team_Configuration
+2 Team verwijderen
+3 Adapterteam verwijderen=Remove_an_Adapter_Team
+1 VLAN's maken en configureren
+2 Overzicht VLAN's=VLAN>main
+2 VLAN instellen
+3 VLAN maken=ADD_VLAN
+3 GVRP inschakelen=GVRP_Support
+3 Geavanceerde instellingen=Advanced_Settings_for_VLANs
+2 VLAN-eigenschappen wijzigen
+3 VLAN-eigenschappen wijzigen=Change_VLAN_Properties
+3 Geavanceerde instellingen=Advanced_Settings_for_VLANs
+2 VLAN verwijderen
+3 VLAN verwijderen=Remove_a_VLAN
+1 Diagnoses stellen
+2 Overzicht=Diagnostics_An_Overview
+2 Diagnostische tests=Diagnostics
+2 Kabeltest=Testing_the_Cable
+2 Test Zender/Responder=Sender_Responder_Test
+2 Logboek voor diagnoses instellen=Diagnostic_Log
+1 Hulpmiddelen van Intel(R)
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel (R) Prioriteitspakket
+3 Overzicht=priority_packet_overview
+1 Problemen oplossen
+2 Tabblad Problemen oplossen=Troubleshooting
+2 Adapterconfiguratie herstellen=RESTORECONFIG
+2 Ondersteuning=Support

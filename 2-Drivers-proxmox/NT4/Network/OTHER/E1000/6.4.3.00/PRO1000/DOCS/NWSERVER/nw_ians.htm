@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Example Netware Configuration Files for ANS software</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Example NetWare* Configuration Files for ANS.</h1>
+<p>
+Here is a series of examples for common configurations of Intel's intermediate
+ driver software, iANS.LAN.  These examples use a combination of Intel 
+ PRO/1000 and PRO/100 adapters.  The intermediate driver uses the same syntax 
+ with all Intel server adapters regardless of speed.  Therefore you may 
+ substitute CE100B for CE1000 and vice versa in any of these examples.  The 
+ only exception to this is that EtherChannel keywords are dependent on the 
+ connection speed.  Use "mode=fec" for 10 or 100 Mbps and "mode=gec" for 
+ gigabit connections.
+</p>
+<ol>
+  <li>
+    <p class="numlst"><a href="nw_aft.ncf">Example 1: Two-Adapter AFT Team</a>
+	<br>
+	1 PRO/1000 server and 1 PRO/100 server adapter - Ethernet_802.2 frametype, IPX protocol.
+ 	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_alb.ncf"> Example 2: Two- Adapter ALB Team</a> 
+	<br>
+	2 PRO/1000 server adapters - Ethernet_II frametype, IP and IPX protocols.
+	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_ecad.ncf"> Example 3: Teaming</a>
+	<br>
+	2 PRO/1000 server adapter Static Link Aggregation team - 2 frametypes, IP and IPX protocols.&nbsp;<br>
+	4 PRO/100 server adapters in a IEEE 802.3ad team.
+	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_vlip.ncf"> Example 4: One Adapter, 2 VLANs</a> 
+	<br>
+	1 PRO/1000 server adapter - Ethernet_II frametype, IP protocol.
+	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_vlipx.ncf">Example 5: One Adapter, 3 VLANs</a> 
+	<br>
+	1 PRO/100 server adapters - All 4 frametypes, IPX protocol.
+	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_vllb.ncf">Example 6: Two- Adapter ALB
+    Team, 5 VLANs</a>
+	<br>
+	2 PRO/1000 server adapters - Ethernet_II, IP and IPX protocols.
+	</p></li>
+  <li>
+    <p class="numlst"><a href="nw_multi.ncf"> Example 7: Two Teams</a>
+	<br>
+	1 PRO/1000 server and 1 PRO/100 server adapter Static Link Aggregation team - 2 frametypes, IP and IPX protocols.
+	<br>
+	1 PRO/100 server adapter, 2 VLANs - 2 frametypes, IP and IPX protocols.
+	</p></li>
+</ol>
+<p>
+<a href="team_nw.htm">Return to NetWare teaming instructions</a></p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/08/04 6:47p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

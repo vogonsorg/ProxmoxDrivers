@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 概述
+2 瀏覽 PROSet II=GENERAL_PAGE
+2 檢視介面卡和驅動程式資訊
+3 一般資訊=General_Information
+3 介面卡詳細資料=Adapter_Details
+3 驅動程式詳細資料=Driver_Information
+1 設定介面卡
+2 設定速度與雙工=Set_Speed_and_Duplex
+2 設定電源使用=Configure_Power_Management
+2 設定進階功能=Configure_Advanced_Features
+2 啟用 IPSec=Enable_IPSec
+2 將組態儲存到檔案=SAVERESTORE
+2 移除介面卡=Remove_an_Adapter_Instance
+1 建立和設定群組
+2 群組類型
+3 關於成組=Teaming_Info
+3 群組類型=Team_Types
+3 介面卡容錯性=Adapter_Fault_Tolerance
+3 切換容錯=Switch_Fault_Tolerance
+3介面式載入平衡=Adapter_Load_Balancing
+3 FEC/LA/802.3ad：靜態=FEC
+3 GEC/LA/802.3ad：靜態=GEC
+3 IEEE 802.3ad：動態=Dynamic_3ad
+2 設定群組
+3 建立群組=Create_a_New_Team
+3 測試開關組態=Test_Switch_Configuration
+3 設定進階設定=Teaming_Advanced_Settings
+2 變更群組組態
+3 變更介面卡成組模式=Change_Adapter_Teaming_Mode
+3 指定主要或次要介面卡=Specify_an_Adapter_as_Primary_or_Secondary
+3 新增介面卡到群組=Add_an_Adapter_to_an_Existing_Team
+3 從群組移除介面卡=Remove_an_Adapter_from_a_Team
+3 成組進階設定=Teaming_Advanced_Settings
+2 檢視群組組態
+3 網路元件目錄中的群組=Team_Listing
+3 檢視群組組態=Team_Configuration
+2 移除群組
+3 移除介面卡群組=Remove_an_Adapter_Team
+1 建立和設定 VLANs
+2 VLAN 概述=VLAN>main
+2 設定 VLAN
+3 建立 VLAN=ADD_VLAN
+3 啟用 GVRP=GVRP_Support
+3 進階設定=Advanced_Settings_for_VLANs
+2 變更 VLAN 內容
+3 變更 VLAN 內容=Change_VLAN_Properties
+3 進階設定=Advanced_Settings_for_VLANs
+2 移除 VLAN
+3 移除 VLAN=Remove_a_VLAN
+1 執行診斷
+2 概述=Diagnostics_An_Overview
+2 診斷測試=Diagnostics
+2 纜線測試=Testing_the_Cable
+2 傳送程式回應程式測試=Sender_Responder_Test
+2 設定診斷記錄=Diagnostic_Log
+1 使用 Intel(R) 附加工具
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 概述=priority_packet_overview
+1 疑難排解
+2 疑難排解標籤=Troubleshooting
+2 復原介面卡組態=RESTORECONFIG
+2 取得支援=Support

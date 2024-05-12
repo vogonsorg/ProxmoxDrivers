@@ -1,0 +1,132 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The Core Schema</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">The Core Schema</font></h1>
+<p>The Core Schema consists of the IANet_NetService class and the core event classes.
+<br><br>
+<img src="core.gif" width="543" height="368">
+<br><br>
+
+<h2><font color="#0000FF">IANet_NetService</h2></font>
+
+<p><b>Purpose</b><br>
+The IANet_NetService class is the root object from the IANet_ schema.  This class enables the client to access the sessions that are required to perform sets.
+
+<p><b>Instances</b><br>
+There is one instance of this object. The client should not rely on the key used for this class. Instead, the client should get the instance of the class by enumerating all instances of IANet_NetService.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_NetService.  
+
+<p><b>Removing Instances</b><br>
+You cannot delete the instance of IANet_NetService.  
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties of this class.
+
+<p><b>Supported Attributes</b><br>
+This class implements two attributes:
+<ul><li>Version &mdash; Contains the current version of the core provider.</li>
+<li>InstallDate &mdash; Contains the date that the providers were installed.</li></ul>
+
+<p><b>Methods</b><br>
+The following methods can be used to manage sessions:
+
+<ul><li><b>void GetSessionHandle(([OUT] string SessionHandle, [out] uint32 ActiveSessions)</b> &mdash; Used to set a session handle string, which should be placed in the context object in the SessionHandle qualifier.  ActiveSessions returns the number of active sessions for this system.  This allows clients to warn that others may be modifying the network settings.</li>
+<li><b>void Apply([IN] string sSessionHandle, [OUT] uint32 FollowupAction);</b> &mdash; Applies changes made with a particular session handle. The uint32 argument returned is used by the
+  WMI and CDM Providers to tell the application the server must be rebooted before the changes will take effect. This can be accomplished by calling the <b>Reboot</b> method on the class Win32_OperatingSystem.<br>
+<br>Values:<br>
+1 = System reboot required<br>
+0 = No reboot required<br><br></li>
+<li><b>void ReleaseSessionHandle ([IN] string SessionHandle)</b> &mdash; Releases a session handle after it has been used. Any changes done with this session will be lost. The session handle will no longer be valid after this call and can no longer be used.</li>
+<li><b>void Cancel([IN] string SessionHandle);</b> &mdash; Cancels a session. The internal cache will be cleared and any data read following this call will show the current configuration.</li></ul>
+
+<h2><font color="#0000FF">Core Events</h2></font>
+
+<h3><font color="#0000FF">IANet_SessionEvent</h3></font>
+
+<p><b>Purpose</b><br>
+This event is used to notify the client about the use of the NCS session API.  Clients can use this event to be informed if other clients are creating or using sessions.
+
+<p><b>Triggers</b><br>
+This event is triggered when a client creates a session, deletes a session, or calls <b>Apply</b> for a session.  
+
+<p><b>Event Data</b><br>
+The <b>EventType</b> can have one of the following values:
+<ul><li>"New session" indicates that a new session has been created by the client or another client.</li>
+<li>"End session" indicates that a client has finished with a session. The session may have
+  ended by the client or another client.</li>
+<li>"Cache invalidated" indicates that another client has called <b>Apply</b> on a session. All other sessions are invalidated and cache associated with their sessions has been deleted.</li>
+<li>"Configuration changed" indicates that the session's configuration has changed.</li></ul>   
+
+<p>The <b>SessionHandle</b> contains the session handle that triggered the event.
+
+<p><b>OpenSessions</b> contains the number of open sessions.   This data item is NULL for the "Cache invalidated" and "Configuration changed" events.
+
+<h3><font color="#0000FF">IANet_InternalErrorEvent</h3></font>
+
+<p><b>Purpose</b><br>
+This event is used to notify the client that an internal error has occurred in the event
+Providers.  In some cases, this means that the event provider is not able to report further events.
+
+<p><b>Triggers</b><br>
+This event will occur:
+<ul><li>After the event provider gets an unknown event from an event
+    source</li>
+<li>After the software that provides the events has been shutdown</li>
+<li>After the event provider gets an event but the event source cannot get further data about the
+  event</li></ul>
+
+<p><b>Event Data</b><br>
+The <b>EventType</b> can be one of the following:
+<ul><li>"Could not get event data". An event occurred, but the event source cannot get further data about the event.</li>
+<li>"Event source has shut down". The data source for the event was shutdown. In this case, the event provider will also be shutdown and no more events will be generated until the source is restarted and new notification queries are made.</li>
+<li>"Unexpected message". The event provider received an unexpected event.</li></ul>
+
+<h2><font color="#0000FF">Use Cases</h2></font>
+<p>A session handle is required to change the configuration.  The session handle allows the NCS software to manage simultaneous multiple
+access to the configuration, thereby preventing a session from locking out all others.   Each session has a separate cache to store any changes that have been made.  If there are multiple sessions making changes simultaneously then the first to apply its changes will succeed.  All other session caches will be invalidated.
+
+<h3><font color="#0000FF">Getting a Session Handle</h3></font>
+<p>The client must get the object path of the single instance of IANet_NetService before accessing the session handle. Call <b>IWbemServices::CreateInstanceEnum</b> and pass the name of the class: IANet_NetService. This is equivalent to calling <b>IWbemServices::ExecQuery</b> with the query <b>SELECT * FROM IANet_NetService</b>.
+Before making any changes to the configuration, the client must get a session handle. Use the <b>GetSesssionHandle</b> method to start a fresh session. 
+
+<p>The client can use <b>IWbemServices::ExecMethod</b> to execute a method on a CIM object and will need the object path, from  <b>__PATH</b> attribute of the instance of IANet_NetService.
+This method also returns the number of currently active sessions. The client may want to issue a warning if it does not have exclusive access to the Network Configuration Service (NCS).
+
+<h3><font color="#0000FF">Using a Session Handle in the IWbemContext Object</h3></font>
+<p>After the client obtains a session handle, it must create an IWbemContext object.  Store the session handle in the <b>SessionHandle</b> qualifier of this object. A pointer to this COM object should be passed to every call into IWbemServices. The session handle is not required when making calls to access the IANet_NetService object as this takes the handle as an explicit argument.
+
+<h3><font color="#0000FF">Reading Pending Changes using a Session Handle</h3></font>
+<p>When reading the configuration, if you pass the session handle in the context, then the Providers will return the configuration as if the pending updates were applied  (e.g., uninstalled adapters will be missing and changed settings will return their new values).  
+However, some objects will not appear until <b>Apply</b> has been called  (e.g., IANet_IPProtcolEndpoints will not be created until the protocol has been bound to the appropriate miniport).  
+
+<h3><font color="#0000FF">Finishing with a Session Handle</h3></font>
+<p>After changing the configuration, call the <b>Apply</b> method to commit the changes. This may return a follow-up action code (e.g., reboot the system before the changes can take effect).
+
+<p>Always call the <b>ReleaseSessionHandle</b> after a session is finished, otherwise any changes made will be discarded.
+Calling the <b>Cancel</b> method will also discard any changes made, but the client can continue to use the session handle as if it has just been created.
+
+<h3><font color="#0000FF">Registering for the Core Events</h3></font>
+<p>Applications should use <b>IWbemServices::ExecNotificationQuery</b> or use <b>IWbemServices:: ExecNotificationQueryAsync</b> to request event notification. The following queries are examples of event notification queries (this list is not exhaustive as many queries are possible):
+<ul><li><b>SELECT * FROM IANet_Event</b> &mdash; Request all events.</li>
+<li><b>SELECT * FROM IANet_SessionEvent</b> &mdash; Request all session events.</li>
+<li><b>SELECT * FROM IANet_InternalErrorEvent</b> &mdash; Request all internal events.</li></ul>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

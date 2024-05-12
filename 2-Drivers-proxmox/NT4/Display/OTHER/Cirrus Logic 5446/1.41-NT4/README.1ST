@@ -1,0 +1,167 @@
+5446 Windows NT 4.0 Driver 
+___________________________
+
+
+   Device Driver Version: 1.41
+
+
+  Contents
+  ________
+
+
+           1.0    Changes in this release
+           2.0    Changes from previous releases
+           3.0    Installing the Device Drivers
+           4.0    Setting the DDC default value
+           5.0    Component Description
+
+
+  1.0 Changes in this release
+  _______________________________
+
+  Version: 1.41 (Based on 1.40d)
+
+  Release Date: 7/16/98     
+  Internal#: 141 qab05
+  Files Modified: cl54xx.dll, cl54xx.sys
+  New Features / Major Changes:
+  - Corrected corrupted lines appearing when testing Foxbear in 
+    1152x864-8bpp, 640x400-16bpp, and 1152x864-16bpp modes. PDR#11602.
+  - Disabled Overlays. PDR#11603.
+  - Added 640x400x8 and x16 modes. PDR#11600.
+  - Disabled all HostToScreen functionality. PDR#11592.
+
+
+  2.0 Changes from previous releases
+  __________________________________
+
+  Version: 1.40d (based on 5480 NT4.0 driver v1.10)
+  Release Date: 5/12/98     
+  Internal#: 110a01
+
+  Files Modified: CL54XX.DLL, CL54XX.SYS, CIRRUS.INF
+
+
+  New Features / Major Changes:
+
+  - Removed all HW Overlay support in all Tddraw modes.
+
+
+  _______________________________
+
+  Version: 1.40c (based on 1.40a)
+  Release Date: 
+  Internal#: 
+
+  Files Modified: cl54xx.dll, cl54xx.sys
+
+  New Features / Major Changes:
+  - Fixes 2nd aperture problem with install
+
+  _______________________________
+
+  Version: 1.40a (based on 1.40)
+  Release Date: 
+  Internal#: 
+
+  Files Modified: cl54xx.dll, cl54xx.sys
+
+  New Features / Major Changes:
+
+  - Corrected a screen corruption in Multimedia Extension 
+    program when moving MXB window around. PDR#9962.
+
+  _______________________________
+
+  Version: 1.40 (based on 1.31a)
+  Release Date: 
+  Internal#: 
+
+  Files Modified:  CL54XX.DLL, CL54XX.SYS, MONISEL.DLL, MONISEL.TXT
+
+  New Features / Major Changes:
+
+  OEM now has the option to set DDC default to ON or OFF by 
+  modifying the Cirrus.inf file.
+   - Open the cirrus.inf file found on the disk.
+   - Go to the section called [cirrus_SoftwareDeviceSettings]
+   - Edit the last character to 1 to enable DDC. 
+     Example:     HKR,, DDCControlFlag, %REG_DWORD%, 1
+
+     Or edit the last character to 0 to disable DDC. 
+     Example:     HKR,, DDCControlFlag, %REG_DWORD%, 0
+
+     Warning: Changing the Cirrus.inf file may void the MS-WHQL logo.
+
+  CL54XX.DLL, CL54XX.SYS
+   - New DDC monitor support.
+   - New DDC algorithm for HP DDC monitor.
+   - New option box "Automatically detect Plug-N-Play Monitor" 
+     in the Monitor Selection Tab 
+     of Display Properties allows you to Enable/Disable DDC.
+   - Fix the hang up bug for HP server system with two PCI bus.
+   - Resolved GPF while running OVERFLY.EXE in 640x480x8bit 
+     when switching from stretch maximum to minimum. PDR#10795.
+   - Resolved noise when occluding a window on top of a running AVI file 
+     in 1024x768x16bit at 70Hz and 75Hz. PDR#10797.
+
+  MONISEL.DLL, MONISEL.TXT
+   - Modified DDC on/off checkbox name to "Use Monitor Plug-N-Play (PnP) 
+      Selection". 
+   - Full localization support. Loads the message strings from MONISEL.TXT file
+
+  The 3.5x drivers are now located on a separate disk to conform to MS 
+  WHQL requirements. Previously, the 3.5x and 4.0 drivers were 
+  all found on the same disk. 
+
+
+  3.0 Installing the Device Drivers
+  __________________________________
+
+  1. Make sure you have installed WinNT 4.0 OS in your HD according to MS
+     installation procedures.
+  2. Click on the Start box in the lower left corner and proceed to Settings,
+     Control Panel.
+  3. Inside the Control Panel group, click on the Display icon to open the
+     Display Properties folder and select the Settings tab (right most tab).
+  4. Choose the "Change Display Type..." button and click the "Change..." 
+     button in the Adapter Type group.
+  5. Select the "Have Disk..." button and then insert the 5446 WIN NT 4.0 
+     Driver Installation diskette into the floppy drive A: or B: and proceed 
+     with OK button.
+  6. Select "Cirrus Logic Graphics Adapter".
+  7. Follow screen instructions to exit Display Properties folder.
+  8. When prompt to restart computer, select Yes so the new driver will take 
+     effect after reboot.
+
+
+  4.0 Setting the DDC default value
+  _________________________________
+ 
+  1. Open the cirrus.inf file found on the disk.
+  2. Go to the section called [cirrus_SoftwareDeviceSettings]
+  3. Edit the last character to 1 to enable DDC. 
+       Example:     HKR,, DDCControlFlag, %REG_DWORD%, 1
+
+       Or edit the last character to 0 to disable DDC. 
+       Example:     HKR,, DDCControlFlag, %REG_DWORD%, 0
+ 
+       Warning: Changing the Cirrus.inf file may void the MS-WHQL logo.
+
+
+  5.0 Component Description
+  _______________________________
+
+    File Name         Version         Component Description
+    ============      ==========      =====================
+
+    Cirrus.inf        N/A             Setup Install script
+    Cirrus1           N/A             Installation Tag File
+    cl54xx.dll        4.0.36          Display driver
+    cl54xx.sys        4.0.36          Mini port driver
+    monisel.dll       1.00.0005       Monitor Selection Utility
+    monisel.hlp       N/A             Monitor Selection Utility Help Document
+    monisel.txt       N/A             Monitor Selection Utility Text Document
+    readme.1st        N/A             This File. ASCII text file.
+    timings.dat       N/A             Monitor Timing file.
+

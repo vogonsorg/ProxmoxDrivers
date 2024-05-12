@@ -1,0 +1,89 @@
+INTEL DMI 2.0  COPYRIGHT LICENSE 
+AND DISTRIBUTION AGREEMENT 
+
+IMPORTANT - READ THIS BEFORE OPENING OR INSTALLING!
+
+IF YOU OPEN THIS PACKAGE OR REPRODUCE OR  INSTALL THE MATERIALS, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.  IF YOU DO NOT WANT TO BE BOUND BY THIS AGREEMENT, DO NOT OPEN THIS PACKAGE, OR INSTALL OR USE THE ENCLOSED MATERIALS OR SOFTWARE.
+
+
+
+1.  Definitions.
+
+"Affiliated Corporations" mean the parent corporation and any subsidiary corporation which is wholly owned or majority owned by the parent corporation.
+"Binary Code" means software in binary form,  compiled from Support Code.
+"Documentation" means all documentation provided by Intel under this Agreement.
+"Licensee Product" means only products which incorporate all or a portion of the Materials, and which are manufactured by or for, and distributed by Licensee subject to the licenses granted by Intel under this Agreement.
+"Licensee" means the individual or entity identified as the Licensee upon ordering these Materials from Intel.  If Licensee is a U. S. Corporation, then Licensee shall include Affiliated Corporations, provided that such Affiliated Corporations agree to the terms and conditions of this Agreement and provided that Licensee remains solely responsible for the duties and obligations of Licensee under this Agreement.
+"Materials" includes Binary Code, Support Code, and Documentation provided by Intel under this Agreement.
+"Redistributable Files" are limited to the files within these directories:  DMI/WIN32/BIN, DMI/WIN32/MIFS, DMI/WIN32/LIB, DMI/WIN32/OEMSETUP.  Redistributable Files include error corrections and bug fixes in binary form, made by Licensee to the Redistributable Files pursuant to Section 2.A.1.
+"Support Code" means all source code modules included in this package which are provided to Licensee by Intel subject to the licenses granted hereunder.
+
+2.  Copyright License.  Subject to the terms and conditions of this Agreement,   Intel Corporation ("Intel") grants to Licensee a non-exclusive, non-transferable, royalty-free license, under Intel copyrights, to the "Materials" subject to Licensee's strict compliance with the following: 
+
+A.  Licensee may:
+
+1.  Support Code:  Reproduce  and modify the Support Code, for internal use only, solely for the purpose of (i) integrating the Redistributable Files and Documentation with Licensee Product, (ii) creating bug fixes and error corrections to the Support Code, and (iii) compiling the Support Code into Binary Code for internal use only except as provided in Section 2.A.2.
+
+2.  Redistributable Files:  Reproduce and distribute the Redistributable Files in binary form only, including any bug fixes and error corrections in binary form that are made to such Redistributable Files pursuant to Section 2.A.1 above, only in conjunction with a Licensee Product or as a stand-alone product for use with a Licensee Product, and on a royalty free basis only.
+
+3.  Documentation:  Reproduce and modify the Documentation for internal use only.  Notwithstanding the foregoing, Licensee may distribute Documentation for the Redistributable Files, and modifications to such Documentation, only to Licensee's customers in conjunction with Licensee Product.
+
+
+B.  Licensee may not:
+
+1.  Distribute the Materials except as provided in Section 2.A.
+
+2.  Permit others to disassemble, decompile, or otherwise reverse engineer the Redistributable Files, in whole or in part. 
+
+3.  Use, copy, modify, rent, sell or transfer the Materials or any portion thereof except as provided in Section 2.A.
+
+4.  Make any statements that the Licensee Product or the Materials are certified by, or that performance is guaranteed or verified in any regard, by Intel.
+
+5.  Use Intel's name or trademarks to market Licensee's products without Intel's prior written consent.
+
+3.  Ownership.  Licensee acknowledges that title to the Materials, and any modifications or derivative works thereto, remain the property of Intel and its vendors.  Licensee agrees to promptly provide to Intel any modifications, derivative works, bug fixes, and  error corrections made to the Support Code.  Licensee hereby assigns all right, title, and interest in and to such modifications or derivative works, including bug fixes and error corrections, to Intel.
+
+4.  Copyright. The Materials are copyrighted and are protected by United States copyright laws and international treaty provisions. Licensee will not remove any copyright or other proprietary notices from the Materials. Licensee agrees to prevent any unauthorized copying of the Materials.
+
+5.  Support.   Intel has no obligation to provide support of any kind to Licensee regarding use of the Materials. Intel may, at its sole discretion, create upgrades and updates to correct errors and bugs. Intel may make any such upgrades and updates available to Licensee on electronic bulletin board service or on the Internet and Intel shall have no obligation to notify Licensee of the availability of any such upgrade or update.  Such upgrades and updates shall be considered part of the Materials, and shall be subject to this Agreement.  Licensee shall be solely responsible to its customers for any update or support obligation or other liability which may arise from Licensee's distribution of the Materials or modified Materials.
+
+6.  Reservation of Rights:   Except as expressly provided herein, Intel does not grant any express or implied right or license to Licensee under any Intel patents, copyrights, trademarks, or trade secret information. 
+
+7.  Compliance with Specifications:  Licensee shall use commercially reasonable efforts to ensure that Licensee Products comply with the Desktop Management Interface ("DMI") Specification and any updates thereto and any reasonably related test suites implemented by the Desktop Management Task Force ("DMTF") from time to time in DMTF's sole discretion within a reasonable time after such updates to the DMI Specification become available publicly, unless Intel, in its sole discretion, decides not to upgrade the Materials to comply with a given update to the DMI Specification 
+
+8.  Limited Warranty. The Materials are provided "AS IS" without warranty of any kind. If the media on which the Materials are furnished is found to be defective under normal use for a period of ninety (90) days from the date of receipt, Intel's entire liability and Licensee's exclusive remedy shall be the replacement of the media. This offer is void if the media defect results from accident, abuse or misapplication. 
+
+THE ABOVE WARRANTIES ARE THE ONLY WARRANTIES OF ANY KIND EITHER EXPRESS OR IMPLIED INCLUDING WARRANTIES OF MERCHANTABILITY,  FITNESS FOR ANY PARTICULAR PURPOSE, OR NONINFRINGEMENT OF ANY PATENT, COPYRIGHT, TRADE SECRET, OR OTHER INTELLECTUAL PROPERTY RIGHT OF ANY PARTY IN ANY COUNTRY. 
+
+9. Limitation of Liability. NEITHER INTEL NOR LICENSEE NOR THEIR RESPECTIVE VENDORS SHALL HAVE ANY LIABILITY FOR ANY INDIRECT OR SPECULATIVE DAMAGES (INCLUDING, WITHOUT LIMITING THE FOREGOING, CONSEQUENTIAL, INCIDENTAL, AND SPECIAL DAMAGES) INCLUDING, BUT NOT LIMITED TO, REPROCUREMENT COSTS, LOSS OF USE, BUSINESS INTERRUPTIONS, AND LOSS OF PROFITS, IRRESPECTIVE OF WHETHER INTEL HAS ADVANCE NOTICE OF THE POSSIBILITY OF ANY SUCH DAMAGES.  IN NO EVENT SHALL INTEL'S TOTAL LIABILITY TO LICENSEE EXCEED THE SUM PAID TO INTEL BY LICENSEE FOR THE MATERIALS LICENSED HEREUNDER. 
+
+10.  Termination.  Intel may terminate this Agreement at any time if Licensee is in material breach of any of its terms and conditions. Upon termination, Licensee shall immediately destroy the Materials or return all copies of the Materials to Intel along with any copies thereof.
+
+11.  U.S. Government Restricted Rights.   The Materials are provided with "RESTRICTED RIGHTS." Use, duplication, or disclosure by the government is subject to restrictions as set forth in FAR 52.227-14 and DFARS 252.227-7013 et. seq. or its successor. The use of this product by the Government constitutes acknowledgment of Intel's proprietary rights in the product. 
+
+12.  Applicable Law and Notice.  Any claim arising under or relating to this Agreement shall be governed by the internal substantive laws of the State of Delaware or federal courts located in Delaware, without regard to principles of conflict of laws.  Each party hereby agrees to jurisdiction and venue in the courts located in the State of Delaware for all disputes and litigation arising under or relating to this Agreement.  This provision is meant to comply with 6 Del. C. Section 2708(a).
+
+13.  Severability. The terms and conditions stated in this Agreement are declared to be severable. If any paragraph, provision, or clause in this Agreement shall be found or be held to be invalid or unenforceable in any jurisdiction in which this Agreement is being performed, the remainder of this Agreement shall be valid and enforceable and the parties shall use good faith to negotiate a substitute, valid, and enforceable provision which most nearly effects the parties' intent in entering into this Agreement.
+
+14.  Export Laws.  Licensee agrees that the distribution and export/re-export of the Materials is in compliance with the laws, regulations, orders or other restrictions of the U.S. Export Administration Regulation, or export/re-export regulations of any foreign government as applicable.
+
+
+
+
+
+
+
+
+
+END OF LICENSE
+
+
+FOR USE ON THE WEB, REMOVE THE NOTIFICATION FROM THE LICENSE AND REPLACE WITH THE FOLLOWING:
+
+IMPORTANT - READ THIS BEFORE USING OR INSTALLING!
+
+PLEASE REVIEW THE LICENSE AGREEMENT BELOW AND CLICK ON THE "I AGREE" BUTTON AT THE BOTTOM TO ACCEPT THIS LICENSE. BY DOING SO, OR OTHERWISE DOWNLOADING OR COPYING THIS SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.  DO NOT LOAD, COPY, OR INSTALL THIS SOFTWARE UNTIL YOU HAVE CAREFULLY READ AND AGREED TO THE FOLLOWING TERMS AND CONDITIONS. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL OR USE THIS SOFTWARE.
+
+KC - 5/19/97, R2.0      Page 1 of 2
+
+

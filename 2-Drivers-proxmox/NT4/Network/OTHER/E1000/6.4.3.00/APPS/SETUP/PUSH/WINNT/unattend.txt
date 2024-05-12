@@ -1,0 +1,69 @@
+[Unattended]
+OemPreinstall = yes
+NoWaitAfterTextMode = 1
+NoWaitAfterGUIMode = 1
+FileSystem = LeaveAlone
+ExtendOEMPartition = 0
+ConfirmHardware = no
+NtUpgrade = no
+Win31Upgrade = no
+TargetPath = winnt
+OverwriteOemFilesOnUpgrade = no
+OemSkipEULA = yes
+
+[GuiUnattended]
+OemSkipWelcome = 1
+OEMBlankAdminPassword = 1
+TimeZone = "(GMT-08:00) Pacific Time (US & Canada)"
+
+[UserData]
+FullName = "Userid"
+OrgName = "Organization"
+ComputerName = COMPUTER
+ProductId = "xxx-xxxxxxx"
+;or Product key if you are using OEM versions
+
+[Display]
+ConfigureAtLogon = 0
+BitsPerPel = 8
+XResolution = 640
+YResolution = 480
+VRefresh = 60
+AutoConfirm = 1
+
+[Network]
+InstallAdapters = SelectedAdaptersSection
+InstallProtocols = ProtocolsSection
+InstallServices = ServicesSection
+JoinWorkgroup = workgroup
+
+[SelectedAdaptersSection]
+E100B = E100BParameters, ..\$OEM$\Net\PRO100\WINNT4
+E1000 = E1000Parameters, ..\$OEM$\NET\PRO1000\WINNT4
+
+[E100BParameters]
+; For Cardbus configuration
+;MemoryAddress = 0x0C000000		; sample parameter only
+;InterruptNumber = 11   		; sample parameter only
+;IOBaseAddress = 0x0F00    		; sample parameter only
+;MemoryMappedBaseAddress = 0x00000000	; sample parameter only
+
+; Other configuration parameters
+;BusNumber = 4				; sample parameter only
+;SlotNumber = 10			; sample parameter only
+;SpeedDuplex = 0			; 0 = Auto Detect
+;			       		  1 = 10Mbps/Half Duplex
+;					  2 = 10Mbps/Full Duplex
+;					  3 = 100Mbps/Half Duplex
+;					  4 = 100Mbps/Full Duplex
+
+[E1000Parameters]
+
+
+[ProtocolsSection]
+TC = TCParamSection
+
+[TCParamSection]
+DHCP = yes
+
+[ServicesSection]

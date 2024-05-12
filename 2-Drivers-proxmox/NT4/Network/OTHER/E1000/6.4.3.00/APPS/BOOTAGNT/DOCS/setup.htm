@@ -1,0 +1,97 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Server System Setup</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Server System Setup</h1>
+
+<p class="contents"><a href="#overview">Overview</a></p>
+
+<p class="contents"><a href="#windows">Windows* 2000 RIS Server Setup</a></p>
+<p class="contents"><a href="#linux">Linux* Server Setup</a></p>
+<p class="contents"><a href="#other">Other Server Setup Information</a></p>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<P>
+For the Boot Agent software to perform its intended job, there must be a server set up on 
+the same network as the client computer. That server must recognize and respond to the
+<a href="glossary.htm#PXE">PXE</a>, <a href="glossary.htm#RPL ">RPL</a>,
+or <a href="glossary.htm#BOOTP">BOOTP</a> boot protocols that are used by the Boot Agent software.</P>
+<P>
+The following topics describe the actions you should take to set up various 
+types of servers to work with the Boot Agent. If you have questions concerning 
+the setup of your server system, contact the manufacturer of your server 
+hardware or your server operating system vendor for assistance.</P>
+
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>   
+	When the Boot Agent software is installed as an upgrade for an
+	earlier version boot ROM, the associated server-side software may not be compatible with the 
+	updated Boot Agent. Contact your system administrator to determine if any server updates are 
+	necessary.
+    </TD>
+  </tr>
+</TABLE>
+<br>
+
+<hr>
+
+<h2>
+<a name="windows"></a>Windows* 2000 RIS Server Setup</h2>
+<P>
+For information about setting up a Windows 2000 RIS Server:</P>
+<ol>
+  <li>
+    <p class="numlst">Refer to the information located at
+    <a target="_blank" href="http://www.microsoft.com/windows2000">
+    http://www.microsoft.com/windows2000</a>.</li>
+  <li>
+    <p class="numlst">
+Select <b>Technical Resources </b>on the left-hand channel bar.</li>
+  <li>
+    <p class="numlst">
+Select <b>How it Works</b>.</li>
+  <li>
+    <p class="numlst">
+Under the Management link, select <b>Remote Operating System Installation</b>.</li>
+  <li>
+    <p class="numlst">
+Select <b>Download this document</b>.</li>
+</ol>
+
+<hr>
+
+<h2>
+<a name="linux"></a>Linux* Server Setup</h2>
+<P>
+Consult your Linux* vendor for information about setting up the Linux Server.</P>
+
+<hr>
+
+<h2>
+<a name="other"></a>Other Server Setup Information</h2>
+<P>
+An extensive list of hardware and software manufacturers provide products that 
+support remote boot technology, conforming either to the Wired for Management
+(<a href="glossary.htm#WfM ">WfM</a>) specifications or the <a href="glossary.htm#PXE">PXE</a>
+/<a href="glossary.htm#RPL ">RPL</a>/<a href="glossary.htm#BOOTP">BOOTP</a>/
+<a href="glossary.htm#DHCP">DHCP</a> protocols. For information
+about setting up servers, as well as about other remote boot-related products
+provided by these manufacturers, select <a href="overview.htm#resources">Boot-Related
+Resources</a>.</P>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 12/13/02 2:50p <!-- $--> Revision <!--$$Revision:--> 5 <!-- $--></code></p>
+
+</body>
+</html>

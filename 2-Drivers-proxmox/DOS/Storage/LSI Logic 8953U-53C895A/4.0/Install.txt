@@ -1,0 +1,87 @@
+**************************************************************************
+
+                                INSTALL.TXT
+**************************************************************************
+
+This file provides instructions for running the DOS Installation Utility,
+which allows you to install the DOS drivers quickly and easily.
+
+The installation program (install.exe) provides a graphical user inter-
+face similar to Windows environments. You may use the mouse or traverse
+the buttons and windows in the standard DOS way using tabs and arrows.
+
+Here are some helpful aids if using the standard DOS method:
+
+o  Press F1 (Help function key) to obtain context sensitive help for
+   any given window.    
+
+o  Use the tab keys to move around from button to button or group to group.
+
+o  Use the up, down, left, or right arrows keys to position the cursor and
+   select an item.
+
+o  Use the Esc (Escape key) to close a window or return to a previous 
+   window.
+
+
+*  *  *  *  *  *  *  *  Installation Instructions *  *  *  *  *  *  *  *  
+
+To install the DOS Drivers using this utility, follow these steps:
+
+1.  Copy these files to a blank, formatted floppy diskette:
+
+       install.exe
+       z_8xx.dat
+       aspi8xx.sys
+       symcd.sys
+       symdisk.sys
+
+2. Boot your system, insert the newly created diskette, and type
+   at the DOS prompt (A: or B:):
+
+   INSTALL   
+
+3. Press Enter.
+
+   A window displays offering two installation choices.
+
+4. Choose one of these two options:
+
+   Express installation (default) 
+
+   This installation choice requires minimal user interaction and installs
+   all the DOS drivers into a directory called C:\symbios. If this option
+   is selected, the drivers are copied and the CONFIG.SYS and SYSTEM.INI
+   files are modified.
+
+   -or-
+
+   Custom Installation 
+  
+   The second choice is a selectable installation that allows you to choose 
+   individual drivers to install and choose the destination directory for
+   the drivers. If you choose this option, the next window gives you a
+   list of the available drivers to install:
+
+   ASPI8XX.SYS, SYMCD.SYS and SYMDISK.SYS.
+
+   Additionally, this window allows you to change the default drive and
+   directory where the DOS drivers will be copied.
+
+5. Choose OK to allow the installation to take place.
+
+   A final Installation complete window appears with various messages depending
+   on your driver selection. 
+
+   For example, if the CD-ROM (SYMCD.SYS) driver is selected, it warns you of
+   the need to make sure the MSCDEX.EXE driver is loaded in the AUTOEXEC.BAT
+   file in the following form:
+
+       [path]\MSCDEX.EXE /D:SYM001 
+
+   WHERE:
+
+     - the /D switch matches the /D switch of the SYMCD driver line in the
+     CONFIG.SYS file. If they do not match, the CD-ROM drive will not be
+     recognized. MSCDEX is a Microsoft product which LSI Logic is not 
+     authorized to distribute.  

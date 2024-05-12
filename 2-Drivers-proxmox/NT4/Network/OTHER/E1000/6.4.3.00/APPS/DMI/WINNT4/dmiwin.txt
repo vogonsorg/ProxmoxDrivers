@@ -1,0 +1,120 @@
+	Intel Client Instrumentation 3.0 
+	for Desktop Management Interface (DMI) 2.0
+======================================================================
+
+
+
+Readme Contents
+===============
+
+A. Folder Contents and Overview 
+B. Software Requirements and Install File Locations
+C. Uninstall Procedure
+D. Supported Standards
+E. Known Issues
+
+
+A.  Folder Contents and Overview
+=================================
+This folder contains Intel Client Instrumentation for DMI Ver 3.0
+for:
+Microsoft* Windows NT* 4.0 with Service Pack 3 including NDIS HotFix 
+  or with a subsequent Service Pack
+
+This folder contains the MIF files your management software will
+need to view in order to view the Intel(R) adapter functions.
+
+The DMI 2.0 SP SDK v1.10 (Service Provider) setup program is located 
+under APPS\DMI\SERVPROV on the CD. This must be installed or
+Intel Client Instrumentation for DMI Version 3.0 will not work.
+ 
+The DMI 2.0 Service Provider (SP) and Client Instrumentation 
+3.0 for Windows (CI) are updated software modules that 
+allow standards-based DMI 2.0 applications, 
+including LANDesk Client Manager, to monitor the status 
+of PCI adapters. The drivers included in this folder can be
+used to view both single adapter information and custom information
+including AFT/ALB Teaming, VLAN, and Flow Control. 
+
+B. Software Requirements and Install File Locations
+====================================================
+The software requirements to run the Intel Client Instrumentation are:
+
+- A Windows NT 4.0 based operating system.
+
+- Any Intel NDIS PCI adapter driver. Intel Client Instrumentation 
+supports all Intel PCI PRO/100, PRO/100+ and PRO/1000 adapters. 
+If you are running an NDIS based driver under Windows NT 4.0, there 
+is no need to install any new drivers to get DMI support. 
+
+The Service Provider must be installed in order to use the Intel DMI
+Instrumentation. However, the instrumentation may be installed either
+before or after installing the Service Provider.  If you have a
+Service Provider later than Version 2.0 already installed, you do not
+need to install the Service Provider from this CD.
+
+To install the Intel Client Instrumentation (this is not order dependent):
+- Run \APPS\DMI\SERVPROV\SETUP.EXE (to install the Service Provider)
+- Restart the system. This is required for the Service Provider to start.
+- Run \APPS\DMI\WINNT4\INSTALL.EXE (to install the Client Instrumentation)
+
+Contact your Network Administrator if you need help with installation.
+
+
+C. Uninstall Procedure
+======================
+To properly uninstall the Client Instrumentation, the Service 
+Provider software must still be running. Then go to
+Add/Remove Software in the Windows Control Panel and select
+"Intel Client Instrumentation for DMI" and click the
+Remove button.
+After Intel Client Instrumentation is gone from this list, you 
+may remove the Service Provider software through the Start Programs 
+menu. MIFs usually do not require removal, but if you should
+wish to remove the Intel specific files, see the documentation
+for your Management application.
+
+
+D. Supported Standards
+======================
+The DMI instrumentation on this CD does not comply with the DMTF DMI 2.0 
+standards.  For directions on how to install a DMI version which complies 
+to the standards, go to the Intel Support web site at http://support.intel.com.
+
+At this time there are no user SETs. There are sets in the 
+IBM Failover Adapter Table Group that are required by the IBM 
+Hotplug process but there is no user set allowed. 
+
+Only the following events listed in the ni_nic.mif are currently supported:
+- Cable unplugged/No LAN activity
+- Adapter initialization failure
+- AFT/ALB events (Adapter Fault Tolerance/Adaptive Load Balancing)
+
+
+E. Known Issues
+=============== 
+
+1. Known Problems in Installation and Uninstallation Order:
+a. Version 3.0 of the Intel Client Instrumentation may not install
+   correctly over an existing Version 1.0 of the Intel DMI 
+   Network Adapter Instrumentation Layer. The Uninstall feature may
+   not work correctly after upgrading so please uninstall Ver 1.0
+   BEFORE upgrading. In order to install Version 3.0 correctly, 
+   please use the documented Uninstall procedures for Version 1.0.
+       
+b. If the TCP/IP protocol is removed after installing the Client 
+   Instrumentation, you must reinstall the Client Instrumentation 
+   again after you reinstall TCP/IP.
+
+2. Enumeration of adapters, teams and VLANs takes place when the
+   DMI instrumentation starts.  Hence, if teams or VLANs are added
+   while the DMI instrumentation is running, the new teams or VLANs
+   will not show up until the DMI instrumentation has been restarted.
+
+---------------------------------------------------------------
+* Other product and corporate names may be trademarks of other
+  companies and are used only for explanation and to the owner's
+  benefit, without intent to infringe.
+
+Readme version 03-05-2003
+

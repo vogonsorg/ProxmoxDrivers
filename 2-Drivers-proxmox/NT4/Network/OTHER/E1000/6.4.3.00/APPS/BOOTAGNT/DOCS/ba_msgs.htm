@@ -1,0 +1,285 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Boot Agent Messages</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Boot Agent Messages</h1>
+<p>
+The <i> Message Text</i> column in the table below contains an
+alphanumeric list of error and informational messages that the Boot Agent may
+display during initialization. Possible causes for the messages are listed in the table's <i>Cause</i> column.
+Wherever applicable, advice regarding how to avoid an error condition
+appears in the <i>Cause</i> column.
+</p>
+
+<table BORDER="1" cellpadding="4" cellspacing="0">
+  <tr>
+    <th WIDTH="30%" VALIGN="middle">
+      Message Text
+    </th>
+    <th VALIGN="middle">
+      Cause
+    </th>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+Flash device wrong size.</td>
+    <td VALIGN="TOP" align="left">
+This can occur as an error message when using IBAUtil. The full version of Boot Agent software 
+cannot be loaded into a flash ROM device smaller than 64 KB. If a 32 KB (or smaller) flash ROM 
+device is detected in the adapter, the
+flash update software returns this message. Assuming the device is
+socketed, remove the &quot;too small&quot; device and install a blank 64 KB (or larger) flash ROM device.
+See <a href="hw_inst.htm#flash_upgrades">Installing Flash ROM
+Upgrades</a> for more information.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      Invalid PMM function number.</td>
+    <td VALIGN="TOP" align="left">
+      <a href="glossary.htm#PMM"> PMM</a>
+      is not installed or is not working correctly. Try updating the <a href="glossary.htm#BIOS">BIOS</a>.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PMM allocation error.</td>
+    <td VALIGN="TOP" align="left">
+      <a href="glossary.htm#PMM"> PMM</a>
+      could not or did not allocate the requested amount of memory for driver usage.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      Press Ctrl+S to enter the Setup Menu.</td>
+    <td VALIGN="TOP" align="left">
+      Instructs you how to enter the Configuration
+      Setup Menu.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E00: This system does not have enough free conventional memory. The Boot Agent cannot continue.</td>
+    <td VALIGN="TOP" align="left">
+      System does not have enough free memory to run
+      <a href="glossary.htm#PXE"> PXE</a> image. The Boot Agent was unable to find enough free base memory 
+      (below 640K) to install the PXE&nbsp;
+	  client software. The system cannot boot via PXE in its current configuration. The error returns control to the
+<a href="glossary.htm#BIOS">BIOS</a>
+ and the system does not attempt to remote boot. If this error persists, try updating your system's BIOS to 
+ the most-recent version. Contact your system administrator or your computer vendor's customer support to 
+ resolve the problem.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E01: PCI Vendor and Device IDs do not match!</td>
+    <td VALIGN="TOP" align="left">
+      Image vendor and device ID do not match those located on the card.
+      Make sure the correct flash image is installed on the adapter.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E04: Error reading PCI configuration space. The Boot Agent cannot continue.</td>
+    <td VALIGN="TOP" align="left">
+      PCI configuration space could not be read. Machine is probably not PCI
+      compliant. The Boot Agent was unable to read one or more of the adapter's PCI configuration 
+      registers. The adapter may be
+mis-configured, or the wrong Boot Agent image may be installed on the adapter. The Boot Agent will 
+return control to the
+<font color="#008000"><a href="glossary.htm#BIOS">BIOS</a>
+</font>and not attempt to remote boot. Try to update the flash image. If this does not solve the problem, 
+contact your system administrator or
+      <a target="_blank" href="http://support.intel.com">Intel Customer Support</a>.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E05: The LAN adapter's configuration is corrupted or has not been
+      initialized.&nbsp; The Boot Agent cannot continue.</td>
+    <td VALIGN="TOP" align="left">
+      The adapter's EEPROM is corrupted. The Boot Agent determined that the adapter EEPROM checksum is 
+      incorrect. The agent will return control to the
+	<font color="#008000"><a href="glossary.htm#BIOS">BIOS</a> </font>and not attempt to remote boot. Try to 
+	update the flash image. If this does not solve the problem, contact your system administrator or
+      <a target="_blank" href="http://support.intel.com">Intel Customer Support</a>.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E06: Option ROM requires DDIM support.</td>
+    <td VALIGN="TOP" align="left">
+      The system <a href="glossary.htm#BIOS">BIOS</a>
+      does not support <a href="glossary.htm#DDIM"> DDIM</a>.&nbsp;The BIOS does not support the 
+      mapping of the PCI expansion ROMs into upper memory as required by the
+      PCI specification. The Boot Agent cannot function in this system. The Boot Agent returns control to 
+      the BIOS and does not attempt to remote boot. You may be able to resolve the problem by updating 
+      the BIOS on your system. If updating your system's BIOS does not fix the problem, contact your 
+      system administrator or your computer vendor's customer support to resolve the problem.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E07: PCI BIOS calls not supported.</td>
+    <td VALIGN="TOP" align="left">
+      
+<a href="glossary.htm#BIOS">BIOS</a>-level PCI services not available. Machine is probably not PCI
+      compliant.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E09: Unexpected UNDI loader error. Status == xx</td>
+    <td VALIGN="TOP" align="left">
+      The <a href="glossary.htm#UNDI"> UNDI</a> loader returned an
+      unknown error status. xx is the status returned.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E20: BIOS extended memory copy error.</td>
+    <td VALIGN="TOP" align="left">
+      
+<a href="glossary.htm#BIOS">BIOS</a> could not move the image into extended memory.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E20: BIOS extended memory copy error.&nbsp;AH == xx</td>
+    <td VALIGN="TOP" align="left">
+      Error occurred while trying to copy the image into extended memory. xx is the 
+      <a href="glossary.htm#BIOS">BIOS</a> failure code.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E51: No DHCP
+      or BOOTP offers
+      received.</td>
+    <td VALIGN="TOP" align="left">
+      The Boot Agent did
+      not receive any <a href="glossary.htm#DHCP">DHCP</a>
+      or <a href="glossary.htm#BOOTP">BOOTP</a>
+      responses to its initial request. Please make sure that your DHCP
+      server (and/or <a href="glossary.htm#proxyDHCP"> proxyDHCP</a> server, if one is in use) is properly
+      configured
+      and has sufficient IP addresses available for lease. If you are using BOOTP
+      instead, make sure that the BOOTP service is running and is properly
+      configured.
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E53: No boot filename received.</td>
+    <td VALIGN="TOP" align="left">
+      The Boot Agent received a <a href="glossary.htm#DHCP">DHCP</a>
+      or <a href="glossary.htm#BOOTP">BOOTP</a> offer,&nbsp; but has not received a
+      valid filename to download. If you are using <a href="glossary.htm#PXE">PXE</a>,
+      please check your PXE and <a href="glossary.htm#BINL">BINL</a>
+      configuration. If using <a href="glossary.htm#BOOTP">BOOTP</a>, be sure
+      that the
+      <a href="glossary.htm#TFTP">TFTP</a>
+      service is running and that the specific path and filename are correct.
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-E61: Media test failure.</td>
+    <td VALIGN="TOP" align="left">
+      The adapter does not detect
+      link. Please make sure that the cable is good and is attached to a working
+      hub or switch. The link light visible from the back of the adapter should
+      be lit.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC1: Base-code <a href="glossary.htm#ROM"> ROM</a>
+      ID structure was not found.</td>
+    <td VALIGN="TOP" align="left">
+      No base code could be located. An incorrect flash image is installed or
+      the image has become corrupted. Try to update the flash image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC3: BC <a href="glossary.htm#ROM"> ROM</a>
+      ID structure is invalid.</td>
+    <td VALIGN="TOP" align="left">
+      Base code could not be installed. An incorrect flash image is installed
+      or the image has become corrupted. Try to update the flash image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC4: <a href="glossary.htm#UNDI"> UNDI</a> <a href="glossary.htm#ROM"> ROM</a>
+      ID structure was not found.</td>
+    <td VALIGN="TOP" align="left">
+      UNDI ROM ID structure signature is
+      incorrect.
+      An incorrect flash image is installed or the image has become corrupted.
+      Try to update the flash image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC5: <a href="glossary.htm#UNDI"> UNDI</a>  <a href="glossary.htm#ROM"> ROM</a>
+      ID structure is invalid.</td>
+    <td VALIGN="TOP" align="left">
+      The structure length is incorrect. An incorrect flash image is
+      installed or the image has become corrupted. Try to update the flash
+      image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC6: UNDI driver image is invalid.</td>
+    <td VALIGN="TOP" align="left">
+      The <a href="glossary.htm#UNDI"> UNDI</a> driver image signature was invalid.
+      An incorrect flash image is installed or the image has become corrupted.
+      Try to update the flash image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC8: !PXE structure was not found in <a href="glossary.htm#UNDI"> UNDI</a>
+      driver code segment.</td>
+    <td VALIGN="TOP" align="left">
+      The Boot Agent could not locate the needed !PXE structure resource. An incorrect flash
+      image is installed or the image has become corrupted. Try to update the
+      flash image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-EC9: PXENV + structure was not found in <a href="glossary.htm#UNDI"> UNDI</a>
+      driver code segment.</td>
+    <td VALIGN="TOP" align="left">
+      The Boot Agent could not locate the needed PXENV+ structure. An incorrect flash image
+      is installed or the image has become corrupted. Try to update the flash
+      image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-M0F: Exiting Intel Boot Agent.</td>
+    <td VALIGN="TOP" align="left">
+      Ending execution of the ROM image.</td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      This option has been locked and cannot be changed.</td>
+    <td VALIGN="TOP" align="left">
+	You have attempted to change a configuration setting that has been locked by your system 
+	administrator with <a href="dos_util.htm"> IBAUtil</a>. This message can appear either 
+	from within Intel&#174 PROSet's Boot Agent tab when operating under Windows* or from the
+	Configuration Setup Menu when operating in a stand-alone environment. If you think you 
+	should be able to change the configuration setting, consult your system administrator.
+    </td>
+  </tr>
+  <tr>
+    <td WIDTH="30%" VALIGN="TOP" align="left">
+      PXE-M0E: Retrying network boot; press ESC to cancel.</td>
+    <td VALIGN="TOP" align="left">
+	The Boot Agent did not successfully complete a network boot due to a network
+	error (such as not receiving a <a href="glossary.htm#DHCP">DHCP</a> offer). The
+	Boot Agent will continue to attempt to boot from the network until
+	successful&nbsp; or until canceled by the user. This feature is disabled by
+	default. For information on how to enable this feature, contact
+    <a target="_blank" href="http://support.intel.com">Intel Customer Support</a>.
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 9/03/02 1:09p <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

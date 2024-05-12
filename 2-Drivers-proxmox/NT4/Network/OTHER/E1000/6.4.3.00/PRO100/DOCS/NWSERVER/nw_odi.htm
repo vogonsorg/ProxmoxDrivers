@@ -1,0 +1,79 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>NETWARE DOS ODI CLIENT DRIVER INSTALLATION</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Novell NetWare* DOS ODI Client Driver Installation</h1>
+
+<p class="contents"><a href="#tips">Tips</a></p>
+<p class="contents"><a href="#samples">Sample Files</a></p>
+<p class="contents"><a href="nw_kw100.htm"> Command Line Parameters</a></p>
+
+<hr>
+
+<h2><a name="vlm"></a>VLM Installation</h2>
+
+<p>This version of E100BODI.COM requires latest version of the VLM client (version 1.21 or greater).</p>
+<p>Refer to the Novell NetWare documentation for complete installation instructions.</p>
+
+<hr>
+
+<h2><a name="tips"></a>Tips (DOS ODI)</h2>
+
+<ul>
+  <li>
+    <p class="numlst">In CONFIG.SYS, add the line <span class="monospace">LASTDRIVE=Z</span>. In NET.CFG,
+    under the
+    <b> NetWare&nbsp;DOS REQUESTER</b> section (indented), add the line <span class="monospace">
+    FIRST NETWORK DRIVE=&lt;the first unused drive letter&gt;.</span></li>
+  <li>
+    <p class="numlst">Support for promiscuous mode is not available as ASM does not&nbsp;include a receive monitor stack. If needed, load RXMONSTK.COM&nbsp;from the VLM client
+    kit. RXMONSTK.COM should be loaded before E100BODI.COM and after LSL.COM in 
+    autoexec.bat.</li>
+  <li>
+    <p class="numlst">If running EMM386, make sure you are using v4.49 or later (ships&nbsp;with DOS 6.22).</li>
+</ul>
+
+<hr>
+
+<h2><a name="samples"></a>Sample Files</h2>
+
+<p><b>AUTOEXEC.BAT:</b></p>
+<p class="monospace">
+   CD\NWCLIENT<br>
+   LSL<br>
+   E100BODI<br>
+   IPXODI<br>
+   NETX (or VLM  optional)
+</p>
+
+<p><b>CONFIG.SYS:</b></p>
+<p class="monospace">
+   DEVICE=C:\WINDOWS|HIMEM.SYS <br>
+   BUFFERS=30,0 <br>
+   FILES=60 (This can be set to more than 60 to improve performance.)<br>
+   LASTDRIVE=Z (for NETX LASTDRIVE=F or first available drive letter)
+</p>
+
+<p><b>NET.CFG:</b>
+</p>
+<p class="monospace">
+   LINK DRIVER E100BODI<br>
+	FRAME ETHERNET_802.2<br>
+	PROTOCOL IPX EO Ethernet_802.2
+	<br>
+	<br>
+   	NETWARE DOS REQUESTER<br>
+	FIRST NETWORK DRIVE = F <br>
+	&nbsp;</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/26/04 1:09p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

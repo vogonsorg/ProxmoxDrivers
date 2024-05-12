@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Intel</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<base target="_self">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Intel<font size="3"><sup>&reg;</sup></font> PRO Network Adapters WMI and CDM Providers User's Guide</font></h1>
+<p>Welcome to the <i>Intel<font size="1"><sup>&reg;</sup></font> 
+PRO Network Adapters WMI and CDM Providers User's Guide</i>. This document describes the external view of the Intel<font size="1"><sup>&reg;</sup></font> PRO Network Adapters 
+WMI and CDM Providers.  The Windows Management Interface (WMI) Provider is a network configuration block of
+Network Configuration Services (NCS), which is a means of deploying and managing all Intel end-station 
+networking technologies using industry standard methods.&nbsp;The Intel<font size="1"><sup>&reg;</sup></font> PRO Common Diagnostic
+Model (CDM) Provider is an upper interface API that is compliant with the
+CIM 2.5 and WMI standards. On the lower interface, the CDM Provider implements a client
+interface into lower layers of the PROSet software stack. Because of this, all PROSet mechanisms for
+data integrity are maintained.<p>The WMI and CDM Providers are sets of software components that implements the Intel
+WMI network classes. These classes are based on the Desktop Management Task Force (DMTF) CIM Schema version 2.5.
+
+<p>This document does not repeat information contained in the Managed Object Format (MOF) files provided with this product (e.g., details 
+of the meanings of individual attributes can be found in the MOF attribute descriptions).
+
+<p>This document describes how a WMI application such as Intel<font size="1"><sup>&reg;</sup></font> PROSet uses classes to configure a system's
+network and how a how a WMI application uses classes to test an Intel
+network interface card. Readers should be familiar with WMI APIs and the WMI SDK (available from <a href="http://www.microsoft.com/">http://www.microsoft.com/</a>).
+
+<h2><font color="#0000FF">Related Documents</h2></font>
+<p>The following documents can be used to better understand WMI technology:
+<ul><li>CIM schema version 2.0, 2.2 published by Desktop Management Task Force (DMTF). Available at <a
+href="http://www.dmtf.org/">http://www.dmtf.org</a>.</li>
+<li>Microsoft Windows Management Interface (and other manageability information). Available at <a href="http://www.microsoft.com/hwdev/driver/WMI/">
+http://www.microsoft.com/hwdev/driver/WMI/</a>.</li>
+<li>Web-Based Enterprise Management (WBEM) initiative by DMTF. Available at <a href="http://www.dmtf.org/standards/standard_wbem.php">
+http://www.dmtf.org/standards/standard_wbem.php</a>.</li>
+<li>WMI (Microsoft CIM implementation) SDK. Available at <a
+href="http://msdn.microsoft.com/downloads/">http://msdn.microsoft.com/downloads/</a>.</li>
+<li>System Diagnostic Model White Paper by DFTM. Available at <a
+href="http://www.dmtf.org/standards/published_documents.php#whitepapers"> http://www.dmtf.org/standards/published_documents.php
+- whitepapers</a>.</li></ul>
+
+<h2><font color="#0000FF">Topics</h2></font>
+<p>Select a topic below and use the Back and Forward buttons in your browser to navigate through the document.
+<ul><li><a href="wmi.htm">WMI</a></li>
+<li><a href="features.htm">Main Features</a></li>
+<li><a href="files.htm">Installed Files</a></li>
+<li><a href="secure.htm">Security</a></li>
+<li><a href="namecon.htm">Namespace and Context</a></li>
+<li><a href="locales.htm">Locales and Localization</a></li>
+<li><a href="error.htm">Error Reporting</a></li>
+<li><a href="core.htm">The Core Schema</a></li>
+<li><a href="ethernet.htm">Ethernet Adapter Schema</a></li>
+<li><a href="setting.htm">Setting Schema</a></li>
+<li><a href="team.htm">Team Schema</a></li>
+<li><a href="vlan.htm">VLAN Schema</a></li>
+<li><a href="config.htm">Getting the Current Configuration</a></li>
+<li><a href="update.htm">Updating the Configuration</a></li>
+<li><a href="event.htm">Event Notifications</a></li>
+<li><a href="query.htm">Optimized WQL Queries</a></li>
+<li><a href="diag.htm">Diagnostics</a></li>
+<li><a href="meth.htm">Executing Methods in IANet_DiagTest</a></li>
+<li><a href="cim.htm">Summary of CIM Classes</a></li>
+<li><a href="warranty.htm">Limited Warranty</a></li>
+<li><a href="license.htm">Software License</a></li>
+<li><a href="regs.htm">Regulatory</a></li>
+<li><a href="support.htm">Customer Support</a></li>
+<li><a href="http://www.intel.com/product/register/index.htm" target=_blank>Register Your Adapter Online</a></li>
+<li><a href="legal.htm">Legal Information</a></li></ul>
+<br><br>
+<hr color="#00b0b0" size="1">
+
+<h4><a name="disclaimer"></a><font color="#0000FF">Legal Notices</font></h4>
+<p>Information in this document is provided in connection with Intel<font size="1"><sup>&reg;</sup></font> products. No license, express or implied, by estoppel or otherwise, to any intellectual property rights is granted by this document. Except as provided in Intel's Terms and Conditions of Sale for such products, Intel assumes no liability whatsoever, and INTEL DISCLAIMS ANY EXPRESS OR IMPLIED WARRANTY, RELATING TO SALE AND/OR USE OF INTEL<font size="1"><sup>&reg;</sup></font> PRODUCTS INCLUDING LIABILITY OR WARRANTIES RELATING TO FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR INFRINGEMENT OF ANY PATENT, COPYRIGHT OR OTHER INTELLECTUAL PROPERTY RIGHT. Intel products are not intended for use in medical, life saving, or life sustaining applications. Intel may make changes to specifications and product descriptions at any time, without notice.
+<p>This manual as well as the software described in it is furnished under license and may only be used or copied in accordance with the terms of the license. The information in this manual is furnished for informational use only, is subject to change without notice, and should not be construed as a commitment by Intel Corporation. Intel Corporation assumes no responsibility or liability for any errors or inaccuracies that may appear in this document or any software that may be provided in association with this document. 
+<p><b>WARNING:</b> This product contains information that could be used to attack and/or disable a computer system(s) or network(s). A thorough knowledge of Microsoft operating system security features should be a prerequisite to any implementation of this product, and developers and users are strongly encouraged to contact Microsoft regarding any security concerns that they may have prior to using any implementation of this product in a production environment.
+
+</body>
+</html>

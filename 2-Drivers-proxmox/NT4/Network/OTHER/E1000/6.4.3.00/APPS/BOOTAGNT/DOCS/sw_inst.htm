@@ -1,0 +1,361 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing the Boot Agent Software Image</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Installing the Boot Agent Software Image</h1>
+<P class="contents"><a href="#overview">Overview</a></P>
+<P class="contents"><a href="#install_dos">Installing/Updating in DOS Environments</a></P>
+<P class="contents"><a href="#install_windows">Installing/Updating in Windows 
+Environments Using Intel&#174 PROSet</a></P>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+
+<P>Most Intel <a href="glossary.htm#WfM ">WfM</a>-compatible adapters, such as the
+<i> Intel&#174;
+PRO/100 S Desktop Adapter</i>, the <i> Intel&#174 PRO/1000
+T Desktop Adapter</i> have a factory-installed, integrated flash ROM device that has been pre-programmed with a Boot Agent software image.&nbsp;</P>
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTES</I>:</B> Use <a href="dos_util.htm">IBAUtil</a> 
+    to enable the flash ROM on Intel server adapters.&nbsp;
+    </TD>
+  </tr>
+  <tr>
+    <td valign="top" height="28"></td>
+    <td valign="top" height="28"> Adding Flash ROM is applicable only to 10/100 adapters.</td>
+  </tr>
+</TABLE>
+<p>In the event that you wish to install flash ROM in an adapter that has an
+empty socket (Intel PRO/100 adapters only), see <a href="overview.htm#rom_devices">Compatible
+Flash ROM Devices</a> for instructions to access a list of flash ROM devices
+that are compatible with the Intel&#174 Boot Agent.&nbsp;</p>
+<P>
+In cases involving hardware upgrades, once a <a href="glossary.htm#Flash"> flash</a>
+<a href="glossary.htm#ROM"> ROM</a> device is available within the client computer, a valid Boot Agent software image must be installed onto the flash ROM device. The way in which the Boot Agent software image is installed within the flash ROM depends upon your hardware configuration.</P>
+<ul>
+<LI CLASS="Bulleted">
+<p class="numlst">
+If your computer includes the network adapter on its motherboard, the Boot Agent software
+will need to be available as part of a motherboard
+<a href="glossary.htm#BIOS"> BIOS</a>. Contact your computer or motherboard manufacturer to upgrade your motherboard BIOS code. Alternatively, it is possible that the motherboard has a ROM socket with a 64 KB (or larger) flash ROM device. In this case, contact the motherboard manufacturer to get the code that must be loaded into the flash ROM.</LI>
+<LI CLASS="Bulleted">
+<p class="numlst">
+If your computer uses a flash ROM-equipped adapter, follow the instructions in 
+the appropriate section below.</LI>
+</ul>
+
+<hr>
+
+<h2>
+<a name="install_dos"></a>Installing/Updating in DOS Environments</h2>
+<P>In this procedure, you will use an executable flash tool called IBAUtil that
+has the necessary Boot Agent images stored within the executable. You will
+select the NIC you want to flash, and indicate whether or not you want the Boot
+Agent to create a backup image of the old flash before flashing a new Boot Agent
+image. IBAUtil then erases the flash before writing the new Boot Agent image onto
+the <a href="glossary.htm#Flash">flash</a>.</P>
+<P>To use IBAUtil to install or update the Boot Agent software in a DOS environment:</P>
+<ol>
+<LI>
+<p class="numlst">
+Obtain a DOS-bootable floppy disk containing an executable image of the IBAUtil.EXE utility. If you do not have IBAUtil.EXE on your DOS bootable floppy disk, copy it to your system disk from the CD ROM that came with your product under the &#92;BOOTAGNT  directory, or acquire the most up-to-date version from Intel's website
+at <a target="_blank" href="http://support.intel.com">http://support.intel.com</a>.</LI>
+<LI>
+<p class="numlst">
+Using your DOS bootable floppy disk, boot your computer to a DOS prompt.<br>
+</p>
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <TR>
+    <TD valign="top"><img border="0" src="caution.gif" width="28" height="21"></TD>
+    <TD valign="top"><b><i>CAUTION</i>:</b> The next several steps require that 
+    your computer be booted only to DOS. These steps cannot be performed from a DOS Command Prompt window or using a DOS task within Windows.</TD>
+  </TR>
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>  
+	If the <a href="glossary.htm#Flash"> flash</a> <a href="glossary.htm#ROM"> ROM</a>
+      device installed in the adapter ROM socket is already programmed (not
+      blank), you may need to take steps to enable your computer to boot from the floppy drive. If necessary, disable the network boot function from either the
+      <a href="glossary.htm#BIOS"> BIOS</a> Setup program or the Boot Agent's configuration setup menu. Then, reboot to the DOS bootable floppy disk containing the
+      IBAUtil upgrade that you just prepared.
+    </TD>
+  </tr>
+</TABLE>
+  </LI>
+  <li>
+    <p>Type <code>IBAUTIL
+    -upgrade</code> and press <b>Enter</b>.
+    </p>
+    <p>
+    A message similar to the one below appears showing a list of all compatible network adapters found in your system, assuming both the adapter and the
+    <a href="glossary.htm#Flash">flash</a> <a href="glossary.htm#ROM"> ROM</a> device are properly
+    installed.
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>  
+      Actual adapter-related data may vary depending upon the adapters installed.
+    </TD>
+  </tr>
+</TABLE>
+</li>
+</ol>
+<blockquote>
+  <table border="0" cellpadding="4" cellspacing="0">
+    <tr>
+      <td colspan="4" align="center"><p><code>Adapter Choices</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>===</code></p>
+      </td>
+      <td align="center"><p><code>================</code></p>
+      </td>
+      <td align="center"><p><code>=======</code></p>
+      </td>
+      <td align="center"><p><code>================</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>NIC</code></p>
+      </td>
+      <td align="center"><p><code>Network Address</code></p>
+      </td>
+      <td align="center"><p><code>Series</code></p>
+      </td>
+      <td align="center">
+        <p><code>Boot Agent</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>===</code></p>
+      </td>
+      <td align="center"><p><code>================</code></p>
+      </td>
+      <td align="center"><p><code>=======</code></p>
+      </td>
+      <td align="center"><p><code>================</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>1</code></p>
+      </td>
+      <td align="center"><p><code>00D0B7D36018</code></p>
+      </td>
+      <td align="center"><p><code>1229</code></p>
+      </td>
+      <td align="left"><p><code>SST 39VF512</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>2</code></p>
+      </td>
+      <td align="center"><p><code>000347003E35</code></p>
+      </td>
+      <td align="center"><p><code>100C</code></p>
+      </td>
+      <td align="left"><p><code>ATMEL AT49LV040</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center"><p><code>&nbsp;</code></p>
+      </td>
+      <td align="center"><p><code>&nbsp;</code></p>
+      </td>
+      <td align="center"><p><code>&nbsp;</code></p>
+      </td>
+      <td align="center"><p><code>&nbsp;</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4"><p><code>Select NIC to update or ESC to quit:</code></p>
+      </td>
+    </tr>
+  </table>
+</blockquote>
+<ol start="4">
+  <li>
+    <p>Type the number that corresponds to the Ethernet address of the desired
+    adapter to continue. The next question appears:</li>
+</ol>
+<blockquote>
+    <blockquote>
+    <pre>Select Option (U)pdate or (R)estore:</pre>
+    </blockquote>
+</blockquote>
+<ol start="5">
+  <li>
+    <p class="numlst">
+Type <code>U</code>  (Update) if you want the IBAUtil utility to update the
+<a href="glossary.htm#Flash"> flash</a> <a href="glossary.htm#ROM"> ROM</a> device with the current version of Boot Agent software. Type
+    <code> R</code>  (Restore) if you want IBAUtil to write a
+previously stored flash image file onto the flash ROM device.
+    </p>
+    <p class="numlst">
+If you select the <code>U</code>  (Update) response, this prompt
+appears:</p>
+    <blockquote>
+    <pre>Create Restore Image? (Y)es or (N)o:</pre>
+    </blockquote>
+  </li>
+  <li>
+    <p class="numlst" style="margin-top: 0; margin-bottom: 0">
+Type <code> Y</code> (yes) to create a backup of the current
+    contents of the <a href="glossary.htm#Flash"> flash</a> <a href="glossary.htm#ROM"> ROM</a>
+    device (not yet updated) onto a file. If such a file already exists, you'll
+    be asked if you want to overwrite the file. If you type <code> Y</code> (yes),
+    the flash image file is overwritten with the current contents of the flash
+ROM. The new Boot Agent image is then written into the flash ROM device
+    used by the adapter. The process takes approximately one minute.&nbsp;
+    <p class="numlst" style="margin-top: 0; margin-bottom: 0">
+&nbsp;
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B>  The IBAUtil utility automatically names the flash image file (backup file) as
+      XXXXXXXX.FLS, where XXXXXXXX are the last eight digits of the adapter's
+      Ethernet<font color="#FF0000"> </font>address. So, if you selected <code>1</code><font size="3">
+      (</font>the first NIC listed) in step 4 above, the backup file's name would be
+      <font size="3"><code>B7D36018.FLS</code>.
+      </font>
+    </TD>
+  </tr>
+</TABLE>
+    <p class="numlst" style="margin-top: 0; margin-bottom: 0">&nbsp;<p class="numlst" style="margin-top: 0; margin-bottom: 0"><b>--or--</b></li>
+</ol>
+<blockquote>
+  <p class="numlst" style="margin-top: 0; margin-bottom: 0">Type
+    <code> N</code> (no) to cause IBAUtil to proceed
+without first saving a copy of the current contents of the <a href="glossary.htm#Flash"> flash</a>
+    <a href="glossary.htm#ROM"> ROM</a> device onto a file. IBAUtil asks you to
+    confirm your choice as follows:
+  <blockquote>
+    <pre>Continue Update without Restore Image? (Y)es or (N)o:</pre>
+  </blockquote>
+  <p class="numlst" style="margin-top: 0; margin-bottom: 0">
+If you type
+    <code> N</code> (no), IBAUtil cancels the update,
+leaving the flash contents unchanged, and then asks you whether you want to
+reboot or return to the DOS prompt.
+    If you type <code> Y</code> (yes), a new Boot Agent
+    image is written into the <a href="glossary.htm#Flash"> flash</a> <a href="glossary.htm#ROM"> ROM</a>
+    device used by the adapter. IBAUtil prompts you with the following question:&nbsp;
+  <blockquote>
+    <pre>Press &lt;Enter&gt; to reboot your computer, &lt;Q&gt; to quit without reboot.</pre>
+  </blockquote>
+</blockquote>
+<ol start="7">
+  <li>Either press <b>Enter</b> to reboot or <code>Q</code>
+    to return to the DOS prompt without rebooting.</li>
+</ol>
+
+<hr>
+
+<h2><a name="install_windows"></a>Installing/Updating in Windows Environments Using
+Intel&#174; PROSet</h2>
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTES</I>:</B>     Intel PROSet can flash the Boot ROM.
+      However, if you need to disable the Boot ROM use <a href="dos_util.htm">IBAUtil</a>
+      from a DOS environment.
+      <p>   The Boot Agent update operation involves writing the Boot Agent image into the flash ROM, which may temporarily disable the
+operation of the Windows network device driver. Depending on what software is installed in your system, you may need to reboot the computer following this operation.
+      To use Intel  PROSet, you must use Intel Driver Release 4.0 or higher.&nbsp;</p>
+      <p style="margin-top: 6">Do not use DOS commands in Windows Protected
+      Mode. If DOS installation is required, refer to <a href="#install_dos">Installing/Updating
+      in DOS Environments</a>.</p>
+    </TD>
+  </tr>
+</TABLE>
+<P CLASS="Body-Text">You can use Intel PROSet to install or update the Boot Agent
+software in Windows environments as follows:</P>
+<ol>
+<LI>
+<p class="numlst">
+When downloading a flash ROM image file from Intel's web site, be sure to save it to a temporary directory or a location where you can easily locate it for this procedure.</LI>
+<LI>
+<p class="numlst">
+Install the Intel PROSet software onto the system.</LI>
+<LI>
+<p class="numlst">
+Open Intel PROSet by double-clicking the icon on the lower-right corner of the
+desktop.</LI>
+<LI>
+<p class="numlst">From Intel PROSet, select the appropriate adapter and click the <b> Boot Agent</b> tab. The Boot Agent tab appears
+like the one shown in the screen image below. If the tab does not appear, update your network driver or make sure you have Intel 
+PROSet Version 4.0 or higher.</LI>
+</ol>
+<blockquote>
+<TABLE border="0" cellpadding="4" cellspacing="0">
+  <tr>
+    <TD valign="top"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top">
+      <B><I>NOTE</I>:</B>   Intel PROSet
+      also allows you to change configuration settings for PXE and
+      RPL environments. Therefore, if you select an adapter
+      that operates in PXE or
+      RPL environments from the devices listed under Network Components on the left side of
+      the Intel PROSet screen below, you may view or change configuration settings that appear on the
+      right side of the screen. To do so, refer to <a href="config.htm#windows">Configuring the Boot Agent in a Windows* Environment</a>. Not all
+      configuration settings are available for some flash ROMs.
+    </TD>
+  </tr>
+</TABLE>
+</blockquote>
+
+<p align="center" style="margin-top: 0"><img border="0" src="proset.gif" width="484" height="318">
+
+<ol start="5">
+  <li>
+    <p CLASS="numlst">
+Press <b> Ctrl+S</b> to enable a special capability allowing you to change the various configuration settings.</li>
+  <li>
+    <p CLASS="numlst">
+Select the adapter that contains the flash ROM you want to update from those
+listed under <b>Network Components</b> on the left side of the screen.</li>
+  <li>
+    <p CLASS="numlst">
+	Click the <b> Update Boot Agent</b> button. If the Windows network device 
+    driver is active (loaded and enabled), or if the Windows network device 
+    driver is inactive (disabled or not loaded), a dialog box appears.</li>
+  <li>
+    <p CLASS="numlst">
+	In either case, click <b> Yes</b> to continue with the update process.</li>
+  <li>
+    <p CLASS="numlst">If you want to create a backup of the current flash ROM image 
+    before updating the flash, click <b>Yes</b>. The Save Existing Flash Image As dialog appears. Proceed to
+	step 10.<p CLASS="numlst">If you are not saving a backup of the current flash ROM image to a file, 
+	click <b>No</b>. A dialog box appears. Click <b>Yes</b> to continue and then 
+	proceed to step 11.</p>
+	</li>
+  <li>
+    <p class="numlst">
+	Click <b> Save</b> if you want to accept the default path and filename (the filename defaults 
+	to the adapter's unique MAC address). Otherwise, modify these parameters and then click<b> Save</b>.</li>
+  <li>
+    <p class="numlst">At the Open File dialog box, click <b> Open</b> if the desired flash ROM image file you stored in
+    step 1 appears as the screen's default path and filename. Otherwise, modify the path and filename and then click
+    <b>Open</b>.</p>
+	<p class="numlst">The flash ROM update process takes between five and ten 
+    seconds; for a serial flash, this process takes up to 90 seconds. A progress 
+    control gauge appears while the update operation is in progress. The Boot 
+    Agent software image is now copied to the flash ROM.</p>
+  </li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/14/03 2:51p <!-- $--> Revision <!--$$Revision:--> 6 <!-- $--></code></p>
+
+</body>
+</html>

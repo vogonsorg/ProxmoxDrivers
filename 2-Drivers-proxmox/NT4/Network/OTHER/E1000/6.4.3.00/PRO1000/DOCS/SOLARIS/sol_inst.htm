@@ -1,0 +1,238 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing the Intel Network Driver for Sun Solaris</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel Network Drivers for SunSoft Solaris*</h1>
+
+<p class="contents"><a href="#install">Install Drivers</a></p>
+<p class="contents"><a href="#verify_install">Verify Installation</a></p>
+<p class="contents"><a href="#speed_duplex">Configuring Speed and Duplex</a></p>
+<p class="contents"><a href="#jumbo_frames">Enabling Jumbo Frame Support</a>
+<br>
+
+</p>
+
+<hr>
+
+<h2><a name="install"></a>Install Drivers</h2>
+<ol>
+  <li>
+    <p class="numlst">Install the Intel adapter and boot the machine.</li>
+  <li>
+    <p class="numlst">Ensure that the adapter is recognized by the operating
+    system:
+    <blockquote>
+    	<code>
+		# prtconf -v | grep pci8086,[0-2][01][0-4][0-F]</code>
+    </blockquote>
+  </li>
+  <li>
+    <p class="numlst">Mount the CD and install INTCGigaE.pkg (INTCGI~1.PKG) from the /PRO1000/SOLARIS 
+    directory using pkgadd. For example, if your CD is mounted at /cdrom, with the Solaris
+    Volume Manager, use the following syntax:</p>
+	  <blockquote>
+	    <code># pkgadd -d /cdrom/cdrom0/PRO1000/SOLARIS/INTCGI~1.pkg</code>
+	  </blockquote>
+	<p class="numlst">If Solaris Volume Manager is not used to mount the
+      CD, use the following syntax:</p>
+      <blockquote>
+        <code># pkgadd -d &lt;mount_point&gt;/PRO1000/SOLARIS/INTCGI~1.pkg</code>
+      </blockquote>
+ 	<p class="numlst">As an alternative to mounting the CD, you can copy the INTCGigaE.tar.Z&nbsp; 
+	(INTCGI~1.Z) file to
+    a temporary directory (for example, /tmp) and install the package from that
+    directory:</p>
+	<blockquote>
+		<code># cp INTCGI~1.Z&nbsp;/tmp<br>
+		#&nbsp;cd /tmp<br>
+		#&nbsp;uncompress INTCGI~1.Z<br>
+		#&nbsp;tar&nbsp;xvf&nbsp;INTCGigaE.tar<br>
+		#&nbsp;pkgadd –d /tmp</code></blockquote>	
+	</li>
+	<li><p class="numlst">The system must be configured to look for new hardware on the next boot.
+    This is accomplished with either of these two methods:</p>
+    <ol type="a">
+    	<li><p class="numlst">Enter the following:</p>
+    	  <blockquote>
+    		<code># touch /reconfigure</code>
+    	  </blockquote>
+    	  <p class="numlst">Then, reboot the computer:</p>
+		  <blockquote>
+			<code># sync;init 6</code>
+      	  </blockquote>
+      	  </li>
+		<li><p class="numlst">Or, as an alternative to the method above, you can
+          boot the operating system with
+  			the -r option. In order for your Intel PRO/1000 adapter to be identified by
+  			the e1000g driver, this must be done after the driver package is installed.</p>
+      		<p class="numlst">First, reboot the computer:
+      		<blockquote>
+				<code># sync;init 6</code>
+			</blockquote>
+          <p class="numlst">
+  			From the Solaris boot interpreter screen (during the Solaris x86
+  			bootstrap program), enter the following when the &quot;Select (b)oot
+          or (i)nterpreter&quot; prompt appears:
+  			<blockquote>
+            <code>b -r</code>
+  			</blockquote>
+  			</li>
+	</ol></li>
+  	<li>
+    <p class="numlst">
+	Configure the IP address for the installed instance. You can determine the installed instance by using the following:
+	<blockquote>
+		<code># prtconf -v | grep pci8086,[12][01][01][0-F]</code>
+	</blockquote>
+	<p class="numlst">To
+	configure the IP address and bring up the interface, run the following commands:
+	<blockquote>
+		<code># ifconfig e1000g0 plumb<br>
+		# ifconfig e1000g0 inet &lt;ip_address&gt; netmask + broadcast + -trailers up</code>
+	</blockquote>
+	</li>
+  	<li>
+    <p class="numlst">Set
+	up your /etc/hosts and /etc/hostname.e1000g&lt;instance&gt; files
+	so that these entries persist through reboot cycles.</li>
+</ol>
+
+<hr>
+<h2><a name="verify_install"></a>Verify Installation</h2>
+<ol>
+  <li><p class="numlst">Check the device ID and instance:</p>
+	<blockquote>
+		<code># prtconf -v | grep pci8086,[0-2][01][0-4][0-F]</code>
+	</blockquote>
+	<p class="numlst">If you have an Intel PRO/1000 Server 
+  Adapter, the adapter should have one of the following device IDs: 1000, 1001,
+    1002, 1003, 1004, 1011, 1012, 1013, 1014, 1019, 1107, 1108, 1109, 2004, 2107, 2109,
+    2112, 101A, 110D, 000E, 001E, 002E, 003E, 004E, 0001, 0014.
+	<p class="numlst">The device instance is needed for certain commands.
+    Typically, you will use the format, <code>e1000g&lt;device_instance&gt;</code>, in such
+    commands. </p></li>
+  <li><p class="numlst">Get the IP address associated with the
+    e1000g&lt;instance&gt; interface:</p>
+  	<blockquote>
+		<code># ifconfig –a</code>
+  	</blockquote></li>
+  <li><p class="numlst">Try to ping this IP address from some other computer on the network:</p>
+	<blockquote>
+		<code>#ping &lt;ip_address&gt;</code>
+	</blockquote></li>
+  <li><p class="numlst">To determine the driver version number, execute the following command:
+	<blockquote>
+		<code># pkginfo -l INTCGigaE</code></p>
+	</blockquote></li>
+</ol>
+
+<hr>
+<h2><a name="speed_duplex"></a>Configuring Speed and Duplex</h2>
+<p>
+In order to change the adapter's speed and duplex settings, you must edit the /kernel/drv/e1000g.conf
+file.
+</p>
+<p>
+The following parameter is listed in this file:
+</p>
+<blockquote>
+	<code>
+	ForceSpeedDuplex=7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7;<br>
+	# This will force Speed and Duplex for following settings for a typical instance.<br>
+	# 1 will set the 10 Mbps speed and Half Duplex mode.<br>
+	# 2 will set the 10 Mbps speed and Full Duplex mode.<br>
+	# 3 will set the 100 Mbps speed and half Duplex mode.<br>
+	# 4 will set the 100 Mbps speed and Full Duplex mode.<br>
+	# 7 will let adapter autonegotiate.
+	</code>
+</blockquote>
+<p>
+To change the adapter speed and duplex, you must change the array element corresponding 
+to the adapter instance to the number shown in the parameter comments for the desired 
+speed/duplex combination. For example, to force the e1000g0 and e1000g1 adapters to 100 
+Mbps/half duplex, you would change this parameter to read:
+</p>
+<blockquote>
+	<code>
+	ForceSpeedDuplex=3,3,7,7,7,7,7,7,7,7,7,7,7,7,7,7;
+	</code>
+</blockquote>
+<p>Any changes to the speed and duplex settings will take effect after the next
+system boot, or when the driver is unloaded and reloaded.
+</p>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top" align="center">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td><b><i>NOTE</i></b>: 1000 Mbps speed can only be obtained when auto-negotiation
+      is enabled.</td>
+  </tr>
+  <tr>
+    <td valign="top" align="center">
+    </td>
+    <td><b><i>NOTE</i></b>: The e1000g driver ignores attempts to force speed and duplex settings 
+for PRO/1000 fiber adapters.</td>
+  </tr>
+</table>
+<br>
+
+<hr>
+<h2><a name="jumbo_frames"></a>Enabling Jumbo Frame Support</h2>
+ 
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top" align="center">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td><b><i>NOTE</i></b>: Jumbo Frames are not supported on
+    Intel 82542-based adapters.</td>
+  </tr>
+</table>
+
+
+<p class="numlst">Before
+loading the driver, set these parameters in the e1000g.conf file under the
+/kernel/drv directory. You must have administrator privileges to be able to edit
+this file and load the driver.
+</p>
+<ol>
+  <li>
+    <p class="numlst">
+Set MaxFrameSize to the appropriate value for your desired maximum Jumbo Frame
+size. For Alteon size Jumbo Frames (9022 bytes), set this to 3 (for up to 16K
+frame size).
+</li>
+  <li>
+    <p class="numlst">
+Once the adapter is working, you can change MTU by using: 
+<blockquote>
+	<code>#ifconfig e1000g&lt;device_instance&gt; mtu &lt;desired value&gt;</code> 
+</blockquote></li>
+<li>
+  <p class="numlst">If you want the driver to collect statistics for Jumbo
+  Frames usage, set ProfileJumboTraffic to 1 for that instance of the adapter.
+  </li>
+<li>
+  <p class="numlst">To see how many Jumbo Frames the driver has sent or
+  received, enter the following after setting ProfileJumboTraffic, as described
+  in the previous step:
+  <blockquote>
+  	<code>netstat -k e1000g&lt;device_instance&gt;</code>
+  </blockquote>
+  </li>
+  <li><p class="numlst">If you have made changes to the /kernel/drv/e1000g.conf file,
+	you must re-boot, or load and unload the driver, for the changes to take effect.</p>
+	</li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/02/04 2:23p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

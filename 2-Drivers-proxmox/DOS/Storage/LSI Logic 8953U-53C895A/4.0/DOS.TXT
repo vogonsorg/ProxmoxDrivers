@@ -1,0 +1,912 @@
+*******************************************************************************
+                                   DOS.TXT
+*******************************************************************************
+
+INSTALLATION GUIDE FOR THE SDMS 4.0 DOS DRIVERS
+
+This file describes the features and use of the LSI Logic SDMS device
+drivers for the DOS/Windows operating system environment. It is divided 
+into the following sections:
+
+Introduction
+        When you need to load drivers
+             ASPI8XX.SYS
+             SYMDISK.SYS
+             SYMCD.SYS
+Automatic Installation of SDMS for DOS/Windows
+    Using the DOS Installation Utility
+About Your ASPI8XX.SYS Driver 
+        Features
+        Description
+Installing Your ASPI8XX.SYS Driver 
+        Command Line Options
+             Using the /NORST Option
+             Using the /ASK Option
+             Using the /WIDTH Option
+             Using the /DISCONNECT Option
+             Using the /SYNCH_RATE Option
+             Using the /SYNCH_OFFSET Option
+             Using the /PARITY Option
+             Using the /EXCLUDE Option
+             Using the /HOST_ID Option
+             Using the /TIMEOUT Option
+             Using the /VERBOSE Option
+        Troubleshooting
+About Your SYMDISK.SYS Driver
+        Features
+        Description
+Installing Your SYMDISK.SYS Driver
+        Command Line Options
+             Using the /ASK Option
+             Using the /UNITS Option
+             Using the /EXCLUDE Option
+             Using the /SSIZE Option
+             Using the /SPINDOWN Option
+        Troubleshooting
+About Your SYMCD.SYS Driver 
+        Features
+        Description
+Installing Your SYMCD.SYS Driver
+        Command Line Options
+             Using the /ASK Option
+             Using the /UPTOLUN Option
+             Using the /NOBCD Option
+        Troubleshooting
+Important Additional Information For DOS Users
+        Assignment of Drive Letters
+
+
+******************************* Introduction **********************************
+
+In SDMS 4.0, the SCSI BIOS for the LSI Logic family of PCI SCSI chips is capable
+of mapping SCSI hard disk drives behind any non-SCSI hard disk drives 
+(IDE, ESDI, etc.) within the same system. A driver-less solution will allow
+connection of up to 24 hard drives (SCSI and non-SCSI) under DOS 5.0 and above. 
+
+Full Virtual DMA Services (VDS), including features such as scatter-gather, 
+are also supported by the SCSI BIOS. Therefore, to gain maximum 
+performance, you should disable any double buffer option provided by disk 
+caching software (such as Microsoft's SMARTDRV.EXE) for all drives 
+handled through SDMS.
+
+
+*  *  *  *  *  *  *  * When You Need to Load Drivers *  *  *  *  *  *  *  *  *
+
+Connecting peripherals other than hard disk drives requires loading the
+appropriate driver. Some of the drivers work together, and some are capable of
+direct communication with a LSI Logic PCI/SCSI controller.
+
+
+*  *  * ASPI8XX.SYS *  *  *
+
+This driver is an ASPI (Advanced SCSI Programming Interface) manager which 
+provides standard ASPI compatibility between your SCSI host adapter hardware
+and ASPI compatible applications.
+
+
+*   *   * SYMDISK.SYS *   *   *
+
+This is a device driver for non-INT13h SCSI disk drives and removable media
+devices, and it works through the ASPI manager.
+
+
+*   *   * SYMCD.SYS *   *   *
+
+This is a device driver for CD-ROM drives, and it works through the ASPI 
+manager.
+
+
+The following sections list these drivers, their features, and their 
+loading requirements.
+
+
+********************* Installation of SDMS Drivers for DOS ******************
+
+This section provides information for quick installation of the DOS device
+drivers.
+
+*  *  *  *  *  *  *  *  Using the DOS Installation Utility *  *  *  *  *  *
+
+The LSI Logic SDMS DOS Installation Utility provides a quick and easy method  
+for performing either an automatic or custom installation of the SCSI device 
+drivers in a DOS/Windows environment. It works with any system using an SDMS
+supported LSI Logic SCSI chip. The DOS Installation Utility identifies the system, 
+scans the SCSI bus, and properly installs the needed SCSI device drivers.
+
+The SDMS Software Device Drivers diskette that contains the DOS device drivers 
+also holds the DOS Installation Utility. To use the utility, insert the disk 
+into your floppy drive while in the DOS environment, and type:
+
+     INSTALL
+
+Press Enter, and then follow the directions presented on the screen.
+
+When performing a custom installation, an understanding of the information
+presented in the following sections for manual installation may prove useful.
+
+*  *  *  *  *  *  *  *  *  * Troubleshooting *  *  *  *  *  *  *  *  *  
+
+Here is a potential problem and a suggested solution:
+
+If a menuing system exists in CONFIG.SYS and multiple menu selections are available 
+that already include some of our drivers, LSI Logic only updates the first menu selection 
+found that already contains our drivers rather than all of them. However, if SDMS 
+drivers are not present, it will put the new drivers in the common area and create a 
+common menu item one if it does not exist.
+
+A workaround regarding menuing in the CONFIG.SYS is to ensure the install program puts
+the drivers where you want them. By default they are put in the common area. However, 
+if some of the SDMS drivers are already present, the install program may incorrectly 
+guess where the new ones should be put.
+
+
+************************* About Your ASPI8XX.SYS Driver ***********************
+
+This section provides information concerning the pertinent features and 
+general description of the ASPI8XX.SYS device manager.  
+
+*  *  *  *  *  *  *  *  *  *  *  * Features *  *  *  *  *  *  *  *  *  *  *  * 
+
+o  Supports Advanced SCSI Programming Interface (ASPI) applications
+o  Supports up to eight host adapters
+o  Releases initialization code for smaller runtime size
+o  Works with or without a SDMS 3.0 or SDMS 4.0 Boot ROM
+o  Performs synchronous negotiation 
+o  Supports target initiated negotiation
+o  Performs Wide SCSI 
+o  Has full Virtual DMA Services (VDS) support, including scatter-gather
+o  Allows Disconnect/Reselect
+o  Supports adapter exclusion 
+o  Allows shared interrupts 
+o  Supports single-threaded I/O
+o  Supports DMI Non-Volatile Storage (NVS) (can read device configuration
+   information from NVS when NVRAM is not present for the device)
+o  Support for LSI Logic usage of PCI Subsystem ID to control various
+   features and configuration settings (See PCI Subsystem ID
+   Definitions for SCSI Class, rev. 1.03, dated 5/28/97) 
+o  Supports booting from a CD-ROM
+o  Supports up to Ultra160 SCSI (160 MBytes/Sec when using Wide SCSI)
+   including:
+      Parallel Protocol Request
+      Double Transition data transfers
+      Cyclic Redundancy Check
+o  Supports a 66MHz PCI bus
+
+*  *  *  *  *  *  *  *  *  *  *  Description *  *  *  *  *  *  *  *  *  *  *
+
+
+This ASPI8XX.SYS driver is an ASPI manager that provides an interface to
+popular ASPI applications. It is required when you want to use SYMDISK.SYS or
+SYMCD.SYS, or whenever you want to run an ASPI application.
+
+This interface replaces an SDMS BIOS (if present), and fully supports all devices
+supported by the BIOS. If an SDMS BIOS is not present, only an ASPI interface
+is provided.
+
+
+*********************** Installing Your ASPI8XX.SYS Driver ********************
+
+To install the ASPI8XX.SYS driver, follow these steps:
+
+1. Use the COPY command to copy the ASPI8XX.SYS driver from the SDMS SCSI
+   Drivers diskette to your boot disk.
+
+2. Add this line to the system's CONFIG.SYS file:
+
+   DEVICE=C:[path]ASPI8XX.SYS
+
+This line must appear before any line loading other SDMS drivers (such as,
+SYMCD.SYS, SYMDISK.SYS), or any other ASPI compliant driver/application.
+
+*  *  *  *  *  *  *  *  *  *  Command Line Options *  *  *  *  *  *  *  *  *  *
+
+The ASPI8XX.SYS driver has several configurable features that are set by using
+switches on the command line in your CONFIG.SYS file.
+
+The command line options are as follows and the usage is detailed below:
+
+    /NORST, /ASK, /WIDTH (or /W), /DISCONNECT (or /DC), /SYNCH_RATE (or /SR),
+    /SYNCH_OFFSET (or /SO), /PARITY (or /P), /EXCLUDE (or /X), /HOST_ID (or /ID),
+    /TIMEOUT (or /T), /VERBOSE (or /V)
+
+In the following descriptions, "path" refers to the adapter number (boot order
+designation), and "id" refers to the SCSI ID. The following conventions are also
+used:
+
+     [ ]   items in brackets are optional
+    
+      *    means repeat item 0 or more times
+
+IMPORTANT: No spaces are allowed within a single command line option, but
+           spaces are required between different command line options. Using
+           these command line options will override the settings in the SCSI
+           BIOS Configuration Utility.
+
+
+*   *   * Using the /NORST Option *   *   *        
+
+This option prevents a SCSI bus reset during loading of ASPI8XX.SYS. 
+
+For example, if a SCSI bus reset is not desired during load, the line 
+in the CONFIG.SYS file that loads ASPI8XX.SYS would look like this: 
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /NORST
+
+
+*   *   * Using the /ASK Option *   *    * 
+
+This option prompts at system boot-up time about loading the 
+ASPI8XX.SYS driver.
+
+     Option Syntax: /ASK
+
+For example, to activate this option, the line in your CONFIG.SYS 
+file that loads ASPI8XX.SYS should look like this: 
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /ASK
+
+
+*   *   * Using the /WIDTH (or /W) Option *   *    *
+
+The width parameter defines the maximum data width negotiated with a device.
+This option is used with host adapters capable of 16-bit data transfers. Valid
+settings are 8 or 16.
+
+     Option Syntax: /WIDTH=n<path[:id]>[,n<path[:id]>]*
+
+For example, if your first host adapter (boot order designation = 0) is a 
+16-bit adapter, and you wish to force 8-bit transfers to a device at 
+SCSI ID 2, the line in the CONFIG.SYS file that loads ASPI8XX.SYS 
+should look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /WIDTH=8<0:2>
+
+
+*   *   * Using the /DISCONNECT (or /DC) Option *   *   *
+
+This option allows a device to disconnect since SCSI devices have the ability
+to disconnect from the bus during an I/O transfer. If a particular host 
+adapter has parity checking disabled, all devices attached to it must have  
+disconnects disabled, since parity is required during the reselection phase. 
+
+Valid options are ON (allow disconnects) or OFF (do not allow disconnects). The 
+default for all devices is ON.
+
+     Option Syntax: /DISCONNECT=n<path[:id]>[,n<path[:id]>]*
+
+For example, to disable disconnects on the device attached to the first host 
+adapter (boot order designation = 0) at SCSI ID 2, the line in the CONFIG.SYS 
+file that loads ASPI8XX.SYS should look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /DISCONNECT=OFF<0:2>
+
+
+*   *    * Using the /SYNCH_RATE (or /SR) Option *   *   *
+
+This option sets the maximum synchronous transfer rate (in mega transfers per
+second) to negotiate with a particular device. The allowable values are 0, 5, 10,
+20, 40 and 80 providing the host adapter is capable of the specified speed. 
+Specify 0 (zero) to turn off synchronous transfers for a particular device.  
+The default value is the fastest rate supported by your host adapter.
+
+     Option Syntax: /SYNCH_RATE=n<path[:id]>[,n<path[:id]>]*
+
+For example, to turn off synchronous transfers to the device attached to the 
+first host adapter (boot order designation = 0) at SCSI ID 3, the line in the 
+CONFIG.SYS file that loads ASPI8XX.SYS should look like this: 
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /SYNCH_RATE=0<0:3>
+
+
+Note: When executing synchronous transfers using an 8-bit SCSI bus,
+      mega bytes per second = mega transfers per second. Also, when you are
+      doing synchronous transfers using a 16-bit SCSI bus, mega bytes
+      per second = 2 * mega transfers per second.
+
+
+*   *    * Using the /SYNCH_OFFSET (or /SO) Option *   *   *
+
+This option sets the maximum synchronous offset in bytes used to negotiate 
+with a particular device. The maximum allowable values are 0, 8, 16, 31 and 62
+provided the host adapter is capable of the specified offset. Specify 0 (zero) 
+to turn off synchronous transfers for a particular device.  
+The default value is the fastest rate supported by your host adapter.
+
+     Option Syntax: /SYNCH_OFFSET=n<path[:id]>[,n<path[:id]>]*
+
+For example, to turn off synchronous transfers to the device attached to the 
+first host adapter (boot order designation = 0) at SCSI ID 3, the line in the 
+CONFIG.SYS file that loads ASPI8XX.SYS should look like this: 
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /SYNCH_OFFSET=0<0:3>
+
+
+*   *   *  Using the /PARITY (or /P) Option *   *   * 
+
+This option tells the host adapter to disable the SCSI bus data integrity 
+checking feature known as parity. Some SCSI devices do not generate parity.
+Valid options are ON (check parity) or OFF (do not check parity). The default
+for all devices is ON.
+
+Warning: When disabling parity checking, also disable disconnects for that
+         adapter since you cannot disable parity checking for reselection. 
+         If a device does not generate parity, and it disconnects, the I/O 
+         will never complete.
+
+     Option Syntax: /PARITY=n<path[,path]*>[,n<path[,path]*>]*
+
+For example, to turn off parity checking on the first host adapter (boot order
+designation = 0), the line in your CONFIG.SYS file that loads ASPI8XX.SYS should
+look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /PARITY=OFF<0>
+
+
+*   *   * Using the /EXCLUDE (or /X) Option *   *   * 
+
+This option allows you to exclude support for an adapter that does not currently
+have BIOS support. You may not exclude an adapter that is supported (included) 
+by the BIOS when you boot your system. This option has three required parameters:
+
+    1. PCI Device ID
+    2. PCI Bus Number
+    3. PCI Device/Function Number
+
+These parameters identify the specific adapter you want to exclude. To obtain
+these parameters, boot your system using the /VERBOSE command line option
+(explained later in this section). Your monitor displays the parameters for the
+adapter or path you wish to exclude.
+
+     Option Syntax: /EXCLUDE<a:b:c>[,<a;b;c>]*
+
+For example, if you found the adapter you wish to exclude to have PCI Device
+ID 3, PCI Bus Number 0, and PCI Device/Function Number 68, then the line in 
+the CONFIG.SYS file that loads ASPI8XX.SYS should look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /EXCLUDE<3:0:68>
+
+
+*   *   *  Using the /HOST_ID (or /ID) Option *   *   *
+
+This option lets you alter the SCSI ID for a host adapter. On an 8-bit adapter,
+the SCSI IDs are 0-7. On a 16-bit adapter, the SCSI IDs are 0-15 (it is
+suggested that IDs 8-15 not be used for your adapter). This option will not
+allow you to select a SCSI ID already in use.
+
+If the host adapter allows connection of both 8-bit and 16-bit devices to the
+same bus, and the adapter number is changed to greater than 7, then the 8-bit
+SCSI devices will not be able to reselect the initiator.
+
+Note: You are not allowed to change the SCSI ID of any adapter currently 
+      supported by the BIOS.
+
+     Option Syntax: /HOST_ID=n<path>[,n<path>]*
+
+For example, to change the SCSI ID of your second host adapter (path=1) to ID=6
+(providing that adapter is not controlled by the BIOS), the line in the
+CONFIG.SYS file that loads ASPI8XX.SYS should look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /HOST_ID=6<1>
+
+
+*   *   * Using the /TIMEOUT (or /T) Option *   *   *
+
+The ASPI8XX.SYS driver uses a time-out mechanism to detect certain errors. When
+the driver issues a command to a SCSI device, a timer is started. If the timer
+expires before the command completes, the driver assumes something has gone
+wrong, and takes steps to recover. The default for this option is 10 seconds,
+if the device is BIOS controlled. If the device is not BIOS controlled, the 
+default is 0. Also, non-volatile memory settings can alter these defaults. The
+maximum setting is 0, which is no time-out. The range of allowable values is
+0-65535 seconds.
+
+     Option Syntax: /TIMEOUT=n<path[:id]>[,n<path[:id]>]*
+
+For example, you might have a particularly slow device (with SCSI ID 3) on the
+first host adapter (boot order designation = 0). If you wish to extend the
+time-out for this device to 60 seconds, the line in the CONFIG.SYS file that
+loads ASPI8XX.SYS should look like this:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS /TIMEOUT=60<0:3>
+
+
+*   *   * Using the /VERBOSE (or /V) Option *   *   *
+
+This option causes more detailed information to appear on your monitor, after
+the ASPI8XX.SYS driver is initialized, during a system boot. For example, the
+following may be displayed after using the /VERBOSE or /V option:  
+
+53C875 Rev 3 at PCI ID 15, Bus 0, Dev/Func 70h, CMD=0117h, SCRIPTS=FFFBE000h
+
+This option is useful if you have multiple adapters in the system and need 
+to know the PCI Device ID, the PCI Bus number, and the PCI Device/Function number
+for each adapter. This information is required to use the /EXCLUDE option 
+already described in this section.
+
+     Option Syntax: /VERBOSE
+
+For example, to see more detailed adapter information displayed when you boot,
+the line in the CONFIG.SYS file that loads ASPI8XX.SYS should look like this:
+
+DEVICE=C:[PATH]ASPI8XX.SYS /VERBOSE
+
+
+*  *  *  *  *  *  *  *  *  *  *  * Troubleshooting *  *  *  *  *  *  *  *  *  *
+
+The following are some potential problems and their suggested solutions.
+
+*   *   * Problem *   *   *
+
+System Locks up at boot time. 
+
+*   *   * Solution *   *   *
+
+     a. Check for conflicts with other ASPI managers.
+
+     b. Check for correct loading sequence in the CONFIG.SYS file.
+
+     c. Boot the system.
+
+
+*   *   * Problem *   *   *
+
+The device driver does not recognize one of the non-boot SCSI peripherals
+(system may lock up).
+
+*   *   * Solution *   *    *
+
+     a. Make sure the drivers were installed in the correct sequence. 
+
+     b. Make sure the drivers' CONFIG.SYS line has the correct path to the drivers.
+
+     c. Power down all units in the system.
+
+     d. Make sure all SCSI devices have unique ID numbers.
+
+     e. Make sure both ends of the SCSI bus are terminated.
+
+     f. Check all cable and power connections.
+
+     g. Boot the system.
+
+
+************************ About Your SYMDISK.SYS Driver ************************
+
+
+This section provides information concerning the pertinent features and 
+description of the SDMS SYMDISK.SYS device driver. 
+
+*  *  *  *  *  *  *  *  *  *  *  * Features *  *  *  *  *  *  *  *  *  *  *  * 
+
+o  Supports up to 8 host adapters
+o  Supports removable media devices
+o  Supports magneto optical devices
+o  Supports non-512-byte sectors (1024, 2048, 4096)
+o  Supports multiple logical unit number (LUN) support
+o  Supports OS/2 floppy format for MO and hard disks
+o  Supports multiple host adapters when adapter has not been controlled by
+   the SCSI BIOS (no INT13h devices)
+o  Can reserve drive letters for installed devices without media present 
+   in the device (see /UNITS under Command Line Options)
+o  Can add drive letters
+o  Supports power management (to spin down drives)
+
+
+*  *  *  *  *  *  *  *  *  *  *  * Description *  *  *  *  *  *  *  *  *  *  *   
+
+The SYMDISK.SYS driver is needed when connecting drives with non-512-byte sectors,
+and when connecting removable drives if the user wants to change the media. It is also
+required to obtain drive letters for devices (adapters) that are not supported
+by a BIOS. SYMDISK.SYS communicates through ASPI8XX.SYS. To use the SYMDISK.SYS 
+driver you must load ASPI8XX.SYS also.
+
+
+*********************** Installing Your SYMDISK.SYS Driver ********************
+
+To install the SYMDISK.SYS driver, follow these steps:
+
+1. Use the COPY command to copy the appropriate drivers from the SDMS SCSI 
+   Drivers disk to your boot disk.
+
+2. Add the lines shown below to the system's CONFIG.SYS file. The ASPI8XX.SYS
+   driver is also required. List the drivers in this sequence:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS
+     DEVICE=C:[PATH]SYMDISK.SYS
+
+
+*  *  *  *  *  *  *  *  *  *  Command Line Options  *  *  *  *  *  *  *  *  *
+
+The SYMDISK.SYS device driver has several embedded functions that are accessed
+via switches on the command line. These options are described below, and use the
+following conventions:
+
+[ ]  items in brackets are optional
+ *   items in brackets followed by an * means repeat 0 or 
+     more times
+ |   choose one of the given items
+
+IMPORTANT: No spaces are allowed in a single command line option, but spaces are     
+           required between different command line options.
+
+
+*   *   * Using the /ASK Option *   *   *
+
+This option prompts the user at system boot-up whether to load SYMDISK.SYS or
+not. To use this option, the line in the CONFIG.SYS file that loads SYMDISK.SYS should 
+look like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /ASK
+
+
+*   *   * Using the /UNITS= Option *   *   *
+
+Note: LSI Logic recommends that this option be used when using removable
+      media with more than one partition.
+
+The SYMDISK.SYS device driver allows the use of removable media, such as
+cartridge hard drives, each of which might have a different number of partitions. 
+If media with more than one partition are used, set this option to the maximum
+number of partitions on any one media. To use this option, the line in the
+CONFIG.SYS file that loads SYMDISK.SYS should look like this (all on one line):
+
+     DEVICE=C:[PATH]SYMDISK.SYS /UNITS=path:id:lun:num_units
+              [,path:id:lun:num_units]*
+
+For example, if there is a removable media drive at SCSI ID 2 on the first host
+adapter, and you need to reserve three partitions, the command line should look
+like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /UNITS=0:2:0:3
+
+When SYMDISK.SYS initializes, it defaults to either:
+
+     a. One drive letter for a removable media device with no media present.
+
+        -OR- 
+
+     b. The number of partitions found on the media in the removable media 
+        device.
+
+Note: The full path, id, lun, and num_units values are required for this option. 
+      Also, there is a limit of 24 devices.
+
+
+*   *   * Using the /EXCLUDE= Option *   *   *
+
+This option allows a user to exclude a "path:id:lun" combination from 
+being scanned or controlled by SYMDISK.SYS. The path parameter is mandatory
+with all ids and luns for that path excluded by default if just the path is
+specified. To use this option, the line in the CONFIG.SYS file that loads 
+SYMDISK.SYS should look like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /EXCLUDE=path[:id[:lun]]
+              [,path[:id[:lun]]]*
+
+For example, if the path is 0, id 2, and lun 0, the command line should look 
+like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /EXCLUDE=0:2:0
+
+Note: There is a limit of 24 "path:id:lun" combinations allowed.
+
+
+*   *   * Using the /SSIZE= Option *   *   *
+
+The SYMDISK.SYS device driver defaults to the largest sector size found during
+boot, handling all different sector sizes found. In the case of removable media, 
+SYMDISK.SYS assumes a 2048 byte sector size when no media is present. This
+option overcomes this limitation. To use this option, the line in the CONFIG.SYS
+file that loads SYMDISK.SYS should look like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /SSIZE=512|1024|2048|4096
+
+For example, if a removable media drive is used that has a sector size of 2048
+bytes, the command line should look like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /SSIZE=2048
+
+Note: If SYMDISK.SYS comes across a sector size larger than the one specified
+      in this option, or if it finds a sector larger than the default, it will
+      refuse to read/write to that media. It will report an invalid media error
+      to DOS.
+
+
+*   *   * Using the /SPINDOWN= Option *   *    *
+
+This is a power management feature that automatically spins down a disk when
+the disk is not accessed for a specified amount of time. The default spindown
+time is 15 minutes. You can specify a new spindown time in hours and minutes
+(hh:mm) with a minimum time of 1 minute. To use this option, the line in the
+CONFIG.SYS file that loads SYMDISK.SYS should look like this (all on one line):
+
+     DEVICE=C:[PATH]SYMDISK.SYS /SPINDOWN=hh:mm<path[:id[:lun]]>
+              [,hh:mm<path[:id[:lun]]>]
+
+For example, to spindown a device on path 0, id 2, and lun 0, after
+one hour and five minutes of inactivity, the command line should look like this:
+
+    DEVICE=C:[PATH]SYMDISK.SYS /SPINDOWN=1:5<0:2:0>
+
+-Or- 
+
+To spindown all devices after the default time-out of 15 minutes,the command
+line should look like this:
+
+     DEVICE=C:[PATH]SYMDISK.SYS /SPINDOWN=<>
+
+Remember, the <> are required when you specify a path:id:lun in this option.
+
+
+*  *  *  *  *  *  *  *  *  *  *   * Troubleshooting *  *  *  *  *  *  *  *  *  *  
+
+The following are some potential problems and their suggested solutions:
+
+*   *   * Problem *   *   *
+
+The computer locks up and will not complete booting from a non-SCSI hard 
+disk drive.
+
+*   *   * Solution *   *   *
+
+     a. Refer to the drive manufacturer's user manual.
+
+*   *   * Problem *   *   *
+
+The computer locks up and will not complete booting from a SCSI hard disk drive.
+
+*   *   * Solution *   *   *
+
+Note: If the SCSI BIOS is seen during boot, a banner similar to the following 
+      appears:
+
+      LSI Logic SDMS (TM) v4.0 PCI SCSI BIOS, PCI Rev. 2.0, 2.1
+      Copyright 1995 LSI Logic PCI-4.09.00
+
+a. Is the SCSI BIOS seen during boot?
+
+   YES     Go to b.
+
+   NO      Power down all units in the system.
+           Remove all SCSI cables.
+           Boot system.
+           Is the SCSI BIOS seen during boot? 
+
+           YES   Power down all units in the system.
+                 Reconnect and check all cable and power connections.
+                 Boot system.
+                 Go to a.
+
+            NO   Power down all units in the system.
+                 Reseat the host bus adapter.
+                 Check CMOS setup.
+                 Boot system.
+                 Go to a.
+
+b. Does the SCSI BIOS see the bootable SCSI drive?
+
+Note: When the computer boots, SDMS scans the SCSI bus. Devices found on the
+      SCSI bus are identified as in the following lines:
+
+      HA ID  LUN   VENDOR       PRODUCT      REV 
+     ---------------------------------------------------- 
+      0  2    0    SEAGATE     ST31230N      0060
+      0  7    0    LSI Logic   SYM53C815     0003
+
+YES     Go to c.
+
+NO      Power down all units in the system.
+        Make sure the hard drives have different ID numbers (boot drive
+        should have lowest ID).
+        Make sure both ends of the SCSI bus are terminated.
+        Check all cable and power connections.
+        Check CMOS setup.
+        Boot system.
+        Go to a.
+
+c. If boot is still unsuccessful, follow the solution to the next problem.
+
+*   *   * Problem *   *   *
+
+The device driver does not recognize one of the non-boot SCSI peripherals
+(system may lock up).
+
+*   *   * Solution *   *    *
+
+     a. Make sure the drivers were installed in the correct sequence. 
+
+     b. Make sure the drivers' CONFIG.SYS line has the correct path to 
+        the drivers.
+
+     c. Power down all units in the system.
+
+     d. Make sure the hard drives have different ID numbers (boot drive 
+        should have lowest ID).
+
+     e. Make sure both ends of the SCSI bus are terminated.
+
+     f. Check all cable and power connections.
+
+     g. Boot the system.
+
+
+************************** About Your SYMCD.SYS Driver ************************
+
+This section provides information concerning the pertinent features and 
+general description of the SDMS SYMCD.SYS device manager.  
+
+*  *  *  *  *  *  *  *  *  *  *  *  Features  *  *  *  *  *  *  *  *  *  *  *   
+
+o  Compatible with Microsoft's CD-ROM Extension 2.21 and above
+o  Multi-session Photo CD support
+o  Supports up to eight host adapters
+
+*  *  *  *  *  *  *  *  *  *  *  *  Description *  *  *  *  *  *  *  *  *  *  *
+
+The SYMCD.SYS device driver is needed whenever a CD-ROM device is connected on 
+the SCSI bus. You must load it in conjunction with Microsoft's CD-ROM Extension
+2.21 or above (MSCDEX.EXE). SYMCD.SYS communicates through ASPI8XX.SYS, so you
+must load ASPI8XX.SYS to use SYMCD.SYS.
+
+
+*********************** Installing Your SYMCD.SYS Driver *********************
+
+To install the SYMCD.SYS driver, follow these steps:
+
+1. Use the COPY command to copy the appropriate driver(s) from the SDMS SCSI
+   Drivers diskette to your boot disk.
+
+2. Add SYMCD.SYS to the CONFIG.SYS file. It goes in after ASPI8XX.SYS and
+   SYMDISK.SYS (if this driver is also being used), in this order:
+
+     DEVICE=C:[PATH]ASPI8XX.SYS
+     DEVICE=C:[PATH]SYMDISK.SYS
+     DEVICE=C:[PATH]SYMCD.SYS /D:NAME
+
+Note: The /D: is not a drive letter designation; it indicates the name you wish 
+      assigned to your CD-ROM. You must include the NAME, which can use any 
+      combination of up to 8 characters.
+
+3. To ensure that sufficient drive letters are available to identify all 
+   devices connected to the SCSI bus, add the MS-DOS LASTDRIVE command to the 
+   CONFIG.SYS file:
+
+      LASTDRIVE=x 
+
+   where x specifies a drive letter in the range C through Z. The letter 
+   assigned to LASTDRIVE represents the last valid drive MS-DOS is able to
+   recognize and also represents the maximum number of drives available. For
+   example, LASTDRIVE=K allows access to eleven (11) logical drives. For 
+   further details about LASTDRIVE, consult your MS-DOS manual.
+
+4. Unless your CD-ROM access software specifies otherwise, Microsoft's CD-ROM 
+   Extension (MSCDEX.EXE) should execute from the AUTOEXEC.BAT file in order to
+   access your drive. Add the following line to the AUTOEXEC.BAT file:
+
+     [PATH]MSCDEX /D:NAME
+
+   For example, if: 
+
+     DEVICE=C:[PATH]SYMCD.SYS /D:MY_CD 
+
+   is in the CONFIG.SYS file, then:
+
+     [PATH]MSCDEX /D:MY_CD
+
+   should exist in the AUTOEXEC.BAT file. The /D: switches must match.
+
+5. Check installation instructions for the CD-ROM drive itself for other
+   parameters necessary to include with MSCDEX.
+
+6. When MSCDEX is loaded during the AUTOEXEC.BAT file execution, a message is
+   returned assigning a drive letter to the CD-ROM drive. For example:
+
+      DRIVE E = DRIVER MY_CD UNIT 0
+
+   This informs the user that the CD-ROM drive is recognized and ready for use.
+
+
+*  *  *  *  *  *  *  *  *  *  *  Command Line Options *  *  *  *  *  *  *  *  *
+
+The SYMCD.SYS device driver has several embedded functions available that are
+accessed via switches on the command line. An explanation of these options
+follows:
+
+IMPORTANT: No spaces are allowed in a single command line option, but spaces are 
+           required between different command line options.
+
+
+*   *   * Using the /ASK Option *   *   *
+
+This option prompts the user at initialization time whether to load SYMCD.SYS or
+not. For example, the line in the CONFIG.SYS file that loads SYMCD.SYS would look 
+like this:
+
+     DEVICE=C:[PATH]SYMCD.SYS /D:MY_CD /ASK
+
+
+*   *   *  Using the /UPTOLUN= Option *   *   *
+
+This option changes the default for multiple LUNs per Target ID on the SCSI bus.
+The current default is to scan all LUNs. CD-ROM changers that use multiple LUNs
+work by default. To turn off scanning all LUNs on a SCSI bus, choose /UPTOLUN=0.
+This saves some time during boot.
+
+For example, the line in the CONFIG.SYS file that loads SYMCD.SYS would look 
+like this:
+
+     DEVICE=C:[PATH]SYMCD.SYS /UPTOLUN=0
+
+*   *   * Using the /NOBCD Option *   *   *
+
+This option supports the Trantor Music Box CD audio application. Using this
+option prevents the track numbers from being converted to BCD (Binary Coded
+Decimal). If this option is used with CD audio applications such as Adaptec's
+cdplayer, Corel's cd-audio, or Future Domain's cdaudio, track numbers >16 are
+not reported correctly because these applications require binary track numbers.
+For this option, the line in the CONFIG.SYS file that loads SYMCD.SYS would look
+like this:
+
+     DEVICE=C:[PATH]SYMCD.SYS /NOBCD
+
+
+*  *  *  *  *  *  *  *  *  *  *  Troubleshooting *  *  *  *  *  *  *  *  *  *  *
+
+The following are some potential problems and their suggested solutions:
+
+*   *   * Problem *   *   *
+
+The CD-ROM drive is not seen at boot time, or the system locks up.
+
+*   *   * Solution *   *   *
+
+     a. Make sure the required drivers are installed and in the correct sequence.
+
+     b. Make sure the drivers' CONFIG.SYS line has the correct path to 
+        the driver.
+
+     c. Make sure MSCDEX, in the AUTOEXEC.BAT, has the same drive 
+        name as the CD-ROM driver in the CONFIG.SYS file.
+
+     d. Make sure there is no ID or drive letter designation conflict.
+
+     e. Power down all units in the system.
+
+     f. Check the cable and power connections.
+
+     g. Make sure the SCSI bus is properly terminated.
+
+     h. Make sure sufficient drive letters are specified (through the MS-DOS 
+        lastdrive= command) to include your CD-ROM. A CD-ROM that uses multiple
+        disks requires a letter for each disk.
+
+
+***************** Important Additional Information For DOS Users **************
+
+*  *  *  *  *  *  *  *  * Assignment of Drive Letters *  *  *  *  *  *  *  *  *
+
+The MS-DOS operating system assigns drive letters to primary partitions 
+first. After the primary partitions have been assigned drive letters the 
+logical partitions are assigned drive letters. Do not assume that the drive 
+letter designations will follow consecutively from device-to-device within a
+PC system.
+
+An Example:
+
+A system is configured with an IDE hard disk as the boot drive, a SCSI hard
+disk, and a CD-ROM drive. The IDE drive has three partitions: one primary and
+two logical. The SCSI hard disk has two partitions: one primary and one
+logical. The SCSI hard disk is assigned ID one, and the CD-ROM is ID four. The
+distribution of the drive letters is:
+
+     A: 3 1/2" floppy drive
+     B: 5 1/4" floppy drive
+     C: IDE primary partition
+     D: SCSI primary partition
+     E: IDE first logical partition
+     F: IDE second logical partition
+     G: SCSI logical partition
+     H: CD-ROM
+
+
+

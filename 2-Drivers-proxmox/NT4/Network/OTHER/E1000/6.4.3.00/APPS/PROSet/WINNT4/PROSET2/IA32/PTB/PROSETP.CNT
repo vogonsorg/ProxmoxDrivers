@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Ajuda do Intel(R) PROSet II
+1 Visão geral
+2 Navegar no PROSet II=GENERAL_PAGE
+2 Ver informações do driver e do adaptador
+3 Informações gerais=General_Information
+3 Detalhes do adaptador=Adapter_Details
+3 Detalhes do driver=Driver_Information
+1 Configurar o adaptador
+2 Definir a velocidade e o modo duplex=Set_Speed_and_Duplex
+2 Configurar o uso de energia=Configure_Power_Management
+2 Configurar os recursos avançados=Configure_Advanced_Features
+2 Ativar o IPSec=Enable_IPSec
+2 Salvar a configuração em um arquivo=SAVERESTORE
+2 Remover um adaptador=Remove_an_Adapter_Instance
+1 Criar e configurar grupos
+2 Tipos de grupos
+3 Agrupamento de adaptadores=Teaming_Info
+3 Tipos de grupos=Team_Types
+3 AFT (Adapter Fault Tolerance)=Adapter_Fault_Tolerance
+3 SFT (Switch Fault Tolerance)=Switch_Fault_Tolerance
+3 ALB (Adaptive Load Balancing)=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Estático=FEC
+3 GEC/LA/802.3ad: Estático=GEC
+3 IEEE 802.3ad: Dinâmico=Dynamic_3ad
+2 Configurar o grupo
+3 Criar um grupo=Create_a_New_Team
+3 Testar a configuração do adaptador=Test_Switch_Configuration
+3 Configurações avançadas=Teaming_Advanced_Settings
+2 Alterar a configuração do grupo
+3 Alterar o modo de agrupamento do adaptador=Change_Adapter_Teaming_Mode
+3 Especificar um adaptador como primário ou secundário=Specify_an_Adapter_as_Primary_or_Secondary
+3 Adicionar um adaptador a um grupo=Add_an_Adapter_to_an_Existing_Team
+3 Remover um adaptador do grupo=Remove_an_Adapter_from_a_Team
+3 Configurações avançadas do grupo=Teaming_Advanced_Settings
+2 Ver a configuração do grupo
+3 Grupos da Árvore dos componentes de rede=Team_Listing
+3 Ver a configuração do grupo=Team_Configuration
+2 Remover um grupo
+3 Remover um grupo de adaptadores=Remove_an_Adapter_Team
+1 Criar e configurar VLANs
+2 Visão geral sobre VLANs=VLAN>main
+2 Configurar uma VLAN
+3 Criar uma VLAN=ADD_VLAN
+3 Ativar o GVRP=GVRP_Support
+3 Configurações avançadas=Advanced_Settings_for_VLANs
+2 Alterar as propriedades da VLAN
+3 Alterar as propriedades da VLAN=Change_VLAN_Properties
+3 Configurações avançadas=Advanced_Settings_for_VLANs
+2 Remover uma VLAN
+3 Remover uma VLAN=Remove_a_VLAN
+1 Executar o teste de diagnósticos
+2 Visão geral=Diagnostics_An_Overview
+2 Testes de diagnósticos=Diagnostics
+2 Teste de cabo=Testing_the_Cable
+2 Teste de Emissor / Respondedor=Sender_Responder_Test
+2 Configurar o registro de diagnósticos=Diagnostic_Log
+1 Usar as ferramentas de expansão Intel(R)
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Visão geral=priority_packet_overview
+1 Solução de problemas
+2 Guia Solução de problemas=Troubleshooting
+2 Restaurar a configuração do adaptador=RESTORECONFIG
+2 Obter suporte=Support

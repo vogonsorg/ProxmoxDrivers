@@ -1,0 +1,100 @@
+H1
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 18pt;
+    FONT-WEIGHT: bold
+}
+H2
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 14pt;
+    FONT-WEIGHT: bold
+}
+H3
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold
+}
+H4
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold
+}
+BODY
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt
+}
+P
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt
+}
+LI
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt
+}
+}TH
+{
+    COLOR: black;
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold
+}
+TD
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt
+}
+.contents
+{
+    FONT-SIZE: 10pt;
+    MARGIN-BOTTOM: 6px;
+    MARGIN-LEFT: 20px;
+    MARGIN-TOP: 6px;
+    TEXT-INDENT: -20px
+}
+.font
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 10pt
+}
+.gui
+{
+    FONT-SIZE: 9pt;
+    FONT-WEIGHT: bold
+}
+.inentry
+{
+    MARGIN-BOTTOM: 3px;
+    MARGIN-TOP: 0px;
+    WORD-SPACING: 0px
+}
+.monospace
+{
+    FONT-FAMILY: Courier New, Courier;
+    FONT-SIZE: 10pt
+}
+.numlst
+{
+    LIST-STYLE: decimal;
+    MARGIN-BOTTOM: 8px;
+    MARGIN-LEFT: 5px;
+    MARGIN-RIGHT: 0px;
+    TEXT-ALIGN: left;
+    TEXT-INDENT: 0px;
+    WORD-SPACING: 0px
+}
+.small
+{
+    FONT-FAMILY: Arial, sans-serif;
+    FONT-SIZE: 8pt
+}
+.warning
+{
+    FONT-STYLE: italic;
+    FONT-WEIGHT: bold
+}

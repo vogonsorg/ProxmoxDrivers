@@ -1,0 +1,75 @@
+IBACFG - for DOS systems
+Configuring the Intel(R) Boot Agent in a DOS Environment
+June 25, 2002
+=========================================================================
+
+DISCLAIMER:
+-----------
+
+This IBACFG.TXT as well as the software described in it is furnished under
+license and may only be used or copied in accordance with the terms of the
+license. The information in this manual is furnished for informational
+use only, is subject to change without notice, and should not be construed
+as a commitment by Intel Corporation. Intel Corporation assumes no
+responsibility or liability for any errors or inaccuracies that may appear
+in this document or any software that may be provided in association with
+this document.
+Except as permitted by such license, no part of this document may be
+reproduced, stored in a retrieval system, or transmitted in any form or
+by any means without the express written consent of Intel Corporation.
+
+INTRODUCTION:
+-------------
+
+You can use the IBACfg.exe program to configure the Intel Boot Agent software
+in a DOS environment as follows:
+
+1. Boot your computer to a DOS prompt.   IBACfg must be run with
+the computer booted to DOS only.  This utility cannot be run in a DOS window
+in any Microsoft* Windows product or in DOS compatibility mode in IBM* OS/2.
+
+2. Insert a CD-ROM or floppy diskette containing the IBACfg.exe
+utility.
+
+3. Make the directory containing IBACfg.exe the current directory.
+
+4. Enter the following command to invoke the IBACfg utility:
+
+        IBACfg
+
+A list of NICs is displayed.
+
+5. Use the up/down arrow keys to highlight the NIC to be configured and
+press Enter to continue.
+
+The Configuration Setup Menu is displayed. This menu shows a list of
+configuration settings on the left and their corresponding values on the
+right. Key descriptions near the bottom of the menu indicate how to
+change setting values. For each selected setting, a brief "mini-Help"
+description of its function also appears near the bottom of the menu.
+
+6. Select the setting you want to change by pressing the up/down arrow
+keys to highlight the setting. Press Enter to display a list of possible
+values for the setting.
+
+7. Select the value you want by pressing the up/down arrow keys to
+highlight the desired value. Press Enter to select the value.
+
+8. If you want to change additional settings, repeat Steps 7 and 8.
+
+9. Once you have completed your changes, select the save option from the
+menu and press Enter.  Press Esc at any time during selection to exit without
+saving changes.  A confirmation box is displayed if changes have been made.
+
+10. Press Esc to exit the IBACfg.exe utility.
+
+See the table entitled "Boot Agent Configuration Settings", within the
+Intel(R) Boot Agent User's Guide, for a list of configuration settings,
+their possible values, and their detailed descriptions.
+
+Copyright (c) 2002 Intel Corporation
+All rights reserved.
+
+* Other names and brands may be claimed as the property of others.
+---End of IBACFG.TXT---
+

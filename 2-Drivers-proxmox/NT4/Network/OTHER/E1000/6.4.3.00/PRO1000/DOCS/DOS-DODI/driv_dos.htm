@@ -1,0 +1,894 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing Intel Network Drivers for DOS</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+<!--
+ table.MsoNormalTable
+	{mso-style-parent:"";
+	font-size:10.0pt;
+	font-family:"Times New Roman"}
+-->
+</style>
+</head>
+
+<body>
+
+<h1>Intel Network Drivers for DOS</h1>
+
+<hr>
+
+<h2>DOS Driver</h2>
+
+<p>
+The NDIS2 (DOS) driver is provided solely for the purpose of loading other 
+operating systems -- for example, during RIS or unattended installations. It is not intended as a
+high-performance driver.</p>
+
+<p>
+You can find adapter drivers, PROTOCOL.INI files, and NET.CFG files in the DOS
+directory on the Product CD or in the download folder.&nbsp;For additional unattended install information, see the 
+README files in the APPS\SETUP\PUSH
+directory.</p>
+
+<h3>
+Automatic or Explicit Configuration of a Single NIC or 
+Multiple NICs</h3>
+
+<p>When the driver finds that there is only one adapter in the system, it will 
+use that adapter regardless of whether or not parameters in PROTOCOL.INI are 
+present or correct.&nbsp; If the values of certain parameters do not match the actual 
+configuration, warning messages are displayed to indicate that the parameter 
+value was not used, and that the default value for the parameter has been used 
+instead.&nbsp; For example, if the user specifies a SLOT parameter and the adapter is 
+in a different slot, messages are displayed by the driver instructing the user 
+to fix the PROTOCOL.INI information; the driver proceeds to function normally 
+loading on the driver instance name. See the next section for more information.</p>
+<p>One instance of the driver must be loaded for each adapter that is 
+activated.&nbsp; When multiple adapters are installed, the SLOT parameter becomes 
+advisable but not required.</p>
+<p>A “multiple-adapter” configuration is defined as a system with one or more 
+PCI buses, with more than one adapter installed in any combination of buses.&nbsp; 
+From the driver’s viewpoint, a system with two PCI adapters and two PCI buses, 
+with both installed in only one of&nbsp; the buses, is indistinguishable from a 
+system with two adapters and two PCI buses where each adapter has been installed 
+in a different bus.&nbsp; In fact, the user may not know if there are multiple buses, 
+but just sees PCI slots on the motherboard.&nbsp;&nbsp;&nbsp;&nbsp; </p>
+<p>The determination as to which adapter each driver will control should be made 
+by the user based on the protocol stack(s) bound to each driver, and based on 
+the network that is connected to each adapter. The “BINDINGS” list in each 
+protocol stack’s PROTOCOL.INI section establishes the relationship between 
+protocol stacks and drivers.&nbsp; The SLOT parameter in the driver’s PROTOCOL.INI 
+section establishes the relationship between drivers and adapters, and a value 
+can be provided for each driver loaded.&nbsp; If a SLOT parameter is not specified, 
+the first driver instance will load on the first NIC/Port found in the scanning 
+list, the second driver instance will load on the second NIC/Port found in the 
+scanning list, etc.&nbsp; When the driver detects multiple NICs/Ports it will report 
+all of the possible slots.&nbsp; The only way for the driver to know which driver 
+instance is being loaded is to use the DRIVERNAME parameter instance number.&nbsp; 
+Therefore, it is essential that the DRIVERNAME parameter instance syntax defined 
+below be used correctly.</p>
+<p>The adapters are automatically configured by the PCI system BIOS when the 
+system boots. The driver queries the PCI BIOS and obtains all of the adapter’s 
+configuration information. BIOS scanning using mechanisms 1 and 2, as defined in 
+the PCI BIOS specification, are supported.&nbsp; The SLOT number is actually the 
+encoded value of the PCI adapter’s device location, which is defined as shown 
+below.&nbsp; The SLOT value reported by the driver and entered by the user is the 
+value of bits 0 through 15.&nbsp; In versions of the driver prior to  2.01, 
+the SLOT value reported by the driver and entered by the user was shifted right 
+by 3 bits (divided by 8) so that SLOT 0x0088 was actually entered into PROTOCOL.INI as 0x0011.&nbsp; This doesn’t allow for multi-function devices to be 
+specified with this SLOT parameter.&nbsp; So starting with v2.01, the driver does not 
+shift the input parameter by 3 bits and SLOT 0x0088 would be entered as 0x0088.&nbsp; 
+This also allows for specifying slot 0x0081 = Bus 0 Device 16 Function 1.&nbsp; If 
+the driver finds that the entered SLOT number is not found in its slot list 
+table, it may be because the SLOT uses the older convention (shifted right).&nbsp; 
+The driver then tries to match this old style slot parameter to a slot in the slot list and 
+loads on that slot 
+if it finds a match.&nbsp; This is done for backward compatibility.&nbsp;</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" align="center" style="border-collapse: collapse; border: medium none; margin-left: 6.75pt; margin-right: 6.75pt">
+  <tr style="height: 10.0pt">
+    <td width="186" valign="top" style="width: 139.5pt; height: 10.0pt; border: 1.0pt solid black; 
+    padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal">15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8</td>
+    <td width="102" valign="top" style="width: 76.5pt; height: 10.0pt; border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal">7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3</td>
+    <td width="114" valign="top" style="width: 85.5pt; height: 10.0pt; border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal">2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0</td>
+  </tr>
+  <tr style="height: 10.0pt">
+    <td width="186" valign="top" style="width: 139.5pt; height: 10.0pt; border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal" style="text-align: justify">Bus Number</td>
+    <td width="102" valign="top" style="width: 76.5pt; height: 10.0pt; border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal" style="text-align: justify">Device Number</td>
+    <td width="114" valign="top" style="width: 85.5pt; height: 10.0pt; border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormal" style="text-align: justify">Function Number</td>
+  </tr>
+</table>
+
+<h3>
+&nbsp;</h3>
+
+<h3>
+Configuring with the PROTOCOL.INI File</h3>
+
+<p>
+<span style="font-family: Times New Roman">The configuration parameters listed 
+below are supported through the  PROTOCOL.INI file. When the machine has a 
+single adapter, all the parameters are optional; when the machine has multiple 
+adapters, 
+some of the parameters are required.</span></p>
+
+<h4><a name="_Toc29028676">DRIVERNAME</a> </h4>
+<p>This is the only parameter required for all 
+configurations.&nbsp;This 
+parameter is essentially an “instance ID”. Each instance of the 
+driver must create a unique instance name, both to satisfy DOS and OS/2 driver 
+requirements, and to make it possible to find the parameters for the instance in 
+the PROTOCOL.INI file. </p>
+<p class="MsoBodyTextIndent3">When the driver initializes,
+it tries to find previously loaded instances of itself.&nbsp; If none is found, the driver calls itself&nbsp; “E1000$”, and looks for that name 
+in the PROTOCOL.INI file to find its parameters.&nbsp; If
+one or more instances are found, the driver calls 
+itself &nbsp;“E100x$”, where ‘x’ is one more than the value used by the most 
+recently loaded instance.&nbsp;So, 
+in this scenario, the second driver calls itself &nbsp;“E1002$”, the third calls itself &nbsp;“E1003$”, and so on; 
+there is no driver called &quot;E1001$&quot;.&nbsp; Up to 10 drivers can 
+be loaded in a single system in this way.&nbsp;</p>
+<div align="left">
+  <table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="669">
+    <tr>
+      <td valign="top" style="width: 93; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Syntax:</td>
+      <td valign="top" style="width: 354; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">DRIVERNAME = [E1000$ | E1002$ | etc<font color="#FF0000">.</font>] </td>
+    </tr>
+    <tr>
+      <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Example:</td>
+      <td valign="top" style="width: 544; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">DRIVERNAME = E1000$</td>
+    </tr>
+    <tr>
+      <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Default:</td>
+      <td valign="top" style="width: 544; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">None, this is a required parameter.</td>
+    </tr>
+    
+    <tr>
+      <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; 
+         border-top: medium none; border-bottom: 1.0pt solid windowtext; 
+         padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+         <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in; margin-bottom:2.0pt;margin-left:0in">Normal Behavior:
+      </td>
+      <td valign="top" style="width: 544; border-left: medium none; border-right: 1.0pt solid windowtext; 
+         border-top: medium none; border-bottom: 1.0pt solid windowtext; 
+         padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+         <p class="MsoNormalIndent" style="margin-left:0in">The driver finds its section in PROTOCOL.INI by matching its instance ID 
+         to the value for this parameter. &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Possible Errors:</td>
+      <td valign="top" style="width: 544; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+      <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">The device driver uses a DOS and OS/2 function to 
+      display the name of the driver it is expecting.&nbsp; This function cannot display a ‘$’ character.&nbsp; For this reason, the user may<font color="#0000FF"> </font>see a message 
+      referring to this value with the ‘$’; the user must remember to enter the 
+      ‘$’ character as part of the parameter’s value.&nbsp; </td>
+    </tr>
+  </table>
+</div>
+<h4><a name="_Toc29028677">SPEEDDUPLEX</a></h4>
+<p class="MsoBodyTextIndent3">The parameter disables Auto-Speed-Detect and 
+causes the adapter to function at the speed indicated.&nbsp;</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="668">
+  
+  <tr>
+    <td valign="top" style="width: 94; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; 
+       padding-top: 0in; padding-bottom: 0in">
+       <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom: 2.0pt;margin-left:0in">Syntax:
+    </td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; 
+       border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+       <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom: 2.0pt;margin-left:0in">SPEEDDUPLEX = [0 | 1 | 2 | 3]
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="width: 94; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Example:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">SPEEDDUPLEX = 2 </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 94; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Default:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Auto-Speed-Detect&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="width: 94; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; 
+       border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+       <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom: 2.0pt;margin-left:0in">Normal Behavior:
+    </td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; 
+       border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+       0 = 10Mbps&nbsp; half duplex <br>
+       1 = 10Mbps&nbsp; full duplex<br>
+       2 = 100Mbps half duplex<br>
+       3 = 100Mbps full duplex
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" style="width: 94; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Possible Errors:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">If the SPEEDDUPLEX parameter is set to an invalid 
+    value: <br>
+    - the parameter is ignored and the default (Auto-Speed-Detect)<span style="font-size: 10.0pt; font-family: Times New Roman">&nbsp; </span>
+    is used<br>
+    - a message indicates a&nbsp; “Parameter value out of range” error</td>
+  </tr>
+</table>
+<h4><a name="_Toc29028678">SLOT</a></h4>
+<p class="MsoBodyTextIndent3">
+This 
+parameter makes it possible for the driver to uniquely identify which of the 
+adapters is to be controlled by the driver.&nbsp; The parameter can be entered in 
+hexadecimal or decimal.</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="667">
+  <tr>
+    <td valign="top" style="width: 93; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Syntax:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    SLOT = [0x0..0x1FFF]<p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    SLOT = [0..8191]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Examples:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    SLOT = 0x1C</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">SLOT = 28 </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Default:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    driver will Auto-Configure if possible.</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Normal Behavior:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    driver uses the value of the parameter to decide which adapter to control.</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; 
+       border-right: 1.0pt solid windowtext; border-top: medium none; 
+       border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; 
+       padding-top: 0in; padding-bottom: 0in">
+       <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom: 2.0pt;
+       margin-left:0in">Possible Errors:
+    </td>
+    <td valign="top" style="width: 543; 
+       border-left: medium none; border-right: 1.0pt solid windowtext; 
+       border-top: medium none; border-bottom: 1.0pt solid windowtext; 
+       padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+       <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+       If only one adapter is installed, and the value does not correctly indicate the adapter slot: &nbsp;</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">&nbsp;- 
+    a message indicates&nbsp; that the value does not match the actual 
+    configuration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">&nbsp;- 
+    the driver finds the adapter and uses it</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">If more 
+    than one adapter is installed, and the value does not
+    correctly indicate 
+    <span style="font-size: 10.0pt; font-family: Times New Roman">an</span> adapter 
+    slot:&nbsp; </p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">&nbsp;- 
+    a message indicates possible slots to use</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">&nbsp;- the 
+    driver loads on the next available slot</td>
+  </tr>
+</table>
+<h4><a name="_Toc29028679">NODE</a></h4>
+<p>This 
+parameter sets the  Individual Address of the adapter, overriding the value read 
+from the its EEPROM.</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="666">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Syntax:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">NODE = 
+    “12 hexadecimal digits”</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    value must be exactly 12 hexadecimal digits, enclosed in double quotes.&nbsp;</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    value can not be all zeros.&nbsp;&nbsp;</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    value can not have the Multicast bit set (LSB of 2nd digit  = 1).</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Example:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">NODE = 
+    “00AA00123456”</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Default:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Value 
+    from EEPROM installed on adapter</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Normal Behavior:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">The 
+    Current Station Address in the NDIS MAC Service-Specific Characteristics (MSSC) 
+    table is assigned the value of this parameter.&nbsp; The adapter hardware is 
+    programmed to receive frames with the destination address equal to the 
+    Current Station Address in the MSSC table.&nbsp; The Permanent Station Address in 
+    the MSSC table will be set to reflect the node address read from the 
+    adapter’s EEPROM.</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin-top:0in;margin-right:0in;margin-bottom:
+  2.0pt;margin-left:0in">Possible Errors:</td>
+    <td valign="top" style="width: 543; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">If any 
+    of the rules described above is violated, an error message indicates the 
+    rules for forming a proper address, and the driver treats this as a fatal 
+    error.</td>
+  </tr>
+</table>
+<h4><a name="_Toc29028680">CACHEFLUSH</a></h4>
+<p>Windows NT bypasses the normal driver “hooks” into the reboot sequence during 
+a “push install” so the driver is unaware of a system boot occurring.&nbsp; Hence the 
+driver may copy incoming frames to host memory during system initialization.&nbsp; 
+This will cause unpredictable behavior (most likely the system will halt).&nbsp; Setting this parameter to any non-zero value<span style="font-size: 10.0pt; font-family: Times New Roman; "> </span>
+enables a disk-cache flush monitor; which is an alternate method of watching for 
+a reboot call.&nbsp; This parameter should not be used under normal 
+circumstances.&nbsp;</p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="13" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> This situation is not being corrected.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="665">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 542; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    CACHEFLUSH = [0 | 1]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 542; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    CACHEFLUSH = 1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 542; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">0</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 542; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">Use this parameter during a remote installation or “push-install” of 
+    Windows NT.&nbsp; </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 542; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Any 
+    nonzero value sets this parameter to 1.&nbsp; The driver does not give any outward indication of the value of this parameter.</td>
+  </tr>
+</table>
+<h4>ADVERTISE</h4>
+<p>This parameter can be used to restrict the speeds and duplexes advertised to a link 
+partner during auto-negotiation.&nbsp; If AutoNeg = 1, this value is used to 
+determine what speed and duplex combinations are advertised to the link 
+partner.&nbsp;This field is treated as a bit mask. </p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="664">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 541; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    ADVERTISE = [ 1 | 2 | 4 | 8 | 0x20]:</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">0x01 = 
+    10H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x02 = 10F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x04 = 
+    100H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x08 = 100F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x20 = 
+    1000F</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 541; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    ADVERTISE = 1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 541; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">0x2F (all rates are supported)</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 541; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">By default all speed/duplex combinations are advertised.</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 541; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">An error 
+    message is displayed if the value given is out of range.</td>
+  </tr>
+</table>
+<h4><a name="_Toc29028682">FLOWCONTROL</a></h4>
+<p>This parameter, which refers to IEEE 802.3x flow control, 
+helps  prevent packets from being dropped and can 
+improve overall network performance.&nbsp; Specifically, 
+the parameter determines what flow control 
+capabilities the adapter advertises to its link partner when auto negotiation 
+occurs.&nbsp; This setting does NOT force flow control to be used.&nbsp; It only affects 
+the advertised capabilities.  </p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="13" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> Due to errata in the 82542 silicon the chip is not 
+    able to receive PAUSE frames if the 
+<span style="text-transform: uppercase">ReportTxEarly</span> 
+parameter is set to 1. Thus, if <span style="text-transform: uppercase">ReportTxEarly</span> =1 and the driver is running on an 
+adapter using this silicon, (such as the PWLA8490) the driver will modify the
+<span style="text-transform: uppercase">FlowControl</span> parameter to disable the 
+ability to receive PAUSE frames.</td>
+  </tr>
+  <tr>
+    <td width="13" valign="top" align="center">&nbsp;</td>
+    <td> <i><b>NOTE</b>:</i> If half-duplex is forced or auto-negotiated, the 
+    driver will completely disable flow control.</td>
+  </tr>
+</table>
+<p>: </p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="547">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 424; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    FLOWCONTROL = [ 0 | 1 | 2 | 3 |0xFF]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 424; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    FLOWCONTROL = 1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 424; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">3</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 424; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">0 = Disabled (No flow control capability)</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">1 = Receive Pause Frames (can receive and 
+    respond to PAUSE frames) </p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">2 = Transmit Pause Frames (can send PAUSE 
+    frames) </p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">3 = Both Enabled (can send and receive PAUSE 
+    frames)</p>
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">0xFF = Hardware Default. </td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 424; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">An error 
+    message is displayed if the value given is out of range. </td>
+  </tr>
+</table>
+<h4><a name="_Toc29028683">SMARTPOWERDOWN</a></h4>
+<p>This parameter enables the Smart Power Down feature under OS/2.&nbsp;This feature 
+is disabled by default on all devices except where the Device ID = 0x101E.&nbsp; On 
+these devices, this feature is 
+enabled by default. </p>
+<p>Enabling this feature causes the software to put the device into a low power 
+(D3) state when the link is disconnected.&nbsp; When the link is reconnected, the device is 
+brought back to the D0 state.</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="546">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 423; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    SmartPowerDown = [ 0 | any other value ]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 423; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    SmartPowerDown = 1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 423; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">0 except 
+    when device ID = 0x101E</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 423; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">0 = Disabled, any other value = Enabled</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 423; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    None</td>
+  </tr>
+</table>
+<h4><a name="_Toc29028684">APMPOWERDOWN</a></h4>
+<p>This parameter enables the driver to put the device into 
+the low power (D3) state on a &quot;suspend&quot; under OS/2.&nbsp; That feature is enabled by default on all NICs; this 
+parameter provides a way to disable it.</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="546">
+  <tr>
+    <td valign="top" style="width: 95; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 420; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    APMPowerDown = [ 0 | any other value ]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 95; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 420; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    APMPowerDown = 0</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 95; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 420; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 95; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 420; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">0 = Disabled, any other value = Enabled</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 95; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 420; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    None</td>
+  </tr>
+</table>
+<h4>USELASTSLOT</h4>
+<p>This parameter causes the driver to load on the device in the last slot found 
+in the slot scan. The default behavior of the driver is to load on the first 
+adapter found in the slot scan. This parameter forces the driver to load on the 
+last one found instead.</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="545">
+  <tr>
+    <td valign="top" style="width: 93; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 421; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    UseLastSlot = [ 0 | any other value ]</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 421; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    USELASTSLOT = 1</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 421; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">0</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 421; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">0 = Disabled, any other value = Enabled</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 93; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 421; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    None</td>
+  </tr>
+</table>
+<h4>TXLOOPCOUNT</h4>
+<p><font color="#008000">&nbsp;</font>This parameter controls the number of times the 
+transmit routine loops while waiting for a free transmit buffer.&nbsp; This parameter can 
+affect Transmit performance.&nbsp;</p>
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: 45.9pt" width="545">
+  <tr>
+    <td valign="top" style="width: 92; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Syntax:</td>
+    <td valign="top" style="width: 422; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    TXLOOPCOUNT = &lt;32-bit value&gt;</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Example:</td>
+    <td valign="top" style="width: 422; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    TXLOOPCOUNT = 10000</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Default:</td>
+    <td valign="top" style="width: 422; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">1000</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Normal 
+    Behavior:</td>
+    <td valign="top" style="width: 422; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt;text-align:
+  justify">Default</td>
+  </tr>
+  <tr>
+    <td valign="top" style="width: 92; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">Possible 
+    Errors:</td>
+    <td valign="top" style="width: 422; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0in; padding-bottom: 0in">
+    <p class="MsoNormalIndent" style="margin:0in;margin-bottom:.0001pt">
+    None</td>
+  </tr>
+</table>
+
+<p>
+&nbsp;</p>
+
+<hr>
+
+<h2><a name="ODI"> DOS ODI Client Driver</a></h2>
+<p>This driver is provided solely for the purpose of loading an OS. It is not intended as a
+high-performance driver. Please limit use to 1-2 frame types.</p>
+<p>Location of Drivers:&nbsp;<br>
+&nbsp;&nbsp; 10/100 Mbit: \DOS\E100BODI.COM&nbsp;<br>
+&nbsp;&nbsp; Gigabit: \DOS\E1000ODI.COM (This directory also contains the 
+PROTOCOL.INI file
+and NET.CFG file for
+    gigabit adapters.)</p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="13" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  If connection fails, set the Spanning Tree Protocol
+      (STP) option on the switch to "off".</td>
+  </tr>
+  <tr>
+    <td width="13" valign="top" align="center">&nbsp;</td>
+    <td> <i><b>NOTE</b>:</i>  Novell no longer supports NETX.EXE or the VLM client software. However, as
+a convenience to Intel customers, a copy of NETX.EXE is provided on the Intel
+Configuration and Drivers CD. Intel recommends that you use the latest Novell
+Client32 software.</td>
+  </tr>
+  <tr>
+    <td width="13" valign="top" align="center">&nbsp;</td>
+    <td><i><b>NOTE</b>:</i>   <span class="TrkText">With dual-port adapters, the first port must be
+      used before the second port.</span></td>
+  </tr>
+</table>
+<h3>NETX General Installation&nbsp;</h3>
+<ol>
+  <li>
+    <p class="numlst">Copy the following files from the \DOS directory of the
+    Intel media to the hard drive (NWCLIENT):
+    <ul>
+      <li>
+        <p class="numlst">LSL.COM
+      </li>
+      <li>
+        <p class="numlst">E100BODI.COM (10/100 Mbit) or E1000ODI.COM (gigabit)
+      </li>
+      <li>
+        <p class="numlst">IPXODI.COM
+      </li>
+      <li>
+        <p class="numlst"> NETX.EXE
+      </li>
+    </ul>
+  <li>
+    <p class="numlst">Configure AUTOEXEC.BAT and NET.CFG based on the sample
+    files below. NET.CFG should be in the same directory as the driver.
+  <li>
+    <p class="numlst">Reboot, and the client should connect to the server.
+  </li>
+</ol>
+
+<h2>VLM Installation</h2>
+
+<p>  
+This version of E100BODI.COM requires latest version of the VLM client (version 1.21 or greater).
+</p>
+<p>Refer to the Novell NetWare documentation for complete installation instructions.</p>
+
+<h3>TIPS (DOS ODI)</h3>
+    <h4>NETX</h4>
+<ul>
+  <li>
+    <p class="numlst">In CONFIG.SYS add LASTDRIVE=E.&nbsp;
+  <li>
+    <p class="numlst"> In NET.CFG add FIRST
+    NETWORK DRIVE F (or some drive letter after the range of physical devices
+    you've installed) under the
+    NetWare&nbsp;DOS REQUESTER section (indented).
+</ul>
+<h4>VLM</h4>
+<ul>
+  <li>
+    <p class="numlst">In CONFIG.SYS add LASTDRIVE=Z.&nbsp;
+  <li>
+    <p class="numlst"> In NET.CFG, add FIRST
+    NETWORK DRIVE F under the
+    NetWare&nbsp;DOS REQUESTER section (indented). If F is already assigned,
+    select a drive letter after the range of physical devices you have
+    installed.
+  <li>
+    <p class="numlst">Promiscuous mode support is not supported since ASM does
+    not&nbsp;include a receive monitor stack. If needed, load RXMONSTK.COM&nbsp;(from the VLM client kit) after LSL.COM and before
+    E100BODI.COM or E1000ODI.COM.&nbsp;
+  <li>
+    <p class="numlst">This version of E100BODI.COM or E1000ODI.COM requires VLM client version
+    1.21 or higher. Attempting to use an older version of the VLM client may
+    cause connection problems, slow response or computer system lock-ups.
+</ul>
+<h3>10/100 Mbit Sample Files</h3>
+<p>AUTOEXEC.BAT:
+</p>
+<blockquote>
+<pre>CD\NWCLIENT
+LSL
+E100BODI
+IPXODI
+NETX (or VLM optional for NetWare 3.12 or higher)</pre>
+</blockquote>
+<p>NET.CFG:
+</p>
+<blockquote>
+<pre>LINK DRIVER E100BODI
+FRAME ETHERNET_802.2 (generally NetWare 3.12 and later servers)
+;FRAME ETHERNET_802.3 (generally NetWare 3.11 and earlier)&nbsp;
+SPEED=100
+PROTOCOL IPX EO Ethernet_802.2
+
+NETWARE DOS REQUESTER
+FIRST NETWORK DRIVE = F (Used only with the VLM.EXE).&nbsp;
+PB BUFFERS = 10</pre>
+</blockquote>
+
+<h3>Gigabit Sample Files</h3>
+<p>AUTOEXEC.BAT:
+</p>
+<blockquote>
+<pre>CD\NWCLIENT
+LSL
+E1000ODI
+IPXODI
+NETX (or VLM optional for NetWare 3.12 or higher)</pre>
+</blockquote>
+<p>NET.CFG:
+</p>
+<blockquote>
+<pre>LINK DRIVER E1000ODI
+FRAME ETHERNET_802.2 (generally NetWare 3.12 and later servers)
+;FRAME ETHERNET_802.3 (generally NetWare 3.11 and earlier)&nbsp;
+SPEEDDUPLEX = 3
+PROTOCOL IPX EO Ethernet_802.2
+
+NETWARE DOS REQUESTER
+FIRST NETWORK DRIVE = F (Used only with the VLM.EXE).&nbsp;
+PB BUFFERS = 10</pre>
+<p><b><i>NOTE</i></b>: <font face="Courier New">SPEEDDUPLEX</font> <span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">parameter:
+</span><font face="Courier New" size="3"><span style="color: #000000; font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none">0</span></font><span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">=10Mbps&nbsp;half-duplex;
+</span><font face="Courier New" size="3"><span style="color: #000000; font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none">1</span></font><span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">=10Mbps&nbsp;full-duplex;
+</span><font face="Courier New" size="3"><span style="color: #000000; font-style: normal; font-variant: normal; font-weight: normal; text-decoration: none">2</span></font><span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">=100Mbps
+half-duplex; 3=100Mbps full-duplex. </span><span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">The
+</span><font face="Courier New">SPEEDDUPLEX</font> <span style="COLOR: #000000; FONT: 10pt Arial; TEXT-DECORATION: none">keyword
+is only needed when you are forcing the card to a lower speed and duplex. The
+link partner must also be forced to the same setting.&nbsp;</span></p>
+</blockquote>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/26/04 1:09p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Test the Adapter</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>
+Test the Adapter (Optional)</h1>
+
+<P CLASS="Body-Text">
+Intel's diagnostic software lets you test the adapter to see if there are problems with the adapter hardware, the cabling, or the network connection.&nbsp;</P>
+
+<H4 CLASS="Heading2">
+Tests for Windows*</H4>
+
+<p CLASS="Heading2">
+Intel PROSet allows you to run four types of diagnostic tests. </p>
+
+<ul>
+  <li>
+
+<p CLASS="Heading2">
+Connection Test: This test verifies network connectivity by pinging the DHCP 
+server, WINS server, and gateway.</li>
+<li>
+
+<p CLASS="Heading2">
+Link Test: This test determines the capability of the link partner. This basic 
+test reports the speed and duplex settings that will result in a successful 
+link.</li>
+<li>
+
+<p CLASS="Heading2">
+Cable Tests: These online and offline tests provide information about cable 
+length, polarity, and other cable properties.</li>
+<li>
+
+<p CLASS="Heading2">
+Hardware Tests: These tests are performed on the adapter hardware to see if it 
+is functioning properly.</li>
+</ul>
+
+<p CLASS="Heading2">
+To access these tests, select the adapter and click Diagnostics in the General 
+tab. A Diagnostics window displays tabs for each type of test. Click the tab and 
+run the test.</p>
+
+<p CLASS="Heading2">
+The availability of these tests is hardware dependent. For example, the Link 
+Test is not available for Intel(R) PRO/100 adapters.</p>
+
+<table>
+  <tr>
+    <td width="21"><img border="0" height="21" src="note.gif" width="28"></td>
+    <td><i><b>NOTE</b>:</i> For 82551 and 82550-based Intel PRO/10 and 
+Intel PRO/100 adapters, the Cable Test button is not available when the adapter does not have link.</td>
+  </table>
+
+<H4 CLASS="Heading2">
+NetWare*, Linux*, UnixWare*, DOS* Diagnostics</H4>
+
+<ol>
+    <li>
+      <p class="numlst">If you are not already at a DOS prompt, shut down the OS
+    and start up MS-DOS*.&nbsp;</li>
+    <li>
+      <p class="numlst">Insert the Product CD or change to the installer directory
+    that contains DIAGS.exe.&nbsp;</li>
+    <li> 
+      <p class="numlst"> At the DOS prompt, type: <font face="Courier New">DIAGS</font> and press
+      <b>Enter</b>.</li>
+    <li>
+      <p class="numlst">If you have more than one adapter in your computer,
+        an Adapter Selection menu appears on the screen. From
+        that menu, select the network adapter you want to test.</li>
+    <li>
+      <p class="numlst">From the Main menu, select <b> Test adapter</b> and then select
+        the type of test you want to run.</li>
+    <li>
+      <p class="numlst">Repeat steps 3 and 4 for each adapter installed in
+        the computer.</li>
+</ol>
+
+    <p>Also see <a href="../../../APPS/TOOLS/DOCS/index.htm">Diagnostics</a>.</p>
+
+<H4 CLASS="Heading2">
+Responder Testing</H4>
+<P CLASS="Body-Text">
+The Intel adapter can send test messages to another Ethernet adapter on the same 
+network. This testing is  available in DOS via the Diags.exe utility found in 
+the&nbsp; /APPS/TOOLS directory on the CD or in the download directory.</P>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/10/04 3:28p <!-- $--> Revision <!--$$Revision:--> 7 <!-- $--></code></p>
+
+</body>
+</html>

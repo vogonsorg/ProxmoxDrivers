@@ -1,0 +1,270 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing Intel Network Drivers for Novell NetWare</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel PRO/100 Network Driver for Novell NetWare*</h1>
+
+<p class="contents"><a href="#install">Installing the Driver</a></p>
+
+<p class="contents"><a href="#speed_duplex">Configuring Speed and Duplex</a></p>
+<p class="contents"><a href="#wake_on_pme">Wake on PME</a></p>
+<p class="contents"><a href="#install_mult">Installing Multiple Adapters</a></p>
+<p class="contents"><a href="nw_kw100.htm">Command Line Parameters</a></p>
+<p class="contents"><a href="team_nw.htm">Teaming and VLAN</a></p>
+<p class="contents"><a href="nw_snmp.htm">SNMP Agent Extension</a></p>
+
+<hr>
+
+<h2><a name="install"></a>Installing the Driver</h2>
+<h3>
+Support Pack Requirements</h3>
+<ul>
+	<li>For Novell NetWare* 5.1 and Novell NetWare 6.0, have Consolidated 
+	Support Pack 10 installed.</li>
+	<li>For Novell NetWare 6.5, have Support Pack 1 installed.</li>
+</ul>
+<h3>
+Installing the Driver</h3>
+<p>
+The Intel PRO/1000 adapter driver for Novell NetWare 5.x and 6.x is
+packaged in the ce1000.lan file. To install the ce1000.lan package and setup the
+driver for a network adapter, use the following steps.</p>
+
+<table border="0" cellpadding="6" cellspacing="0" id="table1">
+	<tr>
+        <td valign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"> 
+        <i><b>NOTE</b>:</i> Prior to installing, either load
+          the DOS or NetWare drivers for your server's CD-ROM drive or create a floppy disk from the  CD on a different computer.
+          For more information, refer to the Make a Driver Disk section of this guide.</td>
+    </tr>
+</table>
+
+<ol>
+  <li>
+  <p class="numlst">From the NetWare console, type <span class="monospace">
+  NWCONFIG</span> for version 5.x and 6.x and press &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">From the Configuration Options screen, choose
+  <span class="gui">Driver options</span> and press &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">Choose <span class="gui">Configure network drivers</span> 
+  and press &lt;Enter&gt;. If any drivers are already loaded, a list of them appears.
+  </li>
+  <li>
+  <p class="numlst"> <span class="gui">Select an additional driver</span> 
+  and press &lt;Enter&gt;. A list of drivers appears.</li>
+  <li>
+  <p class="numlst">Insert the  CD or floppy disk you've created and choose
+  <span class="gui">Install an unlisted driver</span> by pressing &lt;Insert&gt;.
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top">
+      <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTE</strong>: </em>To mount a CD, use <i>cdrom</i>.</td>
+    </tr>
+  </table>
+ </li>
+  <li>
+  <p class="numlst">If you're using a floppy disk, insert the disk in drive A 
+  and press&nbsp;&lt;Enter&gt;. If you've mounted the CD as a NetWare volume, press &lt;F3&gt; 
+  and&nbsp;enter the source path (PRO1001000:/pro100/nwserver/).&nbsp; </li>
+  <li>
+  <p class="numlst">The driver name is displayed: Intel(R) 8255x PCI adapter. 
+  Press &lt;Enter&gt; to select it. </li>
+  <li>
+  <p class="numlst">A prompt appears asking if you want to copy the driver.&nbsp;Select <span class="gui">Yes</span> and press &lt;Enter&gt;.</li>
+  <li>
+  <p class="numlst">The next screen asks for parameters for loading the driver. 
+  To&nbsp;modify any driver parameters or protocols, highlight <span class="gui">
+  Select/Modify&nbsp;driver parameters and protocols</span> and press &lt;Enter&gt;. If you 
+  have multiple adapters,&nbsp;enter the slot number for the adapter you are 
+  currently configuring.&nbsp;When finished configuring the driver, select
+  <span class="gui">Save parameters and load&nbsp;driver to continue</span>. </p>
+  <table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td vAlign="top">
+      <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTES</strong>: </em>If your system contains 
+      a single network adapter, you may enter any number for the slot. The 
+      driver will automatically detect the correct slot number and load 
+      successfully.</td>
+    </tr>
+    <tr>
+      <td vAlign="top">&nbsp;</td>
+      <td vAlign="top">If your system contains more than one network adapter, 
+      you can find the valid slot numbers for your adapters by pressing 
+      &lt;Alt&gt;-&lt;Esc&gt; to switch to&nbsp;the console screen in NetWare. Type
+      <span class="monospace">LOAD CE100B</span> 
+      and press &lt;Enter&gt;. The driver 
+      will attempt to load and prompt you with the available slot&nbsp;numbers. Note 
+      the slot numbers, and press &lt;Esc&gt; to abort the driver load.&nbsp;Use 
+      &lt;Alt&gt;-&lt;Esc&gt; to switch back to the Install screen and enter the 
+      correct&nbsp;slot number.</td>
+    </tr>
+  </table>
+  </li>
+  <li>
+  <p class="numlst">To complete the driver installation process, go back to 
+  the&nbsp;Configuration Options screen by pressing &lt;Esc&gt; until you see&nbsp;the 
+  Configuration Options screen. </li>
+  <li>
+  <p class="numlst">Choose <span class="gui">Exit</span> to return to the server 
+  console prompt.</li>
+</ol>
+
+<table border="0" cellpadding="6" cellspacing="0">
+	<tr>
+        <td valign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+        <td valign="top"><b><i>NOTES</i></b><i>: </i> If the adapter cannot transmit or receive after installation, you 
+        may need to modify the frame type or LOAD and BIND statements in the AUTOEXEC.NCF file.</td>
+    </tr>
+	<tr>
+        <td valign="top"></td>
+        <td valign="top">If you are installing multiple adapters, repeat the driver
+          installation process for each adapter in the server.</td>
+    </tr>
+	<tr>
+        <td valign="top"></td>
+        <td valign="top">Some switches can take several seconds to auto-negotiate and establish
+          a link with the adapter. This may result in a false &quot;could not
+          establish link&quot; error message. Use the monitor or check the
+          adapter lights to determine valid connection information.</td>
+    </tr>
+</table>
+<h3>Installing with Netware 6.x</h3>
+<p>If you are using Netware 6.x the following installation instructions apply:</p>
+<ol>
+  <li>
+  <p class="numlst">From the NetWare console, type <b>HDETECT</b>, and press 
+  &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">From the first NetWare Installation screen (displaying 
+  Platform Support and Hot Plug modules) choose <b>Continue</b>, and press 
+  &lt;Enter&gt;. </li>
+  <li>
+  <p class="numlst">From the second NetWare Installation screen (displaying 
+  Network Boards) choose <b>Modify</b>, and press &lt;Enter&gt;. Then choose <b>
+  Network Boards</b> and press &lt;Enter&gt;.</li>
+  <li>
+  <p class="numlst">At the next screen (displaying only Network Boards) choose
+  <b>Modify</b>.</li>
+  <li>
+  <p class="numlst">Choose <b>Add</b> by pressing &lt;Insert&gt;.</li>
+  <li>
+  <p class="numlst">Insert the  CD or floppy disk you have created, and 
+  choose <b>Install an Unlisted Driver </b>by pressing &lt;Insert&gt;.</li>
+  <li>
+  <p class="numlst">Go to step #6 in the above <a href="#install">installation 
+  instructions</a> and follow through step #11.</li>
+</ol>
+
+<hr>
+
+<h2><a name="speed_duplex"></a>Configuring Speed and Duplex</h2>
+<h3>Setting Full Duplex in DOS, ODI, NDIS 2.01 Servers</h3>
+<p>
+For each adapter, edit the NET.CFG or PROTOCOL.INI file. If editing the
+NET.CFG file, add the following keywords to the Link Driver section. For the
+PROTOCOL.INI file, add these keywords anywhere:
+</p>
+<blockquote>
+	<span class="monospace">FORCEDUPLEX 2</span><br>
+	<span class="monospace">SPEED 100</span> (or 10 if 10BASE-T)
+</blockquote>
+<h3>Setting Full Duplex in NetWare Servers</h3>
+<p>
+For each adapter in AUTOEXEC.NCF, edit the LOAD command and add the following
+options (you must include the equal sign for servers):
+</p>
+<blockquote>
+	<span class="monospace">FORCEDUPLEX=2</span><br>
+	<span class="monospace">SPEED=100 </span>(or 10 if 10BASE-T)
+</blockquote>
+<h3>Setting Speed</h3>
+<p>
+If you manually set (force) speed to 10 or 100, you must force <b>both</b>
+speed and duplex, and auto-negotiation must be disabled. (Also be sure that the
+link partner settings match these settings.) The Autoneg parameter is ignored.
+</p>
+<h3>Using Autoneg</h3>
+<p>
+Use the Autoneg parameter when more control is required. When this parameter
+is used, the Speed and Forceduplex parameters must <b>not</b> be specified. This
+parameter is a bitmap, based on the following table, that specifies which speed
+and duplex settings the adapter advertises to a link partner.
+</p>
+<table cellSpacing="0" cellPadding="6" border="1">
+  <tbody>
+    <tr>
+      <td><b>Setting</b></td>
+      <td>N/A</td>
+      <td>100 Full</td>
+      <td>100 Half</td>
+      <td>10 Full</td>
+      <td>10 Half</td>
+    </tr>
+    <tr>
+      <td><b>Value</b></td>
+      <td>16</td>
+      <td>8</td>
+      <td>4</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>
+This parameter is the sum of the values of each setting to advertise. For
+example, to advertise 100-Full and 100-Half modes, the parameter would be set to
+8 + 4 = 12.
+</p>
+<table cellSpacing="0" cellPadding="4" border="0">
+  <tbody>
+    <tr>
+      <td vAlign="top" align="left"><img src="caution.gif" border="0" width="28" height="21"></td>
+      <td vAlign="top" align="left"><i><b>CAUTION</b>:</i> When the Speed and
+        Forceduplex keywords are used, auto-negotiation is disabled. To ensure
+        that link is established correctly, auto-negotiation must be disabled on
+        the link partner, and the link should be forced to the same speed and
+        duplex mode used on the adapter.</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+<hr>
+
+<h2><a name="wake_on_pme"></a>Wake on PME</h2>
+<p>The Intel driver includes the Wake on PME assertion feature for NetWare 5.x
+and 6.x systems. This feature allows users to select a single adapter in a
+system and configure that adapter to wake a system from an off state.</p>
+<table cellSpacing="0" cellPadding="6" border="0">
+  <tr>
+    <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td vAlign="top"><em><strong>NOTE</strong>: </em>Wake on PME is enable by
+      default.<em> </em>To disable Wake on PME, enter the option <i>pmedisable=0
+      </i>on the command line.</td>
+  </tr>
+</table>
+<hr>
+
+<h2><a name="install_mult"></a>Installing Multiple Adapters</h2>
+<p>The <b>server</b> drivers use the PCI slot number to identify
+each installed adapter. You can correlate the PCI slot number to the port by
+using the Ethernet address that is printed on a label on the adapter.</p>
+
+<p>If you are installing a driver in a computer with existing
+Intel adapters, the drivers are updated automatically.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/21/04 3:58p <!-- $--> Revision <!--$$Revision:--> 11 <!-- $--></code></p>
+
+</body>
+</html>

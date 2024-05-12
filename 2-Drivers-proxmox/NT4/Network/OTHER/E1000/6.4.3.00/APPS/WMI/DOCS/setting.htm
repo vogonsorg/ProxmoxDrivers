@@ -1,0 +1,226 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The Setting Schema</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">The Setting Schema</font></h1>
+<br><br>
+<img src="setting.gif" width="536" height="287">
+<br><br>
+
+<h2><font color="#0000FF">IANet_Configuration</h2></font>
+<p><b>Purpose</b><br>
+This class is used to group a collection of IANet_Setting instances.  The class is derived from CIM_Configuration.
+
+<p><b>Instances</b><br>
+Each adapter, VLAN or Team can have several associated IANet_Configuration instances (each configuration corresponds to a different usage scenario for the adapter.
+
+<p>For this WMI and CDM Providers release, there will be only one instance of IANet_Configuration per adapter, VLAN or team.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_Configuration.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_Configuration.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties for this class.
+
+<p><b>Associations</b><br>
+An IANet_AdapterConfiguration instance will exist to associate each adapter (IANet_EthernetAdapter) with its configuration. An IANet_VLANConfiguration instance will exist to associate each VLAN (IANet_VLAN) with its configuration. An IANet_BootAgentConfiguration
+instance will exist to associate each boot agent (IANet_BootAgent) with its configuration.
+
+<p><b>Methods</b><br>
+There are no supported methods for this class.
+
+<p><b>Unsupported Attributes</b><br>
+None.
+
+<h2><font color="#0000FF">IANet_Setting</h2></font>
+
+<p><b>Purpose</b><br>
+This abstract class is used to describe a settable property in a configuration. The class is derived from CIM_Setting.
+
+<p><b>Instances</b><br>
+A separate instance of this class will exist for each setting on each adapter, VLAN or Team.  Settings are not shared between configurations. 
+
+<p>There are several sub-classes for IANet_Setting. The sub-classes correspond to the different types and ranges of values that settings can take. Each sub-class corresponds to a different style of GUI that may be used to display or change the settings.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_Setting.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_Setting.
+
+<p><b>Modifying Properties</b><br>
+This abstract class has no modifiable properties, however, the child classes have modifiable properties (see below).
+
+<p><b>Associations</b><br>
+Each IANet_Setting instance is associated with an IANet_Configuration instance using an instance of IANet_SettingContext.
+
+<p><b>Methods</b><br>
+There are no supported methods for this class.  To make changes to a setting, modify the required property and call <b>PutInstance</b>.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<h2><font color="#0000FF">IANet_SettingInt</h2></font>
+<p><b>Purpose</b><br>
+This class models a setting that takes an integer value. There are several IANet setting classes used to model integers.  The differences between these classes
+is related to the way the GUI displays and modifies the integer and
+the way the Providers validate.  For IANet_SettingInt, it is expected that the GUI will display an edit box with a spin control.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each setting that should be displayed as an integer edit box.  
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.  
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of this class.
+
+<p><b>Modifying Properties</b><br>
+The "CurrentValue" attribute is the only modifiable property of this class. You can modify this property by using <b>IWbemClassObject::Put()</b> to change the value, then call <b>IWbemServices::PutInstance()</b> to update the setting. The
+Providers will check that:
+<p><b>CurrentValue</b>  <=  <b>max</b><br>
+<b>CurrentValue</b>  >=  <b>min</b><br>
+(<b>CurrentValue</b> - <b>min</b>) is a multiple of <b>Step</b><br><br>
+Where <b>max</b>, <b>min</b>, <b>CurrentValue</b> and <b>Step</b> are all attributes of IANet_SettingInt.
+
+<p><b>Associations</b><br>
+Each IANet_SettingInt instance is associated with an IANet_Configuration instance using an instance of IANet_SettingContext.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<p><b>Methods</b><br>
+There are no supported methods for this class. To make changes to a setting, modify the required property and call <b>PutInstance</b>.
+
+<h2><font color="#0000FF">IANet_SettingEnum</h2></font>
+<p><b>Purpose</b><br>
+This class models a setting that takes an integer value. There are several IANet setting classes used to model integers.  The differences between these classes
+is related to the way the GUI displays and modifies the integer and
+the way the Providers validate. For IANet_SettingEnum, it is expected that the GUI will display a list of strings that map onto a small number of enumerated values (e.g., a drop list combo box).
+
+<p><b>Instances</b><br>
+An instance of this class exists for each setting that will be displayed as an enum. 
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.  
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of this class.
+
+<p><b>Modifying Properties</b><br>
+The <b>CurrentValue</b> attribute is the only modifiable property of this class. Modify this property by using <b>Put()</b> to change the value, then call <b>PutInstance()</b> to update the setting. The
+Providers will check that <b>CurrentValue &#1028; PossibleValues[]</b>
+
+<p><b>Associations</b><br>
+Each IANet_SettingEnum instance is associated with an IANet_Configuration instance using an instance of IANet_SettingContext.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<p><b>Methods</b><br>
+There are no supported methods on this class.  To make changes to a setting, modify the required property and call <b>PutInstance</b>.
+
+<h2><font color="#0000FF">IANet_SettingSlider</h2></font>
+<p><b>Purpose</b><br>
+This class models a setting that takes an integer value. There are several IANet setting classes used to model integers.  The differences between these classes
+is related to the way the GUI displays and modifies the integer and
+the way the Providers validate. For IANet_SettingSlider, it is expected that the GUI will display a slider that will allow you to choose the value in a graphical manner - the actual value chosen need not be displayed.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each setting that will be displayed as a slider.  
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.  
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of this class.
+
+<p><b>Modifying Properties</b><br>
+The <b>CurrentValue</b> attribute is the only modifiable property of this class. Modify this property by using
+<b>Put()</b> to change the value, then call <b>PutInstance()</b> to update the setting. The Providers will check that <b>CurrentValue &#1028; PossibleValues[]</b>
+
+<p><b>Associations</b><br>
+Each IANet_SettingSlider instance is associated with an IANet_Configuration instance using an instance of IANet_SettingContext.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<p><b>Methods</b><br>
+There are no supported methods on this class.  To make changes to a setting, modify the required property and call <b>PutInstance</b>.
+
+
+<h2><font color="#0000FF">IANet_SettingMultiSelection</h2></font>
+<p><b>Purpose</b><br>
+This class models a setting whereby you can select several options from a list of options. For IANet_SettingMultiSelection, it is expected that the GUI will display multi-selection list box that will allow you to choose any (or no) option(s).
+
+<p><b>Instances</b><br>
+An instance of this class exists for each setting that will be displayed as a multi-selection. 
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.  
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of this class.
+
+<p><b>Modifying Properties</b><br>
+The <b>CurrentValue</b> attribute is the only modifiable property of this class. Modify this property by using
+<b>Put()</b> to change the value,  then use <b>PutInstance()</b> to update the setting. The Providers will check that <b>CurrentValue &#1028;
+PossibleValues[].</b>
+
+<p><b>Associations</b><br>
+Each IANet_SettingMultiSelection instance is associated with an IANet_Configuration instance using an instance of IANet_SettingContext.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<p><b>Methods</b><br>
+There are no supported methods for this class. To make changes to a setting, modify the required property and call <b>PutInstance</b>.
+
+<h2><font color="#0000FF">IANet_SettingString</h2></font>
+<p><b>Purpose</b><br>
+This class models a setting whereby you can enter a free-form string value. For IANet_SettingMultiSelection, it is expected that the GUI will display an edit box.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each setting that will be displayed as an edit box.  
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.  
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of this class.
+
+<p><b>Modifying Properties</b><br>
+The <b>CurrentValue</b> attribute is the only modifiable property of this class. Modify this property by using
+<b>Put()</b> to change the value, then call <b>PutInstance()</b> to update the setting.  
+
+<p><b>Associations</b><br>
+Each IANet_SettingMultiSelection instance is associated with an IANet_ElementConfiguration instance using an instance of IANet_SettingString.
+
+<p><b>Methods</b><br>
+There are no supported methods  for this class.
+
+<p><b>Unsupported Attributes</b><br>
+SettingID is not used.
+
+<p><b>Methods</b><br>
+There are no supported methods for this class. To make changes to a setting, modify the required property, then call <b>PutInstance</b>.
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

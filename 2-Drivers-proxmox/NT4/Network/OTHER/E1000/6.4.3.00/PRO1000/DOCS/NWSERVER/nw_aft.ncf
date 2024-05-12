@@ -1,0 +1,54 @@
+# Example 1: 2 Adapter Fault Tolerant Team (Gigabit and PRO/100 Server.)
+
+# The following is an example of an AFT team that consists of a gigabit adapter
+# and a PRO/100 adapter.  The Gigabit is the primary and the PRO/100 is the 
+# secondary.  For simplicity, only one frametype is used: 802.2 (the default.)
+
+; First the base driver must be loaded for each adapter and frametype involved
+; in the team.
+
+load CE1000
+load CE100B
+
+; Second step is to load iANS.LAN to form the basis of a team.  For this
+; example iANS is only loaded once.  If multiple frametypes are used, iANS
+; is loaded once for each frametype.
+
+load iANS
+
+; Once iANS.LAN is loaded, it looks like a protocol, so we can bind it to the
+; virtual adapter(s).  iANS.LAN needs to be bound to each virtual adapter in
+; the team.  The "PRIMARY" keyword is used to make iANS favor one particular
+; virtual adapter.  If a team loses the connection on its primary adapter it 
+; will switch to the other adapter(s).  If the primary adapter recovers, iANS
+; will switch back to it.  In mixed speed teams always set the fastest
+; adapter in the team as the primary.
+
+bind iANS [virtual adapter/frametype name1] PRIMARY
+bind iANS [virtual adapter/frametype name2]
+
+; The commit command creates the team.  The default mode is AFT.  Since
+; that is what this example is after, we do not need to specify a mode.
+
+load iANS COMMIT
+
+; Once the team has been committed, it looks like an adapter, so now we can
+; bind protocols to iANS.
+
+bind IPX iANS net=102
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.

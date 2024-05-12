@@ -1,0 +1,417 @@
+[Danish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[German]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[English]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[UK English]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Latin Spanish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Modern Spanish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Spanish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Finnish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[French]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Italian]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Dutch]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Norwegian]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Brazil Portuguese]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Portuguese]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Swedish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Japanese]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+DIALOG_FONT = ‚l‚r ‚oƒSƒVƒbƒN
+FONT_SIZE = 12
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[TChinese]
+PAGE_TITLE = ¿ï¾ÜÅã¹³¾¹
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Åã¹³¾¹¼tµP:
+MODEL = Åã¹³¾¹¾÷«¬:
+CAPABLE = Åã¹³¾¹­«²M²v¯à¤O
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+DIALOG_FONT = ²Ó©úÅ
+FONT_SIZE = 12
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[SChinese]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+DIALOG_FONT = ËÎÌ
+FONT_SIZE = 12
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Korean]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+DIALOG_FONT = ±¼¸²
+FONT_SIZE = 12
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Hungarian]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Russian]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Czech]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Polish]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+[Thai]
+PAGE_TITLE = Monitor Selection
+NON_DDC = Non-PnP Monitor Selection
+BRAND = Monitor Brand:
+MODEL = Monitor Model:
+CAPABLE = Monitor Capable Refresh Rates
+OTHER_BRAND = Other Brand
+OTHER_MODEL = Other Model
+ALL = All available
+NONE = Unavailable
+PNP_MONITOR = Use Monitor Plug-N-Play (PnP) Selection
+STR_PNP_MONITOR	= PnP Monitor of Manufacturer: %s, Product Code: %d is detected.
+STR_NONPNP_MONITOR = Non-PnP Monitor of Brand: %s, Model: %s is selected.
+STR_RESTART = The monitor selection settings have been updated to Windows registry.  You need to restart Windows in order to take effect the new settings.
+STR_RESTARTNOW = You must restart your system to take effect the new monitor selection settings.  Do you want to shut down and restart Windows right now?
+STR_RESTARTFAIL = Can not shut down and restart Windows at this time.  You need to manually restart Windows later.
+
+

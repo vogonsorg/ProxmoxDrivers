@@ -1,0 +1,694 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Linux Driver for the Intel(R) PRO/1000 Family of Adapters</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Linux* Base Driver for the Intel<sup>&reg;</sup> PRO/1000 Family of Adapters</h1>
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#adapters">Supported Adapters</a></p>
+<p class="contents"><a href="#install">Building and Installation</a></p>
+<p class="contents"><a href="#parameters">Command Line Parameters</a></p>
+<p class="contents"><a href="#speed_duplex">Speed and Duplex Configuration</a></p>
+<p class="contents"><a href="#add_config">Additional Configurations</a></p>
+<p class="contents"><a href="#known_issue">Known Issues</a></p>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+This file describes the Linux* Base Driver for the Intel<sup>&reg;</sup> 
+PRO/1000 Family of Adapters, version 5.3.x. This driver is intended for 2.4.x 
+kernels; it is known to build properly on 2.4.x kernels through 2.4.22. Intel 
+focused testing on Intel architectures running the 2.4.21 kernel. This driver 
+includes support for Intel<sup>&#174;</sup> Itanium&#153;-based systems.</p>
+<p>
+ This driver is only supported as a loadable module at this time. Intel is not supplying 
+patches against the kernel source&nbsp;to allow for static linking of the driver. For questions related 
+to hardware requirements, refer to the documentation supplied with your Intel PRO/1000 adapter. All 
+hardware requirements listed apply to use with Linux.
+</p>
+     
+<p>
+Native VLANs are now available with supported kernels.
+</p>
+     
+<p>The driver information previously displayed in the /proc filesystem is not 
+supported in this release.&nbsp; Alternatively, you can use ethtool (version 1.6 or 
+later), lspci, and ifconfig to obtain the same information.&nbsp; Instructions on 
+updating ethtool can be found in the section <a href="#add_config">Additional 
+Configurations</a> later in this document.</p>
+     
+<hr>
+
+<h2><a name="adapters"></a>Supported Adapters</h2>
+<font SIZE="2"></font>
+<p>
+For more information on how to identify your adapter, go to the Adapter &amp;
+Driver ID Guide at:
+</p>
+
+<blockquote>
+  <p><a href="http://support.intel.com/support/network/adapter/pro100/21397.htm" target="_blank">
+  http://support.intel.com/support/network/adapter/pro100/21397.htm</a></p>
+</blockquote>
+For the latest Intel network drivers for Linux, refer to the following website.
+In the search field, enter your adapter name or type, or use the networking link
+on the left to search for your adapter:&nbsp;&nbsp;
+<blockquote>
+  <p><a href="http://downloadfinder.intel.com/scripts-df/support_intel.asp" target="_blank">http://downloadfinder.intel.com/scripts-df/support_intel.asp</a></p>
+</blockquote>
+
+<hr>
+
+<h2><a name="install"></a>Building and Installation</h2>
+
+<p>
+To build a binary RPM* package of this driver, run&nbsp;'rpmbuild -tb &lt;filename.tar.gz&gt;'. 
+Replace &lt;filename.tar.gz&gt; with the&nbsp;specific file name of the driver.</p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTES</b>:</i>  For the build to work properly, the currently running kernel 
+    MUST match the version and configuration of the installed kernel sources. If you have just
+      recompiled the kernel reboot the system now.<p>RPM functionality has only 
+    been tested in Red Hat distributions.</td>
+  </tr>
+</table>
+<ol>
+  <li>
+    <p class="numlst">Move the base driver tar file to the directory of your
+    choice. For example, use '/home/username/e1000' or '/usr/local/src/e1000'.</li>
+  <li>
+    <p class="numlst">Untar/unzip the archive, where &lt;x.x.x&gt; is the   version number for the driver
+    tar file:
+    <blockquote>
+      <p class="monospace">tar zxf e1000-&lt;x.x.x&gt;.tar.gz
+    </blockquote>
+  <li>
+    <p class="numlst">Change to the driver src directory, where &lt;x.x.x&gt; is the   version number for the driver
+    tar:
+    <blockquote>
+      <p class="monospace">cd e1000-&lt;x.x.x&gt;/src/
+    </blockquote>
+  </li>
+  <li>
+    <p class="numlst">Compile the driver module:
+    <blockquote>
+      <p class="monospace">make install
+    </blockquote>
+    <p>The binary will be installed as:</p>
+    <blockquote>
+       <p> /lib/modules/&lt;kernel_version&gt;/kernel/drivers/net/e1000.o</p>
+    </blockquote>
+    <p class="numlst">The install locations listed above are the default locations.
+          They might not be correct for certain Linux distributions. For
+          more information, go to <a href="ldistrib.htm">ldistrib.htm</a>.</p>	
+  </li>
+  <li>
+    <p class="numlst">Install the module:
+    <blockquote>
+      <p class="monospace">insmod e1000 &lt;parameter&gt;=&lt;value&gt;
+    </blockquote>
+  </li>
+  <li>
+    <p class="numlst">Assign an IP address to the interface by entering the
+    following, where &lt;x&gt; is the interface number:
+    <blockquote>
+      <p class="monospace">ifconfig eth&lt;x&gt; &lt;IP_address&gt;
+    </blockquote>
+  </li>
+  <li>
+    <p class="numlst">Verify that the interface works. Enter the following, where
+    &lt;IP_address&gt;
+    is the IP address for another machine on the same subnet as the interface
+    that is being tested:
+    <blockquote>
+      <p class="monospace">ping &lt;IP_address&gt;
+    </blockquote>
+  </li>
+</ol>
+
+<hr>
+
+<h2><a name="parameters"></a>Command Line Parameters</h2>
+<p>If the driver is built as a module, the following optional parameters are used by entering them on the command
+line with the modprobe or insmod command using this syntax:</p>
+<blockquote>
+  <p class="monospace">modprobe e1000
+  [&lt;option&gt;=&lt;VAL1&gt;,&lt;VAL2&gt;,...]</p>
+  <p class="monospace">insmod e1000
+  [&lt;option&gt;=&lt;VAL1&gt;,&lt;VAL2&gt;,...]</p>
+</blockquote>
+<p>
+ For example, with two PRO/1000 PCI
+adapters, entering:
+</p>
+<blockquote>
+  <p class="monospace">insmod e1000 TxDescriptors=80,128
+</blockquote>
+<p>
+loads the e1000 driver with 80 TX descriptors for the first adapter and 128 TX
+descriptors for the second adapter.
+</p>
+<p>
+The default value for each parameter is generally the recommended setting, unless otherwise noted.
+</p>
+
+    <table border="0" cellpadding="4" width="100%">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTES</b>:</i>
+For more information about the AutoNeg, Duplex, and Speed parameters, see the <a href="#speed_duplex">Speed and Duplex
+Configuration</a> section in this document.
+        <p>For more information about the InterruptThrottleRate, RxIntDelay, 
+        TxIntDelay, RxAbsIntDelay, and TxAbsIntDelay parameters, see the 
+        application note at:
+        <a href="http://www.intel.com/design/network/applnots/ap450.htm">
+        http://www.intel.com/design/network/applnots/ap450.htm</a>.<p>A 
+		descriptor describes a data buffer and attributes related to the data 
+		buffer. This information is accessed by the hardware.</td>
+      </tr>
+    </table>
+
+<p>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <th width="15%" align="center">Parameter Name</th>
+    <th width="20%" align="center">Valid Range/Settings</th>
+    <th width="16%" align="center">Default</th>
+    <th align="center">Description</th>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">AutoNeg</td>
+    <td width="20%">0x01-0x0F, 0x20-0x2F</td>
+    <td width="16%" align="center">0x2F</td>
+    <td valign="top">
+    This parameter is a bit mask that specifies which speed and duplex
+    settings the board advertises. When this parameter is used, the
+    Speed and Duplex parameters must not be specified.
+<p> (adapters using copper connections only)</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">Duplex</td>
+    <td width="20%"> 0-2 (0=auto-negotiate, 1=half, 2=full)</td>
+    <td width="16%" align="center"> 0</td>
+    <td valign="top">
+    Defines the direction in which data is allowed to flow. Can be either
+    one or two-directional. If both Duplex and the link partner are set to auto-negotiate, the board
+    auto-detects the correct duplex. If the link partner is forced
+    (either full or half), Duplex defaults to half-duplex.
+<p> (adapters using copper connections only)</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">FlowControl</td>
+    <td width="20%"> 0-3 (0=none, 1=Rx only, 2=Tx only, 3=Rx&amp;Tx)</td>
+    <td width="16%" align="center">Read flow control settings from the EEPROM</td>
+    <td valign="top">This parameter controls the automatic generation(Tx) and 
+    response(Rx) to Ethernet PAUSE frames.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">InterruptThrottleRate</td>
+    <td width="20%">100-100000 (0=off, 1=dynamic)</td>
+    <td width="16%" align="center">1</td>
+    <td valign="top">This value represents the maximum number of
+      interrupts per second the controller generates. InterruptThrottleRate is
+      another setting used in interrupt moderation. Dynamic mode uses a
+      heuristic algorithm to adjust InterruptThrottleRate based on the current
+      traffic load.
+      <p>Un-supported Adapters: InterruptThrottleRate is <i>not</i> supported by 82542, 82543, 
+      82545, or 82544-based adapters.</p>
+      <p>
+      <i><b>NOTE</b>:</i> InterruptThrottleRate takes precedence over the
+      TxAbsIntDelay and RxAbsIntDelay parameters. In other words, minimizing the
+      receive and/or transmit absolute delays does not force the controller to
+      generate more interrupts than what the Interrupt Throttle Rate allows.
+      <p>
+      <b><i>CAUTION</i></b><i>:</i> If you are using the Intel PRO/1000 CT 
+      Network Connection (controller 82547), setting InterruptThrottleRate to a 
+      value <br>
+      greater than 75,000, may hang (stop transmitting) adapters under <br>
+      certain network conditions. If this occurs a NETDEV WATCHDOG <br>
+      message is logged in the system event log. In addition, the <br>
+      controller is automatically reset, restoring the network <br>
+      connection. To eliminate the potential for the hang, ensure <br>
+      that InterruptThrottleRate is set no greater than 75,000 and is <br>
+      not set to 0.<p>
+      <i><b>NOTE</b>:</i> When e1000 is loaded with default settings and 
+      multiple adapters are in use simultaneously, the CPU utilization may 
+      increase non-linearly. In order to limit the CPU utilization without 
+      impacting the overall throughput, we recommend that you load the driver as 
+      follows:<br>
+      <br>
+&nbsp;&nbsp;&nbsp;&nbsp; insmod e1000.o InterruptThrottleRate=3000,3000,3000<br>
+      <br>
+      This sets the InterruptThrottleRate to 3000 interrupts/sec for the first, 
+      second, and third instances of the driver. The range of 2000 to 3000 interrupts per second works 
+      on a majority of systems and is a good starting point, but the optimal 
+      value will be platform-specific. If CPU utilization is not a concern, use RX_POLLING (NAPI) and default driver settings.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">RxDescriptors</td>
+    <td width="20%"> 80-256 for 82542 and 82543-based adapters
+      <p>80-4096 for all other supported adapters</p>
+    </td>
+    <td width="16%" align="center">256</td>
+    <td valign="top">
+    This value is the number of receive descriptors allocated by the
+    driver. Increasing this value allows the driver to buffer more
+    incoming packets.  Each descriptor is 16 bytes.  A receive buffer is
+    also allocated for each descriptor and can be either 2048, 4096, 8192,
+    or 16384 bytes, depending on the MTU setting. The maximum MTU size is 16110.<p>
+    <i><b>NOTE</b>:</i> MTU designates the frame size. It only needs to be set 
+    for Jumbo Frames.<p>
+    <i><b>NOTE</b>:</i> Depending on the available system resources, the request 
+	for a<br>
+	higher number of receive descriptors may be denied. In this case,<br>
+	use a lower number.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">RxIntDelay</td>
+    <td width="20%"> 0-65535 (0=off)</td>
+    <td width="16%" align="center"> 0
+    </td>
+    <td valign="top">
+    This value delays the generation of receive interrupts in units of
+    1.024 microseconds.  Receive interrupt reduction can improve CPU
+    efficiency if properly tuned for specific network traffic.
+    Increasing this value adds extra latency to frame reception
+    and can end up decreasing the throughput of TCP traffic. If the system is 
+    reporting dropped receives, this value may be set too high, causing the 
+    driver to run out of available receive descriptors.
+    <p><i><b>CAUTION</b>:</i> When setting RxIntDelay to a value other than 0, 
+    adapters may 
+    	hang (stop transmitting) under certain network conditions. If 
+    	this occurs a NETDEV WATCHDOG message is logged in the system event log. In 
+    	addition, the controller is automatically reset, restoring the
+     	network connection. To eliminate the potential for the hang 
+     	ensure that RxIntDelay is set to zero.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">RxAbsIntDelay</td>
+    <td width="20%">0-65535 (0=off)</td>
+    <td width="16%" align="center">128</td>
+    <td valign="top">This value, in units of 1.024 microseconds, limits the delay in which a 
+    receive interrupt is generated. Useful only if RxIntDelay is non-zero, 
+    this value ensures that an interrupt is generated after the initial 
+    packet is received within the set amount of time. Proper tuning, 
+    along with RxIntDelay, may improve traffic throughput in specific 
+    network conditions.
+    <p>(82540, 82545, and later adapters only)
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">Speed</td>
+    <td width="20%">0, 10, 100, 1000</td>
+    <td width="16%" align="center"> 0</td>
+    <td valign="top">
+    Speed forces the line speed to the specified value in megabits&nbsp;per second (Mbps). If this parameter 
+    is not specified or is set&nbsp;to 0 and the link partner is set to auto-negotiate, the board
+    will auto-detect the correct speed. Duplex must also be set&nbsp;when Speed is set to either 10 or 100.<br>
+<br>
+    (adapters using copper connections only)
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">
+TxDescriptors</td>
+    <td width="20%"> 80-256 for 82542 and 82543-based adapters
+      <p>
+             80-4096 for all other supported adapters</p>
+    </td>
+    <td width="16%" align="center"> 256 </td>
+    <td valign="top">
+    This value is the number of transmit descriptors allocated by the
+    driver. Increasing this value allows the driver to queue more
+    transmits. Each descriptor is 16 bytes.
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">TxIntDelay</td>
+    <td width="20%">0-65535 (0=off)</td>
+    <td width="16%" align="center">64</td>
+    <td valign="top">This value delays the generation of transmit interrupts in units of 1.024 
+    microseconds. Transmit interrupt reduction can improve CPU efficiency if 
+    properly tuned for specific network traffic. If the system is reporting 
+    dropped transmits, this value may be set too high causing the driver to run 
+    out of available transmit descriptors.</td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">TxAbsIntDelay</td>
+    <td width="20%">0-65535 (0=off)</td>
+    <td width="16%" align="center">64</td>
+    <td valign="top">
+    <p>This value, in units of 1.024 microseconds, limits the delay in which a transmit 
+    interrupt is generated. Useful only if TxIntDelay is non-zero, this value 
+    ensures that an interrupt is generated after the initial packet is sent on 
+    the wire within the set amount of time. Proper tuning, along with TxIntDelay, 
+    may improve traffic throughput in specific network conditions.</p>
+    <p>(82540, 82545, and later adapters only)</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="15%" align="center" class="monospace">XsumRX</td>
+    <td width="20%">0-1</td>
+    <td width="16%" align="center"> 1</td>
+    <td valign="top">
+    A value of '1' indicates that the driver should enable IP checksum<br>
+    offload for received packets (both UDP and TCP) to the adapter<br>
+    hardware.
+	<p>(not available on the 82542-based adapter)</p>
+    </td>
+  </tr>
+</table>
+<p>
+
+<hr>
+
+<h2><a name="speed_duplex"></a>Speed and Duplex Configuration</h2>
+<p>
+Three keywords are used to control the speed and duplex configuration. These keywords are Speed,
+Duplex, and AutoNeg.
+</p>
+<p>
+If the board uses a fiber interface, these keywords are ignored, and the&nbsp;fiber interface board only links at 1000 Mbps full-duplex.
+</p>
+<p>
+For copper-based boards, the keywords interact as follows:
+</p>
+<blockquote>
+	<p>
+	The default operation is auto-negotiate. The board advertises all supported
+	speed and duplex combinations, and it links at the highest common speed and
+	duplex mode IF the link partner is set to auto-negotiate.
+	</p>
+	<p>
+	If Speed = 1000, limited auto-negotiation is enabled and only 1000 Mbps is 
+	advertised (The 1000BaseT spec requires auto-negotiation.)
+	</p>
+	<p>
+	If Speed = 10 or 100, then both Speed and Duplex should&nbsp; be set. Auto-negotiation is disabled, 
+	and the AutoNeg parameter is ignored. Partner SHOULD also be forced.
+	</p>
+</blockquote>
+<p>
+The AutoNeg parameter is used when more control is required over the 
+auto-negotiation process.  When this parameter is used, Speed and Duplex 
+must not be specified.  This parameter is a bitmap that specifies which 
+speed and duplex settings are advertised to the link partner.
+</p>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <td width="15%"><b>
+Bit:</b></td>
+    <td align="center">7</td>
+    <td align="center">6</td>
+    <td align="center">5</td>
+    <td align="center">4</td>
+    <td align="center">3</td>
+    <td align="center">2</td>
+    <td align="center">1</td>
+    <td align="center">0</td>
+  </tr>
+  <tr>
+    <td width="15%"><b>
+Speed (Mbps):</b></td>
+    <td align="center">   N/A</td>
+    <td align="center">   N/A</td>
+    <td align="center">    1000</td>
+    <td align="center">   N/A</td>
+    <td align="center">     100</td>
+    <td align="center">100</td>
+    <td align="center">10</td>
+    <td align="center">10</td>
+  </tr>
+  <tr>
+    <td width="15%"><b>
+Duplex:</b></td>
+    <td align="center">&nbsp;</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">                       Full</td>
+    <td align="center">&nbsp;</td>
+    <td align="center">                       Full</td>
+    <td align="center">Half</td>
+    <td align="center">                       Full</td>
+    <td align="center">Half</td>
+  </tr>
+</table>
+
+<p>
+Note that setting AutoNeg does not guarantee that the board will link at
+the highest specified speed or duplex mode, but the board will link at 
+the highest possible speed/duplex of the link partner IF the link partner 
+is also set to auto-negotiate. If the link partner is forced speed/duplex,
+the adapter MUST be forced to the same speed/duplex.
+</p>
+
+<hr>
+
+<h2><a name="add_config"></a>Additional Configurations</h2>
+<h3>
+Configuring the Driver on Different Distributions
+</h3>
+<p>
+Configuring a network driver to load properly when the system is started
+is distribution dependent.  Typically, the configuration process involves
+adding an alias line to /etc/modules.conf as well as editing other system
+startup scripts and/or configuration files.  Many popular Linux
+distributions ship with tools to make these changes for you.  To learn
+the proper way to configure a network device for your system, refer to
+your distribution documentation. If during this process you are asked
+for the driver or module name, the name for the Linux Base Driver for the Intel PRO/1000 
+family of adapters
+is e1000.
+</p>
+<p>
+As an example, if you install the e1000 driver for two PRO/1000 adapters
+(eth0 and eth1) and set the speed and duplex to 10full and 100half, add the
+following to modules.conf:
+</p>
+<blockquote class="monospace">
+  alias eth0 e1000<br>
+  alias eth1 e1000<br>
+  options e1000 Speed=10,100 Duplex=2,1
+</blockquote>
+
+<h3>
+Viewing Link Messages
+</h3>
+<p>
+Link messages will not be displayed to the console if the distribution is restricting system messages.
+In order to see network driver link
+messages on your console, set dmesg to eight by entering the following:
+</p>
+
+<blockquote class="monospace">
+	dmesg -n 8
+</blockquote>
+    <table border="0" cellpadding="4">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i> This setting is not saved across reboots.</td>
+      </tr>
+    </table>
+
+<h3><a name="jumbo_frames"></a>Jumbo Frames</h3>
+<p>The driver supports Jumbo Frames for all adapters except 82542-based 
+adapters. Jumbo Frames support is enabled by changing the MTU to a value larger 
+than the default of 1500. Use the ifconfig command to increase the MTU size. For 
+example:</p>
+<blockquote>
+  <p><code>ifconfig eth&lt;x&gt; mtu 9000 up</code> </p>
+</blockquote>
+<table height="88" cellPadding="4" border="0">
+  <tr>
+    <td vAlign="top" align="middle" height="78">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td height="78"><i><b>NOTE:</b> This setting is not saved across reboots. The 
+    setting change can be made permanent by adding:</i>
+    <blockquote>
+      <p><i>MTU=9000</i><br>
+      to the file /etc/sysconfig/network-scripts/ifcfg-eth&lt;x&gt; (RedHat 
+		distributions)</p>
+    </blockquote>
+    </td>
+  </tr>
+</table>
+<p>The maximum MTU setting for Jumbo Frames is 16110. This value coincides with 
+the maximum Jumbo Frames size of 16128.</p>
+
+<table height="47" cellPadding="4" width="871" border="0">
+  <tr>
+    <td vAlign="top" align="middle" width="19" height="37">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td vAlign="top" width="830" height="37"><i><b>NOTES:</b> </i>Jumbo Frames are 
+    supported at 1000 Mbps only. Using Jumbo Frames at 10 or 100 Mbps may result 
+    in poor performance or loss of link.<p>MTU designates the frame size. To 
+	enable Jumbo Frames increase the MTU size on the interface beyond 1500.</td>
+  </tr>
+</table>
+
+<h3>Ethtool</h3>
+<p>The driver utilizes the ethtool interface for driver configuration and 
+diagnostics, as well as displaying statistical information.&nbsp; Ethtool version 1.6 
+or later is required for this functionality.</p>
+<p class="MsoPlainText">The latest release of ethtool can be found at:
+<a href="http://sourceforge.net/projects/gkernel">
+http://sourceforge.net/projects/gkernel</a>.&nbsp; 
+After ethtool is installed, ethtool-copy.h must be copied and renamed to 
+ethtool.h in your kernel source tree at &lt;linux_kernel_src&gt;/include/linux.&nbsp; 
+Backup the original ethtool.h as needed before copying.&nbsp; The driver then must be 
+recompiled in order to take advantage of the latest ethtool features.</p>
+
+<h3>Enabling Wake on LAN* (WoL)</h3>
+<p>WoL is configured through the Ethtool* utility. Ethtool is included with all 
+versions of Red Hat after Red Hat 7.2. For other Linux distributions,
+download and install Ethtool from the following website: 
+<a href="http://sourceforge.net/projects/gkernel">http://sourceforge.net/projects/gkernel</a>.</p>
+<p>For instructions on enabling WoL with Ethtool, refer to the website listed 
+above.</p>
+<p>WoL will be enabled on the system during the next shut down or reboot. For this 
+driver version, in order to enable WoL, the e1000 driver must be
+loaded prior to shutting down or suspending the system.</p>
+
+<h3>NAPI</h3>
+
+<p>NAPI (Rx polling mode) is supported in the e1000 driver. NAPI is enabled or 
+disabled based on the configuration of the kernel. To override the 
+default, use the following compile-time flags.</p>
+<p>To enable NAPI, compile the driver module, passing in a configuration option:</p>
+<blockquote>
+	<p class="monospace">make CFLAGS_EXTRA=-DE1000_NAPI install</p>
+</blockquote>
+<p>To disable NAPI, compile the driver module, passing in a configuration 
+option:</p>
+<blockquote>
+	<p class="monospace">make CFLAGS_EXTRA=-DE1000_NO_NAPI install</p>
+</blockquote>
+<p>See <a href="http://www.cyberus.ca/~hadi/usenix-paper.tgz">http://www.cyberus.ca/~hadi/usenix-paper.tgz</a> for more information on NAPI.</p>
+
+<hr>
+
+<h2><a name="known_issue"></a>Known Issues</h2>
+
+    <table border="0" cellpadding="4" width="100%">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i>  For distribution-specific information, see <a href="ldistrib.htm">ldistrib.htm</a>.</td>
+      </tr>
+    </table>
+
+<h3>Compiling the Driver</h3>
+ 
+<p>
+When trying to compile the driver by running make install, the following
+error may occur:&nbsp; &quot;Linux kernel source not configured - missing
+version.h&quot;
+</p>
+<p>
+To solve this issue, create the version.h file by going to the Linux source
+tree and entering:
+</p>
+
+<blockquote class="monospace">
+	make include/linux/version.h
+</blockquote>
+
+<h3>Jumbo Frames System Requirement</h3>
+<p>
+Memory allocation failures have been observed on Linux systems with 64 MB of
+RAM or less that are running Jumbo Frames. If you are using Jumbo Frames, your
+system may require more than the advertised minimum requirement of 64 MB of
+system memory.
+</p>
+
+<h3>Performance Degradation with Jumbo Frames</h3>
+<p>Degradation in throughput performance may be observed in some Jumbo frames 
+environments. If this is observed, increasing the application's socket buffer 
+size and/or increasing the /proc/sys/net/ipv4/tcp_*mem entry values may help. 
+See the specific application manual and /usr/src/linux*/Documentation/networking/ip-sysctl.txt 
+for more details.</p>
+
+<h3>Multiple Interfaces on Same Ethernet Broadcast Network</h3>
+<p>Due to the default ARP behavior on Linux, it is not possible to have one 
+system on two IP networks in the same Ethernet broadcast domain 
+(non-partitioned switch) behave as expected. All Ethernet interfaces will 
+respond to IP traffic for any IP address assigned to the system.
+This results in unbalanced receive traffic.</p>
+<p>If you have multiple interfaces in a server, either turn on ARP filtering by 
+entering:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_filter<br>
+(this only works if your kernel's version is higher than 2.4.5), </p>
+
+<table height="70" cellPadding="4" border="0">
+  <tr>
+    <td vAlign="top" align="middle" height="60">
+    <img border="0" src="note.gif" width="28" height="21"></td>
+    <td height="60"><i><b>NOTE:</b> This setting is not saved across reboots. The 
+    configuration change can be made permanent by adding the line:</i>
+    <blockquote>
+      <p><i>net.ipv4.conf.all.arp_filter = 1</i><br>
+      <i>to the file /etc/sysctl.conf</i> </p>
+		<p>&nbsp;&nbsp; or,<br>
+<br>
+install the interfaces in separate broadcast domains (either in different 
+switches or in a switch partitioned to VLANs).</p>
+    </blockquote>
+    </td>
+  </tr>
+</table>
+
+<h3>82541/82547 can't link or is slow to link with some link partners</h3>
+
+<p>There is a known compatibility issue with 82541/82547 and some low-end 
+switches where the link will not be established, or will <br>
+be slow to establish. In particular, these switches are known to be incompatible 
+with 82541/82547:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Planex FXG-08TE<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I-O Data ETG-SH8<br>
+<br>
+To workaround this issue, the driver can be compiled with an override of the 
+PHY's master/slave setting. Forcing master or forcing slave <br>
+mode will improve time-to-link.<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # make CFLAGS_EXTRA=-DE1000_MASTER_SLAVE=&lt;n&gt;<br>
+<br>
+Where &lt;n&gt; is:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 = Hardware default<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 = Master mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 = Slave mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 = Auto master/slave</p>
+<h3>Disable rx flow control with ethtool </h3>
+<p>In order to disable receive flow control using ethtool on the following 
+adapters, you must turn off auto-negotiation on the same command line. <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For example:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ethtool -A 
+eth? autoneg off rx off<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intel PRO/1000 MT Network Connection<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intel PRO/1000 MT Desktop Adapter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intel PRO/1000 CT Desktop Adapter <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intel PRO/1000 CT Desktop Adapter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Intel PRO/1000 CT Mobile Connection</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/23/04 1:08p <!-- $--> Revision <!--$$Revision:--> 18 <!-- $--></code></p>
+
+</body>
+
+</html>

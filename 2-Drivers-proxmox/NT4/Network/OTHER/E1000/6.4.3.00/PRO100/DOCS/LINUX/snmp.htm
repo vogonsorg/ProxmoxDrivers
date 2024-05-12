@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>SNMP agent extension implementing the INTEL-LAN-ADAPTERS MIB</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>SNMP Agent Extension for Linux*</h1>
+
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#prereqs">Prerequisites</a></p>
+<p class="contents"><a href="#install">Installation</a></p>
+<p class="contents"><a href="#function">Functionality</a></p>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+This file describes the Intel SNMP package for Linux* operating systems, version 
+1.8.x. This package is intended for 2.4.x kernels. Intel focused testing on 
+Linux systems running the 2.4.21 kernel.
+</p>
+<p>
+The SNMP agent extension extends the UCD-SNMP or NET-SNMP agent for Linux via a 
+&quot;pass-through&quot; protocol. It provides information on the Intel&reg;
+PRO LAN adapters (10/100/1000) through the adapter drivers (<a href="e100.htm">e100</a>,
+<a href="e1000.htm">e1000</a>).
+It also provides information about advanced features, including teaming
+and VLANs, through the Intel <a href="ans.htm">Advanced Network Services</a> (ANS) module.
+</p>
+<p>The extension was tested on Red Hat* 3.0 with the net-snmp-5.0.9 SNMP agent 
+and on Red Hat 9.0 with the net-snmp-5.0.6 SNMP agent.</p>
+
+<hr>
+
+<h2><a name="prereqs"></a>Prerequisites</h2>
+<p>
+An SNMP agent which supports the "pass-through" protocol
+should be installed on the system.
+</p>
+
+<p>
+The libstdc++-libc6.2-2.so.3 package - available in Red Hat* 7.2 and later. 
+Located in either the libstdc++ or compat-libstdc++ package provided <br>
+with the operating system.</p>
+
+<hr>
+
+<h2><a name="install"></a>Installation</h2>
+<font SIZE="2" COLOR="#0000ff">
+</font>
+
+<ol>
+  <li><p class="numlst">Copy the inic-snmp-xxx.tar.gz tar file to a directory of
+    your choice.
+  	</p></li>
+  <li><p class="numlst">Untar the archive:</p>
+  	<blockquote class="monospace">
+  		tar xzf inic-snmp-xxx.tar.gz
+  	</blockquote>
+  	<p class="numlst">The inic-snmp-x.x.x directory should be created.</p></li>
+  <li><p class="numlst">Change directories to the inic-snmp-x.x.x directory:</p>
+  	<blockquote class="monospace">
+		cd inic-snmp-x.x.x
+	</blockquote>
+	<p class="numlst">The following files should be in the directory:</p>
+	<blockquote>
+		INSTALL<br>
+		ia32<br>
+		ia64<br>
+		inic-snmp.spec&nbsp;<br>
+        
+        INTELLAN.txt<br>
+		LICENSE<br>
+		README&nbsp;
+        <br>
+        UNINSTALL
+	</blockquote></li>
+  <li><p class="numlst">Enter:</p>
+	<blockquote class="monospace">
+		./INSTALL [-i &lt;install_directory&gt;][-c &lt;snmpd_config_file&gt;]
+	</blockquote>
+	<p class="numlst">The INSTALL script:</p>
+	<ul>
+		<li>detects architecture (&lt;arch&gt;) of the current machine (ia32 or ia64)</li>
+		<li>copies the following files to the indicated location:<br>
+			<blockquote>
+				&lt;arch&gt;/inic-extension - to &lt;install_directory&gt;<br>
+				&lt;arch&gt;/inic-daemon - to &lt;install_directory&gt;<br>
+				LICENSE and README - to /usr/share/doc/inic-snmp-&lt;package_version&gt;<br>
+                INTELLAN.txt - to &lt;mibs_directory&gt;
+			</blockquote></li>
+		<li>adds the following line anywhere in &lt;snmpd_config_file&gt;:<br>
+			<blockquote class="monospace">
+				pass .1.3.6.1.4.1.343.2.7.2 &lt;install_directory&gt;/inic_extension
+			</blockquote></li></ul>
+    	<table border="0" cellpadding="4" cellspacing="0">
+		  <tr>
+			<td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+			<td><i><b>NOTES</b>:</i> 
+				&lt;install_directory&gt;&nbsp;is any preferred directory. If option
+              -i is not used, &lt;install_directory&gt; is /usr/local/sbin.</td></tr>
+		  <tr>
+			<td></td>
+			<td>&lt;snmpd_config_file&gt; is any configuration file for the SNMP agent.
+              If option -c is not used, &lt;snmpd_config_file&gt; is the file specified
+    			in the snmpd.conf man page. If this file does not exist, INSTALL script creates an 
+				empty file in the specified location.</td></tr>
+		  <tr>
+			<td></td>
+			<td>&lt;mibs_directory&gt; is the MIBS directory specified in the snmpd man page.</td></tr>
+		</table>
+  </li>
+  <li>
+    <p class="numlst">In order to receive both complete information on counters and SNMP traps, 
+    run the inic_daemon executable before using the extended agent.
+    </p>
+    <p class="numlst">The inic_daemon executable is used for keeping track of internal counters 
+    and sending traps to the SNMP clients. The daemon recognizes the directives
+    'trapsink', 'trap2sink', 'informsink', 'trapcommunity', 'agentuser', 'agentaddress' and
+    'agentgroup' (for more information, see the snmpd.conf man page). These
+    directives are optional and should be added manually to &lt;snmpd_config_file&gt;
+    (see previous step, &lt;snmpd_config_file&gt;).</p>
+    <p class="numlst">By default, the inic_daemon 
+    reads the trap directives from the configuration file specified in the snmpd.conf man page 
+    (see previous step, &lt;snmpd_config_file&gt;). In order to use an alternative configuration 
+    file, specify the file from the inic_daemon command line using the '-c' option:</p>
+		<blockquote class="monospace">
+			inic_daemon -c &lt;snmpd_config_file&gt;
+		</blockquote>
+	<p class="numlst">Your SNMP agent is now ready to run.</p>
+  </li>
+  <li><p class="numlst">Install the clients. Copy the MIB files (INTELLAN.txt) to every management station, placing
+    the file in the relevant MIBS directory. This varies according to
+   the SNMP MIB browser/application you are using.</p>
+  </li>
+</ol>
+<h4>To uninstall enter:</h4>
+<font SIZE="2" COLOR="#ff0000"></font>
+<ol>
+  <li>
+    <p class="numlst">./UNINSTALL [-i &lt;install_directory&gt;][-c &lt;snmpd_config_file&gt;]</li>
+  <li>
+    <p class="numlst">The UNINSTALL script will remove all files installed in
+    step 4 (see above). If &lt;install_directory&gt; is not specified, the
+    default is the directory used when running the INSTALL script.</li>
+  <li>
+    <p class="numlst">The UNINSTALL script will remove the line</li>
+</ol>
+<blockquote>
+  <blockquote>
+    <p>pass .1.3.6.1.4.1.343.2.7.2 &lt;install_directory&gt;/inic_extension</p>
+  </blockquote>
+  <font SIZE="2" COLOR="#ff0000"></font>
+  <p class="numlst">from &lt;snmpd_config_file&gt;. If &lt;snmpd_config_file&gt;
+  is not specified, the default is the file used when running the INSTALL
+  script.</p>
+</blockquote>
+<font SIZE="2" COLOR="#ff0000"></font>
+<ol start="4">
+  <li>
+    <p class="numlst">To keep all features of UNINSTALL script working properly,
+    it is not recommended to relocate the files installed/edited by INSTALL
+    script. To relocate them run UNINSTALL and then INSTALL with new parameters.</li>
+</ol>
+<font SIZE="2" COLOR="#ff0000">
+    	<table border="0" cellpadding="4" cellspacing="0">
+		  <tr>
+			<td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+			<td><i><b>NOTE</b>:</i> 
+              The UNINSTALL script will not remove any directives added manually
+              to &lt;snmpd_config_file&gt;.</td></tr>
+		</table>
+</font><font SIZE="2"></font>
+<p>
+For more information concerning the UCD-SNMP (NET-SNMP) package, go
+to <a href="http://net-SNMP.sourceforge.net" target="_blank">http://net-SNMP.sourceforge.net</a>.
+</p>
+
+<hr>
+
+<h2><a name="function"></a>Functionality</h2>
+<p>
+The SNMP extension&nbsp;implements a MIB branch through the UCD SNMP translate
+utility.
+The branch is located under the Intel branch at:
+</p>
+<p>
+&nbsp;&nbsp;&nbsp; .intel.products.nic-products.intel-lan-adapters
+</p>
+<p>
+&nbsp;&nbsp;&nbsp; Full OID: .1.3.6.1.4.1.343.2.7.2
+</p>
+<p>
+For a text reference of the tree output, see README, included in the SNMP
+Agent Extension tar file.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/13/04 2:35p <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

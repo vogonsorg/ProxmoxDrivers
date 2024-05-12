@@ -1,0 +1,156 @@
+REGEDIT4
+
+;Remove UniATA
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UniATA]
+
+;Enable generic drivers
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PciIde]
+"Start"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PciIdex]
+"Start"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Intelide]
+"Start"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Atapi]
+"Start"=dword:00000000
+
+;Set generic drivers
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\primary_ide_channel]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="atapi"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\secondary_ide_channel]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="atapi"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#cc_0101]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_0e11&dev_ae33]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1039&dev_0601]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1039&dev_5513]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1042&dev_1000]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_105a&dev_4d33]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1095&dev_0640]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1095&dev_0646]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1097&dev_0038]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_10ad&dev_0001]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_10ad&dev_0150]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_10b9&dev_5215]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_10b9&dev_5219]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_10b9&dev_5229]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="pciide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_1106&dev_0571]
+"Service"="pciide"
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1222]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_1230]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2411]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_2421]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_7010]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_7111]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#ven_8086&dev_7199]
+"ClassGUID"="{4D36E96A-E325-11CE-BFC1-08002BE10318}"
+"Service"="intelide"
+
+;Add driver for Atapi (requires atapi.sys in drivers directory)
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\atapi]
+"ErrorControl"=dword:00000001
+"Group"="SCSI miniport"
+"Start"=dword:00000000
+"Tag"=dword:00000019
+"Type"=dword:00000001
+"DisplayName"="Standard IDE/ESDI Hard Disk Controller"
+"ImagePath"=hex(2):53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,44,00,\ 
+  52,00,49,00,56,00,45,00,52,00,53,00,5c,00,61,00,74,00,61,00,70,00,69,00,2e,\ 
+  00,73,00,79,00,73,00,00,00
+
+;Add driver for intelide (requires intelide.sys in drivers directory)
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\IntelIde]
+"ErrorControl"=dword:00000001
+"Group"="System Bus Extender"
+"Start"=dword:00000000
+"Tag"=dword:00000004
+"Type"=dword:00000001
+"ImagePath"=hex(2):53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,44,00,\ 
+  52,00,49,00,56,00,45,00,52,00,53,00,5c,00,69,00,6e,00,74,00,65,00,6c,00,69,\ 
+  00,64,00,65,00,2e,00,73,00,79,00,73,00,00,00
+
+
+;Add driver for pciide (requires pciide.sys and pciidex.sys in drivers directory)
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PCIIde]
+"ErrorControl"=dword:00000001
+"Group"="System Bus Extender"
+"Start"=dword:00000000
+"Tag"=dword:00000003
+"Type"=dword:00000001
+"ImagePath"=hex(2):53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,44,00,\ 
+  52,00,49,00,56,00,45,00,52,00,53,00,5c,00,70,00,63,00,69,00,69,00,64,00,65,\ 
+  00,2e,00,73,00,79,00,73,00,00,00
+

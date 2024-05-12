@@ -1,0 +1,797 @@
+
+;DrIvEr DeScRiPtIoN
+;VeRsIoN=1.11
+;CoPyRiGhT=Copyright(c) 1998 - 2004 Intel Corporation. All Rights Reserved.
+VER: 1.14
+SYN: 1.00
+;- Internal Version 1.14
+
+;- File: CE1000.LDI
+;- Intel(R) PRO/1000 Network Connection Driver Installation Information File
+
+   DR CE1000
+   {
+      DES:      $CE1000_1
+      HELP:     $CE1000_2
+      PAR:      2.00
+; 82542-based fiber
+      PROD:     PCI.8086.1000.8086.*.*
+      PROD:     PCI.8086.1000.1014.*.*
+; 82543GC-based fiber
+      PROD:     PCI.8086.1001.8086.*.*
+      PROD:     PCI.8086.1001.1014.*.*
+; 82543GC-based copper
+      PROD:     PCI.8086.1004.*.*.*
+; 82544EI-based copper
+      PROD:     PCI.8086.1008.*.*.*
+; 82544EI-based fiber
+      PROD:     PCI.8086.1009.*.*.*
+; 82544GC-based copper
+      PROD:     PCI.8086.100C.*.*.*
+      PROD:     PCI.8086.100D.*.*.*
+; 82540EM-based copper
+      PROD:     PCI.8086.100E.*.*.*
+      PROD:     PCI.8086.1015.*.*.*
+; 82545EM-based copper
+      PROD:     PCI.8086.100F.*.*.*
+; 82545EM-based fiber
+      PROD:     PCI.8086.1011.*.*.*
+; 82546EB-based copper
+      PROD:     PCI.8086.1010.*.*.*
+      PROD:     PCI.8086.101D.*.*.*
+; 82546EB-based fiber cards
+      PROD:     PCI.8086.1012.*.*.*
+; 82540EP-based copper
+      PROD:     PCI.8086.1016.*.*.*
+      PROD:     PCI.8086.1017.*.*.*
+      PROD:     PCI.8086.101E.*.*.*
+; 82541EI-based copper
+      PROD:     PCI.8086.1013.*.*.*
+; 82541GI-based copper
+      PROD:     PCI.8086.1076.*.*.*
+      PROD:     PCI.8086.1077.*.*.*
+; 82547EI-based copper
+      PROD:     PCI.8086.1019.*.*.*
+; 82547GI-based copper
+      PROD:     PCI.8086.1075.*.*.*
+; 82545GM-based (copper, fiber, SERDES)
+      PROD:     PCI.8086.1026.*.*.*
+      PROD:     PCI.8086.1027.*.*.*
+      PROD:     PCI.8086.1028.*.*.*
+; 82546GB-based (copper, fiber, SERDES)
+      PROD:     PCI.8086.1079.*.*.*
+      PROD:     PCI.8086.107A.*.*.*
+      PROD:     PCI.8086.107B.*.*.*
+
+;@#   Sprod:    'Intel~Intel(R) PRO/1000 Network Connection Driver'
+;@#   Client:   CE1000.LAN
+;@#   Alias:    CE1000.LAN
+
+      FILE: CE1000.LAN
+      OF:   IANS.LAN
+
+      PR   SLOT    REQ
+      {
+        HELP:   $CE1000_3
+        TYP:    DEC (5)
+        VAL:    1 - 65535
+        DEF:    UND
+      }
+
+      PR NODE OPT
+      {
+        HELP:   $CE1000_4
+        TYP:    HEX (12)
+        VAL:    000000000000-FFFFFFFFFFFF
+        DEF:    UND
+        Out:    'NODE=%s'
+      }
+
+      FR FrameSelect
+      {
+        Help:   $CE1000_5
+
+        CD:     $CE1000_6
+        CH:     'Ethernet_802.2'
+
+        CD:     $CE1000_7
+        CH:     'Ethernet_802.3'
+
+        CD:     $CE1000_8
+        CH:     'Ethernet_SNAP'
+
+        CD:     $CE1000_9
+        CH:     'Ethernet_II'
+
+        DEF:    1,2,3,4
+
+      }
+
+      PR RXBUFFERS OPT
+      {
+        DES:    "RX BUFFERS"
+        TYP:    DEC (3)
+        HELP:   $CE100B_10
+        VAL:    8 - 128
+        DEF:    64
+        OUT:    'RXDESCRIPTORS=%s'
+      }
+
+      PR TXBUFFERS OPT
+      {
+        DES:    "TX BUFFERS"
+        TYP:    DEC (3)
+        HELP:   $CE100B_11
+        VAL:    32 - 128
+        DEF:    96
+        OUT:    'TXDESCRIPTORS=%s'
+      }
+
+      PR SPEED OPT
+      {
+        DES:    "SPEED"
+        TYP:    DEC (3)
+        HELP:   $CE100B_12
+        VAL:    0, 10, 100
+        DEF:    0
+        OUT:    'SPEED=%s'
+      }
+
+      PR FORCEDUPLEX OPT
+      {
+        DES:    "FORCE DUPLEX"
+        HELP:   $CE100B_13
+        TYP:    DEC (1)
+        VAL:    0, 1, 2
+        DEF:    0
+        OUT:    'FORCEDUPLEX=%s'
+      }
+
+      PR FLOWCONTROL OPT
+      {
+        DES:    "FLOW CONTROL"
+        HELP:   $CE100B_14
+        TYP:    DEC (1)
+        VAL:    0, 1, 2, 3
+        DEF:    3
+        OUT:    'FLOWCONTROL=%s'
+      }
+
+      PR PMEDISABLE OPT
+      {
+        DES:    "PME DISABLE"
+        HELP:   $CE100B_15
+        TYP:    DEC (1)
+        VAL:    0, 1
+        DEF:    0
+        OUT:    'PMEDISABLE=%s'
+      }
+
+      PR COALESCEBUFFERS OPT
+      {
+        DES:    "COALESCE BUFFERS"
+        HELP:   $CE100B_16
+        TYP:    DEC (3)
+        VAL:    32 - 128
+        DEF:    96
+        OUT:    'COALESCEBUFFERS=%s'
+      }
+   }
+
+DLANG: 4
+;English
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG: 6
+;French
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG: 7
+;German
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG: 8
+;Italian
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG: 14
+;Spanish
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:  12
+;Portugese
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:   9
+;Japanese
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:   10
+;Korean
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:   1
+;Chinese (S)
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:   16
+;Chinese (T)
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+LANG:   13
+;Russian
+
+       $CE1000_1  = "Intel(R) PRO/1000 Network Connection Driver"
+
+       $CE1000_2  = "This driver supports Intel(R) PRO/1000 Network Connections.\n\n"
+
+       $CE1000_3  = "Slot number for the adapter.\n
+                     For PCI adapters, this refers to the Device Location."
+
+       $CE1000_4  = "Specifies the MAC address to be used by the board.\n"
+
+       $CE1000_5  = "The driver defaults to 802.2 frame format. You
+                    may use this default to select from the other 3
+                    options => 802.3, Ethernet II and Ethernet SNAP."
+
+       $CE1000_6  = "CE1000 802.2"
+
+       $CE1000_7  = "CE1000 802.3"
+
+       $CE1000_8  = "CE1000 SNAP"
+
+       $CE1000_9  = "CE1000 E_II"
+
+       $CE100B_10 = "This is to pre-allocate receive adapter resources.\n
+                     This value MUST BE in multiples of 8.\n
+                     This setting may be affected by the Netware server
+                     maximum/minimum packet receive buffer settings."
+
+       $CE100B_11 = "TX descriptors are used to tell the hardware where the fragments
+                     of a transmit packet are in host memory. A transmit packet can use 1
+                     or more descriptors. Most transmits require 3 or 4 descriptors. Each
+                     descriptor is 16 bytes."
+
+       $CE100B_12 = "On copper-based adapters, forces the line speed to the specified
+                     value in Mbps. If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link based on
+                     link partner. Gig speed can only be achieved by auto-negotiation.\n
+                     This setting has no effect on fiber adapters which are defined to be 1000 Mbps."
+
+       $CE100B_13 = "On copper-based adapters, forces the duplex mode.\n
+                     1 - indicates half duplex\n
+                     2 - indicates full duplex\n
+                     If this parameter is not specified, or is set to 0,
+                     the adapter will auto-negotiate to the best possible link.  If it cannot
+                     auto-negotiate, it will default to half-duplex.\n
+                     This setting has no effect on fiber adapters which are defined to be full duplex."
+
+       $CE100B_14 = "Controls the ability of the adapter to advertise flow control
+                     capabilities. Default is to allow both TX and RX flow control.\n
+                     0 is off, 1 is RX, 2 is TX, 3 is both."
+
+       $CE100B_15 = "Enables/disables wake-up from APM power management."
+
+       $CE100B_16 = "Number of buffers available for transmits acceleration."
+
+;DrIvEr DeScRiPtIoN EnD

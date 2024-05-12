@@ -1,0 +1,463 @@
+SNMP Agent Extension -- Implementing the INTEL(R) LAN ADAPTERS MIB
+==================================================================
+
+May 13, 2004
+
+
+Contents
+========
+
+- Overview
+- Prerequisites
+- Installation
+- Functionality
+- License
+
+
+Overview
+========
+
+This file describes the Intel SNMP package for Linux* operating systems, 
+version 1.8.x. This package is intended for 2.4.x kernels. Intel focused 
+testing on Linux systems running the 2.4.21 kernel. 
+
+The SNMP agent extension extends the UCD-SNMP or NET-SNMP agent for Linux 
+via a "pass-through" protocol. It provides information on the Intel(R) PRO 
+LAN adapters (10/100/1000) through the adapter drivers (e100, e1000). It 
+also provides information about advanced features, including teaming and 
+VLANs, through the Advanced Network Services (ANS) module.
+
+The extension was tested on Red Hat* 3.0 with the net-snmp-5.0.9 SNMP agent 
+and on Red Hat 9.0 with the net-snmp-5.0.6 SNMP agent.
+
+
+Prerequisites
+==============
+
+- An SNMP agent which supports the "pass-through" protocol should 
+    be installed on the system.
+
+- libstdc++-libc6.2-2.so.3 package - available in Red Hat* 7.2 and later. 
+    Located in either the libstdc++ or compat-libstdc++ package provided 
+    with the operating system.
+
+
+
+Installation
+============
+
+1.  Copy the inic-snmp-xxx.tar.gz tar file to a directory of your choice.
+
+2.  Untar the archive:
+
+       tar xzf inic-snmp-xxx.tar.gz
+
+    The inic-snmp-x.x.x directory should be created.
+
+3.  Change directories to the inic-snmp-x.x.x directory:
+
+       cd inic-snmp-x.x.x
+
+    The following files should be in the directory:
+
+       INSTALL
+       ia32
+       ia64
+       inic-snmp.spec
+       INTELLAN.txt
+       LICENSE
+       README
+       UNINSTALL
+
+4.  Enter:
+
+       ./INSTALL [-i <install_directory>][-c <snmpd_config_file>]
+
+    The INSTALL script:
+       - detects architecture (<arch>) of the current machine (ia32 or ia64)
+       - copies the following files to the indicated location:
+
+         - <arch>/inic-extension - to <install_directory>
+         - <arch>/inic-daemon - to <install_directory>
+         - LICENSE and README - to usr/share/doc/inic-snmp-<package_version>
+         - INTELLAN.txt - to <mibs_directory>
+         
+       - adds the following line anywhere in <snmpd_config_file>:
+
+           pass .1.3.6.1.4.1.343.2.7.2 <install_directory>/inic_extension
+
+    NOTES: <install_directory>  is any preferred directory. If option -i is 
+           not used, <install_directory> is /usr/local/sbin.
+
+           <snmpd_config_file> is any configuration file for the SNMP agent. 
+           If option -c is not used, <snmpd_config_file> is the file 
+           specified in the snmpd.conf man page. If this file does not exist,
+           INSTALL script creates an empty file in the specified location.
+
+           <mibs_directory> is the MIBS directory specified in the snmpd man
+           page.
+
+5.  In order to receive both complete information on counters and SNMP traps,
+    run the inic_daemon executable before using the extended agent.
+
+    The inic_daemon executable is used for keeping track of internal counters
+    and sending traps to the SNMP clients. The daemon recognizes the 
+    directives 'trapsink', 'trap2sink', 'informsink', 'trapcommunity', 
+    'agentuser', 'agentaddress', and 'agentgroup' (for more information, see 
+    the snmpd.conf man page). These directives are optional and should be
+    added manually to <snmpd_config_file> (see previous step, <snmpd_config_file>).
+
+    By default, the inic_daemon reads the trap directives from the 
+    configuration file specified in the snmpd.conf man page (see previous 
+    step, <snmpd_config_file>). In order to use an alternative configuration
+    file, specify the file from the inic_daemon command line using the '-c' 
+    option:
+
+       inic_daemon -c <snmpd_config_file>
+
+    Your SNMP agent is now ready to run.
+
+6.  Install the clients. Copy the MIB file (INTELLAN.txt)  to every management 
+    station, placing it in the relevant MIBS directory. This varies according 
+    to the SNMP MIB browser/application you are using.
+
+For more information concerning the UCD-SNMP (NET-SNMP) package, go to 
+http://net-SNMP.sourceforge.net.
+
+    To uninstall enter:
+    ------------------
+ 
+	./UNINSTALL [-i <install_directory>][-c <snmpd_config_file>]
+	
+    The UNINSTALL script will remove all files installed in step 4 (see above). 
+    If <install_directory> is not specified, the default is the directory used 
+    when running the INSTALL script.
+
+    The UNINSTALL script will remove the line
+    
+	pass .1.3.6.1.4.1.343.2.7.2 <install_directory>/inic_extension
+	
+    from <snmpd_config_file>. If <snmpd_config_file> is not specified, the default
+    is the file used when running the INSTALL script.
+ 
+    
+    To keep all features of UNINSTALL script working properly, it is not 
+    recommended to relocate the files installed/edited by INSTALL script. To 
+    relocate them run UNINSTALL and then INSTALL with new parameters. 
+  
+    NOTE: The UNINSTALL script will not remove any directives added manually 
+    to <snmpd_config_file>.
+
+
+
+Functionality
+============
+
+The SNMP extension implements the following MIB branch.
+The branch is located under the Intel branch at:
+
+	.intel.products.nic-products.intel-lan-adapters
+
+Full OID: .1.3.6.1.4.1.343.2.7.2
+
++--intel-lan-adapters(2)
+   |
+   +--component-description(1)
+   |  |
+   |  +-- -R-- String    company(1)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- String    description(2)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- String    operatingSystem(3)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- String    mibVersion1-4-3(4)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- String    mibVersionSupported(5)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- String    agentExtensionVersion(6)
+   |  |        Textual Convention: DisplayString
+   |  |        Size: 0..255
+   |  +-- -R-- EnumVal   status(7)
+   |           Values: baseDriverNotLoadedAnsNotLoaded(0), 
+   |                   baseDriverLoadedAnsNotLoaded(1), 
+   |                   baseDriverNotLoadedAnsLoaded(2), 
+   |                   baseDriverLoadedAnsLoaded(3)
+   |
+   +--adaptersTables(2)
+   |  |
+   |  +--genericAdaptersAttrTables(1)
+   |  |  |
+   |  |  +--genericAdaptersAttrTable(1)
+   |  |  |  |
+   |  |  |  +--genericAdapterAttrEntry(1)
+   |  |  |     |  Index: adapterIndex
+   |  |  |     |
+   |  |  |     +-- -R-- Integer32 adapterIndex(1)
+   |  |  |     |        Textual Convention: InterfaceIndex
+   |  |  |     |        Range: 1..2147483647
+   |  |  |     +-- -R-- String    adapterName(2)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- EnumVal   adapterType(3)
+   |  |  |     |        Values: standAlone(0), teamMember(1), virtual(2)
+   |  |  |     +-- -R-- EnumVal   adapterDriverLoadStatus(4) (***)
+   |  |  |              Values: loaded(0), notLoaded(1)
+   |  |  |
+   |  |  +--genericAdaptersDriversAttrTable(2)
+   |  |  |  |
+   |  |  |  +--genericAdapterDriverAttrEntry(1)
+   |  |  |     |  Index: adapterIndex
+   |  |  |     |
+   |  |  |     +-- -R-- String    adapterDriverName(1)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- String    adapterDriverInfo(2)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- String    adapterDriverVersion(3)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- String    adapterDriverPath(4) (***)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- String    adapterDriverDate(5) (***)
+   |  |  |     |        Textual Convention: DisplayString
+   |  |  |     |        Size: 0..255
+   |  |  |     +-- -R-- String    adapterDriverSize(6) (***)
+   |  |  |              Textual Convention: DisplayString
+   |  |  |              Size: 0..255
+   |  |  |
+   |  |  +--genericAdaptersTrafficStatsAttrTable(3)
+   |  |     |
+   |  |     +--genericAdapterTrafficStatsAttrEntry(1)
+   |  |        |  Index: adapterIndex
+   |  |        |
+   |  |        +-- -R-- Counter   adapterRxPackets(1)
+   |  |        +-- -R-- Counter   adapterTxPackets(2)
+   |  |        +-- -R-- Counter   adapterRxBytes(3)
+   |  |        +-- -R-- Counter   adapterTxBytes(4)
+   |  |        +-- -R-- Counter   adapterRxErrors(5)
+   |  |        +-- -R-- Counter   adapterTxErrors(6)
+   |  |        +-- -R-- Counter   adapterRxDropped(7)
+   |  |        +-- -R-- Counter   adapterTxDropped(8)
+   |  |        +-- -R-- Counter   adapterRxMulticast(9)
+   |  |        +-- -R-- Counter   adapterCollisions(10)
+   |  |
+   |  +--physicalAdaptersAttrTables(2)
+   |  |  |
+   |  |  +--physicalAdaptersAttrTable(1)
+   |  |  |  |
+   |  |  |  +--physicalAdapterAttrEntry(1)
+   |  |  |     |  Index: physicalAdapterIndex
+   |  |  |     |
+   |  |  |     +-- -R-- Integer32 physicalAdapterIndex(1)
+   |  |  |     |        Textual Convention: InterfaceIndex
+   |  |  |     |        Range: 1..2147483647
+   |  |  |     +-- -R-- EnumVal   physicalAdapterLinkStatus(2)
+   |  |  |     |        Values: not-available(-1), link-up(0), link-down(1)
+   |  |  |     +-- -RW- Counter32 physicalAdapterLinkStatusChangesCounter(3)
+   |  |  |     +-- -R-- Gauge     physicalAdapterSpeed(4)
+   |  |  |     +-- -R-- EnumVal   physicalAdapterDplxMode(5)
+   |  |  |     |        Values: not-available(0), half(1), full(2)
+   |  |  |     +-- -R-- EnumVal   physicalAdapterAutoNegotiation(6) (***)
+   |  |  |     |        Values: on(0), off(1)
+   |  |  |     +-- -R-- INTEGER   physicalAdapterPciBus(7)
+   |  |  |     +-- -R-- INTEGER   physicalAdapterPciSlot(8)
+   |  |  |     +-- -R-- INTEGER   physicalAdapterIrq(9)
+   |  |  |     +-- -R-- String    physicalAdapterCurrentNA(10)
+   |  |  |     |        Textual Convention: PhysAddress
+   |  |  |     +-- -R-- String    physicalAdapterPermanentNA(11)
+   |  |  |     |        Textual Convention: PhysAddress
+   |  |  |     +-- -R-- INTEGER   physicalAdapterOnlineDiagStatus(12)  
+   |  |  |              Values: not-available(-1), failed(0), passed(1)
+   |  |  |
+   |  |  +--physicalAdaptersAttrChecksumOffloadTable(2)
+   |  |     |
+   |  |     +--physicalAdapterAttrChecksumOffloadEntry(1)
+   |  |        |  Index: physicalAdapterIndex
+   |  |        |
+   |  |        +-- -R-- EnumVal   physicalAdapterTcpRxChecksumOffLoadEnable(1) (***)
+   |  |        |        Values: enabled(0), disabled(1)
+   |  |        +-- -R-- Counter   physicalAdapterTcpRxChecksumBad(2) (***)
+   |  |        +-- -R-- EnumVal   physicalAdapterTcpTxChecksumOffLoadEnable(3) (***)
+   |  |                 Values: enabled(0), disabled(1)
+   |  |
+   |  +--virtualAdaptersAttrTables(3)
+   |  |  |
+   |  |  +--virtualAdaptersAttrTable(1)
+   |  |  |  |
+   |  |  |  +--virtualAdapterAttrEntry(1)
+   |  |  |     |  Index: virtualAdapterIndex
+   |  |  |     |
+   |  |  |     +-- -R-- Integer32 virtualAdapterIndex(1)
+   |  |  |     |        Textual Convention: InterfaceIndex
+   |  |  |     |        Range: 1..2147483647
+   |  |  |     +-- -R-- INTEGER   virtualAdapterAnsId(2)
+   |  |  |
+   |  |  +--virtualAdaptersVlanAttrTable(2)
+   |  |     |
+   |  |     +--virtualAdapterVlanAttrEntry(1)
+   |  |        |  Index: virtualAdapterIndex
+   |  |        |
+   |  |        +-- -R-- EnumVal   virtualAdapterVlanId(1)
+   |  |                 Values: none(0)
+   |  |
+   |  +--ansAttrTables(4)
+   |  |  |
+   |  |  +--ansAttrTable(1)
+   |  |  |  |
+   |  |  |  +--ansAttrEntry(1)
+   |  |  |     |  Index: ansId
+   |  |  |     |
+   |  |  |     +-- -R-- INTEGER   ansId(1)
+   |  |  |     +-- -R-- INTEGER   ansNumberOfMembers(2)
+   |  |  |     +-- -R-- INTEGER   ansNumberOfVirtualAdapters(3)
+   |  |  |
+   |  |  +--ansVlansAttrTable(2)
+   |  |  |  |
+   |  |  |  +--ansVlanAttrEntry(1)
+   |  |  |     |  Index: ansId
+   |  |  |     |
+   |  |  |     +-- -R-- EnumVal   ansVlanTaggingType(1)
+   |  |  |     |        Values: none(0), tag-802-1Q(1), tag-802-1P(2), 
+   |  |  |     |                tag-802-3AC(3), tag-iSL(4)
+   |  |  |     +-- -R-- EnumVal   ansVlanGvrpSupport(2)
+   |  |  |              Values: enabled(0), disabled(1)
+   |  |  |
+   |  |  +--ansTeamsAttrTable(3)
+   |  |     |
+   |  |     +--ansTeamAttrEntry(1)
+   |  |        |  Index: ansId
+   |  |        |
+   |  |        +-- -R-- String    ansTeamName(1)
+   |  |        |        Textual Convention: DisplayString
+   |  |        |        Size: 0..255
+   |  |        +-- -R-- EnumVal   ansTeamMode(2)
+   |  |        |        Values: none(0),
+   |  |        |		adapter-fault-tolerance(1),
+   |  |	       |		adaptive-load-balancing(2),
+   |  |	       |		static-link-aggregation(3),
+   |  |	       |		iEEE-802-3ad(5),
+   |  |	       | 		switch-fault-tolerance(6)
+   |  |        +-- -R-- EnumVal   ansTeamLinkState(3)
+   |  |        |        Values: up(0), down(1)
+   |  |        +-- -R-- Gauge     ansTeamSpeed(4)
+   |  |        +-- -R-- EnumVal   ansTeamProbesState(5)
+   |  |        |        Values: probes-enabled(0), probes-disabled(1)
+   |  |        +-- -R-- EnumVal   ansTeamProbesMode(6)
+   |  |        |        Values: broadcast(0), multicast(1), not-available(2)
+   |  |        +-- -R-- EnumVal   ansTeamLoadBalanceRefresh(7) (***)
+   |  |        |        Values: not-available(0)
+   |  |        +-- -R-- EnumVal   ansTeamProbesSendTime(8)
+   |  |        |        Values: not-available(0)
+   |  |        +-- -R-- EnumVal   ansTeamPreferredPrimaryIndex(9) (***)
+   |  |        |        Values: not-available(-1)
+   |  |        +-- -R-- EnumVal   ansTeamCurrentPrimaryIndex(10)
+   |  |        |        Values: not-available(-1)
+   |  |        +-- -R-- EnumVal   ansTeamPreviousPrimaryIndex(11)
+   |  |        |        Values: not-available(-1)
+   |  |        +-- -RW- Counter32 ansTeamFailoverCounter(12)
+   |  |        +-- -R-- EnumVal   ansTeamSlaCompatible(13) (***)
+   |  |        |        Values: not-available(-1), yes(0), no(1)
+   |  |        +-- -R-- EnumVal   ansTeamAggrSelectionMode(14)
+   |  |        |        Values: not-available(-1), bandwidth(0), count(1)
+   |  |        +-- -R-- EnumVal   ansTeamRlbSupport(15)
+   |  |                 Values: not-available(-1), enabled(0), disable(1)
+   |  | 
+   |  |
+   |  +--ansMembersAttrTables(5)
+   |     |
+   |     +--ansMembersAttrTable(1)
+   |     |  |
+   |     |  +--ansMemberAttrEntry(1)
+   |     |     |  Index: ansMemberIndex
+   |     |     |
+   |     |     +-- -R-- Integer32 ansMemberIndex(1)
+   |     |     |        Textual Convention: InterfaceIndex
+   |     |     |        Range: 1..2147483647
+   |     |     +-- -R-- INTEGER   ansMemberAnsId(2)
+   |     |
+   |     +--ansTeamMembersAttrTable(2)
+   |        |
+   |        +--ansTeamMemberAttrEntry(1)
+   |           |  Index: ansMemberIndex
+   |           |
+   |           +-- -R-- EnumVal   ansTeamMemberState(1)
+   |           |        Values: active(0), disabled(1), standby(2), 
+   |           |                active-secondary(3)
+   |           +-- -RW- Counter32 ansTeamMemberFailureCounter(2)
+   |           +-- -R-- EnumVal   ansTeamMemberPriority(3)
+   |                    Values: none(0), primary(1), secondary(2)
+   |
+   +--events(3)
+      |
+      +--physicalAdaptersEvents(1)
+      |  |
+      |  +--physicalAdaptersTraps(1)
+      |  |  |
+      |  |  +--physicalAdapterLinkUpTrap(1)
+      |  |  +--physicalAdapterLinkDownTrap(2)
+      |  |  +--physicalAdapterAddedTrap(3) (***)
+      |  |  +--physicalAdapterRemovedTrap(4) (***)
+      |  |  +--physicalAdapterOnlineDiagPassedTrap(5)
+      |  |  +--physicalAdapterOnlineDiagFailedTrap(6)
+      |  |
+      |  +-- -RW- EnumVal   physicalAdapterLinkUpDownTrapEnable(2)
+      |  |        Values: disabled(0), enabled(1)
+      |  +-- -RW- EnumVal   physicalAdapterAddedRemovedTrapEnable(3) (***)
+      |  |        Values: disabled(0), enabled(1)
+      |  +-- -RW- EnumVal   physicalAdapterOnlineDiagPassedFailedTrapEnable(4)
+      |           Values: disabled(0), enabled(1)
+      |
+      +--virtualAdaptersEvents(2)
+      |  |
+      |  +--virtualAdaptersTraps(1)
+      |  |  |
+      |  |  +--virtualAdapterAddedTrap(1)
+      |  |  +--virtualAdapterRemovedTrap(2)
+      |  |
+      |  +-- -RW- EnumVal   virutalAdaptersTrapEnable(2)
+      |           Values: disabled(0), enabled(1)
+      |
+      +--ansEvents(3)
+      |  |
+      |  +--ansTraps(1)
+      |  |  |
+      |  |  +--ansTeamFailoverTrap(1)
+      |  |  +--ansAddedTrap(2)
+      |  |  +--ansRemovedTrap(3)
+      |  |
+      |  +-- -RW- EnumVal   ansTrapEnable(2)
+      |           Values: disabled(0), enabled(1)
+      |
+      +--teamMembersEvents(4)
+         |
+         +--teamMembersTraps(1)
+         |  |
+         |  +--teamMemberAddedTrap(1)
+         |  +--teamMemberRemovedTrap(2)
+         |
+         +-- -RW- EnumVal   teamMemberTrapEnable(2)
+                  Values: disabled(0), enabled(1)
+
+
+(***) Not Implemented
+
+
+License
+=======
+
+This software program is released under the terms of a license agreement 
+between you ('Licensee') and Intel. Do not use or load this software or any 
+associated materials (collectively, the 'Software') until you have carefully 
+read the full terms and conditions of the LICENSE located in this software 
+package. By loading or using the Software, you agree to the terms of this 
+Agreement. If you do not agree with the terms of this Agreement, do not 
+install or use the Software.
+
+* Other names and brands may be claimed as the property of others.

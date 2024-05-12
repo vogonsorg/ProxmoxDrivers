@@ -1,0 +1,771 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Diagnostic Classes</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Diagnostics</font></h1>
+
+<h2><font color="#0000FF">Diagnostic Classes</font></h2>
+
+<h3><font color="#0000FF">IANet_DiagTest</h3></font>
+<p><b>Purpose</b><br>
+IANet_DiagTest is subclassed from CIM_DiagnosticTest. 
+The class provides a generic vehicle to run and control
+diagnostic tests for an Intel<font size="1"><sup>&reg;</sup></font> PROSet supported
+Ethernet adapter. The superclass, CIM_DiagnosticTest, is designed to generically support the
+testing of any computer hardware on a CIM enabled system. Properties of the class are
+descriptive in nature and the mechanics of the testing are provided by
+the exposed methods. 
+
+<p><b>Instances</b><br>
+Key is Name and in this provider it is the concatenation of a numeric index of the test at
+the GUID of the referenced adapter (e.g. 1@{12345678-9ABC-DEF0-1234-123456789012}). This
+key value is, in one sense, redundant information, as all information
+to reference an adapter and test is passed as object parameters to the
+RunTest and other methods. Still, the instance must be consistent with parameters to the method or the
+provider will reject the command. The caption property provides the name of the test that this
+instance will run. Other properties provide other description and run-time information. 
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_DiagTest.
+
+<p><b>Deleting Instances</b><br>
+You cannot delete instances of IANet_DiagTest.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties for this
+class.
+
+<p><b>Associations</b>
+<ul><li>An instance of IANet_DiagTestForMSE associates an IANet_DiagTest with an IANet_ManagedSystemElement. The
+IANet_ManagedSystemElement will be an IANet_EthernetAdapter instance.</li>
+<li>An instance of IANet_DiagResultForTest associates an IANet_DiagTest with an IANet_DiagnosticResult instance.</li>
+<li>An instance of IANetDiagSettingForTest associates an IANet_DiagTest with an IANet_DiagSetting.</li></ul>
+
+<p><b>Unsupported Properties</b><br>
+Install Date, OtherCharacteristicDescription
+
+<p><b>Methods</b><br>
+This class supports the following methods:
+<ul><li>RunTest &mdash; Runs a test as defined by three parameters referencing:
+      <ul><li>SystemElement &mdash; defines the adapter, which we are
+      to run the test on by referring to an instance of SystemElement,
+      which will always be the subclass IANet_EthernetAdapter.</li>
+      <li>Setting &mdash; defines the test to be run, and the
+      manner in which it is run by referring to an instance of
+      CIM_DiagnosticSetting, which will always be the subclass
+      IANet_DiagSetting.</li>
+      <li>DiagnosticResult &mdash; defines an instance of the class
+      CIM_DiagnosticResult, which will always be the class
+      IANet_DiagResult.</li></ul>
+      <li>DiscontinueTest &mdash; Attempts to stop a diagnostic test in progress as
+      defined by two parameters referencing CIM_ManagedSystemElement
+      and CIM_DiagnosticResult. These
+      parameters function the same as RunTest. A third parameter
+      TestingStopped returns a BOOLEAN value, which indicates if the
+      command was successful in stopping the test.</li>
+      <li>ClearResults &mdash; Clears test results using parameters:
+      <ul><li>SystemElement</li>
+      <li>ResultsNotCleared</li></ul>
+      The referenced parameter ManagedSystemElement, combined with this
+      object’s object path combine to reference instances of
+      DiagnosticResultForMSE, which will be deleted. Also, all references of
+      DiagnosticResult objects referenced by DiagnosticResultForMSE
+      will be deleted. Also, all instances of DiagnosticResultForTest, which refer to the
+      deleted DiagnosticResult objects, will be deleted. Finally, the string
+      array Output parameter ResultsNotCleared will list the keys of
+      the DiagnosticResults, which could not be cleared.</li></ul>
+
+<p><b>Class Hierarchy</b></p>
+
+<p>For CimV2. Unused properties and methods not shown.</p>
+   <ul><li>CIM_ManagedElement:<br>
+     Caption<br>
+     Description</li>
+   <li>CIM_ManagedSystemElement:<br>
+     Install Date<br>
+     Name<br>
+     Status</li>
+   <li>CIM_LogicalElement</li>
+   <li>CIM_Service:
+    <ul><li>Key</li>
+        <ul><li>Name (string)</li></ul>
+    <li>Properties</li>
+        <ul><li>Caption (string)</li>
+        <li>CreationClassName (string)</li>
+        <li>Description (string)</li>
+        <li>Started (boolean)</li>
+        <li>StartMode (string)</li>
+        <li>Status (string)</li>
+        <li>SystemCreationClass (string)</li>
+        <li>SystemName (string)</li></ul>
+    </ul>
+<li>CIM_DiagnosticTest:
+    <ul><li>Properties</li>
+        <ul><li>Characteristics (uint16 array)</li>
+        <li>IsInUse (Boolean)</li>
+        <li>ResourcesUsed (uint16 array)</li></ul>
+    <li>Methods</li>
+        <ul><li>RunTest</li>
+        <li>ClearResults</li>
+        <li>DiscontinueTest</li></ul>
+    </ul>
+</ul>
+
+<h4><font color="#0000FF">Executing RunTest, and Other Methods in WbemTest</font></h4>
+<p>The RunTest method from the MOF file is as follows:
+
+<p><font face="Courier">uint32<br>
+RunTest([IN] CIM_ManagedSystemElement ref SystemElement,<br>
+[IN] CIM_DiagnosticSetting ref Setting,<br>
+[OUT] CIM_DiagnosticResult ref Result);</font>
+
+<p>The first two parameters are In parameters. You must get the object path
+of both objects referenced. You must also get the object path of the IANet_DiagTest object, which is
+exporting the RunTest object.
+
+<ol><li>From the main WBEM test dialog box, click <b>Connect</b>.</li>
+<li>Enter the appropriate Server\Namespace. Namespaces IntelNCS and CimV2 are supported.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test and enter <font face="Courier">IANet_DiagTest</font>.</li>
+<li>Double-click the instance of IANet_DiagTest. The name will be in the form
+X@[AdapterGUID}, where X is the test name and AdapterGUID will be the Adapter Name, same as the Name key of the IANet_EthernetAdapter.</li>
+<li>The following is an example of the object path retrieved:<br>
+   <font face="Courier">\\MYCOMPUTER\root\Cimv2:IANet_DiagTest.Name=&quot;1@{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test
+and enter <font face="Courier">IANet_EthernetAdapter</font>.</li>
+<li>Double-click on the adapter to be tested.</li>
+<li>The following is an example of the object path retrieved:<br>
+  <font face="Courier">\\MYCOMPUTER\root\cimv2:IANet_EthernetAdapter.DeviceID=&quot;{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>Click the <b>Enum Instances</b> button of WBEM test and enter <font face="Courier">IANet_DiagSetting</font>.</li>
+<li>Double-click on the setting that represents the adapter/test combination.</li>
+<li>The following is an example of the object path retrieved:<br>
+   <font face="Courier">\\MYCOMPUTER\root\cimv2:IANet_DiagSetting.SettingID=&quot;1@{4A0CDABE-F6C3-45D0-B60D-F6E7BAFA2C2C}&quot;</font></li>
+<li>Save the object path.</li>
+<li>From the main WBEM test dialog box, click <b>Execute Method</b>.</li>
+<li>Paste the IANet_DiagTest object path into the dialog box. Click <b>OK</b>.</li>
+<li>Select the test in the drop-down box under method.</li>
+<li>Click the <b>Edit In Parameters</b> button.</li>
+<li>For RunTest, Setting and SystemElement are the In
+parameters. Paste the previously saved Setting and Adapter object paths and close.</li>
+<li>Click the <b>Execute</b> button.</li>
+<li>Enumerate the IANet_DiagResult class, in the same manner as the In parameters.</li>
+<li>Examine the selected result object as needed.</li></ol>
+
+<h3><font color="#0000FF">IANet_DiagSetting</h3></font>
+<p><b>Purpose</b><br>
+Instances of IANet_DiagSetting provide specific run-time diagnostic test
+directives. Directives used are common to all tests and are bound to the superclass
+CIM_DiagnosticSetting. These include properties, such as ReportSoftErrors and HaltOnError. There are no additional
+properties added to the subclass IANet_DiagSetting.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.
+
+<p><b>Deleting Instances</b><br>
+You cannot delete instances of this class.
+
+<p><b>Modifying Properties</b><br>
+UpdateInstanceAsync is implemented and can be used to set test parameters to "Halt On
+Error", "Report Soft Errors", "Report Status Messages", "Quick Mode", "Test Warning Level" and "Percent Of Test
+Coverage".
+
+<p><b>Associations</b><br>
+An instance of IANetDiagSettingForTest associates an IANet_DiagTest with an IANet_DiagSetting.
+
+<p><b>Unsupported Properties</b><br>
+The following properties are not supported by NCS:
+<ul><li>Caption</li>
+<li>Description</li></ul>
+
+<p><b>Methods</b><br>
+None
+
+<p><b>Class Hierarchy</b>
+
+<p>
+For CimV2. Unused properties and methods not shown.
+<ul><li>CIM_ManagedElement</li>
+<li>CIM_Setting:</li>
+    <ul><li>Properties</li>
+    <li>SettingID</li>
+    <li>Methods (none are supported)</li>
+    <li>VerifyOKToApplyToMSE</li>
+    <li>ApplyToMSE</li>
+    <li>VerifyOKToApplyToCollection</li>
+    <li>ApplyToCollection</li>
+    <li>VerifyOKToApplyIncrementalChangeToMSE</li>
+    <li>ApplyIncrementalChangesToMSE</li>
+    <li>ApplyIncrementalChangeToCollection</li></ul>
+<li>CIM_DiagnosticSetting:</li>
+    <ul><li>Key</li>
+        <ul><li>SettingID (string)</li></ul>
+    <li>Properties</li>
+        <ul><li>TestWarningLevel (uint16)</li>
+        <li>ReportSoftErrors (Boolean)</li>
+        <li>ReportStatusMessages (Boolean)</li>
+        <li>HaltOnError (Boolean)</li>
+        <li>QuickMode (Boolean)</li>
+        <li>PercentOfTestCoverage (uint8)
+    </ul>
+</ul></ul>
+
+<h3><font color="#0000FF">IANet_DiagResult</h3></font>
+<p><b>Purpose</b><br>
+Instances of IANet_DiagResult display result data for a particular test run on a
+particular adapter. Instances of this class correspond identically to instances of IANet_DiagTest
+and IANet_DiagSetting.
+
+<p><b>Instances</b><br>
+Instances of IANet_DiagResult correspond to results
+of a particular test run on a specific adapter. The format for the key is the
+same as IANet_DiagTest and IANet_DiagSetting. The instance can store
+any arbitrary test results as any data, which does not fit the defined
+properties, can be placed into the TestResults Array property. Any time a new test is run on
+an adapter, the new instance overwrites the existing instance of test
+results corresponding to that adapter and test combination.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of this class.
+
+<p><b>Deleting Instances</b><br>
+You cannot delete instances of this class.
+
+<p><b>Modifying Properties</b><br>
+You cannot modify instances of this class.
+
+<p><b>Associations</b><br>
+An instance of IANet_DiagResultForTest associates an IANet_DiagTest with an
+IANet_DiagnosticResult instance.
+
+<p><b>Unsupported Properties</b><br>
+The following properties are not supported by NCS:
+<ul><li>EstimatedTimeOfPerforming</li>
+<li>HaltOnError</li>
+<li>OtherStateDescription</li>
+<li>ReportSoftErrors</li>
+<li>TestWarningLevel</li></ul>
+
+<p><b>Methods</b><br>
+None
+
+<p><b>Class Hierarchy</b>
+
+<p>
+For CimV2. Unused properties and methods not shown.
+<ul><li>CIM_DiagnosticResult:</li>
+    <ul><li>Keys</li>
+        <ul><li>DiagnosticCreationClassName (string)</li>
+        <li>DiagnosticName (string)</li>
+        <li>ExecutionID (string)</li>
+        <li>DiagSystemCreationClassName (string)</li>
+        <li>DiagSystemName (string)</li></ul>
+   <li>Properties</li>
+        <ul><li>TimeStamp (string)</li>
+        <li>IsPackage (Boolean)</li>
+        <li>TestStartTime (datetime)</li>
+        <li>TestCompletionTime (datetime)</li>
+        <li>TestState (uint16)</li>
+        <li>TestResults (string)</li>
+        <li>PercentComplete (uint8)</li></ul>
+   </ul>
+<li>IANet_DiagResult</li></ul>
+
+<h2><font color="#0000FF">Registry Entries</font></h2>
+<p>The following entries are entered into the registry
+during installation
+under <b>HKLM\Software\Intel\NETWORK_SERVICES\NCS\NcsDiag</b>. These keys and values control the execution of the
+diagnostic tests and are defined below.
+
+<p>The following table contains the values in the key, their type, and a brief explanation of their usage:
+<br><br>
+<table border="1" cellspacing="0" cellpadding="0"
+style="border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.75pt 0in 5.75pt">
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;"><b>Value</b>
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;"><b>Type</b>
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;"><b>Default</b>
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;"><b>Usage</b>
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Check Time
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">2 seconds
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Duration of time period between checks for
+      completion of sender or responder test
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Enable
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">0
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">
+      Enable (1) or Disable (0) usage of a results log file.</span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">FileAppend
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">1
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Append (1) log results file to existing log
+      results file. If 0, delete existing file.</span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">LogFileName
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_SZ
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">NcsDiag.log
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">The name of the log results file.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">MaxFileSize
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">0x10000
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Maximum size of the log results file.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">MaxPktsRcvd
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">200
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">In Quick
+      Mode (from IANet_DiagSetting),
+      send/receive test will terminate when the number of packets
+      received is greater than this value.
+      </span>
+    </td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"
+    style="width:77.75pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">TimeoutSndRsp
+      </span>
+    </td>
+    <td width="102" valign="top"
+    style="width:76.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">REG_DWORD
+      </span>
+    </td>
+    <td width="114" valign="top"
+    style="width:85.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">100
+      </span>
+    </td>
+    <td width="271" valign="top"
+    style="width:203.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0in 5.75pt 0in 5.75pt">
+      <p class="MsoNormal"><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt;">Test is exited when duration of test (in seconds)
+      has exceeded this value.
+      </span>
+    </td>
+  </tr>
+</table>
+
+<h2><font color="#0000FF">Logging</font></h2>
+<h3><font color="#0000FF">Results Log</h3></font>
+<p>The Results log primarily shows information, which
+could also be obtained from IANet_DiagResult objects. The difference is that information obtained from a
+CIM browser will only show the immediate last results of particular
+tests on a particular adapter. Subsequent tests overwrite earlier test results. The Results log is more convenient for setting up and viewing
+multiple runs of such a test.
+
+<h3><font color="#0000FF">Enabling the Results Log</h3></font>
+<p>To enable the results log:
+<ol><li>In the registry key <b>HKLM\Software\Intel\NETWORK_SERVICES\NCS\NCSDiag</b>, set the value Enable to 1.</li>
+<li>Set the value LogFileName to the preferred log filename or leave at default <b>NcsDiag.log</b>.</li>
+<li>The log file will be found in the directory indicated by the value InstalledDir.</li></ol>
+
+<h2><font color="#0000FF">Associative Classes</font></h2>
+<table border="1" cellspacing="0" cellpadding="0"
+style="border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+  <tr>
+    <td valign="top"
+    style="border:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt"><b>Associative
+      Class</b></span>
+    </td>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span
+      style="font-size:10.0pt;mso-bidi-font-size:10.0pt"><b>Reference
+      Property/Value</b></span>
+    </td>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt"><b>Reference
+      Property/Value</b></span>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">IANet_DiagTestForMSE
+      </span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span
+      style="font-size:10pt;mso-bidi-font-size:10.0pt">Antecedent =
+      IANet_DiagTest</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">Dependent =
+      IANet_EthernetAdapter</span>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">IANet_DiagResultForTest</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">DiagnosticResult
+      = IANet_DiagResult</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">DiagnosticTest
+      = IANet_DiagTest</span>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">IANet_DiagSettingForTest</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">Element =
+      IANet_DiagTest</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">Setting =
+      IANet_DiagSetting</span>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"
+    style="border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">IANet_DiagResultForTest</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">DiagnosticResult
+      = IANetDiagResult</span>
+    </td>
+    <td valign="top"
+    style="border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt">
+      <p><span style="font-size:10.0pt;mso-bidi-font-size:10.0pt">DiagnosticTest
+      = IANet_DiagTest</span>
+    </td>
+  </tr>
+</table>
+
+
+<h2><font color="#0000FF">Tests</font></h2>
+<p>The implemented tests can run on a single machine or on two machines. Detailed descriptions of the
+tests are beyond the scope of this document because the CDM Provider is
+intended to be a generic test vehicle, which is not dependent on the
+particulars of the tests. However, there is some dependency built into the code and that is explained
+in this section.
+
+<h3><font color="#0000FF">Single Adapter Tests</h3></font>
+<p>The following tests are run on a single adapter and need no interaction with any
+other adapter:
+<ul><li>EEPROM</li>
+<li>Control Registers</li>
+<li>MAC Loopback</li>
+<li>PHY Loopback</li>
+<li>Link</li></ul>
+
+<p>All error messages from these tests result from HRESULT error codes returned from calls
+to lower stack layers. The error codes are stored internally as error codes and are not
+translated into error messages until the IANet_DiagResult objects are
+de-referenced by enumeration or object calls are received from a management application.
+
+<h3><font color="#0000FF">Tests Requiring Two Adapters</h3></font>
+<p>The sender and responder tests are codependent
+tests in which one adapter (the sender) sends packets to another
+adapter (the responder), which sends packets back to the sender, thus
+completing the loop. These are the same tests, which can be run from Intel<font size="1"><sup>&reg;</sup></font> PROSet. 
+However, Intel<font size="1"><sup>&reg;</sup></font> PROSet does not use CDM and does not allow you to run two tests 
+on the same machine at the same time. CDM will allow different tests to be run concurrently on the same machine.
+
+<h3><font color="#0000FF">Sender/Responder Tests</h3></font>
+<p>Sender/Responder requires two Intel<font size="1"><sup> </sup></font>adapters, one to be
+the sender and one to be the responder. This test is the only one in which 
+the test is run based on a second thread that continues running until the test completes
+according to completion criteria or is stopped by the primary thread. The completion criteria are
+timeouts based either on the length of the testing time or number of
+packets received. Both of these values are obtained from the registry. The test may only be ended based on the number of packets received if Quick mode has been enabled. Quick Mode is a property of the IANet_DiagSetting class and hence may be set on a per
+adapter basis. CDM responders will respond to PROSet responders and
+vice versa.
+
+<p>Two types of error values are returned from the
+sender/responder tests. First, an Error Code (HRESULT) may be returned from the lower layers. Secondly, while the test is running and, unless the
+test is terminated prematurely by returned error code, the test thread
+will return intermediate and then final test statistics, which will include the following:
+<ul><li>Link Status</li>
+<li>Using Auto-Negotiation</li>
+<li>Collisions</li>
+<li>Packets Received</li>
+<li>Packets Received Total</li>
+<li>Packets Sent</li>
+<li>Transmit Oks</li>
+<li>Receive Oks</li>
+<li>Transmit Errors</li>
+<li>Receive Errors</li>
+<li>Collisions</li>
+<li>Diagnostic Phase</li></ul>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

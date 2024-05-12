@@ -1,0 +1,1071 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>PROCfg for Intel(R) adapters on Linux</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+<!--
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body>
+
+<h1>Intel&reg; Linux* LAN Adapters PROCfg Application</h1>
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#prereqs">Prerequisites</a></p>
+<p class="contents"><a href="#features">Supported Features</a></p>
+<p class="contents"><a href="#using">Using TCO-Enabled Devices in a Teaming Environment</a></p>
+<p class="contents"><a href="#install">Installation</a></p>
+<p class="contents"><a href="#running_procfg">Running the PROCfg Client</a></p>
+<p class="contents"><a href="#issues">Known Issues</a>
+<br>
+
+</p>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+This file describes the Intel<sup>&#174</sup> Linux* LAN Adapters PROCfg Application, version
+2.2.x.
+</p>
+<p>
+PROCfg is a reporting and configuration tool for the Intel<sup>&#174</sup> PRO family of LAN adapters
+(10/100 and 1000) and <i>Intel Advanced Network Services</i>  (ANS). It 
+works with the Intel <a href="e100.htm">e100</a>, <a href="e1000.htm">e1000</a>, 
+and <a href="ans.htm"> ANS</a> drivers on Intel 32-bit architectures running
+Linux.
+It does not work on Intel 64-bit architectures.</p>
+<p>
+The tool consists of two parts: the PROCfgd daemon and the PROCfg command-line tool. The daemon should 
+be run on a managed system. The command-line tool should be used on a managing 
+system. The managing 
+system can be either the  system that is used for the daemon or&nbsp; a remote 
+system.
+</p>
+
+<p>
+Refer to the man page in the tar file for details on specific commands.</p>
+
+<hr>
+
+<h2><a name="prereqs"></a>Prerequisites</h2>
+<p>
+PROCfgd and PROCfg require the following minimal versions:
+</p>
+<ul>
+  <li><p class="numlst">Linux 2.4.x kernels</p>
+  </li>
+  <li><p class="numlst">Any combination of the following Intel drivers:
+    <blockquote>
+    	e100 version 3.0.x<br>
+    	e1000 version 5.3.x<br>
+    	ANS version 3.0.x - 3.4.x</blockquote>
+  <table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  The non-Intel driver eepro100 must not be loaded on
+      the managed machine.</td>
+  	</tr>
+	</table>&nbsp;
+  </li>
+  <li><p class="numlst">
+ 	libstdc++-libc6.1-1.so.2 package - available in Red Hat* 7.2 and later. 
+    Located in either the libstdc++ or compat-libstdc++ package provided with 
+    the operating system.</p>
+  </li>
+  <li><p class="numlst">openssl*&nbsp;
+  <p>&nbsp;- If your gcc version is 3.2 or above, install version 0.9.7 of 
+  openssl. Use &quot;gcc -v&quot; to determine your gcc version.<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> openssl 0.9.7 is installed with Red Hat* Linux 9.0 
+    and above. If the package is already installed, make sure the libcrypto.so.4 
+    file is in /lib or any other directory in the path. If it is not installed, 
+    see the instructions below for creating libcrypto.so.4.<p><i><b>NOTE</b>:</i> 
+    If you do not have openssl installed, download the package from &lt;http://www.openssl.org/&gt; 
+    and configure openssl with 'config shared' to create the libcrypto.so.0.9.7 
+    shared library.</td>
+  	</tr>
+	</table>
+  <p>To create libcrypto.so.4 under /usr/lib, you must copy libcrypto.so.0.9.7 
+  to /usr/lib and create a link named libcrypto.so.4 to <br>
+  libcrypto.so.0.9.7 : <br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; cp libcrypto.so.0.9.7 /usr/lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cd /usr/lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ln -s libcrypto.so.0.9.7 libcrypto.so.4 <br>
+  <br>
+  - If your gcc version is 2.96, install version 0.9.6&lt;x&gt; of openssl, where &lt;x&gt; 
+  is &quot;b&quot; or above. 
+  <table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> openssl-0.9.6&lt;x&gt; is installed with Red Hat* Linux 
+    7.2 and above. If the package is already installed, make sure the 
+    libcrypto.so.2 file is in /lib or any other directory in the path. If it is 
+    not Installed, see the instructions below for creating libcrypto.so.2.
+    <p><i><b>NOTE</b>:</i> If you do not have openssl installed, download the 
+    package from &lt;http://www.openssl.org&gt; and configure openssl with 'config 
+    shared' to create the libcrypto.so.0.9.6&lt;x&gt; shared library.</td>
+  	</tr>
+	</table>
+  <p>To create libcrypto.so.2 under /usr/lib, you must copy 
+  libcrypto.so.0.9.6&lt;x&gt; to /usr/lib and create a link named libcrypto.so.2 to 
+  libcrypto.so.0.9.6&lt;x&gt;:<br>
+  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; cp libcrypto.so.0.9.6&lt;x&gt; /usr/lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp; cd /usr/lib<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ln -s libcrypto.so.0.9.6&lt;x&gt; libcrypto.so.2 <br>
+  <br>
+  - Exception: On Red Hat 8.0, install version 0.9.6&lt;x&gt; of openssl, where &lt;x&gt; is 
+  &quot;b&quot; or above.</li>
+</ul>
+
+<hr>
+
+<h2><a name="features"></a>Supported Features</h2>
+<p>
+PROCfg includes the following features for Intel adapters:
+</p>
+
+<p>
+Viewing:
+<ul>
+  <li><p class="numlst">Bus, Slot, and IRQ numbers for physical adapters</p></li>
+  <li><p class="numlst">Static driver info: name, version, path, date, size (base 
+  driver and ANS)</p></li>
+  <li><p class="numlst">Adapter load-time parameters and their values (e100 only)</p></li>
+  <li><p class="numlst">Dynamic information: link state, speed and duplex (Intel adapters only), and statistical counters</p></li>
+  <li><p class="numlst">Interface information on loaded adapters and teams including virtual interfaces (VLANs) and aliases</p></li>
+  <li><p class="numlst">The ANS topology (teams, members, VLANs)</p></li>
+  <li><p class="numlst">Team and member parameter values</p></li>
+  <li><p class="numlst">Dynamic information regarding the state of a team and the state of its members</p></li>
+</ul>
+
+<p>
+Setting:
+<ul>
+  <li><p class="numlst">MAC, inet, mask, and broadcast addresses</p></li>
+  <li><p class="numlst">MTU size</p></li>
+  <li><p class="numlst">Interface state</p></li>
+  <li><p class="numlst">Load-time parameters (e100 only)</p></li>
+  <li><p class="numlst">Team settings: initial config, add members, change teaming mode, change probes settings.
+    Teaming modes include:</p>
+    <blockquote>
+    	<p>
+       Adapter Fault Tolerance (&quot;AFT&quot;)<br>
+       Switch Fault Tolerance (&quot;SFT&quot;)<br>
+       Adaptive Load Balancing (&quot;ALB&quot;), includes
+       Receive Load Balancing (&quot;RLB&quot;)<br>
+       Static Link Aggregation 
+       (&quot;SLA&quot;), includes Intel® Link Aggregation or Cisco FEC or GEC<br>
+       IEEE 802.3ad: dynamic (&quot;802.3ad&quot;)
+ 		</p>
+	</blockquote>
+  </li>
+  <li><p class="numlst">VLAN settings: add/delete VLANs for a physical adapter or team (adapters controlled by e100 or e1000 drivers only)
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Once a physical adapter is a team member or has
+      VLANs, any operation issued by ifconfig on the individual network interfaces of such an adapter may cause corruption. As a precaution, Intel recommends using
+      procfg to configure the interfaces and ifconfig only for operations that
+      PROCfg does not support.</td>
+  </tr>
+</table>
+  </li>
+  <li><p class="numlst">Loading and unloading of drivers
+  </p></li>
+</ul>
+
+<p>
+Special Functions:
+<ul>
+  <li><p class="numlst">Blink hardware LEDs to identify a specific adapter</p></li>
+  <li><p class="numlst"> Run diagnostics on adapters</p></li>
+  <li><p class="numlst">Save and restore network configurations. The configuration is saved as a text file 
+  in XML-format. It is possible to edit this file, but restore fails if either the file is in illegal XML 
+  format or if it contains invalid configuration data.
+  </p>
+    <table border="0" cellpadding="4">
+      <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Restoring a configuration destroys the current PROCfg system 
+            configuration. This includes unloading Intel drivers. Multi-vendor
+      team (MVT) drivers are not unloaded, as they might control adapters
+            that are not supported by PROCfg and ANS. To avoid MVT adapters            using names that are used in the saved configuration file,
+      manually unload the
+            drivers before using the "restore" operation. For additional
+            information, see the <a href="#issues">Known Issues</a> section.</td>
+      </tr>
+    </table>
+  
+  </li>
+</ul>
+
+<p>Error messages:
+<ul>
+	<li><p class="numlst">User initiated operation failures</p></li>
+	<li><p class="numlst">Daemon initiated operation failures, usually polling failure</p>
+    <table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  All error messages are printed to the console.</td>
+  </tr>
+</table>
+    </li>
+</ul>
+
+<p>
+Logging:
+<ul>
+  <li><p class="numlst">Configuration changes<br>
+&nbsp;&nbsp;&nbsp; If found during periodic polling noted as "external events"<br>
+&nbsp;&nbsp;&nbsp; If user change noted as "events generated by session ID X"</p></li>
+  <li><p class="numlst">Errors that occur only in the daemon
+		<table border="0" cellpadding="4">
+  		  <tr>
+    		<td width="21" valign="top" align="center">
+            <img border="0" src="note.gif" width="28" height="21"></td>
+    		<td><i><b>NOTE</b>:</i>  Events are logged in /var/log/procfgd.log.</td>
+  		  </tr>
+		</table>
+  </li>
+</ul>
+
+<hr>
+
+<h2><a name="using"></a>Using TCO-Enabled Devices in a Teaming Environment</h2>
+
+<p>If an adapter is TCO enabled and connected to a Baseboard Manageability 
+Controller (BMC), you can add it to any type of ANS team. However, if you are 
+adding it to a Static Link Aggregation (SLA) or an IEEE 802.3ad Dynamic Link 
+Aggregation Team, a warning is displayed indicating that all manageability 
+traffic will be lost. The result is that the system management capabilities will 
+be non-functional. This is due to load balancing requirements within a team and 
+the fact that manageability traffic is restricted to a single port on a specific 
+adapter.</p>
+<p>Also, if the adapter is connected to a BMC device that does not use a 
+dedicated MAC address, Receive Load Balancing and Adaptive Load Balancing teams 
+will lose manageability traffic like SLA and Dynamic Link Aggregation Teams 
+mentioned above.</p>
+
+<hr>
+
+<h2><a name="install"></a>Installation</h2>
+
+<table border="0" cellpadding="4" width="981">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> The following instructions describe installing the 
+	PROCfg package through the tar file; although, PROCfg may be installed 
+	through a binary RPM* package. To build a binary RPM* package of this 
+	application, run 'rpmbuild -tb &lt;filename.tar.gz&gt;'. Replace &lt;filename.tar.gz&gt; 
+	with the specific filename of the package.</td>
+  </tr>
+</table>
+
+<p>
+<h3><a name="install_procfgd"></a>PROCfgd</h3>
+<blockquote>
+There are different tar balls per IA architecture(i386 and x86_64) and per gcc 
+compiler version (v2.96 and v3.2).<p>NOTE: For x86_64, there is only support for gcc3.2.<br>
+<br>
+In the following:<br>
+x.v.z represents the version number of the component,<br>
+VER is the gcc* compiler version: 2.96 or 3.2<br>
+ARC is the machine architecture: i386 or x86_64</p>
+<p>1. Copy procfgd-x.y.z-VER.ARC.tar.gz and libxerces-c.VER.ARC.tar.gz to the 
+directory of your choice.<br>
+<br>
+NOTES:<br>
+- Use &quot;gcc -v&quot; to determine your gcc version.<br>
+- On Red Hat 8.0, install the gcc2.96 versions.<br>
+- Use &quot;uname -m&quot; to determine your machine architecture. <br>
+- For i&lt;x&gt;86 architectures use the i386 tar ball.<br>
+- &quot;libxerces&quot; is the xerces XML-parser library; you do not need to install it if it 
+is already installed.<br>
+<br>
+2. Untar the procfgd-x.y.z-VER.ARC.tar.gz file.</p>
+<p>&nbsp;&nbsp;&nbsp; The procfgd-x.y.z directory should appear.<br>
+<br>
+3. Change directory to the procfgd-x.y.z directory:<br>
+<br>
+&nbsp;&nbsp;&nbsp; cd procfgd-x.y.z<br>
+<br>
+&nbsp;&nbsp;&nbsp; The following files should be in the directory:<br>
+<br>
+&nbsp;&nbsp;&nbsp; INSTALL<br>
+&nbsp;&nbsp;&nbsp; INSTALL_BOOT<br>
+&nbsp;&nbsp;&nbsp; prodfgd_init<br>
+&nbsp;&nbsp;&nbsp; prodfgd_init_def<br>
+&nbsp;&nbsp;&nbsp; prodfgd_init_suse<br>
+&nbsp;&nbsp;&nbsp; prodfgd_init_caldera<br>
+&nbsp;&nbsp;&nbsp; procfgd<br>
+&nbsp;&nbsp;&nbsp; procfgd_adduser<br>
+&nbsp;&nbsp;&nbsp; procfgd.1.gz<br>
+&nbsp;&nbsp;&nbsp; procfgd.spec<br>
+&nbsp;&nbsp;&nbsp; uninstall<br>
+&nbsp;&nbsp;&nbsp; README<br>
+&nbsp;&nbsp;&nbsp; ldistrib.txt<br>
+&nbsp;&nbsp;&nbsp; LICENSE.txt<br>
+&nbsp;&nbsp;&nbsp; LICENSE.net-snmp.txt<br>
+&nbsp;&nbsp;&nbsp; LICENSE.xerces.txt<br>
+<br>
+4. Enter:<br>
+<br>
+&nbsp;&nbsp;&nbsp; ./INSTALL<br>
+<br>
+&nbsp;&nbsp;&nbsp; The INSTALL script untars necessary tar files and copies the 
+following files to the indicated location:<br>
+<br>
+&nbsp;&nbsp;&nbsp; procfgd (the server application) and procfgd_adduser to /usr/sbin<br>
+&nbsp;&nbsp;&nbsp; procfgd.1.gz (the man page) to the default man directory<br>
+&nbsp;&nbsp;&nbsp; the licenses, README, and ldistrib.txt files to <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+/usr/share/doc/procfgd-&lt;package_version&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+5. After procfgd is installed, the INSTALL script asks if you want procfgd to 
+automatically run on boot. </p>
+<p>&nbsp;&nbsp;&nbsp; If you answer 'yes', a script called 'procfgd' is&nbsp; 
+placed in the directory containing the system's boot scripts (usually in /etc/rc.d/init.d/).
+</p>
+<p>&nbsp;&nbsp;&nbsp; If you answer 'no' and later change your mind, you can 
+always enter the 'procfgd-x.x.x' directory and run the command:<br>
+<br>
+&nbsp;&nbsp;&nbsp; ./INSTALL_BOOT install<br>
+<br>
+&nbsp;&nbsp;&nbsp; Likewise, if you no longer want procfgd to run on boot, use 
+the command:<br>
+<br>
+&nbsp;&nbsp;&nbsp; ./INSTALL_BOOT uninstall<br>
+<br>
+6. To run the PROCfg server, first logon to the system as root. Enter:<br>
+<br>
+&nbsp;&nbsp;&nbsp; procfgd</p>
+<table border="0" cellpadding="4" width="818">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>: </i>To change the configuration for the PRO LAN adapters 
+	or iANS PROCfgd requires a non-default username and password. To configure a 
+	user, see the instructions in the next step.</td>
+  </tr>
+</table>
+
+  <p>&nbsp;&nbsp;
+The daemon runs by default on port 58086. If this port is taken or if
+PROCfgd is already running on the default port, the following <br>
+&nbsp;&nbsp;
+error message is printed on the screen:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Error opening specified endpoint &quot;58086&quot; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Server Exiting with code 1<br>
+<br>
+&nbsp;&nbsp;
+In order to run the server on an alternate port, use the -p option:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; procfgd -p &lt;port number&gt;<br>
+<br>
+7. To add a new read/write-access user to the PROCfg server, first logon
+as root. Make sure PROCfgd is not running. Enter <br>
+&nbsp;&nbsp;&nbsp;
+the following, where
+the password is at least 8 characters long:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+/usr/sbin/procfgd_adduser &lt;username&gt; &lt;password&gt;<br>
+<br>
+&nbsp;&nbsp;
+Multiple read/write users may be added. The new username(s)/password(s) are added to the /var/.procfgd/procfgd.conf file. After <br>
+&nbsp;&nbsp;
+running the server once, this file is encrypted, but the password is
+visible while typing it.</p>
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>: </i>A single read-only user is configured by default on 
+    the PROCfg
+server. To simply view settings no username or password are
+required, as long as the default username and password
+(username=procfgd, password=pRoCfGdPaSs) have been left in place.</td>
+  </tr>
+</table>
+
+<h3>To Uninstall</h3>
+1. To uninstall enter<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+./UNINSTALL<br>
+<br>
+&nbsp;&nbsp;
+The UNINSTALL script will remove all files installed by INSTALL script
+(see step 4 above).<br>
+<br>
+<h3><a name="install_procfg"></a>PROCfgd</h3>
+<p>&nbsp;&nbsp;&nbsp; There are different tar balls per gcc compiler version 
+(v2.96 and v3.2). <br>
+&nbsp;&nbsp;&nbsp; The tar balls support the i386 and x86_64 IA architectures.
+<br>
+&nbsp;&nbsp;&nbsp; The tar balls do not depend on architecture.
+&nbsp;&nbsp;&nbsp; </p>
+<p>&nbsp;&nbsp;&nbsp; NOTE: For x86_64, there is only support for gcc3.2.<br>
+<br>
+&nbsp;&nbsp;&nbsp; In the following:<br>
+&nbsp;&nbsp;&nbsp; x.v.z represents the version number of the component,<br>
+&nbsp;&nbsp;&nbsp; VER is the gcc* compiler version: 2.96 or 3.2</p>1. . Copy 
+procfg-x.y.z-VER.tar.gz to directory of your choice.<br>
+<br>
+&nbsp;&nbsp;&nbsp; NOTES:<br>
+&nbsp;&nbsp;&nbsp; - Use &quot;gcc -v&quot; to determine your gcc version.<br>
+&nbsp;&nbsp;&nbsp; - On Redhat 8.0, install the gcc2.96 versions.<br>
+&nbsp;&nbsp;&nbsp; - Use &quot;uname -m&quot; to determine your machine architecture. <br>
+<br>
+2. Untar the procfg-x.y.z-VER.tar.gz file.<br>
+<br>
+&nbsp;&nbsp;&nbsp; The procfg-x.y.z directory should appear.<p><br>3. Change 
+directory to the procfg-x.y.z directory:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cd procfg-x.y.z<br>
+<br>
+&nbsp;&nbsp;&nbsp; The following files should be in the directory:<br>
+<br>
+&nbsp;&nbsp;&nbsp; INSTALL<br>
+&nbsp;&nbsp;&nbsp; procfg<br>
+&nbsp;&nbsp;&nbsp; procfg.1.gz<br>
+&nbsp;&nbsp;&nbsp; procfg.spec<br>
+&nbsp;&nbsp;&nbsp; README<br>
+&nbsp;&nbsp;&nbsp; ldistrib.txt<br>
+&nbsp;&nbsp;&nbsp; uninstall<br>
+&nbsp;&nbsp;&nbsp; LICENSE.txt<br>
+&nbsp;&nbsp;&nbsp; LICENSE.net-snmp.txt<br><br>4. Enter:<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ./INSTALL<br>
+<br>
+&nbsp;&nbsp;&nbsp; The INSTALL script copies the following files to the 
+indicated location:<br>
+<br>
+&nbsp;&nbsp;&nbsp; procfg (the server application) - to /usr/sbin<br>
+&nbsp;&nbsp;&nbsp; procfg.1.gz (the man page) - to the default man directory<br>
+&nbsp;&nbsp;&nbsp; the licenses, README, and ldistrib.txt files to <br>
+&nbsp;&nbsp;&nbsp; /usr/share/doc/procfg-&lt;package_version&gt;<br>
+<br>
+&nbsp;&nbsp;&nbsp; To configure a user in the PROCfg client (procfg), see the 
+Switches section below.</p>
+<table border="0" cellpadding="4" width="875">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>: </i>A single read-only user is configured by default on 
+	the PROCfg server. To simply view settings no username or password are 
+	required, as long as the default username and password (username=procfgd, 
+	password=pRoCfGdPaSs) have been left in place.</td>
+  </tr>
+</table>
+
+<h3>To Uninstall</h3>
+1. To uninstall enter<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+./UNINSTALL<br>
+<br>
+&nbsp;&nbsp;&nbsp;
+The UNINSTALL script will remove all files installed by INSTALL script
+(see step 4 above).</p>
+</p>
+</blockquote>
+</p>
+
+<hr>
+
+<h2><a name="running_procfg"></a>Running the PROCfg Client</h2>
+<p>
+The following parameters are used by entering them on the command line with 
+the procfg command. When issuing a command, the following syntax must be used:<br>
+<blockquote class="monospace">
+		procfg [&lt;switch(es)>] &lt;command> [&lt;object(s)>] [&lt;option(s)>]
+</blockquote>
+<p>
+Object(s) can be an interface name (ethx), team name, or list of interfaces or team names (eth0 eth1 ...).
+</p>
+<p>
+Each switch has a long name as well. See the man page for a more detailed description of the command options.<br>
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center">
+    <img border="0" src="caution.gif" width="28" height="21"></td>
+    <td><i><b>CAUTION</b>:</i>  The PROCfgd daemon must be running before issuing a command.</td>
+  </tr>
+</table>
+
+&nbsp;
+<h3><a name="switches"></a>Switches</h3>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <th width="20%" height="30"><b>Switch</b></th>
+    <th width="50%" height="30"><b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="20%">
+      <p class="monospace">-p &lt;port></p>
+    </td>
+    <td width="50%" valign="top">
+       If the PROCfgd daemon is not using the default port, you must set the
+       PROCfg application 
+       to the same port. If a port number is not specified, the default port (58086) is used.</td>
+  </tr>
+  <tr>
+    <td width="20%">
+   <p class="monospace">-h &lt;hostname>
+    </td>
+    <td width="50%" valign="top">
+       Hostname or IP address of the managed machine (the one that runs the
+       PROCfgd server). If not specified, the default
+       hostname (localhost) is       used.
+    </td>
+  </tr>
+  <tr>
+    <td width="20%">
+   <p class="monospace">
+   -U &lt;username> -P &lt;password></p>
+    </td>
+    <td width="50%" valign="top">
+       Set the username and password to access the server application. The username and password 
+       must be pre-configured in the server (see the Installation section). If you do not specify a 
+       username or password, the defaults are used (username: procfgd, password: pRoCfGdPaSs).
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  The default username is authorized for 'get' operations only.</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td width="20%">
+   <p class="monospace">
+   -t &lt;num_seconds&gt;</p>
+    </td>
+    <td width="50%" valign="top">
+       This parameter specifies how long, in seconds, the PROCfg application waits for response from
+       PROCfgd. The default is 4 seconds and should only be increased for a highly stressed server.</td>
+  </tr>
+  <tr>
+    <td width="20%">
+   <p class="monospace">   -f&nbsp;
+    </td>
+    <td width="50%" valign="top">
+       "Force mode". Commands do not issue warning to the user.</td>
+  </tr>
+</table>
+<p>
+   To allow a non-default User to write without having to input the username
+   and password on each command, or to save changes to any of these values
+   create a configuration file named procfg.conf. Place it in your home directory under a procfg directory 
+   (~/.procfg/procfg.conf). This file may contain the new username, password, port or timeout. The new 
+   settings are retained across reboots. An example of the procfg.conf file:
+</p>
+<blockquote class="monospace">
+	username anyone<br>
+	password anyonepassword<br>
+	port 1012<br>
+	hostname localhost<br>
+	force<br>
+	timeout 20
+</blockquote>       
+
+    <table border="0" cellpadding="4">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i>   The configuration file must not contain any white spaces following any of the switches.</td>
+      </tr>
+    </table>
+&nbsp;
+<h3>Commands - Informational</h3>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <th width="40%" height="30"><b>Command</b></th>
+    <th width="50%" height="30"><b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   help [&lt;command_in-question&gt; [-a]]</td>
+    <td width="50%" valign="top">
+       Displays command usage. Use -a for advanced information.</td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   adapters [&lt;ethx(s) or lspci_adapter_name(s)&gt;]  [-a -v -i -h -p[d] -g]</td>
+    <td width="50%" valign="top">
+       Displays general information on adapters in the system including:       unique name, system name, link state, speed, duplex, team membership,       type (Intel100 for Intel adapters using e100,
+       Intel1000 for Intel       adapters using e1000, non-Intel vendor names otherwise), VLANs, interfaces,       hardware info, adapter load time parameters, and GVRP parameters.
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Link state, speed, and duplex are not supplied for non-Intel             adapters. Non-Intel adapters are shown only if they are
+      supported by iANS. For specific switches see the man page.</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+      <p class="monospace">   adpdiag [&lt;ethx(s)&gt;] [-d &lt;diagnostic_name1>]<br>
+           [-d &lt;diagnostic_name2> ...</td>
+    <td width="50%" valign="top">
+       Runs diagnostics on adapters. If no adapter names are given the command 
+       displays a list of adapters and their driver, on which a diagnostic can 
+       be run. If one adapter name is given without any diagnostic names the 
+       command displays a list of diagnostics that can be run on the adapter. If 
+       both adapter names and diagnostic names are given the command runs the 
+       specified diagnostics on the specified adapters.&nbsp;<p>Diagnostic options 
+       include online, offline, and phyinfo.</p>
+       <p>Online tests do not break network connectivity.</p>
+       <p>Offline tests will disable network connectivity while they are 
+       running.</p>
+       <p>Phyinfo tests check the network cable.</p>
+       <p>NOTE: Tests included in online and offline testing will vary based on 
+       the type of adapter being tested.</td>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">blink ethx [-t &lt;num_seconds&gt;]</td>
+    <td width="50%" valign="top">
+       Identifies adapter by blinking hardware LED. Default blink time is 10 seconds.
+       <table border="0" cellpadding="4">
+  <tr>
+    <td><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  procfgd blocks all other network
+       configuration while the blink operation is running.</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   interfaces [&lt;ethx(s)&gt;]   [-a -d -s -x]</td>
+    <td width="50%" valign="top">
+       Displays general information on all interfaces in the system including:
+       interface name, inet address, broadcast address, netmask, VLAN ID, MTU size, driver info, and statistics. <br>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   teams [&lt;team_name(s)&gt;]  [-m -p -v -i -g]</td>
+    <td width="50%" valign="top">
+       Displays information on the teams in the system including: teaming mode, team current primary, 
+       team state, team link state, team speed, team members table, team VLANs table, team
+       hwaddr, team probe parameters, forward delay, interface table, RLB state,
+       and GVRP parameters.
+      <p>
+       Teams probe parameters are: addressing mode, check time out, send time, max retry count, receive 
+       time out, receive back cycles, probe burst size.
+       </p>
+       <p>
+       Team speed is defined differently for the different teaming modes. For
+       AFT, SFT, and ALB team speed equals primary speed. For 
+       <font face="Arial" size="2"><span class="821261622-10032004">SLA</span>&nbsp;</font>team speed 
+       equals sum of speeds of all members.
+       </p></td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   tree</td>
+    <td width="50%" valign="top">
+       Demonstrates the topology of the system. Gives a non-detailed listing of all stand-alone adapters and their
+      VLANs, teams and their VLANs, and members.
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   vlans</td>
+    <td width="50%">
+       Displays information on VLANs including: interface name, VLAN name and ID.</td>
+  </tr>
+</table>
+&nbsp;<h3>Commands - Save and Restore</h3>
+<table border="1" cellpadding="4" cellspacing="0" width="100%">
+  <tr>
+    <th width="40%" height="30">
+   <b>Command</b></th>
+    <th width="50%" height="30">
+       <b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="40%" class="monospace">restore [&lt;file_name&gt;] [-c -i -b]</td>
+    <td width="50%" valign="top">Restore a network configuration of the server.
+      The configuration is restored from a file stored in the /etc/procfgd directory 
+    of the server.
+      The default file name is saved_conf.procfgd.
+      <p>
+      The -c option forces the client to restore the configuration on the
+      server(s) from the file, stored locally on the client. When using
+      this option, you must have a configuration file that contains the server
+      list and hostname (or IP address) for each host on which the configuration
+      should be restored. If you have multiple servers, they must be  exact 
+      copies of each other; same types and number of adapters, and
+      same driver versions. When the -c option is used the path to the
+      configuration file may be either relative to the current directory or
+      absolute.
+      </p>
+      <p>The -i option restores the IP addresses for the server(s) from the
+      restore IP file. This feature is recommended to prevent connection losses.
+      To use this option, you must first create a restore IP file that contains, for each
+      hostname or IP address in the configuration files described above, a list
+      of interface names and their IP addresses. The restore IP file must be
+      located in the same directory from which the procfg command is run. When the -i
+      option is not used, the IP addresses are as defined in the configuration
+      file.
+      </p>
+      <p>The -b option is used for restore on boot.</p>
+      <p>For examples of the configuration and restore IP files, see below.
+      </p>
+      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber1">
+        <tr>
+          <td width="7%"><img border="0" src="note.gif" width="28" height="21"></td>
+          <td width="93%"><i><b>NOTE:</b> Do not modify hardware configuration if teams are set to 
+      restore on reboot. Unexpected results may occur.</i></td>
+        </tr>
+    </table>
+      	</td>
+  </tr>
+  <tr>
+    <td width="40%" class="monospace">save [&lt;file_name&gt;] [-c]</td>
+    <td width="50%" valign="top">Save the current network configuration on the
+      host. The file is saved in the /etc/procfgd directory. The default file
+      name is saved_conf.procfgd.
+      <p>The -c option saves the configuration on the client that is configuring
+      the server. When the -c option is used the path to the configuration file
+      may be either relative to the current directory or absolute.</p>
+      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber2">
+        <tr>
+          <td width="7%"><img border="0" src="note.gif" width="28" height="21"></td>
+          <td width="93%"><i><b>NOTE: </b>Do not insert hardware if teams are set to restore on reboot. 
+      If hardware is added, the teams must be recreated.</i></td>
+        </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+<p>To ensure network configuration is restored:</p>
+<ol>
+  <li><p class="numlst">Ensure that you have installed procfgd with the option
+    to automatically run on boot. For instructions, see the <a href="#install_procfgd">PROCfgd
+    Installation</a> section.</p></li>
+  <li><p class="numlst">Ensure that procfg is installed on the server where procfgd 
+  is installed before implementing the following procedure.</p></li>
+  <li><p class="numlst">Save the current configuration as the default saved configuration:</p>
+  	<blockquote class="monospace">
+  		procfg -f save
+  	</blockquote>
+  	<p class="numlst">
+  	The default file name is /etc/procfgd/saved_conf.procfgd.</p>       
+    <table border="0" cellpadding="4">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i> You can run <span class="monospace">procfg -f save</span> once or multiple 
+        times. You can also save multiple configurations to different files using 
+        <span class="monospace">/usr/sbin/procfg save &lt;file_name&gt;</span>. Then, copy the 
+        configuration file you want to restore on boot to the default restore file location
+        (/etc/procfgd/saved_conf.procfgd). The file must be saved to /etc/procfgd or any subdirectory under 
+        this location.
+        </td>
+      </tr>
+    </table>
+  </li>
+</ol>
+
+<p>
+During the next reboot, the default configuration will load and restore your network configuration.
+</p>
+    <table border="0" cellpadding="4">
+      <tr>
+        <td width="21" valign="top" align="center">
+        <img border="0" src="note.gif" width="28" height="21"></td>
+        <td><i><b>NOTE</b>:</i> The restore operation overrides network scripts. If you are using 
+  			DHCP or have other information in the network scripts (such as an IP address), 
+        	issuing this command will override that information. For example, if you specify an IP 
+  			address in the script, PROCfg will override that address with the IP address 
+  			specified in the saved configuration.</td>
+      </tr>
+    </table>
+
+<h4>Definition of multi server conf_file:</h4>
+<p>
+	[any_name]<br>
+	username &lt;user&gt;<br>
+	password &lt;password&gt;<br>
+	port &lt;n&gt;<br>
+	timeout &lt;n&gt;<br>
+	hostname &lt;ip_address&gt;<br>
+	[any_other_name]<br>
+	hostname &lt;ip&gt;<br>
+	.....
+</p>
+<h4>Definition of restore_ip.procfgd:</h4>
+<p>
+    [name (as in hostname from conf file)]<br>
+&lt;interface_name&gt; &lt;ip_address&gt; [-b &lt;broadcast&gt;] [-n &lt;netmask&gt;] 
+[-d] [-a &lt;ipv6_address&gt;] [-a &lt;other_address&gt;]
+<br>
+	...<br>
+	[other name]<br>
+	...<br>
+	[...]
+</p>
+<table border="0" cellpadding="4">
+  <tr>
+	<td width="21" valign="top" align="center">
+	<img border="0" src="note.gif" width="28" height="21"></td>
+	<td><i><b>NOTES</b>:</i> -d is used for removing the default IPv6 address.<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -a is used to add IPv6 addresses (many -a flags may appear).
+      <p>The management adapter's IP address (hostname IP address) in the above
+      examples must be an IPv4 address.</p>
+    </td>
+  </tr>
+</table>
+
+<h3>Commands - Team/VLAN Configuration</h3>
+<table border="1" cellpadding="4" cellspacing="0" width="100%">
+  <tr>
+    <th width="40%" height="30">
+   <b>Command</b></th>
+    <th width="50%" height="30">
+       <b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   addmem &lt;team_name> &lt;ethx> [-p &lt;priority>] &lt;ethx> [-p &lt;priority>] ...</td>
+    <td width="50%" valign="top">
+       Add adapter to team. Default priority is none.</td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   addteam &lt;team_name> eth0 eth1 ... [-M &lt;mode>] [-e/-d] [-a &lt;addrmode>] [-c &lt;num>] [-s &lt;num>] 
+   [-m &lt;num>] [-t &lt;num>] [-r &lt;num>] [-b &lt;num>] [-g &lt;aggregation mode>]
+   [-R &lt;on|off&gt;] [-f &lt;num&gt;]</td>
+    <td width="50%" valign="top">
+       <p>
+       Add team. &lt;team_name&gt; must be no longer than 8 characters, must start 
+       with a letter, and must NOT start with &quot;eth&quot;,&quot;lo&quot;, &quot;ippp&quot; or &quot;cipcb&quot;. The default teaming mode is AFT. For other default values, see the man page.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+        <p class="monospace">
+   		addvlans &lt;ethx>/&lt;team_name> -i &lt;VLAN_ID(s)> [-n &lt;VLAN_name>] -i &lt;VLAN_ID(s)> [-n &lt;VLAN_name>] ...</td>
+    <td width="50%" valign="top">Add VLANs to a team or a physical adapter. Each set of VLAN
+      IDs can be tagged with a VLAN name. The VLAN ID range is  0 - 4094.
+      <table border="0" cellpadding="4">
+        <tr>
+          <td width="21" valign="top" align="center">
+          <img border="0" src="note.gif" width="28" height="21"></td>
+          <td><i><b>NOTES</b>:</i>  If a VLAN ID appears twice in the list an error occurs.</td>
+        </tr>
+        <tr>
+          <td width="21" valign="top" align="center">
+          </td>
+          <td>Due to a third-party limitation, adding VLANs when the IPv6 module
+            is loaded might cause a network connectivity failure.</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">delmem &lt;team_name&gt; &lt;member_names_list&gt;</td>
+    <td width="50%" valign="top">Delete members from team.</td>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">delteam &lt;team_name&gt;</td>
+    <td width="50%" valign="top">Delete team.</td>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">delvlans &lt;ethx&gt;/&lt;team_name&gt; -i &lt;VLAN_ID(s)&gt;</td>
+    <td width="50%" valign="top">Delete VLANs from a team or physical adapter. If a VLAN ID
+      appears twice in the list an error occurs. delvlans will not remove VLANs
+      if their interface is up.</td>
+  </tr>
+  </table>
+<p>
+After configuring teaming and VLAN settings, you must save the configuration 
+as the default to make sure it is restored after the next reboot. To ensure 
+network configuration is restored, see the instructions under the Save and 
+Restore commands.
+</p>
+<h3>Commands - Setting Parameters</h3>
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Enter 'procfg &lt;command>' for a list of the objects that can be configured by the
+      specified command.
+      Enter 'procfg &lt;command&gt; &lt;object&gt;' for a list of parameters
+      that can be set by the specified command and the current values of those parameters. </td>
+  </tr>
+</table>
+<p>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <th width="40%" height="30"><b>Command</b></th>
+    <th width="50%" height="30"><b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">adpcfg [&lt;ethx&gt;] [-h &lt;hwaddr&gt;]</td>
+    <td width="50%" valign="top">
+        Sets adapter hardware address, speed, and duplex.</td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   adpsetp [&lt;ethx(s)&gt;] [-p &lt;parameter_name1> = &lt;val1>] [-p &lt;parameter_name2> = &lt;val2>] ...</td>
+    <td width="50%" valign="top">
+	<span style="font-size: 10.0pt; font-family: Arial">Sets load time 
+    parameters for adapters that are using the e100 driver.</span><table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> This operation is only available for PRO/100 adapters.</td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   ifcfg [&lt;ethx&gt;] [-i &lt;addr&gt;] [-n &lt;mask>] [-b &lt;addr&gt;] [-u &lt;pktsize&gt;]
+          [-s &lt;up/down>] [-a &lt;inet6_address&gt;] [-d
+   &lt;inet6_address&gt;]</td>
+    <td width="50%" valign="top">
+<p>
+       Sets interfaces (all  set to same value).</p>
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  Setting aliased interfaces to the same IP address should fail. "ifcfg ethx:i -i 0.0.0.0" 
+    removes the alias i from ethx. "ifcfg ethx:i -s down" also removes the alias. </td>
+  </tr>
+</table>
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   memcfg &lt;member_name&gt; -p &lt;priority></td>
+    <td width="50%" valign="top">
+		Sets member priority. Possible values = none, primary, secondary.</td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   teamcfg [&lt;team_name&gt;] [-h &lt;addr&gt;] [-M &lt;mode>] [-e/-d] [-a &lt;addrmode>] [-c &lt;num>] [-s &lt;num>] 
+   [-m &lt;num>] [-t &lt;num>] [-r &lt;num>] [-b &lt;num>] [-g &lt;aggregation mode>]
+   [-R &lt;on|off&gt;] [-f &lt;num&gt;]</td>
+    <td width="50%" valign="top">
+       Configures team.</td>
+  </tr>
+  <tr>
+    <td width="40%">
+      <p class="monospace">vlancfg &lt;ethx&gt;/&lt;team_name&gt; [-g &lt;on|off&gt; [-t
+      &lt;num&gt;] ]</td>
+    <td width="50%" valign="top">
+      
+        <p>Sets GVRP information.</p>
+    </td>
+  </tr>
+</table>
+&nbsp;
+
+<h3>Commands - Drivers</h3>
+<table border="1" cellpadding="4" width="100%" cellspacing="0">
+  <tr>
+    <th width="40%" height="30"><b>Command</b></th>
+    <th width="50%" height="30"><b>Description</b></th>
+  </tr>
+  <tr>
+    <td width="40%"><p class="monospace">   loaddrv [&lt;driver_name&gt;] </td>
+    <td width="50%" valign="top">
+       Loads a driver. If no arguments are given, the operation lists the 
+       loadable drivers. If a driver name is given, the operation executes the 
+       modprobe command to load the driver.
+    </td>
+  </tr>
+  <tr>
+    <td width="40%">
+   <p class="monospace">
+   unloaddrv [&lt;driver_name&gt;]</td>
+    <td width="50%" valign="top">
+       <p class="monospace">Unloads a driver. If no arguments are given, the 
+       operation lists the removable drivers. If a driver name is given, the 
+       operation executes the rmmod command to unload the driver.<font SIZE="2" COLOR="#ff0000">
+       </font>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+
+<p>
+<hr>
+<h2><a name="issues"></a>Known Issues</h2>
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>  For Linux distribution-specific information, see <a href="ldistrib.htm">ldistrib.htm</a>.</td>
+  </tr>
+</table>
+
+<ol>
+  <li><p class="numlst">An error message, "procfg: Unknown engine id, Unable to connect to host", is seen for every PROCfg command.
+	</p>
+	<p class="numlst">
+   	Since PROCfg is a client-server application, the loopback interface in the system (lo) must be up, and it 
+   	must contain an IP address. Configure the loopback interface up by entering:
+	<blockquote class="monospace">
+    	ifconfig lo &lt;IP_address>
+   	</blockquote>
+  </li>
+  <li><p class="numlst">Restoring a configuration destroys the current PROCfg system configuration.
+  	</p>
+  	<p class="numlst">The restore operation might fail in the following cases:
+  	<ul type="disc">
+		<li><p class="numlst">Adapters in the system on which the restore is done are of a different type or have different 
+		capabilities than the adapters in the system on which the configuration was saved.
+		</p></li>
+		<li><p class="numlst">The adapter names in the configuration file are being used by other drivers.
+		</p></li>
+		<li><p class="numlst">The system is in a state that does not allow loaded drivers to occupy the adapter names that 
+		are specified in the configuration file (adapter names are determined when loading the drivers).
+		</p></li>
+    </ul>
+	<p class="numlst">In order to overcome these situations either edit the configuration file and change the adapter names to 
+	match the system state and the adapter capabilities, or change the system state and/or its adapters in a way 
+	which will allow restoring the configuration.
+	</p></li>
+	<li><p class="numlst">Restoring a configuration does not restore the machine's routing table. Therefore, when
+      issuing a restore operation from a remote machine through a gateway defined on the "restored" machine, communication 
+    can stop.
+      </p>
+      <p class="numlst">If you have local access to the managed machine, try rebuilding that machine's routing table.
+		</p></li>
+	<li><p class="numlst">When running PROCfg commands in a script, some commands may fail because of timing issues 
+	(some commands take longer than script allows). As a workaround run the script again or insert pauses between the 
+	commands in the script.
+	</p></li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/29/04 9:49a <!-- $--> Revision <!--$$Revision:--> 23 <!-- $--></code></p>
+
+</body>
+</html>

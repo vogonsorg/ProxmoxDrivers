@@ -1,0 +1,956 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Teaming and VLANs in NetWare</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Teaming and VLANs in NetWare*</h1>
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#teaming_reqs">Teaming Requirements</a></p>
+<p class="contents"><a href="#commands">Command Lines</a></p>
+<p class="contents"><a href="#mem_config">Allocating Memory</a></p>
+<p class="contents"><a href="#adding adapter">Adding an Adapter into an Existing 
+Team</a></p>
+<p class="contents"><a href="#removing adapter">Removing an Adapter for an 
+Existing Team</a></p>
+<p class="contents"><a href="#Hot plug/unplug">Hot Plug Operations with an Adapter</a></p>
+<p class="contents"><a href="#remove_team">Removing a Team</a></p>
+<p class="contents"><a href="#RLB">Receive Load Balancing (RLB)</a></p>
+<p class="contents"><a href="#Keywords">NetWare* iANS Command Line Parameters 
+and Keywords</a></p>
+<p class="contents"><a href="#usage_notes">Usage Notes</a></p>
+<p class="contents"><a href="#trouble">Troubleshooting</a></p>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+
+<p><i>Driver name: iANS.LAN Location on CD-ROM: \NWSERVER</i></p>
+<p>iANS.LAN is the Intel software for NetWare* 5.x through NetWare 6.x* that provides a
+variety of Advanced Network Services (ANS). ANS include
+teaming and VLAN-based features.&nbsp;</p>
+<h3>Teaming</h3>
+<p>Teaming includes:</p>
+<blockquote>
+    <ul>
+      <li>
+      <p class="numlst">Adapter Fault Tolerance (AFT)</li>
+      <li>
+      <p class="numlst">Adaptive Load Balancing (ALB)</li>
+      <li>
+      <p class="numlst">Switch Fault Tolerance (SFT)</li>
+      <li>
+      <p class="numlst">Port Aggregation, also known as Static Link Aggregation 
+      (static) and IEEE 802.3ad (dynamic)</li>
+      <li>
+      <p class="numlst">VLAN (Virtual LAN) support of IEEE 802.1Q.</li>
+    </ul>
+</blockquote>
+<p>Select the general teaming page (top level item) from the Table of Contents for 
+a complete description of these modes.</p>
+<p>For
+detailed instructions on configuring teams in NetWare, see the
+<a href="nw_ians.htm">Examples File</a>.</p>
+
+<h3>VLANs (Virtual LAN)</h3>
+<p>See the VLAN page for complete description of VLANs.</p>
+<p>General Configuration Notes:</p>
+<ul>
+  <li>
+  <p class="numlst">There is a limit of 64 VLANs per NetWare server.</li>
+  <li>
+  <p class="numlst">Even if you have a single adapter set up for VLANs, it is
+    still called a team, or &quot;virtual adapter.&quot;</li>
+</ul>
+
+<p>Example for a Single 802.1Q VLAN Team:</p>
+
+<blockquote class="monospace">   
+  Load ce100b slot=5 frame=ethernet_802.3 name=e83<br>
+  Load ians vlanid=2 frame=ethernet_802.3 name=T1-VL2 team=1<br>
+  Load ians vlanid=3 frame=ethernet_802.3 name=T1-VL3 team=1<br>
+  Bind ians e83 team=1<br>
+  Load ians commit mode=AFT team=1<br>
+  Bind ipx T1-VL2 net=2<br>
+  Bind ipx T1-VL3 net=3
+</blockquote>
+
+<p>In order to function properly, the adapters configured for IEEE VLANs must be
+connected to a &quot;tagged&quot; port (called a trunk port by Cisco) on an 802.1Q-capable switch.</p>
+
+<p>For
+detailed instructions on configuring VLANs in NetWare, see the <a href="nw_ians.htm">Examples File</a>.</p>
+
+<hr>
+
+<h2><a name="teaming_reqs"></a>Teaming Requirements</h2>
+    <ul>
+      <li>
+      <p class="numlst">You must have at least one server adapter in the team.</li>
+      <li>
+      <p class="numlst">All adapters in a team must use the same frame type.</li>
+      <li>
+      <p class="numlst">All adapters must be connected to a switch with matching capabilities,
+    	and the switch should be set to match the
+    	settings which you enable on your adapters.</li>
+      <li>
+      <p class="numlst">Link all adapters of a team to the same switch using the same speed and duplex; 
+      otherwise, performance is greatly degraded.</li>
+      <li>
+      <p class="numlst">When using iANS.LAN, do NOT bind the network protocols (IPX, IP, etc)
+		directly to the base driver of an adapter used with iANS. Instead, bind iANS to
+		the base driver and the protocol(s) to iANS. Doing otherwise can cause routing
+		error messages, but most likely the protocols bound directly to the base drivers
+		will simply not work.</li>
+      <li>
+      <p class="numlst">Do not use INSTALL.NLM or NWCONFIG.NLM to configure iANS.LAN. You may use it
+		to install the module (done automatically if the utility is used to install
+		CE1000), but do not use it to set the configuration. Alternatively, you can
+		manually copy the iANS driver to sys:\system. To configure to run automatically, set up a configuration NCF file which can
+		be called from AUTOEXEC.NCF.</li>
+      <li>
+      <p class="numlst"><i><b>IMPORTANT: </b></i>Before creating a team, adding 
+      or removing team members, or changing advanced settings of a team member, 
+      make sure each team member has been configured similarly. Settings to 
+      check include VLANs and QoS Packet Tagging, Jumbo Frames, and the various 
+      offloads. <i>Pay particular attention when using different adapter models 
+      or adapter versions, as adapter capabilities vary.</i></li>
+</ul>
+
+<h3>Server Adapters Supporting Teaming:</h3>
+<p>Some advanced features are also adapter dependent as the table below depicts.&nbsp;</p>
+
+<table border="1" cellspacing="0" cellpadding="6">
+    <tr>
+      <td rowspan="2" valign="bottom"><b>Adapter</b></td>
+      <td rowspan="2" valign="bottom">
+        <p align="center"><b>VLAN<br>
+        (IEEE 802.1Q)</b></td>
+      <td align="center" colspan="6"><b>Teaming Mode</b></td>
+    </tr>
+    <tr>
+      <td align="center"><b>AFT</b></td>
+      <td align="center"><b>ALB</b></td>
+      <td align="center"><b>SFT</b></td>
+      <td align="center"><b>FEC*</b></td>
+      <td align="center"><b>GEC*</b></td>
+      <td align="center" width="38"><b>AD</b></td>
+    </tr>
+    <tr>
+      <td>Intel PRO/100+ Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/100S and PRO/100+ Dual Port Server Adapters</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/100 and PRO/100S Server Adapters</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 Gigabit Server Adapter</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 F Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 T Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 XT Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 XF Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 MF Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 MT Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 MT Dual Port Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>Intel PRO/1000 MF Dual Port Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">&nbsp;</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+    <tr>
+      <td>PRO/1000 MT Quad Port Server Adapter</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+      <td align="center">x</td>
+    </tr>
+  </table>
+
+<p>AFT - Adapter Fault Tolerance<br>
+ALB - Adaptive Load Balancing<br>
+SFT - Switch Fault Tolerance<br>
+FEC - Fast EtherChannel (*used here to include Intel Link Aggregation and static 802.3ad)<br>
+GEC - Gigabit EtherChannel (*used here to include Intel Link Aggregation and static 802.3ad)<br>
+AD - IEEE 802.3ad teaming mode</p>
+<p>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top" align="center" width="13">
+      <p class="Body-Text">
+      <a href="note.gif">
+      <img border="0" src="note.gif" width="28" height="21"></a></p>
+    </td>
+    <td><i><b>NOTES</b></i>: Copper gigabit adapters may be teamed with Intel
+      PRO/100 adapters at 10 or 100 Mbps or with adapters from other vendors.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" align="center" width="13">
+    </td>
+    <td>SFT mode only allows for two adapters in the team.
+    </td>
+  </tr>
+</table>
+<p>The ANS driver (required for all ANS features) for Intel PRO/100, as well as
+PRO/1000 adapters is located at \NWSERVER\iANS.LAN.</p>
+
+<h3>Multi-Vendor Teaming</h3>
+<p>
+<i>Multi-vendor teaming</i> (MVT) is supported on NetWare 5.x through 6.x systems.
+</p>
+<ul>
+  <li>
+    <p class="numlst">FEC/GEC and 802.3ad modes support all frame types, and IPX may also be used.
+  	</li>
+  <li>
+    <p class="numlst">AFT, ALB, and SFT modes using the Ethernet_II frametype and IP protocol may
+        include other vendors&#8217; adapters in the multi-vendor team.
+	</li>
+</ul>
+<p>
+Only some vendors support LAN drivers that register NESL events. These drivers are required for MVT support.
+</p>
+<p>
+MVT only supports mixed speed adapters in AFT, ALB, and SFT modes. MVT Load Balancing is provided at layer 3 for TCP, UDP 
+(including multicast), and IP/Snap protocols.
+</p>
+<p>
+Hot Plug operations are not supported for members of a multi-vendor team. Hot 
+Plug operations with non-Intel adapters may be done in Static Link Aggregation 
+team mode only.
+</p>
+<p>
+A multi-vendor team cannot be created with VLANs.</p>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top" align="center" width="13">
+    <a href="note.gif">
+    <img border="0" src="note.gif" width="28" height="21"></a>
+    </td>
+    <td>
+    <p align="left"><i><b>NOTES</b></i>: ANS must be loaded prior to installing 
+    a non-Intel adapter for Multi-vendor teaming.<p align="left">If a failover occurs or if the primary adapter is changed, the MAC
+  		address changes. Clients are notified by an ARP broadcast. When any team
+  		member receives an ARP request, the ANS software responds only with the MAC
+  		address for the current primary adapter.
+    </td>
+  </tr>
+</table>
+<br>
+
+<hr>
+
+<h2><a name="commands"></a>Command Lines&nbsp;</h2>
+<p>Basic Structure:&nbsp;</p>
+<ol>
+  <li><p class="numlst"> LOAD base driver (CE100.LAN or CE1000.LAN) with appropriate
+    parameters, including frame size.</p></li>
+  <li><p class="numlst">LOAD iANS driver&nbsp;with appropriate parameters,
+    including frame size.</p>
+    	<ul type="disc">
+    	  <li><p class="numlst">For a VLAN you would include a VLAN ID number.</p></li>
+		  <li><p class="numlst">For a VLAN or multiple frame type configuration, include a name.</p></li>
+	 	  <li><p class="numlst">For a multiple team setup include a team number.</p></li>
+		</ul>
+  </li>
+  <li><p class="numlst">BIND iANS driver to the adapter name.</p>
+		<ul type="disc">
+    	  <li><p class="numlst">If creating multiple teams, include the team number here to define which team uses
+			which adapters.</p></li>
+          <li><p class="numlst">If you want to specify which adapter is to be primary or secondary,
+            include it here.</p></li>
+		</ul>
+  </li>
+  <li><p class="numlst"> Create the team: <span class="monospace">LOAD iANS COMMIT &lt;mode&gt;</span>.</p>
+        <ul type="disc">
+          <li><p class="numlst">&lt;mode&gt; distinguishes which advanced services to
+        	enable (AFT, ALB, FEC, GEC, AD).</p></li>
+          <li><p class="numlst">If creating multiple teams, include the team number.</p></li>
+        </ul>
+  </li>
+  <li><p class="numlst">BIND the protocol to the iANS driver using the name that 
+  	was assigned when iANS was loaded.</p></li>
+</ol>
+
+<p>
+If you are using only one frame type, a single team, and no VLAN, you can bind
+the protocol directly to the iANS driver without using an assigned name. Include
+a net=n number, especially in a script since the system requests the number
+if not given.</p>
+<p>Example of Mixed Speed Fault Tolerance Team:</p>
+<blockquote class="monospace">
+  Load CE100b name=100Meg<br>
+  Load CE1000 name=Gigabit<br>
+  Load iANS<br>
+  Bind iANS Gigabit Primary<br>
+  Bind iANS 100Meg<br>
+  Load iANS COMMIT MODE = AFT<br>
+  Bind IPX iANS Net=2<br>
+  Bind &lt;Protocol&gt; iANS &lt;Address&gt;
+</blockquote>
+
+<p>
+For more examples of specific load commands for AFT, ALB or FEC see the
+adapter teaming <a href="nw_ians.htm">Examples</a> page.
+</p>
+
+<hr>
+
+<h2><a name="mem_config"></a>Allocating Memory</h2>
+<p>
+<span class="TrkFieldValue">When using teams or multiple VLANs, the server's 
+default packet buffers probably need to be increased. To do this, add the 
+following lines to the STARTUP.NCF file which is located in the same directory 
+that NetWare is launched from. Usually C:\NWSERVER\STARTUP.NCF. </span>
+</p>
+
+<blockquote class="monospace">
+  SET MINIMUM PACKET RECEIVE BUFFERS = 500 (or higher)<br>
+  SET MAXIMUM PACKET RECEIVE BUFFERS = 2000 (or higher)
+</blockquote>
+   
+<p><span class="TrkFieldValue">&quot;SET MINIMUM PACKET&quot; designates the minimum 
+number of packet receive buffers the system shall allocate, and &quot;SET MAXIMUM 
+PACKET&quot; designates the maximum. Make sure that the maximum setting is equal to 
+or greater than the minimum setting. The number of buffers required is based on 
+the number of VLANs and which teaming features are in use.</span></p>
+<p><span class="TrkFieldValue">For every virtual adapter, team, or VLAN used, 
+iANS requests 64 buffers. When in Adaptive Load Balancing modes (ALB, FEC/GEC 
+and Link Aggregation - static IEEE 802.3ad), 64 buffers are needed for each 
+adapter in the team. The non-load balancing AFT and SFT modes only require 64 
+buffers for the team.</span></p>
+<p><span class="TrkFieldValue">As an example, an ALB team of two adapters that 
+uses 12 VLANs would require 64 [buffers] * 2 [adapters] * 12 [VLANs] = 1536 for 
+the minimum packet receive buffers. This number is in addition to any other 
+buffers that the server may require for other purposes, including other 
+adapters.</span></p>
+<p><span class="TrkFieldValue">The default amount of memory used by each NetWare 
+receive buffer is approximately 4K (varies slightly with different versions). If 
+the extra memory requirement is a problem, the following configurations may help 
+to reduce the impact.</span></p>
+
+<ul>
+  <li><p class="numlst"><span class="TrkFieldValue">If Ethernet is the only 
+  network topology that the server uses, the size of&nbsp;&nbsp;the buffer can be reduced 
+  to 2000 bytes (the maximum Ethernet frame size plus some out of band data used 
+  by iANS) without impacting the performance of the server. This is done by 
+  adding the following line to the STARTUP.NCF file:</span></p>
+	<blockquote class="monospace">
+		SET MAXIMUM PHYSICAL RECEIVE PACKET SIZE = 2048
+	</blockquote>
+  </li>
+</ul>
+
+<table cellSpacing="0" cellPadding="6" border="0">
+    <tr>
+      <td><a href="note.gif"><img src="note.gif" border="0" width="28" height="21"></a></td>
+      <td><b><i>NOTE</i></b>:&nbsp; This does not work if Ethernet Jumbo
+        Frames are in use. In fact,&nbsp; the packet size must be
+        increased to accommodate the jumbo frames.&nbsp;</td>
+    </tr>
+</table>
+<ul>
+  <li><p class="numlst">A keyword is included for iANS that allows the administrator to reduce the
+	buffer requirement per VLAN from 64 down to as low as 32; however, this
+	negatively impacts the server's performance. The syntax is:</p>
+	<blockquote>
+  <span class="monospace">LOAD IANS TX_ECBS_TO_USE = X</span>&nbsp;&nbsp;&nbsp; where &quot;X&quot; 
+  	is the number of buffers to use for each VLAN.
+	</blockquote>
+  </li>
+</ul>
+
+<hr>
+
+<h2><a name="adding adapter"></a>Adding an Adapter into an Existing Team</h2>
+<p>A member can be added into team after a commit is done in the following way:</p>
+<ol>
+  <li>
+  <p class="numlst">Bind the new adapter to iANS using the 'bind&quot; command. For example &quot;Bind 
+  ians ce_100II&quot;.</li>
+  <li>
+  <p class="numlst">Use the &quot;load ians recommit&quot; command to complete the operation.</li>
+  <li>
+  <p class="numlst">You cannot hot add an MVT adapter into a team that was created with Intel 
+  adapters only. </li>
+  <li>
+  <p class="numlst">For an FEC/GEC team the member should be added to the team with the link 
+  down. The reason is that when a port is added to a switch channel before the 
+  adapter is added to the ANS team, disconnections will occur because the switch 
+  will start forwarding traffic to the port before the member is actually 
+  configured. The opposite, where the member is first added to the ANS team and 
+  then added to the switch channel, is also problematic because ANS will forward 
+  traffic to the member before the port is added to the switch channel and 
+  disconnection will occur.&quot;</li>
+</ol>
+<h2><a name="removing adapter"></a>Removing an Adapter from an Existing Team</h2>
+<p>In an FEC/GEC team the member should be removed from the team with the link 
+down for the same reason as described for <a href="#adding adapter">Adding 
+an Adapter into an Existing Team</a>.</p>
+
+<h2><a name="Hot plug/unplug"></a>Hot Plug Operations with an Adapter</h2>
+<p>In Static Link Aggregation teams, do not perform Hot Plug operations with an 
+adapter with the link down for 
+the same reason as described for <a href="#adding adapter">Adding an 
+Adapter into an Existing Team</a>.</p>
+
+<hr>
+
+<h2><a name="remove_team"></a>Removing a Team</h2>
+<p>To remove a team,
+unload iANS.LAN by typing &quot;UNLOAD IANS&quot; at the console. Remember to comment out
+any lines you added to autoexec.ncf or a batch file if you do not want them to
+reload when you restart the server.</p>
+
+<hr>
+
+<h2 style="text-align:justify"><a name="RLB"></a>Receive Load Balancing (RLB)</h2>
+<p style="text-align:left">Receive Load Balancing (RLB) is a method for 
+dynamic distribution of received data traffic load among multiple physical 
+channels. The purpose of RLB is to improve overall bandwidth and end station 
+performance in teaming mode ALB, which currently receives all incoming traffic 
+only on the primary member. RLB provides receive load balancing by dividing 
+incoming IP traffic among all the adapters, with the ability to shift traffic away 
+from any adapter that goes out of service.</p>
+<h4 style="margin-left:0in;text-align:justify;text-indent:0in">Supported OS</h4>
+<p style="text-indent: -.25in; margin-left: 1.0in">
+<span style="font-family: Symbol">·<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>NetWare 5.x, and 6.x.</p>
+<h4 style="text-indent: 0in; text-align: justify; margin-left: 0in">Refreshing 
+the load balancing</h4>
+<p style="text-align: left">In order to achieve a fair distribution of 
+clients among all enabled members the receive load balancing client table is 
+refreshed at even intervals (default is 5 minutes). The refresh involves 
+selecting new members for each client. </p>
+<h4 style="text-indent: 0in; text-align: justify; margin-left: 0in">Adapter 
+Failure:</h4>
+<p>In case of adapter failure, the primary member will work in promiscuous mode 
+until the return of the disabled member or the removal via Hot Plug operations of this adapter. Working 
+in promiscuous mode can degrade performance. </p>
+<p>In RLB mode there must be a designated preferred primary. If the user doesn't 
+choose one, ANS will do so.</p>
+<p>If the primary adapter has a failure another primary will take its place. As 
+soon as the preferred primary is enabled, a fail back will occur and the 
+preferred primary will return as the team primary.</p>
+<h4><b>Change Preferred Primary:</b></h4>
+<p>Change primary is not allowed in RLB mode of Netware ANS. The user has to 
+reload the team in this case.</p>
+<h4 style="text-align:justify"><b>Removal of Preferred Primary:</b></h4>
+<p>Re-adding a dynamically removed preferred primary in a team is not 
+recommended without the following provision. When dynamically removing a 
+preferred primary from a team, its MAC address will be in use by the team and 
+can therefore create a conflict on the LAN if the preferred primary is re-added 
+back into the team or anywhere else on the network. To avoid this problem, you 
+must reload the team after dynamically removing the primary adapter.</p>
+<h4><b>Removing the Secondary adapter via Hot Plug Operations:</b></h4>
+<p>All clients are failed over to the primary (such that the team is actually 
+working in ALB mode). </p>
+<p align="left">The team will return to work in mode RLB gradually as clients refresh their ARP 
+tables. This process may take up to 10 minutes, depending on the refresh timing 
+of the client's ARP table .</p>
+<h4>Adapter Hot Add</h4>
+<p class="MsoBodyText3">The clients are rebalanced over the new adapter if it is 
+in the highest speed group of adapters.</p>
+<h4 style="margin-left:0in;text-indent:0in">Enabling/Disabling RLB</h4>
+<p style="text-align:left">RLB is enabled by default in ALB team mode. To 
+disable RLB, load the team with ALB mode and write:</p>
+
+<p style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rlbmode = 
+disable</p>
+
+<p style="text-align:left">Enabling or disabling RLB cannot be done after 
+commit.</p>
+
+<p style="text-align:left">Example: Load ans commit mode = ALB rlbmode = disable</p>
+
+<hr>
+
+<h2><a name="Keywords"></a>NetWare* iANS Command Line Parameters and Keywords</h2>
+<p>The following NetWare* keywords apply to the NetWare iANS driver.</p>
+<table border="0">
+  <tr>
+    <td vAlign="top" align="left">
+    <a href="note.gif">
+    <img height="17" src="note.gif" width="17" border="0"></a></td>
+    <td vAlign="top" align="left"><i><b>NOTE</b>: Always type <code>IANS</code> before 
+    the keyword and always include the team number in the command line if more 
+    than one team exists.</i></td>
+  </tr>
+</table>
+<p align="left">See also <a href="nw_ians.htm">
+Examples</a> files for usage.</p>
+<table cellSpacing="2" cellPadding="4" border="1">
+  <tr>
+    <th><b>Parameter</b></th>
+    <th><b>Description</b></th>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">HELP or -h<br>
+    -h&lt;keyword&gt;</td>
+    <td vAlign="top" align="left">Used alone, this command shows a list of all 
+    known iANS keywords. If it is followed by a keyword, a specific help message 
+    is displayed for that keyword.&nbsp;</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">STATUS</td>
+    <td vAlign="top" align="left">Displays the status of the team. If more than 
+    one team exists, the team name must be included.&nbsp;</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">NAME</td>
+    <td vAlign="top" align="left">Gives user the ability to set a unique string 
+    identifier for each virtual adapter (team or VLAN).</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">TEAM</td>
+    <td vAlign="top" align="left">Assigns unique numeric identifier for each 
+    virtual adapter (team or VLAN). The number can be user assigned or machine 
+    generated.<br>
+    Range: 0-9999<br>
+    Default: 1 and increments by one</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">MODE</td>
+    <td vAlign="top" align="left">Sets the teaming type for the given team.<br>
+    Modes: AFT | ALB | SFT | FEC | GEC | AD<br>
+    Default: AFT<br>
+&nbsp;<table cellPadding="0" border="0">
+      <tr>
+        <td vAlign="top" width="10%">AFT -</td>
+        <td vAlign="top">Adapter Fault Tolerance</td>
+      </tr>
+      <tr>
+        <td vAlign="top" width="10%">ALB -</td>
+        <td vAlign="top">Adaptive Load Balancing (including RLB)</td>
+      </tr>
+      <tr>
+        <td vAlign="top" width="10%">SFT -</td>
+        <td vAlign="top">Switch Fault Tolerance</td>
+      </tr>
+      <tr>
+        <td vAlign="top" width="10%">FEC -</td>
+        <td vAlign="top">Fast EtherChannel (used here to include Intel Link 
+        Aggregation and static 802.3ad)</td>
+      </tr>
+      <tr>
+        <td vAlign="top" width="10%">GEC -</td>
+        <td vAlign="top">Gigabit EtherChannel (used here to include Intel Link 
+        Aggregation and static 802.3ad)</td>
+      </tr>
+      <tr>
+        <td vAlign="top" width="10%">AD -</td>
+        <td vAlign="top">IEEE 802.3ad teaming mode (LACP or Dynamic Link 
+        Aggregation)</td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">BIND</td>
+    <td vAlign="top" align="left">Matches physical adapters to specific drivers 
+    and virtual adapters to protocols.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">COMMIT</td>
+    <td vAlign="top" align="left">Used after binding all underlying base drivers 
+    as team members before binding to the protocol.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">RECOMMIT</td>
+    <td vAlign="top" align="left">Used to dynamically add members or VLANs to an 
+    existing team.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">REMOVETEAM</td>
+    <td vAlign="top" align="left">Used to remove any team by number except the 
+    last team.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PRIMARY</td>
+    <td vAlign="top" align="left">Allows user to set the primary adapter. If not 
+    specified, the default is the first team member.&nbsp;</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">SECONDARY</td>
+    <td vAlign="top" align="left">Allows user to set the secondary adapter.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">NO_DEFAULT_PRIMARY</td>
+    <td vAlign="top" align="left">Allows user to block to software from choosing 
+    the first team member as the primary.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">SMPMODE</td>
+    <td vAlign="top" align="left">Enables SMP awareness. Use only on first load 
+    ians line.<br>
+    Values: SMP | NONSMP<br>
+    Default: Matches the machine<br>
+&nbsp;</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">TX_ECBS_TO_USE</td>
+    <td vAlign="top" align="left">Sets the number of ECBs (buffers) in RAM for 
+    each virtual adapter (team or VLAN).<br>
+    Range: 0-9999<br>
+    Default: 64<br>
+    <br>
+    Use on load line.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">MAX_TX_QUEUE</td>
+    <td vAlign="top" align="left">Sets the depth of the transmit queues.<br>
+    Range: 0-9999<br>
+    Default: 1000</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">RESET LBN</td>
+    <td vAlign="top" align="left">Resets a particular virtual adapter (logical 
+    board number).</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">DELAY</td>
+    <td vAlign="top" align="left">Sets the time interval, in minutes, before 
+    actual commit.<br>
+    Range: 0-5<br>
+    Default: 0</td>
+  </tr>
+</table>
+<p>The following commands are specific to certain team modes. Probe settings are 
+only applicable in AFT, ALB, and SFT&nbsp;modes.</p>
+<p>When setting intervals for different probe commands, please note that a &quot;tic&quot; 
+is a unit of time equal to 110 milliseconds.</p>
+<table cellSpacing="1" cellPadding="2" border="0">
+  <tr>
+    <td vAlign="top" align="left">
+    <img height="17" src="note.gif" width="17" border="0"></td>
+    <td vAlign="top" align="left"><i><b>NOTE</b>: Always include the team number in the 
+    command line if more than one team exists.</i></td>
+  </tr>
+</table>
+<table cellSpacing="2" cellPadding="4" border="1">
+  <tr>
+    <th><b>Parameter</b></th>
+    <th><b>Description</b></th>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">VLANID</td>
+    <td vAlign="top" align="left">Creates a virtual adapter with a specific VLAN 
+    number (must match network).<br>
+    Range: 1-4095</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">REMOVEVLANID</td>
+    <td vAlign="top" align="left">Removes the set VLANID</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBES</td>
+    <td vAlign="top" align="left">Allows checking for link state between team 
+    members (optional). Only for AFT, ALB, or SFT teams of more than 1 adapter 
+    using ETHERNET_II or ETHERNET_SNAP.<br>
+    Range: ON | OFF&nbsp;&nbsp;&nbsp;&nbsp; BROADCAST | MULTICAST<br>
+    Default: ON, BROADCAST</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_RETRY_COUNT</td>
+    <td vAlign="top" align="left">Number of times probes will be resent before 
+    deciding the link is down<br>
+    Range: 0-9999<br>
+    Default: 7</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_BURST_SIZE</td>
+    <td vAlign="top" align="left">Number of back to back probes to send (to 
+    attempt to get through heavy traffic).<br>
+    Range: 1-9999<br>
+    Default: 3</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_SET_DEFAULT</td>
+    <td vAlign="top" align="left">Resets all probe-related parameters except 
+    PROBES.</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_SEND_INTERVAL</td>
+    <td vAlign="top" align="left">Sets the time interval between probe 
+    transmissions.<br>
+    Range: 4 - 9998<br>
+    Default: 18 tics</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_CHECK_INTERVAL</td>
+    <td vAlign="top" align="left">Sets the time interval between probe checks 
+    (returns).<br>
+    Range: 0 - 9998<br>
+    Default: 2 tics</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">PROBE_RECHECK_INTERVAL</td>
+    <td vAlign="top" align="left">Sets the time interval between probe checks 
+    during retries.<br>
+    Range: 0 - 9998<br>
+    Default: 2 tics</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">BALANCE_INTERVAL</td>
+    <td vAlign="top" align="left">Sets the amount of time between load balance 
+    checks (not AFT and SFT).<br>
+    Range: 18-1080<br>
+    Default: 180 tics</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">STFORWARD_DELAY</td>
+    <td vAlign="top" align="left">Sets the SFT failover delay for SFT mode. 
+    Should be the max spanning tree forward delay for the switches connected to 
+    the server.<br>
+    Range: 0-255<br>
+    Default: 15</td>
+  </tr>
+  <tr>
+    <td vAlign="top" align="left">RLBMODE</td>
+    <td vAlign="top" align="left">Enable/disable the receive load balancing in 
+    the ALB team mode.<br>
+    Values: Enable/Disable<br>
+    Default: Enable</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<hr>
+
+<h2><a name="usage_notes"></a>Usage Notes</h2>
+<ol>
+  <li>
+    <p class="numlst">Gigabit adapters - Intel copper-based gigabit server adapters
+    (e.g., PRO/1000 T, PRO/1000 XT) may be teamed with Intel PRO/100 server adapters for AFT,
+    ALB, SFT, and FEC modes. <span class="TrkFieldValue">In FEC and GEC modes 
+    all the adapters in the team must be configured for the same speed and 
+    duplex. In all other modes, ANS supports mixed speed adapters in one team.</span></li>
+  <li>
+    <p class="numlst">Required Settings in STARTUP.NCF:</p>
+    <blockquote>
+   		<span class="monospace">SET MINIMUM PACKET RECEIVE BUFFERS = 500</span> <i>(or larger)</i>
+		<br>
+		<span class="monospace">SET MAXIMUM PACKET RECEIVE BUFFERS = 2000</span> <i>(or larger)</i>
+	</blockquote>
+	<p class="numlst">See &quot;Allocating Memory for VLANS&quot; in <a href="#mem_config">Memory
+	Configuration Requirements</a> for more information.</p>
+  </li>
+  <li>
+    <p class="numlst">Display the current status for all adapters in a iANS
+    team. Example:
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <span class="monospace">LOAD iANS STATUS team=</span>n <i>(where n=team
+    number)</i></p>
+  </li>
+  <li>
+    <p class="numlst">Create the primary adapter. Example:
+    <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+	<span class="monospace">BIND iANS CE100B_1_E82 PRIMARY</span>
+	<br>
+	<br>
+	This can only be done with the BIND command.</p>
+  </li>
+  <li>
+    <p class="numlst">When using iANS with SMP mode enabled, do not use the Stop
+    Processors command after loading iANS.LAN.&nbsp; The Novell OS does not
+    currently have a mechanism for informing the intermediate driver of a change
+    in the number of active processors, and this could lead to a server abend if
+    iANS attempts to use a deactivated processor.</p></li>
+  <li>
+    <p class="numlst">Due to some potentially
+    severe problems in registering our driver with NEB.NLM, a PCI Hot Plug capable
+    server must have iANS.LAN loaded before the Hot Plug modules are loaded. To
+    do this, make sure the iANS.LAN load lines precede the NCMCON.NLM load lines
+    in the AUTOEXEC.NCF.</p></li>
+  <li>
+    <p class="numlst">When a multiple-adapter
+    team is created (other than AFT), it uses all the functionality of the least-capable adapter
+    in the team. In order to add an adapter to an existing team it must have the
+    same base functionality enabled as that of the adapter with the lowest common feature
+    set in
+    the team.</p></li>
+  <li>
+    <p class="numlst">ANS probes are turned off
+    by default when only Ethernet_802.2 and/or Ethernet_802.3 frame types are in
+    use. This is due to the fact that Ethernet_802.2 and Ethernet_802.3 frame
+    types may not allow ANS probes to be sent correctly and may cause one or
+    more adapters to&nbsp;failover unnecessarily. If you intend to use the probe
+    feature of ANS, Intel recommends that you load the frame types Ethernet_II
+    or Ethernet_Snap. You do not need to bind any protocols to these frame
+    types.</p></li>
+	<li>
+    <p class="numlst">If an adapter is TCO enabled and connected to a Baseboard 
+	Manageability Controller (BMC), you can add it to any type of ANS team. 
+	However, if you are adding it to a Static Link Aggregation (SLA) or an IEEE 
+	802.3ad Dynamic Link Aggregation Team, a warning is displayed indicating 
+	that all manageability traffic will be lost. The result is that the system 
+	management capabilities will be non-functional. This is due to load 
+	balancing requirements within a team and the fact that manageability traffic 
+	is restricted to a single port on a specific adapter.<br>
+	Also, if the adapter is connected to a BMC device that does not use a 
+	dedicated MAC address, Receive Load Balancing and Adaptive Load Balancing 
+	teams will lose manageability traffic like SLA and Dynamic Link Aggregation 
+	Teams mentioned above.</p></li>
+</ol>
+
+<hr>
+
+<h2><a name="trouble"></a>Troubleshooting</h2>
+<ol>
+  <li><p class="numlst">When IANS.LAN forms a team, it may report the following error 
+  	message: &quot;Primary adapter does not sense any probes. Possible reason, partitioned 
+  	team.&quot;</p>
+	<p class="numlst">In addition, if VLANs are enabled at the switch, the adapter will
+	continuously fail over while there is <i>no traffic</i> on the network. This has
+	been observed when connected to <i>Extreme Summit2</i> and <i>Summit4.2 </i>switches.</p>
+	<p class="numlst">This fail-over does not affect performance. But the error message 
+	can be turned off with the command <span class="monospace">PROBES = OFF</span>.</p>
+  </li>
+  <li><p class="numlst">If, at commit, you receive the error message: &quot;Failed to create new team,&quot;
+    ensure the following:</p>
+  	<ol type="a">
+     <li>
+      <p class="numlst">All adapters have loaded drivers and have the same frame types loaded.</p></li>
+     <li>
+      <p class="numlst">iANS is loaded once for each VLAN and frame type.</p></li>
+     <li>
+      <p class="numlst">All adapters are connected to the same switch.</p></li>
+     <li>
+      <p class="numlst">iANS is not bound to an unsupported adapter.</p></li>
+     <li>
+      <p class="numlst">An &quot;iANS BIND&quot; command has been issued for each adapter and
+  		frame type in the team.</p>
+		<table cellSpacing="0" cellPadding="6" border="0">
+    	  <tr>
+      		<td valign="top"><img src="note.gif" border="0" width="28" height="21"></td>
+      		<td valign="top"><b><i>NOTE</i></b>: Novell's CONFIG command does not reflect the iANS BIND statements
+  			until after the COMMIT has been successfully issued.</td>
+    	  </tr>
+		</table>
+  	  </li></ol>
+  <li>
+    <p class="numlst">In NetWare, the following message may be displayed:
+    &quot;IPX received an incomplete packet from network 00001011:00A0C9AADFC3.
+    85 incomplete packets received.&quot;&nbsp; This message occurs when
+    NetWare's internal routing mechanism mistakes the Intel iANS driver's probe
+    packets for NetWare RIP packets. To prevent this message from displaying,
+    make sure that IPXRTR.NLM is loaded on every NetWare server on the LAN. For
+    more information on IPXRTR, see Novell's documentation or their Support website: 
+    <a href="http://support.novell.com" target="_blank">http://support.novell.com</a>.</p></li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/08/04 3:44p <!-- $--> Revision <!--$$Revision:--> 16 <!-- $--></code></p>
+
+</body>
+</html>

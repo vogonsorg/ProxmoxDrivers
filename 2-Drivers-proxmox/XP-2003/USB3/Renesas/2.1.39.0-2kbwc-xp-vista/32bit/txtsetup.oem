@@ -1,0 +1,26 @@
+[Disks]
+disk1="RENESAS USB3 Installation Disk",\nusb3xhc.inf,\
+
+[Defaults]
+SCSI=nusb3xhc
+
+[SCSI]
+nusb3xhc="Renesas USB3 Controller Driver"
+nusb3hub="Renesas USB3 HUB Driver"
+
+[Files.SCSI.nusb3xhc]
+driver=disk1,nusb3xhc.sys,nusb3xhc
+inf=disk1,nusb3xhc.inf
+catalog=disk1,nusb3xhc.cat
+
+[Files.SCSI.nusb3hub]
+driver=disk1,nusb3hub.sys,nusb3hub
+inf=disk1,nusb3hub.inf
+catalog=disk1,nusb3hub.cat
+
+[HardwareIds.SCSI.nusb3xhc]
+id="PCI\VEN_1033&DEV_0194","nusb3xhc"
+
+[HardwareIds.SCSI.nusb3hub]
+id="NUSB3\ROOT_HUB30","nusb3hub"
+id="NUSB3\CLASS_09","nusb3hub"

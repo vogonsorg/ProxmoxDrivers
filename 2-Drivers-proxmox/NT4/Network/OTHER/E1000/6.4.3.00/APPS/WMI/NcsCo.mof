@@ -1,0 +1,338 @@
+//***********************************************************************
+//                                                                      *
+//              INTEL CORPORATION PROPRIETARY INFORMATION               *
+// This software is supplied under the terms of a license agreement or  *
+// nondisclosure agreement with Intel Corporation and may not be copied *
+//  or disclosed except in accordance with the terms of that agreement. *
+//       Copyright (c) 2004 Intel Corporation. All Rights Reserved.     *
+//                                                                      *
+//***********************************************************************
+/***********************************************************************\
+*
+* NAME:	NcsCo.mof	
+*
+* DESCRIPTION: Master MOF file with class definitions for
+*			   Intel NCS Core WMI Provider schema.				
+*
+* PREREQUISITE: NcsCm.mof
+* 
+*
+* NOTE:	This file generates language neutral MOF for IntelNcs namespace. 
+*		This file also generates ENU language specific MFL. 
+*
+*
+\***********************************************************************/
+
+#pragma namespace ("\\\\.\\Root")
+
+instance of __Namespace
+{
+    Name = "IntelNCS";
+};
+
+#pragma namespace ("\\\\.\\Root\\IntelNCS")
+
+
+instance of __Win32Provider as $P
+{
+    Name    = "NcsCoreImp" ;
+    ClsId   = "{2EDF172F-3DBA-41C0-996B-32815E890963}" ;
+	Pure = FALSE;
+	ImpersonationLevel = 3;
+    PerUserInitialization = TRUE; 
+};    
+
+instance of __MethodProviderRegistration
+{
+    Provider = $P;
+};
+
+instance of __InstanceProviderRegistration
+{
+    Provider = $P;
+    SupportsPut = TRUE;
+    SupportsGet = TRUE;
+    SupportsDelete = TRUE;
+    SupportsEnumeration = TRUE;
+	QuerySupportLevels = { "WQL:UnarySelect" };
+};
+
+/////////////////////////////////////////////////////////////////////
+// Declare an instance of the __Win32Provider so as to "register" the
+// Nic Event provider
+/////////////////////////////////////////////////////////////////////
+instance of __Win32Provider as $Q
+{
+	Name  = "NcsCoreEvents" ;
+	ClsId = "{963A6463-5207-4D06-AD5E-5A900C851735}";
+};    
+
+
+// ============================================================================
+// Extended Status class
+// ============================================================================
+[Description (
+"IANet_ExtendedStatus is used to return error information back to the "
+"caller if something went wrong with an operation."):Amended,  LOCALE(0x409)
+]
+class IANet_ExtendedStatus : __ExtendedStatus 
+{
+		[Description (
+		 "The code file name in the provider where the error occurred."
+		 ):Amended]
+	string File;
+
+		[Description (
+		 "The line number in the code file where the error occurred."
+		 ):Amended]
+	uint32 Line;
+		[Description (
+		 "The session that caused the problem."
+		 ):Amended]
+	string SessionHandle;
+
+		[Description (
+		 "If a technical rule has failed this array provides several strings "
+		 "explaining the reasons for the failure. "
+		 ):Amended]
+	string RuleFailureReasons[];
+
+};
+
+// ============================================================================
+// Abstract Event class
+// ============================================================================
+		[Description(
+		 "This is the base class for NCS WMI Provider Events. As per "
+		 "Microsoft model, this is derived from the system event class"):ToInstance 
+			Amended,  LOCALE(0x409),
+		 Version ("2.0"):ToInstance 
+		]
+class IANet_Event:__ExtrinsicEvent
+{
+		[Description("Event type is type of the event. It will be defined by the subclass.")
+		 :ToInstance Amended
+		]
+		uint32 EventType;
+};
+
+// ============================================================================
+// Abstract Adapter Event class
+// ============================================================================
+		[Description("This is the base class for NCS Adapter events") 
+		 :ToInstance Amended,  LOCALE(0x409),
+		 Version ("2.0"):ToInstance 
+		]
+class IANet_AdapterEvent: IANet_Event
+{
+		[Description("AdapterKey is the path of the adapter that caused "
+		 "the event"):ToInstance Amended]
+	IANet_EthernetAdapter REF AdapterPath;
+};
+
+// ============================================================================
+// Abstract Team Event class
+// ============================================================================
+		[Description(" This is the base class for NCS Team events") :ToInstance Amended,  LOCALE(0x409),
+		 Version ("2.0"):ToInstance ]
+class IANet_TeamEvent: IANet_Event
+{
+	[Description("TeamKey is the path of the team that caused the event"):ToInstance Amended]
+	IANet_TeamOfAdapters REF TeamPath;
+};
+// ============================================================================
+// Abstract VLAN Event class
+// ============================================================================
+		[Description(" This is the base class for NCS VLAN events") :ToInstance Amended,  LOCALE(0x409),
+		 Version ("2.0"):ToInstance ]
+class IANet_VlanEvent: IANet_Event
+{
+	[Description("VlanKey is the paths of the VLAN that caused the event"):ToInstance Amended]
+	IANet_VLAN REF VlanPath;
+};
+
+
+// ============================================================================
+// Session Event class
+// ============================================================================
+		[dynamic, 
+		 description("This class is used for all session related events.")
+		 :Amended,  LOCALE(0x409)
+		]
+class IANet_SessionEvent:IANet_Event
+{
+		[Description("IANet_SessionEvent Events"):ToInstance Amended,
+		 Override("IANet_Event:EventType"),	read, 
+		 ValueMap {"1", "2", "3", "4", "100"},
+		 Values{
+			"New session", 
+			"End session",
+			"Cache invalidated",
+			"Configuration changed",
+			"Service stopped"
+		}:ToInstance Amended]
+	uint32 EventType;
+		
+		[Description(
+			 "The ID of the session handle that this event concerns"):Amended]
+	string SessionHandle;
+	
+		[Description(
+		 "The validity of the OpenSessions attribute depends on the event type\n"
+		 "	New session :\n"
+		 "		The number of currently open sessions.\n"
+		 "	End session :\n"
+		 "		The number of currently open sessions.\n"
+		 "	Cache invalidated:\n"
+		 "		N/A.\n"
+		 ):ToInstance Amended]
+	uint32 OpenSessions;
+};
+
+// ============================================================================
+// Internal error event
+// ============================================================================
+        [Description (
+		 "IANet_InternalErrorEvent is used to return error information back to the "
+		 "caller if something went wrong while generating an event.")
+		 :Amended,  LOCALE(0x409)
+		]
+class IANet_InternalErrorEvent : IANet_Event 
+{
+	[Description("IANet_InternalError Events"):ToInstance Amended,
+		 Override("IANet_Event:EventType"),	read, 
+		 ValueMap {"1", "2", "3"},
+		 Values{
+			"Could not get event data", 
+			"Event source has shut down",
+			"Unexpected message"
+		}:ToInstance Amended]
+	uint32 EventType;
+	
+		[Description (
+		 "The name of the provider which had the error."
+		 ) :Amended]
+	string Provider;
+
+		[Description (
+		 "The code file in the provider where the error occurred."
+		 ):Amended]
+	uint32 StatusCode;
+
+		[Description (
+		 "The line in the code file in the provider where the error occurred."
+		 ):Amended]
+	string File;
+
+		[Description (
+		 "The line in the code file where the error occurred."
+		 ):Amended]
+	uint32 Line;
+
+	[Description (
+		 "ParameterInfo contains information about the parameter which caused the error."
+		 ):Amended]
+	string ParameterInfo;
+
+		[Description (
+		 "Message information contains data about the Windows message that caused this event."
+		 " This can be used for debugging."
+		 ):Amended]
+
+	string MessageInformation;
+};
+
+
+// ============================================================================
+// NetService class
+// ============================================================================
+[dynamic, provider("NcsCoreImp"), Description (
+"IANet_NetService is used to manage the interface supported by the provider.  "
+"All set operations require a session handle in the context if they are to "
+"succeed."):Amended,  LOCALE(0x409)
+]
+class IANet_NetService: CIM_Service
+{
+	[Description (
+		 "Version of Intel NCS software stack."
+		 ):Amended]
+	string Version;
+
+	[Description (
+	"The GetSessionHandle method creates a new session handle that can be used "
+	"for accessing the IANet classes. "
+	"Parameters:\n"
+	"	SessionHandle - returns the new session handle\n"
+	"	ActiveSessions - returns the number of active sessions\n"
+	"Return code:\n"
+	"	0 if operation was successful\n"
+	"	non-zero if operation failed - check extended error status\n"
+	):Amended, implemented
+	] 
+	void GetSessionHandle(
+		[OUT] string SessionHandle, 
+		[OUT] uint32 ActiveSessions
+		);
+
+	[Description (
+	"The ReleaseSessionHandle method releases the session handle. "
+	"Any operations that were made using this handle will be discarded if "
+	"Apply has not been called. "
+	"Parameters:\n"
+	"	SessionHandle - session handle to be released\n"
+	"Return code:\n"
+	"	0 if operation was successful\n"
+	"	non-zero if operation failed - check extended error status\n"
+	):Amended, implemented
+	] 
+	void ReleaseSessionHandle(
+		[IN] string SessionHandle
+		);
+		
+	[Description (
+	"The Apply method commits any changes that the user has made with a "
+	"session handle. The caches for all other sessions will be invalidated. "
+	"Parameters:\n"
+	"	SessionHandle - session for which operations are to be committed\n"
+	"	FollowupAction - caller may be required to do something before "
+	"	changes will take effect.\n"
+	"Return code:\n"
+	"	0 if operation was successful\n"
+	"	non-zero if operation failed - check extended error status\n"
+	):Amended, implemented 
+	]
+	void Apply(
+		[IN] string SessionHandle,
+		[OUT,
+		ValueMap {"0", "1"} , 
+		Values {"No Action Required", "Reboot"}: Amended] 
+		uint32 FollowupAction
+		);
+		
+		[Description (
+		"The Cancel method cancels any changes that the user has made with a "
+		"session handle. "
+		"Parameters:\n"
+		"	SessionHandle - session for which operations are to be committed\n"
+		"Return code:\n"
+		"	0 if operation was successful\n"
+		"	non-zero if operation failed - check extended error status\n"
+		):Amended, implemented
+		]
+	void Cancel(
+		[IN] string SessionHandle
+		);
+
+};
+
+// ============================================================================
+// Core Event Provider Registration
+// ============================================================================
+instance of __EventProviderRegistration
+{
+	Provider = $Q;
+	EventQueryList = { 
+				"SELECT * FROM IANet_SessionEvent",
+				"SELECT * FROM IANet_InternalErrorEvent"
+	};
+};

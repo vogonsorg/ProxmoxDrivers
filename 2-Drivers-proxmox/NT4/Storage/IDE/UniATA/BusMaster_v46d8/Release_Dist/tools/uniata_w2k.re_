@@ -1,0 +1,32 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UniATA]
+"ErrorControl"=dword:00000001
+"Group"="SCSI miniport"
+"Start"=dword:00000000
+"Tag"=dword:00000019
+"Type"=dword:00000001
+"DisplayName"="Universal BusMaster SATA/ATA/ATAPI Driver v%DRIVER_VER%"
+"ImagePath"=hex(2):53,79,73,74,65,6d,33,32,5c,44,52,49,56,45,52,53,5c,75,6e,69,\
+  61,74,61,2e,73,79,73,00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UniATA\Parameters]
+"SkipRaids"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PciIde]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PciIdex]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\atapi]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\pci#CC_0101]
+"Service"="uniata"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\primary_ide_channel]
+"Service"="uniata"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CriticalDeviceDatabase\secondary_ide_channel]
+"Service"="uniata"

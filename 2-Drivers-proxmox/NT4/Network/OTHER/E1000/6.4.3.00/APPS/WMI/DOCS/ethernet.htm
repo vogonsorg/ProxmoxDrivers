@@ -1,0 +1,338 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>The Ethernet Adapter Schema</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+<!--
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">The Ethernet Adapter Schema</font></h1>
+<h2>The adapter schema is used to model the various configurable Intel<font size="1"><sup>&reg;</sup></font> PROSet Ethernet Adapters.  This schema is based on the CIM v2.5 schema.
+<br><br>
+<img src="adapter.gif" width="561" height="358">
+<br><font color="#0000FF">IANet_EthernetAdapter</h2>
+</font>
+<p><b>Purpose</b><br>
+IANet_EthernetAdapter defines the capabilities and status of all the installed Intel<font size="1"><sup>&reg;</sup></font> PRO network adapters as well as any other adapters that can be teamed using Intel intermediate drivers. The class is derived from the CIM_EthernetAdapter superclass defined in CIMv2.5. CIM_EthernetAdapter is derived from CIM_NetworkAdapter, an abstract class defining general networking hardware concepts, such as PermanentAddress, CurrentAddress, Speed of operation, etc. 
+
+<p><b>Instances</b><br>
+Instances of this class will exist for each of the following:
+<ul><li>Supported and installed Intel NICs</li>
+<li>Non-Intel NICs that can participate in an Intel multi-vendor team</li>
+<li>Created Intel adapter team</li></ul>
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_EthernetAdapter.  
+
+<p><b>Removing Instances</b><br>
+Deleting an instance of IANet_EthernetAdapter will uninstall physical adapters.  Only non-virtual Intel adapters may be uninstalled in this way.  A session handle is required for this operation.
+
+<p><b>Modifying Properties</b><br>
+Use <b>Put()</b> to change the value of the <b>ExpressTeam </b> property. 
+If Express Teaming is enabled on the adapter, OriginalDisplayName contains the 
+name of the adapter.<p><b>Unsupported Attributes</b><br>
+The following attributes are not required for Intel<font size="1"><sup>&reg;</sup></font> PROSet and are, therefore, not supported:
+<ul><li>AutoSense (this is exposed as a setting)</li>
+<li>ErrorCleared</li>
+<li>OtherIdentifyingInfo</li>
+<li>IdentifyingDescriptions</li>
+<li>InstallDate</li>
+<li>LastErrorCode</li>
+<li>MaxDataSize</li>
+<li>MaxQuiesceTime</li>
+<li>PowerManagementCapabilities (this is exposed as a method)</li>
+<li>PowerManagementSupported (this is exposed as a method)</li>
+<li>PowerOnHours</li>
+<li>ShortFramesReceived</li>
+<li>SymbolErrors</li>
+<li>TotalPowerOnHours</li></ul>
+
+<p><b>Methods</b><br>
+This class instance supports the following methods:
+<ul><li><b>IdentifyAdapter</b> &mdash; Identifies adapter by flashing the light on the adapter for a few seconds. This method will only
+    work for physical adapters.</li>
+<li><b>HasVLANs</b> &mdash; Returns number of VLANs on this adapter.</li>
+<li><b>IsPowerMgmtSupported</b> &mdash; Indicates whether power management is supported on the adapter.</li>
+<li><b>GetPowerUsage</b> &mdash; Detects overall power usage for the adapter.<br>
+0 = Normal Power<br>
+1 = Low power</li>
+<li><b>SetPowerUsage</b> &mdash; Reduces overall power usage for the adapter. Power usage setting is not preserved between system restarts or driver reloads. When the system restarts or the driver is reloaded, the adapter automatically returns to normal power consumption.</li>
+<li><b>GetPowerUsageOptions</b> &mdash; Detects any optional power usage settings (e.g., power usage for standby, battery operation, etc.).</li>
+<li><b>SetPowerUsageOptions</b> &mdash; Changes power usage options (e.g., method can be used to reduce power usage for standby, battery operation, etc.)<br>
+<b>Note:</b> Power usage settings are stored and used for subsequent reboots.</li>
+<li><b>TestCable</b> &mdash; Performs diagnostic test on a particular adapter. On failure, this method returns possible problems, causes and solutions.</li>
+<li><b>AdvancedTestCable</b> &mdash; Performs advanced cable tests on a particular adapter. This test suite is available with 1000 Mbps adapters. The method returns names of tests and their respective results.<br>
+<b>Note:</b> Link failure can occur when <b>SpeedDuplex</b> is not set to <b>Auto Negotiate</b>. In this instance, <b>SpeedAndDuplexNotAutomatic</b> out parameter is TRUE.</li>
+<li><b>TestLinkSpeed</b> &mdash; Determines whether adapter is running at full speed. If the adapter is advertising less than 1 Gigabit, then the method states possible reasons (e.g., "Link partner is not capable of running at 1000 Mbps").</li>
+<li><b>CreateExpressTeam</b> — Adds all ports of a multi-port adapter to an 
+Express Team. The input parameter is a reference to an array of IANet_EthernetAdapter 
+which is added to this team. This parameter is optional<font face="Arial" size="2"><span style="FONT-SIZE: 10pt; FONT-FAMILY: Arial"><font color="navy"><span style="COLOR: navy">.
+</span></font>The creation of an Express Team fails if any port on the adapter 
+is already teamed or disabled.</span></font></li>
+<li><b>RemoveExpressTeam</b> — If the ports of a multi-port adapter are part of 
+an Express Team, this method initiates the Express Team deletion from the 
+adapter.</li>
+<li><b>PollStatus</b> — Use this method to determine adapter capabilities that 
+frequently change. Such capabilities include but are not limited to link speed 
+and adapter status.</li></ul>
+
+
+<h2><font color="#0000FF">IANet_IPProtocolEndpoint</h2></font>
+
+<p><b>Purpose</b><br>
+This class is used to describe the IP settings for a protocol endpoint in the system.  The WMI Provider does not provide information for any other types of networking protocols. The class is derived from the abstract class CIM_IPProtocolEndpoint. The WMI Provider only supplies protocol information when it concerns an entity managed by Intel<font size="1"><sup>&reg;</sup></font> PROSet.
+
+<p><b>Instances</b><br>
+An IANet_IPProtocolEndpoint instance will exist for each binding of the IP Protocol stack to an Intel-supported endpoint (i.e., Intel adapters, Intel team-able adapters and VLANs). Some teamed adapters do not have their own IP addresses and so have no IANet_IPProtocolEndpoint directly associated with their adapter instance.
+
+The IANet_IPProtocolEndpoint exists only after the operating system has bound the protocol to the adapter or VLAN.  
+
+Though some adapters may have more than one IP address, they will be associated with only one IP Protocol endpoint instance. The Provider does not support this advanced use as it is not required or used by Intel<font size="1"><sup>&reg;</sup></font> PROSet. 
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_IPProtocolEndpoint. The instance exists only if the operating system has bound the protocol to the endpoint.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_IPProtocolEndpoint.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties for this class.
+
+<p><b>Associations</b><br>
+An instance IANet_AdapterProtocolImplementation is used to associate an IANet_EthernetAdapter with an IANet_IPProtocolEndpoint. An instance of IANet_VLANProtocolDependency is used to associate a VLAN with an IANet_IPProtocolEndpoint.
+
+<p><b>Note:</b> Teams are associated with the endpoint via the adapter that represents the virtual adapter for the team.
+
+
+<p><b>Supported Attributes</b><br>
+The following read-only attributes are required by Intel<font size="1"><sup>&reg;</sup></font> PROSet:
+<ul><li>Address</li>
+<li>AddressType</li>
+<li>DefaultGateway</li>
+<li>DHCPServerAddress</li>
+<li>DHCPAutoAssign</li>
+<li>IPVersionSupport</li>
+<li>SubnetMask</li></ul>
+
+<p><b>Unsupported Attributes</b><br>
+The following attributes are not required for Intel<font size="1"><sup>&reg;</sup></font> PROSet and are, therefore, not supported:
+<ul><li>Caption</li>
+<li>Description</li>
+<li>InstallDate</li>
+<li>NameFormat</li>
+<li>OtherTypeInformation</li>
+<li>ProtocolType</li>
+<li>Status</li></ul>
+
+<p><b>Methods</b><br>
+None.
+
+<h2><font color="#0000FF">IANet_BootAgent</h2></font>
+<p><b>Purpose</b><br>
+This class is used to capture information about the network boot capabilities of an adapter (e.g., settings for the PXE Boot Agent supported by some Intel adapters). This class is derived from CIM_BootService.
+
+<p><b>Instances</b><br>
+An IANet_BootAgent instance exists for each adapter that supports boot agent capability, even if the boot agent is not currently installed.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_BootAgent. An instance exists only if the adapter supports boot agent functionality.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_BootAgent.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties of this class.
+
+<p><b>Associations</b><br>
+An instance of IANet_DeviceBootServiceImplementation is used to associate an IANet_EthernetAdapter with an IANet_BootAgent, if the adapter supports it.
+
+<p><b>Supported Attributes</b><br>
+The following read-only attributes are required by Intel<font size="1"><sup>&reg;</sup></font> PROSet:
+<ul><li>InvalidImageSignature</li>
+<li>Version</li>
+<li>UpdateAvailable</li>
+<li>FlashImageType</li></ul>
+ 
+<p><b>Unsupported Attributes</b><br>
+The following attributes are not required by Intel<font size="1"><sup>&reg;</sup></font> PROSet and are, therefore, not supported:
+<ul><li>Caption</li>
+<li>Description</li>
+<li>InstallDate</li>
+<li>Started</li>
+<li>StartMode</li>
+<li>Status</li></ul>
+
+<p><b>Methods</b><br>
+The following methods on this class can be used to update the Flash ROM on the NIC:
+<br><br>
+
+<table>
+ <tr>
+  <td width=410 valign=top style='width:260.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><b><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'>uint32 ProgramFlash( </span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[IN,</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>           </span>ValueMap
+  {&quot;0&quot;,&quot;1&quot;} , </span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>           </span>Values {&quot;Check Version&quot;,
+  &quot;Write Flash&quot;}: Amended</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>] </span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>uint32 Action,</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[IN]</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>uint8
+  NewFlashData[],</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>[OUT] </span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>string
+  strErrorMessage</span>
+  <br><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-tab-count:2'>                                </span>);</span></b>
+  </td>
+  <td width=295 valign=top style='width:221.4pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'>
+  This method is used to update the Flash ROM on the NIC. This will cause the NIC to stop 
+  communicating with the network while the flash is updated.</span> 
+ </td>
+ </tr>
+ <tr>
+  <td width=295 valign=top style='width:221.4pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'><b>
+  uint32 ReadFlash( [OUT] uint8 FlashData[] );</b></span>
+  </td>
+  <td width=295 valign=top style='width:221.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'><span style='font-size:10.0pt;mso-bidi-font-size:10.0pt;'>
+  This method reads the Flash ROM on the NIC.</span>
+  </td>
+ </tr>
+</table>
+
+
+
+
+<h2><font color="#0000FF">IANet_PCIDevice</h2></font>
+
+<p><b>Purpose</b><br>
+This class is used to describe the properties of a PCI device for a network device in the system. The class is derived from CIM_PCIDevice.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each PCI card that is a network device in the system. For IA64, only PCI devices that are Intel<font size="1"><sup>&reg;</sup></font> PROSet supported adapters will have instances.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_PCIDevice.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_PCIDevice.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties of this class.
+
+<p><b>Associations</b><br>
+See IANet_EthernetPCIDevice for the class associations. 
+
+<p><b>Methods</b><br>
+There are no supported methods for this class.
+
+<p><b>Unsupported Attributes</b><br>
+The following attributes are not supported by the WMI Provider:
+<ul><li>AdditionalAvailabitlity</li>
+<li>Capabilities</li>
+<li>CapabilityDescriptions</li>
+<li>Caption</li>
+<li>DeviceSelectTiming</li>
+<li>ErrorCleared</li>
+<li>ErrorDescription</li>
+<li>IdentifyingDescription</li>
+<li>InstallDate</li>
+<li>LastErrorCode</li>
+<li>MaxNumberController</li>
+<li>MaxQuiesceTime</li>
+<li>Name</li>
+<li>OtherIdentifyingInfo</li>
+<li>PowerManagementCapabilities</li>
+<li>PowerManagementSupported</li>
+<li>PowerOnHours</li>
+<li>ProtocolDescription</li>
+<li>ProtocolSupported</li>
+<li>SelfTestEnabled</li>
+<li>TimeOfLastReset</li>
+<li>TotalPowerOnHours</li></ul>
+
+<h2><font color="#0000FF">IANet_EthernetPCIDevice</h2></font>
+<p><b>Purpose</b><br>
+This class is used to describe the properties of a PCI device for a Intel<font size="1"><sup>&reg;</sup></font> PROSet supported Ethernet adapter.  This is a subclass of IANet_PCIDevice. The class contains some extra attributes that are only known for Intel<font size="1"><sup>&reg;</sup></font> PROSet supported PCI devices.
+
+<p><b>Instances</b><br>
+An instance of this class exists for each PCI card that is a Intel<font size="1"><sup>&reg;</sup></font> PROSet supported Ethernet adapter.
+
+<p><b>Creating Instances</b><br>
+You cannot create instances of IANet_EthernetPCIDevice.
+
+<p><b>Removing Instances</b><br>
+You cannot remove instances of IANet_ EthernetPCIDevice.
+
+<p><b>Modifying Properties</b><br>
+There are no user-modifiable properties for this class.
+
+<p><b>Associations</b><br>
+An instance IANet_AdapterDevice is used to associate the IANet_PCIDevice with the IANet_EthernetAdapter.  Virtual adapters (i.e., adapters created to represent teams) do not have an associated IANet_PCIDevice.
+
+<p><b>Unsupported Attributes</b><br>
+The following attributes are not supported by the WMI Provider:
+<ul><li>AdditionalAvailabitlity</li>
+<li>Capabilities</li>
+<li>CapabilityDescriptions</li>
+<li>Caption</li>
+<li>DeviceSelectTiming</li>
+<li>ErrorCleared</li>
+<li>ErrorDescription</li>
+<li>IdentifyingDescription</li>
+<li>InstallDate</li>
+<li>LastErrorCode</li>
+<li>MaxNumberController</li>
+<li>MaxQuiesceTime</li>
+<li>Name</li>
+<li>OtherIdentifyingInfo</li>
+<li>PowerManagementCapabilities</li>
+<li>PowerManagementSupported</li>
+<li>PowerOnHours</li>
+<li>ProtocolDescription</li>
+<li>ProtocolSupported</li>
+<li>SelfTestEnabled</li>
+<li>Status</li>
+<li>StatusInfo</li>
+<li>TimeOfLastReset</li>
+<li>TotalPowerOnHours</li></ul>
+
+<p><b>Methods</b><br>
+There are no supported methods for this class.
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

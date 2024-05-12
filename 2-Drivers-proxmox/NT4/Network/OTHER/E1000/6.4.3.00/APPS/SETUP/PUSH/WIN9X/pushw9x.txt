@@ -1,0 +1,157 @@
+Windows* 98/Me Push Install Instructions
+
+- Operating system support for Intel(R) PRO/1000 T Desktop Adapters 
+
+- Computer names in Microsoft* networks 
+
+- Setting up an install directory on the file server 
+
+- Deployment methods 
+
+- Where to get help 
+
+- Files needed for the unattended installation of drivers and Intel(R) PROSet II 
+
+--------------------------------------------------------------------------------
+
+Operating system support for Intel PRO/1000 T Desktop Adapters
+
+The drivers for the Intel PRO/1000 T Desktop Adapter are supported only for 
+Windows 98 Second Edition and Windows Me edition. Windows 98 Retail does not 
+support the NDIS 5 driver.
+
+Computer names in Microsoft networks
+There cannot be more than one computer with a particular name on the network at 
+any time, even during installation. Consequently to deploy Windows 98/Me on 
+multiple computers, you must manually change the value of the computer name.
+
+Different configuration managers exist to overcome this hurdle in enterprise OS 
+deployments. For more information on deploying Windows 98/Me in an enterprise 
+network, consult the Windows 98 resource kit.
+
+--------------------------------------------------------------------------------
+
+Setting up an install directory on the file server
+
+NOTE: The network share Z:\PUSH noted in this section is an example path to the 
+distribution folder. The distribution folder is where the Windows setup files 
+(Setup.exe and .CAB files) reside. During the first step of the install, the 
+client connects to the distribution folder with IPX or TCP/IP. 
+
+Before an unattended server based setup of Windows can occur, you must prepare 
+a directory.
+
+Copy the Windows setup folder from the Windows CD to Z:\PUSH. Use Explorer, 
+Winfile or XCOPY to maintain the same directory structure as on the CD. 
+Use the pushcopy.bat batch file located in the \APPS\SETUP\PUSH directory on the 
+Intel CD to copy the necessary files to Z:\PUSH or alternatively copy the entire 
+Intel CD to Z:\PUSH.
+  
+NOTE: PUSHCOPY.BAT must be run from the \APPS\SETUP\PUSH directory on the CD or 
+CD image.
+ 
+The command to copy the Windows 98 files or Windows Me to the Z:\PUSH directory 
+is: PUSHCOPY Z:\PUSH W9X.
+
+By default, pushcopy.bat copies all files required to install the driver and 
+Intel PROSet II. Intel PROSet II is installed during the push installation. 
+Comment out the following line in the [RunOnce.BatchDelay] section if you do 
+not to install Intel PROSet II.
+
+HKEY_CURRENT_USER,%KEY_RUNONCE%,BatchRun0,,"c:\progra~1\Intel\proset.exe 
+MsiPath=c:\Progra~1\Intel /qn"
+ 
+Review the copy of MSBATCH.INF within the Z:\PUSH directory. Make any changes 
+needed to customize the install. At a minimum you should change the 
+ProductKey= entry in the [Setup] section, the Name= and Org= entries in 
+the [NameAndOrg] section, and the ComputerName= entry in the [Network] 
+section.
+ 
+NOTE: Make sure that you read the comments in the [RunOnce.BatchDelay] 
+section and uncomment the appropriate batch commands for your installation. 
+
+--------------------------------------------------------------------------------
+
+Deployment Methods
+
+There are many ways to perform an unattended installation or upgrade including 
+but not limited to:
+
+- Setting up a login script that executes a setup statement when each user 
+  logs in. 
+- Inserting an object in an email message that runs setup when the user clicks 
+  it. 
+- Using Microsoft SMS server to run Windows Setup 
+- Inserting a floppy that shares a drive on the network and runs setup from 
+  the shared drive 
+- Copying the files to a local drive and then running an unattended setup from 
+  there. 
+- Use the Boot Strap Agent and an installed PXE Server. See the Boot Agent 
+  Users Guide for deployment suggestions and strategies for each OS. 
+
+Use the method that best suits your network situation.
+
+To avoid possible areas where an unattended installation might be halted, use 
+one of the following setup command lines for Windows 98 or Windows Me 
+respectively:
+
+Windows 98:
+SETUP /IS /ID /IM /IE /IW
+- "/IV" turns off billboards and speeds up the setup.
+- "/ID" turns off free diskspace check
+
+Windows Me:
+SETUP /IS /ID /IM /IE /IW /IV
+
+NOTE: Do not include the argument "/ID" if you believe that there is 
+insufficient free hard disk space. 
+
+--------------------------------------------------------------------------------
+
+Where to get help
+
+The Windows Resource kits contains detailed information on unattended setups and 
+deploying Windows 98 in an enterprise environment.
+
+Microsoft's support web site is also a good source: 
+http://search.support.microsoft.com/
+
+--------------------------------------------------------------------------------
+
+Files needed for the unattended installation of drivers and Intel PROSet II
+The following files are copied into the Z:\PUSH directory by the PUSHCOPY.BAT 
+copy utility. The directory structure must be maintained to successfully install 
+the drivers and Intel PROSet II. 
+
+From the PRO100\WIN98_ME directory of the Intel CD
+
+8255INDI.DLL
+8255XDEL.EXE
+E100B9x.INF
+E100b9x.DIN
+E100b9xa.INF
+E100BNT5.SYS
+E100BNT.SYS
+WOL558.VXD
+
+From the \PRO1000\WIN98_ME directory on the Intel CD
+
+E1000W9x.INF
+E1000W9x.DIN
+E1000W9X.SYS
+
+From the APPS\SETUP\PUSH\Win9x directory on the Intel CD
+
+MSBATCH.INF
+CUSTOM.INF
+
+From the PRO100\DOS directory on the Intel CD
+
+E100BODI.COM
+
+From the APPS\PROSET\WN98SEME directory of the Intel CD
+
+PROSET.EXE
+PROSET.MSI
+INSTMSIA.EXE 
+

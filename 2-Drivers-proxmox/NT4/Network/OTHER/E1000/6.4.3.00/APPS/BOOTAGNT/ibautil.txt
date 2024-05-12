@@ -1,0 +1,242 @@
+IBAUTIL
+Intel(R) PCI NIC Boot ROM/WOL Flash Upgrade Utility
+November 14, 2002
+=========================================================================
+
+DISCLAIMER:
+-----------
+
+This IBAUTIL.TXT as well as the software described in it is furnished under
+license and may only be used or copied in accordance with the terms of the
+license. The information in this manual is furnished for informational
+use only, is subject to change without notice, and should not be construed
+as a commitment by Intel Corporation. Intel Corporation assumes no
+responsibility or liability for any errors or inaccuracies that may appear
+in this document or any software that may be provided in association with
+this document.
+Except as permitted by such license, no part of this document may be
+reproduced, stored in a retrieval system, or transmitted in any form or
+by any means without the express written consent of Intel Corporation.
+
+
+INTRODUCTION:
+-------------
+
+IBAUTIL is a utility program that changes the default settings of your
+Intel WfM-compatible adapter.
+
+IBAUTIL can be used to enable or disable the Wake-on-LAN and Boot Agent
+capabilities, as well as enable or disable some settings used by the
+Boot Agent.
+
+IBAUTIL also allows for in-the-field upgrades to the image stored in the Flash
+component of the NIC.
+
+Wake-On-LAN: When enabled, the adapter can react to special 'wake up' packets
+and power up the computer without end user intervention.
+However, there is a higher power draw when the system is in the suspended
+state once this is enabled.  It is strongly recommended that no more than 2
+adapters should have this feature enabled per machine.
+
+Intel Boot Agent: When enabled, the computer can initiate PXE/RPL boot if
+a valid flash image is present on the NIC.
+
+NOTE: Desktop adapters are normally shipped with both WOL and the Boot
+        Agent (for PXE) enabled.
+      Server adapters are normally shipped with both WOL and the Boot
+        Agent (for PXE) disabled.
+      LOM implementations will vary.
+
+To enable or disable these features you MUST use IBAUTIL.  Other tools,
+like PROSet, can only be used to upgrade the Boot Agent image and change
+Boot Agent configuration settings.
+
+IBAUTIL is not intended as a utility for LAN-On-Motherboard (LOM)
+implementations.  While IBAUTIL may be able to adjust the EEPROM settings
+on LOM implementations, those changes may not affect how the adapter operates.
+
+If the Boot Agent on the NIC is currently disabled, use the IBAUTIL
+utility to enable the Boot Agent before using IBAUTIL or PROSet to
+upgrade the image stored in the NIC.
+
+Older adapters should be upgraded using the -UPGRADE option before trying to
+use any other IBAUtil function.
+
+If IBAUtil reports the Boot Agent as Invalid, run IBAUTIL with the -UPGRADE
+option to refresh the image stored in the NIC.
+
+A reboot is required for any changes to take effect.
+
+IBAUTIL supports both the PRO/100 and PRO/1000 family of adapters.
+
+Always check at http://support.intel.com for the latest Boot Agent
+information and images. (Search for Boot Agent).
+
+RUNNING IBAUTIL:
+----------------
+
+IBAUtil accepts up to 16 simultaneous parameters. If conflicting parameters (like the commands FLASHENABLE -FLASHDISABLE used together) are supplied, IBAUtil will exit with an error.
+
+Where applicable, the parameters listed below are listed in logical groups.  Note that -HELP, -EXITCODES and -IMAGEVERSION have special overriding characteristics.  Unless noted otherwise, any parameter may be used in conjunction with any other parameter.
+
+If IBAUtil is run without any command line options, it displays a listing of all of the Intel network adapters found in the system.
+
+GENERAL OPTIONS
+
+   -HELP or -?
+Displays command line help and exits.  When -HELP is used, all other parameters are ignored.
+    -EXITCODES
+Displays exit code help.  When -EXITCODES is used, all other parameters are ignored.
+    -IMAGEVERSION or -IV
+Displays the PXE versions stored within IBAUTIL.  When  -IMAGEVERSION is used, all other parameters are ignored.
+NOTE: The precedence of these parameters is as listed above.  If two or more of the above parameters are specified, the first one in the list is used and the others are ignored.
+
+ADAPTER SELECTION OPTIONS
+   -ALL
+Selects all adapters found in system; works for both EEPROM and FLASH activity.
+   -NIC=XX
+Selects a specific adapter (1-16).
+Note:  If there is more than one NIC in the system, one of these options MUST be specified, or IBAUtil generates an error.  If there is only one NIC in the system, then all requested operations will be performed on that NIC.
+
+IMAGE PROGRAMMING OPTIONS
+
+   -UP -UPGRADE or -INSTALL { PXE | RPL | EFI64 | ISCSI }
+Programs an Intel Boot Agent image into the FLASH on the selected NIC. 
+If IBAUtil is running under EFI, it will install an EFI-only image.  If IBAUtil is running under DOS, it will install a PXE/RPL image.
+If the user specifies -UPGRADE or -INSTALL with one or more additional keywords, IBAUtil will attempt to install the requested image or images into the NIC’s FLASH.  The PXE and RPL keywords may be used singly or in combination.  The ISCSI and EFI64 keywords may only be used singly.
+If -AUTO is not specified and -SAVE is not specified, and the FLASH is not blank, the user is prompted to save the existing image before upgrading.
+   -SAVE
+Saves the existing Intel Boot Agent and EEPROM settings to a disk file.  The file will be named based on the PCI Vendor and Device ID of the NIC.  If this is specified on the same command line as -UPGRADE, the save is performed before the upgrade.
+   -RESTORE
+Restores a previously-saved Intel Boot Agent image.  IBAUtil will look for a file name based on the PCI Vendor and Device ID of the NIC.  If -RESTORE is specified on the same command line as -UPGRADE, an error is generated.
+
+UTILITY OPTIONS
+
+-AUTO or -QUIET
+Runs IBAUTIL without asking for user intervention.  If used with the –UPGRADE parameter IBAUtil will NOT create a backup image.  This parameter must be used with -NIC or -ALL if there is more than one NIC in the system.  It will run without -ALL or -NIC=xx if there is only one NIC in the system.
+
+   -BLINK
+	Blinks the LED on the selected adapter for ten seconds.  
+
+   -FLASHENABLE or -FE
+Enables Boot ROM.
+   -FLASHDISABLE or -FD
+Disables Boot ROM.
+
+
+EEPROM SETTING OPTIONS
+   -DEFAULTCONFIG or -DEFCFG
+Resets Configuration and Control words in the EEPROM back to default settings.  Specifically, word 30h in the EEPROM is set to 0100h and word 31h is set to 4000h.   On dual-port adapters, words 34h and 35h are also set to these values.  The checksum in the EEPROM is updated to account for these new values.  No other words in the EEPROM are modified.
+-WOLDISABLE or -WOLD
+Disables WOL bit on Fast Ethernet and disables APMPME and APME EEPROM bits on Gigabit.
+   -WOLENABLE or -WOLE
+Enables WOL bit on Fast Ethernet and enables APMPME and APME EEPROM bits on Gigabit.
+
+   -SETUPENABLE or -STE
+Enables Setup Menu.
+   -SETUPDISABLE OR -STD
+Disables Setup Menu.
+
+   -TITLEENABLE OR -TLE
+Enables Initial Title Message.
+   -TITLEDISABLE OR -TLD
+Disables Initial Title Message.
+
+   -PROTOCOLENABLE OR -PROE
+Enables Changing the Boot Protocol Option.
+   -PROTOCOLDISABLE OR -PROD
+Disables Changing the Boot Protocol Option.
+
+   -ORDERENABLE OR -ORDE
+Enables Changing the Boot Order Option.
+   -ORDERDISABLE OR -ORDD
+Disables Changing the Boot Order Option.
+  -MESSAGEENABLE OR –MSE
+	Enables to Control-S Setup Menu message.
+  -MESSAGEDISABLE OR –MSD
+	Enables to Control-S Setup Menu message.
+
+   -LWSENABLE OR -LWSE
+Enables Changing the Legacy OS Wakeup Support Option.
+   -LWSDISABLE OR -LWSD
+Disables Changing the Legacy OS Wakeup Support Option.
+
+   -RPLBOOT
+Sets the boot protocol to RPL.
+   -PXEBOOT
+Sets the boot protocol to PXE.
+
+   -SETWAITTIME=X or -SWT=X
+Set the setup delay time for the NIC to X seconds.
+Valid delay times are 0, 2, 3, and 5.  Only the first instance of this parameter will be valid.  All other instances of the parameter will generate an error.
+
+  -MODE=X
+Sets Control word (Word 31) in the EEPROM to the value specified by X.  No range checking or validation will be done.
+
+
+All other parameters will generate an error.
+
+ERROR CODES
+------------------
+IBAUTIL returns error codes to the OS environment, a description
+of the error codes is found below.
+
+ERROR CODE                      DOS	EFI32		EFI64
+=============================================================================
+SUCCESS	                        0	0x0	        0x0
+BAD PARAMETER	                1	0x4000 0001	0x4000 0000 0000 0001
+NO SUPPORTED ADAPTERS	        2	0x4000 0002	0x4000 0000 0000 0002
+INVALID ADAPTER SELECTED	3	0x4000 0003	0x4000 0000 0000 0003
+FLASH_OPERATION_FAILED	        4	0x4000 0004	0x4000 0000 0000 0004
+EEPROM_READ_FAILED	        5	0x4000 0005	0x4000 0000 0000 0005
+EEPROM_WRITE_FAILED	        6	0x4000 0006	0x4000 0000 0000 0006
+IMAGE MISSING OR CORRUPT	7	0x4000 0007	0x4000 0000 0000 0007
+OPERATOR_TERMINATION	        8	0x4000 0008	0x4000 0000 0000 0008
+LOM_NOT_SUPPORTED	        9	0x4000 0009	0x4000 0000 0000 0009
+PORT_NOT_BOOTABLE	        10	0x4000 000A	0x4000 0000 0000 000A
+FLASH_DISABLED	                11	0x4000 000B	0x4000 0000 0000 000B
+FLASH_TOO_SMALL	                12	0x4000 000C	0x4000 0000 0000 000C
+PROTOCOL_NOT_SUPPORTED	        13	0x4000 000D	0x4000 0000 0000 000D
+EFI_NOT_SUPPORTED	        14	0x4000 000E	0x4000 0000 0000 000E
+ISCSI_NOT_SUPPORTED	        15	0x4000 000F	0x4000 0000 0000 000F
+RPL_NOT_SUPPORTED	        16	0x4000 0010	0x4000 0000 0000 0010
+PXE_NOT_SUPPORTED	        17	0x4000 0011	0x4000 0000 0000 0011
+
+
+UPGRADE NOTE:
+-------------
+As part of the UPGRADE code path, IBAUTIL will save the backup image to the
+current directory if the user elects to make a backup.  If that directory
+is on a RAM drive, the backup image will not be available after the
+machine reboots.  IBAUTIL will make no effort to warn the user about this.
+
+EXAMPLES:
+---------
+
+Example 1:
+To Disable WOL on all Intel Network Adapters, call IBAUTIL like this:
+        IBAUTIL -ALL -WOLDISABLE
+
+Example 2:
+To Enable WOL on a the second Intel Network Adapter found in your
+system, call IBAUTIL like this:
+        IBAUTIL -NIC=2 -WOLENABLE
+
+Example 3:
+To Update the Boot Agent image on all Intel Network Adapters, call
+IBAUTIL like this:
+        IBAUTIL -ALL -UPGRADE
+
+Example 4:
+To Enable the Boot ROM on the first Intel Network Adapter
+found in your system, call IBAUTIL like this:
+        IBAUTIL -NIC=1 -FLASHENABLE
+
+
+
+
+Copyright (c) 2002 Intel Corporation
+All rights reserved.
+
+* Other names and brands may be claimed as the property of others.
+---End of IBAUTIL.TXT---

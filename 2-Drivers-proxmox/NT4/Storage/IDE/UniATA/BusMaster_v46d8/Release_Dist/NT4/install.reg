@@ -1,0 +1,58 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\Root\LEGACY_UNIATA]
+"NextInstance"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\Root\LEGACY_UNIATA\0000]
+"Service"="uniata"
+"FoundAtEnum"=dword:00000001
+"Class"="SCSIAdapter"
+"ClassGUID"="{4D36E97B-E325-11CE-BFC1-08002BE10318}"
+"Problem"=dword:00000000
+"StatusFlags"=dword:00000008
+"BaseDevicePath"="HTREE\\ROOT\\0"
+"DeviceDesc"="Universal BusMaster ATA Controller"
+"Driver"="{4D36E97B-E325-11CE-BFC1-08002BE10318}\\0000"
+"Mfg"="(Standard mass storage controllers)"
+"HardwareID"=hex(7):61,74,61,70,69,5f,73,63,73,69,00,00
+"ConfigFlags"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\Root\LEGACY_UNIATA\0000\Control]
+"ActiveService"="uniata"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\Root\LEGACY_UNIATA\0000\LogConf]
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\uniata]
+"Type"=dword:00000001
+"Start"=dword:00000000
+"ErrorControl"=dword:00000000
+"Tag"=dword:00000011
+"ImagePath"=hex(2):53,79,73,74,65,6d,33,32,5c,64,72,69,76,65,72,73,5c,75,6e,69,\
+  61,74,61,2e,73,79,73,00
+"Group"="SCSI Miniport"
+"PlugPlayServiceType"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\uniata\Parameters]
+"EnableSoftReorder"=dword:00000001
+"SelectionTimeout"=dword:0000000a
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\uniata\Parameters\BadBlocks]
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\uniata\Security]
+"Security"=hex:01,00,14,80,c0,00,00,00,cc,00,00,00,14,00,00,00,34,00,00,00,02,\
+  00,20,00,01,00,00,00,02,80,18,00,ff,01,0f,00,01,01,00,00,00,00,00,01,00,00,\
+  00,00,20,02,00,00,02,00,8c,00,05,00,00,00,00,00,18,00,8d,01,02,00,01,01,00,\
+  00,00,00,00,01,00,00,00,00,6d,00,63,00,00,00,1c,00,fd,01,02,00,01,02,00,00,\
+  00,00,00,05,20,00,00,00,23,02,00,00,69,00,61,00,00,00,1c,00,ff,01,0f,00,01,\
+  02,00,00,00,00,00,05,20,00,00,00,20,02,00,00,69,00,61,00,00,00,1c,00,ff,01,\
+  0f,00,01,02,00,00,00,00,00,05,20,00,00,00,25,02,00,00,69,00,61,00,00,00,18,\
+  00,fd,01,02,00,01,01,00,00,00,00,00,05,12,00,00,00,25,02,00,00,01,01,00,00,\
+  00,00,00,05,12,00,00,00,01,01,00,00,00,00,00,05,12,00,00,00
+
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\atapi]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\atdisk]
+"Start"=dword:00000004

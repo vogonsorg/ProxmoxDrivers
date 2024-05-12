@@ -1,0 +1,129 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>SNMP agent extension implementing the INTEL-LAN-ADAPTERS MIB</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Linux* LAN Management Instrumentation </h1>
+
+<p class="contents"><a href="#overview">Overview</a></p>
+<p class="contents"><a href="#daemon">Linux* LAN Management Daemon</a></p>
+<p class="contents"><a href="#snmp">Linux* LAN Management SNMP Extension</a></p>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+This file describes the Intel Linux* LAN Management Instrumentation Daemon and 
+the Intel Linux* LAN Management SNMP Extension.
+</p>
+
+<hr>
+
+<h2><a name="daemon"></a>Linux* LAN Management Daemon</h2>
+
+<h3>Installation</h3>
+The Linux* LAN Management Daemon (ilanmngd) is delivered in RPM format. There 
+are different sets of RPMs per IA architecture (IA32 and IA64) and per gcc 
+compiler version (v2.96 and v3.2).<br>
+<br>
+The following RPMs create ilanmngd: <br>
+<ul>
+<li>ilanmngd_core-x.v.z-gccVER-ARC.rpm - the core of the daemon application</li>
+<li>ilanmngd_diag-x.v.z-gccVER-ARC.rpm - an extension to the core which handles diagnostics</li>
+<li>ilanmngd_team-x.v.z-gccVER-ARC.rpm - an extension to the core which handles teams (bonding)</li>
+<li>ilanmngd_vlan-x.v.z-gccVER-ARC.rpm - an extension to the core which handles vlans</li>
+<li>ilanmngd_pt-x.v.z-gccVER-ARC.rpm - an extension to the core which handles pass through fail over</li>
+</ul>
+<p>where:<br>
+x.v.z represents the version number of the component,<br>
+VER is the gcc* compiler version: 2.96 or 3.2, and<br>
+ARC is the machine architecture: i386 or ia64.<br>
+<br>
+The following instructions explain how to install ilanmngd:<br>
+<ol>
+<li>Take the appropriate files for your machine (IA32 or IA64) and gcc* compiler (v2.96 or v3.2).</li>
+<li>Install each RPM file by the command: 'rpm -i rpm-file-name'. First install the rpm file 
+'ilanmngd_core-x.v.z-gccVER-ARC.rpm'. <br>
+This rpm must be installed in order to get any functionality of ilanmngd. The other RPM files depend on this one.
+<br>
+<br>Install the other ilanmngd RPMs according to the instrumentation functionality you want to get.
+<br>
+<br>The rpm file 'ilanmngd_pt-x.v.z-gccVER-ARC.rpm' depends on the rpm file 'ilanmngd_team-x.v.z-gccVER-ARC.rpm'.
+<br>
+So if you want to install 'ilanmngd_pt' then you need to install 'ilanmngd_team'.
+<br>
+</li>
+</ol>
+<h3>Running</h3>
+<ol>
+<li>To run ilanmngd, logon to the system as root.</li>
+<li>Enter the 'ilanmngd' command.</li>
+</ol>
+
+<h3>Uninstall</h3>
+<ol>
+<li>Stop running the ilanmngd daemon by using the 'killall process-id-of-ilanmngd' command.</li>
+<li>Uninstall the RPMs in reverse order by using the 'rpm -e ilanmngd_AgentName' command. 
+The AgentName could be 'core','diag','team','vlan',or'pt'. In the command 'rpm -e', you need to 
+indicate only the prefix name of the RPM file. The RPM file 'ilanmngd_core' should be removed last 
+since all the other RPM files depend on it. If you installed 'ilanmngd_pt', then remove it before 
+removing the 'ilanmngd_team' RPM file.</li>
+</ol>
+
+
+
+<h2><a name="snmp"></a>Linux* LAN Management SNMP Extension</h2>
+
+
+
+<h3>Installation</h3>
+The SNMP extension (ilanmng_snmp) is delivered in RPM format. There are 
+different RPMs per IA architecture (IA32 and IA64) and <br>
+per gcc compiler version (v2.96 and v3.2).
+The following RPM creates ilanmngd_snmp: <br>
+<ul><li>ilanmng_snmp-x.v.z-gccVER-ARC.rpm </li></ul>
+where:<br>
+x.v.z represents the version number of the component,<br>
+VER is the gcc* compiler version: 2.96 or 3.2, and<br>
+ARC is the machine architecture: i386 or ia64.<br>
+<br>
+The following instructions explain how to install ilanmngd_snmp.<br>
+<ol>
+<li>Take the appropriate RPM file for your machine (IA32 or IA64) and gcc* compiler (v2.96 or v3.2).</li>
+<li>Prior to installing the rpm file for ilanmng_snmp, install the following RPMs (ilanmng_snmp depends on them).</li>
+<ul>
+<li>ilanmngd_core-x.v.z-gccVER-ARC.rpm - the core of the daemon application.</li>
+<li>ilanmngd_diag-x.v.z-gccVER-ARC.rpm - an extension to the core which handles diagnostics.</li>
+<li>ilanmngd_team-x.v.z-gccVER-ARC.rpm - an extension to the core which handles teams (bonding).</li>
+<li>ilanmngd_vlan-x.v.z-gccVER-ARC.rpm - an extension to the core which handles vlans.</li>
+</ul>
+<li>Install the ilanmng_snmp RPM file by the command 'rpm -i ilanmng_snmp-x.v.z-gccVER-ARC.rpm'</li>
+</ol>
+
+<h3>Running</h3>
+<ol>
+<li>To run the ilanmngd_snmp daemon, first logon to the system as root.</li>
+<li>Validate that the ilanmngd is running (use the 'ps' command); otherwise activate it by using the 'ilanmngd' command.</li>
+<li>Validate that the net-snmp daemon (snmpd) isn't running by using the 'ps' command. If it is running, remove it by using 
+the 'kill' command.</li>
+<li>Run snmpd by using the 'snmpd' command.</li>
+<li>Run the ilanmng snmp extenstion by using the 'ilanmng_snmp' command.</li>
+</ol>
+
+<h3>Uninstall</h3>
+<ol>
+<li>Stop running the ilanmng_snmp by using the 'killall process-id-of-ilanmng_snmp' command.</li>
+<li>Uninstall the RPMs in reverse order by using the 'rpm -e ilanmng_snmp' command. Use the prefix 
+name of the RPM file in the command.</li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/27/04 3:57p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

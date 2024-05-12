@@ -1,0 +1,58 @@
+; Extended DOS NIF file
+
+[E100B]
+   Type = NDIS
+   Title = Intel(R) PRO/100 Network Connection
+   Version = 4.55
+   Drivername = E100B$
+   Xports = NETBEUI LANDD
+
+[FILE]
+   Name = E100B.DOS
+
+[SPEED]
+   display = "Media Speed"
+   type = Decimal
+   set = 10, 100
+   optional = YES
+   editable = YES
+   help = "The driver can configure the adapter for either 10 or 100 Mbps.
+ Assigning a value to this parameter will override the Auto-Speed-Sense feature
+ of the driver.  Leave the field blank to enable the Auto-Speed-Sense feature."
+
+[FORCEDUPLEX]
+   display = "Force Duplex Mode"
+   type = Decimal
+   set = 1, 2
+   optional = YES
+   editable = YES
+   help = "The driver can configure the adapter for either Half or Full Duplex.
+ Automatic detection of Full Duplex REQUIRES a hub with ports which are capable
+ of performing N-Way auto-negotiation, so forcing the duplex mode to Full is
+ recommended for most users connecting to a Full Duplex hub.  Assigning a value
+ of 1 (Half) or 2 (Full) to this parameter will override the auto-negotiation
+ feature of the adapter, and will also make the SPEED parameter REQUIRED.
+ Leave the field blank to enable the auto-negotiation feature."
+
+[SLOT]
+   display = "Slot/Device Identifier"
+   type = Hexadecimal
+   range = 0-1FFF
+   optional = YES
+   editable = YES
+   help = "Use of this parameter is only required in systems with more than one
+ adapter installed. If you are installing more than one PCI adapter: 1) complete
+ the configuration process, but leave the Slot field blank for each driver;
+ 2) restart the system and record the list of Slots that each driver displays;
+ 3) complete the configuration by assigning one of the values from the list to
+ the Slot parameter of each driver. Leave the field blank if you have only one
+ adapter installed."
+
+[NODE]
+   display = "Locally Administered Address"
+   type = String
+   strlength = 12
+   optional = YES
+   editable = YES
+   help = "Use of this parameter to modify the network address used by
+ the adapter."

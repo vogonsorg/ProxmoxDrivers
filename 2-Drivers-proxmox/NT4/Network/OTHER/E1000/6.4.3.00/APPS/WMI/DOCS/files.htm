@@ -1,0 +1,414 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Installed Files</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Installed Files</font></h1>
+
+<h2><font color="#0000FF"> WMI Files</h2></font>
+
+<h3><font color="#0000FF">Executables</h3></font>
+<p>The WMI Provider executables are as follows:
+<ul><li><b>NcsWmiCo.exe</b> &mdash; The core provider. Implements the IANet_NetService and the core event classes.</li>
+<li><b>NcsWmiIm.exe</b> &mdash; The instance and method provider. Implements the Ethernet Adapter Schema, the Teaming Schema, 
+the Setting Schema and the VLAN Schema.</li>
+<li><b>NcsWmiEv.exe</b> &mdash; The event provider. Implements the adapter, team and VLAN events.</li></ul>
+
+<h3><font color="#0000FF">MOF Files</h3></font>
+<p>There are separate MOF files for language-neutral and language-specific data. Also, there are separate MOF files for IntelNCS and CIMV2 namespace. See <i><a href="locales.htm">Locales and Localization</i></a> and <i><a href="error.htm">Error Reporting</i></a> for more details. 
+
+<p>The MOF files for IntelNCS namespace are as follows:
+<ul><li><b>NcsCmLn.mof</b> &mdash; CIM base classes that the NCS classes depend on.</li>
+<li><b>NcsCmEnu.mfl</b> &mdash; US English version of the CIM base classes.</li>
+<li><b>NcsCoLn.mof</b> &mdash; Core classes implemented by the core provider.</li>
+<li><b>NcsCoEnu.mfl</b> &mdash; US English textual amendments to the core classes.</li>
+<li><b>NcsIaLn.mof</b> &mdash; Classes for the IEEE 802.3 adapters, teams and VLANs.</li>
+<li><b>NcsIaEnu.mfl</b> &mdash; US English textual amendments to the 802.3 core classes.</li></ul>
+
+<p>The MOF files for CIMV2 namespace are as follows:
+<ul><li><b>C2CmLn.mof</b> &mdash; CIM base classes that the NCS classes depend on.</li>
+<Li><b>C2CmEnu.mfl</b> &mdash; US English version of the CIM base classes.</li>
+<li><b>C2CoLn.mof</b> &mdash; Core classes implemented by the core provider.</li>
+<li><b>C2CoEnu.mfl</b> &mdash; US English textual amendments to the core classes.</li>
+<li><b>C2IaLn.mof</b> &mdash; Classes for the IEEE 802.3 adapters, teams and VLANs.</li>
+<li><b>C2IaEnu.mfl</b> &mdash; US English textual amendments to the 802.3 core classes.</li></ul>
+
+
+<h3><font color="#0000FF">Resource Files</h3></font>
+<p>The resource files for the WMI Provider are as follows:
+<ul><li><b>ENU_8023.dll</b> &mdash; English USA 8023 resource.</li>
+<li><b>ENU_NWRC.dll</b> &mdash; English USA WMI resources for core providers.</li>
+<li><b>ENU_NWR.dll</b> &mdash; English USA WMI resources for 8023 providers.</li></ul>
+
+<p>The other localized resource files can be loaded on demand.  The general pattern for the names of localized resource DLLs is 
+<font face="Courier">"_mwr.dll"</font> which is the language code for the localization (e.g. FRA for standard French).
+
+<h2><font color="#0000FF">CDM Provider Files</h2></font>
+
+<h3><font color="#0000FF">Executables</font>
+</h3>
+
+<p>The executables for the CDM Provider are as follows:</p>
+<ul><li><b>Ncsdiag.exe</b> is the main executable file for the CDM diagnostics. It conforms to the Microsoft* WMI interface 
+specification and is accessed as an out-of-process COM server.</li>
+<li>Other executables from the Intel<font size="1"><sup>&reg;</sup></font> PROSet software stack</li></ul>
+
+<h3><font color="#0000FF">MOF Files</h3></font>
+<p>The master <b>.mof</b> files are not shipped with the product, but are compiled into 
+respective language-dependent and language-neutral components, according to the 
+Microsoft* Windows* Management Instrumentation globalization model. For further information, refer to the 
+Microsoft* WMI SDK (component of Platform SDK) chapter on WMI localization. Pay specific attention to the section 
+<i>Compiling Localized MOF Files</i>.
+
+<p>Deleting a <b>.mof</b> file (DNcsCdmN.mof) deletes the Intel-derived class definitions, but not 
+the DMTF-defined classes, as this would endanger other existing applications.
+
+<p>Typical usage of this CDM implementation is based on the CIMV2 namespace.
+The MOF files for an IntelNCS namespace are as follows: 
+<br><br>
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>File Name</span>
+  </td>
+  <td valign=top style='border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language Type</span>
+  </td>
+  <td valign=top style='border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Description</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdIa.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Master</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Class definitions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdIaLn.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language-neutral</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Class definitions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdIaEnu.mfl</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>English language
+  dependent</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language extensions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdCm.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>master</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Core superset CDM
+  class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdCmLn.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language-neutral</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Core superset CDM
+  class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>CdCmEnu.mfl</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>English language-dependent</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language extensions
+  for core superset CDM class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>DNcsCdmN.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Does not apply</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Deletes Intel CDM
+  classes</span>
+  </td>
+ </tr>
+</table>
+
+<p>The MOF Files for a CIMV2 namespace are as follows:
+<br><br>
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>File Name</span>
+  </td>
+  <td valign=top style='border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language Type</span>
+  </td>
+  <td valign=top style='border:solid windowtext .5pt;border-left:none;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Description</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2Icd.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>master</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Class definitions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2IcdLn.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language-neutral</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Class definitions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2IcdEnu.mfl</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>English language-dependent</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language extensions
+  for Intel CDM implementation</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2Cd.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Master</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Core superset CDM
+  class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2CdLn.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language-neutral</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Core superset CDM
+  class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>C2CdEnu.mfl</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>English language-dependent</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Language extensions
+  for core superset CDM class definitions</span>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext .5pt;border-top:none;
+  mso-border-top-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>DNcsCdm2.mof</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Does not apply</span>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext .5pt;
+  border-right:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;
+  mso-bidi-font-family:"Times New Roman"'>Deletes Intel CDM
+  classes</span>
+  </td>
+ </tr>
+</table>
+
+<p><b>Note:</b> Localization requires addition of the correct language-dependent <b>.mof</b> file.
+
+<h3><font color="#0000FF">Resource Files</font>
+</h3>
+
+<p>The resource file for the CDM Provider is as follows:</p>
+<ul>
+<li><b>ENU_Diag.dll</b> - English USA WMI Resources for Diagnostic Provider</li></ul>
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

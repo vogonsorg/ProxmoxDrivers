@@ -1,0 +1,49 @@
+
+[Unattended]
+    UnattendMode=FullUnattended
+    OemSkipEula=Yes
+    OemPreinstall=Yes
+    OemPnPDriversPath=\drivers\net\INTEL
+    TargetPath=\WINNT
+    DriverSigningPolicy=Ignore
+    Filesystem=LeaveAlone
+    OverwriteOemFilesOnUpgrade=No
+
+[GuiUnattended]
+    AdminPassword=*
+    AutoLogon=Yes
+    AutoLogonCount=1
+    OEMSkipRegional=1
+    TimeZone=4
+    OemSkipWelcome=1
+
+[UserData]
+    FullName=Name
+    OrgName=Organization
+    ComputerName=ComputerName
+    ProductID=xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+
+; For Server installations, this section specifies the Server Type and number of 
+; users if the Server Type is PerServer
+
+[LicenseFilePrintData]
+;    Set up the licensing type for the server.  
+ 
+;     AutoMode=xxxxxxxx
+;             Possible AutoMode values are PerSeat and PerServer
+
+;     AutoUsers=xxxx
+;             Number of users if AutoMode = PerServer.
+
+
+[GuiRunOnce]
+
+    ; command to install PROSetII - uncomment to install PROSetII after push install
+;    Command0="c:\drivers\net\INTEL\Proset.msi /qn"
+
+[Identification]
+    JoinWorkgroup=WORKGROUP
+
+[Networking]
+    InstallDefaultComponents=Yes
+

@@ -1,0 +1,106 @@
+# Example 7: 2 teams - 2 adapters in Static Link Aggregation (SLA) team 
+# and another team with 1 adapter with 2 VLANs.
+
+
+# This example results in the creation of two teams.  
+# The first is a Static Link Aggregation (SLA) team comprised of a Copper 
+# Intel(r) PRO/1000 Server Adapter (CE1000.LAN) along with a PRO/100 
+# (CE100B.LAN) adapter.  
+# Adding adapters operating at different speeds to a SLA team is not 
+# recommended because this could result in lower throughput. However, you 
+# may want to add an Intel PRO/100 adapter and an Intel PRO/1000 adapter 
+# to the same team for the following reasons:
+# 1. Fault tolerant in case of an adapter failure. 
+# 2. If a switch with a copper gigabit port is not available for the copper 
+#    Intel PRO/1000 adapter.
+# The second team consists of a single PRO/100 adapter configured with 
+# 2 VLANs.
+
+;load TCPIP.NLM.  This must be done before IP is bound.
+LOAD TCPIP
+
+; Load the base drivers for the first team.  
+
+LOAD CE1000 SLOT=1 FRAME=Ethernet_802.2 NAME=GIG_E82 
+LOAD CE1000 SLOT=1 FRAME=Ethernet_II    NAME=GIG_EII 
+
+LOAD CE100B SLOT=2 FRAME=Ethernet_802.2 NAME=100M_E82 
+LOAD CE100B SLOT=2 FRAME=Ethernet_II    NAME=100M_EII 
+
+; Load iANS.LAN for the first team.  The "team" keyword is used to specify
+; which team the adapters should join.
+
+LOAD iANS FRAME=ETHERNET_802.2 NAME=SLA_TEAM_E82 TEAM=1
+LOAD iANS FRAME=ETHERNET_II    NAME=SLA_TEAM_EII TEAM=1
+
+; Bind iANS to the base driver for each adapter and each frametype.  Bind to
+; the name of the base driver instance (assigned when the driver was loaded)
+; and specify the team number.
+
+BIND iANS GIG_E82 TEAM=1 PRIMARY
+BIND iANS GIG_EII TEAM=1 PRIMARY
+
+BIND iANS 100M_E82 TEAM=1
+BIND iANS 100M_EII TEAM=1
+
+; commit for team 1
+
+LOAD iANS COMMIT MODE=SLA TEAM=1
+
+; Bind IPX to both frametypes and bind IP to Ethernet II.
+
+BIND IPX SLA_TEAM_E82 NET=102
+BIND IPX SLA_TEAM_EII NET=111
+BIND IP SLA_TEAM_EII ADDR=128.181.11.1 MASK=255.255.0.0
+
+; Now load the base drivers for the VLAN adapter.
+
+LOAD CE100B SLOT=6 FRAME=Ethernet_802.2 NAME=vl-base_E82
+LOAD CE100B SLOT=6 FRAME=Ethernet_II    NAME=vl-base_EII
+
+; Load iANS.LAN for the second team.  Name each frametype with the "NAME"
+; keyword and specify the second team with the "TEAM=2" keyword.
+
+LOAD iANS FRAME=ETHERNET_802.2 VLANID=100 NAME=VLAN_100_E82 TEAM=2
+LOAD iANS FRAME=ETHERNET_II    VLANID=100 NAME=VLAN_100_EII TEAM=2
+
+LOAD iANS FRAME=ETHERNET_802.2 VLANID=200 NAME=VLAN_200_E82 TEAM=2
+LOAD iANS FRAME=ETHERNET_II    VLANID=200 NAME=VLAN_200_EII TEAM=2
+
+
+; Bind iANS to the base driver for each adapter and each frametype.  Bind to
+; the name of the base driver instance (assigned when the driver was loaded)
+; and specify the team number.
+
+bind iANS vl-base_E82 TEAM=2
+bind iANS vl-base_EII TEAM=2
+
+; commit for team 2
+
+LOAD iANS COMMIT TEAM=2
+
+; Bind appropriate protocols to each VLAN and frametype.
+
+BIND IPX VLAN_100_E82 NET=102
+BIND IPX VLAN_100_EII NET=111
+BIND IP VLAN_100_EII ADDR=128.122.22.1 MASK=255.255.0.0
+
+BIND IPX VLAN_200_E82 NET=202
+BIND IPX VLAN_200_EII NET=211
+BIND IP VLAN_200_EII ADDR=128.222.22.1 MASK=255.255.0.0
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.

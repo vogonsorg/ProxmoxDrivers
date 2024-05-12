@@ -1,0 +1,73 @@
+;
+;  File name:  LANAgent.LDI
+;  VeRsIoN=1.00 
+;  Intel(R) LANAgent Installation Information File
+;  CoPyRiGhT=(c)Copyright 2001 by Intel Corporation, All rights reserved.
+;
+;- File: LANAgent.LDI
+
+
+VER: 6.66
+SYN: 1.00
+
+   DR LANAGENT
+   {
+      DES: $LANAGENT_1
+      HELP: $LANAGENT_2
+
+      FILE: LANAGENT.LAN
+      CPROG:SNMPINST
+      OFILE:SNMPINST.NLM
+   }
+
+DLANG: 4
+;English
+
+       $LANAGENT_1 = "Intel(R) LAN Adapters SNMP Agent"
+
+       $LANAGENT_2 = "This module serves as a SNMP agent for Intel(R) LAN Adapters.
+                      It enables a network manager to control and query Intel(R)
+				      LAN drivers and Intel(R) Advanced Network Services\n
+                      Use the command 'load LANAgent help' for online assistance.\n"
+
+LANG: 6
+;French
+
+
+LANG: 7
+;German
+
+LANG: 8
+;Italian
+
+
+LANG: 14
+;Spanish
+
+
+LANG: 9
+;Japanese
+
+
+LANG:   12
+;Portugese
+
+
+LANG:   10
+;Korean
+
+
+LANG:   1
+;Chinese (simplified)
+
+
+LANG:   16
+;Chinese (traditional)
+
+
+LANG:   13
+;Russian
+
+
+;DrIvEr DeScRiPtIoN EnD
+

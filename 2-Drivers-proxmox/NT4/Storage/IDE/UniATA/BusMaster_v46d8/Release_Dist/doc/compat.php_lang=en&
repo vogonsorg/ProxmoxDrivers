@@ -1,0 +1,265 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="en">
+  <head>
+    <title>Universal ATA driver device compatibility info</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="UniATA, device, controller, compatibility">
+    <meta name="description" content="Universal ATA driver device compatibility info">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=en">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="compat.php_lang=ru&amp;">RU&nbsp;<img height="12" width="20" alt="ru" src="http://10.0.0.11/alter/img/lang_ru.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<center>
+<h3>Universal ATA driver for Windows NT4/2000/XP</h3>
+</center>
+
+<center>
+<h4>Devices those <i>should</i> be supported</h4>
+</center>
+
+<ul>
+  Intel PIIX / PIIX3 / PIIX4<br>
+  Intel ICH / ICH0 / ICH2<br>
+  AcerLabs Aladdin ATA / ATA33<br>
+  VIA ATAxxx<br>
+  SiS 5591 ATA33<br>
+  CMD 649 ATA100 <i>checked</i><br>
+  CMD 648 / 646<br>
+  Cyrix 5530 ATA33<br>
+  AMD 756 ATA66<br>
+  ServerWorks ROSB4 ATA33<br>
+  Promise TX2 ATA33 / ATA66 / ATA100<br>
+  HighPoint ATAxxx<br>
+  <hr width="5%" align="left">
+  Intel ICH3, PIIX4e<br>
+  nVIDIA nForce/nForce2<br>
+  AMD 768, 766, 756<br>
+  ServerWorks CSB5 ATA66/100<br>
+  Promise TX2 ATA133<br>
+  Promise Ultra/FastTrak 33/66/100<br>
+  Promise OEM ATA100
+  Acard ATPxxxx 33/66/100<br>
+  Cenatek Rocket Drive
+  <hr width="5%" align="left">
+  Intel ICH4 /ICH5, PIIX4e<br>
+  SiS Family<br>
+  <hr width="5%" align="left">
+  Intel ICH6<br>
+  National Geode SC1100<br>
+  IT8xxx<br>
+
+  <hr width="20%" align="left">
+
+  PC Technology RZ 1000<br>
+  PC Technology 37C922<br>
+  CMD 640<br>
+  SiS83C601<br>
+</ul>
+
+
+<center>
+<h4><i>Practical</i> compatibility matrices</h4>
+</center>
+
+<p>
+Cells of the matrices contains number of computers with specified controllers (rows) tested under specified OS (columns).
+</p>
+
+<br>
+<b>BusMaster_v31.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31.tgz">tgz</a></b> (79.6 Kb/95.6 Kb)<br><br>
+
+  <table bgcolor="black" cellspacing="1">
+  <tr bgcolor="#eeeeee">
+  <td>&nbsp;Chip&nbsp;</td><td>&nbsp;Ven/Dev/Rev&nbsp;</td>
+  <td>&nbsp;NT4+sp4&nbsp;</td><td>&nbsp;+sp6a&nbsp;</td>
+  <td>&nbsp;w2k&nbsp;</td><td>&nbsp;+sp1&nbsp;</td><td>&nbsp;+sp4&nbsp;</td>
+  <td>&nbsp;XP&nbsp;</td><td>&nbsp;XP+sp2&nbsp;</td><td>&nbsp;2003&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 82c598</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 82c586</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>CMD 649</td><td>1095/0649</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel PIIX4e</td><td>8086/7111</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>2</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel ICH2</td><td>8086/244a</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Ali ATA-33</td><td>10b9/5229/c2</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>1</td></tr>
+  <tr bgcolor="white"><td>Promise Ultra-133</td><td>105a/4d69/02</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+<br>
+<b>BusMaster_v29a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a.tgz">tgz</a></b> (61.1 Kb/64.7 Kb)<br><br>
+
+  <table bgcolor="black" cellspacing="1">
+  <tr bgcolor="#eeeeee">
+  <td>&nbsp;Chip&nbsp;</td><td>&nbsp;Ven/Dev/Rev&nbsp;</td>
+  <td>&nbsp;NT4+sp4&nbsp;</td><td>&nbsp;+sp6a&nbsp;</td>
+  <td>&nbsp;w2k&nbsp;</td><td>&nbsp;+sp1&nbsp;</td><td>&nbsp;+sp4&nbsp;</td>
+  <td>&nbsp;XP&nbsp;</td><td>&nbsp;XP+sp2&nbsp;</td><td>&nbsp;2003&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 82C586</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 8233</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>CMD 649</td><td>1095/0649</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel ICH</td><td>8086/2411</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel ICH5 (SATA)</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>SiS 650</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>SiS 651</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+<br>
+<b>BusMaster_v27a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a.tgz">tgz</a></b> (58.2 Kb/61.9 Kb)<br><br>
+
+  <table bgcolor="black" cellspacing="1">
+  <tr bgcolor="#eeeeee">
+  <td>&nbsp;Chip&nbsp;</td><td>&nbsp;Ven/Dev/Rev&nbsp;</td>
+  <td>&nbsp;NT4+sp4&nbsp;</td><td>&nbsp;+sp6a&nbsp;</td>
+  <td>&nbsp;w2k&nbsp;</td><td>&nbsp;+sp1&nbsp;</td><td>&nbsp;+sp4&nbsp;</td>
+  <td>&nbsp;XP&nbsp;</td><td>&nbsp;XP+sp2&nbsp;</td><td>&nbsp;2003&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 82C586</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 82C686</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>1</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>VIA 8233</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>CMD 649</td><td>1095/0649</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel ICH</td><td>8086/2411</td>
+  <td>2</td><td>&nbsp;</td>
+  <td>8</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel ICH2</td><td>8086/244a</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>Intel PIIX3</td><td>8086/7010</td>
+  <td>&nbsp;</td><td>1</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>ServerWorks CSB5</td><td>1166/0212</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr bgcolor="white"><td>AcerLabs Aladdin V</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td>
+  <td>1</td><td>&nbsp;</td><td>&nbsp;</td>
+  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+<center>
+<h4>Known problems</h4>
+</center>
+
+<ul>
+Intel ICH4<br>
+</ul>
+
+<br>
+
+<a href="index.php_lang=en&amp;">UniATA driver home</a><br>
+
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">designed by Alter aka Alexander A. Telyatnikov</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">powered by Apache+PHP under FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>

@@ -1,0 +1,297 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; idmi.inf: Setup Information for Mapper based DMI Install.
+; Componenets Installed:
+;      1) DMI Instrumentation layer.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[version]
+signature="$CHICAGO$"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Install sections, these are the options
+;  for building the installation file lists
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[ProductInstall.NT]
+CopyFiles=ProductNT.copy.files
+AddReg=ProductNT.Add.Reg
+
+[ProductInstall.9x]
+CopyFiles=Product9x.copy.files
+AddReg=Product9x.Add.Reg
+
+[Option2Section]
+CopyFiles=Product.copy.files2
+
+;;;;;;;;;;
+; Uninstall
+
+[MyProgramUninstall.NT]
+; be sure to remove everything
+DelFiles=ProductNT.del.files
+DelFiles=Product.copy.files2
+DelReg=ProductNT.Del.Reg
+UpdateInis=del.links, del.links.old
+
+[MyProgramUninstall.9x]
+; be sure to remove everything
+DelFiles=Product9x.del.files
+DelFiles=Product.copy.files2
+DelReg=Product9x.Del.Reg
+UpdateInis=del.links, del.links.old
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Service sections, used for installing the Intel Instrumentation
+;  service on NT.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[ProductInstall.Services]
+AddService=ni_nic,,Instr-install-section
+;DelService=ni_nic
+
+[Product.Del.Services]
+DelService=ni_nic
+
+[Instr-install-section]
+DisplayName = Intel Client Instrumentation for DMI
+ServiceType = 0x10
+StartType = 0x2
+ErrorControl = 0x1
+ServiceBinary = %11%\ni_nic.exe
+StartName = ni_nic
+
+ 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Registry sections, used for creating Intel specific 
+;  registry entries.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[ProductNT.Add.Reg]
+;
+; Product Registry entries here
+; DMI registry entries.
+;;
+
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"InstrumentationPath",0,"%11%\ni_nic.dll"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"EventPollFrequency",0x10001,"2"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,"MIFId",0x10001,"0x1"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,"MIFPath",0,"%11%\ni_nic.mif"
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfSnmp,"DisplayName",0,"Intel Client Instrumentation for DMI"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfSnmp,"UninstallString",0,"%11%\dmiinst.exe Uninstall"
+HKLM,SYSTEM\CurrentControlSet\Services\EventLog\Application\Intel Client Instrumentation for DMI and SNMP,"EventMessageFile",0,"%SYSTEMROOT%\System32\ni_nicmc.dll"
+HKLM,SYSTEM\CurrentControlSet\Services\EventLog\Application\Intel Client Instrumentation for DMI and SNMP,"TypesSupported",0x10001,"0x7"
+
+;;;;;;;;;
+;
+; registry delete works by pruning the tree,
+; so if you have interdependent values, put thems in subkeys and
+; not in values of the main key since when you prune all the values are lost
+;
+
+[ProductNT.Del.Reg]
+HKLM,SYSTEM\CurrentControlSet\Services\EventLog\Application\Intel Client Instrumentation for DMI and SNMP,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"InstrumentationPath",,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"EventPollFrequency",,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation,,,
+HKLM,SOFTWARE\Intel\SnmpExt,,,
+
+
+
+;
+; for add/remove programs applet
+;
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfSnmp,"DisplayName",,
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfSnmp,"UninstallString",,
+HKLM,SoftWare\Microsoft\Windows\CurrentVersion\Uninstall\InfSnmp,,,
+
+
+
+
+[Product9x.Add.Reg]
+;
+; Product Registry entries here
+; DMI registry entries.
+;;
+
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"InstrumentationPath",0,"%11%\ni_nic.dll"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"EventPollFrequency",0x10001,"30"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,"MIFId",0x10001,"0x1"
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,"MIFPath",0,"%11%\ni_nic.mif"
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices,"ni_nic",0,"%11%\ni_nic9x.exe"
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfDMI,"DisplayName",0,"Intel Client Instrumentation for DMI"
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfDMI,"UninstallString",0,"%11%\dmiinst.exe Uninstall"
+
+
+;;;;;;;;;
+;
+; registry delete works by pruning the tree,
+; so if you have interdependent values, put thems in subkeys and
+; not in values of the main key since when you prune all the values are lost
+;
+[Product9x.Del.Reg]
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters\0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"InstrumentationPath",,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,"EventPollFrequency",,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0\NetworkAdapters,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation\2.0,,,
+HKLM,SOFTWARE\Intel\DMI Instrumentation,,,
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\RunServices,"ni_nic",,
+
+;
+; for add/remove programs applet
+;
+
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfDMI,"DisplayName",,
+HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\InfDMI,"UninstallString",,
+HKLM,SoftWare\Microsoft\Windows\CurrentVersion\Uninstall\InfDMI,,,
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Disk lay out information, used by the CopyFiles lists
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; This is the source disk identifiers the number at the
+; beginning maps to the SourceDisksFiles first parameter
+
+[SourceDisksNames]
+1="The Product Source Disk Name, 1.0","",1
+2="The Product Optional Component Disk, 1.0","",1
+
+;;;;;;;;;;;;;;;;;;
+;
+; SourceDisksFiles -
+; this must have ALL file names in any copyfiles section
+; so that the default copyfile error callback dialog (browse,skip)
+; can use the SourceDisksNames strings above to help find the file
+; -- this infomation can also be put in a layout.inf
+;
+; filename_on_source = diskid,subdir,size,checksum,spare,spare
+; 
+
+[SourceDisksFiles]
+ni_nic.dll = 1,,,,,
+ni_nic.exe = 1,,,,,
+ni_nic9x.exe = 1,,,,,
+ni_nic.mif = 1,,,,,
+Dmiprw95.vxd,,,,,
+setup.dll,,,,,
+ni_nic.dat,,,,,
+ni_nicmc.dll = 1,,,,,
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Targetdirectories predefined for [DestinationDirs] section
+;   parameter number one  
+;     00 = null, use only the second parameter for a path
+;     11 = windows system directory
+;     ...
+;
+
+[DestinationDirs]
+;
+; a default if a particular copyfiles section
+;
+; DefaultDestDir=LDID[,subdir]  ; not used in this sample
+
+DefaultDestDir=11         ; System directory
+ProductNT.del.files=11    ; 01 is the source directory
+Product9x.del.files=11 
+
+
+;
+; Run time defined strings, these are set with 
+; SetupSetDirectoryId once this inf is openned
+;
+
+ProductNT.copy.files=65600  ; 65600 is a random choice for a dirid
+Product9x.copy.files=65600  ; note this must be set by a calling
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; These are the CopyFiles lists, here is where the files
+; for each component are defined
+; Note the last param (parm 4) is the CopyFlag for that
+; File, for example 8 means copy on  restart--see the doc for more
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[ProductNT.copy.files]
+idmi.inf
+dmiinst.exe
+ni_nic.dll
+ni_nic.mif
+ni_nic.exe
+ni_nic.dat
+ni_nicmc.dll
+
+[ProductNT.del.files]
+;note: the ",,,1" is a flag that will force a reboot and rename if the file is
+;      in use when we try to delete it during uninstall
+idmi.inf
+ni_nic.dll,,,1
+ni_nic.mif
+ni_nic.exe,,,1
+ni_nic.dat
+ni_nicmc.dll,,,1
+
+[Product.copy.files2]
+;dmiinst.exe,,,1
+
+[Product9x.copy.files]
+idmi.inf
+dmiinst.exe
+ni_nic.dll
+ni_nic.mif
+ni_nic9x.exe
+Dmiprw95.vxd
+setup.dll
+ni_nic.dat
+
+[Product9x.del.files]
+;note: the ",,,1" is a flag that will force a reboot and rename if the file is
+;      in use when we try to delete it during uninstall
+idmi.inf
+ni_nic.dll,,,1
+ni_nic.mif
+ni_nic9x.exe,,,1
+Dmiprw95.vxd,,,1
+setup.dll,,,1
+ni_nic.dat
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Strings replace variable in percents above
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[Strings]
+PRODUCT_DESC    = "INFSNMP Extension"
+PRODUCT_MIBGEN  = "Mibgen"
+DT_MESSAGES     = "INFSNMP Extension"
+DT_DESKTOP      = "Desktop"
+DESC_OLD        = "Old Product"    ; removes old links
+README_DESC     = "Read Me"
+
+
+
+

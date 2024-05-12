@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Optimized WQL Queries</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Optimized WQL Queries</font></h1>
+<p>The WMI Provider is optimized to allow applications to get settings using queries. The WMI Provider can recognize the following queries and will only return the objects that match.  All other queries will result in the WMI Provider getting all the settings on all objects and CIMOM will filter them before they reach the application. With several adapters, teams, and VLANs, this can cause a delay of several seconds when retrieving required data.
+
+<h2><font color="#0000FF">Getting the Settings for a Particular Adapter, VLAN or Team</font></h2>
+<p>The following query will get only the settings for a particular adapter, VLAN or team. WQL does not allow any additional clauses in the WHERE clause.
+
+<p><b>ASSOCIATORS OF {IANet_Configuration path} WHERE AssocClass = IANet_SettingContext</b>
+
+<h2><font color="#0000FF">Getting One Setting</font></h2>
+<p>The following query can be used to get a single setting for an object without querying to get them all:
+
+<p><b>SELECT *  FROM [SETTING CLASS] WHERE ParentId="[Device ID]" AND ParentType="[type]" AND Caption="[SETTING NAME]"</b>
+
+<p><b>Notes:</b>  
+<ul><li>The class must be the exact setting class, not a base class (e.g. IANet_SettingInt).</li>
+<li>Acceptable ParentTypes are "NIC", "Team" , "VLAN" or "BootAgent".</li>
+<li>ParentId is the GUID that uniquely defines the object with the setting (for an adapter, this is the DeviceId).</li>
+<li>This is not a recommended method of getting the settings associated for an object; the preferred method is use associations.  However, WQL does not support the complex query required (i.e., WQL does not support  ASSOCIATORS OF {IANet_Configuration path} WHERE AssocClass = IANet_SettingContext AND Caption="[SETTING NAME]")</li></ul>
+
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

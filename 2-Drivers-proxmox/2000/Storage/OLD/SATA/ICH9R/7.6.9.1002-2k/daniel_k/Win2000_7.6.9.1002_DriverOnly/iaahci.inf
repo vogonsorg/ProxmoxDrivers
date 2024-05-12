@@ -1,0 +1,155 @@
+; Copyright (c) 2003-07 Intel Corporation
+; ****************************************************************************
+; ****************************************************************************
+; **    Filename:  iaAHCI.INF
+; **    Revision:  Version 7.6.9.1002
+; **    Date:      06/02/2008
+; **    Abstract:  Windows* INF File for Intel(R) Matrix Storage Manager Driver
+; ****************************************************************************
+; ****************************************************************************
+
+[version]
+CatalogFile=iaAHCI.cat
+Signature="$WINDOWS NT$"
+Class=hdc
+ClassGuid={4D36E96A-E325-11CE-BFC1-08002BE10318}
+Provider=%INTEL%
+DriverVer=06/02/2008,7.6.9.1002
+
+[DestinationDirs]
+DefaultDestDir = 12 ; DIRID_DRIVERS
+CopyFullPort = 12;
+
+[CopyFullPort]
+iaStor.sys
+
+[SourceDisksNames]
+1 = %DiskName%,,,
+
+[SourceDisksFiles]
+iaStor.sys= 1
+
+[ControlFlags]
+ExcludeFromSelect=*
+
+[Manufacturer]
+%INTEL%=INTEL_HDC,ntamd64
+
+[INTEL_HDC]
+%PCI\VEN_8086&CC_0106.DeviceDesc% = iaStor_Inst, PCI\VEN_8086&CC_0106
+
+[INTEL_HDC.ntamd64]
+%PCI\VEN_8086&CC_0106.DeviceDesc% = iaStor_Inst, PCI\VEN_8086&CC_0106
+
+;****************************************************
+[iaStor_Inst]
+CopyFiles=CopyFullPort
+FeatureScore=0x80
+
+[iaStor_Inst.HW]
+AddReg = iaStorSecurity.AddReg
+
+[iaStorSecurity.AddReg]
+HKR,,Security,,"D:P(A;;FA;;;SY)(A;;FA;;;BA)(A;;FRFW;;;BU)"
+
+[iaStor_Inst.Services]
+AddService = iaStor, %SPSVCINST_ASSOCSERVICE%, iaStor_Service_Inst, iaStor_EventLog_Inst
+
+[iaStor_Service_Inst]
+DisplayName    = %*PNP0600.DeviceDesc%
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_BOOT_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
+ServiceBinary  = %12%\iaStor.sys
+LoadOrderGroup = SCSI Miniport
+AddReg         = iaStor_parameters_AddReg
+
+[iaStor_parameters_AddReg]
+HKR,,Tag,%REG_DWORD%,25
+HKR,Parameters,queuePriorityEnable,%REG_DWORD%,0
+HKR,Parameters,BusType,0x00010001,0x0000003
+
+HKR,Parameters\Port0,%AN%,0x00010001,0
+HKR,Parameters\Port0,%LPM%,0x00010001,0
+HKR,Parameters\Port0,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port0,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port0,%GTF%,0x00010001,0
+HKR,Parameters\Port0,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port1,%AN%,0x00010001,0
+HKR,Parameters\Port1,%LPM%,0x00010001,0
+HKR,Parameters\Port1,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port1,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port1,%GTF%,0x00010001,0
+HKR,Parameters\Port1,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port2,%AN%,0x00010001,0
+HKR,Parameters\Port2,%LPM%,0x00010001,0
+HKR,Parameters\Port2,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port2,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port2,%GTF%,0x00010001,0
+HKR,Parameters\Port2,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port3,%AN%,0x00010001,0
+HKR,Parameters\Port3,%LPM%,0x00010001,0
+HKR,Parameters\Port3,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port3,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port3,%GTF%,0x00010001,0
+HKR,Parameters\Port3,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port4,%AN%,0x00010001,0
+HKR,Parameters\Port4,%LPM%,0x00010001,0
+HKR,Parameters\Port4,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port4,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port4,%GTF%,0x00010001,0
+HKR,Parameters\Port4,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port5,%AN%,0x00010001,0
+HKR,Parameters\Port5,%LPM%,0x00010001,0
+HKR,Parameters\Port5,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port5,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port5,%GTF%,0x00010001,0
+HKR,Parameters\Port5,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port6,%AN%,0x00010001,0
+HKR,Parameters\Port6,%LPM%,0x00010001,0
+HKR,Parameters\Port6,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port6,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port6,%GTF%,0x00010001,0
+HKR,Parameters\Port6,%DIPM%,0x00010001,0
+
+HKR,Parameters\Port7,%AN%,0x00010001,0
+HKR,Parameters\Port7,%LPM%,0x00010001,0
+HKR,Parameters\Port7,%LPMSTATE%,0x00010001,0
+HKR,Parameters\Port7,%LPMDSTATE%,0x00010001,1
+HKR,Parameters\Port7,%GTF%,0x00010001,0
+HKR,Parameters\Port7,%DIPM%,0x00010001,0
+
+[iaStor_EventLog_Inst]
+AddReg = iaStor_EventLog_AddReg
+
+[iaStor_EventLog_AddReg]
+HKR,,EventMessageFile,%REG_EXPAND_SZ%,"%SystemRoot%\System32\IoLogMsg.dll;%SystemRoot%\System32\drivers\iaStor.sys"
+HKR,,TypesSupported,%REG_DWORD%,7
+
+;********************************************************
+[Strings]
+DiskName                = "Intel Matrix storage Manager Driver"
+*PNP0600.DeviceDesc	= "Intel AHCI Controller"
+PCI\VEN_8086&CC_0106.DeviceDesc	= "Intel(R) SATA AHCI Controller"
+
+INTEL="Intel"
+AN="AN"
+LPM="LPM"
+LPMSTATE="LPMSTATE"
+LPMDSTATE="LPMDSTATE"
+GTF="GTF"
+DIPM="DIPM"
+;*******************************************
+;Handy macro substitutions (non-localizable)
+SPSVCINST_ASSOCSERVICE = 0x00000002
+SERVICE_KERNEL_DRIVER  = 1
+SERVICE_BOOT_START     = 0
+SERVICE_ERROR_NORMAL   = 1
+REG_EXPAND_SZ          = 0x00020000
+REG_DWORD              = 0x00010001

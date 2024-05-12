@@ -1,0 +1,329 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="en">
+  <head>
+    <title>Universal ATA driver for Windows NT4/2000/XP, last version</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="Universal ATA driver, Windows, universal, ata, driver, dma, BusMaster, NT4, 2000, w2k, XP, UniATA">
+    <meta name="description" content="Universal ATA driver for Windows NT4/2000/XP, last version">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=en">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="uni_ata.php_lang=ru&amp;">RU&nbsp;<img height="12" width="20" alt="ru" src="http://10.0.0.11/alter/img/lang_ru.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<center>
+<h3>Universal ATA driver for Windows NT4/2000/XP</h3>
+</center>
+  <p>On
+  2002.06.25 
+  the new build of UniATA, that successfully works under NT4 with 3
+  different controllers: 2 well-known ones and 1 unknown (for driver).
+  In all these cases HDDs used DMA mode.<br>
+  Current version is 0.31a - <b>BusMaster_v31a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a></b> (80 Kb/96 Kb). It is built at 2005.02.21<br>
+  You can read about project history and current driver capabilities
+  <a href="index.php_lang=en&amp;">
+  here
+</a>.</p>
+  <p>Thanks to brave readers (and users), now we have list of bugs, troubles and
+solutions - the
+  <a href="uniata_faq.php_lang=en&amp;">TroubleShooter</a></p>
+<hr width="15%" align="left">
+  <b>WARNING !!!</b>
+  This is <b>beta-version</b> only (though I use it at home and on computers
+  of my friends ;). Thus, it worth making 2 copies of <i>Hardware
+  Profiles</i>. One copy should use standard driver only (usually atapi.sys),
+  another copy - UniATA only.
+<br>  
+See below for installation guides
+<ul>
+<li><a href="uni_ata.php_lang=en&amp;#inst_xp">Win XP</a> (UniATA v30+)
+<li><a href="uni_ata.php_lang=en&amp;#inst_w2k">Win 2000</a> (UniATA v25g+)
+<li><a href="uni_ata.php_lang=en&amp;#inst_nt4">Win NT4</a> (UniATA v23b+)
+<li><a href="uni_ata.php_lang=en&amp;#inst_nt4_old">Win NT4</a>
+  (UniATA prior to v23b)
+</ul>
+
+<a name="inst_xp"></a>
+<center>
+  <h4>Installation for Windows XP<br>
+  (for version 30 and higher)</h4>
+</center>
+<br>
+<pre>
+1.  unpack <b>BusMaster_v31a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a></b> (80 Kb/96 Kb) (for ex. to C:\temp\uniata)
+2.  My Computer -> Properties -> Hardware -> Device Manager
+3.  select device, chose it's
+       Properties -> Driver
+
+    Note:
+    IDE controllers may be listed no only in 'IDE controllers'
+    section, but in 'SCSI and RAID controllers' or 'Other devices'.
+
+4.  Update Driver -> Next
+5.  ( ) ....
+    (*) Install from a list or specific location (Advanced)
+6.  Next
+7.  ( ) ....
+    (*) Don't search. I will choose the driver to install
+8.  Next
+9.  Have Disk
+10.  enter path to .INF file for new driver
+    If this is usual onboard IDE controller, use
+        C:\temp\uniata\Release_Dist\uata_2kh.inf (or uata_xph.inf for v 30c)
+    If this is IDE RAID controller or additional PCI IDE controller, use
+        C:\temp\uniata\Release_Dist\uata_2k.inf (or uata_xp.inf for v 30c)
+11. OK
+
+12. chose in the list of available drivers the following line:
+
+      Standard Dual Channel PCI BusMaster IDE Controller
+         or
+      Your IDE Controller Name
+
+13. say 'Continue Anyway' for the question about missing digital signature.
+    (YES, we want to continue the installation)
+   
+14. REBOOT your computer
+</pre>
+
+Additional release notes you can find in archive (readme_xp.txt) or
+download from <a href="readme_xp.txt">this location</a>.
+
+<a name="inst_w2k"></a>
+<center>
+  <h4>Installation for Windows 2000<br>
+  (for version 25g and higher)</h4>
+</center>
+
+<br>
+<pre>
+1.  unpack <b>BusMaster_v31a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a></b> (80 Kb/96 Kb) (for ex. to C:\temp\uniata)
+2.  My Computer -> Properties -> Hardware -> Device Manager
+3.  select device, chose it's
+       Properties -> Driver
+
+    Note:
+    IDE controllers may be listed no only in 'IDE controllers'
+    section, but in 'SCSI and RAID controllers' or 'Other devices'.
+
+4.  Update Driver -> Next
+5.  (*) Search for a suitable driver for my device (recommended)
+    ( ) ....
+6.  Next
+7.  [ ] Floppy disk drives
+    [ ] CD-ROM drives
+    [v] Specify a location
+    [ ] Microsift Windows Update
+8.  Next
+9.  enter path to .INF file for new driver
+    If this is usual onboard IDE controller, use
+        C:\temp\uniata\Release_Dist\uata_2kh.inf
+            or for UniATA versions below v30c
+        C:\temp\uniata\Release_Dist\uata2kh.inf
+            or for UniATA versions below v29a
+        C:\temp\uniata\Release_Dist\uniata2kh.inf
+    If this is IDE RAID controller or additional PCI IDE controller, use
+        C:\temp\uniata\Release_Dist\uata_2k.inf
+            or for UniATA versions below v30c
+        C:\temp\uniata\Release_Dist\uata2k.inf
+            or for UniATA versions below v29a
+        C:\temp\uniata\Release_Dist\uniata2k.inf
+10. OK
+
+11. !!! IMPORTANT !!!
+    You MUST chose the following checkbox:
+
+    [v] Install one of the other drivers
+
+12. Next
+13. chose in the list of available drivers the following line:
+
+      SCSI and RAID controllers | AlterWare | .......
+         or
+      IDE controllers           | AlterWare | .......
+
+    the keyword here is 'AlterWare' in Provider column
+
+14. say 'Yes' for the question about missing digital signature.
+    (YES, we want to continue the installation)
+   
+15. REBOOT your computer
+
+</pre>
+
+Additional release notes you can find in archive (readme_w2k.txt) or
+download from <a href="readme_w2k.txt">this location</a>.
+
+
+<hr width="15%" align="left">
+
+<a name="inst_nt4"></a>
+<center>
+  <h4>Installation for Windows NT4<br>
+  (for version 23b and higher)</h4>
+</center>
+
+<br>
+<pre>
+1. unpack <b>BusMaster_v31a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a></b> (80 Kb/96 Kb) 
+
+2. Install driver using INF-file:
+   a) Control Panel->SCSI Adapters
+   b) select Drivers property sheet
+   c) click on Add button
+   d) click on Have Disk button
+   e) enter path to UATA_NT4.INF
+        or to UNIATA_NT4.INF for UniATA versions below v30c
+        or ro OEMSETUP.INF for UniATA versions below v26e
+      from UniATA distribution and click on OK button
+   f) select "Universal BusMaster ATA/ATAPI Driver"
+      from list and click on OK button
+   g) enter path to UniATA.sys from UniATA distribution
+      and click on OK button
+
+   <b>IMPORTANT !!!</b>
+
+   If you have installed IDE/ATA/BusMaster drivers from
+   Motherboard's CD, you may need to uninstall them after
+   UniATA installation.
+
+   To ensure safity of IDE BusMaster installation/deinstallation
+   please refer to points 1 and 6-8 of Manual installation for NT4 (see below).
+
+3. REBOOT your computer
+</pre>
+Additional release notes you can find in archive (readme_nt4.txt) or
+download from <a href="readme_nt4.txt">this location</a>.
+
+<hr width="15%" align="left">
+
+<center>
+  <h4>Manual installation for Windows NT4<br>
+  (for version prior 23b)</h4>
+</center>
+
+<br>
+<pre>
+1. make a copy of your default Hardware Profile and set it as Default
+   a) My Computer->Properties->Hardware Profiles
+   b) select the Profile, marked as (Current)
+      usually it's name is "Original Configuration"
+   c) click on Copy button & name your copy (for ex. "UniATA")
+   d) place UniATA profile at the top of list
+      by clicking Up Arrow button
+   e) click on Apply button
+
+2. unpack archive with distribution
+
+3. copy idedma.sys to your WINNT/System32/drivers directory from
+   Release (or Debug ;) directory
+4. import idedma.reg into registry (just press Enter on this file)
+5. REBOOT your computer
+
+6. disable "Universal ATA Driver" driver in "Original Configuration" HW Profile
+   a) Control Panel->Devices
+   b) select driver from list (idedma)
+   c) click on HW Profiles button
+   d) disable driver in appropriate HW Profile
+      by selecting Profile Name from list and clicking
+      Enable button
+   e) click on OK button
+
+7. disable "Atapi" driver in UniATA HW Profile
+
+   <b>IMPORTANT !!!</b>
+
+   If you have installed IDE/ATA/BusMaster drivers from
+   Motherboard's CD, the initial state of "Atapi" driver
+   would be "Disabled" !!!
+   In this case you should disable that driver instead
+   of "Atapi" !!!
+
+8. set startup mode of "Universal ATA Driver" to Boot
+   by clicking Startup button
+
+You sould see the following:
+
+--- Universal ATA Driver ---
+Startup: Boot
+HW Profiles:
+  UniATA                 - Enabled
+  Original Configuration - Disabled
+
+       --- Atapi ---
+Startup: Boot
+HW Profiles:
+  UniATA                 - Disabled
+  Original Configuration - Enabled
+
+
+9. REBOOT your computer
+</pre>
+Additional release notes you can find in archive (readme_nt4_old.txt) or
+download from <a href="readme_nt4_old.txt">this location</a>.
+
+<hr width="15%" align="left">
+
+Please, send your comments and propositions here:
+<a href="mailto:alterX@alter.org.ua (remove X)?subject=Uni-ATA">alterX@alter.org.ua (remove X)</a>
+<br>
+
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">designed by Alter aka Alexander A. Telyatnikov</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">powered by Apache+PHP under FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>

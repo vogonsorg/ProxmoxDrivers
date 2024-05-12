@@ -1,0 +1,86 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Windows 95 Troubleshooting</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<H1>Windows 98/Me Troubleshooting</H1>
+<P>If you can’t connect to a server or if Windows 98 or Windows Me reports an error after
+you double-click Network Neighborhood, try the suggestions here first, refer to
+the general troubleshooting<I>  </I>steps if necessary<I>.</I></P>
+<ul>
+  <li>
+    <p class="numlst">Make sure you’re using the drivers that are on the
+    drivers CD that ships with this adapter.</li>
+  <li>
+    <p class="numlst">Make sure the driver is loaded and the protocols are
+    bound. Check the Device Properties list for trouble indicators (an X or !
+    symbol).</li>
+  <li>
+    <p class="numlst">Test the adapter with the Intel&reg; PROSet advanced configuration
+    utility that was installed on your system when you installed the PRO/100 S
+    Server adapter. To start Intel PROSet, double-click the Intel PROSet icon in Control
+    Panel. To run diagnostics, select the adapter and click the Diagnostics tab,
+    then click Run Tests. For additional information, click Help in the Intel PROSet
+    window.</li>
+  <li>
+    <p class="numlst">Check with your LAN administrator — you may need to
+    install additional networking software.</li>
+</ul>
+
+<h2>
+<a name="Common Problems"></a>Common Problems and Solutions</h2>
+
+<TABLE BORDER="1" cellpadding="6" cellspacing="0">
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+Windows 98 is unable to update device driver files
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    If you're using Windows 98 and have updated or added an adapter, you may experience a problem with device driver update files not being
+    copied.  (This is a known problem, for which Microsoft has published a Knowledge Base article, Q242150.)
+    To resolve this problem:
+    <ol>
+      <li>
+        <p class="numlst">Reboot the computer.</li>
+      <li>
+        <p class="numlst">Remove the adapter via Device Manager and reboot the computer again.</li>
+      <li>
+        <p class="numlst">When prompted for the adapter driver, choose the option "Display a<br>
+   list of all the drivers...".  Then choose the adapter from the list<br>
+   and click Have Disk to update the drivers from the Product CD.</li>
+      <li>
+        <p class="numlst">Reboot the computer.</li>
+    </ol>
+</TD>
+</tr>
+<tr>
+<TD COLSPAN="1" width="150" valign="top">
+Install prompting for Prodd.vxd and Prokddp.vxd files in Windows&nbsp;98<br>
+</TD>
+<TD COLSPAN="1" class="numlst" valign="top" align="left">
+    If you use the Add/Remove Programs icon in the Windows Control Panel to remove an Intel adapter, and then try to install drivers from a later
+    Product CD, you may see a prompt asking for the following files:<br>
+    &quot;Prodd.vxd&quot;<br>
+    &quot;Prokddp.vxd&quot;
+    <p>This is because Windows is attempting to install the files associated with the earlier driver, which are not present on the later 
+    Product CD.
+    <p>To resolve this problem, finish the installation and choose "Skip" when prompted for a missing file.  Then, instead of removing the driver,
+    update it with the later Product CD.
+    <p>For instructions on updating the adapter driver, see the "Install the Network Drivers" section in
+    this online guide.&nbsp;
+</TD>
+</tr>
+</TABLE>
+
+    <p class="numlst">&nbsp;
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 12/22/03 12:11p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code></p>
+
+</body>
+</html>

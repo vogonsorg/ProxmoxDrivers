@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Intel&#174 PROSet Save and Restore Function</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Saving and Restoring an Adapter's Configuration Settings</h1>
+<p>The Save and 
+Restore Command Line Tool is a VBScript (SavRes.vbs)
+that allows you to copy the current adapter and team
+settings into a standalone file (such as on a floppy disk) as a
+backup measure. In the event of a hard drive failure, you can
+reinstate most of your former settings. This script does not save/restore the
+network drivers or the protocol addresses.</p>
+<p>Restoring network configuration settings can only be done on the same system
+with the same configuration on which the save was performed.</p>
+<table border="0" cellPadding="6" cellSpacing="0" id="table2">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+      <td vAlign="top"><em><strong>NOTES</strong>: </em>Only adapter
+        settings are saved (these include ANS teaming, Express teaming and VLANs). The adapter's 
+		driver and IP address are not saved.&nbsp;</td>
+    </tr>
+    <tr>
+      <td vAlign="top">&nbsp;</td>
+      <td vAlign="top">When you save the adapter settings, the script removes all 
+		the configured teams and VLANs. Run the script again to restore your 
+		settings. The preferred primary adapter setting is not saved or 
+		restored. You must manually change the preferred primary adapter setting 
+		after restoring the team settings.</td>
+    </tr>
+   
+  </tbody>
+</table>
+<h2>Supported Operating Systems</h2>
+<ul>
+  <li>
+    <p class="numlst">Microsoft* Windows* 2000, Windows XP, Windows Server 2003</p>
+  </li>
+</ul>
+
+<h2>Command Line Syntax</h2>
+<blockquote>
+	<p class="monospace">cscript SavRes.vbs save|saveall|restore [filename]</p>
+</blockquote>
+<p>SavRes.vbs has the following command line options:</p>
+<table border="1" cellPadding="6" cellSpacing="0" width="100%" bordercolor="#000000" id="table3">
+	<tr>
+		<td>save</td>
+		<td>Saves adapter and team settings that have been changed from the 
+		default settings.&nbsp; When you restore with the resulting file, any 
+		settings not contained in the file are assumed to be the default.</td>
+	</tr>
+	<tr>
+		<td>saveall</td>
+		<td>Saves all adapter settings, even those that are the default values.</td>
+	</tr>
+	<tr>
+		<td>restore</td>
+		<td>Restores the settings.</td>
+	</tr>
+	<tr>
+		<td>filename</td>
+		<td>The file to save settings to or restore settings from.&nbsp; If no 
+		filename is specified, the script default to WmiConf.txt.</td>
+	</tr>
+</table>
+
+<h2>Examples</h2>
+<h3>Save Example</h3>
+<p>To save the adapter settings to a file on a floppy diskette, do the 
+following.</p>
+<ol>
+	<li>Open a Windows Command Prompt.</li>
+	<li>Navigate to the directory where SavRes.vbs is located.</li>
+	<li>Type the following:</li>
+	<p class="monospace">cscript SavRes.vbs save a:\settings.txt</p>
+</ol>
+<h3>Restore Example</h3>
+<p>To restore the adapter settings from a file on a floppy diskette, do the 
+following:</p>
+<ol>
+	<li>Open a Windows Command Prompt.</li>
+	<li>Navigate to the directory where SavRes.vbs is located.</li>
+	<li>Type the following:</li>
+	<p class="monospace">cscript SavRes.vbs restore 
+	a:\settings.txt</p>
+	</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/10/04 8:02a <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+
+</html>

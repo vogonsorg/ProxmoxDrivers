@@ -1,0 +1,1 @@
+This driver works on Windows 2000but Windows 2000 does not support multipath-IO (requires 3rd party software) so you'll see multiple drives in disk management. Unknown if this will cause issues or not.

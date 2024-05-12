@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Intel(R) PROSet II Help
+1 개요
+2 PROSet II 탐색=GENERAL_PAGE
+2 어댑터 및 드라이버 정보 보기
+3 일반 정보=General_Information
+3 어댑터 세부 정보=Adapter_Details
+3 드라이버 세부 정보=Driver_Information
+1 어댑터 구성
+2 속도 및 이중성 설정=Set_Speed_and_Duplex
+2 전원 사용 구성=Configure_Power_Management
+2 고급 기능 구성=Configure_Advanced_Features
+2 IPSec 활성화=Enable_IPSec
+2 파일에 구성 저장=SAVERESTORE
+2 어댑터 제거=Remove_an_Adapter_Instance
+1 팀 만들기 및 구성
+2 팀 유형
+3 팀 구성 정보=Teaming_Info
+3 팀 유형=Team_Types
+3 어댑터 고장 대비=Adapter_Fault_Tolerance
+3 스위치 고장 대비=Switch_Fault_Tolerance
+3 적응 로드 균형 조정=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: 정적=FEC
+3 GEC/LA/802.3ad: 정적=GEC
+3 IEEE 802.3ad: 동적=Dynamic_3ad
+2 팀 설정
+3 팀 만들기=Create_a_New_Team
+3 스위치 구성 테스트=Test_Switch_Configuration
+3 고급 설정 구성=Teaming_Advanced_Settings
+2 팀 구성 변경
+3 어댑터 팀 구성 모드 변경=Change_Adapter_Teaming_Mode
+3 어댑터를 주 또는 보조로 지정=Specify_an_Adapter_as_Primary_or_Secondary
+3 팀에 어댑터 추가=Add_an_Adapter_to_an_Existing_Team
+3 팀에서 어댑터 제거=Remove_an_Adapter_from_a_Team
+3 팀 구성 고급 설정=Teaming_Advanced_Settings
+2 팀 구성 보기
+3 네트워크 구성요소 트리의 팀=Team_Listing
+3 팀 구성 보기=Team_Configuration
+2 팀 제거
+3 어댑터 팀 제거=Remove_an_Adapter_Team
+1 VLAN 만들기 및 구성
+2 VLAN 개요=VLAN>main
+2 VLAN 설정
+3 VLAN 만들기=ADD_VLAN
+3 GVRP 활성화=GVRP_Support
+3 고급 설정=Advanced_Settings_for_VLANs
+2 VLAN 속성 변경
+3 VLAN 속성 변경=Change_VLAN_Properties
+3 고급 설정=Advanced_Settings_for_VLANs
+2 VLAN 제거
+3 VLAN 제거=Remove_a_VLAN
+1 진단 수행
+2 개요=Diagnostics_An_Overview
+2 진단 테스트=Diagnostics
+2 케이블 테스트=Testing_the_Cable
+2 전송자 응답자 테스트=Sender_Responder_Test
+2 진단 로그 설정=Diagnostic_Log
+1 Intel(R) 추가 도구 사용
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) 우선순위 패킷
+3 개요=priority_packet_overview
+1 문제 해결
+2 문제 해결 탭=Troubleshooting
+2 어댑터 구성 복원=RESTORECONFIG
+2 지원 정보=Support

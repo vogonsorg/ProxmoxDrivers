@@ -1,0 +1,195 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Namespace and Context</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Namespace and Context</font></h1>
+<p>The CIM classes reside in a namespace.  The standard Microsoft* namespace is called <b>root/cimv2</b> and is based on CIM
+v2.2 or <b>root/default</b>. The WMI
+and CDM Provider classes can be added to this namespace.
+The Providers are based on CIM v2.5. Because of this and differences used in the keys of the objects, the
+Providers' classes are located in a separate namespace, <b>root/IntelNCS</b>.
+
+<h2><font color="#0000FF">WBEM Context</h2></font>
+<p>Context objects provide additional information to the Providers that cannot be passed as a parameter to a WMI API method.
+To register context qualifiers, use the <b>IWbemContext</b> to register context qualifiers. The interface pointer for the context object is passed as the last parameter of an <b>IWbemServices</b> method.
+
+<p>The following table contains the context qualifiers (named values) used by the
+Providers. Most qualifiers, like SessionHandle, are only used in conjunction with specific functional areas of the
+Providers, whereas LocaleID, MachineName and ApplicationName can be set for all <b>IWbemServices</b> calls.
+
+<p>If no context is passed to the Providers, they will use the LocaleID passed in the <b>Initialize</b> call to the
+Providers.
+Any read done with a context will read the current configuration until a write operation is performed. Subsequent reads will show the system as it would be after the write has succeeded. A NULL context can be used for reads.		        
+<br><br>
+
+<table>
+  <tr>
+   <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'><b>Context Qualifier</b>
+   </td>
+   <td width=92 valign=top style='width:69.3pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'><b>Variant Type</b>
+   </td>
+   <td width=500 valign=top style='width:500pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'><b>Description</b>
+   </td>
+  </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>SessionHandle
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_BSTR
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  Identifies the application's copy of IANet network classes. The application cannot make any changes to
+  the classes or their attributes without first establishing a session
+  handle. See the section on the
+  IANet_NetService class to see how to establish and use a session handle. 
+  This qualifier is not required if the application is only going to read
+  data from the classes.
+  The session handle allows the NCS software to manage
+  simultaneous multiple accesses to the configuration without one user locking
+  out all others. Each session has a separate cache to store any changes that
+  have been made. If there are multiple
+  users making changes simultaneously then the first user to apply their
+  changes will succeed. All the other
+  users’ caches will be invalidated.
+ </td>
+ </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  LocaleID
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_BSTR
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  Microsoft's ID for a locale. This is required if the application requires localized text strings
+  from the Providers. All error messages and warnings will be in English, unless the required
+  LocaleID is used.
+  </td>
+ </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  ApplicationName
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_BSTR
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  The name of the application that made the call. This
+  is required for logging.
+  </td>
+ </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  MachineName
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_BSTR
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  The name of the  machine that is connecting to the Providers. This is required for logging.
+  </td>
+ </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  PreCheck
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_BOOL
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  This Boolean value is used to tell the Providers that the client is attempting to verify that an
+  operation is allowed before actually performing the operation. For example, adding an adapter to a team. 
+  <br><br>Values:
+  <ul><li>TRUE = Provider will not perform the operation, but will return an error code and
+  extended status if the operation is not allowed.</li>
+  <li>FALSE = Provider will perform the operation.</li></ul>
+  If this qualifier is missing, it has the same effect as if the attribute was FALSE.
+  </td>
+ </tr>
+ <tr>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  WarningErrorCode
+  </td>
+  <td width=92 valign=top style='width:69.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  VT_I4
+  </td>
+  <td width=500 valign=top style='width:500pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  Some operations may require warnings to be sent to the user (e.g., adding an adapter to the team
+  may require the team to be reloaded in some circumstances). WMI does not provide a mechanism for this. 
+  If this qualifier is present and non-zero, the Provider will return E_FAIL if the operation 
+  succeeded, but there was an associated warning. The client should use the extended status to get the 
+  text of the warning.
+  </td>
+ </tr>
+</table>
+
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

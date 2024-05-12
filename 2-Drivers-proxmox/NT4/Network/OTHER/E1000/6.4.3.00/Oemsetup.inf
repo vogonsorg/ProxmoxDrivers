@@ -1,0 +1,246 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 2002 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO        **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;***********************************************************************
+; Windows NT OEMSETUP.INF for
+;
+;       Intel(R) PRO family of adapters
+;
+; Version 7.0.4.00
+;***********************************************************************
+; $Revision: 4 $
+;
+;***********************************************************************
+;
+;***********************************************************************
+; Define constants
+;***********************************************************************
+[FileConstants]
+        UtilityInf = "UTILITY.INF"
+        SubroutineInf = "SUBROUTN.INF"
+
+        Manufacturer  = "Intel"
+
+        ProCaption   = "Windows NT Setup"
+        ProCancel    = "Cancel"
+        ProCancelMsg = "Windows NT Networking is not correctly installed.  "+
+                        "Are you sure you want to cancel copying files?"
+        ProCancelCap = "Network Setup Message"
+        ProText1     = "Copying:"
+        ProText2     = "To:"
+
+        PRO100Dir      = "PRO100\WINNT4\"
+        PRO1000Dir     = "PRO1000\WINNT4\"
+        PROWirelessDir = "PROW7100\WINNT4\"
+
+;***********************************************************************
+; Detect sections
+;***********************************************************************
+[DetectConstants]
+
+;***********************************************************************
+; Define Option
+;***********************************************************************
+[Options]
+        E100B
+        E1000
+;        W70
+;        W20
+
+[OptionsText]
+        E100B = "Intel(R) PRO/100 Family Adapter"
+        E1000 = "Intel(R) PRO/1000 Family Adapter"
+;        W70 = "Intel(R) PRO/Wireless LAN 7100 Mini PCI Adapter"
+;        W20 = "Intel(R) PRO/Wireless LAN 2100 Mini PCI Adapter"
+
+[Source Media Descriptions]
+        1 = "Intel PRO Adapter CD-ROM or diskette", TAGFILE = D100disk
+        2 = "Intel PRO Adapter diskette 2", TAGFILE = D100dsk2
+
+;***********************************************************************
+; Returns information to Setup about the type of driver or drivers that
+; can be installed by this INF file.
+;***********************************************************************
+[Identify]
+        Return STATUS_SUCCESSFUL NetAdapter ""
+
+;***********************************************************************
+; This section returns information to the Setup program, listing the
+; names of any drivers that can be installed by this INF file. It also
+; returns the text strings for each driver (in the requested language)
+; to be used in the dialog box that asks the user to select the driver
+; to install.
+;***********************************************************************
+[ReturnOptions]
+        Set Status         = STATUS_SUCCESSFUL
+        Set OptionList     = ^(Options, 1)
+        Set OptionTextList = ^(OptionsText, 1)
+
+        IfStr(i) $($1) != ""
+                IfContains(i) $($1) not-in "PCI"
+                        Set Status         = STATUS_NOTSUPPORTED
+                        Set OptionList     = {}
+                        Set OptionTextList = {}
+                EndIf
+        EndIf
+
+        Return $(Status) $(OptionList) $(OptionTextList)
+
+
+;***********************************************************************
+; If the [ReturnOptions] section returns successfully, indicating the
+; language is supported, Setup displays a dialog box from which the user
+; can select a driver to install. If the user proceeds with the
+; installation, Setup calls the [InstallOption] section.
+;***********************************************************************
+[InstallOption]
+		Set Language = $($0)
+        Set Option   = $($1)
+        Set SrcDir   = $($2)
+        Set AddCopy  = $($3)
+        Set DoCopy   = $($4)
+        Set DoConfig = $($5)
+		Set Cleanup  = "FALSE"
+
+        read-syms FileConstants
+
+        IfStr(i) $(Option) == "E1000"
+            Set SrcDir = $(SrcDir)$(PRO1000Dir)
+        Else-IfStr(i) $(Option) == "W70"
+            Set SrcDir = $(SrcDir)$(PROWirelessDir)
+        Else-IfStr(i) $(Option) == "W20"
+            Set SrcDir = $(SrcDir)$(PROWirelessDir)
+        Else
+            Set SrcDir = $(SrcDir)$(PRO100Dir)
+        Endif
+
+        Split-String $(STF_CONTEXTINFNAME) "\" SrcDirList
+        QueryListSize ListSize $(SrcDirList)
+        set NewInfName = *($(SrcDirList), $(ListSize))
+
+        Set OrigInfName = $(NewInfName)
+
+        IfStr(i) $(!NTN_InstallMode) == install
+            Install "Install-Oemsetup"
+            Set NewInfName = $(Option)".inx"
+            Set CleanInfName = $(NewInfName)
+            Set Cleanup  = "TRUE"
+            Install "Install-Oemsetup"
+        Else-IfStr(i) $(!NTN_InstallMode) == update
+            Set NewInfName = $(Option)".inx"
+            Set CleanInfName = $(NewInfName)
+            Set Cleanup  = "TRUE"
+            Install "Install-Oemsetup"
+        Endif
+
+        Shell $(NewInfName) "InstallOption" +
+                $(Language) $(Option) +
+                $(SrcDir) $(AddCopy) $(DoCopy) $(DoConfig)
+
+        Set ReturnStatus = $($R0)
+
+        Ifstr(i) $($ShellCode) != $(!SHELL_CODE_OK)
+            Ifstr(i) $(Cleanup) == "TRUE"
+                Install "Install-Cleanup"
+            Endif
+
+            goto FatalError
+        Endif
+
+        Ifstr(i) $(!NTN_InstallMode) != install
+            goto NoMoreCards
+        Endif
+
+        Set Networkcards = "SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkCards\"
+        Set NMSInfName = "SOFTWARE\Intel\NETWORK_SERVICES\NMS"
+        Set Netrules = "\NetRules"
+        Set CardNumber = 1
+        Set CardKey = ""
+        Set KeyNull = ""
+        Set MAXIMUM_ALLOWED = 33554432
+        Set NoTitle = 0
+
+        IfStr(i) $(Option) == "W70"
+            goto NetworkCardsLoop
+        Else-IfStr(i) $(Option) == "W20"
+            goto NetworkCardsLoop
+        Endif
+
+        OpenRegKey $(!REG_H_LOCAL) "" $(NMSInfName) $(MAXIMUM_ALLOWED) CardKey
+        SetRegValue $(CardKey) {InfName,$(NoTitle),$(!REG_VT_SZ),$(OrigInfName)}
+        CloseRegKey $(CardKey)
+
+NetworkCardsLoop = +
+        Set yRegPath = $(Networkcards)$(CardNumber)
+        Set xRegPath = $(yRegPath)$(Netrules)
+
+        OpenRegKey $(!REG_H_LOCAL) "" $(xRegPath) $(MAXIMUM_ALLOWED) CardKey
+        ifstr(i) $(CardKey) == $(KeyNull)
+            goto NoMoreCards
+        endif
+
+        GetRegValue $(CardKey),"InfName" InfNameValue
+        Set InfNameInfo = *($(InfNameValue), 4)
+
+        ifstr(i) $(InfNameInfo) == $(NewInfName)
+            SetRegValue $(CardKey) {InfName,$(NoTitle),$(!REG_VT_SZ),$(OrigInfName)}
+        Endif
+
+        CloseRegKey $(CardKey)
+        set-add CardNumber = $(CardNumber),1
+        goto NetworkCardsLoop
+
+NoMoreCards = +
+        Ifstr(i) $(Cleanup) == "TRUE"
+            Install "Install-Cleanup"
+        Endif
+
+	return $(ReturnStatus)
+
+;***********************************************************************
+; Something's busted!
+;***********************************************************************
+FatalError = +
+
+        return STATUS_FAILED
+
+[Install-Oemsetup]
+	Set STF_VITAL = 1
+	Set STF_OVERWRITE = "VERIFYSOURCEOLDER"
+
+	AddSectionFilesToCopyList "Files-Option-Inf" $(SrcDir) +
+		$(!STF_WINDOWSSYSPATH)
+	
+	Set !STF_NCPA_FLUSH_COPYLIST = 1
+	CopyFilesInCopyList
+
+	Exit
+
+;***********************************************************************
+; Clean system of adapter files.
+;***********************************************************************
+[Install-Cleanup]
+
+	AddFileToDeleteList $(!STF_WINDOWSSYSPATH)\$(CleanInfName)                                         
+
+	Exit
+
+[Files-Option-Inf]
+        2, OEMSETUP.INF,   SIZE=30000, RENAME=$(NewInfName), +
+                OVERWRITE=ALWAYS
+

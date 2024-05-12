@@ -1,0 +1,767 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="en">
+  <head>
+    <title>Universal ATA driver for Windows NT4/2000/XP</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="Universal ATA driver, Universal IDE driver, Universal UDMA driver, Universal DMA driver, Windows, universal, ata, driver, dma, BusMaster, NT4, 2000, w2k, XP">
+    <meta name="description" content="Universal ATA driver for Windows NT4/2000/XP">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=en">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="index.php_lang=ru&amp;">RU&nbsp;<img height="12" width="20" alt="ru" src="http://10.0.0.11/alter/img/lang_ru.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    <center>
+<h3>Universal ATA driver for Windows NT4/2000/XP</h3>
+<h4>Updated
+ 2005.03.24</h4>
+</center>
+
+<ul>
+  <li><a href="index.html#download">Download</a>
+  <li><a href="index.html#features">Features</a>
+  <li><a href="compat.php_lang=en&amp;">Compatibility</a>
+  <li><a href="uni_ata.php_lang=en&amp;">Install Guide</a>
+  <li><a href="uniata_faq.php_lang=en&amp;">TroubleShooter/FAQ</a>
+  <li><a href="registry.php_lang=en&amp;">Registry settings</a>
+  <li><a href="atactl.php_lang=en&amp;">Management utility</a>
+  <li><a href="index.html#plans">Plans</a>
+  <li><a href="index.html#history">History</a>
+  <li><a href="index.html#ver">Versions</a>
+</ul>
+
+<a name="download"></a>
+<center>
+<h4>Download</h4>
+</center>
+
+To get latest stable version 
+<a href="uni_ata.php_lang=en&amp;">
+(v 0.31a) click here
+</a>
+<br>
+The latest beta version 
+ - <a href="index.html#uniata_beta">v 0.31b</a>
+
+<a name="features"></a>
+<center>
+<h4>Features</h4>
+</center>
+
+<ul>
+  <li>Support of <a href="compat.php_lang=en&amp;">numerous IDE controllers</a> and generic ATA/ATAPI
+  <li>DMA/UDMA support (up to ATA-133) on known and generic DMA on unknown controllers
+  <li>support of contiguous set of modes UDMA0-UDMA6 (ATA-16/25/33/44/66/100/133)
+  <li>Serial ATA support
+  <li>LBA48 (large drives greater than 128Gb) support
+  <li>no reinstall required when migrating to different IDE controller or motherboard.
+  <li>internal command queueing and optimized execution order
+  <li>user-mode device <a href="atactl.php_lang=en&amp;">management utility</a>. You can change data transfer mode
+      (PIO/DMA/UDMA) on the fly.
+  <li>NT4, 2000, XP support (may be 2003/2005 - not tested)
+  <li>tuning Read/Write cache, transfer modes and many other things via <a href="registry.php_lang=en&amp;">Registry settings</a>
+</ul>
+
+<a name="plans"></a>
+<center>
+<h4>Plans</h4>
+</center>
+
+<ul>
+  <li>RAID support (mirror, stripping, mirror+stripping)
+  <li>NT3.51 support 
+  <li>Hot swap for IDE devices under OSes prior w2k
+  <li>Win 9x/ME support
+  <li>correct PNP (WDM) implementation for w2k and higher
+</ul>
+
+<a name="history"></a>
+<center>
+<h4>History</h4>
+</center>
+
+  The idea of writing own universal ATA driver had appeared due to the following reasons
+:<br>
+<ol>
+  <li>
+     compatibility of DMA/UDMA mode (really, the driver supporting these modes)
+     and varoius CD-R/RW recording software
+     (see <a href="http://10.0.0.11/alter/docs/win/cdrw_dma/index.php_lang=en&amp;">CD-R/RW & DMA drivers</a>)</li>
+  <li>
+     absence of user-level IDE management tools: transfer mode management/monitoring
+     (PIO, (U)DMA), getting detailed device information
+     </li>
+  <li>
+     absence of simultaneous usage of devices operating in different transfer modes
+     (PIO vs (U)DMA) with single IDE cable.
+     </li>
+  <li>
+     a wish to implement <b>command reordering</b> to improve performance
+     (I hope everybody knows why SCSI shows better results than IDE in multiprocess
+     environment.
+     </li>
+  <li>
+     an idea of organizing LBA-based sector cache, (of course, cache block would
+     be at least 64k)
+     </li>
+  <li>
+     neverending problems with decision what is better: to be able to boot OS
+     on any motherboard or to use UDMA. Such questions come when we have
+     to support many computers with different hardware, but identical
+     set of software (NortonGhost's users know). Especially topical for w2k, where changing of IDE
+     controller makes system unbootable. By the way, to solve this
+     problem one significant improvment is planned. Read about it 
+     <a href="uniata_pnp.php">here</a>.
+     </li>
+</ol>
+<br>
+  There are some wishes from downloaders (not implemented yet):
+<br>
+<ol>
+  <li>
+  RAID support 
+ (mirror, stripping, mirror+stripping)
+  </li>
+  <li>
+  NT3.51 support 
+  </li>
+  <li>
+  Hot swap for IDE devices under OSes prior w2k
+  </li>
+</ol>
+<br>
+  <p>After reading some specifications (for HDDs, ATAPI and ATA/IDE controllers) and
+looking through sources (from NT4 DDK and FreeBSD 4.3 - 4.5) the first working
+version - <b>BusMaster_v8a_ok.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v8a_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v8a_ok.tgz">tgz</a></b> (52.1 Kb/60.5 Kb) (v 0.8a). <i>Note, that
+the last one is <b>BusMaster_v31a.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a></b> (80 Kb/96 Kb) :)</i>
+That version (v 0.8a) successfully detected all available controllers under NT4.
+The first controller list was:
+</p>
+<ol>
+  <li><b>VIA 82C586 (ETEQ)</b> on SOYO-5EHM</li>
+  <li><b>VIA 8233</b> on Soltek-DRV4</li>
+  <li><b>CMD 649</b> (an additional PCI controller)</li>
+</ol>
+  And a little later:
+<br>
+<ol start="4">
+  <li><b>Intel ICH</b> on ~10 different machines</li>
+  <li><b>Intel ICH2</b> on Dual-Processor machine</li>
+  <li><b>ServerWorks CSB5</b> on Dual-Processor machine</li>
+  <li><b>AcerLabs Aladdin V (Rev 0xC4)</b> on Notebook</li>
+  <li><b>Intel PIIX3</b></li>
+  <li><b>VIA 82C686</b></li>
+</ol>
+<br>
+
+  <p>By design the driver initializes any PCI device that reports itself as
+an IDE Controller and also the following well-known Mass-storage Controllers:
+</p>
+<ul>
+  <b>good BusMasters:</b><br><br>
+
+  Intel PIIX / PIIX3 / PIIX4<br>
+  Intel ICH / ICH0 / ICH2<br>
+  AcerLabs Aladdin ATA / ATA33<br>
+  VIA ATAxxx<br>
+  SiS 5591 ATA33<br>
+  CMD 649 ATA100 <i>checked</i><br>
+  CMD 648 / 646<br>
+  Cyrix 5530 ATA33<br>
+  AMD 756 ATA66<br>
+  ServerWorks ROSB4 ATA33<br>
+  Promise TX2 ATA33 / ATA66 / ATA100<br>
+  HighPoint ATAxxx<br>
+  <hr width="5%" align="left">
+  Intel ICH3, PIIX4e<br>
+  nVIDIA nForce/nForce2<br>
+  AMD 768, 766, 756<br>
+  ServerWorks CSB5 ATA66/100<br>
+  Promise TX2 ATA133<br>
+  Promise Ultra/FastTrak 33/66/100<br>
+  Promise OEM ATA100
+  Acard ATPxxxx 33/66/100<br>
+  Cenatek Rocket Drive
+  <hr width="5%" align="left">
+  Intel ICH4 /ICH5, PIIX4e<br>
+  SiS Family<br>
+  <hr width="5%" align="left">
+  Intel ICH6<br>
+  National Geode SC1100<br>
+  IT8xxx<br>
+
+  <hr width="20%" align="left">
+  <b>buggy controllers:</b><br><br>
+
+  PC Technology RZ 1000<br>
+  PC Technology 37C922<br>
+  CMD 640<br>
+  SiS83C601<br>
+</ul>
+
+  <p>Check if the driver really supports all mentioned devices is rather difficult.
+  But some compatibility matrices for some versions you can find <a href="compat.php_lang=en&amp;">here</a></p>
+
+<br>
+
+<a name="ver"></a>
+<a name="uniata_beta"></a>
+
+<hr>
+  Debug Version 0.31b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b_Dbg.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b_Dbg.tgz">tgz</a>)</b> - 111.8 Kb/131.6 Kb.<br>  Version 0.31b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b.tgz">tgz</a>)</b> - 80.1 Kb/96.1 Kb.<br>and sources 0.31b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31b_src.tgz">tgz</a>)</b> - 166.1 Kb/206.5 Kb.<br>  <li>Extension in <a href="registry.php_lang=en&amp;">Registry settings</a> related to supported device classes.
+  Now it is possible to enable/disable support of PCI, ISA, ISA/PCI Compat and MCA.<br>
+  <li>Also for Debug purposes added option for dumping Debug messages to blue screen.<br>
+  <li>HiNT VXPro II is added to the list of known devices. However, it doesn work yet :)<br>
+  <b>Note: <font color="red">do not</font></b> install Debug build under Win 2000 and higher
+  until <a href="http://10.0.0.11/alter/soft/win/dbgdump/index.php_lang=en&amp;">DbgPrint Dump</a>
+  is installed with
+<pre class="code">
+DbgPrintLog.exe -full -T DTN -wd X:\dir_for_logs -drv 1 -svc A -drvopt DoNotPassMessagesDown 1
+    -drvopt StopOnBufferOverflow 1 -drvopt BufferSize 16384 DbgDump.log
+</pre>
+  <i>2005.03.04</i><br>
+
+<hr>
+  Version 0.31a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a.tgz">tgz</a>)</b> - 80 Kb/96 Kb.<br>and sources 0.31a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31a_src.tgz">tgz</a>)</b> - 165.9 Kb/206.3 Kb.<br>  <li>Thanks to <i>Axxie</i> for discovering bug with uninitialized DEVICE_EXTENSION. This structure includes state variables
+      of channels, connected devices and interrupt service routines. On most machines this memory block was allocated
+      zero-filled. But on some ones it contained garbage.<br>
+  <li>I've also received interesting news from <i>Mike</i>. He have successfully run NT4+sp6a with UniATA installed on ICH4.<br>
+  <i>2005.03.04</i><br>
+
+<hr>
+  Version 0.31 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31.tgz">tgz</a>)</b> - 79.6 Kb/95.6 Kb.<br>and sources 0.31 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v31_src.tgz">tgz</a>)</b> - 165.1 Kb/205.4 Kb.<br>  <li>Completely rewritten workaround for ATAPI devices those generate <i>INTR</i>
+      without clearing <i>BSY</i>. Treate thanks to <i>Root</i> for testing.<br>
+  <li>Fixed bug in operation sequence for sending ATAPI command. At one place interrupt status was not cleared,
+  and at another interrupts were enabled too early.<br>
+  <li>Added interrupt status clear code after controller reset.<br>
+  <li>Still some extensions in <a href="registry.php_lang=en&amp;">Registry settings</a>.<br>
+  <i>2005.02.20</i><br>
+
+<hr>
+  Debug Version 0.30i (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i_Dbg.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i_Dbg.tgz">tgz</a>)</b> - 101.6 Kb/119.8 Kb.<br>  Version 0.30i (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i.tgz">tgz</a>)</b> - 79.2 Kb/95.2 Kb.<br>and sources 0.30i (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30i_src.tgz">tgz</a>)</b> - 164.2 Kb/204.5 Kb.<br>  <li>Fixed bug (too long delay) in HDD cache flushing code.<br>
+  <li>.INF is updated with till one patch by <i>Root</i><br>
+  <li>Added experimantal workaround (from FreeBSD) for ATAPI devices those generate <i>INTR</i>
+      without clearing <i>BSY</i>.<br>
+  <li>Added workaround for the following bug in SCSIPORT.SYS from NT4: If we attempt to initialize
+      <i>Compatible Mode</i> IDE controller and SCSIPORT.SYS fails resource list check, it keeps
+      <i>AtDiskPrimaryAddressClaimed</i> and/or <i>AtDiskPrimaryAddressClaimed</i> flag(s) set to TRUE.
+      As result the second initialization attempt fails because UniATA driver decides that this controller is
+      already clamed by some other driver.
+      Thanks to <i>Vitaliy Vorobyov aka deathsoftX@yandex.ru (remove X)</i> for bug report and fix.<br>
+  <li>I've extended and documented <a href="registry.php_lang=en&amp;">Registry settings</a>.<br>
+  <li>Also published special debug build with logs enabled. <br>
+  <i>2005.02.08</i><br>
+
+<hr>
+  Debug Version 0.30h (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h_Dbg.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h_Dbg.tgz">tgz</a>)</b> - 99.9 Kb/118.2 Kb.<br>  Version 0.30h (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h.tgz">tgz</a>)</b> - 78.3 Kb/94.3 Kb.<br>and sources 0.30h (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30h_src.tgz">tgz</a>)</b> - 162.6 Kb/202.7 Kb.<br>  <li>Removed too long waiting for device readiness in error handler.<br>
+  <li>Implemented HDD cache flushing in response to system shutdown request.<br>
+  <li>.INF is updated with patch by <i>Root</i>. May be this will help .INFs working properly :)<br>
+  <li>Added device reset option <i>-r</i> to <i><a href="atactl.php_lang=en&amp;">atactl.exe</a></i>.
+  It is useful when ATAPI device hangs.<br>
+  <li>Published special debug build with logs enabled.<br>
+  <b>Note: <font color="red">do not</font></b> install this build
+  until <a href="http://10.0.0.11/alter/soft/win/dbgdump/index.php_lang=en&amp;">DbgPrint Dump</a>
+  is installed with
+<pre class="code">
+DbgPrintLog.exe -full -T DTN -wd X:\dir_for_logs -drv 1 -svc A -drvopt DoNotPassMessagesDown 1
+    -drvopt StopOnBufferOverflow 1 DbgDump.log
+</pre>
+  <i>2005.01.30</i><br>
+
+<hr>
+  Version 0.30g (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30g.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30g.tgz">tgz</a>)</b> - 78.2 Kb/93.8 Kb.<br>and sources 0.30g (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30g_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30g_src.tgz">tgz</a>)</b> - 161.5 Kb/201 Kb.<br>  <li>I've found and fixed rather specific bug: in some cases driver attempted to change transfer mode
+  for some device on IDE bus while another device executed the command. In other cases similar situation
+  appeared when new command came to the queue. The bug could be observed as complete system hang.<br>
+  On my configuration this situation could be reproduced in rather specific conditions. However,
+  I have only 1 device on each IDE bus. My be such hang can happen on machines with 2 devices on
+  single IDE bus much often, even during OS boot.<br>
+  <li>Seems, LBA48 already works fine now. And <b>Intel ICH4</b> doesn't yet :(<br>
+  <i>2005.01.16</i><br>
+
+<hr>
+  Version 0.30e (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30e.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30e.tgz">tgz</a>)</b> - 78.1 Kb/93.8 Kb.<br>and sources 0.30e (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30e_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30e_src.tgz">tgz</a>)</b> - 160.9 Kb/200.4 Kb.<br>  Still some fixes with LBA48 support
+  <li>I have forgotten to set <i>IDE_USE_LBA</i> flag when using LBA48 addressing<br>
+  <li>there were no support for LBA48 version of <i>IDE_VERIFY</i> command. This command is used for surface check.<br>
+  <li>in some cases <i>READ_NATIVE_LAST_LBA/SET_MAX_LBA</i> were not handled properly<br>
+  and one useful addon:
+  <li>implemented <i><a href="atactl.php_lang=en&amp;">atactl.exe</a></i>
+  command line utility, which can enumerate IDE, SCSI and RAID controllers
+  and display information about connected to them devices.
+  If UniATA driver is installed, you can change data transfer mode (PIO/DMA/UDMA) for individual IDE/ATAPI
+  devices with <i><a href="atactl.php_lang=en&amp;">atactl.exe</a></i>.<br>
+  <li>optimized controller-specific DMA tuning code. When removing code duplicates
+  (see usage of <i>AtaSetTransferMode()</i>) I have found some misscorrespondance between
+  ATA/ATAPI device transfer mode and controller transfer mode.<br>
+  <i>2005.01.02</i><br>
+
+<hr>
+  Version 0.30c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30c.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30c.tgz">tgz</a>)</b> - 69.8 Kb/75.1 Kb.<br>and sources 0.30c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30c_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30c_src.tgz">tgz</a>)</b> - 148.6 Kb/176.8 Kb.<br>  <li>Fixed LBA48 support bug. LBA48 is addressing mode used for large capacity drives - more than 128Gb.
+  The problem was caused by code of determining real drive capacity.
+  Some drives report their size as 32Gb (e.g. my <i>Seagate Barracuda IV 40</i>) or
+  as 128Gb (I don't know real examples) for compatibility issues. There are
+  special commands for retrieving real capacity and size limit removal.
+  They are <i>READ_NATIVE_LAST_LBA</i> and <i>SET_MAX_LBA</i>. But I didn't know,
+  about their 48-bit clones intended for drives larger than 128Gb. So,
+  I programmed drives to limit their capacity to 128Gb wit hold commands :(<br>
+  Greate thanks to <i>Alexander Spelicyn aka spelX@mail.ru (remove X)</i> for testing with 160Gb HDD
+  on the old good <i>i440BX</i> (this controlled doesn't support LBA48).
+  <li>Fixed bug with handling <i>UNIATA_NO_DPC_ATAPI</i> flag. This flag enables workaround
+  for hangs with some new CD/DVD drives on <b>CMD-649</b>.<br>
+  <i>2004.12.27</i><br>
+
+<hr>
+  Version 0.30a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30a.tgz">tgz</a>)</b> - 67.9 Kb/72.5 Kb.<br>and sources 0.30a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30a_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v30a_src.tgz">tgz</a>)</b> - 146.4 Kb/173.7 Kb.<br>  <li>Once again I have rewritten <b>Intel ICH4</b> support code. Saying truth, I reverted it
+  to very old state, when it seemed working. Let's wait for testing result.
+  <li>Until we have no absolutely correct and 100%-reliable interaction with ScsiPort driver,
+  I have introduced workaround. The main idea - I try to init main Onboar IDE controller
+  using various tricks (I wrote about these tricks before). Experiments show that
+  this workaround helps in many cases. Also, let's wait for results.<br>
+  <i>2004.12.05</i><br>
+
+<hr>
+  Version 0.29j (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29j.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29j.tgz">tgz</a>)</b> - 67.6 Kb/72 Kb.<br>and sources 0.29j (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29j_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29j_src.tgz">tgz</a>)</b> - 145.5 Kb/172.6 Kb.<br>  <li>Bug-fix in <b>SiS</b> controller detection code. It has very interesting algorithm.
+  There is 1 PCI IDE Controller with instant DeviceId/VendorID. There are
+  one or two specific Bridge Device(s). Their DeviceId/VendorId determine
+  actual type of the IDE Controller. This behavior is similar to VIA.
+  But some models need very specific check. We change 1 byte in <i>PCI Config Space</i> ot
+  the IDE Controller and check if its DeviceId have changed (!). (Seems to me,
+  this is not too good idea). The problem was because I have lost the line
+  which reverts controller to initial state.<br>
+  Greate thanks to
+  <a href="http://www.tmse.h11.ru/">Mike</a> for testing my buggy versions
+  and supplying me with pretty <a href="http://10.0.0.11/alter/soft/win/uni_ata/New_BSOD_2.jpg">bug-reports</a> (181 Kb).<br>
+  So, lets try new version...<br>
+  <i>2004.09.21</i><br>
+<hr>
+  <li>Still some fixes in <b>Intel</b>, <b>Acer</b> and some other controller support code.
+  Silly bug. I put <b>break</b> in <b>switch/case</b> instead of <b>return</b>.
+  As result after successfull UDMA initialization the default code was called
+  and the device (not controller!) switched back to PIO-0.
+  <li>Improved <b>SiS</b> controlelr support. Thanks to Ivano Guerra. Of course, this
+  is beta-version and must be tested. Try
+  Version 0.29i3 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i3.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i3.tgz">tgz</a>)</b> - 67.6 Kb/72 Kb.<br>and sources 0.29i3 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i3_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i3_src.tgz">tgz</a>)</b> - 144.9 Kb/171.9 Kb.<br>  <i>2004.09.08</i><br>
+<hr>
+  In same code for <b>Intel ICHxxx</b> IDE support found still one bug. Looks like
+  that it is mine. The bug leads to data corruption. So, v29i is removed
+  from the site.
+<br>
+  <i>2004.08.26</i><br>
+<hr>
+Version 0.29i (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29i_src.tgz">tgz</a>)</b> - 144.4 Kb/171.2 Kb.<br>  <li>Found and fixed bug in <b>Intel</b> IDE support code. It was copied from FBSD 5.2.1
+  (and it is still there). Have compared the latest and some old versions and found, than
+  32-bit value (0x10000 << devno) is written to 16-bit register (PCI Config Space 0x54).
+  Higher bits are truncated and lower bits are all 0. This turns the controller out from UDMA mode.
+  But connected devices are already programmed to use UDMA. Thus we have transfer mode missmatch,
+  and as result - hangs and crashes.
+  I hope this fix will help.
+<br>
+  <i>2004.08.25</i><br>
+<hr>
+Version 0.29h (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29h.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29h.tgz">tgz</a>)</b> - 66.9 Kb/71.4 Kb.<br>and sources 0.29h (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29h_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29h_src.tgz">tgz</a>)</b> - 143.6 Kb/170.3 Kb.<br>  <li>Rewritten <b>Intel</b> IDE controller support code. I hope this will only improve compatibility.
+  Especially for <b>ICH4</b>, which didn't work with previous version.
+  <li>Ported some new code from FBSD 5.2.1.
+  <li>Fixed bug with include/exclude device list in Registry.
+  <li>Implemented simplex-mode support. In this mode IDE channels do not operate simultaneously.
+  For some controllers this mode is inevitable. Along with autodetect, you can turn the controller
+  into simplex-mode using DWORD:ForceSimplex Registry value under
+  HKLM\System\CurrentControlSet\Services\UniATA\Parameters Registry key or under its device-specific subkey.
+  <li>Added support for IDE devices those report 0x40 (IDE_STATUS_DRDY) status in inactive state
+  instead of usual 0x50 (IDE_STATUS_IDLE). Such behavior was oberved under latest VMWare release (4.5.1 build-7568).
+  Thanks to <i>Vitaliy</i> for information and testing.
+  <li>Rewritten load balancing code for separate IDE channels and devices connected to single
+  channel.
+<br>
+  <i>2004.08.01</i><br>
+<hr>
+Version 0.29d (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29d.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29d.tgz">tgz</a>)</b> - 62.4 Kb/66 Kb.<br>and sources 0.29d (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29d_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29d_src.tgz">tgz</a>)</b> - 135.9 Kb/160.1 Kb.<br>  <li>Fixed <b>VIA 8235</b> and <b>VIA 8233A</b> init code. That was done because
+I have installed UniATA on one computer with VIA 8235. After that I observed a lot pretty
+bugs. System worked slowly and randomly crashes. It seemed like sometimes data is not correctly
+read from HDD. I looked into latest FBSD ata drivers and saw no changes for this controller.
+At the same time there are bug-reports in formus. I looked into Linux kernel and found
+that for <b>VIA 8235</b> and <b>VIA 8233A</b> PCI register 0x4c is not programmed. I did
+the same. Unfortunately, I cannot check if it works on that machine.
+  <li>During code review I found that I made a mistake when porting SiS support code from 
+FBSD. The bug affected on secondary channel's UDMA mode register. Also fixed.
+<br>
+  <i>2004.06.05</i><br>
+<hr>
+Version 0.29c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29c.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29c.tgz">tgz</a>)</b> - 61.6 Kb/65.2 Kb.<br>and sources 0.29c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29c_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29c_src.tgz">tgz</a>)</b> - 133.9 Kb/157.9 Kb.<br>  <li>Fixed <b>VIA 8235</b> and <b>VIA 8233A</b> init code. That was done because
+I have installed UniATA on one computer with VIA 8235. After that I observed a lot pretty
+bugs. System worked slowly and randomly crashes. It seemed like sometimes data is not correctly
+read from HDD. I looked into latest FBSD ata drivers and saw no changes for this controller.
+At the same time there are bug-reports in formus. I looked into Linux kernel and found
+that for <b>VIA 8235</b> and <b>VIA 8233A</b> PCI register 0x4c is not programmed. I did
+the same. Unfortunately, I cannot check if it works on that machine.
+  <li>During code review I found that I made a mistake when porting SiS support code from 
+FBSD. The bug affected on secondary channel's UDMA mode register. Also fixed.
+<br>
+  <i>2004.06.02</i><br>
+<hr>
+Version 0.29a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a.tgz">tgz</a>)</b> - 61.1 Kb/64.7 Kb.<br>and sources 0.29a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29a_src.tgz">tgz</a>)</b> - 133.5 Kb/157.5 Kb.<br><li>
+  Added code for a lot of new controllers. Mostly for SiS and Promese.
+<br>
+<li>
+  Implemented device/vendor-specific Registry settings.<br>
+  You can create the following sub-keys with parameters under 
+  HKLM\System\CurrentControlSet\Services\UniATA.<br>
+  Paramaters - The most global settings.<br>
+  Paramaters\Ven_VVVV - where VVVV is Vendor ID (see. <a href="http://10.0.0.11/alter/soft/win/ntpcidump/index.php_lang=en&amp;">PCI Dump</a>)<br>
+  Paramaters\Ven_VVVV\Dev_DDDD, where DDDD is Device Id. See the same place.<br>
+  Paramaters\Ven_VVVV\Dev_DDDD\Slot_XXXXXXXX, where XXXXXXXX is PCI address in 32-bit form (HEX).<br>
+  In general it would be pretty to create configuration utility...<br>
+<li>
+  Implemented Include/Exclude options. Now you can create
+  Inlude or Exclude DWORD value under Registry key, described above to
+  Enable/Disable UniATA support for specified controller.
+
+<br>
+  <i>2004.04.08</i><br>
+<hr>
+Version 0.29b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29b.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29b.tgz">tgz</a>)</b> - 61.5 Kb/65.1 Kb.<br>and sources 0.29b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29b_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v29b_src.tgz">tgz</a>)</b> - 133.8 Kb/157.8 Kb.<br><li>
+  Fixed some issues in OEMSETUP.INF and TXTSETUP.OEM. After that UniATA was
+successfully added during text-mode w2k setup phase. Then w2k was installed
+on HDD connected to CMD649 IDE controlled. Note, w2k doesn't support it itself.
+So, I decided that these setup files are correct now. Enjoy.
+<br>
+  <i>2004.05.19</i><br>
+<hr>
+Version 0.28 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v28.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v28.tgz">tgz</a>)</b> - 58.3 Kb/61.8 Kb.<br>and sources 0.28 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v28_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v28_src.tgz">tgz</a>)</b> - 127.2 Kb/149.1 Kb.<br>  <li>Fixed bug with interrupt enable/disable routines. They worked with Primary
+channel only.<br>
+  <li>At least we removed dependence on ScsiPort DMA support API. Now UniATA
+translates virtual addresses to physical itself. This give 2 advantages:
+1) No hackar's init methods needed (ISA bridged controllers was initialized
+as PCI and this method worked not on all machines). 2) No more copying
+data between DMA buffer and user buffer.
+<br>
+  <i>2004.02.24</i><br>
+<hr>
+Version 0.27a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a.tgz">tgz</a>)</b> - 58.2 Kb/61.9 Kb.<br>and sources 0.27a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27a_src.tgz">tgz</a>)</b> - 124.7 Kb/147.6 Kb.<br><li>
+  Fixed error handling code for ATAPI devices (CD-ROM/RW, etc.).
+On some devices we must wait for DRQ bit assertion if an error occured.
+<br>
+  <i>2004.01.20</i><br>
+<hr>
+Version 0.27 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27.tgz">tgz</a>)</b> - 58.3 Kb/61.8 Kb.<br>and sources 0.27 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v27_src.tgz">tgz</a>)</b> - 125.5 Kb/147.1 Kb.<br><li>
+  Thanks to <i>Vitaliy Vorobyov aka deathsoftX@yandex.ru (remove X)</i>.<br>
+  Fixed initialization code for
+ NT4+SP6a<br>
+<li>
+  Thanks to <i>Vitaliy Vorobyov</i> again,
+  for rewriting installation INT. file for NT4<br>
+<li>
+  Interrupt service (ISR) code, that uses delays is moved to deparate thread (DPC).
+<br>
+  <i>2004.01.16</i><br>
+<hr>
+Version 0.26c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26c.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26c.tgz">tgz</a>)</b> - 55.8 Kb/59 Kb.<br>and sources 0.26c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26c_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26c_src.tgz">tgz</a>)</b> - 120.7 Kb/141.4 Kb.<br><li>
+  Fixed bug with DMA error handling. Previous versions deadly hanged
+  the system if such error occured. The experiment shown, that after
+  DMA CRC error we should wait for drive readiness before retry.<br>
+  Special thanks to <i>Alex Y. Matiash</i> for bug-report<br>
+<li>
+  Fixed interrupt handler for <b>CMD 649</b> and <b>CMD 648</b> controllers<br>
+  <i>2003.12.26</i><br>
+<hr>
+Version 0.26 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26.tgz">tgz</a>)</b> - 55.7 Kb/59 Kb.<br>and sources 0.26 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26_src.tgz">tgz</a>)</b> - 119.3 Kb/140 Kb.<br><li>
+  Promise and HighPoint RAID support is now disabled by default, because we
+  don't support RAID-arrays yet.<br>
+  It is possible to enable support for these controllers in standard (non-RAID)
+  dual-channel mode:<br>
+<pre>
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UniATA\Parameters]
+"SkipRaids"=dword:00000000
+</pre>
+<li>
+  New utility for w2k .INF-file reconstruction is added to distribution.
+  It scans PCI bus for compatible, but not listed IDE controllers.
+  If such controllers are added, they are inserted into .INF-file.
+<br>
+  <i>2003.09.23</i><br>
+<hr>
+Version 0.26b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26b.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26b.tgz">tgz</a>)</b> - 55.8 Kb/59 Kb.<br>and sources 0.26b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26b_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v26b_src.tgz">tgz</a>)</b> - 120.6 Kb/141.2 Kb.<br><li>
+  Fixed bug with DMA mode on some types of CD-ROMs<br>
+  <i>2003.11.08</i><br>
+<hr>
+Version 0.25f (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25f.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25f.tgz">tgz</a>)</b> - 36.9 Kb/38.6 Kb.<br>and sources 0.25f (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25f_src.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25f_src.tgz">tgz</a>)</b> - 100.6 Kb/119.1 Kb.<br><li>
+  I've found, that even rahter old versions work under w2k. But with some
+  restrictions: OS doesn't allow us to handle onboard (Native Mode) IDE, because in
+  w2k IDE has its own miniport driver that differs from SCSI miniport.
+  Now I'm thinking about the way of cheating the system to allow my
+  driver representing Native Mode IDE controllers as SCSI devices.<br>
+  <i>2003.09.12</i><br>
+<hr>
+Version 0.25e (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25e.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25e.tgz">tgz</a>)</b> - 164.3 Kb/200.1 Kb.<br><li>
+  Fixed bug with invisibility of the 2nd IDE channel on onboard controller.
+  The trouble was because NT4 allows initialization of 2 PCI devices with the same
+  address on PCI bus, but with different system resource usage (I/O ranges and IRQ).
+  W2k doesn't permit such tricks. Thus I use single device thet handles 2 IRQs under this OS.
+<br>
+<li>
+  AdapterControl fuctionality is added. It is used by OS to enable/disable controller interrupts
+  under w2k and higher.
+<br>
+<li>
+  Tests show, that PnP functionality doesn't work yet under w2k. The main difficulty lays in the following:
+  for PnP support we must create a list of all supported devices in Registry and installation .INF file.
+  It is not compatible with the idea of universal driver. Probably the utilities for dynamic Registry and/or .INF file
+  update will be created. Also probably 2 services using the same uniaata.sys would be created:<br>
+  - one of them will operate in PnP mode with fixed (from OS's point of view) set of known devices<br>
+  - onother will be started in Legacy mode to handle all other recognizable controllers
+<br>
+  <i>2003.09.01</i><br>
+<hr>
+Version 0.25a (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25a.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25a.tgz">tgz</a>)</b> - 157.5 Kb/192.6 Kb.<br><li>
+  I've found that broblem with onboard controllers was caused by PciIde.sys,
+  which handles such controllers.
+  Thus a simple installation BAT-file was created. It simply copies UniATA.sys,
+  creates neccessary Keys in Registry and disabled PciIde driver.<br>
+  <b>Now it works under w2k !!!</b>
+<br>
+<li>
+  Readme files are created for different platforms: w2k (readme_w2k.txt) and
+  NT4 (readme_nt4.txt). Old version of NT4 readme is now called readme_nt4_old.txt.
+  These files are moved to XXX_Dist directories.
+<br>
+  <i>2003.08.24</i><br>
+<hr>
+  I've found, that even rahter old versions work under w2k. But with some
+  restrictions: OS doesn't allow us to handle onboard (Native Mode) IDE, because in
+  w2k IDE has its own miniport driver that differs from SCSI miniport.
+  Now I'm thinking about the way of cheating the system to allow my
+  driver representing Native Mode IDE controllers as SCSI devices.<br>
+  <i>2003.07.12</i><br>
+<hr>
+Version 0.25 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v25.tgz">tgz</a>)</b> - 155.2 Kb/187.5 Kb.<br>  <li><b>Acard</b> and <b>nForce2</b> IDE DMA controllers support is added.</li>
+  <li>Fixed bug with Promise IDE DMA support code.</li>
+  <li>DMA mode check is added before accessing controller registers</li>
+  <i>2003.06.03</i><br>
+<hr>
+Version 0.24 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v24.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v24.tgz">tgz</a>)</b> - 153.1 Kb/185.2 Kb.<br>  <li>Disabled DMA for ATAPI devices on <b>ServerWorks</b> controllers. It doesn't work :(</li>
+  <li>Fixed bug with very old HDDs those don't support SET_GEOMETRY feature.</li>
+  <li>Fixed bug with using DWordIO (32bit) on very old HDDs those report such capability,
+  but can't operate in this mode</li>
+  <li>I tried to run this under w2k. It doesn't work.</li>
+  <i>2003.02.15</i><br>
+
+<hr>
+Version 0.23e (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23e.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23e.tgz">tgz</a>)</b> - 152.8 Kb/184.9 Kb.<br><li>
+  Code for handling some unusual devices (Yamaha-CRW2100) those like generating
+  <i>Unexpected Interrupt</i> durring initialization process. (They do it
+  a little later than I expected).
+<br>
+  <i>2002.11.25</i><br>
+<hr>
+Version 0.23d (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23d_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23d_ok.tgz">tgz</a>)</b> - 152.8 Kb/184.9 Kb.<br><li>
+  Fixed bug in .INF file
+<br>
+<li>
+  .INF files together with uniata.sys are moved to Debug_Dist and
+  Release_Dist directories
+<br>
+<li>
+  new target <b>PKG</b> with parameter <b>VER</b> is added to idedma.mak.
+  For example, current version with Dist directories was build using the
+  following command:
+  <br>
+  <i>nmake PKG VER="23d_ok"</i><br>
+<li>
+  new installation instruction can be found inside archive.
+<br>
+  <i>2002.11.14</i><br>
+<hr>
+Version 0.23c (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23c.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23c.tgz">tgz</a>)</b> - 155.4 Kb/188.9 Kb.<br><li>
+  I've fixed a very big and fat bug,
+  that could bring the computer down when executing DSC-restrictive commands
+  (Such as SEEK, PLAY_CD, immediate LOAD/UNLOAD, etc.).  Is was found on
+  attempt to play Audio-CD. This bug could also lead to non-oparated state
+  of dual-channel controllers. (when both channels are visible via single
+  PCI device).
+<br>
+<li>
+  .INF files are moved to Debug and Release directories for corresponding
+  build installation.
+  <br>
+  <i>2002.11.04</i><br>
+<hr>
+Version 0.23 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23.tgz">tgz</a>)</b> - 147.3 Kb/176.6 Kb.<br>  But you should not use it. It is buggy ;).
+  There is better one:
+  0.23b <b>BusMaster_v23b_ok.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23b_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23b_ok.tgz">tgz</a></b> (148.9 Kb/198.7 Kb)  It is good enough, but I've not publish it yet....<br>
+<b>Already done!!! Here it is:
+  <a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v23b_ok.rar">BusMaster_v23b_ok.rar</a></b>
+<li>
+  Controllers initialization code is optimizad for minimal size.
+</li>
+<li>
+  I've created independent command queues for Master and Slave devices.
+  Now command reordering is performed separately for each device, thus, it
+  is more efficient. The queue to be serviced for the next time is chosen
+  according to special algorithm. Currently it looks at queue size only,
+  but I'm going to make something more clever in nearest future.
+</li>
+<li>
+  Installation .INF file is added (in Dist directory)
+</li>
+  <i>2002.10.11(29)</i><br>
+<hr>
+Version 0.22b (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v22b.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v22b.tgz">tgz</a>)</b> - 146.1 Kb/173.5 Kb.<br>  It is a little less buggy
+<br>
+<li>
+  <b>VIA</b>-compatible chipset initialization code has been fixed. Now we handle
+  the case of an unknown <i>Revision Id</i> properly.
+</li>
+<li>
+  Controller list initialization code has been fixed. There were a bug with
+  NULL-pointers.
+</li>
+<li>
+  I've implement 'human-friendly' ;) algorithm of transfer rate slow-down
+  when we have too high CRC Error-rate. Now driver don't switch device to
+  PIO mode immediately. It probes slower modes until suitable one is found.
+  The mode is assumed to be suitable if it shows much better results.
+  If such mode can be found the device is switched to use this mode permanently.
+  This technology solves problem with 40-cond. cables instead of 80-cond. one
+  for UDMA66+ capable devices those don't set cable type bit properly in
+  IDENTIFY_INFORMATION.
+</li>
+  <i>2002.10.10</i><br>
+<hr>
+  Wow again! I've got new version
+<b>BusMaster_v21d_ok.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v21d_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v21d_ok.tgz">tgz</a></b> (87.8 Kb/108.2 Kb) (v 0.21d).
+  I would be thankful to everyone who takes it for testing and tell me
+  where it works and where it doesn't.
+<br>
+<li>
+  DMA/UDMA support for ATAPI devices is added.
+</li>
+<li>
+  The technology of working with controllers those have 2 channels
+  available via single PCI device was dramatically changed.
+  NT designers assumed that device can't interrupt until its previous
+  interrupt is serviced. Thus, we can't programm one channel until
+  transfer is completed on another channel. I've used a kind of workaround.
+  (New DeviceObject connected to the same interrupt is created. It
+  receives and queues interrupts from another channel).
+</li>
+<li>
+  IO request queue sorting by LBA is implemented. Huge directory tree scan
+  works about 8% faster (6.00 min -> 5.30) even in multithread tests with
+  different start directories. I've also tried transfer rates for simple
+  copy, but the results were unstable. The experiments with sorting algorithm
+  will go on.
+</li>
+  <i>2002.09.16</i><br>
+<hr>
+  Wow! I've got <b>working</b> version
+<b>BusMaster_v13b_ok.<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v13b_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v13b_ok.tgz">tgz</a></b> (97.4 Kb/112.6 Kb) (v 0.13b).
+that understand what is
+<b>DMA</b>.<br>
+<li>
+DMA Engine is enabled and works now!!!
+</li>
+<li>
+Some minor bugs in Primary/Secondary initialization on a
+single controller are fixed.
+</li>
+<li>
+  <i>Generic DMA (Single Word DMA, mode 0)</i> support is added for the case
+  when other DMA modes can't be initialized (for ex. on unknown controller model).
+  According to IDE BusMaster specification, the controller must automatically
+  stitch to this mode after power on or reset.
+</li>
+<li>
+  Device response wait timeout was changed from 5 to 0.05 sec in interrupt
+handler. It is wrong - blocking interrupts / thread switching when device
+hangs. Especially because it is possible (and even recomended by Microsoft)
+to avoid such waits.
+</li>
+  <i>2002.06.25</i><br>
+
+<hr>
+Version 0.9 (<b><a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v9_ok.rar">rar</a>/<a href="http://10.0.0.11/alter/soft/win/uni_ata/BusMaster_v9_ok.tgz">tgz</a>)</b> - 54.1 Kb/62.1 Kb.<br><li>
+New (I think, ideologically right) algorithm of device search and
+initialization is implemented.
+</li>
+<li>
+Some bugs with initialization of <i>MasterIde controller</i> (this is one that
+is onboard and usually works via ISA-to-PCI bridge). I was surprised that
+we can't communicate with it via PCI bus. Though it is visible there, neither
+IRQ nor IO-range is allocated (I suspect it was done for some kind of compatibility)
+We should use the following standard (predefined) IRQ/IO-ranges instead:
+<ul>
+  Primary channel - IRQ 14 / IO 0x1f0<br>
+  Secondary channel - IRQ 15 / IO 0x170<br>
+</ul>
+</li>
+  <i>2002.06.01</i><br>
+<hr>
+  <p>I've found an interesting thing: some HDDs (in particular my
+<i>Seagate Barracuda ATA 4</i>) report their capacity as 32Gb by default.
+Thus, we should use special command to determine its right capacity
+(see ATA specifications, 
+keyword="READ/SET NATIVE MAX LBA")</p>
+  <i>2002.05.28</i><br>
+<hr>
+
+Please, send your comments and propositions here:
+<a href="mailto:alterX@alter.org.ua (remove X)?subject=Uni-ATA">alterX@alter.org.ua (remove X)</a>
+<br>
+
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="http://10.0.0.11/alter/soft/index.php_lang=en&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">designed by Alter aka Alexander A. Telyatnikov</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">powered by Apache+PHP under FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>
+

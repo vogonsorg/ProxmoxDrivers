@@ -1,0 +1,184 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type"
+content="text/html; charset=iso-8859-1">
+<title>Other Advanced Features</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+<h1>Intel&reg; PRO Network Adapters WMI Provider 2.0</h1>
+<ul>
+  <li>
+    <p class="contents"><a href="#Overview">Overview</a></li>
+  <li>
+    <p class="contents"><a href="#System">System Requirements</a></li>
+  <li>
+    <p class="contents"><a href="#Install">Install</a></li>
+  <li>
+    <p class="contents"><a href="#Uninstall">Uninstall</a></li>
+  <li>
+    <p class="contents"><a href="#Usage">Usage with Applications</a></li>
+  <li>
+    <p class="contents"><a href="#Standards">Supported Standards</a></li>
+  <li>
+    <p class="contents"><a href="#Issues">Known Issues</a></li>
+</ul>
+<hr>
+<h2><a name="Overview"></a>Overview</h2>
+<p>The Intel&reg; PRO Network Adapters WMI Provider enables WMI-based management applications such as
+LANDesk* Client Manager 6.0 to monitor the status of PCI network adapters. 
+Intel&reg; PRO Network Adapters WMI Provider uses WMI, a user-level instrumentation technology for the Microsoft Windows* platform.&nbsp;
+<p>Windows Management Instrumentation (WMI) is a middleware layer that allows measurement and instrumentation information to be collected
+from kernel mode data providers. This information can then be provided to local or remote user-mode data consumers through the use of a common
+set of interfaces (Web-based Enterprise Management called WBEM). WMI is a data-independent pipeline between the data consumer and
+the data provider that makes no assumptions about the format of the data.
+<p>For example, Intel PRO Network Adapters WMI Provider uses the WMI event notification mechanism to send an event if a loosely
+plugged-in cable falls free and the Ethernet signal is lost.
+<p>The driver from the Product CD is required to be able to view custom information regarding Adapter Fault Tolerance and Adapter Load
+Balancing (AFT/ALB).&nbsp;
+<hr>
+<h2><a name="System"></a>System Requirements</h2>
+<ul>
+  <li>
+  <p class="numlst">Any Intel&reg; PRO/100 or PRO/1000 adapter and related driver software</li>
+  <li>
+  <p class="numlst">Microsoft WMI Core (NOTE: The WMI Core components are part of the operating system. These pieces are required for a WMI enabled application to work.)</li>
+  <li>
+  <p class="numlst">Windows 98, Me, NT 4.0</li>
+  <li>
+  <p class="numlst">For Adapter Teaming features (AFT and ALB support), the latest NDIS are also
+    required</li>
+</ul>
+<p>The Intel PRO Network Adapters WMI Provider supports all Intel PRO/100 and PRO/1000 adapters. If you are running an NDIS based
+driver under Windows NT 4.0, there is no need to install any new drivers to get full WMI support.
+<p>WMI instrumentation does not support VLANs.
+<hr>
+<h2><a name="Install"></a>Installation</h2>
+<ol>
+  <li>
+    <p class="numlst">If you are installing on a system running Windows 95, 98, Me or NT 4.0, you must install the Microsoft WMI Core. The most recently released version of the Microsoft WMI Core can be downloaded from Microsoft's web site:&nbsp;
+<a href="http://www.microsoft.com">http://www.microsoft.com</a>. You must then
+    configure DCOM. The WMI Core is included with Windows 2000, XP and Windows Server 2003.</li>
+  <li>
+    <p class="numlst">If you are upgrading from a previous version of the WMI
+    Provider, you must stop all running programs that are using
+Intel PRO Network Adapters WMI Provider. Once all programs have been stopped,
+remove older
+installations of the Intel PRO Network Adapters WMI Provider.</li>
+  <li>
+    <p class="numlst">To install the Intel PRO Network Adapters WMI Provider,
+    use the installer program that is available from the autorun program on the
+    Product CD.&nbsp;
+    <ol type="a">
+      <li>
+        <p class="numlst">At the &quot;Setup Type&quot; screen, select
+        Custom.&nbsp;</li>
+      <li>
+        <p class="numlst">At the &quot;Custom Setup&quot; screen, click the icon
+        next to the &quot;WMI CIMv2 Support&quot; selection.&nbsp;</li>
+      <li>
+        <p class="numlst">On the drop-down menu, select &quot;This feature will
+        be installed on local hardware.&quot;</li>
+      <li>
+        <p class="numlst">At the &quot;Ready to Install the Program&quot;
+        screen, click the &quot;Install&quot; button.&nbsp;</li>
+    </ol>
+  </li>
+</ol>
+<h2><a name="Uninstall"></a>Uninstall</h2>
+<p>To uninstall the Intel PRO Network Adapters WMI Provider:
+<ol>
+  <li>
+  <p class="numlst">Select <b> Start -> Settings -> Control Panel.</b></li>
+  <li>
+  <p class="numlst">Double-click the <b>Add/Remove Programs</b> icon.</li>
+  <li>
+  <p class="numlst">On the Install/Uninstall tab, select <b>Intel</b>&reg;<b> PRO Network Adapters WMI Provider (Build
+    2.0)</b>.</li>
+  <li>
+  <p class="numlst">Click <b>Add/Remove</b>.</li>
+</ol>
+<hr>
+<h2><a name="Usage"></a>Usage with Applications</h2>
+<p>WMI-based management applications such as WBEM CIM studio and WBEM Object browser in the WMI SDK can be used to access 
+Intel&reg; Client&nbsp;Instrumentation properties both locally and remotely.&nbsp;
+<p>On Windows 95, 98 or Millennium operating systems, however, you must carefully configure client systems to allow remote access of
+the Intel PRO Network Adapters WMI Provider properties. To do this, you will need to edit the Windows
+registry to remotely access Intel PRO Network Adapters WMI Provider properties.
+  <TABLE border="0" cellpadding="6" cellspacing="0">
+    <TR>
+      <TD valign="top">
+        <p class="numlst"><img border="0" src="caution.gif" width="28" height="21">
+      </TD>
+      <TD>
+        <em><strong>CAUTION</strong>:</em> Editing the system's registry incorrectly can cause
+        serious problems that may require you to reinstall the operating system.
+        Be very careful when editing the following registry entries. Please back up any important data before beginning this process. Please be
+        aware that enabling DCOM applications to connect anonymously to your system may violate your network's security policies.
+        Consult
+        with your system administrators before making these changes.
+      </TD>
+    </TR>
+  </TABLE>
+<h3>Step one: Verify registry values</h3>
+<p>Open regedit (<b>Start</b> -&gt; <b>Run</b> -&gt; regedit) on the Win9x or Millennium system, and ensure that the following values are set
+correctly:
+<ul>
+  <li>
+    <p class="numlst">HKLM\Software\Microsoft\OLE\EnableDCOM should be set to its default of "Y".</li>
+  <li>
+    <p class="numlst">HKLM\Software\Microsoft\OLE\EnableRemoteConnect should be changed to "Y".</li>
+  <li>
+    <p class="numlst">HKLM\software\microsoft\wbem\cimom\AutostartWin9x should be changed to "2".</li>
+  <li>
+    <p class="numlst">HKLM\software\microsoft\wbem\cimom\EnableAnonConnections should be changed to "1".&nbsp;</li>
+</ul>
+<p>Exit the registry editor and restart the Windows 95/98 or Millennium system.
+<h3>Step two: Configure the remote system</h3>
+<p>Log into the Windows 95, 98 or Millennium system remotely from a Windows NT
+4.0, Windows 2000, or Windows XP system using WBEM CIM Studio from the WMI
+SDK.&nbsp;
+<ol>
+  <li>
+    <p class="numlst">Enter the UNC name of the Windows system in the <b>Machine name</b> 
+    box and click <b>Connect</b>.&nbsp;</li>
+  <li>
+    <p class="numlst">In the WBEM CIM Studio login window, choose <b>Options</b> to see the full set of login choices.<br>
+    Leave <b>Login as current user</b> checked.&nbsp;<br>
+    Leave impersonation level set to <b>impersonate</b>.</li>
+  <li>
+    <p class="numlst">For authentication level, choose <b>None</b>. Click <b>OK</b>.</li>
+</ol>
+<p>This should allow you to connect to your Windows system remotely. The
+Intel PRO Network Adapters WMI Provider properties&nbsp;are available within the CIMv2 class structure.
+<hr>
+<h2><a name="Standards"></a>Supported Standards</h2>
+<p>The Intel&reg; PRO Network Adapters WMI Provider 2.0 supports the standards based CIM 2.2 specification.&nbsp;
+<hr>
+<h2><a name="Issues"></a>Known Issues</h2>
+<ul>
+  <li>
+    <p class="numlst">This Intel PRO Network Adapters WMI Provider cannot jointly operate with the 
+  Intel&reg; DMI-SNMP instrumentation.</li>
+  <li>
+    <p class="numlst">If you are using Windows 98, you must install Intel PROSet
+    in order for WMI Provider to start.&nbsp;</li>
+  <li>
+    <p class="numlst">Under some circumstances, the process winmgt.exe may not start on a Windows
+    95, 98, or Me.  This results in a browsing machine being unable
+    to connect to the computer.  The browser (CIM Studio or other) may show an error "the RPC server is unavailable".  If pview95.exe
+    shows that winmgt.exe is not executing, double click on the file to begin execution.
+    Fix this by upgrading to a
+    newer version of the WBEM core.&nbsp;</li>
+  <li>
+    <p class="numlst">Do not install the Intel PRO Network Adapters WMI Provider to a mapped network drive.  This configuration does not work and is not
+    supported.</li>
+</ul>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 4/07/04 6:45p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code>
+
+</body>
+</html>

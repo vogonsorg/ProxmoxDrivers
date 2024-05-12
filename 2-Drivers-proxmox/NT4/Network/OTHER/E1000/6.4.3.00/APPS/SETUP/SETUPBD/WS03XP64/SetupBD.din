@@ -1,0 +1,42 @@
+;*******************************************************************************
+;*                                                                            **
+;*                     I N T E L   P R O P R I E T A R Y                      **
+;*                                                                            **
+;*   COPYRIGHT (c) 2003 BY INTEL CORPORATION. ALL RIGHTS RESERVED.  NO        **
+;*   PART  OF  THIS  PROGRAM OR PUBLICATION MAY BE REPRODUCED, TRANSMITTED,   **
+;*   TRANSCRIBED, STORED IN A RETRIEVAL  SYSTEM,  OR  TRANSLATED  INTO  ANY   **
+;*   LANGUAGE OR COMPUTER LANGUAGE IN ANY FORM OR BY ANY MEANS, ELECTRONIC,   **
+;*   MECHANICAL, MAGNETIC, OPTICAL, CHEMICAL, MANUAL, OR OTHERWISE, WITHOUT   **
+;*   THE PRIOR WRITTEN PERMISSION OF :                                        **
+;*                                                                            **
+;*                             INTEL CORPORATION                              **
+;*                                                                            **
+;*                          2200 MISSION COLLEGE BLVD                         **
+;*                                                                            **
+;*                     SANTA CLARA, CALIFORNIA 95052-8119                     **
+;*                                                                            **
+;*******************************************************************************
+;
+;*******************************************************************************
+; SetupBD.din
+; $Revision: 1 $
+;
+; PnP Un-install script for Windows 2000
+
+[version]
+Signature="$Windows NT$"
+SetupClass=BASE
+
+[DestinationDirs]
+DefaultDestDir=11
+
+[SetupBD.Uninstall]
+DelReg=SetupBD.DelReg
+DelFiles=SetupBD.DelFiles
+
+[SetupBD.DelReg]
+HKLM,Software\INTEL\Basedrivers
+
+[SetupBD.DelFiles]
+setupbd.din,,,1
+

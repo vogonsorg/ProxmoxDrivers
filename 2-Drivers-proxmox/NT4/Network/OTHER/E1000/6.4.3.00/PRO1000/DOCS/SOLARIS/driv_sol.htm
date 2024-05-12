@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Installing the Intel Network Driver for Sun Solaris</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel Network Drivers for Solaris*&nbsp;(e1000g)</h1>
+
+<p class="contents"> <a href="#overview">Overview</a></p>
+<p class="contents"> <a href="sol_inst.htm">Installing the Drivers</a></p>
+<p class="contents"> <a href="sol_remv.htm">Removing the Drivers</a></p>
+<p class="contents"> <a href="sol_trbl.htm">Solaris Troubleshooting</a></p>
+<p class="contents"> <a href="sol_errs.htm">Solaris Error Messages</a></p>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<p>
+<b>Versions Supported: Solaris* 7</b>, or <b>Solaris 8</b> Update 2 
+operating system for x86 architecture, <b>Solaris 9</b> for x86 architecture, with latest patch
+clusters/patches for respective operating system versions for x86.
+</p>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top">
+    <img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+    <td valign="top"><i><b>NOTE</b>:</i> 
+    If the existing driver version is 2.000.0 or lower, 
+    completely uninstall the drivers and then install the newer version. Do not 
+    upgrade the 1.xxx.x version with the 2.xxx.x version as both package formats are 
+    slightly different. The new format does not configure adapters and uses 
+    different scripts than the previous package. New device IDs are also added 
+    in the new package.</td>
+  </tr>
+</table>
+<p>Read the instructions to install the Solaris 7 or Solaris 8 driver
+package for the Intel adapter. You must have administrative
+rights to successfully install the driver.</p>
+<p>The INTCGigaE package is available in two formats:</p>
+<ul>
+  <li>
+    <p class="numlst">Datastream format (INTCGigaE.pkg).</p></li>
+  <li>
+    <p class="numlst">Compressed and tar File system format (INTCGigaE.tar.Z).</p></li>
+</ul>
+<p>
+If you already have a previous version of this package, remove it first before
+installing this package. Use 'pkgrm' to remove a package and 'pkgadd' to add a package.</p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 2/28/03 3:19p <!-- $--> Revision <!--$$Revision:--> 6 <!-- $--></code></p>
+
+</body>
+</html>

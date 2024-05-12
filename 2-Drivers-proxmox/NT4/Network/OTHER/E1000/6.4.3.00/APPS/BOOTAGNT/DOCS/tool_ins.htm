@@ -1,0 +1,146 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Intel&#174; Boot Agent Tools Installation Suite</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Intel&#174 Boot Agent Tools Installation Suite</h1>
+<P class="contents"><a href="#overview">Overview</a></P>
+<P class="contents"><a href="#install">IBA Tools Installation</a></P>
+<P class="contents"><a href="#maintenance">Enabling Maintenance and Troubleshooting Options</a></P>
+<br>
+
+<hr>
+
+<h2>
+<a name="overview"></a>Overview</h2>
+<P>
+Windows* 2000 Remote Installation Service (RIS) includes an option to allow third-party tools to be accessed 
+and run by client machines during network (<a href="glossary.htm#PXE">PXE</a>) boot up. 
+The Intel&#174; Boot Agent (IBA) Tools Suite is a set of utilities used for updating 
+and diagnosing Intel PRO/100 and Intel  PRO/1000 adapters during boot-up from a Windows 
+2000 RIS server. The included utilities are:
+</P>
+
+<ul>
+  <LI><p class="numlst"><a href="dos_util.htm">IBAUtil</a> is used to change the default 
+  	settings of the Intel Boot Agent and update the flash contents of the 
+  	<a href="glossary.htm#NIC"> NIC</a></LI>
+  <LI><p class="numlst"><a href="config.htm#dos">IBACfg</a> is used to configure the Boot Agent in a DOS environment</LI>
+</ul>
+
+<P>
+Please refer to the appropriate sections of this User's Guide for detailed
+descriptions of each of these utilities.
+</P>
+<P>
+The client machine must be set to boot from <a href="glossary.htm#PXE"> PXE</a>
+before any other boot services. IBA Tools setup may only be installed on a 
+Windows 2000 server running RIS.
+</P>
+
+<hr>
+
+<h2><a name="install"></a>IBA Tools Installation</h2>
+<P>
+The IBA Tools Suite Installer uses InstallShield to provide a simple method of 
+installing bootable images containing these tools within the Windows 2000 RIS 
+server. You will need a formatted, bootable floppy disk to complete the installation 
+of IBA Tools. Please do not have autoexec.bat and config.sys files in your
+bootable floppy disk. Following are the steps to install this program:
+</P>
+<ol>
+  <li><p class="numlst">
+	Boot your Windows 2000 RIS.</LI>
+  <li>
+    <p CLASS="numlst">
+	Insert a CD-ROM or floppy diskette containing IBATOOLS.EXE, located under the 
+	pathname: BOOTAGNT/RISTOOLS.</li>
+  <li>
+    <p CLASS="numlst">
+	Make BOOTAGNT/RISTOOLS the current directory.</li>
+  <li>
+    <p CLASS="numlst">Enter the following command to invoke the IBA Tools Suite Installer:</p>
+    <blockquote>
+    	<code>IBATOOLS</code>
+    </blockquote>
+  	<p class="numlst">The IBA Tools Suite Installer will first welcome you.</p>
+	<p align="center"><img border="0" src="ibatools.gif" width="377" height="286"></p>
+	<br>
+  </li>
+  <li>
+    <p CLASS="numlst">Click <b> Next</b> to proceed.
+	The IBA Tools Suite Installer displays the licensing agreement.
+	</p>
+  </li>
+  <li>
+    <p CLASS="numlst">Click <b>Yes</b> to proceed.
+    </p>
+    <p class="numlst">The IBA Tools Suite Installer performs a search to see whether 
+    RIS is installed on the server. If RIS is not detected, you are informed that RIS is 
+    not installed, and the IBA Tools Suite Installer will exit after you click <b>OK</b>.
+    </p>
+	<p class="numlst">If RIS is detected, you are prompted to insert a 
+	bootable floppy disk in Drive A.</p>
+  </li>
+  <li>
+    <p CLASS="numlst">Insert a plain, bootable floppy diskette without any autoexec.bat and config.sys 
+    files on the floppy diskette and click <b>OK</b>.</p>
+    <p CLASS="numlst">The Creating Images screen appears. The IBA Tools Suite Installer generates a floppy boot image for each 
+    of the utilities it supports. This process takes a few minutes to create images.</p>
+	<p CLASS="numlst">Upon completion of this process, you are given a list of steps to enable Troubleshooting and Maintenance 
+		Options. The IBA Tools will not be available to run if you do not enable these options. The steps are 
+		listed in <a href="#maintenance">Enabling Maintenance and Troubleshooting Options</a>.</p>
+  </li>
+  <li>
+    <p CLASS="numlst">
+	Click <b> Next</b> to proceed. The IBA Tools Suite Installer displays a finish dialog box.
+	</li>
+  <li>
+    <p CLASS="numlst">Click <b>Finish</b> to complete the installation.</p>
+  </li>
+</ol>
+
+<hr>
+
+<h2><a name="maintenance"></a>Enabling Maintenance and Troubleshooting Options</h2>
+<P>
+To enable the Maintenance and Troubleshooting Options, perform the following
+steps:
+</P>
+<ol>
+  <li>
+	<p class="numlst">
+	From the Start menu, select <b> Programs</b> followed by <b>Administrative Tools</b>
+	followed by <b>Active Directory Users and Computers</b>.</LI>
+  <li>
+    <p CLASS="numlst">
+	Right-click on the appropriate domain name at the top of the tree in the left windowpane and select
+	<b>Properties</b>.</li>
+  <li>
+    <p CLASS="numlst">
+	From the Group Policy tab, select <b> Default Domain Policy</b> and click <b>Edit</b>. A Group Policy window appears.</li>
+  <li>
+    <p CLASS="numlst" style="margin-top: 12">
+	Expand the Windows Settings under User Configuration in the tree in the left windowpane.</li>
+  <li>
+    <p CLASS="numlst">
+	Select <b> Remote Installation Service</b> under Security Settings.</li>
+  <li>
+    <p CLASS="numlst">
+	Double-click <b> Choice Options</b> in the right windowpane.</li>
+  <li>
+    <p CLASS="numlst">
+	Enable the Maintenance and Troubleshooting menu item by selecting <b> Allow</b> under the Tools setting.</p>
+  </li>
+</ol>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 7/22/02 2:34p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

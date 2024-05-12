@@ -1,0 +1,101 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="ru">
+  <head>
+    <title>Universal ATA driver console management utility atactl.exe</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="UniATA, console, management utility, atactl.exe">
+    <meta name="description" content="Universal ATA driver console management utility atactl.exe">
+    <meta charset="KOI8-R">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=ru">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="atactl.php_lang=en&amp;">EN&nbsp;<img height="12" width="20" alt="en" src="http://10.0.0.11/alter/img/lang_en.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<center>
+<h3>UniATA console management utility</h3>
+</center>
+  <p>Утилита для управления контроллерами и подключенными устройствами. Ниже приведено описание
+  ключей командной строки. В отсутствии 
+  <a href="index.php_lang=ru&amp;">драйвера UniATA</a> утилита позволяет только просматривать
+  список подключенных IDE. ATAPI и SCSI устройств.</p>
+<pre class="code">
+Usage:
+  atactl -&lt;switches&gt; c|s&lt;controller id&gt;:b&lt;bus id&gt;:d&lt;device id&gt;[:l&lt;lun&gt;]
+Switches:
+  l         list devices on ATA and SCSI bus(es) and their transfer modes
+  m [MODE]  set i/o mode for device or revert to default
+            available MODEs are PIO, PIO0-PIO5, DMA, WDMA0-WDMA2,
+              ATA16/25/33/44/66/100/133, UDMA0-UDMA5
+  r         reset device
+Examples:
+  atactl -l
+    will list all scsi buses and all connected devices
+  atactl -m udma0 s2:b1:d1
+    will switch device at Scsi2, bus 1, taget_id 1 to UDMA0 mode
+  atactl -r s1:b0:d1
+    will make hard reset for device at Scsi1, bus 0, taget_id 1
+</pre>
+<hr align="left" width="10%">
+
+
+<a href="index.php_lang=ru&amp;">UniATA driver home</a><br>
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Автор: Alter (Александр А. Телятников)</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Сервер: Apache+PHP под FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>

@@ -1,0 +1,88 @@
+[Version]
+Signature=$CHICAGO$
+
+[Custom_Precopy]
+CopyFiles=MeFiles, DriverFiles, ProsetFiles
+; , ANSFiles 
+
+[DestinationDirs]
+DriverFiles=2
+MeFiles=10,system
+ProsetFiles=30,Progra~1\Intel
+; ANSFiles=30,progra~1\intel
+
+[SourceDisksNames]
+; diskid = description[, [tagfile] [, <unused>, subdir]]
+1=Root,,0
+
+[SourceDisksFiles]
+; filename_on_source = diskID[, [subdir][, size]]
+
+; files needed for basic driver installation
+8255indi.dll = 1
+8255xDel.exe = 1
+E100B9x.INF = 1
+E100B9x.din = 1
+E100B9xa.INF = 1
+E1000W9x.inf = 1
+E1000W9x.din = 1
+E1000w9x.sys = 1
+e100bnt5.sys = 1
+e100bnt.sys  = 1
+e100bodi.com = 1
+E100B9x.CAT    = 1
+wol558.vxd   = 1
+E100B9xa.CAT   = 1
+e1000W9x.cat   = 1
+
+; PROSet2
+instmsia.exe = 1
+proset.exe   = 1
+proset.msi   = 1
+
+
+; Ansmw98.inf  = 1
+; Anspw98.inf  = 1
+; iANSNdi.dll  = 1
+; iansw98.cat  = 1
+; IANSW98.sys  = 1
+
+
+[DriverFiles]
+8255indi.dll,,,4
+8255xDel.exe,,,4
+E100B9x.INF,,,4
+E100B9x.din,,,4
+e100bnt5.sys,,,4
+e100bnt.sys,,,4
+e1000w9x.sys,,,4
+E1000w9x.inf,,,4
+E1000w9x.din,,,4
+e100bodi.com,,,4
+E100B9x.CAT,,,4
+wol558.vxd,,,4
+E100B9xa.INF,,,4
+E1000w9x.CAT,,,4
+e100b9xa.cat,,,4
+
+
+; [ANSFiles]
+; Ansmw98.inf,,,4
+; Anspw98.inf,,,4
+; iANSNdi.dll,,,4
+; iansw98.cat,,,4
+; IANSW98.sys,,,4
+
+[ProsetFiles]
+instmsia.exe,,,4
+proset.exe,,,4
+proset.msi,,,4
+
+[MeFiles]
+E100Bnt5.sys,,,4
+E1000w9x.sys,,,4
+E1000W9x.din,,,4
+E100B9x.din,,,4
+8255indi.dll,,,4
+8255xDel.exe,,,4
+wol558.vxd,,,4

@@ -1,0 +1,730 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Auxiliary DOS Utilities</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Auxiliary DOS Utilities</h1>
+<P class="contents"><a href="#overview">Overview</a></P>
+<P class="contents"><a href="#run_ibautil">Running IBAUtil</a></P>
+<P class="contents"><a href="#parameters">Command Line Parameters</a></P>
+<P class="contents"><a href="#flash_devices">Supported Flash Devices</a></P>
+<br>
+
+<hr>
+
+<h2><a name="overview"></a>Overview</h2>
+<P>
+The Intel&#174; PROSet configuration and diagnostic utility requires use of the Windows* 
+operating environment. For non-Windows systems, Intel provides a utility (IBAUtil) for 
+installing and configuring the Boot Agent using the DOS environment.
+IBAUtil is a utility program that provides an alternative means for modifying
+the adapter configuration settings. IBAUtil supports both the PRO/100 and
+PRO/1000 family of adapters. Use IBAUtil to:
+</P>
+<ul>
+<LI CLASS="Bulleted">
+<p class="numlst">
+change the default settings of your Intel <a href="glossary.htm#WfM">WfM</a>-compatible adapter.</LI>
+<LI CLASS="Bulleted">
+<p class="numlst">
+enable/disable the <i> Wake-on-LAN</i> (WOL) and Intel&#174; Boot Agent
+capabilities.</LI>
+<LI CLASS="Bulleted">
+<p class="numlst">
+allow in-the-field upgrades to the image stored in the flash component of the
+NIC.</LI>
+</ul>
+<P>
+<b>
+Wake-On-LAN:</b> When enabled, the adapter can react to special &quot;wake
+up&quot; packets
+and power up the computer without end user intervention.
+However, there is a higher power draw when the system is in the suspended
+state once this is enabled.  It is strongly recommended that no more than two adapters should 
+have this feature enabled per machine.<br>
+<br>
+<b>
+Intel Boot Agent:</b> When enabled, the computer can initiate PXE/RPL boot if
+a valid flash image is present on the NIC.</P>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTES</I>: </B>   The Intel&#174 PRO/1000 T Desktop Adapter
+      and Intel&#174 PRO/100 S Family of Desktop Adapters are shipped with the Boot Agent enabled
+        for both WOL and PXE.
+    </TD>
+  </tr>
+  <tr>
+    <TD valign="top" width="28"></TD>
+    <TD valign="top">
+      The Intel&#174 PRO/1000 XT Server Adapter and Intel&#174 PRO/100 S Family of
+      Server Adapters are shipped with the Boot Agent disabled
+        for both WOL and PXE.
+    </TD>
+  </tr>
+</TABLE>
+<P>
+To enable or disable WOL or Boot Agent features you MUST use IBAUtil.  Other tools,
+like Intel PROSet, can only be used to upgrade the Boot Agent image and change
+Boot Agent configuration settings.<br>
+<br>
+IBAUtil is not intended as a utility for LAN-On-Motherboard (LOM)
+implementations. While IBAUtil may be able to adjust the EEPROM settings on LOM
+implementations, those changes may not affect how the adapter operates.<br>
+<br>
+If the Boot Agent on the NIC is currently disabled, use the IBAUtil utility to
+enable the Boot Agent before using IBAUtil or Intel PROSet to upgrade the image
+stored in the NIC. A reboot is
+required for any changes to take effect.<br>
+<br>
+IBAUtil is located on the supplied driver CD in the APPS\BOOTAGNT directory.
+Always check the <a target="_blank" href="http://support.intel.com">Intel Customer Support</a>
+(http://support.intel.com) website for the latest Boot Agent
+information and images. Enter &quot;boot agent&quot; in the search field.</P>
+
+<hr>
+
+<h2><a name="run_ibautil"></a>Running IBAUtil</h2>
+The syntax for issuing IBAUtil command line parameters in DOS is:
+<br>
+<blockquote>
+	<code>IBAUTIL [-option]...</code>
+</blockquote>	
+&nbsp;<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B> IBAUtil (for DOS) must be run with the computer booted to DOS only.
+This utility cannot be run in a DOS window in any Microsoft Windows*
+product or in DOS compatibility mode in IBM OS/2*.
+    </TD>
+  </tr>
+</TABLE>
+<p>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="caution.gif" width="28" height="21"></TD>
+    <TD valign="top"><b><i>CAUTION</i>:</b> If you use a third-party (non-Intel)
+      boot ROM solution with an Intel adapter and run Intel Boot Agent utilities, you may 
+      corrupt the contents of your flash ROM, rendering it useless.
+    </TD>
+  </tr>
+</TABLE>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>: </B><i>The Boot Agent 
+    column in IBAUtil only displays the Boot Agent version when Boot Agent is 
+    enabled.</i><B> </B>&nbsp;</TD>
+  </tr>
+</TABLE>
+
+<hr>
+
+<h2><a name="parameters"></a>Command Line Parameters</h2>
+<p>
+IBAUtil accepts up to 16 simultaneous parameters.&nbsp; If conflicting
+parameters (such as <font face="Courier New">-FLASHENABLE -FLASHDISABLE</font> used together) 
+are supplied, IBAUtil exits with an error.
+</p>
+<p>
+The parameters are, where applicable are listed in logical groups.  Note that <font face="Courier New">-HELP</font>,
+<font face="Courier New"> 
+-EXITCODES</font> and <font face="Courier New"> -IMAGEVERSION</font> have special overriding characteristics. Unless noted, all other 
+parameters may be used in conjunction with any other parameter.
+</p>
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B> If you enter <code>IBAUTIL</code> without any command line options, the 
+    utility displays a list of all the adapters found in your system.
+    </TD>
+  </tr>
+</TABLE>
+<br>
+<table border="1" cellpadding="4" cellspacing="0" width="631">
+  <tr>
+    <td width="619" valign="top" align="left">
+      <table border="0" cellpadding="4" width="619">
+        <tr>
+          <th width="171">
+            <p align="center">General Options</th>
+          <th width="422"></th>
+        </tr>
+        <tr>
+          <th width="171">Parameter</th>
+          <th width="422">Description</th>
+        </tr>
+        <tr>
+          <td width="171" height="16" valign="top" align="left"><code>-HELP or -?</code>
+          </td>
+          <td height="16" valign="top" align="left" width="422">Displays command line help and exits. When -HELP 
+          is used, all other parameters are ignored.</td>
+        </tr>
+        <tr>
+          <td width="171" height="18" valign="top" align="left"><code>-EXITCODES</code></td>
+          <td height="18" valign="top" align="left" width="422">Displays exit code help. When
+            -EXITCODES are set, all other parameters except -HELP are ignored.</td>
+        </tr>
+        <tr>
+          <td width="171" height="34" valign="top" align="left"><code>-IMAGEVERSION or -IV</code></td>
+          <td height="34" valign="top" align="left" width="422">Displays the PXE versions stored within the
+            IBAUtil. When -IMAGEVERSION is set,
+      all other parameters except -EXITCODES and -HELP are ignored.</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="619" valign="top" align="left">
+      <table border="0" cellpadding="4" width="618">
+        <tr>
+          <th width="173">Adapter Selection Options</th>
+          <th width="419"></th>
+        </tr>
+        <tr>
+          <th width="173">Parameter</th>
+          <th width="419">Description</th>
+        </tr>
+        <tr>
+          <td width="173" valign="top" align="left"><code>-ALL</code>
+          </td>
+          <td valign="top" align="left" width="419">Selects all adapters found in system, works for both EEPROM
+        and Flash activity.</td>
+        </tr>
+        <tr>
+          <td width="173" valign="top" align="left"><code>-NIC=XX</code></td>
+          <td valign="top" align="left" width="419">Selects a specific adapter (1-16).</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="619" valign="top" align="left">
+      <table border="0" cellpadding="4" width="619">
+        <tr>
+          <th width="174">Image Programming Options</th>
+          <th width="419"></th>
+        </tr>
+        <tr>
+          <th width="174">Parameter</th>
+          <th width="419">Description</th>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code> -UP -UPGRADE or
+            -INSTALL {PXE|RPL|EFI64|ISCSI}</code></td>
+          <td valign="top" align="left" width="419">Programs a Intel Boot Agent
+            image into the FLASH on the selected NIC.&nbsp;
+            <p>If IBAUtil is running under EFI, it will install an EFI-only
+            image. If IBAUtil is running under DOS, it will install a PXE/RPL
+            image.&nbsp;</p>
+            <p><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">If
+            the user specifies <font face="Courier New">-UPGRADE</font> or <font face="Courier New">-INSTALL</font>
+            with one or more additional keywords, IBAUtil will attempt to
+            install the requested image or images into the NIC’s FLASH.<span style="mso-spacerun: yes">
+            </span>The <font face="Courier New">PXE</font> and <font face="Courier New">RPL</font>
+            keywords may be used singly or in any combination.<span style="mso-spacerun: yes">
+            </span>The <font face="Courier New">ISCSI</font> and <font face="Courier New">EFI64</font>
+            keywords may only be used singly.</span></p>
+            <p><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">If
+            <font face="Courier New">-AUTO</font> is not specified and <font face="Courier New">-SAVE</font>
+            is not specified, and the FLASH is not blank, the user is prompted
+            to save the existing image before upgrading.</span></p>
+          </td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-SAVE</code></td>
+          <td valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Saves
+            the existing Intel Boot Agent and EEPROM settings to a disk file.<span style="mso-spacerun: yes">
+            </span>The file will be named based on the PCI Vendor and Device ID
+            of the NIC.<span style="mso-spacerun: yes"> </span>If this is
+            specified on the same command line as <font face="Courier New">-UPGRADE</font>,
+            the save is performed before the upgrade.</span></td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-RESTORE</code></td>
+          <td valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Restores
+            a previously-saved Intel Boot Agent image.<span style="mso-spacerun: yes">
+            </span>IBAUtil will look for a file name based on the PCI Vendor and
+            Device ID of the NIC.<span style="mso-spacerun: yes"> </span>If <font face="Courier New">-RESTORE</font>
+            is specified on the same command line as <font face="Courier New">-UPGRADE</font>,
+            an error is generated.</span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="619" valign="top" align="left">
+      <table border="0" cellpadding="4" width="100%">
+        <tr>
+          <th width="174">Utility Options</th>
+          <th width="419"></th>
+        </tr>
+        <tr>
+          <th width="174">Parameter</th>
+          <th width="419">Description</th>
+        </tr>
+        <tr>
+          <td width="173" valign="top" align="left"><code>-AUTO or -QUIET</code></td>
+          <td valign="top" align="left" width="419">
+      Runs IBAUtil without asking for user intervention. If used with the
+      -UPGRADE option, it will NOT create
+        a backup image. This parameter must be used with -NIC or -ALL if
+        there is more than one NIC in the system. It will run without <font face="Courier New"> -ALL</font> or
+      <font face="Courier New">-NIC=xx</font> if there is only one NIC in the system.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-BLINK</code></td>
+          <td valign="top" align="left" width="419">Provides a method for identifying an
+            adapter. Blinks the LED on the selected adapter for ten seconds.</td>
+        </tr>
+        <tr>
+          <td width="30%" valign="top" align="left"><code>-FLASHENABLE or -FE</code>
+          </td>
+          <td valign="top" align="left">Enables Boot ROM.</td>
+        </tr>
+        <tr>
+          <td width="30%" valign="top" align="left"><code>-FLASHDISABLE or -FD</code></td>
+          <td valign="top" align="left">Disables Boot ROM.</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td width="619" valign="top" align="left">
+      <table border="0" cellpadding="4" width="619">
+        <tr>
+          <th width="174">EEPROM Settings Options</th>
+          <th width="419"></th>
+        </tr>
+        <tr>
+          <th width="174">Parameter</th>
+          <th width="419">Description</th>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-DEFAULTCONFIG or -DEFCFG</code></td>
+          <td valign="top" align="left" width="419">Resets Configuration and Control words in the EEPROM to default settings.
+            <span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Specifically,
+            word 30h in the EEPROM is set to 0100h and word 31h is set to 4000h.<span style="mso-spacerun: yes">
+            </span>On dual-port adapters, words 34h and 35h are also set to
+            these values.<span style="mso-spacerun: yes"> </span>The checksum in
+            the EEPROM is updated to account for these new values.<span style="mso-spacerun: yes">
+            </span>No other words in the EEPROM are modified.</span></td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-WOLDISABLE or -WOLD</code>
+          </td>
+          <td valign="top" align="left" width="419">Disables WOL bit on Fast Ethernet and disables APMPME and APME
+        EEPROM bits on Gigabit.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-WOLENABLE or -WOLE</code></td>
+          <td valign="top" align="left" width="419">Enables WOL bit on Fast Ethernet and enables APMPME and APME
+        EEPROM bits on Gigabit.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-SETUPENABLE or -STE</code>
+          </td>
+          <td valign="top" align="left" width="419">Enables Setup Menu.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-SETUPDISABLE OR -STD</code></td>
+          <td valign="top" align="left" width="419">Disables Setup Menu.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-TITLEENABLE OR -TLE</code>
+          </td>
+          <td valign="top" align="left" width="419">Enables Initial Title Message.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-TITLEDISABLE OR -TLD</code></td>
+          <td valign="top" align="left" width="419">Disables Initial Title Message.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-PROTOCOLENABLE OR -PROE</code>
+          </td>
+          <td valign="top" align="left" width="419">Enables Changing the Boot Protocol Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-PROTOCOLDISABLE OR -PROD</code></td>
+          <td valign="top" align="left" width="419">Disables Changing the Boot Protocol Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-ORDERENABLE OR -ORDE</code>
+          </td>
+          <td valign="top" align="left" width="419">Enables Changing the Boot Order Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-ORDERDISABLE OR -ORDD</code></td>
+          <td valign="top" align="left" width="419">Disables Changing the Boot Order Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-LWSENABLE
+            OR -LWSE</code>
+          </td>
+          <td valign="top" align="left" width="419">Enables Changing the Legacy OS Wakeup
+            Support Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-LWSDISABLE
+            OR -LWSD</code></td>
+          <td valign="top" align="left" width="419">Disables Changing the Legacy OS Wakeup
+            Support Option.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-RPL</code>
+          </td>
+          <td valign="top" align="left" width="419">Sets the network boot protocol to RPL.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-PXE</code></td>
+          <td valign="top" align="left" width="419">Sets the network boot protocol to PXE.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-SETWAITTIME=X
+            or -SWT=X</code></td>
+          <td valign="top" align="left" width="419">Set the setup delay time for the NIC to
+            X seconds. Valid delay times are 0, 2, 3, and 5. Only the first
+            instance of this parameter is valid. All other instances of the
+            parameter generate an error.</td>
+        </tr>
+        <tr>
+          <td width="174" valign="top" align="left"><code>-MODE=X</code></td>
+          <td valign="top" align="left" width="419">Sets the Customization
+            Control word in the EEPROM to the value specified by X. No range
+            checking or validation is done. X must be in hexadecimal format.
+            This should only be used under direction of Intel Customer Support.</td>
+        </tr>
+        <tr>
+          <th width="174">
+            <p align="center">ISCSI Configuration Options</th>
+          <th width="419"></th>
+        </tr>
+        <tr>
+          <th width="174">Parameter</th>
+          <th width="419">Description</th>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-BOOT_LUN=XX</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Specifies
+            the iSCSI target’s LUN value to boot from.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><code>-DHCP</code>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Configures
+            the iSCSI image contained in the selected nics EEPROM to perform
+            DHCP.<span style="mso-spacerun: yes">&nbsp; </span>The default for
+            an iSCSI session is to perform DHCP.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-IP
+            &lt;ip_address&gt; &lt;subnet mask&gt; &lt;gateway&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">A
+            static IP will be used by the iSCSI initiator using the specified IP
+            address, subnet, and gateway.<span style="mso-spacerun:
+yes">&nbsp; </span>DHCP will not be performed.<span style="mso-spacerun: yes">&nbsp;
+            </span>The fields of the supplied IP addresses must delimited using
+            periods ‘.’ and separated by a space.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-ISCSI_NAME
+            &lt;Initiator Name&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Sets
+            the name of the iSCSI initiator to the supplied string.<span style="mso-spacerun: yes">&nbsp;
+            </span>This field may be up to 255 characters in length although the
+            command line on some Operating Systems may not accept the full 255
+            characters.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-TARGET_NAME
+            &lt;Initiator Name&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Sets
+            the name of the iSCSI target to the supplied string.<span style="mso-spacerun: yes">&nbsp;
+            </span>This field may be up to 255 characters in length although the
+            command line on some Operating Systems may not accept the full 255
+            characters.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-TARGET_IP
+            &lt;ip_address&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Sets
+            the target IP address of the target for the iSCSI session. The
+            fields of the supplied IP address must delimited using periods
+            ‘.’.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-TARGET_PORT
+            &lt;port number&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Set
+            the port number of the target IP address to be used for the iSCSI
+            session.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-CHAP_USER
+            &lt;username&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">The
+            username that will be used for the iSCSI session.</span></td>
+        </tr>
+        <tr>
+          <td width="174" height="16" valign="top" align="left"><font face="Courier New" size="1"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">-CHAP_PASS
+            &lt;password&gt;</span></font>
+          </td>
+          <td height="16" valign="top" align="left" width="419"><span style="font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">The
+            password to be used for the iSCSI session.</span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<p>
+All other parameters will generate an error.
+</p>
+
+
+
+
+<h3>DOS Error Codes</h3>
+<p>IBAUtil returns codes to the DOS command line when an error occurs. Possible
+error codes are listed below:
+</p>
+<table border="1" cellpadding="3" width="50%" cellspacing="0">
+  <tr>
+    <th width="60%" height="18">Code Name</th>
+    <th height="18">Value</th>
+  </tr>
+  <tr>
+    <td width="60%" height="18">success</td>
+    <td align="center" height="18">0</td>
+  </tr>
+  <tr>
+    <td width="60%" height="17">operator termination</td>
+    <td align="center" height="17">1</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">invalid NIC</td>
+    <td align="center" height="18">2</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">bad command line parameter</td>
+    <td align="center" height="18">3</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">EEPROM checksum failure</td>
+    <td align="center" height="18">4</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">EEPROM read failure</td>
+    <td align="center" height="18">5</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">EEPROM write failure</td>
+    <td align="center" height="18">6</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">EEPROM dump failure</td>
+    <td align="center" height="18">7</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">(not used)</td>
+    <td align="center" height="18">8</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">no memory</td>
+    <td align="center" height="18">9</td>
+  </tr>
+  <tr>
+    <td width="60%" height="18">no NICs found</td>
+    <td align="center" height="18">10</td>
+  </tr>
+</table>
+&nbsp;
+<TABLE border="0" cellpadding="4">
+  <tr>
+    <TD valign="top" width="28"><img border="0" src="note.gif" width="28" height="21"></TD>
+    <TD valign="top"><B><I>NOTE</I>:</B> 
+As part of the UPGRADE code path, IBAUtil saves the backup image to the
+current directory if the user elects to make a backup.  If that directory
+is on a RAM drive, the backup image will not be available after the
+machine reboots. IBAUtil makes no effort to warn the user about this.
+    </TD>
+  </tr>
+</TABLE>
+
+
+
+
+<h3>Examples</h3>
+<p>
+The following examples show how to enter some typical IBAUtil command lines:
+</p>
+<h4>Example 1:</h4>
+<P>
+To disable WOL on all Intel network adapters, enter:</P>
+<blockquote>
+	<code>IBAUTIL -ALL -WOLDISABLE</code></P>
+</blockquote>
+<h4>
+Example 2:</h4>
+<P>
+To enable WOL on the second Intel network adapter found in your system, enter:</P>
+<blockquote>
+<P>
+	<code>IBAUTIL -NIC=2 -WOLENABLE</code>
+</P>
+</blockquote>
+<h4>
+<a name="Example 3:">Example 3:</a></h4>
+<p>
+To Update the Boot Agent image on all Intel network adapters, enter:<br>
+<blockquote>
+	<code>IBAUTIL -ALL -UPGRADE</code>
+</blockquote>
+<h4>
+Example 4:</h4>
+<p>
+To Enable the Boot ROM on the first Intel Network Adapter
+found in your system, enter:<br>
+<blockquote>
+        <code>IBAUTIL -NIC=1 -FE</code>
+</blockquote>
+
+<hr>
+
+<h2><a name="flash_devices"></a>Supported Flash Devices</h2>
+<p>
+Please note that even though a part may be listed here, it may not work on all
+the hardware supported by IBAUtil.  Some flash devices listed here are for PRO/100
+adapters only and cannot be used on PRO/1000 adapters. Consult the
+appropriate hardware design documentation to compare the compatibility between
+certain flash devices and controllers.
+</p>
+<table border="1" cellpadding="4" width="50%" cellspacing="0">
+  <tr>
+    <th width="50%">Vendor</th>
+    <th width="50%">Part Number</th>
+  </tr>
+  <tr>
+    <td width="50%">
+AMD</td>
+    <td width="50%">         28F020</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT49BV512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT29LV512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT49LV010</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT49LV020</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT49LV040</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ATMEL</td>
+    <td width="50%">       AT49LV001N</td>
+  </tr>
+  <tr>
+    <td width="50%">
+CATALYST</td>
+    <td width="50%">    28F256</td>
+  </tr>
+  <tr>
+    <td width="50%">
+CATALYST</td>
+    <td width="50%">    28F512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+CATALYST</td>
+    <td width="50%">28F010</td>
+  </tr>
+  <tr>
+    <td width="50%">
+CATALYST</td>
+    <td width="50%">    28F020</td>
+  </tr>
+  <tr>
+    <td width="50%">
+INTEL</td>
+    <td width="50%">       28F010</td>
+  </tr>
+  <tr>
+    <td width="50%">
+INTEL</td>
+    <td width="50%">       28F020</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SGS</td>
+    <td width="50%">         28F512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SST</td>
+    <td width="50%">         29LE512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SST</td>
+    <td width="50%">         39SF512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SST</td>
+    <td width="50%">         39VF512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SST</td>
+    <td width="50%">	    39VF010</td>
+  </tr>
+  <tr>
+    <td width="50%">
+SST</td>
+    <td width="50%">         39VF020</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ST MICRO</td>
+    <td width="50%">    28F512</td>
+  </tr>
+  <tr>
+    <td width="50%">
+ST MICRO</td>
+    <td width="50%">    29W512B</td>
+  </tr>
+</table>
+<br>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 2/05/04 5:11p <!-- $--> Revision <!--$$Revision:--> 4 <!-- $--></code></p>
+
+</body>
+</html>

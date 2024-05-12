@@ -1,0 +1,316 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Linux Driver for the Intel(R) PRO/100 Family of Adapters</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Linux* Base Driver for the Intel<sup>®</sup> PRO/100 Family of Adapters</h1>
+
+<p class="contents"><a href="#overview">In This Release</a></p>
+<p class="contents"><a href="#adapters">Supported Adapters</a></p>
+<p class="contents"><a href="#install">Building and Installation</a></p>
+<p class="contents"><a href="#driver_config">Driver Configuration Parameters</a></p>
+<p class="contents"><a href="#add_config">Additional Configurations</a></p>
+<p class="contents"><a href="#trouble">Known Issues</a></p>
+
+<hr>
+
+<h2><a name="overview"></a>In This Release</h2>
+<p>This file describes the Linux* Base Driver for the Intel(R) PRO/100 Family of 
+Adapters, version 3.0.x. This driver is intended for 2.4.x kernels; it is known 
+to build properly on 2.4.x kernels through 2.4.22. Intel focused testing on 
+Intel architectures running the 2.4.21 kernel. This driver includes support for 
+Itanium&#153;-based systems.</p>
+<p>For questions related to hardware requirements, refer to the documentation 
+supplied with your Intel PRO/100 adapter.</p>
+
+<hr>
+
+<h2><a name="adapters"></a>Supported Adapters</h2>
+<p>To verify that your adapter is supported, find the board ID number on the 
+adapter. Look for a label that has a barcode and a number in the format 
+A12345-001. </p>
+
+<p>
+For more information on how to identify your adapter, go to the Adapter &amp; Driver ID Guide at:
+</p>
+	<blockquote>
+    <p><a href="http://support.intel.com/support/network/adapter/pro100/21397.htm" target="_blank">
+    http://support.intel.com/support/network/adapter/pro100/21397.htm</a></p>
+  	</blockquote>
+<p>
+For the latest Intel network drivers for Linux, refer to the following website.
+In the search field, enter your adapter name or type, or use the networking link
+on the left to search for your adapter:
+</p>
+	<blockquote>
+    <p><a href="http://downloadfinder.intel.com/scripts-df/support_intel.asp" target="_blank">http://downloadfinder.intel.com/scripts-df/support_intel.asp</a></p>
+	</blockquote>
+
+<hr>
+
+<h2><a name="install"></a>Building and Installation</h2>
+
+<p>
+To build a binary RPM* package of this driver run 'rpmbuild -tb &lt;filename.tar.gz&gt;'.
+Replace &lt;filename.tar.gz&gt; with the specific file name of the driver.</p>
+<table border="0" cellpadding="4" width="100%">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTES</b>:</i> For the build to work properly it is important that the currently      running kernel MATCH the version and configuration of the installed      kernel source.
+      If you have just recompiled your kernel,      reboot the system and choose the correct kernel to boot.
+    <p>RPM functionality has only been tested in Red Hat distributions.</td>
+  </tr>
+</table>
+<ol>
+  <li><p class="numlst">Move the base driver tar file to the directory of your choice. 
+  For example, use /home/username/e100 or /usr/local/src/e100.</li>
+  <li><p class="numlst">Untar/unzip the archive by entering the following, where
+    &lt;x.x.x&gt; is the version number for the driver tar:
+  	<blockquote>
+        <p class="monospace">
+ 		tar xfz e100-&lt;x.x.x&gt;.tar.gz
+	</blockquote> 		
+  <li><p class="numlst">Change to the driver src directory by entering the
+    following, where &lt;x.x.x&gt; is the version number for the driver tar:<blockquote>
+     <p class="monospace">
+     cd e100-&lt;x.x.x&gt;/src/
+   </blockquote></li>
+  <li><p class="numlst">Compile the driver module:
+	<blockquote>
+     <p class="monospace">
+     make install
+   </blockquote>
+    <p class="numlst">The binary will be installed as one of the following:
+    <blockquote>
+    	/lib/modules/&lt;kernel_version>/kernel/drivers/net/e100.o
+    	<br>
+    	<br>
+     	/lib/modules/&lt;kernel_version>/net/e100.o
+	</blockquote>
+	<p class="numlst">The install locations listed above are the default locations. 
+         They may not be correct for certain Linux distributions. For 
+         more information, see <a href="ldistrib.htm">ldistrib.htm</a>.
+	 </p>
+	
+	<p class="numlst">&nbsp;</p>
+	
+  </li>
+  <li><p class="numlst">Install the module:
+	<blockquote>
+     <p class="monospace">
+     modprobe e100&nbsp;
+	</blockquote>
+  </li>
+   
+  <li><p class="numlst">Assign an IP address to the interface by entering the following, where
+    &lt;x&gt; is
+    the interface number:
+	<blockquote>
+     <p class="monospace">
+     ifconfig eth&lt;x&gt; &lt;IP_address&gt;
+   </blockquote></li>
+  <li><p class="numlst">Verify that the interface works. Enter the following, where &lt;IP_address&gt;
+   is the IP address for another machine on the same subnet as the interface
+   that is being tested:
+	<blockquote>
+     <p class="monospace">
+     ping  &lt;IP_address&gt;
+   </blockquote></li>
+</ol>
+
+<hr>
+
+<h2><a name="driver_config"></a>Driver Configuration Parameters</h2>
+<p>The default value for each parameter is generally the recommended setting, 
+unless otherwise noted.</p>
+<h3>Rx Descriptors: </h3>
+<p>Number of receive descriptors. A receive descriptor is a data structure that 
+describes a receive buffer and its attributes to the network controller. The 
+data in the descriptor is used by the controller to write data from the 
+controller to host memory. In the 3.0.x driver the valid range for this 
+parameter is 64-256. The default value is 64. This parameter can be changed 
+using the command <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ethtool –G 
+eth? rx n, where n is the number of desired rx descriptors.</p>
+<h2>Tx Descriptors: </h2>
+<p>Number of transmit descriptors. A transmit descriptor is a data structure 
+that describes a transmit buffer and its attributes to the network controller. 
+The data in the descriptor is used by the controller to read data from the host 
+memory to the controller. In the 3.0.x driver the valid range for this parameter 
+is 64-256. The default value is 64. This parameter can be changed using the 
+command <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ethtool –G 
+eth? tx n, where n is the number of desired tx descriptors.</p>
+<h3>Speed/Duplex: </h3>
+<p>The driver auto-negotiates the link speed and duplex settings by default. 
+Ethtool can be used as follows to force speed/duplex. <br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ethtool –s 
+eth? autoneg off speed {10|100} duplex {full|half}</p>
+<table border="0" cellpadding="4" width="60%" id="table2">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> Setting the speed/duplex to incorrect values will 
+	cause the link to fail.</td>
+  </tr>
+</table>
+<h3>Event Log Message Level: </h3>
+<p>The driver uses the message level flag to log events to syslog. The message 
+level can be set at driver load time. It can also be set using the command<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ethtool -s 
+eth? msglvl n</p>
+
+<hr>
+
+<h2><a name="add_config"></a>Additional Configurations</h2>
+<h3>Configuring the Driver on Different Distributions</h3>
+<p>
+Configuring a network driver to load properly when the system is started is distribution dependent. 
+Typically, the configuration process involves adding an alias line to /etc/modules.conf as well as 
+editing other system startup scripts and/or configuration files.  Many popular Linux distributions
+ship with tools to make these changes for you. To learn the proper way to configure a network device 
+for your system, refer to your distribution documentation. If during this process you are asked for 
+the driver or module name, the name for the Linux Base Driver for the Intel PRO/100 Family of Adapters 
+is e100.
+</p>
+<p>
+As an example, if you install the e100 driver for two PRO/100 adapters (eth0 and eth1), add the following to modules.conf:
+</p>
+<blockquote class="monospace">
+	alias eth0 e100<br>
+	alias eth1 e100</blockquote>
+
+<h3>Viewing Link Messages</h3>
+<p>
+In order to see link messages and other Intel driver information on your console, you must set 
+the dmesg level up to six. This can be done by entering the following on the command line before 
+loading the e100 driver:
+</p>
+<blockquote class="monospace">
+	dmesg -n 8
+</blockquote>
+<p>
+If you wish to see all messages issued by the driver, including debug messages, set the dmesg 
+level to eight.
+</p>
+
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>   This setting is not saved across reboots.
+    </td></tr>
+</table>
+
+<h3>Ethtool</h3>
+<p class="MsoPlainText">The driver utilizes the ethtool interface for driver 
+configuration and diagnostics, as well as displaying statistical information.&nbsp; 
+Ethtool version 1.6 or later is required for this functionality.</p>
+<p class="MsoPlainText">The latest release of ethtool can be found at:
+<a href="http://sf.net/projects/gkernel">http://sf.net/projects/gkernel</a>.&nbsp;  </p>
+<p class="MsoPlainText">After ethtool is 
+installed, ethtool-copy.h must be copied and renamed to ethtool.h in your kernel 
+source tree at &lt;linux_kernel_src&gt;/include/linux.&nbsp; Backup the original ethtool.h 
+as needed before copying.&nbsp; The driver then must be recompiled in order to take 
+advantage of the latest ethtool features.</p>
+
+<table border="0" cellpadding="4" id="table1" width="861">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i>   This driver uses mii support from the kernel. As a 
+	result, when there is no link, ethtool will report speed/duplex to be 
+	10/half.
+    </td></tr>
+</table>
+
+<h3>Enabling Wake on LAN* (WoL)</h3>
+<p>
+WoL is provided through the Ethtool* utility. Ethtool is included with Red
+Hat* 8.0. For other Linux distributions, download and install Ethtool from the
+following website: <a href="http://sourceforge.net/projects/gkernel">http://sourceforge.net/projects/gkernel</a>.
+</p>
+<p>
+For instructions on enabling WoL with Ethtool, refer to the Ethtool man page.
+</p>
+<p>
+WoL will be enabled on the system during the next shut down or reboot. For
+this driver version, in order to enable WoL, the e100 driver must be loaded when
+shutting down or rebooting the system.
+</p>
+<h3>
+NAPI</h3>
+<p>
+NAPI (Rx polling mode) is supported in the e100 driver. NAPI is enabled or 
+disabled based on the configuration of the kernel. To override the 
+default, use the following compile-time flags.</p>
+<p>
+To enable NAPI, compile the driver module, passing in a configuration option:</p>
+<blockquote>
+	<p class="monospace">make CFLAGS_EXTRA=-DE100_NAPI install</p>
+</blockquote>
+<p>
+To disable NAPI, compile the driver module, passing in a configuration option:</p>
+<blockquote>
+	<p class="monospace">make CFLAGS_EXTRA=-DE100_NO_NAPI install</p>
+</blockquote>
+<p>
+See <a href="http://www.cyberus.ca/~hadi/usenix-paper.tgz">
+http://www.cyberus.ca/~hadi/usenix-paper.tgz</a> for more information on NAPI.</p>
+
+<hr>
+
+<h2><a name="trouble"></a>Known Issues</h2>
+ 
+<table border="0" cellpadding="4">
+  <tr>
+    <td width="21" valign="top" align="center"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td><i><b>NOTE</b>:</i> For distribution-specific information, see <a href="ldistrib.htm">
+    ldistrib.htm</a>.
+    </td></tr>
+</table>
+
+<h3>Driver Compilation</h3>
+<p>
+When trying to compile the driver by running make install, the following
+error may occur: 
+</p>
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp; &quot;Linux kernel source not configured - missing version.h&quot;
+</p>
+<p>To solve this issue, create the version.h file by going to the Linux source
+tree and entering:
+</p>
+<blockquote class="monospace">
+  make include/linux/version.h
+</blockquote>
+
+<h3>Multiple Interfaces on Same Ethernet Broadcast Network</h3>
+ 
+<p>Due to the default ARP behavior on Linux, it is not possible to have one 
+system on two IP networks in the same Ethernet broadcast domain 
+(non-partitioned switch) behave as expected. All Ethernet interfaces will 
+respond to IP traffic for any IP address assigned to the system.
+This results in unbalanced receive traffic.</p>
+<p>If you have multiple interfaces in a server, either turn on ARP filtering by 
+ 
+</p>
+ 
+<ol>
+  <li>entering: echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_filter
+(this only works if your kernel's version is higher than 2.4.5), or</li>
+  <li>installing the interfaces in separate broadcast domains (either in different 
+switches or in a switch partitioned to VLANs).</li>
+</ol>
+ 
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 6/22/04 11:02a <!-- $--> Revision <!--$$Revision:-->- $-->
+
+</body>
+</html>

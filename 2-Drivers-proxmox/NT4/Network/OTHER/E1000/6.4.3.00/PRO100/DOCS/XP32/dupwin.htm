@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Configuring Speed and Duplex in Windows*</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Configuring Speed and Duplex in Windows*</h1>
+<p>These instructions apply to Windows 98, Windows NT*, Windows 2000, Windows XP,
+and Windows Server 2003.
+<p>The methods used to configure Intel<sup>&reg;</sup> PRO/100 and PRO/1000 adapters differ
+slightly. See the section specific to your adapter for configuration
+instructions.
+<ul>
+  <li>
+    <p class="numlst"><a href="#configuring_100">Intel PRO/100 Adapters</a></li>
+  <li>
+    <p class="numlst"><a href="#configuring_1000">Intel PRO/1000 Adapters</a></li>
+</ul>
+<h2><a name="configuring_100">Configuring Intel PRO/100 Adapters</a></h2>
+<p>The default setting is for auto-negotiation to be enabled. Change this
+setting only
+to match the link partner.
+<h2><a name="configuring_1000">Configuring Intel PRO/1000 adapters</a></h2>
+<p>The default setting is for auto-negotiation to be enabled. 
+<p>For Intel PRO/1000 fiber adapters, auto-negotiation is the only speed. For 
+other Intel PRO/1000 adapters, change this setting only if you are encountering 
+problems linking to a link partner. In this case, change the settings to match 
+the link partner.<br>
+&nbsp;<table border="0" cellPadding="6" cellSpacing="0">
+  <tbody>
+    <tr>
+      <td vAlign="top"><img src="note.gif" naturalsizeflag="0" width="28" height="21"></td>
+      <td vAlign="top"><b><i>NOTE</i></b>: The adapter will not operate at
+        gigabit speed (1000 Mbps) if you disable auto-negotiation.</td>
+    </tr>
+    <tr>
+      <td vAlign="top">&nbsp;</td>
+      <td vAlign="top"><b><i>NOTE</i></b>: You cannot change the speed or duplex
+        of Intel PRO/1000 adapters that use fiber cabling.</td>
+    </tr>
+  </tbody>
+</table>
+<p class="numlst">If <b>Auto Negotiation</b> is disabled, you can specify <b>Forced Speed </b>(to 10 or 100 Mbps, but not 1000 Mbps) <b>and Duplex</b>.
+In this situation, the <b>Negotiable Speeds and Duplexes</b> checkboxes are
+disabled, since these are set to advertise speeds during auto-negotiation.&nbsp;
+<p class="numlst">If <b>Auto Negotiation</b> is <i>enabled</i>, the
+<b>Negotiable Speeds and Duplexes</b> checkboxes are enabled, allowing specific speed
+advertisement and disabling the <b>Forced Speed and Duplex </b>selection
+buttons.&nbsp;
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 5/06/04 10:51a <!-- $--> Revision <!--$$Revision:--> 5 <!-- $--></code>
+
+</body>
+
+</html>

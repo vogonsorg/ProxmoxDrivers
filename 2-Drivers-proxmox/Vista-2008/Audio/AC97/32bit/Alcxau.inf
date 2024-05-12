@@ -1,0 +1,666 @@
+;
+; INF file for installing Realtek AC97 WDM Driver
+;
+
+[Version]
+CatalogFile=alcxwdm.cat
+Signature="$CHICAGO$"
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+provider=%ProviderName%
+;;LayoutFile=layout.inf, layout1.inf, layout2.inf
+DriverVer=09/24/2008,5.10.00.6300
+
+[SourceDisksNames]
+222=%DiskDesc%,,,
+
+[SourceDisksFiles]
+ALCXWDM.SYS=222
+SOUNDMAN.EXE=222
+ALSNDMGR.CPL=222
+ALSNDMGR.WAV=222
+RTLCPL.EXE=222
+RtlCPAPI.dll=222
+Alcrmv.exe=222
+
+[DestinationDirs]
+AC97AUD.CopyList=10,system32\drivers
+ALCAUD_SMAPP.CopyList=10			;; WINDOWS
+RTUninstall_SMAPP.CopyList=10		;; WINDOWS
+ALCAUD_CPL.CopyList=11				;; WINDOWS system directory WIN98/ME->Windows\system, 2K/XP->Windows\system32
+RTLCPAPI.CopyList  = 11
+
+[Manufacturer]
+%MfgName%=Realtek
+
+[ControlFlags]
+ExcludeFromSelect = *
+
+[Realtek]
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_2415&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_2425&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_2445&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_2485&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_24C5&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_24D5&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_25A6&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_266E&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_2698&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_27DE&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_8086&DEV_7195&CC_0401
+%ALCVIA.Desc%=AC97VIA,	PCI\VEN_1106&DEV_3058&CC_0401
+%ALCVIA.Desc%=AC97VIA,	PCI\VEN_1106&DEV_3059&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1039&DEV_7012&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1022&DEV_7445&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1022&DEV_746D&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1022&DEV_2093&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10B9&DEV_5451&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10B9&DEV_5455&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1002&DEV_4341&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1002&DEV_4361&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1002&DEV_4370&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_1002&DEV_4382&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_006A&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_008A&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_00DA&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_00EA&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_0059&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_003A&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_026B&CC_0401
+%ALCAUD.Desc%=AC97AUD,	PCI\VEN_10DE&DEV_01B1&CC_0401
+
+[AC97AUD]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97AUD.CopyList, ALCAUD_SMAPP.CopyList, ALCAUD_CPL.CopyList, RTLCPAPI.CopyList, RTUninstall_SMAPP.CopyList
+DelReg=SndVol32.DelReg
+AddReg=AC97AUD.AddReg, AC97AUD_NAMES.AddReg, AC97AUD_OEM.AddReg, ALCAUD_SMAPP.AddReg, RTDS3DConfiguration.AddReg, RTLCPAPI.AddReg, RTUninstall_SMAPP.AddReg
+
+[AC97VIA]
+AlsoInstall=KS.Registration(ks.inf), WDMAUDIO.Registration(wdmaudio.inf)
+CopyFiles=AC97AUD.CopyList, ALCAUD_SMAPP.CopyList, ALCAUD_CPL.CopyList, RTLCPAPI.CopyList, RTUninstall_SMAPP.CopyList
+DelReg=SndVol32.DelReg
+AddReg=AC97AUD.AddReg, AC97AUD_NAMES.AddReg, AC97AUD_OEM.AddReg, ALCAUD_SMAPP.AddReg, RTDS3DConfiguration.AddReg, RTLCPAPI.AddReg, RTUninstall_SMAPP.AddReg
+DelReg=AC97AUD.DelReg
+
+[AC97AUD.DelReg]
+HKLM,Enum\Root\*PNPB002
+HKLM,Enum\Root\*PNPB006
+HKLM,Enum\Root\*PNPB02F
+
+[SndVol32.DelReg]
+HKCU,Software\Microsoft\Windows\CurrentVersion\Applets\Volume Control\Realtek AC97 Audio
+HKR,Settings
+HKLM,%AUTORUN%,SoundMan,,"SOUNDMAN.EXE"
+HKLM,Software\RealTek,InitLang
+HKLM,Software\RealTek\InitAP
+HKCU,Software\Realtek\AC97 Audio
+
+[AC97AUD.CopyList]
+ALCXWDM.SYS
+
+[ALCAUD_SMAPP.CopyList]
+SOUNDMAN.EXE
+
+[RTUninstall_SMAPP.CopyList]
+Alcrmv.exe
+
+[ALCAUD_CPL.CopyList]
+ALSNDMGR.CPL
+ALSNDMGR.WAV
+RTLCPL.EXE
+
+[RTLCPAPI.CopyList]
+RTLCPAPI.dll
+
+[RTLCPAPI.AddReg]
+HKCR,RtlCP.RtlCP.1,,0,"RtlCP Class"
+HKCR,RtlCP.RtlCP.1\CLSID,,0,%RTLCPAPI_CLSID%
+HKCR,RtlCP.RtlCP,,0,"RtlCP Class"
+HKCR,RtlCP.RtlCP\CurVer,,0,"RtlCP.RtlCP.1"
+HKCR,CLSID\%RTLCPAPI_CLSID%,,0,"RtlCP Class"
+HKCR,CLSID\%RTLCPAPI_CLSID%\ProgID,,0,"RtlCP.RtlCP.1"
+HKCR,CLSID\%RTLCPAPI_CLSID%\VersionIndependentProgID,,0,"RtlCP.RtlCP"
+HKCR,CLSID\%RTLCPAPI_CLSID%\Programmable
+HKCR,CLSID\%RTLCPAPI_CLSID%\InProcServer32,,0,RTLCPAPI.dll
+HKCR,CLSID\%RTLCPAPI_CLSID%\InProcServer32,ThreadingModel,0,Apartment
+
+[CPL_Class.AddReg]
+HKLM,%CPL_CLASS_S%,%CPL_CLASS_KS%,0x00010001 ,0x00000004
+
+[RTDS3DConfiguration.AddReg]
+HKR,DS3D,ForwardSpeakerConfiguration,0x00010001,1
+HKR,DS3D,IgnoreDSSpeakerConfiguration,0x00010001,1
+
+[AC97AUD.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+
+[AC97VIA.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+
+[AC97AUD.Interface.Wave]
+AddReg=AC97AUD.I.Wave.AddReg
+
+[AC97AUD.I.Wave.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97AUD.Wave.szPname%
+
+[AC97AUD.Interface.Topology]
+AddReg=AC97AUD.I.Topo.AddReg
+
+[AC97AUD.Interface.RecTopology]
+AddReg=AC97AUD.I.RecTopo.AddReg
+
+[AC97AUD.I.Topo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97AUD.Topo.szPname%
+
+[AC97AUD.I.RecTopo.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97AUD.RecTopo.szPname%
+
+[AC97AUD.Interface.Uart]
+AddReg=AC97AUD.I.Uart.AddReg
+
+[AC97AUD.I.Uart.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,,FriendlyName,,%AC97AUD.Uart.szPname%
+
+[AC97AUD.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,ALCXWDM.SYS
+HKR,,NTMPDriver,,"ALCXWDM.SYS,sbemul.sys"
+HKR,Drivers,SubClasses,,"wave,midi,mixer"
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%ALCAUD.Desc%
+HKR,Drivers\midi\wdmaud.drv, Description,,%ALCAUD.Desc%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%ALCAUD.Desc%
+
+[ALCAUD_SMAPP.AddReg]
+HKLM,%AUTORUN%,SoundMan,,"SOUNDMAN.EXE"
+
+[RTUninstall_SMAPP.AddReg]
+HKLM,%RT_UNINSTALL%,DisplayName,,"Realtek AC'97 Audio"
+HKLM,%RT_UNINSTALL%,UninstallString,,"Alcrmv.exe -r -m"
+
+[AC97AUD.Services]
+AddService = ALCXWDM, 0x00000002, AC97AUD_Service_Inst
+
+[AC97VIA.Services]
+AddService = ALCXWDM, 0x00000002, AC97AUD_Service_Inst
+
+[AC97AUD_Service_Inst]
+DisplayName   = %AC97AUD.SvcDesc%
+ServiceType   = 1                  ; SERVICE_KERNEL_DRIVER
+StartType     = 3                  ; SERVICE_DEMAND_START
+ErrorControl  = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\ALCXWDM.SYS
+
+[AC97AUD_NAMES.AddReg]
+;; Pins
+HKLM,%MCat%\%GUID.WaveOut%,Name,,%Pin.WaveOut%
+HKLM,%MCat%\%GUID.WaveOut%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.PcBeep%,Name,,%Pin.PcBeep%
+HKLM,%MCat%\%GUID.PcBeep%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Phone%,Name,,%Pin.Phone%
+HKLM,%MCat%\%GUID.Phone%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Mic%,Name,,%Pin.Mic%
+HKLM,%MCat%\%GUID.Mic%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.LineIn%,Name,,%Pin.LineIn%
+HKLM,%MCat%\%GUID.LineIn%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.CD%,Name,,%Pin.CD%
+HKLM,%MCat%\%GUID.CD%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Video%,Name,,%Pin.Video%
+HKLM,%MCat%\%GUID.Video%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Aux%,Name,,%Pin.Aux%
+HKLM,%MCat%\%GUID.Aux%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Aux2%,Name,,%Pin.Aux2%
+HKLM,%MCat%\%GUID.Aux2%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Radio%,Name,,%Pin.Radio%
+HKLM,%MCat%\%GUID.Radio%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.StereoMic%,Name,,%Pin.StereoMic%
+HKLM,%MCat%\%GUID.StereoMic%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MasterOut%,Name,,%Pin.MasterOut%
+HKLM,%MCat%\%GUID.MasterOut%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.HeadPhoneOut%,Name,,%Pin.HeadPhoneOut%
+HKLM,%MCat%\%GUID.HeadPhoneOut%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MonoOut%,Name,,%Pin.MonoOut%
+HKLM,%MCat%\%GUID.MonoOut%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.WaveIn%,Name,,%Pin.WaveIn%
+HKLM,%MCat%\%GUID.WaveIn%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicIn%,Name,,%Pin.MicIn%
+HKLM,%MCat%\%GUID.MicIn%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Spdif%,Name,,%Pin.Spdif%
+HKLM,%MCat%\%GUID.Spdif%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Front_TV%,Name,,%Pin.Front_TV%
+HKLM,%MCat%\%GUID.Front_TV%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Front_LineIn%,Name,,%Pin.Front_LineIn%
+HKLM,%MCat%\%GUID.Front_LineIn%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.TVIn%,Name,,%Pin.TVIn%
+HKLM,%MCat%\%GUID.TVIn%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Buzzer%,Name,,%Pin.Buzzer%
+HKLM,%MCat%\%GUID.Buzzer%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SpdifOut%,Name,,%Pin.SpdifOut%
+HKLM,%MCat%\%GUID.SpdifOut%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.VistaMasterOut%,Name,,%Pin.VistaMasterOut%
+HKLM,%MCat%\%GUID.VistaMasterOut%,Display,1,00,00,00,00
+
+;; Virtual Pins
+HKLM,%MCat%\%GUID.Virt3DCenterPin%,Name,,%Pin.Virt3DCenterPin%
+HKLM,%MCat%\%GUID.Virt3DCenterPin%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Virt3DDepthPin%,Name,,%Pin.Virt3DDepthPin%
+HKLM,%MCat%\%GUID.Virt3DDepthPin%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Virt3DMixPin%,Name,,%Pin.Virt3DMixPin%
+HKLM,%MCat%\%GUID.Virt3DMixPin%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.VirtToneMixPin%,Name,,%Pin.VirtToneMixPin%
+HKLM,%MCat%\%GUID.VirtToneMixPin%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.VirtToneMixMonoPin%,Name,,%Pin.VirtToneMixMonoPin%
+HKLM,%MCat%\%GUID.VirtToneMixMonoPin%,Display,1,00,00,00,00
+
+;; Nodes
+HKLM,%MCat%\%GUID.WaveVolume%,Name,,%Node.WaveVolume%
+HKLM,%MCat%\%GUID.WaveVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.WaveMute%,Name,,%Node.WaveMute%
+HKLM,%MCat%\%GUID.WaveMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.PcBeepVolume%,Name,,%Node.PcBeepVolume%
+HKLM,%MCat%\%GUID.PcBeepVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.PcBeepMute%,Name,,%Node.PcBeepMute%
+HKLM,%MCat%\%GUID.PcBeepMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.PhoneVolume%,Name,,%Node.PhoneVolume%
+HKLM,%MCat%\%GUID.PhoneVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.PhoneMute%,Name,,%Node.PhoneMute%
+HKLM,%MCat%\%GUID.PhoneMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicSelect%,Name,,%Node.MicSelect%
+HKLM,%MCat%\%GUID.MicSelect%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicBoost%,Name,,%Node.MicBoost%
+HKLM,%MCat%\%GUID.MicBoost%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicVolume%,Name,,%Node.MicVolume%
+HKLM,%MCat%\%GUID.MicVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicMute%,Name,,%Node.MicMute%
+HKLM,%MCat%\%GUID.MicMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.LineInVolume%,Name,,%Node.LineInVolume%
+HKLM,%MCat%\%GUID.LineInVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.LineInMute%,Name,,%Node.LineInMute%
+HKLM,%MCat%\%GUID.LineInMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.CDVolume%,Name,,%Node.CDVolume%
+HKLM,%MCat%\%GUID.CDVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.CDMute%,Name,,%Node.CDMute%
+HKLM,%MCat%\%GUID.CDMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.VideoVolume%,Name,,%Node.VideoVolume%
+HKLM,%MCat%\%GUID.VideoVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.VideoMute%,Name,,%Node.VideoMute%
+HKLM,%MCat%\%GUID.VideoMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.AuxVolume%,Name,,%Node.AuxVolume%
+HKLM,%MCat%\%GUID.AuxVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.AuxMute%,Name,,%Node.AuxMute%
+HKLM,%MCat%\%GUID.AuxMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MainMix%,Name,,%Node.MainMix%
+HKLM,%MCat%\%GUID.MainMix%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Virt3DCenter%,Name,,%Node.Virt3DCenter%
+HKLM,%MCat%\%GUID.Virt3DCenter%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Virt3DDepth%,Name,,%Node.Virt3DDepth%
+HKLM,%MCat%\%GUID.Virt3DDepth%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.3DBypass%,Name,,%Node.3DBypass%
+HKLM,%MCat%\%GUID.3DBypass%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.3DEnable%,Name,,%Node.3DEnable%
+HKLM,%MCat%\%GUID.3DEnable%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.BeepMix%,Name,,%Node.BeepMix%
+HKLM,%MCat%\%GUID.BeepMix%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Bass%,Name,,%Node.Bass%
+HKLM,%MCat%\%GUID.Bass%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Treble%,Name,,%Node.Treble%
+HKLM,%MCat%\%GUID.Treble%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Loudness%,Name,,%Node.Loudness%
+HKLM,%MCat%\%GUID.Loudness%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MasterVolume%,Name,,%Node.MasterVolume%
+HKLM,%MCat%\%GUID.MasterVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MasterMute%,Name,,%Node.MasterMute%
+HKLM,%MCat%\%GUID.MasterMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.HPVolume%,Name,,%Node.HPVolume%
+HKLM,%MCat%\%GUID.HPVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.HPMute%,Name,,%Node.HPMute%
+HKLM,%MCat%\%GUID.HPMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MonoOutSelect%,Name,,%Node.MonoOutSelect%
+HKLM,%MCat%\%GUID.MonoOutSelect%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MonoOutVolume%,Name,,%Node.MonoOutVolume%
+HKLM,%MCat%\%GUID.MonoOutVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MonoOutMute%,Name,,%Node.MonoOutMute%
+HKLM,%MCat%\%GUID.MonoOutMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.WaveInSelect%,Name,,%Node.WaveInSelect%
+HKLM,%MCat%\%GUID.WaveInSelect%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MasterInVolume%,Name,,%Node.MasterInVolume%
+HKLM,%MCat%\%GUID.MasterInVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MasterInMute%,Name,,%Node.MasterInMute%
+HKLM,%MCat%\%GUID.MasterInMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicInVolume%,Name,,%Node.MicInVolume%
+HKLM,%MCat%\%GUID.MicInVolume%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.MicInMute%,Name,,%Node.MicInMute%
+HKLM,%MCat%\%GUID.MicInMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SimulStereo%,Name,,%Node.SimulStereo%
+HKLM,%MCat%\%GUID.SimulStereo%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SpdifMute%,Name,,%Node.SpdifMute%
+HKLM,%MCat%\%GUID.SpdifMute%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SpdifSrc%,Name,,%Node.SpdifSrc%
+HKLM,%MCat%\%GUID.SpdifSrc%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.V_Loudness%,Name,,%Node.V_Loudness%
+HKLM,%MCat%\%GUID.V_Loudness%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SurroundSwitch%,Name,,%Node.SurroundSwitch%
+HKLM,%MCat%\%GUID.SurroundSwitch%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.CenLFESwitch%,Name,,%Node.CenLFESwitch%
+HKLM,%MCat%\%GUID.CenLFESwitch%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SpdifInMonitor%,Name,,%Node.SpdifInMonitor%
+HKLM,%MCat%\%GUID.SpdifInMonitor%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Front%,Name,,%Node.Front%
+HKLM,%MCat%\%GUID.Front%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Surround%,Name,,%Node.Surround%
+HKLM,%MCat%\%GUID.Surround%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Center%,Name,,%Node.Center%
+HKLM,%MCat%\%GUID.Center%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.LFE%,Name,,%Node.LFE%
+HKLM,%MCat%\%GUID.LFE%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.BassBoost%,Name,,%Node.BassBoost%
+HKLM,%MCat%\%GUID.BassBoost%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.TrebleBoost%,Name,,%Node.TrebleBoost%
+HKLM,%MCat%\%GUID.TrebleBoost%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.SideSwitch%,Name,,%Node.SideSwitch%
+HKLM,%MCat%\%GUID.SideSwitch%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.Side%,Name,,%Node.Side%
+HKLM,%MCat%\%GUID.Side%,Display,1,00,00,00,00
+HKLM,%MCat%\%GUID.DisableAnalogCD%,Name,,%Node.DisableAnalogCD%
+HKLM,%MCat%\%GUID.DisableAnalogCD%,Display,1,00,00,00,00
+
+[AC97AUD_OEM.AddReg]
+;;Default register value at driver startup
+;;low byte comes first, values are hexadezimal.
+HKR,Settings,MasterVolume,1,04,04		;-6dB
+HKR,Settings,HeadphoneVolume,1,04,04	;-6dB
+HKR,Settings,BeepVolume,1,04,00			;-12dB,unmuted
+HKR,Settings,PhoneVolume,1,04,04		;6dB,unmuted
+HKR,Settings,MicVolume,1,04,80			;6dB,muted,20dB Boost off
+HKR,Settings,LineInVolume,1,04,04		;6dB
+HKR,Settings,VideoVolume,1,04,04		;6dB
+HKR,Settings,AUXVolume,1,04,04			;6dB
+
+;;Configuration
+HKR,Settings,ChannelConfig,0x00010001,3
+HKR,Settings,DisableHeadphone,1,1
+HKR,Settings,DisableMonoOut,1,1
+HKR,Settings,DisableMicIn,1,1
+HKR,Settings,DisableCenterLFE,1,0
+
+HKLM,"Software\Realtek\AC97 Audio",SpoutPage,1,1
+
+;;================= Window2000====================
+[AC97AUD.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=AC97AUD.CopyList, ALCAUD_SMAPP.CopyList, ALCAUD_CPL.CopyList, RTLCPAPI.CopyList, RTUninstall_SMAPP.CopyList
+DelReg=SndVol32.DelReg
+AddReg=AC97AUD.AddReg,AC97AUD_NAMES.AddReg, AC97AUD_OEM.AddReg, ALCAUD_SMAPP.AddReg, RTDS3DConfiguration.AddReg, RTLCPAPI.AddReg, CPL_Class.AddReg, RTUninstall_SMAPP.AddReg
+
+[AC97VIA.NTX86]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration,WDMAUDIO.Registration
+CopyFiles=AC97AUD.CopyList, ALCAUD_SMAPP.CopyList, ALCAUD_CPL.CopyList, RTLCPAPI.CopyList, RTUninstall_SMAPP.CopyList
+DelReg=SndVol32.DelReg
+AddReg=AC97AUD.AddReg,AC97AUD_NAMES.AddReg, AC97AUD_OEM.AddReg, ALCAUD_SMAPP.AddReg, RTDS3DConfiguration.AddReg, RTLCPAPI.AddReg, CPL_Class.AddReg, RTUninstall_SMAPP.AddReg
+DelReg=AC97AUD.DelReg
+
+[AC97AUD.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+
+[AC97VIA.NTX86.Interfaces]
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_Wave%,AC97AUD.Interface.Wave
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_RENDER%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_CAPTURE%,%KSNAME_UART%,AC97AUD.Interface.Uart
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_Topology%,AC97AUD.Interface.Topology
+AddInterface=%KSCATEGORY_AUDIO%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+AddInterface=%KSCATEGORY_TOPOLOGY%,%KSNAME_RecTopology%,AC97AUD.Interface.RecTopology
+
+[AC97AUD.NTX86.Services]
+AddService = ALCXWDM, 0x00000002, AC97AUD_Service_Inst
+
+[AC97VIA.NTX86.Services]
+AddService = ALCXWDM, 0x00000002, AC97AUD_Service_Inst
+
+[Strings]
+ProviderName="Realtek Semiconductor Corp."
+MfgName="Realtek"
+DiskDesc="Realtek AC97 Audio Driver Disk"
+ALCAUD.Desc="Realtek AC'97 Audio"
+ALCVIA.Desc="Realtek AC'97 Audio for VIA (R) Audio Controller"
+
+AC97AUD.Wave.szPname="Realtek AC97 Audio"
+AC97AUD.Topo.szPname="Realtek AC97 Mixer"
+AC97AUD.Uart.szPname="MIDI External Port"
+AC97AUD.RecTopo.szPname="Realtek AC97 Record Mixer"
+
+MCat="SYSTEM\CurrentControlSet\Control\MediaCategories"
+AUTORUN="Software\Microsoft\Windows\CurrentVersion\Run"
+CPL_CLASS_S="SOFTWARE\Microsoft\Windows\CurrentVersion\Control Panel\Extended Properties\{305CA226-D286-468e-B848-2B2E8E697B74} 2"
+CPL_CLASS_KS="%SystemRoot%\system32\ALSNDMGR.CPL"
+RT_UNINSTALL="Software\Microsoft\Windows\CurrentVersion\Uninstall\{FB08F381-6533-4108-B7DD-039E11FBC27E}"
+
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_AUDIO="{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_TOPOLOGY="{DDA54A40-1E4C-11D1-A050-405705C10000}"
+KSNAME_Wave="Wave"
+KSNAME_Topology="Topology"
+KSNAME_UART="UART"
+KSNAME_RecTopology="RecTopology"
+
+AC97AUD.SvcDesc = "Service for Realtek AC97 Audio (WDM)"
+
+RTLCPAPI_CLSID="{E9F1F599-7B14-4213-BF46-F992758CAB81}"
+
+;; Pins (non-localizeable)
+GUID.WaveOut		="{0A8C1A80-42B0-11D2-95D2-00C04FB925D3}"
+GUID.PcBeep			="{0A8C1A83-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Phone			="{0A8C1A86-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Mic			="{0A8C1A89-42B0-11D2-95D2-00C04FB925D3}"
+GUID.LineIn			="{0A8C1A8F-42B0-11D2-95D2-00C04FB925D3}"
+GUID.CD				="{0A8C1A92-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Video			="{0A8C1A95-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Aux			="{0A8C1A98-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Aux2			="{8B9F0564-3955-42a3-B03D-F68C81FD4A36}"
+GUID.Radio			="{2F2065D0-667B-481e-9353-5465FE7FAEBC}"
+GUID.StereoMic		="{1FF36655-CDF0-4023-AE26-A40BE2EB8223}"
+GUID.MasterOut		="{0A8C1AA4-42B0-11D2-95D2-00C04FB925D3}"
+GUID.HeadPhoneOut	="{0A8C1AA7-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MonoOut		="{0A8C1AAC-42B0-11D2-95D2-00C04FB925D3}"
+GUID.WaveIn			="{0A8C1AB1-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicIn			="{0A8C1AB4-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Spdif			="{4548F87B-32C7-46c7-B2E3-7AD500166A5E}"
+GUID.Front_TV		="{CFA16E88-A2B0-44a7-BE83-B0892D1C2E53}"
+GUID.Front_LineIn	="{FBADB939-BD97-4e24-A260-840FFFDDBED8}"
+GUID.TVIn	        ="{EEA4BECD-4269-47c4-91C6-8FC2C788D15F}"
+GUID.Buzzer	="{C4C73B78-9EC3-49B1-BEC9-85CAC9379656}"
+GUID.SpdifOut		="{AA7203A7-31DF-402c-BC38-A5D9800A9009}"
+GUID.VistaMasterOut	="{0CC90307-05DA-42a9-9418-EE55EF8EC74C}"
+
+;; Virtual Pins (non-localizeable)
+GUID.Virt3DCenterPin	="{766DB59F-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.Virt3DDepthPin		="{766DB5A0-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.Virt3DMixPin		="{4CE9C3C9-6EC0-11d2-9ADE-00C04F8EFB68}"
+GUID.VirtToneMixPin		="{766DB5A1-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.VirtToneMixMonoPin	="{766DB5A5-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.VirtHallPin		="{18D5C240-23F8-11d3-92C6-52544C29295E}"
+GUID.VirtPubPin			="{18D5C241-23F8-11d3-92C6-52544C29295E}"
+GUID.VirtStadiumPin		="{18D5C242-23F8-11d3-92C6-52544C29295E}"
+GUID.VirtSurroundPin	="{18D5C243-23F8-11d3-92C6-52544C29295E}"
+GUID.VirtKaraokPin		="{BCFB9E44-24BA-11d3-92C6-52544C29295E}"
+GUID.VirtPitchShiftPin	="{BCFB9E43-24BA-11d3-92C6-52544C29295E}"
+
+;; Nodes (non-localizeable)
+GUID.WaveVolume		="{0A8C1A81-42B0-11D2-95D2-00C04FB925D3}"
+GUID.WaveMute		="{0A8C1A82-42B0-11D2-95D2-00C04FB925D3}"
+GUID.PcBeepVolume	="{0A8C1A84-42B0-11D2-95D2-00C04FB925D3}"
+GUID.PcBeepMute		="{0A8C1A85-42B0-11D2-95D2-00C04FB925D3}"
+GUID.PhoneVolume	="{0A8C1A87-42B0-11D2-95D2-00C04FB925D3}"
+GUID.PhoneMute		="{0A8C1A88-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicSelect		="{0A8C1A8B-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicBoost		="{0A8C1A8C-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicVolume		="{0A8C1A8D-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicMute		="{0A8C1A8E-42B0-11D2-95D2-00C04FB925D3}"
+GUID.LineInVolume	="{0A8C1A90-42B0-11D2-95D2-00C04FB925D3}"
+GUID.LineInMute		="{0A8C1A91-42B0-11D2-95D2-00C04FB925D3}"
+GUID.CDVolume		="{0A8C1A93-42B0-11D2-95D2-00C04FB925D3}"
+GUID.CDMute			="{0A8C1A94-42B0-11D2-95D2-00C04FB925D3}"
+GUID.VideoVolume	="{0A8C1A96-42B0-11D2-95D2-00C04FB925D3}"
+GUID.VideoMute		="{0A8C1A97-42B0-11D2-95D2-00C04FB925D3}"
+GUID.AuxVolume		="{0A8C1A99-42B0-11D2-95D2-00C04FB925D3}"
+GUID.AuxMute		="{0A8C1A9A-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MainMix		="{0A8C1A9B-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Virt3DCenter	="{766DB5A2-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.Virt3DDepth	="{766DB5A3-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.3DBypass		="{0A8C1A9E-42B0-11D2-95D2-00C04FB925D3}"
+GUID.3DEnable		="{766DB5A4-6E94-11d2-9ADE-00C04F8EFB68}"
+GUID.BeepMix		="{0A8C1A9F-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Bass			="{0A8C1AA0-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Treble			="{0A8C1AA1-42B0-11D2-95D2-00C04FB925D3}"
+GUID.Loudness		="{B9B9016C-57EB-11d2-9AC0-00C04F8EFB68}"
+GUID.MasterVolume	="{0A8C1AA2-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MasterMute		="{0A8C1AA3-42B0-11D2-95D2-00C04FB925D3}"
+GUID.HPVolume		="{0A8C1AA5-42B0-11D2-95D2-00C04FB925D3}"
+GUID.HPMute			="{0A8C1AA6-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MonoOutSelect	="{0A8C1AA9-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MonoOutVolume	="{0A8C1AAA-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MonoOutMute	="{0A8C1AAB-42B0-11D2-95D2-00C04FB925D3}"
+GUID.WaveInSelect	="{0A8C1AAE-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MasterInVolume	="{0A8C1AAF-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MasterInMute	="{0A8C1AB0-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicInVolume	="{0A8C1AB2-42B0-11D2-95D2-00C04FB925D3}"
+GUID.MicInMute		="{0A8C1AB3-42B0-11D2-95D2-00C04FB925D3}"
+GUID.SimulStereo	="{B3AD50B5-3849-4983-ADD7-25E6268F912D}"
+GUID.SpdifMute		="{D0A0EAFF-729D-4f69-A771-7209DC2041B2}"
+GUID.SpdifSrc		="{6E03E3B9-52AF-4de8-8DA7-0BFBA156F0D8}"
+GUID.V_Loudness		="{245299E0-8A44-11d5-994D-00E04C39004E}"
+GUID.SurroundSwitch	="{C1F8C09B-11D8-4fa5-8AAE-FD8AD4D540C6}"
+GUID.CenLFESwitch	="{912D8260-EA5B-11d5-8EC8-52544C29295E}"
+GUID.SpdifInMonitor	="{A9D66068-912B-4fa5-932C-94FD7092CCEB}"
+GUID.Front			="{8A74FFAE-8766-480f-AF6D-325FCF9AB324}"
+GUID.Surround		="{B25A6526-9703-4117-9D7F-260A5DF5CC34}"
+GUID.Center			="{594AC582-B82A-4024-99E7-DC5B358E0F30}"
+GUID.LFE			="{19532773-C332-4de7-BEDD-F888163C3094}"
+GUID.BassBoost      ="{9557C941-7360-11D4-8133-0050046069C0}"
+GUID.TrebleBoost      ="{9557C944-7360-11D4-8133-0050046069C0}"
+GUID.SideSwitch         ="{58738821-8C5E-445e-B335-DA43DF2916D7}"
+GUID.Side               ="{A5B27DE2-40F3-469e-9A4D-2CD8D5D9284D}"
+GUID.DisableAnalogCD	="{08FDB237-3D34-4c59-9511-56E178AE3E10}"
+
+;; Pins (localizeable)
+Pin.WaveOut		="Wave Out"
+Pin.PcBeep		="PC Beep"
+Pin.Phone		="Phone"
+Pin.Mic			="Microphone"
+Pin.LineIn		="Line In"
+Pin.CD			="CD"
+Pin.Video		="Video"
+Pin.Aux			="Aux"
+Pin.Aux2		="Aux/Line In 2"
+Pin.Radio		="Radio"
+Pin.StereoMic	="Stereo Mic"
+Pin.MasterOut	="Speaker"
+Pin.HeadPhoneOut="Headphones"
+Pin.MonoOut		="Mono Out"
+Pin.WaveIn		="Wave In"
+Pin.MicIn		="Mic In"
+Pin.Spdif		="SPDIF"
+Pin.Front_TV    ="Front/TV in"
+Pin.Front_LineIn="Front line in"
+Pin.TVIn        ="TV in"
+Pin.Buzzer	="Buzzer"
+Pin.SpdifOut	="Realtek Digital Output"
+Pin.VistaMasterOut	="Realtek AC97 Audio Output"
+
+;; Virtual Pins (localizeable)
+Pin.Virt3DCenterPin		="3D Center"
+Pin.Virt3DDepthPin		="3D Depth"
+Pin.Virt3DMixPin		="3D Mix"
+Pin.VirtToneMixPin		="Stereo Mix"
+Pin.VirtToneMixMonoPin	="Mono Mix"
+
+;; Nodes (localizeable)
+Node.WaveVolume		="Wave Volume"
+Node.WaveMute		="Wave Mute"
+Node.PcBeepVolume	="Beep Volume"
+Node.PcBeepMute		="Beep Mute"
+Node.PhoneVolume	="Phone Volume"
+Node.PhoneMute		="Phone Mute"
+Node.MicSelect		="Mic2 Select"
+Node.MicBoost		="Mic Boost"
+Node.MicVolume		="Mic Volume"
+Node.MicMute		="Mic Mute"
+Node.LineInVolume	="LineIn Volume"
+Node.LineInMute		="LineIn Mute"
+Node.CDVolume		="CD Volume"
+Node.CDMute			="CD Mute"
+Node.VideoVolume	="Video Volume"
+Node.VideoMute		="Video Mute"
+Node.AuxVolume		="Aux Volume"
+Node.AuxMute		="Aux Mute"
+Node.MainMix		="Main Mix"
+Node.Virt3DCenter	="3D Center"
+Node.Virt3DDepth	="3D Depth"
+Node.3DBypass		="WaveOut 3D Bypass"
+Node.3DEnable		="3D Enable"
+Node.BeepMix		="Beep Mix"
+Node.Bass			="Bass"
+Node.Treble			="Treble"
+Node.Loudness		="Loudness"
+Node.MasterVolume	="Master Volume"
+Node.MasterMute		="Master Mute"
+Node.HPVolume		="Headphone Volume"
+Node.HPMute			="Headphone Mute"
+Node.MonoOutSelect	="Mono Out Select"
+Node.MonoOutVolume	="Mono Out Volume"
+Node.MonoOutMute	="Mono Out Mute"
+Node.WaveInSelect	="WaveIn Select"
+Node.MasterInVolume	="WaveIn Volume"
+Node.MasterInMute	="WaveIn Mute"
+Node.MicInVolume	="Mic In Volume"
+Node.MicInMute		="Mic In Mute"
+Node.SimulStereo	="Simulated Stereo"
+Node.SpdifMute		="SPDIF Mute"
+Node.SpdifSrc		="Sampling rate conversion for SPDIF output"
+Node.V_Loudness		="Loudness"
+Node.SurroundSwitch	="Switch Line-In to Rear Output"
+Node.CenLFESwitch	="Switch Mic-In to Center/LFE Output"
+Node.SpdifInMonitor	="Real-Time SPDIF-In Monitor"
+Node.Front			="Front"
+Node.Surround		="Rear"
+Node.Center			="Center"
+Node.LFE			="Subwoofer"
+Node.BassBoost      ="Bass Boost"
+Node.TrebleBoost      ="Treble Boost"
+Node.SideSwitch		="Switch Aux-In to Side Output"
+Node.Side           ="Side"
+Node.DisableAnalogCD	="Disable Analog CD"

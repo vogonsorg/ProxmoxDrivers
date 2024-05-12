@@ -1,0 +1,113 @@
+# Example 3: 2 TEAMS - 2 adapters in a Static Link Aggregation (SLA) team and 
+# 4 Adapters in IEEE 802.3AD team.
+
+# This example results in the creation of two teams.  The first is a SLA team 
+# of two Intel(r) PRO/1000 Server Adapters. 
+# The second team consists of four Intel PRO/100 adapters (CE100B.LAN) 
+# configured as an IEEE 802.3AD team.  
+# This example uses IPX on both Ethernet 802.2 and Ethernet II, IP on Ethernet II.
+# An SLA team requires that the adapters in the team are connected to a switch 
+# with a trunk capability (Fast ethernet channel (FEC) OR gigabit ethernet 
+# channel (GEC)) and all the adapters in the team are running at the same speed. 
+# The 802.3AD team requires an IEEE 802.3AD compliant switch.
+
+;load TCPIP.NLM.  This must be done before IP is bound.
+
+LOAD TCPIP
+
+; Load the base drivers for the first team.
+
+LOAD CE1000 SLOT=1 FRAME=Ethernet_802.2 NAME=GIG_1_E82
+LOAD CE1000 SLOT=1 FRAME=Ethernet_II    NAME=GIG_1_EII
+
+LOAD CE1000 SLOT=2 FRAME=Ethernet_802.2 NAME=GIG_2_E82
+LOAD CE1000 SLOT=2 FRAME=Ethernet_II    NAME=GIG_2_EII
+
+; Load iANS.LAN for the first team.  A name must be declared to reference the
+; individual frametypes later if multiple frametypes are used.  To designate
+; which team the adapters should join, the "team" keyword is used.
+
+LOAD iANS FRAME=ETHERNET_802.2 NAME=SLA_TEAM_E82 TEAM=1
+LOAD iANS FRAME=ETHERNET_II    NAME=SLA_TEAM_EII TEAM=1
+
+; Bind iANS to the base driver for each adapter and each frametype.  Bind to
+; the name of the base driver instance (assigned when the driver was loaded)
+; and specify the team number.
+
+BIND iANS GIG_1_E82  TEAM=1 PRIMARY
+BIND iANS GIG_1_EII  TEAM=1 PRIMARY
+
+BIND iANS GIG_2_E82 TEAM=1
+BIND iANS GIG_2_EII TEAM=1
+
+; commit team 1 in SLA (Static Link Aggregation) mode
+LOAD iANS COMMIT MODE=SLA TEAM=1
+
+; Bind IPX to both frametypes and bind IP to Ethernet II.
+
+BIND IPX SLA_TEAM_E82 NET=102
+BIND IPX SLA_TEAM_EII NET=111
+BIND IP SLA_TEAM_EII ADDR=128.181.11.1 MASK=255.255.255.0
+
+
+; Now load the base drivers for the second team (802.3AD).
+
+LOAD CE100B SLOT=6 FRAME=Ethernet_802.2 NAME=AD_1_E82
+LOAD CE100B SLOT=6 FRAME=Ethernet_II    NAME=AD_1_EII
+
+LOAD CE100B SLOT=5 FRAME=Ethernet_802.2 NAME=AD_2_E82
+LOAD CE100B SLOT=5 FRAME=Ethernet_II    NAME=AD_2_EII
+
+LOAD CE100B SLOT=4 FRAME=Ethernet_802.2 NAME=AD_3_E82
+LOAD CE100B SLOT=4 FRAME=Ethernet_II    NAME=AD_3_EII
+
+LOAD CE100B SLOT=3 FRAME=Ethernet_802.2 NAME=AD_4_E82
+LOAD CE100B SLOT=3 FRAME=Ethernet_II    NAME=AD_4_EII
+
+; Load iANS.LAN for the second team.  Name each frametype with the "NAME"
+; keyword and specify the second team with the "TEAM=2" keyword.
+
+LOAD iANS FRAME=ETHERNET_802.2 NAME=AD_TEAM_E82 TEAM=2
+LOAD iANS FRAME=ETHERNET_II    NAME=AD_TEAM_EII TEAM=2
+
+; Bind iANS to the base driver for each adapter and each frametype.  Bind to
+; the name of the base driver instance (assigned when the driver was loaded)
+; and specify the team number.
+
+bind iANS AD_1_E82 TEAM=2
+bind iANS AD_1_EII TEAM=2
+
+bind iANS AD_2_E82 TEAM=2
+bind iANS AD_2_EII TEAM=2
+
+bind iANS AD_3_E82 TEAM=2
+bind iANS AD_3_EII TEAM=2
+
+bind iANS AD_4_E82 TEAM=2
+bind iANS AD_4_EII TEAM=2
+
+; commit for team 2
+
+LOAD iANS COMMIT MODE=AD TEAM=2
+
+; Bind IPX to both frametypes and bind IP to Ethernet II.
+
+BIND IPX AD_TEAM_E82 NET=202
+BIND IPX AD_TEAM_EII NET=211
+BIND IP AD_TEAM_EII ADDR=128.181.22.1 MASK=255.255.255.0
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.

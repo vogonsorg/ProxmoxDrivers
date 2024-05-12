@@ -1,0 +1,66 @@
+:Base prosetp.HLP
+:Title Guida in linea di Intel(R) PROSet II
+1 Panoramica
+2 Spostarsi in PROSet II=GENERAL_PAGE
+2 Visualizzazione delle informazioni sulla scheda di rete e sul driver
+3 Informazioni generali=General_Information
+3 Dettagli delle schede di rete=Adapter_Details
+3 Dettagli dei driver=Driver_Information
+1 Configurazione della scheda di rete
+2 Impostazione della velocità e del duplex=Set_Speed_and_Duplex
+2 Configurazione dell'utilizzo dell'energia=Configure_Power_Management
+2 Configurazione delle funzioni avanzate=Configure_Advanced_Features
+2 Attivazione di IPSec=Enable_IPSec
+2 Salvataggio della configurazione su un file=SAVERESTORE
+2 Rimozione di una scheda di rete=Remove_an_Adapter_Instance
+1 Creazione e configurazione dei raggruppamenti
+2 Tipi di raggruppamenti  
+3 Informazioni sui raggruppamenti=Teaming_Info
+3 Tipi di raggruppamenti=Team_Types
+3 Fault Tolerance della scheda di rete=Adapter_Fault_Tolerance
+3 Fault Tolerance dello switch=Switch_Fault_Tolerance
+3 Bilanciamento adattivo del carico=Adapter_Load_Balancing
+3 FEC/LA/802.3ad: Statico=FEC
+3 GEC/LA/802.3ad: Statico=GEC
+3 IEEE 802.3ad: Dinamico=Dynamic_3ad
+2 Impostazione di un raggruppamento
+3 Creazione di un raggruppamento=Create_a_New_Team
+3 Test della configurazione dello switch=Test_Switch_Configuration
+3 Configurazione delle impostazioni avanzate=Teaming_Advanced_Settings
+2 Modifica della configurazione del raggruppamento
+3 Modifica della modalità di raggruppamento delle schede di rete=Change_Adapter_Teaming_Mode
+3 Specifica di una scheda di rete come primaria o secondaria=Specify_an_Adapter_as_Primary_or_Secondary
+3 Aggiunta di una scheda di rete a un raggruppamento=Add_an_Adapter_to_an_Existing_Team
+3 Rimozione di una scheda da un raggruppamento=Remove_an_Adapter_from_a_Team
+3 Impostazioni avanzate di raggruppamento=Teaming_Advanced_Settings
+2 Visualizzazione della configurazione del raggruppamento
+3 Raggruppamenti nella struttura dei componenti di rete=Team_Listing
+3 Visualizzazione della configurazione del raggruppamento=Team_Configuration
+2 Rimozione di un raggruppamento
+3 Rimozione di un raggruppamento di schede di rete=Remove_an_Adapter_Team
+1 Creazione e configurazione di VLAN
+2 Panoramica delle reti VLAN=VLAN>main
+2 Configurazione di una VLAN
+3 Creazione di una VLAN=ADD_VLAN
+3 Attivazione di GVRP=GVRP_Support
+3 Impostazioni avanzate=Advanced_Settings_for_VLANs
+2 Modifica delle proprietà della VLAN
+3 Modifica delle proprietà della VLAN=Change_VLAN_Properties
+3 Impostazioni avanzate=Advanced_Settings_for_VLANs
+2 Rimozione di una VLAN
+3 Rimozione di una VLAN=Remove_a_VLAN
+1 Esecuzione della diagnostica
+2 Panoramica=Diagnostics_An_Overview
+2 Test di diagnostica=Diagnostics
+2 Test del cavo=Testing_the_Cable
+2 Test mittente/destinatario=Sender_Responder_Test
+2 Impostazione del registro di diagnostica=Diagnostic_Log
+1 Utilizzo degli strumenti aggiuntivi Intel(R)
+2 Boot Agent
+3 Boot Agent=Boot_Agent
+2 Intel(R) Priority Packet
+3 Panoramica=priority_packet_overview
+1 Risoluzione dei problemi
+2 Scheda Risoluzione dei problemi=Troubleshooting
+2 Ripristino della configurazione della scheda di rete=RESTORECONFIG
+2 Servizio di supporto=Support

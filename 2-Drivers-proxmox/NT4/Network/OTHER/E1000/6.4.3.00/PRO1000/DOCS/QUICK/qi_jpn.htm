@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=Shift_JIS">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Microsoft FrontPage 5.0">
+<link rel="stylesheet" type="text/css" href="style.css">
+<TITLE> 
+Intel(R) ネットワーク アダプタ クイック インストール ガイド</TITLE></HEAD>
+<BODY>
+<H1>
+<font color="#000000">インテル(R) PRO ネットワーク アダプタのインストール</font></H1>
+<p>
+<i>2004 年 4 月改訂</i></p>
+<DIV>
+<hr>
+<DIV>
+<h2>
+<font color="#000000">Intel PCI、PCI-X、または PCI-Express* アダプタのインストール</font></h2>
+<ol>
+  <li>
+    <p class="numlst"><font color="#000000">コンピュータの電源を切り、電源コードをコンセントから抜きます。</font></li>
+  <li>
+    <p class="numlst"><font color="#000000">コンピュータのカバーを外し、アダプタに該当するスロットからアダプタ スロット カバーを取り外します。</font></li>
+  <li>
+    <p class="numlst"><font color="#000000"><b>PCI Express</b> アダプタの場合: アダプタのエッジ コネクタを PCI Express スロットに差し込み、ブラケットをシャーシに止めつけます。<br> <b>PCIおよび PCI-X</b> アダプタの場合: アダプタのエッジ コネクタを、PCI スロットに完全にはまるまで差し込みます。 ブラケットをシャーシに止めつけます。 </font></li>
+  <li>
+    <p class="numlst">コンピュータのカバーを取り付けます。 電源コードをコンセントに挿入します。</li>
+</ol>
+    <h2>ネットワーク ケーブルの挿入</h2>
+</DIV>
+<DIV>
+</DIV>
+<p><font color="#000000"><b>Intel(R) PRO/100 アダプタおよび PRO/1000 銅アダプタ</b> 10 Mbps ネットワークでは、カテゴリ 3、4、または 5 のツイスト ペア イーサネット (TPE) ケーブルを使用して、ネットワーク ケーブルまたはケーブルをアダプタに接続します。 100 または1000 Mbps ネットワークおよびホーム ネットワークには、カテゴリ 5 (4 ペア) ケーブルを使用します。<br> <br> <b>Intel(R) PRO/1000 光ファイバ アダプタ (SC コネクタ接続):</b> 光ファイバー コネクタのカバーをはずして保管します。 1000Base-SX 二重通信型 SC 光ファイバー コネクタを アダプタ ブラケットの TX/RX ポートに差し込みます。<br> <br> <b>Intel(R) PRO/1000 光ファイバ アダプタ (LC コネクタ接続):</b> 光ファイバー コネクタのカバーをはずして保管します。 アダプタのタイプ<span class="295061618-17042002"> (1000BASE-SX または 1000BASE-LX) に合ったケーブルを使用して、LC コネクタをアダプタに差し込みます。 長さの制限を含め、光ファイバーの仕様にケーブルが準拠する場合は、SC 等のほかのタイプのコネクタに変換ケーブルを使用することができます。<br> <br></span></font> コンピュータを起動し、以下のドライバ インストール手順に従います。
+</DIV>
+<h2>
+<font color="#000000">ドライバおよび</font>拡張子のインストール</h2>
+<p>
+<i><font color="#000000">注:  Intel PRO/1000 サーバ アダプタは、Windows 95*、Windows 98*、および Windows Me* のコンピュータでは動作しません。</font></i></p>
+<h3><font color="#000000">Windows オペレーティング システム (Windows NT* 4.0 を除く)</font></h3>
+<font COLOR="#231f20">
+<p ALIGN="LEFT">ドライバをインストールするには、オペレーティング システムに対して管理者権限が必要であることにご留意ください。 </p>
+<ol>
+  <li>
+<p ALIGN="LEFT" class="numlst">アダプタが検出され、Windows は Windows の搭載ドライバをインストールするか、<b>新しいハードウェアの検出</b>ウィザードを開始します。</p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">ウィザードが開始する場合、プロンプトに従い、このパッケージの CD からドライバをインストールします。  </p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">Windows の搭載ドライバがインストールされる (ウィザードが表示されない) 場合、インテルの CD を挿入して、<b>Intel PRO ネットワーク接続</b> オートランのウィンドウが表示される際に [<b>ドライバのインストール</b>] ボタンをクリックしてドライバを更新します。</p>
+  </li>
+  <li>
+<p ALIGN="LEFT" class="numlst">[<b>インストールのオプション</b>] ダイアログが表示されたら、チームまたは VLAN をセットアップする必要がある場合に [<b>Advanced Network Services</b>] を選択します。</p>
+  </li>
+</ol>
+</font>
+<DIV>
+<h3><font color="#000000">Windows NT 4.0</font></h3>
+<P>
+<font color="#000000">注:  インテル PROSet Utility ソフトウェアは、アダプタ ドライバのインストール中に自動的にインストールされます。</font></P>
+<ol>
+  <li>
+    <p CLASS="numlst"><font color="#000000">Windows NT 4.0 を起動して、[コントロール パネル] で [ネットワーク] アイコンをダブルクリックし、 [アダプタ] タブ、[追加] の順にクリックします。</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">アダプタのリストが表示されたら、そのリストからアダプタを選択せずにアダプタに搭載された CD を挿入するか、その他のメディアを示して、[ディスク使用] をクリックします。</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">CD の [Autorun] の画面が表示されたら、それを閉じて続行します。</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">パスを指定し [OK] をクリックしてインストールを続行します。 作業が終了すると、ネットワーク アダプタのリストに、インストールしたインテルのアダプタが表示されます。</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">[閉じる] をクリックしてインストールを完了します。</font></li>
+  <li>
+    <p CLASS="numlst"><font color="#000000">コンピュータを再起動します。</font></p>
+  </li>
+</ol>
+</DIV>
+<h3>
+<font color="#000000">Linux*</font> </h3>
+<p>このドライバのバイナリ RPM* パッケージをビルドするには、'rpmbuild -tb &lt;ファイル名.tar.gz&gt;' を実行します。 &lt;ファイル名.tar.gz&gt; をドライバの特定ファイル名に置き換えます。</p>
+<table cellPadding="4" width="100%" border="0">
+  <tr>
+    <td vAlign="top" align="middle" width="21">
+    &nbsp;</td>
+    <td><i><b>注</b>:</i> ビルドが適切に動作するには、現在実行しているカーネルがインストール済みのカーネル ソースのバージョンおよび設定と一致する必要があります。 カーネルを再コンパイルした直後の場合、システムを今すぐ再起動します。
+    <p>RPM 機能は Red Hat 配布でのみテストされています。<p>インテル PRO/100 アダプタには、ドライバ名に e100 を使用します。</td>
+  </tr>
+</table>
+<ol>
+  <li>
+  <p class="numlst">任意のディレクトリにベース ドライバの tar ファイルを移動します。 たとえば、'/home/username/e1000' または '/usr/local/src/e1000' を使用します。
+  </li>
+  <li>
+  <p class="numlst">アーカイブを tar または zip 解除します。&lt;x.x.x&gt; はドライバ tar ファイルのバージョン番号です。 </p>
+  <blockquote>
+    <p class="numlst">tar zxf e1000-&lt;x.x.x&gt;.tar.gz </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">ドライバ src ディレクトリに変更します。&lt;x.x.x&gt; はドライバ tar のバージョン番号です。 </p>
+  <blockquote>
+    <p class="numlst">cd e1000-&lt;x.x.x&gt;/src/ </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">ドライバ モジュールをコンパイルします。 </p>
+  <blockquote>
+    <p class="numlst">make install </p>
+  </blockquote>
+  <p class="numlst">バイナリは次の通りにインストールされます。</p>
+  <blockquote>
+    <p class="numlst">/lib/modules/&lt;kernel_version&gt;/kernel/drivers/net/e1000.o</p>
+  </blockquote>
+  <p class="numlst">上記に示されたインストールの場所はデフォルトであり、 一部の Linux 配布では正しくない可能性があります。 詳細は、<a href="../LINUX/ldistrib.htm">ldistrib.htm</a> をご覧ください。</li>
+  <li>
+  <p class="numlst">モジュールをインストールします。 </p>
+  <blockquote>
+    <p class="numlst">insmod e1000 &lt;パラメータ&gt;=&lt;値&gt; </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">次のように入力して、IPアドレスをインターフェースに割り当てます。&lt;x&gt; はインターフェースの番号です。  </p>
+  <blockquote>
+    <p class="numlst">ifconfig eth&lt;x&gt; &lt;IP_address&gt; </p>
+  </blockquote>
+  </li>
+  <li>
+  <p class="numlst">インターフェースが動作することを確認します。 次のように入力します。&lt;IP_address&gt; は、テストされるインターフェースとして同じサブネット上の別のコンピュータの IP アドレスです。 </p>
+  <blockquote>
+    <p class="numlst">ping &lt;IP_address&gt; </p>
+  </blockquote>
+  </li>
+</ol>
+<h3>
+<font color="#000000">その他のオペレーティング システム</font> </h3>
+<P><font color="#000000">他のドライバをインストールするには、アダプタ CD-ROM のユーザ ガイド、または次のカスタマ サポート ウェブサイトをご覧ください。 <a href="http://support.intel.co.jp">http://support.intel.co.jp</a></font></P>
+<DIV>
+<hr>
+<P CLASS="Proc-Step"><font color="#000000">*<a href="ld_jpn.htm">著作権に関する情報</a></font></P>
+</DIV>
+</BODY>
+</HTML>

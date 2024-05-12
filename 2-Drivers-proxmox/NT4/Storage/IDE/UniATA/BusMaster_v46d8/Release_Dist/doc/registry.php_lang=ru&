@@ -1,0 +1,505 @@
+<!-- Copyright (c) 2001-2005 by Alter -->
+<html lang="ru">
+  <head>
+    <title>Universal ATA driver Registry settings manual</title>
+    <link rel="stylesheet" href="http://10.0.0.11/alter/common.css" type="text/css">
+    <meta name="keywords" content="UniATA, Registry, Registry settings, Include, Exclude, Transfer Mode, tuning">
+    <meta name="description" content="Universal ATA driver Registry settings manual">
+    <meta charset="KOI8-R">
+  </head>
+  <body align="center">
+
+
+
+<!--<center><img src="/blank.gif" width="3" height="3" alt=""><br><a href="http://ccnp.kiev.ua/"><img src="/academy480v1.gif" width="468" height="60" alt="Региональная сетевая академия  Cisco " border="0"></a></center> 
+-->
+
+
+
+  <center>
+  <table valign="top" height="100%" width="770" bgcolor="#ffffff"
+         cellspacing="0" cellpadding="0" align="center" style="align: center;">
+  <tr height="30"><td class="head1">Alter.Org.UA</td>
+  </tr>
+  <tr height="1"><td bgcolor="white" >
+    <img height="1" width="770" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td></tr>
+  <tr height="20"><td class="head2">
+  <table cellspacing="0" cellpadding="0" width="100%"><tr>
+    <td width="72" class="head3">&nbsp;<a class="head3" href="index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td width="40" class="head3"><a class="head3" href="http://10.0.0.11/alter/index.php_lang=ru">Home</a></td>
+    <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td width="55" class="head3"><a class="head3" href="registry.php_lang=en&amp;">EN&nbsp;<img height="12" width="20" alt="en" src="http://10.0.0.11/alter/img/lang_en.gif"></a></td>
+  <td width="2" bgcolor="white"><img width="2" height="19" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+  <td class="head3">&nbsp;</td>
+  <td width="150" class="head3">
+    <a class="head3" href="http://www.alter.org.ua">www</a>/<a class="head3" href="http://www1.alter.org.ua">www1</a>/<a class="head3" href="http://www2.alter.org.ua">www2</a>  </td>
+  </tr></table>
+  </td></tr>
+
+  
+  
+  
+  <tr><td>
+    <table width="100%" height="100%" valign="top" align="center"
+           cellspacing="0" cellpadding="0"><tr>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td height="100%" class="main">
+    
+<center>
+<h3>Universal ATA driver for Windows NT4/2000/XP</h3>
+</center>
+
+<center>
+<h3>UniATA Registry settings</h3>
+</center>
+
+<center>
+<h4>Overview</h4>
+</center>
+
+<p>
+
+  <a href="index.php_lang=ru&amp;">UniATA driver</a> имеет рад настроек в Registry.
+  В ключе
+</p>
+<pre class="code">
+HKLM\System\CurrentControlSet\Services\UniATA
+</pre>
+<p>
+  можно создавать следующую иерархию ключей с настройками. Наиболее
+  глобальные настройки находятся в
+</p>
+<pre class="code">
+HKLM\System\CurrentControlSet\Services\UniATA\<b>Parameters</b>
+</pre>
+<p>
+  Более специфические настройки располагаются в специальным образом проименованых подключах.
+  В поисках значения той или иной опции драйвер просматривает ключи в следующем порядке:
+</p>
+
+<pre class="code">
+Parameters
+Parameters\Chan_<b>C</b>
+Parameters\Chan_<b>C</b>\Lun_<b>L</b>
+Parameters\Ven_<b>VVVV</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>\Chan_<b>C</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>\Chan_<b>C</b>\Lun_<b>L</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>\Slot_<b>XXXXXXXX</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>\Slot_<b>XXXXXXXX</b>\Chan_<b>C</b>
+Parameters\Ven_<b>VVVV</b>\Dev_<b>DDDD</b>\Slot_<b>XXXXXXXX</b>\Chan_<b>C</b>\Lun_<b>L</b>
+</pre>
+
+<p>
+  где
+</p>
+<pre class="code">
+<b>VVVV</b> - код производителя (Vendor ID) (см. <a href="http://10.0.0.11/alter/soft/win/ntpcidump/index.php_lang=ru&amp;">PCI Dump</a>)
+<b>DDDD</b> - код устройства (Device ID), см. <a href="http://10.0.0.11/alter/soft/win/ntpcidump/index.php_lang=ru&amp;">туда же</a>.
+<b>XXXXXXXX</b> - адрес на шине PCI в шестнадцатиричной ворме.
+<b>C</b> - канал IDE. 0 - <i>Primary</i>, 1 - <i>Secondary</i>. Максимальное значение - 7.
+<b>L</b> - номер устройства на IDE канале. 0 - <i>Master</i>, 1 - <i>Slave</i>).
+</pre>
+
+<p>
+  Последнее найденное значение имеет высший приоритет.
+</p>
+  
+<center>
+<h4>Example</h4>
+</center>
+  
+<p>
+  Если в
+</p>
+<pre class="code">
+Parameters\Ven_8086
+DWORD:Exclude=0x00000001
+</pre>
+<p>
+но в
+</p>
+<pre class="code">
+Parameters\Ven_8086\Dev_7111
+DWORD:Exclude=0x00000000
+</pre>
+<p>
+окончательным значением опции
+  <b>Exclude</b> для устройства <i>Ven_8086\Dev_7111</i> будет <b>0x00000000</b>.
+</p>
+
+<center>
+<h4>Options</h4>
+</center>
+
+<ul>
+  <li><a href="registry.php_lang=ru&amp;#Exclude">Exclude</a> -
+      запретить UniATA работу с данным контроллером (или контроллерами)
+  </a>
+
+  <li><a href="registry.php_lang=ru&amp;#Include">Include</a> -
+      принудительно инициализировать данный контроллер
+  
+  <li><a href="registry.php_lang=ru&amp;#ForceSimplex">ForceSimplex</a> -
+      поочередная работа каналов контроллера
+  
+  <li><a href="registry.php_lang=ru&amp;#SkipRaids">SkipRaids</a> -
+      не инициализировать IDE Raid контроллеры
+  
+  <li><a href="registry.php_lang=ru&amp;#MaxTransferMode">MaxTransferMode</a> -
+      указать максимальный поддерживаемый контроллером или подключенным устройством режим (PIO/DMA/UDMA)
+    
+  <li><a href="registry.php_lang=ru&amp;#PreferedTransferMode">PreferedTransferMode</a> -
+      указать желаемый режим (PIO/DMA/UDMA) для контроллера или подключенного устройства
+  
+  <li><a href="registry.php_lang=ru&amp;#ReadCacheEnable">ReadCacheEnable</a> -
+      включить/выключить аппаратное кеширование операций чтения IDE устройством
+  
+  <li><a href="registry.php_lang=ru&amp;#WriteCacheEnable">WriteCacheEnable</a> -
+      включить/выключить аппаратное кеширование операций записи IDE устройством
+  
+  <li><a href="registry.php_lang=ru&amp;#ReorderEnable">ReorderEnable</a> -
+      включить/выключить оптимизацию порядка исполнения запросов
+  
+  <li><a href="registry.php_lang=ru&amp;#LogToDisplay">LogToDisplay</a> -
+      включить/выключить вывод Debug-сообщений на синий экран в NT4
+  
+  <li><a href="registry.php_lang=ru&amp;#IgnoreIsaCompatiblePci">IgnoreIsaCompatiblePci</a> -
+      выключить поддержку ISA/PCI совместимых IDE контроллеров или их отдельных каналов
+  
+  <li><a href="registry.php_lang=ru&amp;#IgnoreNativePci">IgnoreNativePci</a> -
+      выключить поддержку Native PCI IDE контроллеров
+  
+  <li><a href="registry.php_lang=ru&amp;#IgnoreIsa">IgnoreIsa</a> -
+      выключить поддержку ISA IDE контроллеров
+  
+  <li><a href="registry.php_lang=ru&amp;#IgnoreMca">IgnoreMca</a> -
+      выключить поддержку MCA IDE контроллеров
+  
+
+</ul>
+
+<center>
+<h4>Option details</h4>
+</center>
+
+
+<hr>
+<a name="Exclude"></a>
+<pre class="code">
+DWORD:Exclude (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA инициализировать
+контроллер указанного в имени ключа
+типа (<i>Ven_<b>VVVV</b>\Dev_<b>DDDD</b></i>)
+или производителя (<i>Ven_<b>VVVV</b></i>).
+Это значение имеет низший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.29a  </font></p>
+<hr>
+<a name="Include"></a>
+<pre class="code">
+DWORD:Include (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 вызывает принудительную инициализацию
+контроллер, указанного в имени ключа
+типа (<i>Ven_<b>VVVV</b>\Dev_<b>DDDD</b></i>)
+или производителя (<i>Ven_<b>VVVV</b></i>).
+Эта установка имеет
+высший приоритет по отношению к <a href="registry.php_lang=ru&amp;#Exclude">Exclude</a>.
+</p>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.29a  </font></p>
+<hr>
+<a name="ForceSimplex"></a>
+<pre class="code">
+DWORD:ForceSimplex
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA использовать
+оба канала одновременно. В simplex-режиме каналы работают поочередно.
+Такой режим введен для борьбы с глюками в некоторых контроллерах.
+Для всх устройств кроме перечисленных ниже значение по умолчанию DWORD:0x00000000.
+Для особо отличившихся - DWORD:0x00000001:
+</p>
+<pre>
+0640/1095 /* CMD 640 known bad, no DMA */
+0601/1039
+1000/1042 /* RZ 100? known bad, no DMA */
+1001/1042
+8172/1283 /* IT8172 IDE controller */
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.29h  </font></p>
+<hr>
+<a name="SkipRaids"></a>
+<pre class="code">
+DWORD:SkipRaids (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA инициализировать
+контроллеры. определяющиеся как IDE Raid. Это значение имеет высший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.26  </font></p>
+<hr>
+<a name="MaxTransferMode"></a>
+<pre class="code">
+DWORD:MaxTransferMode (default = 0xffffffff)
+</pre>
+
+<p>
+Данное значение устанавливает максимальный допустимый режим передачи данных
+для указанного контроллера,
+IDE канала (<i>Chan_<b>C</b></i>)
+или отдельного IDE/ATAPI устройства (<i>Chan_<b>C</b>\Lun_<b>L</b></i>).
+Снижение скорости относительно номинальной (той, которая прописана во
+внутренней таблице драйвера) должно проходить нормально.
+А вот повышение... Если у контроллера нет более скоростных старших собратьев,
+ничего не произойдет, т.к. в драйвере просто отсутствует код для установки
+такого режима и будет выбран максимальный работающий. А если есть - 
+то это будет чистой воды overclock - может заработает, может и нет, а может
+будет изредка поглюкивать.
+</p>
+<p>
+Ниже приведены допустимые значения. За результаты использования
+других значений фирма-изготовитель (то есть я ;) никакой ответственности не несет.
+</p>
+<pre>
+0xffffffff  use default            0x20        WDMA/WDMA0
+0x00        PIO                    0x21        WDMA1
+0x01	    PIO (no RDY)           0x22        WDMA2
+
+0x08        PIO0                   0x40        UDMA/UDMA0 (ATA-16)
+0x09        PIO1                   0x41        UDMA1      (ATA-25)
+0x0a        PIO2                   0x42        UDMA2      (ATA-33)
+0x0b        PIO3                   0x43        UDMA3      (ATA-44)
+0x0c        PIO4                   0x44        UDMA4      (ATA-66)
+0x0d        PIO5                   0x45        UDMA5      (ATA-100)
+                                   0x46        UDMA6      (ATA-133)
+                                   0x47        SATA-150
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.30i  </font></p>
+<hr>
+<a name="PreferedTransferMode"></a>
+<pre class="code">
+DWORD:PreferedTransferMode (default = 0xffffffff)
+</pre>
+
+<p>
+Данное значение устанавливает желаемый режим передачи данных
+для указанного контроллера, канала или отдельного устройства.
+Предназначено для инициализации устройства в более медленном режиме,
+чем позволяет контроллер. Не может превышать <a href="registry.php_lang=ru&amp;#MaxTransferMode">MaxTransferMode</a>.
+</p>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.30i  </font></p>
+<hr>
+<a name="ReadCacheEnable"></a>
+<pre class="code">
+DWORD:ReadCacheEnable (default = 0x00000001)
+</pre>
+
+<p>
+Данный параметр позволяет принудительно включать/выключать кеширование данных при чтении с носителя.
+</p>
+
+<pre>
+0x00000000 - <font color="red">выключить</font>
+0x00000001 - включить
+</pre>
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.30i  </font></p>
+<hr>
+<a name="WriteCacheEnable"></a>
+<pre class="code">
+DWORD:WriteCacheEnable (default = 0x00000001)
+</pre>
+
+<p>
+Данный параметр позволяет принудительно включать/выключать кеширование данных при записи на носитель.
+</p>
+
+<pre>
+0x00000000 - <font color="red">выключить</font>
+0x00000001 - включить
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.30i  </font></p>
+<hr>
+<a name="ReorderEnable"></a>
+<pre class="code">
+DWORD:ReorderEnable (default = 0x00000001)
+</pre>
+
+<p>
+Данный параметр позволяет принудительно включать/выключать оптимизацию порядка исполнения запросов.
+</p>
+
+<pre>
+0x00000000 - <font color="red">выключить</font>
+0x00000001 - включить
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31  </font></p>
+<hr>
+<a name="LogToDisplay"></a>
+<pre class="code">
+DWORD:LogToDisplay (default = 0x00000000)
+</pre>
+
+<p>
+Данный параметр позволяет включать вывод Debug-сообщений на синий экран в NT4. Доступен только в Debug-версии. В старших ОС пока не работает.
+</p>
+
+<pre>
+0x00000000 - <font color="red">выключить</font>
+0x00000001 - включить
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31b  </font></p>
+<hr>
+<a name="IgnoreIsaCompatiblePci"></a>
+<pre class="code">
+DWORD:IgnoreIsaCompatiblePci (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA производить поиск и инициализацию
+PCI IDE контроллера, работающего в режиме совместимости с
+ISA (Compatible Mode) или его Primary/Secondary канал. Как правило, это основной OnBoard контроллер.
+Это значение имеет высший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+<pre>
+0x00000000 - включить
+0x00000001 - <font color="red">выключить</font>
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31b  </font></p>
+<hr>
+<a name="IgnoreNativePci"></a>
+<pre class="code">
+DWORD:IgnoreNativePci (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA производить поиск и инициализацию PCI IDE
+контроллеров, работающих в Native режиме. Как правило, это дополнительные IDE/RAID контроллеры.
+Это значение имеет высший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+<pre>
+0x00000000 - включить
+0x00000001 - <font color="red">выключить</font>
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31b  </font></p>
+<hr>
+<a name="IgnoreIsa"></a>
+<pre class="code">
+DWORD:IgnoreIsa (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA производить поиск и инициализацию ISA IDE
+контроллера. Как правило, это основной OnBoard контроллер на старых материнских платах.
+Это значение имеет высший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+<pre>
+0x00000000 - включить
+0x00000001 - <font color="red">выключить</font>
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31b  </font></p>
+<hr>
+<a name="IgnoreMca"></a>
+<pre class="code">
+DWORD:IgnoreMca (default = 0x00000000)
+</pre>
+
+<p>
+Установка данного значения в DWORD:0x00000001 запрещает UniATA производить поиск и инициализацию MCA IDE
+контроллера. Как правило, это основной OnBoard контроллер на старых материнских платах.
+Это значение имеет высший приоритет по сравнению
+с <a href="registry.php_lang=ru&amp;#Include">Include</a>.
+</p>
+
+<pre>
+0x00000000 - включить
+0x00000001 - <font color="red">выключить</font>
+</pre>
+
+  <p><font style="background-color: #eeeeee; ">
+    Появилось в версии 
+     UniATA 0.31b  </font></p>
+<hr>
+
+<a href="index.php_lang=ru&amp;">UniATA driver home</a><br>
+Please send your comments and propositions here: <a href="mailto:alterX@alter.org.ua (remove X)?subject=Uni-ATA">alterX@alter.org.ua (remove X)</a>
+    </td>
+    <td width="1" class="mainb"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    </tr></table>
+  </td></tr>
+
+
+  <tr height="20"><td class="head2">
+
+    <table cellspacing="0" cellpadding="0" width="100%"><tr height="20">
+    <td class="head3" width="72">
+    <a class="head3" href="index.php_lang=ru&amp;">&lt;&lt;&nbsp;Back</a>
+    </td>
+
+    <td width="2" bgcolor="white"><img width="1" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Автор: Alter (Александр А. Телятников)</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">Сервер: Apache+PHP под FBSD</td>
+    <td width="2" bgcolor="white"><img width="2" height="1" src="http://10.0.0.11/alter/img/1x1.gif" alt=""></td>
+    <td class="tail">&copy; 2002&#150;2005</td>
+    </tr></table>
+
+  </td></tr></table>
+  <center>
+</body>
+</html>
+

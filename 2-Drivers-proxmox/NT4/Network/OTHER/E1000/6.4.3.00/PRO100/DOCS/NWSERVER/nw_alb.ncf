@@ -1,0 +1,53 @@
+# Example 2: 2 Adapter ALB Team with 2 PROTOCOLS (E_II frametype.)
+
+# This example uses one frametype, Ethernet_II, which is not the default and
+# must be specified.  It creates a load balanced team (ALB) from two PRO/1000
+# Gigabit Server adapters with both IP and IPX bound to the iANS team. 
+
+;Load TCPIP.NLM.  This can be done at any point before binding IP.
+
+load TCPIP
+
+; Load the base drivers for each adapter in the team.  Since the default 
+; frametype (802.2) is not the one in use, the frametype (Ethernet_II) must be
+; specified on the driver load line.  Also, as two different PRO/1000 Gigabit 
+; adapters are in use, each one needs an assigned a name for later reference.
+
+load CE1000 slot=1 frame=ETHERNET_II name=Primary_Gig_II
+load CE1000 slot=2 frame=ETHERNET_II name=Scndary_Gig_II
+
+; Load iANS.LAN to form the basis for the team.  As only one frametype is in
+; use a "name" is not necessary here.
+
+load iANS frame=ETHERNET_II
+
+; Bind iANS.LAN to each physical adapter using the names we defined when
+; the base drivers were loaded
+
+bind iANS Primary_Gig_II
+bind iANS Scndary_Gig_II
+
+; Create the team, the "mode" keyword is used to specify load balancing.
+
+load iANS COMMIT MODE=ALB
+
+; bind both IPX and IP as if iANS was a physical adapter.
+
+bind IPX iANS net=111
+bind IP iANS Address=192.168.1.1 Mask=255.255.255.0
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.

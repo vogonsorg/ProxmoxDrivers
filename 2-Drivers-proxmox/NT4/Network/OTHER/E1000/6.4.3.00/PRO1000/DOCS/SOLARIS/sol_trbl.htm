@@ -1,0 +1,245 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Solaris Troubleshooting</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>SunSoft Solaris* Troubleshooting Issues</h1>
+
+<p class="contents"><a href="#device_num">Solaris 8 Bad Device Number Error</a></p>
+<p class="contents"><a href="#alt_path">Alternate Pathing Support</a></p>
+<p class="contents"><a href="#network_issues">Network Issues</a></p>
+<p class="contents"><a href="#driver_load">Driver Did Not Load</a></p>
+<p class="contents"><a href="#device_unrec">Operating System Does Not Recognize the Device</a></p>
+<p class="contents"><a href="#adap_move">Adapter Moved to Different Slot</a>
+<br>
+
+</p>
+
+<hr>
+
+<h2><a name="device_num"></a>Solaris 8 Bad Device Number Error</h2>
+<p>If
+you get a &quot;Bad Device Number&quot; error, shut down your computer with the
+following command:</p>
+<blockquote>
+    <code>
+	# touch /reconfigure;sync;init 6</code>
+</blockquote>
+<p>After rebooting, configure your adapters by entering the following:</p>
+<blockquote>
+    <code>
+	# ifconfig e1000g&lt;instance no.&gt; plumb<br>
+	# ifconfig e1000g&lt;instance no.&gt; inet &lt;ip_address&gt; netmask + broadcast + -trailers up</code></blockquote>
+
+<hr>
+
+<h2><a name="alt_path"></a>Alternate Pathing Support</h2>
+<p>The driver
+supports the Solaris* alternate pathing functionality. To configure adapters for
+alternate pathing, refer to SUN Solaris (x86) Alternate Pathing man
+pages, the User's Guide, and the Alternate Pathing 2.0 AnswerBook documentation available
+at <a href="http://docs.sun.com/" target="_blank">http://docs.sun.com</a>.</p>
+
+<hr>
+
+<h2><a name="network_issues"></a>Network Issues</h2>
+<p>If you cannot ping other machines, check whether the
+cable is plugged-in properly and that the link lights on the back of the adapter are
+illuminated.</p>
+<p>Check
+the cable. Faulty cables are a frequent source of problems.</p>
+<p>Check
+the Net to Media (ARP) table:</p>
+<blockquote>
+  <p><code>#arp –a</code></p>
+</blockquote>
+<p>ARP table:</p>
+<blockquote>
+ <table border="0" cellpadding="4" width="80%">
+  <tr>
+    <td width="20%" class="monospace"><u>Device</u></td>
+    <td width="20%" class="monospace"><u>IP Address</u></td>
+    <td width="20%" class="monospace"><u>Mask</u></td>
+    <td width="20%" class="monospace"><u>Flags</u></td>
+    <td width="20%" class="monospace"><u>Physical Address</u></td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.237</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">SP</td>
+    <td width="20%" class="monospace">00:c0:4f:68:9c:74</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.146</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:a0:c9:3f:27:4a</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.151</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:60:94:2e:b0:42</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.198</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:90:27:62:2b:5a</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.200</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:a0:c9:ab:e3:9c</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.1</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:a0:c9:b1:00:6d</td>
+  </tr>
+  <tr>
+    <td width="20%" class="monospace">e1000g0</td>
+    <td width="20%" class="monospace">10.0.0.80</td>
+    <td width="20%" class="monospace">255.255.255.255</td>
+    <td width="20%" class="monospace">&nbsp;</td>
+    <td width="20%" class="monospace">00:a0:c9:aa:e1:f2</td>
+  </tr>
+ </table>
+</blockquote>
+
+<p>If
+the table is not up to date, try adding entries into the ARP table as follows:
+</p>
+<ol>
+  <li><p class="numlst">For a computer with the IP address 10.0.0.200, add the 
+  	entry for the other side of the network interface:</p>
+	<blockquote>
+  		<p><code># arp –s 10.0.0.253 00:a0:c9:61:00:f2</code></p>
+	</blockquote>
+	</li>
+  <li><p class="numlst">On the other side (of the computer with IP address
+    10.0.0.253) add the 
+  	entry for the previous interface:</p>
+	<blockquote>
+  		<p><code># arp –s&nbsp; 10.0.0.200 00:a0:c9:61:a0:c0</code><b>&nbsp;</b></p>
+	</blockquote>
+	</li>
+  <li><p class="numlst">Ensure that the proper entries are included in the ARP tables on both 
+  	ends by running <code>arp -a</code>. Then, try to ping the IP address.</p>
+	</li>
+  <li><p class="numlst">Check your network configuration files, such as /etc/hosts, 
+  	/etc/ethers, $HOME/.rhosts, and /etc/hostname.e1000g&lt;device_instance&gt;.</p>
+	</li>
+</ol>
+
+<hr>
+
+<h2><a name="driver_load"></a>Driver Did Not Load</h2>
+<ol>
+  <li><p class="numlst">Ensure that the device is identified by the operating system:</p>
+	<blockquote>
+    	<code># prtconf -v | grep pci8086,[0-2][01][0-4][0-F]</code>
+	</blockquote></li>
+  <li><p class="numlst">If you see that the driver is not attached, ensure the e1000g
+	and e1000g.conf files are present in /kernel/drv, and add the driver:</p>
+	<blockquote>
+    	<code># add_drv –m '* 0666 root root' –i 'pci8086,1000' e1000g<br>
+		# modload –p drv/e1000g<br>
+		# ifconfig e1000g0 plumb<br>
+		# ifconfig e1000g0 inet &lt;ip_address&gt; netmask + broadcast + -trailers up<br>
+		# ifconfig –a</code>
+	</blockquote></li>
+  <li><p class="numlst">Ping the IP address from a different computer on the network:</p>
+	<blockquote>
+    	<code># ping &lt;ip_address&gt;</code>
+	</blockquote></li>
+  <li><p class="numlst">Remove the driver, and add it again:</p>
+	<blockquote>
+    	<code># rem_drv e1000g<br>
+		# touch /reconfigure<br>
+		# sync; init 6</code>
+	</blockquote></li>
+  <li><p class="numlst">Reload the driver as described above, or remove and reload the driver.</p>
+  </li>
+</ol>
+
+<hr>
+
+<h2><a name="device_unrec"></a>Operating System Does Not Recognize the Device</h2>
+<p>Ensure that the adapter is inserted all the way into the PCI slot.</p>
+<p>If
+the driver
+is added but has no IP Address, check
+the device instance:</p>
+
+<blockquote>
+    <code># prtconf -v | grep pci8086,[0-2][01][0-4][0-F]</code>
+</blockquote>
+
+<p>The /etc directory must contain a file
+named, hostname.e1000g&lt;device_instance&gt;, that contains the computer name. This computer name must be present
+in the /etc/hosts file with the IP address.</p>
+<p>In
+the hosts file:</p>
+<blockquote>
+  <p><code>&lt;ip_address&gt; my_machine
+		</code></p>
+</blockquote>
+<p>In /etc/hostname.e1000g&lt;device_instance&gt;:</p>
+<blockquote>
+  <p><code>my_machine</code></p>
+</blockquote>
+
+<hr>
+
+<h2><a name="adap_move"></a>Adapter Moved to Different Slot</h2>
+<p>If,
+after the driver installation, you moved the adapter to a different slot, you must
+reconfigure the computer while booting. This way all the devices can be
+re-scanned and the appropriate resources such as IRQ, memory, etc. can be reassigned
+to all the detected devices. Your device instance will change as all the device
+instances are persistent in Solaris.&nbsp;</p>
+<p>To perform a reconfiguration at the boot prompt, enter:</p>
+<blockquote>
+	<code>boot –r</code>
+</blockquote>
+<p>Or, reconfigure and reboot the system by entering:</p>
+<blockquote>
+	<code>#touch /reconfigure;sync;init 6</code>
+</blockquote>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><p><em><strong>NOTE</strong>: </em>Your device instance will
+      	change, so you will have to check your device
+		instance using <code>prtconf –v | grep pci8086,1000</code> and create another
+		hostname.e1000g&lt;device instance&gt; file. After this process you can do
+		the following:</p>
+      <blockquote>
+      	<code>
+      	# ifconfig e1000g0 plumb<br>
+		# ifconfig e1000g0 inet &lt;ip_address&gt; netmask + broadcast + -trailers up
+		</code></blockquote>
+    </td>
+  </tr>
+</table>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 11/20/02 1:29p <!-- $--> Revision <!--$$Revision:--> 8 <!-- $--></code></p>
+
+</body>
+</html>

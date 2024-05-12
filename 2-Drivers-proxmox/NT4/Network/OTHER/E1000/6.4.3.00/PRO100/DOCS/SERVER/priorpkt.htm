@@ -1,0 +1,203 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Intel</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h2>Intel<sup>&reg;</sup> Priority Packet Overview</h2>
+<p>Intel<sup>&reg;</sup> Priority Packet is a utility that lets you set up priority filters to
+process high priority network traffic before normal traffic. Using Priority
+Packet, you set up priority filters to give priority to time-critical
+traffic. This is also known as Traffic Class Expediting<i>.</i> You can set up global filters that apply to the entire
+system or
+network-component-specific filters that apply only to specific network
+components (individual adapters or VLANs). You can also create
+custom priority filters or use priority filter templates to assign filter
+properties you use often. Priority Packet comes with pre-defined priority filter
+templates or you can create your own templates.</p>
+<p>Use Priority Packet filters for these reasons:</p>
+<ul>
+  <li><p class="numlst">To tag packets with priority levels or forwarding behaviors.</li>
+  <li><p class="numlst">To drop incoming packets that match certain criteria.</li>
+  <li><p class="numlst">To count the number of packets that match certain criteria.</li>
+</ul>
+<p>Priority Packet is available on the Product CD. To install or run Priority Packet,
+you must have administrative rights.</p>
+  <p>To use Priority Packet with Microsoft* Windows 98 or Windows Me, you 
+  must first enable remote DCOM connectivity on your system. For
+  more information, visit the Microsoft web site at: <a href="http://www.microsoft.com/com/tech/dcom.asp" target="_blank">http://www.microsoft.com/com/tech/dcom.asp</a></p>
+
+
+<h4><b>Prioritizing Network Traffic </h4>
+</b>
+<p>Intel's Priority Packet lets you set up priority filters to send packets on
+the network with an indicated priority or forwarding behavior. By prioritizing
+traffic at the hosts or entry point of the network, network devices can base
+forwarding decisions on priority information defined in the packet.</p>
+<p>Priority filters are parameters you assign to packets. Using
+Priority Filter Wizard, you set up filters from templates or define custom
+priority filters based on the following traffic filter types:</p>
+<ul>
+  <li><p class="numlst">Node (MAC) address</li>
+  <li><p class="numlst">Ethertype</li>
+  <li><p class="numlst">TCP/IP information</li>
+  <li><p class="numlst">IPX information</li>
+</ul>
+<p>Priority Packet provides the following methods for prioritizing traffic:</p>
+<ul>
+  <li><p class="numlst">IEEE 802.1p Tagging</li>
+  <li><p class="numlst">IP ToS (Type of Service) Layer 3 Tagging—supporting both Differentiated Services Codepoint (DSCP) and Legacy IP
+    Precedence</li>
+  <li><p class="numlst">Intel High Priority Queue</li>
+</ul>
+<b>
+<h4>IEEE 802.1p Tagging</h4>
+</b>
+<p>802.1p is an IEEE standard for adding additional bytes of
+information, also called tagging, to packets with different priority levels utilizing
+four additional bytes in the header.  When these packets are sent out on the network, the higher priority
+packets are transferred first by 802.1p-aware devices. To effectively use  802.1p tagging, the other devices receiving and routing 802.1p tagged
+    packets must support 802.1p. 802.1p tagging lets you assign specific
+priority levels from 0 (low) to 7 (high).</p>
+
+  <table border="0" cellpadding="4" width="100%">
+    <tr>
+      <td width="13" valign="top" align="center">
+      <img border="0" src="caution.gif" width="28" height="21"></td>
+      <td>
+  <i>
+  <b>CAUTION</b>:</i> 802.1p tagging increases the size of the packets. Some
+  hubs and switches do not recognize the larger packets, and will drop them because they exceed
+  the maximum frame size of standard Ethernet packets. Check
+  your hub or switch documentation to see if it supports 802.1p.  If you are 
+  using PRO/100 adapters and these routing devices do not support
+  802.1p, or you are unsure, use High Priority Queue to prioritize network
+  traffic.</td>
+    </tr>
+  </table>
+
+<p>You can configure a switch to strip the tags from packets and send them on to 
+the next destination as normal traffic.</p>
+<p>You can specify 802.1p tagging using Priority
+Packet, or when you create or assign a priority filter via Microsoft Windows 
+2000, Windows XP, or Windows Server 2003.
+<b>
+<h4>IP ToS Layer 3 Tagging</h4>
+</b>
+<p>Priority Packet supports two Type of Service (ToS) tagging methods:&nbsp;</p>
+<ul>
+  <li><p class="numlst">Differentiated Services Codepoint (DSCP)</li>
+  <li><p class="numlst">Legacy IP Precedence</li>
+</ul>
+<p>Differentiated Services Codepoint (DSCP) is a new tagging method that classifies packets based on network policies and rules, not on priority. The tags assign one of 64 possible forwarding
+behaviors known as per hop behaviors
+(PHBs). A PHB provides a particular service level (bandwidth, queuing, and dropping decisions) in accordance with network policy. Using Priority Packet, DSCP tagging lets you assign assured forwarding (AF)
+codepoints, using one of four AF classes and one of three drop precedence values. You may also enter your own non-standard
+codepoints.</p>
+<p>DSCP tags replace the existing IP header, and do not add any additional bytes
+to packets. DSCP tags are backwards compatible with legacy ToS IP precedence
+bits, so non-DSCP compliant, ToS-enabled devices do not conflict with the DSCP
+mapping. A default DSCP mapping to &quot;best effort&quot; forwarding is
+applied if network rules are not defined or the devices are non-DSCP compliant.</p>
+<p>To assign DSCP, you can specify it using Priority Packet when you create or
+assign a priority filter for IP traffic.</p>
+<p>For more information on DSCP, see RFC <u><font COLOR="#008000"><a href="http://www.ietf.org/rfc/rfc2474.txt" target="_blank">2474</a></font></u>
+and <font COLOR="#008000"><u><a href="http://www.ietf.org/rfc/rfc2475.txt" target="_blank">2475</a></u></font>
+on the <u><font COLOR="#008000"><a href="http://www.ietf.org/" target="_blank">IETF (Internet
+Engineering Task Force) Web site</a></font></u>.</p>
+<p><b><i>Legacy IP Precedence</i></b> is an early tagging method that classifies and
+prioritizes packets. When these packets are sent out on the network, the higher
+priority packets are transferred first. Using Priority Packet, Legacy IP
+Precedence tagging lets you assign the following specific priority levels:</p>
+<blockquote>
+<p class="monospace">Network Control = 111 (7 in binary)<br>
+Internet Control = 110 (6 in binary)<br>
+CRITIC/ECP = 101 (5 in binary)<br>
+Flash Override = 100 (4 in binary)<br>
+Flash = 011 (3 in binary)<br>
+Immediate = 010 (2 in binary)<br>
+Priority = 001 (1 in binary)<br>
+Routine = 000 (0 in binary)</p>
+</blockquote>
+<p>To assign a Legacy IP Precedence, you can specify it using Priority Packet when you
+create or assign a priority filter.</p>
+<font FACE="Arial" SIZE="1"></font><b>
+<p><a name="HPQ">Intel<sup>&reg;</sup>  High Priority Queue</a></p>
+</b>
+<p>If your network infrastructure devices do not support IEEE 802.1p or IP ToS,
+or you are unsure if either is supported, you can still define priority filters
+and transmit packets from the adapter onto the network as high priority. While
+High Priority Queue (HPQ) does not provide the precise priority levels of 802.1p
+and IP ToS tagging, it does assign traffic as either high or low priority, and
+sends high priority packets first. Therefore, if there are multiple applications
+on a system sending packets, the packets from the application with a priority
+filter are sent out first. HPQ does not change network routing, nor does it add
+any information to the packets.</p>
+<p>To assign HPQ, you can specify it using Priority Packet when you create or assign a
+priority filter.</p>
+<p>If you add an adapter to a team, its filters are removed automatically. When you apply HPQ tagging to a team, you assign HPQ tagging to all
+adapters in the same team, including any new ones subsequently added.</p>
+  <table border="0" cellpadding="4" width="100%">
+    <tr>
+<b>
+      <td width="13" valign="top" align="center">
+      <img border="0" src="note.gif" width="28" height="21"></td>
+      </b>
+      <td><i><b>NOTE</b></b></i>: The Intel<sup>&reg;</sup> 
+      High-Priority Queue (HPQ) feature is not compatible with gigabit adapters.&nbsp;</td>
+    </tr>
+  </table>
+<h3>Dropping Incoming Packets</h3>
+<p>You can use Priority
+Packet to specify that incoming packets of a certain type should be dropped.</p>
+<h3>Counting Incoming or Outgoing Packets</h3>
+<p>You can use Priority Packet to specify that you want all incoming or outgoing
+packets of a certain type to be counted. This allows you to monitor, or track,
+specific types of packets.
+</p>
+
+
+<h2>Supported Adapters </h2>
+<p class="Body">Priority Packet supports the following Intel adapters:</p>
+<ul>
+  <li>
+  <p class="numlst">All Intel 
+  PRO/100 server and desktop adapters based on the 82558 Media Access Controller 
+  (MAC) and newer (e.g., Intel<sup>&reg;</sup>
+  PRO/100+, PRO/100 S, and PRO/100 Cardbus II adapters) </li>
+  <li>
+  <p class="numlst">All 
+  PRO/1000 server and desktop adapters based on the 82544 Media Access 
+  Controller (MAC) and newer (e.g., Intel<sup>&reg;</sup> PRO/1000 family of adapters) </li>
+</ul>
+  <table border="0" cellpadding="4" width="100%">
+    <tr>
+      <td width="13" valign="top" align="center">
+      <img border="0" src="note.gif" width="28" height="21"></td>
+      <td><i><b>NOTE</b></i>: The Intel<sup>&reg;</sup> 
+        <a href="#HPQ"> 
+      High-Priority Queue (HPQ)</a> feature is not compatible with gigabit adapters.&nbsp;</td>
+    </tr>
+  </table>
+  <table border="0" cellpadding="4" width="100%">
+    <tr>
+      <td width="13" valign="top" align="center">
+      <img border="0" src="note.gif" width="28" height="21"></td>
+      <td><i>
+  <b>NOTE</b>:</i> Priority Packet II
+  only runs on systems having Intel adapters installed. You cannot
+  set filters for non-Intel adapters.</td>
+    </tr>
+  </table>
+<p>See the <a href="support.htm">support website</a> for details.&nbsp; </p>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/22/04 5:14p <!-- $--> Revision <!--$$Revision:--> 3 <!-- $--></code></p>
+
+</body>
+</html>

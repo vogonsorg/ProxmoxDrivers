@@ -1,0 +1,237 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Remote Wake-Up</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+<h1>Remote Wake-Up and Wake-On-LAN (WOL)</h1>
+<ul>
+  <li><p class="contents"><a href="#About">About Remote Wake-up</a></li>
+  <li><p class="contents"><a href="#Install">Physical Installation Issues</a></li>
+  <li><p class="contents"><a href="#BIOS">BIOS Settings</a></li>
+</ul>
+
+<hr>
+
+<h2><a name="About"></a>About Remote Wake-Up</h2>
+<p><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">The
+ability to remotely wake computers is an important development in computer
+management. This feature has evolved over the last few years from a simple
+remote power-on capability to a complex system interacting with a variety of
+device and operating system (OS) power states.</span>
+<p>&nbsp;<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><b><i>NOTE</i></b>:&nbsp; the following adapter does not 
+    support Wake on LAN operations<ul>
+        <li>
+          <p class="numlst">Intel PRO/1000 MT Quad Port Server adapter - 
+          PWLA8494MT</li>
+      </ul>
+
+    </td>
+  </tr>
+</table>
+<h3><b>Wake on Magic Packet</b></h3>
+<p>
+<span style="mso-bidi-font-size: 12.0pt">In early implementations of Remote
+Wake-up, the computer could be started from a power-off state by sending a Magic
+Packet. A Magic Packet is an Ethernet packet that contains an adapter’s MAC
+address repeated 16 times in the data field. When an adapter receives a Magic
+Packet containing its own MAC address, it activates the computer’s power. This
+enables network administrators to perform off-hours maintenance at remote
+locations without sending a technician out.<o:p>
+</o:p>
+</span>
+<p><span style="mso-bidi-font-size: 12.0pt">This early implementation did not
+require an OS that was aware of remote wake-up. However, it did require a
+computer that was equipped with a standby power supply and had the necessary
+circuitry to allow the remote power control. These computers were typically
+equipped with a feature named Advanced Power Management (APM). APM provided
+BIOS-based power control.<o:p>
+</o:p>
+</span>
+<h3><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Advanced Configuration and Power
+Interface (</span><b>ACPI)
+</b></h3>
+<p><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Newer
+computers feature ACPI, which
+extends the APM concept to enable the OS to selectively control power. ACPI
+supports a variety of power states. Each state represents a different level of
+power, from fully powered up to completely powered down, with partial levels of
+power in each intermediate state. Power states include:</span>
+<table border="1" width="100%">
+  <tr>
+    <td width="12%"><b>Power State&nbsp;</b></td>
+    <td width="88%"><b>	Description</b></td>
+  </tr>
+  <tr>
+    <td width="12%">S0</td>
+    <td width="88%">	On and fully operational</td>
+  </tr>
+  <tr>
+    <td width="12%">S1</td>
+    <td width="88%">	System is in low power mode (sleep mode). The CPU clock is stopped, but RAM is powered on and being refreshed.</td>
+  </tr>
+  <tr>
+    <td width="12%">S2</td>
+    <td width="88%">	Similar to S1, but power is removed from the CPU.</td>
+  </tr>
+  <tr>
+    <td width="12%">S3</td>
+    <td width="88%">	Suspend to RAM (standby mode). Most components are shutdown. RAM remains operational.</td>
+  </tr>
+  <tr>
+    <td width="12%">S4</td>
+    <td width="88%">	Suspend to disk (hibernate mode). The memory contents are swapped to the disk drive and then reloaded into RAM when the system is awakened.</td>
+  </tr>
+  <tr>
+    <td width="12%">S5</td>
+    <td width="88%">	Power off</td>
+  </tr>
+</table>
+<p>Some newer machines do not support being woke up from a powered-off state.<p>Remote wake-up can
+be initiated by a variety of user selectable packet types and is not limited to
+the Magic Packet format. For more information about supported packet types, see
+the operating system settings section.
+&nbsp;
+
+
+<h3>Wake Up Address Patterns</h3>
+
+<p>The wake up capability of Intel gigabit adapters is based on patterns that
+are sent by the OS. You may configure the driver to the following settings using
+the Intel PROSet utility:&nbsp;</p>
+<ul>
+  <li>
+    <p class="numlst"><b>OS Controlled</b> - accept all the patterns sent by the OS.&nbsp;</li>
+  <li>
+    <p class="numlst"><b>Directed Packets</b> - accepts only patterns containing the Adapter's Ethernet
+    address in the Ethernet Header or containing the IP address, assigned to the
+    adapter, in the IP header.&nbsp;</li>
+  <li>
+    <p class="numlst"><b>Magic Packets</b> - accept only patterns containing 16 consecutive repetitions
+    of the adapter's MAC address.&nbsp;</li>
+  <li>
+    <p class="numlst"><b>Directed &amp; Magic</b> - accepts the patterns of both directed packets and
+    magic packets.</li>
+</ul>
+<p>Choosing &quot;Directed Packets&quot; will also accept patterns of the
+Address Resolution Protocol (ARP) querying the IP address assigned to the
+adapter. Upon configuring multiple IP addresses to one adapter, the OS may
+request to wake up on ARP patterns to all of the configured addresses. The
+adapter will only awaken in response to ARP packets querying the first IP
+address in the list.</p>
+
+<hr>
+
+<h2><a name="Install">Physical Installation Issues</a></h2>
+<h3><b>Wake on LAN* (WOL) Cable</b></h3>
+<h4>For computers with a PCI 2.1 compliant bus</h4>
+<p>
+<span style="mso-bidi-font-size: 12.0pt">A Wake on LAN (WOL) cable is required
+on all remote wake-up capable adapters when used in older WOL-capable
+computers. These computers are generally equipped with a PCI 2.1 complaint bus
+and the BIOS is typically designed for APM compliant power management.</span>
+<table border="0" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top"><img border="0" src="note.gif" width="28" height="21"></td>
+    <td valign="top"><b><i>NOTE</i></b>:&nbsp; <span style="mso-bidi-font-size: 12.0pt">Remote
+      Wake-Up from power-off (S5) is not supported on the following adapters in
+      computers using the PCI 2.1 bus. To use Remote Wake-Up on any of the
+      adapters listed below, the computer must have a PCI 2.2 compliant bus. <o:p>
+      </o:p>
+      </span>
+      <ul>
+        <li>
+          <p class="numlst">Intel PRO/100+ PCI adapter (PILA8460BN)</li>
+        <li>
+          <p class="numlst">Intel PRO/100 M Desktop adapter (PILA8460F)</li>
+        <li>
+          <p class="numlst">Intel PRO/1000 T Desktop adapter (PWLA8390T)</li>
+        <li>
+        <p class="numlst">Intel <span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">PRO/1000
+          XT Server adapter (PWLA8490XT)</span></li>
+      </ul>
+
+    </td>
+  </tr>
+</table>
+<h4>For computers with a PCI 2.2 compliant bus&nbsp;</h4>
+<p>The Wake on LAN cable is not usually required for computers equipped with a
+PCI 2.2 compliant bus, as the wake up signal is routed through the PCI bus. This
+is done through the PCI connector pin defined as PME (Power Management Event).
+<p class="MsoBodyText"><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Many
+of the newer ACPI computers also have a connector for the 3-pin Wake on LAN
+cable for backwards compatibility with older WOL capable adapters. In this type
+of computer, the WOL cable is still required for older 82558-based Intel&reg;
+PRO/100+ Management adapter model numbers PILA8900 and PILA8461.</span>
+<h4><b>Slot
+</b></h4>
+<p><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">Some
+motherboards only support remote wake-up (or remote wake-up from S5 state)
+in a particular slot. For example, the Intel&reg; Desktop Board D815EPEA2 only
+supports remote wake-up from a powered off (S5) state if the adapter is plugged
+into PCI slot 2. It does, however, support remote wake-up from standby from any
+slot. See the documentation that came with your system or motherboard for
+details on remote wake-up support.</span>
+<h4>
+<b>Power
+</b></h4>
+<p><span style="mso-bidi-font-size: 12.0pt">Early versions of the Intel
+PRO/100+ Management adapter are +5 volt only. These models must have the 3-pin
+cable attached for the remote wake-up function to work. These adapters are equipped with 3 LEDs on the adapter
+bracket, whereas the PCI 2.2 compliant PRO/100 models have 2 LEDs on the adapter
+bracket. The older +5 volt model adapters are not compliant to the PCI 2.2
+specification and do not fit in a 3-volt only PCI slot due to the slot being
+keyed differently.</span>
+<p><span style="mso-bidi-font-size: 12.0pt">Newer Intel PRO adapters are 3.3
+volt, but work in a 5-volt slot also. They are keyed to fit either type of
+slot.</span>
+<p><span style="mso-bidi-font-size: 12.0pt">If your computer requires the 3-pin
+cable, the +5 volt standby power&nbsp;supply must supply
+at least 0.2 amps at +5 volts for each Intel PRO adapter installed. For older
+PCI 2.1 compliant management adapters, the power supply must supply at least .6 amps. This value is usually
+listed on the power supply label as +5SB, +5VSB or +5AUX.&nbsp;</span>
+<p><span style="mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">If
+your remote wake-up enabled computer is compliant to PCI specification 2.2, it does not require the 3-pin cable for remote wake-up. In these&nbsp;computers,
+the 3.3 volt standby power supply <i> must</i> provide at least 0.2 amps for
+each Intel PRO adapter installed. You may need to contact your computer
+manufacturer to verify the standby current rating. Turning off the remote wake
+up capability on the adapter by using the IBAUTIL utility reduces the power draw to
+around 50 milliamps (.05 amps) per adapter.</span>
+
+<hr>
+
+<h2><b><a name="BIOS">BIOS Settings</a></b></h2>
+<p class="MsoNormal"><span style="mso-bidi-font-size: 12.0pt">You may need to
+configure various
+settings in the computer BIOS so that remote
+wake-up will work.<o:p>
+</o:p>
+</span>
+<p class="MsoNormal"><span style="mso-bidi-font-size: 12.0pt">Many ACPI
+computers can be configured to work in APM mode. Check your BIOS settings to
+determine which mode you are operating in.</span>
+<p class="MsoNormal"><span style="mso-bidi-font-size: 12.0pt">In both APM and
+ACPI computers, you may find settings for Wake on LAN* under the Power Control
+area and titled “Wake on LAN” and/or “Wake on PME”. Wake on LAN setting
+refers to wake up events received through the 3-pin header cable. Wake on PME
+refers to wake up events received through the PCI bus. To enable remote wake-up,
+you should enable the setting that corresponds to your adapter connection. For
+example, set Wake on LAN to enable if you are using the WOL cable.</span>
+<p class="MsoNormal"><span style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">In
+ACPI computers operating in ACPI mode and using an ACPI aware OS such
+as Windows 2000, look for an ACPI specific setting. If you want to power up the system from a power off
+state, set an ACPI specific setting such as “Wake on LAN from S5” to enable.</span>
+
+<hr color="#00b0b0" size="1">
+<p class="small"><code>Last modified on <!--$$Modtime:--> 1/22/04 5:10p <!-- $--> Revision <!--$$Revision:--> 2 <!-- $--></code>
+
+</body>
+</html>

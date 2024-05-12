@@ -1,0 +1,2 @@
+Installer not working on 102.7.0 but exe runs
+Exe stopped working on 105, issue with qemu-ga.exe not just dependencies

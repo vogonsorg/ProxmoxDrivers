@@ -1,0 +1,1180 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Getting the Current Configuration</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<h1><font color="#0000FF">Getting the Current Configuration</font></h1>
+<p>The client does not need to get a session handle to read the current configuration.  Clients can use a NULL context, however, any error messages will be returned in the default language for the managed machine.
+In the following table, items enclosed in {  } are object paths.  These paths are assumed to have been obtained from  previous WQL queries.  The client should never need to construct an object path without doing a query.  The <b>__PATH</b> attribute of every object contains the object path for that object.
+
+<p>In all the following use cases, the methods <b>IWbemServices::ExecQuery</b> or <b>IWbemServices::ExecQueryAsync</b> are used to execute WQL queries.
+
+<h2><font color="#0000FF">Getting the Physical Adapters</font></h2>
+<p>The main class for the adapters is IANet_EthernetAdapter.  This class is used for both physical and virtual adapters, and the client needs to know how to distinguish between them.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=81 valign=top style='width:61.05pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=214 valign=top style='width:160.35pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Query</span></b>
+   </td>
+   <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=139 valign=top style='width:1.45in;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comment</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr style='page-break-inside:avoid'>
+  <td width=81 valign=top style='width:61.05pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Enumerate all
+  adapters<span>
+  </td>
+  <td width=214 valign=top style='width:160.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>SELECT * FROM
+  IANet_EthernetAdapter</span>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetAdapter</span>
+  </td>
+  <td width=139 valign=top style='width:1.45in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns all
+  IANet_EthernetAdapters.<span style='mso-spacerun:yes'>  </span>This is
+  equivalent to <b>IWbemServices::CreateInstanceEnumAsync</b>.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=81 valign=top style='width:61.05pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Determine if
+  adapter is virtual</span>
+  </td>
+  <td width=214 valign=top style='width:160.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {adapter path}</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>     </span>WHERE AssocClass =
+  IANet_NetworkVirtualAdapter</span>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_TeamOfAdapters</span>
+  </td>
+  <td width=139 valign=top style='width:1.45in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>If the query
+  results in no classes then the adapter is a real adapter.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=81 valign=top style='width:61.05pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Determine if
+  adapter is a phantom adapter</span>
+  </td>
+  <td width=214 valign=top style='width:160.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {adapter path}</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>     </span>WHERE ResultClass =
+  IANet_EthernetPCIDevice<span>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=139 valign=top style='width:1.45in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>If the adapter is
+  not <span class=GramE>virtual</span> and this query returns no objects then
+  the adapter is a phantom adapter.</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'></span>
+  </td>
+ </tr>
+</table>
+
+<h2><font color="#0000FF">Getting the PCI Devices</font></h2>
+<p>The main classes are IANet_EthernetPCIDevice, IANet_PCIDevice, and  IANet_AdapterDevice (an association class to associate an adapter with its device). 
+
+<p>In this case, the association class does not contain any data, i.e., it has no value by itself.  IANet_EthernetPCIDevice inherits from IANet_PCIDevice and contains extra attributes that are specific for a PCI device that is an Ethernet adapter.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=216 valign=top style='width:161.8pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Query</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comment</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Enumerate network PCI devices</span>
+  </td>
+  <td width=216 valign=top style='width:161.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>SELECT * FROM IANet_PCIDevice</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_PCIDevice</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>The query may
+  return modems and other devices that Intel&#174 PROSet does not configure.</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>This is equivalent
+  to <b>IWbemServices::CreateInstanceEnumAsync</b>.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Enumerate all PCI
+  devices used by Intel&#174 PROSet configured adapters.</span>
+  </td>
+  <td width=216 valign=top style='width:161.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>SELECT * FROM IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>The query returns
+  just the PCI devices that Intel&#174 PROSet manages. This is equivalent to
+  <b>IWbemServices::CreateInstanceEnumAsync</b>.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Determine if
+  adapter is installed.</span>
+  </td>
+  <td width=216 valign=top style='width:161.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>N/A</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Check the “Availability”
+  attribute of IANet_EthernetPCIDevice. If equal to 10 - “Not Installed”, then
+  the device is not installed.<span style='mso-spacerun:yes'>  </span>Note: Not
+  much information is known about the device at this stage.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the PCI Device
+  associated with an adapter</span>
+  </td>
+  <td width=216 valign=top style='width:161.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF {
+  IANet_EthernetAdapter path}</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>     </span>WHERE ResultClass =
+  IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetPCIDevice</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>If this returns no
+  objects, then the adapter is either virtual or a phantom adapter.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=79 valign=top style='width:59.6pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the adapter
+  associated with a PCI device</span>
+  </td>
+  <td width=216 valign=top style='width:161.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {Ethernet PCI device path}</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span
+  style='mso-spacerun:yes'>     </span>WHERE ResultClass =
+  IANet_EthernetAdapter</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetAdapter</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>This query is not
+  optimal for the Provider – it is preferred that the client starts with the
+  adapter.</span>
+  </td>
+ </tr>
+</table>
+
+<h2><font color="#0000FF">Getting the Adapter Settings</font></h2>
+<p>The setting objects are not associated with the adapter directly. In conformance with the CIM standard, they are associated with a configuration object, which is associated with the adapter.
+
+<p>The classes involved with this part of the schema are IANet_EthernetAdapter,  IANet_Configuration, IANet_SettingInt, IANet_SettingString, IANet_SettingEnum, IANet_SettingMultiSelection and IANet_SettingSlider.	
+
+<p>The association classes IANet_AdapterConfiguration and IANet_SettingContext do not contain any real data - they act as glue between the settings and their parent object.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=204 valign=top style='width:153.0pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the
+  Configuration object for the adapter</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_EthernetAdapter<span style='mso-spacerun:yes'>  </span>path} WHERE
+  ResultClass = IANet_Configuration</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_Configuration</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns exactly one
+  object; even if there are no settings there will always be a configuration
+  object. The object path from this object is used in the next query.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the settings
+  associated with an adapter</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_Configuration<span style='mso-spacerun:yes'>  </span>path} WHERE
+  AssocClass = IANet_SettingContext</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>A mixture of
+  IANet_SettingInt, IANet_SettingString, IANet_SettingEnum,
+  IANet_SettingMultiSelection,<span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_SettingSlider</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns all the
+  setting classes associated with the adapter.<span style='mso-spacerun:yes'>  
+  </span>The client should use the __CLASS attribute to determine that type of
+  each setting.</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'></span>
+  </td>
+ </tr>
+</table>
+
+
+<h2><font color="#0000FF">Getting the ANS Team Configuration</font></h2>
+<p>The main classes in the teaming schema are IANet_EthernetAdapter, IANet_TeamOfAdapters, IANet_NetworkVirtualAdapter and IANet_TeamedMemberAdapter. 
+
+<p>The challenge in this schema is that an instance of IANet_EthernetAdapter exists for each physical adapter and for each virtual adapter. The client must be capable of distinguishing between the virtual adapter for a team and the adapters that are members of the team.
+
+<p>The association class IANet_NetworkVirtualAdapter contains no useful data - clients are really only interested in the endpoints of this association.  IANet_TeamedMemberAdapter does contain useful data about how the member adapter is used within the team.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=136 valign=top style='width:101.8pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=188 valign=top style='width:141.2pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=175 valign=top style='width:131.4pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Enumerate all teams</span>
+  </td>
+  <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>SELECT * FROM IANet_TeamOfAdapters</span>
+  </td>
+  <td width=188 valign=top style='width:141.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_TeamOfAdapters</span>
+  </td>
+  <td width=175 valign=top style='width:131.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>There is one
+  instance of IANet_TeamOfAdapters for each team. This is equivalent to
+  <b>IWbemServices::CreateInstanceEnumAsync</b>.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the virtual
+  adapter for a team</span>
+  </td>
+  <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_TeamOfAdapters path} WHERE AssocClass = IANet_NetworkVirtualAdapter</span>
+  </td>
+  <td width=188 valign=top style='width:141.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetAdapter</span>
+  </td>
+  <td width=175 valign=top style='width:131.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns only the
+  adapter object for the virtual adapter in the team.<span
+  style='mso-spacerun:yes'>  </span>This adapter will not exist if the team has
+  been created but Apply has not been called.<span style='mso-spacerun:yes'> 
+  </span>(see below on updating the configuration).</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Enumerate the
+  team’s member adapters</span>
+  </td>
+  <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_TeamOfAdapters path} WHERE AssocClass = IANet_TeamedMemberAdapter</span>
+  </td>
+  <td width=188 valign=top style='width:141.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_EthernetAdapter</span>
+  </td>
+  <td width=175 valign=top style='width:131.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns the
+  adapters which are in the team, but does not describe what role the adapter
+  plays.</span>
+  </td>
+ </tr>
+ <tr style='mso-yfti-lastrow:yes;page-break-inside:avoid'>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Determine an
+  adapter’s role in a team</span>
+  </td>
+  <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>REFERENCES OF
+  {IANet_EthernetAdapter path} WHERE ResultClass = IANet_TeamedMemberAdapter</span>
+  </td>
+  <td width=188 valign=top style='width:141.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_TeamedMemberAdapter</span>
+  </td>
+  <td width=175 valign=top style='width:131.4pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>The class contains
+  information about how the member adapter relates to the team and its current
+  status within the team.</span>
+  </td>
+ </tr>
+</table>
+
+
+<p><b>Note</b>: ANS Teaming is a class. Express Teaming is an adapter attribute. 
+For more information about getting the settings for an Express Team, see
+<a href="#get_express_team_configuration">Getting an Express Teaming 
+Configuration</a>.</p>
+
+
+<h2><font color="#0000FF">Getting the ANS Team Settings</font></h2>
+<p>The setting objects are not associated with the team directly. In conformance with the CIM standard, they are associated with a configuration object which is associated with the virtual IANet_EthernetAdapter for the team.   The same configuration object is also associated with the IANet_TeamOfAdapters object for the team.
+
+<p>The classes involved with this part of the schema are IANet_EthernetAdapter, IANet_TeamOfAdapters,  IANet_Configuration, IANet_SettingInt, IANet_SettingString, IANet_SettingEnum, IANet_SettingMultiSelection and IANet_SettingSlider.	
+
+<p>The association classes IANet_AdapterConfiguration  and IANet_SettingContext do not contain any real data - they act as glue between the settings and their parent object. This is exactly the same as the adapter settings case.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=213 valign=top style='width:159.95pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the
+  configuration object for the team, starting with the virtual adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_EthernetAdapter path} WHERE ResultClass = IANet_Configuration</span>
+  </td>
+  <td width=162 rowspan=2 valign=top style='width:121.5pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_Configuration</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'></span>
+  </td>
+  <td width=133 rowspan=2 valign=top style='width:99.9pt;border-top:none;
+  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns exactly one
+  object. Even if there are no settings, there will always be a configuration
+  object. The object path from this object is used in the next query.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the
+  configuration object for the team, starting with the team of adapters</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_TeamOfAdapters path} WHERE ResultClass = IANet_Configuration</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the settings
+  associated with an adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_Configuration path} WHERE AssocClass = IANet_SettingContext</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>A mixture of IANet_SettingInt,
+  IANet_SettingString, IANet_SettingEnum, IANet_SettingMultiSelection,</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_SettingSlider</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns all the
+  setting classes associated with the adapter.<span style='mso-spacerun:yes'>  
+  </span>The client should use the __CLASS attribute to determine that type of
+  each setting.</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'><span>
+  </td>
+ </tr>
+</table>
+
+
+<h2><font color="#0000FF"><a name="get_express_team_configuration">Getting an Express Teaming Configuration</a></font></h2>
+
+
+<p>If the IANet_EthernetAdapter.ExpressTeam value is =1, Express 
+Teaming is enabled on this adapter. IANet_EthernetAdapter.Caption contains the name 
+of the Express Team. Express teaming is an adapter attribute whereas ANS Teaming 
+is treated as a separate class.</p>
+
+
+<h2><font color="#0000FF">Getting the VLAN Configuration</font></h2>
+<p>Each adapter that supports VLANs has an IANet_802dot1QVLANService associated with it, using the association class IANet_Device802dot1QVVLANServiceImplementation.  If an adapter does not have an instance of this class associated with it, then it does not support VLANs.
+
+<p>Each VLAN is represented by an instance of  IANet_VLAN.  The VLAN is not directly associated with the adapter - it is associated with the IANet_802dot1QVLANService for the adapter.
+
+<p>The association class IANet_VLANFor is used to associate each VLAN instance with the correct IANet_802dot1QVLANService.  This class contains no useful data for the user.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=213 valign=top style='width:159.95pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the 802.1q VLAN
+  service object associated with an adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_EthernetAdapter path} WHERE ResultClass = IANet_802dot1QVLANService</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_802dot1QVLANService</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns one or no
+  object(s).</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the VLANs on an
+  adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_802dot1QVLANService path} WHERE ResultClass = IANet_VLAN</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_VLAN</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>This can return no
+  objects if there are <span class=GramE>no</span> VLANs installed.</span>
+  </td>
+ </tr>
+</table>
+
+
+<h2><font color="#0000FF">Getting the VLAN Settings</font></h2>
+<p>The setting objects are not associated with the VLAN directly. In conformance with the CIM standard, they are associated with a configuration object, which is associated with the IANet_VLAN object for the VLAN.  
+
+<p>The classes involved with this part of the schema are IANet_VLAN, IANet_Configuration, IANet_SettingInt, IANet_SettingString, IANet_SettingEnum, IANet_SettingMultiSelection and IANet_SettingSlider.	
+
+<p>The association classes IANet_VLANConfiguration and IANet_SettingContext do not contain any real data - they act as glue between the settings and their parent object. This is exactly the same as the adapter settings case.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=204 valign=top style='width:153.0pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b style='mso-bidi-font-weight:normal'><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b style='mso-bidi-font-weight:normal'><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the
+  Configuration object for the VLAN</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_VLAN path} WHERE ResultClass = IANet_Configuration</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_Configuration</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns exactly one
+  object; even if there are no settings there will always be a configuration
+  object. The object path from this object is used in the next query.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the settings
+  associated with a VLAN</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_Configuration path} WHERE AssocClass = IANet_SettingContext</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>A mixture of
+  IANet_SettingInt, IANet_SettingString, IANet_SettingEnum,
+  IANet_SettingMultiSelection, IANet_SettingSlider</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns all the
+  setting classes associated with the VLAN.<span style='mso-spacerun:yes'>  
+  </span>The client should use the __CLASS attribute to determine the type of
+  each setting.</span>
+ </td>
+ </tr>
+</table>
+
+
+
+<h2><font color="#0000FF">Getting the IP Protocol Information</font></h2>
+<p>The Provider will give some limited information about the IP Protocol Endpoints that are associated with adapters, VLANs and teams.  No other protocols are supported.
+
+<p>The main class containing the protocol information is IANet_IPProtocolEndpoint.  There are two association classes: IANet_VLANProtocolDependency and IANet_AdapterProtocolImplementation.  To get the IP endpoint for a team, first get the virtual IANet_EthernetAdapter for the team, i.e., the IP Endpoint is associated with this instance.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=213 valign=top style='width:159.95pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the IP Protocol
+  Endpoints associated with an adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {path of IANet_EthernetAdapter} WHERE ResultClass = IANet_IPProtocolEndpoint</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_IPProtocolEndpoint</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Though some
+  adapters may have more than one IP address, they will be associated with only
+  one IP Protocol Endpoint instance. </span>
+  </td>
+ </tr>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the IP Protocol
+  Endpoints associated with a VLAN.</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {path of IANet_VLAN} WHERE ResultClass = IANet_IPProtocolEndpoint</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_IPProtocolEndpoint</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>There will be one
+  IP Protocol Endpoint associated with the VLAN.</span>
+  </td>
+ </tr>
+</table>
+
+
+<h2><font color="#0000FF">Getting the Boot Agent Information</font></h2>
+<p>Each adapter that can support a boot agent in flash ROM will have an IANet_BootAgent instance associated with it using the IANet_DeviceBootServiceImplementation association class.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=213 valign=top style='width:159.95pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=82 valign=top style='width:61.45pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the Boot Agent
+  associated with an adapter</span>
+  </td>
+  <td width=213 valign=top style='width:159.95pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {path of IANet_EthernetAdapter} WHERE ResultClass = IANet_BootAgent</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_BootAgent</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>The following read
+  only attributes provide information on the boot ROM image for this adapter:</span>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>InvalidImageSignature,
+  Version, UpdateAvailable, FlashImageType</span>
+  </td>
+ </tr>
+</table>
+
+
+<h2><font color="#0000FF">Getting the BootAgent Settings</font></h2>
+<p>The setting objects are not associated with the boot agent directly. In conformance with the CIM standard, they are associated with a configuration object which is associated with the boot agent.
+
+<p>The classes involved with this part of the schema are IANet_BootAgent,  IANet_Configuration, IANet_SettingInt, IANet_SettingString, IANet_SettingEnum, IANet_SettingMultiSelection and IANet_SettingSlider.
+
+<p>The association classes IANet_BootAgentConfiguration and IANet_SettingContext do not contain any real data - they act as glue between the settings and their parent object.
+<br><br>
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;
+ mso-border-insidev:.5pt solid windowtext'>
+ <thead>
+  <tr>
+   <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Task</span></b>
+   </td>
+   <td width=204 valign=top style='width:153.0pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>WQL Queries</span></b>
+   </td>
+   <td width=162 valign=top style='width:121.5pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b><span style='font-size:8.0pt;mso-bidi-font-size:
+   10.0pt;'>Result Class</span></b>
+   </td>
+   <td width=133 valign=top style='width:99.9pt;border:solid windowtext 1.0pt;
+   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+   solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+   <p><b style='mso-bidi-font-weight:normal'><span
+   style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Comments</span></b>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the
+  Configuration object for the boot agent</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF {
+  IANet_BootAgent<span style='mso-spacerun:yes'>  </span>path} WHERE
+  ResultClass = IANet_Configuration</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>IANet_Configuration</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns exactly one
+  object. Even if there are no settings, there will always be a configuration
+  object. The object path from this object is used in the following query.</span>
+  </td>
+ </tr>
+ <tr>
+  <td width=91 valign=top style='width:.95in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Get the settings
+  associated with an boot agent</span>
+  </td>
+  <td width=204 valign=top style='width:153.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>ASSOCIATORS OF
+  {IANet_Configuration<span style='mso-spacerun:yes'>  </span>path} WHERE
+  AssocClass = IANet_SettingContext</span>
+  </td>
+  <td width=162 valign=top style='width:121.5pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>A mixture of
+  IANet_SettingInt, IANet_SettingString, IANet_SettingEnum,
+  IANet_SettingMultiSelection, IANet_SettingSlider</span>
+  </td>
+  <td width=133 valign=top style='width:99.9pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p ><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;'>Returns all the
+  setting classes associated with the adapter.<span style='mso-spacerun:yes'>  
+  </span>The client should use the __CLASS attribute to determine that type of
+  each setting.</span>
+  </td>
+ </tr>
+</table>
+
+
+<p><a href="index.htm">Home</a>
+<br>
+<br>
+<hr color="#00b0b0" size="1">
+<p><font size="1">Copyright&#169 2002 Intel Corporation. <a href="legaldis.htm">Legal Information</a></font>
+</body>
+</html>

@@ -1,0 +1,674 @@
+REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet]
+"SyncDisplayName"=dword:00000001
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Customer Support:]
+"Order"=dword:00000001
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Customer Support:]
+"Url"="http://support.intel.com"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Network Products:]
+"Order"=dword:00000002
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Network Products:]
+"Url"="http://www.intel.com/network"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Download Site:]
+"Order"=dword:00000003
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General_Intel\Download Site:]
+"Url"="http://downloadfinder.intel.com"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\SupportTabKey\General]
+"LatestDriver"="http://apps.intel.com/scripts-supportupdates/proset.asp?PartNo=%s&DrvVer=%s&OSVer=%s&Eid=%s&Sw=%s&SwVer=%s"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229]
+"DeviceDescription"="Intel(R) PRO/100 PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860001]
+"DeviceDescription"="Intel(R) PRO/100B PCI Adapter (TX)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860002]
+"DeviceDescription"="Intel(R) PRO/100B PCI Adapter (T4)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860003]
+"DeviceDescription"="Intel(R) PRO/10+ PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860004]
+"DeviceDescription"="Intel(R) PRO/100 WfM PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860005]
+"DeviceDescription"="Intel 82557-based Integrated Ethernet PCI (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860006]
+"DeviceDescription"="Intel 82557-based Integrated Ethernet with Wake on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860007]
+"DeviceDescription"="Intel 82558-based Integrated Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860008]
+"DeviceDescription"="Intel 82558-based Integrated Ethernet with Wake on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860009]
+"DeviceDescription"="Intel(R) PRO/100+ PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000A]
+"DeviceDescription"="Intel(R) PRO/100+ Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000B]
+"DeviceDescription"="Intel(R) PRO/100+ Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000C]
+"DeviceDescription"="Intel(R) PRO/100+ Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000D]
+"DeviceDescription"="Intel(R) PRO/100+ Alert on LAN* 2 Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000E]
+"DeviceDescription"="Intel(R) PRO/100+ Alert on LAN* Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086000F]
+"DeviceDescription"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860011]
+"DeviceDescription"="Intel(R) PRO/100 S Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860012]
+"DeviceDescription"="Intel(R) PRO/100 S Advanced Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860013]
+"DeviceDescription"="Intel(R) PRO/100 S Advanced Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860030]
+"DeviceDescription"="Intel(R) PRO/100+ Management Adapter with Alert On LAN* GC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860031]
+"DeviceDescription"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860040]
+"DeviceDescription"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860041]
+"DeviceDescription"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860042]
+"DeviceDescription"="Intel(R) PRO/100 Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860050]
+"DeviceDescription"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860051]
+"DeviceDescription"="Intel(R) PRO/100 S Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860060]
+"DeviceDescription"="Intel(R) PRO/100 S+ Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860070]
+"DeviceDescription"="Intel(R) PRO/100 M Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80860071]
+"DeviceDescription"="Intel(R) PRO/100 M Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861009]
+"DeviceDescription"="Intel(R) PRO/100+ Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086100C]
+"DeviceDescription"="Intel(R) PRO/100+ Server Adapter (PILA8470B)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861012]
+"DeviceDescription"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861013]
+"DeviceDescription"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861014]
+"DeviceDescription"="Intel(R) PRO/100 Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861015]
+"DeviceDescription"="Intel(R) PRO/100 S Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861016]
+"DeviceDescription"="Intel(R) PRO/100 S Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861017]
+"DeviceDescription"="Intel(R) PRO/100+ Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861030]
+"DeviceDescription"="Intel(R) PRO/100+ Management Adapter with Alert On LAN* G Server"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861040]
+"DeviceDescription"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861041]
+"DeviceDescription"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861042]
+"DeviceDescription"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861050]
+"DeviceDescription"="Intel(R) PRO/100 S Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861051]
+"DeviceDescription"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861052]
+"DeviceDescription"="Intel(R) PRO/100 Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80861060]
+"DeviceDescription"="Intel(R) PRO/100 S+ Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_808610F0]
+"DeviceDescription"="Intel(R) PRO/100+ Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862009]
+"DeviceDescription"="Intel(R) PRO/100 S Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086200D]
+"DeviceDescription"="Intel(R) PRO/100 CardBus II"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086200E]
+"DeviceDescription"="Intel(R) PRO/100 LAN+Modem56 CardBus II"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086200F]
+"DeviceDescription"="Intel(R) PRO/100 SR Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862010]
+"DeviceDescription"="Intel(R) PRO/100 S Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862011]
+"DeviceDescription"="Intel(R) PRO/100 Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862012]
+"DeviceDescription"="Intel(R) PRO/100 Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862013]
+"DeviceDescription"="Intel(R) PRO/100 SR Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862014]
+"DeviceDescription"="Intel(R) PRO/100 R Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862015]
+"DeviceDescription"="Intel(R) PRO/100 R Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862016]
+"DeviceDescription"="Intel(R) PRO/100 S Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862017]
+"DeviceDescription"="Intel(R) PRO/100 S Combo Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862018]
+"DeviceDescription"="Intel(R) PRO/100 SR Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862019]
+"DeviceDescription"="Intel(R) PRO/100 SR Combo Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862100]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI Type 3A"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862101]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862102]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862103]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862104]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862105]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862106]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862107]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862108]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862200]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862201]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862202]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862203]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862204]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862205]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862206]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862207]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862208]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862402]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862407]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862408]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862409]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_8086240F]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862410]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862411]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862412]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80862413]
+"DeviceDescription"="Intel(R) PRO/100+ Mini PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863000]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LAN on Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863001]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863002]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN* 2"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863006]
+"DeviceDescription"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863007]
+"DeviceDescription"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863008]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863010]
+"DeviceDescription"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863011]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863012]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863013]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_80863014]
+"DeviceDescription"="Intel(R) PRO/100 SP Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_01]
+"DeviceDescription"="IBM 10/100 EtherJet PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_02]
+"DeviceDescription"="IBM 10/100 EtherJet PCI Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_04]
+"DeviceDescription"="IBM NetFinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014005C\REV_05]
+"DeviceDescription"="IBM NetFinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_101401BC]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LAN On Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_101401F1]
+"DeviceDescription"="IBM 10/100 Ethernet Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_101401F2]
+"DeviceDescription"="IBM 10/100 Ethernet Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014023F]
+"DeviceDescription"="Intel PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10140232]
+"DeviceDescription"="IBM 10/100 Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10140207]
+"DeviceDescription"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014105C]
+"DeviceDescription"="IBM Netfinity 10/100 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014305C]
+"DeviceDescription"="IBM 10/100 EtherJet PCI Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014405C]
+"DeviceDescription"="IBM 10/100 EtherJet PCI Adapter with Alert on LAN"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014505C]
+"DeviceDescription"="IBM 10/100 EtherJet Secure Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014605C]
+"DeviceDescription"="IBM 10/100 EtherJet Secure Management Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014705C]
+"DeviceDescription"="IBM Netfinity 10/100 Ethernet Security Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1014805C]
+"DeviceDescription"="IBM Netfinity 10/100 Ethernet Security Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113001]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113002]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113003]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113004]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113005]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113006]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E113007]
+"DeviceDescription"="Intel(R) 82559 Fast Ethernet LOM with Alert on LAN*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B01E]
+"DeviceDescription"="Compaq NC3120 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B01F]
+"DeviceDescription"="Compaq NC3122 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B02F]
+"DeviceDescription"="Compaq NC1120 Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B04A]
+"DeviceDescription"="Compaq 10/100 TX PCI Intel WOL UTP Controller"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0C6]
+"DeviceDescription"="Compaq NC3161 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0C7]
+"DeviceDescription"="Compaq NC3160 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0D7]
+"DeviceDescription"="Compaq NC3121 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0DD]
+"DeviceDescription"="Compaq NC3131 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0DE]
+"DeviceDescription"="Compaq NC3132 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B0E1]
+"DeviceDescription"="Compaq NC3133 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B134]
+"DeviceDescription"="Compaq NC3163 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B13C]
+"DeviceDescription"="Compaq NC3162 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B144]
+"DeviceDescription"="Compaq NC3123 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B163]
+"DeviceDescription"="Compaq NC3134 Fast Ethernet NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B164]
+"DeviceDescription"="Compaq NC3135 Fast Ethernet Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_0E11B209]
+"DeviceDescription"="Intel(R) PRO/100 S Mobile LAN on Motherboard"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10C0]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10C3]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10CA]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10CB]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10E3]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C10E4]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C1200]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103C1273]
+"DeviceDescription"="HP NetServer 10/100TX PCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10338000]
+"DeviceDescription"="NEC PC-9821X-B06(PCI) or compatible/Intel 82557-based Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10338016]
+"DeviceDescription"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1033801F]
+"DeviceDescription"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10338026]
+"DeviceDescription"="NEC PK-UG-X006(PCI) or compatible Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10338063]
+"DeviceDescription"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10338064]
+"DeviceDescription"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_103380C4]
+"DeviceDescription"="NEC 82559-based Fast Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10250009]
+"DeviceDescription"="ACER NIC-559A PRO/100+ with WOL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1025001A]
+"DeviceDescription"="ACER NIC-559A PRO/100+ with Alert On LAN 2*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1025001B]
+"DeviceDescription"="ACER T62L158 PRO/100+ with Alert On LAN 2*"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_1028009B]
+"DeviceDescription"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A0019]
+"DeviceDescription"="Fujitsu Siemens Computers 82558-based Onboard Ethernet with WoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A0031]
+"DeviceDescription"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82558"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A0037]
+"DeviceDescription"="Fujitsu Siemens Computers 82559-based Onboard Ethernet with WoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A004B]
+"DeviceDescription"="Fujitsu Siemens Computers 82559-based Onboard Ethernet with WoL and AoL"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A6608]
+"DeviceDescription"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82558"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_110A6618]
+"DeviceDescription"="Fujitsu Siemens Computers Server Onboard LAN with Intel 82559C"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10CF1115]
+"DeviceDescription"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10CF1143]
+"DeviceDescription"="Intel 8255x-based PCI Ethernet Adapter (10/100)"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_10CF1188]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_144D2502]
+"DeviceDescription"="Samsung SEM-2100iL MiniPCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_144D2501]
+"DeviceDescription"="Samsung SEM-2000 MiniPCI LAN Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_11790001]
+"DeviceDescription"="Intel(R) PRO/100 S Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1229\SUBSYS_11790003]
+"DeviceDescription"="Intel 8255x-based Fast Ethernet"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863010]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863011]
+"DeviceDescription"="Intel(R) PRO/100 VM Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863012]
+"DeviceDescription"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863013]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863014]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863015]
+"DeviceDescription"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863016]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Combo Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863017]
+"DeviceDescription"="Intel(R) PRO/100 P Mobile Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_80863018]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_101401CE]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_101401DC]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_101401EB]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_101401EC]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140202]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140205]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140209]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140217]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140234]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_1014023D]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140244]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140245]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140265]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10140267]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_1014026A]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_0E110012]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_0E110091]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_10CF1188]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_144D2503]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_144D2601]
+"DeviceDescription"="Samsung HomePNA 1M PCI"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_144D2602]
+"DeviceDescription"="Samsung HomePNA 1M CNR"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_1179FF01]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_15099011]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_14A42126]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_14A42149]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_14A42147]
+"DeviceDescription"="Intel(R) PRO/100 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_109F315D]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_109F3181]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_2449\SUBSYS_11867801]
+"DeviceDescription"="Intel(R) PRO/100 VE Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1031]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1031\SUBSYS_10140209]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1031\SUBSYS_1014022D]
+"DeviceDescription"="Intel(R) PRO/100 VE Desktop Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1032]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1033]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1034]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1035]
+"DeviceDescription"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1036]
+"DeviceDescription"="82562EH based Phoneline Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1037]
+"DeviceDescription"="Formally used for Gilad2"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1038]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1039]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_103A]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_103B]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_103C]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_103D]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_103E]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1050]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1051]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1052]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1053]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1054]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1055]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1059]
+"DeviceDescription"="Intel(R) PRO/100 M Mobile Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1064]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1065]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1066]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1067]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1068]
+"DeviceDescription"="Intel(R) PRO/100 VE Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1069]
+"DeviceDescription"="Intel(R) PRO/100 VM Network Connection"
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1030\SUBSYS_80861030]
+"DeviceDescription"="Intel(R) InBusiness 10/100 Network Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000\SUBSYS_80861000]
+"DeviceDescription"="Intel(R) PRO/1000 Gigabit Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000\SUBSYS_10140119]
+"DeviceDescription"="IBM Netfinity Gigabit Ethernet SX Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000\SUBSYS_0E11B0DF]
+"DeviceDescription"="Compaq NC6132 Gigabit Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000\SUBSYS_0E11B0E0]
+"DeviceDescription"="Compaq NC6133 Gigabit Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000\SUBSYS_0E11B123]
+"DeviceDescription"="Compaq NC6134 Gigabit NIC"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1000]
+"DeviceDescription"="Intel(R) 82542-based Network Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1001\SUBSYS_80861002]
+"DeviceDescription"="Intel(R) PRO/1000 T Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1001\SUBSYS_80861003]
+"DeviceDescription"="Intel(R) PRO/1000 F Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1001\SUBSYS_101401EA]
+"DeviceDescription"="IBM Gigabit Ethernet SX Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1001\SUBSYS_0E11004A]
+"DeviceDescription"="Compaq NC6136 Gigabit Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1004\SUBSYS_80861004]
+"DeviceDescription"="Intel(R) PRO/1000 T Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1004\SUBSYS_80862004]
+"DeviceDescription"="Intel(R) PRO/1000 T Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1004\SUBSYS_101410F2]
+"DeviceDescription"="IBM Total Storage Gigabit Ethernet Copper Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1004\SUBSYS_0E110049]
+"DeviceDescription"="Compaq NC7132 Gigabit Upgrade Module"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1004\SUBSYS_0E11B1A4]
+"DeviceDescription"="Compaq NC7131 Gigabit Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008]
+"DeviceDescription"="Intel(R) 82544EI Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_80861107]
+"DeviceDescription"="Intel(R) PRO/1000 XT Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_80862107]
+"DeviceDescription"="Intel(R) PRO/1000 XT Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_80863108]
+"DeviceDescription"="Intel(R) PRO/1000 XT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_80862110]
+"DeviceDescription"="Intel(R) PRO/1000 XT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_80860269]
+"DeviceDescription"="IBM iSeries 1000/100/10 Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1008\SUBSYS_10140269]
+"DeviceDescription"="IBM iSeries 1000/100/10 Ethernet Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1009]
+"DeviceDescription"="Intel(R) 82544EI Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1009\SUBSYS_80861109]
+"DeviceDescription"="Intel(R) PRO/1000 XF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1009\SUBSYS_80862109]
+"DeviceDescription"="Intel(R) PRO/1000 XF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1009\SUBSYS_80860268]
+"DeviceDescription"="IBM iSeries Gigabit Ethernet Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1009\SUBSYS_10140268]
+"DeviceDescription"="IBM iSeries Gigabit Ethernet Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100C]
+"DeviceDescription"="Intel(R) 82544GC Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100C\SUBSYS_80861112]
+"DeviceDescription"="Intel(R) PRO/1000 T Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100C\SUBSYS_80862112]
+"DeviceDescription"="Intel(R) PRO/1000 T Desktop Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100D]
+"DeviceDescription"="Intel(R) 82544GC Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100D\SUBSYS_8086110D]
+"DeviceDescription"="Intel(R) 82544GC Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100D\SUBSYS_10280123]
+"DeviceDescription"="Intel(R) 82544GC Based Network Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_8086001E]
+"DeviceDescription"="Intel(R) PRO/1000 MT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_8086002E]
+"DeviceDescription"="Intel(R) PRO/1000 MT Desktop Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_8086003E]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_8086004E]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_0E1100BD]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_10140265]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_10140267]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100E\SUBSYS_1014026A]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100F]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100F\SUBSYS_80861000]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_100F\SUBSYS_80861001]
+"DeviceDescription"="Intel(R) PRO/1000 MT Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1010]
+"DeviceDescription"="Intel(R) 82546EB Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1010\SUBSYS_80861010]
+"DeviceDescription"="Intel(R) PRO/1000 MT Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1010\SUBSYS_80861011]
+"DeviceDescription"="Intel(R) PRO/1000 MT Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1010\SUBSYS_80861012]
+"DeviceDescription"="Intel(R) PRO/1000 MT Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1010\SUBSYS_8086101A]
+"DeviceDescription"="Intel(R) PRO/1000 MT Dual Port Network Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1011]
+"DeviceDescription"="Intel(R) 82545EM Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1011\SUBSYS_80861002]
+"DeviceDescription"="Intel(R) PRO/1000 MF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1011\SUBSYS_80861003]
+"DeviceDescription"="Intel(R) PRO/1000 MF Server Adapter (LX)"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1012]
+"DeviceDescription"="Intel(R) 82546EB Based Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1012\SUBSYS_80861012]
+"DeviceDescription"="Intel(R) PRO/1000 MF Dual Port Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1012\SUBSYS_80861013]
+"DeviceDescription"="Intel(R) PRO/1000 MF Dual Port Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1013]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1018]
+"DeviceDescription"="Intel(R) PRO/1000 MT Mobile Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1026]
+"DeviceDescription"="Intel(R) PRO/1000 MT Server Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1027]
+"DeviceDescription"="Intel(R) PRO/1000 MF Server Adapter"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1028]
+"DeviceDescription"="Intel(R) PRO/1000 MB Server Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1075]
+"DeviceDescription"="Intel(R) PRO/1000 CT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1076]
+"DeviceDescription"="Intel(R) PRO/1000 MT Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1077]
+"DeviceDescription"="Intel(R) PRO/1000 MT Mobile Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1078]
+"DeviceDescription"="Intel(R) PRO/1000 Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1079]
+"DeviceDescription"="Intel(R) PRO/1000 MT Dual Port Network Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_107A]
+"DeviceDescription"="Intel(R) PRO/1000 MF Dual Port Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_107B]
+"DeviceDescription"="Intel(R) PRO/1000 MB Dual Port Server Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_107C]
+"DeviceDescription"="Intel(R) PRO/1000 GT Desktop Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1015]
+"DeviceDescription"="Intel(R) PRO/1000 MT Mobile Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1016]
+"DeviceDescription"="Intel(R) PRO/1000 MT Mobile Connection"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_1017]
+"DeviceDescription"="Intel(R) PRO/1000 MT Desktop Connection"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_101D]
+"DeviceDescription"="Intel(R) PRO/1000 MT Quad Port Server Adapter"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Intel\PROSet\DeviceKey\VEN_8086&DEV_5201]
+"DeviceDescription"="Intel(R) PRO/100 Intelligent Server Adapter"

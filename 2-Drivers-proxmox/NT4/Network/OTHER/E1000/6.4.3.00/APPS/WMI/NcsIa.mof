@@ -1,0 +1,2248 @@
+/************************************************************************
+*                                                                       *
+*               INTEL CORPORATION PROPRIETARY INFORMATION               *
+*  This software is supplied under the terms of a license agreement or  *
+*  nondisclosure agreement with Intel Corporation and may not be copied *
+*   or disclosed except in accordance with the terms of that agreement. *
+*        Copyright (c) 2004 Intel Corporation. All Rights Reserved.     *
+*                                                                       *
+************************************************************************/
+/***********************************************************************\
+*
+* NAME:	NcsIa.mof	
+*
+* DESCRIPTION: Master MOF file with class definitions for the 
+*			   Intel PRO Network Adapters WMI Provider (802.3 schema).
+*
+* PREREQUISITE: NcsCm.mof and NcsCo.mof
+*
+* NOTE:	This file generates language neutral MOF for IntelNcs namespace.
+*		This file also generates ENU language specific MFL. 
+*
+\***********************************************************************/
+
+#pragma namespace ("\\\\.\\Root")
+
+instance of __Namespace
+{
+    Name = "IntelNCS";
+};
+
+#pragma namespace ("\\\\.\\Root\\IntelNCS")
+
+
+instance of __Win32Provider as $P
+{
+    Name    = "NcsImp" ;
+    ClsId   = "{541D882C-646A-4F67-894F-8576036FC14B}" ;
+	Pure = FALSE;
+	ImpersonationLevel = 3;
+    PerUserInitialization = TRUE; 
+};    
+
+instance of __MethodProviderRegistration
+{
+    Provider = $P;
+};
+
+instance of __InstanceProviderRegistration
+{
+    Provider = $P;
+    SupportsPut = TRUE;
+    SupportsGet = TRUE;
+    SupportsDelete = TRUE;
+    SupportsEnumeration = TRUE;
+	QuerySupportLevels = { "WQL:UnarySelect" };
+};
+
+
+// ============================================================================
+// Ethernet Adapter Class
+// ============================================================================
+[dynamic, provider("NcsImp"), 
+Description("IANet_EthernetAdapter class objectifies "
+"the general network characteristics of the Intel NIC. In this class, "
+"the lower level networking properties are presented. Note that only the "
+"network relationships are in this class. The controller characteristics "
+"are presented separately."):Amended,  LOCALE(0x409)
+]
+class IANet_EthernetAdapter : CIM_EthernetAdapter
+{
+	[Override ("Capabilities"), Description (
+	"Capabilities of the EthernetAdapter. For example, the "
+	"Device may support AlertOnLan, WakeOnLan, Load Balancing "
+	"and/or FailOver. If failover or load balancing "
+	"capabilities are listed, a SpareGroup (failover) or "
+	"ExtraCapacityGroup (load balancing) should also be defined "
+	"to completely describe the capability."):Amended, 
+	ArrayType ("Indexed"),
+	Values {
+	/* 0 */ "Unknown", "Other", "AlertOnLan", "WakeOnLan", 
+	/* 4 */ "FailOver", "LoadBalancing", 
+	/* 6 */ "IPSec Offload", "ASF",
+	/* 8 */ "GEC", "FEC", "802.3ad", "Checksum Offload",
+	/* 12 */ "Switched Fault Tolerant", "Basic AlertOnLan", "AlertOnLan 2"
+	/* 15 */ "Security Offload AH", "Security Offload ESP", "Security Payload Tunnel",
+	/* 18 */ "Security Payload Transport", "Security IPV4 Packets",
+	/* 20 */ "Authentication Algorithm MD5", "Authentication Algorithm SHA1",
+	/* 22 */ "Encryption Algorithm EAS", "Encryption Algorithm DES",	
+	/* 24 */ "Encryption Algorithm 3DES",
+	/* 25 */ "ESP Xmit Checksum Encryption", "ESP Xmit Checksum Authentication",
+	/* 27 */ "ESP Receive Checksum Encryption", "ESP Receive Checksum Authentication",
+	/* 29 */ "TCO Capability", "Wake Up Capabilities", "IP Checksum Offload",
+	/* 32 */ "10 Mbps", "100 Mbps", "1000 Mbps", "10000 Mbps",
+	/* 36 */ "Teaming", "VLAN", "IEEE VLAN", "ISL VLAN", "Uninstallable",
+	/* 41 */ "Identify Adapter Support", "Cable Test Support", "Diagnostic Support",
+	/* 44 */ "Flash support", "ICH Support", "Usage Server", "Vendor Intel", "Phoneline PHY",
+	/* 49 */ "Mobile", "Express Teaming","Cable Diagnostics","Signal Quality"
+	} : Amended, 
+	ModelCorrespondence {"IANet_EthernetAdapter.CapabilityDescriptions"}
+	]
+    uint16 Capabilities[];
+
+	[Override ("CapabilityDescriptions"), Description (
+	"An array of free-form strings providing more detailed "
+	"explanations for any of the Ethernet Adapter features "
+	"indicated in the Capabilities array. Note, each entry of "
+	"this array is related to the entry in the Capabilities "
+	"array that is located at the same index."):Amended, 
+	ArrayType ("Indexed"), 
+	ModelCorrespondence {"IANet_EthernetAdapter.Capabilities"}
+	]
+    string CapabilityDescriptions[];
+
+	[Override ("EnabledCapabilities"), Description (
+	"Specifies which capabilities are enabled from the list "
+	"of all supported ones, defined in the Capabilities array."):Amended, 
+	Values {"Unknown", "Other", "AlertOnLan", "WakeOnLan", 
+	"FailOver", "LoadBalancing", "IPSec Offload", "ASF",
+	"GEC", "FEC", "802.3ad", "Checksum Offload",
+	"Switched Fault Tolerant", "Basic AlertOnLan", "AlertOnLan 2"
+	"Security Offload AH", "Security Offload ESP", "Security Payload Tunnel",
+	"Security Payload Transport", "Security IPV4 Packets",
+	"Authentication Algorithm MD5", "Authentication Algorithm SHA1",
+	"Encryption Algorithm EAS", "Encryption Algorithm DES",	"Encryption Algorithm 3DES",
+	"ESP Xmit Checksum Encryption", "ESP Xmit Checksum Authentication",
+	"ESP Receive Checksum Encryption", "ESP Receive Checksum Authentication",
+	"TCO Capability", "Wake Up Capabilities", "IP Checksum Offload"}:Amended, 
+	ModelCorrespondence {"IANet_EthernetAdapter.Capabilities"}
+	]
+    uint16 EnabledCapabilities[];
+
+	[Description (
+	"An array of IDs of other capabilities.  There is no value map for these - the "
+	"meaning can be ascertained from the OtherEnabledCapabilities string array."):Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.OtherEnabledCapabilityIDs"}
+	]
+	uint16 OtherEnabledCapabilityIDs[];
+
+	[Description ("An array of free-form strings used to state "
+	"Other Capabilities of the Ethernet Adapter."):Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.OtherEnabledCapabilities"}
+	]
+	string OtherEnabledCapabilities[];
+
+	[Description ("An array of free-form strings used to state "
+	"Other Capabilities of the Ethernet Adapter."):Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.OtherEnabledCapabilities"}
+	]
+	string OtherCapabilityDescriptions[];
+
+	[Override("NetworkAddresses"), MaxLen (64), 
+	Description (
+	"An array of strings indicating the network addresses for an adapter."):Amended,
+	ArrayType ("Indexed"),
+	MappingStrings {"MIF.DMTF|Network Adapter 802 Port|001.3"},
+	ModelCorrespondence {"IANet_EthernetAdapter.NetworkAddressDescription"}
+	]
+    string NetworkAddresses[];
+    		
+	[Description (
+	"DriverPath is full path of the driver for this network adapter."):Amended
+	]
+	string DriverPath;
+	
+	[Description (
+	"DriverFileVersion is the file version of the driver for this network adapter."):Amended
+	]
+	string DriverFileVersion;
+	
+	[Description (
+	"DriverFileSize is file size of the driver for this network adapter."):Amended,
+	Units("Bytes"):Amended
+	]
+	uint32 DriverFileSize;
+	
+	[Description (
+	"DriverProductVersion is the product version of the driver for this network adapter."):Amended
+	]
+	string DriverProductVersion;
+
+	[Description (
+	"DriverDescription is the description of the driver for this network adapter."):Amended
+	]
+	string DriverDescription;
+
+	[Description (
+	"DriverLegalCopyright is the copyright message for the driver for this network adapter."):Amended
+	]
+	string DriverLegalCopyright;
+
+	[Description (
+	"DriverComments are the comments concerning the driver for this network adapter."):Amended
+	]
+	string DriverComments;
+    
+	[Description (
+	"GeneralTransmitErrors is the total number of transmit errors."):Amended
+	]
+ 	uint64 GeneralTransmitErrors;
+
+	[Description (
+	"The GeneralReceiveErrors is the total number of receive errors."):Amended
+	]	
+	uint64 GeneralReceiveErrors;
+
+	[Description (
+	"NoBufferReceiveErrors is the number of errors that occurred"
+	" because the driver had no buffer to receive the frame."):Amended
+	]
+	uint64 NoBufferReceiveErrors;
+		
+	[Description (
+	"NoBufferXmitErrors is the number of errors that occurred because"
+	" the driver had no buffer to send the frame."):Amended
+	]
+	uint64 NoBufferXmitErrors;
+	
+	[Description (
+	"ShortFramesReceived is the number of incomplete frames that were received."):Amended
+	]
+    uint64 ShortFramesReceived;
+
+	[Description (
+	"IdentifyAdapter will flash the light on the adapter for a few "
+	"seconds to enable the user to identify it.  This method will only "
+	"work for physical adapters."):Amended, implemented 
+	]
+	uint32 IdentifyAdapter( [in] uint16 nSeconds );
+
+	[Description (
+	"TestCable performs some diagnostic tests on a particular adapter. "
+	"In case of failure this method will return with possible problems, "
+	"causes and solutions."
+	):Amended, implemented 
+	]
+	uint32 TestCable( 
+		[OUT] string strProblems[],	// for 10/100 adapters
+		[OUT] string strCauses[],		// for 10/100 adapters
+		[OUT] string strSolutions[],	// for 10/100 adapters
+		[OUT] uint16 SeverityInfo[]
+	);	
+
+
+	[Description (
+	"AdvancedTestCable performs a set of advanced cable tests on a particular "
+	"adapter. This test suit is available with 1000 adapters. This method "
+	"returns with names of tests and their respective results. "
+	"The link can also be down because the 'SpeedDuplex' setting is not set to "
+	"'Auto Negotiate'.  The  'bSpeedAndDuplexNotAutomatic' out parameter "
+	"will be TRUE if this situation occurs."
+	):Amended, implemented 
+	]
+	uint32 AdvancedTestCable(
+		[OUT] boolean	bSpeedAndDuplexNotAutomatic,
+	  	[OUT] string	strTestName[],		// for 1000 adapters
+		[OUT] string	strTestResult[],       // for 1000 adapters
+		[OUT] uint32    SeverityInfo[],
+		[OUT] uint32	testID[]	
+	);
+
+	[Description (
+	"IsPowerMgmtSupported indicates whether power management is supported by "
+	"the adapter."
+	):Amended, implemented  
+	]
+	uint32 IsPowerMgmtSupported(
+		[OUT]
+		boolean bEnabled
+	);
+
+	[Description (
+	"GetPowerUsage detects overall power usage for the adapter."
+	):Amended, implemented,
+	ModelCorrespondence {"IANet_EthernetAdapter.IsPowerMgmtSupported"}
+	]
+	uint32 GetPowerUsage(
+		[OUT,
+        ValueMap {"0","1","2"} , 
+        Values {"Normal Power", "Temporary Low Power", "Low Power"}: Amended
+        ]
+		uint32 StandByMode
+	);
+
+
+	[Description (
+	"SetPowerUsage can be used to reduce the overall power usage for the adapter. " 
+	"Note that the temporary low power usage setting is not preserved between "
+	"system restarts. When the system restarts, the adapter automatically returns "
+	"to its normal amount of power consumption. Use low power setting to preserve " 
+	"reduced power usage between system restarts."
+	):Amended, implemented, 
+	ModelCorrespondence {"IANet_EthernetAdapter.SetPowerUsage"}
+	]
+	uint32 SetPowerUsage(
+		[IN,
+        ValueMap {"0","1","2"} , 
+        Values {"Normal Power", "Temporary Low Power", "Low Power"}: Amended
+        ]
+		uint32 StandByMode
+	);
+
+	[Description (
+	"GetPowerUsageOptions detects any optional power usage settings. "
+	"For example, power usage for standby, battery operation etc."  
+	):Amended, implemented, 
+	ModelCorrespondence {"IANet_EthernetAdapter.IsPowerMgmtSupported"}
+	]
+	uint32 GetPowerUsageOptions(
+	  	[OUT] uint32 AutoPowerSaveModeEnabled,
+		[OUT] uint32 ReduceSpeedOnPowerDown
+	);
+
+	[Description (
+	"This method can be used to makes changes to the power usage options. "
+	"For example, this method could be used to reduce power usage for "
+	"standby, battery operation etc. Note power usage settings are "
+	"stored and used for every boot."
+	):Amended, implemented, 
+	ModelCorrespondence {"IANet_EthernetAdapter.GetPowerUsageOptions"} 
+	]
+	uint32 SetPowerUsageOptions(
+	 	[IN] uint32 AutoPowerSaveModeEnabled,
+		[IN] uint32 ReduceSpeedOnPowerDown
+	);
+
+	[ Description (
+	"MiniPortName represents the Win32 kernel mode service name of the adapter."):Amended
+	]
+	string MiniPortName;
+
+	[Description (
+	"MiniPortInstance distinguishes a network device from other devices of "
+	"the same type on a machine. It is a unique string without any "
+	"path-separator characters that contains serial-number information, "
+	"if supported by the underlying bus, or some kind of location "
+	"information. The format of the string is bus specific. "
+	"It is persistent across system boots."):Amended
+	]
+	string MiniPortInstance;
+
+	[Description (
+ 	"Adapter status specifies the current status of the adapter."):Amended,
+	Bitmap{"1", "2", "4", "16", "32", "1024", "2048"},
+	Bitvalues {"Installed", "DriverLoaded", "HardwareMissing", 
+    "HasDiag", "HasLink", "HasTCOEnabled", "DeviceError"}:Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.AdapterStatus"}
+	]
+    uint32 AdapterStatus;
+
+	[ Description (
+	"Hardware status specifies the current status of the hardware"):Amended,
+	Values {"Unknown", "Ready", "Initializing", "Reset", 
+	"Closing", "Not Ready" }: Amended
+	]
+	uint32 HardwareStatus;
+
+	[Description (
+	"Packet tagging specifies the current status of packet tagging"):Amended,
+	Bitmap{"1", "2", "4"},
+	Bitvalues{"802.3ac", "ISL", "IP TOS"}:Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.PacketTaggingStatus"}
+	]
+	uint32 PacketTaggingStatus;
+
+	[Description (
+	"FlowControlPacketsTransmitted is the number of Flow Control packets "
+	"that this device has had to transmit."):Amended
+	]
+    uint64 FlowControlPacketsTransmitted;
+
+	[Description (
+	"FlowControlPacketsReceived is the number of Flow Control packets "
+	"that this device has received."):Amended
+	]
+    uint64 FlowControlPacketsReceived;
+
+	[Description (
+	"This counter is incremented any time the 82559 receives a \"TCO\" packet. "
+	"Note that any reception of TCO packets also affects the normal "
+	"receive counters."):Amended
+	]
+    uint64 TCOFramesTransmitted;
+
+	[Description (
+	"This counter is incremented any time the 82559 transmits a  packet initiated "
+	"by the TCO controller (or ICH). Note that any transmission of TCO packets also "
+	"affects the normal transmit counters."):Amended
+	]
+    uint64 TCOFramesReceived;
+
+	[Description (
+	"An array of free-form strings to describe any problems detected during adapter "
+	"configuration, driver installation, or some other error."): Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.TroubleShootingSeverityLevels"}
+	]
+	string TroubleShootingProblems[];
+
+	[Description (
+	"TroubleShootingSeverityLevels indicate levels of severity for "
+	"problems in the TroubleShootingProblems array. Note, each entry "
+	"of this array is related to the corresponding "
+	"array item in TroubleShootingProblems array."):Amended, 
+	ArrayType ("Indexed"), 
+	ValueMap {"0", "1", "2"},
+	Values {"SeverityLow", "SeverityMedium", "SeverityHigh"}: Amended,
+	ModelCorrespondence {"IANet_EthernetAdapter.TroubleShootingProblems"}
+	]
+	uint32 TroubleShootingSeverityLevels[];
+
+	[Description (
+	"TroubleShootingCauses may contain possible causes for problems "
+	"in the TroubleShootingProblems array.  Note, each entry "
+	"of this array is related to the corresponding "
+	"array item in TroubleShootingProblems array."):Amended, 
+	ArrayType ("Indexed"),
+	ModelCorrespondence {"IANet_EthernetAdapter.TroubleShootingProblems"}
+	]
+	string TroubleShootingCauses[];
+
+	[Description (
+	"TroubleShootingSolutions offers possible solutions to "
+	"TroubleShootingProblems.  Note, each entry "
+	"of this array is related to the corresponding "
+	"array item in TroubleShootingProblems array."):Amended, 
+	ArrayType ("Indexed"),
+	ModelCorrespondence {"IANet_EthernetAdapter.TroubleShootingProblems"}
+	]
+	string TroubleShootingSolutions[];
+
+	[Description (
+	"TotalHostErrors is the total number of general transmit and "
+	"receive errors and number of errors that occurred because the "
+	"driver had no buffer to send or receive the frame."):Amended
+	]
+	uint64 TotalHostErrors;
+
+	[Description (
+	"TotalWireErrors is the total number of general transmit and receive errors."):Amended
+	]
+	uint64 TotalWireErrors;
+
+	[Description (
+	"IsATeam indicates whether this adapter is a team."):Amended
+	]
+	boolean IsATeam;
+
+	[implemented, Description (
+	"HasVLANs specifies the number of VLANs on this adapter."):Amended
+	]
+	uint32 HasVLANs(
+		[OUT]
+		uint32 nVLANs
+	);
+
+	[Description (
+	"TestLinkSpeed determines whether adapter is running at full speed. "
+	"If the adapter is advertising less than 1 Gigabyte speed this method "
+	"states the possible reasons. For example, the Link partner is not capable "
+	"of running at 1000 Mbps." 
+	):Amended, implemented 
+	]
+	uint32 TestLinkSpeed(
+	    [OUT,
+        ValueMap {"0","1","2","3","4","5","6","7","8","9"} , 
+        Values {
+		/*0*/ "There might be a problem in the device driver preventing 1000Mbs speed. Please attempt to restart the device.",
+		/*1*/ "The adapter is running at full speed.",
+		/*2*/ "A 1000 Mbps Copper adapter is required for this test.",
+		/*3*/ "Autonegotiation is not enabled on the device. The adapter has been configured to force the speed to a low speed.",
+		/*4*/ "Autonegotiation has not completed on this device. Either no link is connected to it or the process is not yet completed.",
+		/*5*/ "The cable has only two pairs - four are required to run at 1000 Mbps. A Category 5 cable should be used.",
+		/*6*/ "The Link partner is not capable of running at 1000 Mbps.",
+		/*7*/ "Power Saving mode has been configured and link speed has been reduced.",
+		/*8*/ "The adapter is configured to force the speed to a low speed.",
+		/*9*/ "The adapter is configured to negotiate the speed with the link partner, but 1000 Mpbs has not been chosen as one of the possible speeds."
+		}: Amended
+        ]
+        uint32 Status,
+		[OUT]
+        string strStatus
+ 	);
+
+	[Description (
+		"Indicates whether this adapter supports advanced cable test."):Amended,
+		ValueMap {"0","1","2"},
+        Values {
+			"No cable test support",
+			"Supports cable test",
+			"Supports advanced cable test"
+		}: Amended
+        
+	]
+	uint32 SupportsCableTest;
+
+	[Description (
+	"PollStatus method could be used to get frequently changing adapter capabilities "
+	"such link speed, adapter status etc. "
+	):Amended, implemented 
+	]
+	uint32 PollStatus(
+	
+                [OUT] string	strIPAddress,
+                [OUT] uint64	LinkSpeed,
+                [OUT] boolean	bFullDuplex,
+                [OUT] uint32	ulAdapterStatus,
+                [OUT] uint64	PacketsTx,
+                [OUT] uint64	PacketsRx,
+                [OUT] uint64	ErrorsTx,
+                [OUT] uint64	ErrorsRx,
+				[IN]  uint32	SupportsCableTest, 
+                [OUT] boolean	bCableTestAvailable);
+
+	[Description (
+    "DeviceElement represents a reference to the Controller or Device "
+    "which supplies the hardware functionality."):Amended
+	]
+	IANet_EthernetPCIDevice ref DeviceElement;
+
+	[Description (
+    "If this network adapter is a team member, "
+	"TeamComponent represents a reference to the 'virtual' adapter."):Amended
+	]
+	IANet_TeamOfAdapters ref TeamComponent; 
+
+  	[Read,
+	Description ("Determines if this adapter has a 'manageability' enabled port."):Amended,
+	ValueMap {"0", "1", "2", "3"},
+	Values {"'Manageability' is not available",
+			"'Manageability' is enabled on this adapter port",
+			"This adapter supports 'Manageability Teaming' capability",
+	       	"This adapter is the second port of a 'manageability' enabled adapter"}:Amended 
+	] 	 
+    uint32 ManageabilityPort;
+
+	[Read, Description ("Determines the manageability mode for a 'manageability' enabled port."):Amended,
+	ValueMap {"0", "1", "2", "3"}, 
+	Values {"Undefined",
+			"ASF",
+			"PT",
+			"DEDICATED_MAC"}:Amended
+	] 	 
+    uint32 ManageabilityMode;
+
+
+	[Read,
+	Description("Determines if Express teaming is enabled on this adapter."):Amended,
+	ValueMap {"0", "1", "2", "255"}, 
+	Values {"Express teaming is not enabled on this adapter",
+			"Express teaming is enabled and this adapter is the primary port (initiator) of Express Team",
+			"Express teaming is enabled and this adapter is member of an Express Team",
+			"Used internally by PROSet"}:Amended 
+	] 	 
+	uint32 ExpressTeam;
+
+	[Description(
+	 "If Express teaming is enabled on this adapter OriginalDisplayName will contain the "
+	 "original display name of the adapter. "):Amended]
+	string OriginalDisplayName;
+
+	[Description (
+	"CreateExpressTeam adds an arbitrary number of adapters to the Express Team.  The input parameter "
+	"is a reference to an array of IANet_EthernetAdapter which will be added to this team. In this release "
+	"the input parameter is optional since this feature is available only for multi-port adapters. "
+	"This method will create an Express Team with all the ports of the adapter. "
+	"Express Team creation will fail if any of the adapter port is already teamed or disabled."
+	):Amended, implemented
+	]
+	uint32 CreateExpressTeam(
+		[IN]
+			IANet_EthernetAdapter REF Adapters[]
+	);
+
+	[Description (
+	"RemoveExpressTeam initiates Express Team deletion from this adapter."
+	):Amended, implemented
+	]
+	uint32 RemoveExpressTeam();
+};
+
+// ============================================================================
+// Team of Adapters Class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_TeamOfAdapters class objectifies "
+		 "the team properties of an AFT or other team. These are the properties which "
+		 "cannot be attributed to a particular adapter in the team."):Amended,  LOCALE(0x409)
+		]
+class IANet_TeamOfAdapters : CIM_ExtraCapacityGroup
+{
+
+	[write, Description(
+	"This setting enables creation of a manageability failover team. "
+	"Adapters in a Manageability Failover team must be 'Manageability Teaming' capable and "
+	"one of the adapters must be enabled to IPMI or PT manageability mode. "
+	"Use IANet_EthernetAdapter.ManageabilityPort and IANet_EthernetAdapter.ManageabilityMode attributes "
+	"to determine manageability capabilities of an adapter."):Amended
+	]
+	boolean ManageabilityEnabled;
+
+	[Description("AdapterCount is the number of adapters currently in "
+	"this team."):Amended
+	] 	
+ 	uint32 AdapterCount;
+
+	[Description("MaxAdapterCount is the maximum number of adapters that can "
+	"be placed in this team."):Amended]
+	uint32 MaxAdapterCount;
+
+	[Read, Write, Description("TeamingMode is the type of the current team."):Amended,
+	 ValueMap {"0", "1", "2", "3", "4", "5", "255"} , 
+	 Values {"AFT", "ALB", "FEC", "GEC", "IEEE 802.3ad", "SFT", "Unknown"}:Amended ] 	 
+    uint32 TeamingMode;
+
+	[Description (
+	"TestSwitchConfiguration tests the switch configuration to make sure that the team "
+	"is functioning correctly with the switch. This test could be used to ensure that "
+	"link partners i.e. a device that an adapter links to, such as another adapter, "
+	"a hub, a switch, etc. support the chosen adapter teaming mode. For example, if "
+	"the adapter is a member of a Link Aggregation team, this test can verify that "
+	"link partners connected to the adapter support Link Aggregation." 
+	):Amended, implemented 
+	]
+	uint32 TestSwitchConfiguration(
+		   [	IN, 
+                ValueMap {"0","1","2"} , 
+                Values {"Start", "Cancel", "Results"}: Amended
+           ] 
+           uint32 Cmd,
+ 
+           [	OUT,
+                ValueMap {"0","1","2"} , 
+                Values {"OK", "Error", "Progress"}: Amended
+           ]
+           uint32 Status,
+ 
+           [OUT]
+           string strCause[],
+           [OUT]
+           string strSolution[]
+	);
+	[Description (
+	"AddMemberAdapters adds an arbitrary number of adapters to this team.  The input parameter "
+	"is a reference to an array of IANet_EthernetAdapter which will be added to this team."
+	):Amended, implemented
+	]
+	uint32 AddMemberAdapters(
+		[IN]
+			IANet_EthernetAdapter REF Adapters[]
+	);
+
+	[Description (
+	"PollStatus method could be used to get frequently changing Team capabilities e.g.IP Address."
+	):Amended, implemented 
+	]
+	uint32 PollStatus(
+		[OUT] string strIPAddress
+	);
+};
+
+// ============================================================================
+// Teamed Member Adapter class 
+// ============================================================================
+		[Aggregation, dynamic, provider("NcsImp"), 
+		 Description("IANet_TeamedMemberAdapter objectifies "
+		 "the properties of an individual member of an Intel adapter team. "
+		 "Those properties attributed to the team as a whole will be found, not here "
+		 "but in IANet_TeamOfAdapters."):Amended,  LOCALE(0x409)
+		]
+class IANet_TeamedMemberAdapter : CIM_NetworkAdapterRedundancyComponent
+{
+		
+		[write, 
+		 Description ("AdapterFunction describes how the adapter is used in "
+		 "the team."):Amended,
+		 ValueMap {"0", "1", "2", "3"}, 
+		 Values {"Unknown", "Primary Adapter", "Secondary Adapter", "Other"}:Amended ] 	 
+    uint16 AdapterFunction;
+
+		[Description ("AdapterStatus describes the adapter's status within the team."):Amended,
+		 write, ValueMap {"0", "1", "2", "3"}, 
+		 Values {"Unknown", "Active", "StandBy", "InActive"}:Amended ] 	 
+    uint16 AdapterStatus;
+
+     [write, Override("GroupComponent"), 
+       Description (
+        "The RedundancyGroup representing a set of load balanced "
+        "NetworkAdapters."):Amended
+      ]
+    IANet_TeamOfAdapters REF GroupComponent;
+      [write, Override("PartComponent"), 
+       Description (
+        "The Network Adapter(s) belonging to the RedundancyGroup."):Amended
+      ]
+    IANet_EthernetAdapter REF PartComponent;
+
+};
+
+// ============================================================================
+// Network Virtual Adapter class
+// ============================================================================
+		[dynamic, provider("NcsImp"), Association, Description (
+		 "NetworkVirtualAdapter describes that an instance of Network "
+         "Adapter is actually the result of several Adapters "
+         "participating in a load balanced RedundancyGroup."):Amended,  LOCALE(0x409)
+		]
+class IANet_NetworkVirtualAdapter : CIM_NetworkVirtualAdapter
+{
+		[Override ("SystemElement"), 
+		 Description ("The 'virtual' NetworkAdapter."):Amended
+		]
+    IANet_EthernetAdapter REF SystemElement;
+		[Override ("SameElement"), 
+		 Description (
+    	"The ExtraCapacity RedundancyGroup that describes the load "
+    	"balancing. The result of the load balancing is the 'virtual' "
+    	"Adapter.") :Amended
+		]
+   	IANet_TeamOfAdapters REF SameElement;
+};
+ 
+// ============================================================================
+// VLAN class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_VLAN objectifies "
+		 "the properties of a VLAN.  All of the needed properties "
+		 "of the VLAN object are inherited from CIM_VLAN."):Amended,  LOCALE(0x409)
+		]
+class IANet_VLAN : CIM_VLAN
+{
+		[Description (
+		 "VLANName is the name of the VLAN as chosen by the user."):Amended
+		]
+	string VLANName;
+
+		[Description (
+		 "DriverPath is full path of the driver for this network adapter."):Amended
+		]
+	string DriverPath;
+
+		[Description (
+		 "DriverFileVersion is the file version of the driver for this network adapter."):Amended
+		]
+	string DriverFileVersion;
+
+		[Description (
+		 "DriverProductVersion is the product version of the driver for this network adapter."):Amended
+		]
+	string DriverProductVersion;
+
+		[Description (
+		 "DriverDescription is the description of the driver for this network adapter."):Amended
+		]
+	string DriverDescription;
+
+		[Description (
+		 "DriverLegalCopyright is the copyright message for the driver for this network adapter."):Amended
+		]
+	string DriverLegalCopyright;
+
+		[Description (
+		 "DriverComments are the comments concerning the driver for this network adapter."):Amended
+		]
+	string DriverComments;
+
+		[Description (
+		 "NoBufferReceiveErrors is the number of errors that occurred"
+		 " because the driver had no buffer to receive the frame."):Amended
+		]
+	uint64 NoBufferReceiveErrors;
+		
+		[Description (
+		 "NoBufferXmitErrors is the number of errors that occurred because"
+		 " the driver had no buffer to send the frame."):Amended
+		]
+	uint64 NoBufferXmitErrors;
+
+		[Description (
+		 "FlowControlPacketsTransmitted is the number of Flow Control packets "
+		 "that this device has had to transmit."):Amended
+		]
+    uint64 FlowControlPacketsTransmitted;
+
+		[Description (
+		 "FlowControlPacketsReceived is the number of Flow Control packets "
+		 "that this device has received."):Amended
+		]
+    uint64 FlowControlPacketsReceived;
+
+		[Description (
+		"This counter is incremented any time the 82559 transmits a  packet initiated "
+		"by the TCO controller (or ICH). Note that any transmission of TCO packets also "
+		"affects the normal transmit counters."):Amended
+		]
+    uint64 TCOFramesTransmitted;
+
+		[Description (
+		"This counter is incremented any time the 82559 receives a \"TCO\" packet. "
+		"Note that any reception of TCO packets also affects the normal "
+		"receive counters."):Amended
+		]
+    uint64 TCOFramesReceived;
+
+	// Similar to  CIM Ethernet Adapter class
+
+	  [Description ("The total number of packets transmitted."): ToSubclass Amended, 
+       MappingStrings {"MIF.DMTF|Network Adapter 802 Port|001.6"}: ToSubclass, 
+       Counter: ToSubclass
+      ] 
+    uint64 TotalPacketsTransmitted;
+
+     [Description ("The total number of packets received."): ToSubclass Amended, 
+       MappingStrings {"MIF.DMTF|Network Adapter 802 Port|001.8"}: ToSubclass, 
+       Counter: ToSubclass
+      ] 
+    uint64 TotalPacketsReceived;
+
+	[Description (
+		 "The GeneralReceiveErrors is the total number of receive errors."):Amended
+		]	
+	uint64 GeneralReceiveErrors;
+
+		[Description (
+		 "GeneralTransmitErrors is the total number of transmit errors."):Amended
+		]
+ 	uint64 GeneralTransmitErrors;
+
+		[Description (
+		  "A count of frames for which transmission on a particular "
+		  "interface fails due to an internal MAC sublayer transmit "
+		  "error. A frame is only counted by an instance of this "
+		  "object if it is not counted by the corresponding instance "
+		  "of either the LateCollisions property, the Excessive"
+		  "Collisions property, or the CarrierSenseErrors property. "
+		  "The precise meaning of the count represented by an instance "
+		  "of this object is implementation-specific.  In particular, "
+		  "an instance of this object may represent a count of "
+		  "transmission errors on a particular interface that are "
+		  "not otherwise counted."): ToSubclass Amended,
+	  	  Mappingstrings {
+		  "MIB.IETF|EtherLike-MIB.dot3StatsInternalMacTransmitErrors"}: ToSubclass, 
+			Counter: ToSubclass
+        ] 
+    uint32 InternalMACTransmitErrors;
+		[Description (
+		  "A count of frames for which reception on a particular "
+		  "interface fails due to an internal MAC sublayer receive "
+		  "error. A frame is only counted by an instance of this "
+		  "object if it is not counted by the corresponding instance "
+		  "of either the FrameTooLongs property, the AlignmentErrors "
+		  "property, or the FCSErrors property. The precise meaning "
+		  "of the count represented by an instance of this object is "
+		  "implementation-specific.  In particular, an instance of "
+		  "this object may represent a count of receive errors on a "
+		  "particular interface that are not otherwise counted."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsInternalMacReceiveErrors"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 InternalMACReceiveErrors;
+
+		[Description (
+		  "A count of frames received on a particular interface "
+		  "that are an integral number of octets in length but do "
+		  "not pass the FCS check. The count represented by an "
+		  "instance of this object is incremented when the Frame"
+		  "CheckError status is returned by the MAC layer to the "
+		  "LLC (or other MAC user). Received frames for which "
+		  "multiple error conditions occur are, according to the "
+		  "conventions of IEEE 802.3 Layer Management, counted "
+		  "exclusively according to the error status presented to "
+		  "the LLC."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsFCSErrors"}: ToSubclass, 
+		   Counter
+		] 
+	uint32 FCSErrors;
+
+		[Description (
+		  "A count of frames received on a particular interface that "
+		  "exceed the maximum permitted frame size. The count "
+		  "represented by an instance of this object is incremented "
+		  "when the FrameTooLong status is returned by the MAC layer "
+		  "to the LLC (or other MAC user). Received frames for which "
+		  "multiple error conditions occur are, according to the "
+		  "conventions of IEEE 802.3 Layer Management, counted "
+		  "exclusively according to the error status presented to "
+		  "the LLC."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsFrameTooLongs"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 FrameTooLongs;
+	
+		[Description (
+		  "A count of frames received on a particular interface "
+		  "that are not an integral number of octets in length and do "
+		  "not pass the FCS check. The count represented by an "
+		  "instance of this object is incremented when the Alignment "
+		  "Error status is returned by the MAC layer to the LLC (or "
+		  "other MAC user). Received frames for which multiple error "
+		  "conditions occur are, according to the conventions of IEEE "
+		  "802.3 Layer Management, counted exclusively according to "
+		  "the error status presented to the LLC."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsAlignmentErrors"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+    uint32 AlignmentErrors;
+
+		[Description (
+		  "A count of successfully transmitted frames on a particular "
+		  "interface for which transmission is inhibited by exactly "
+		  "one collision. A frame that is counted by an instance of "
+		  "this object is not counted by the corresponding instance "
+		  "of the MultipleCollisionFrames property."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsSingleCollisionFrames"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 SingleCollisionFrames;
+
+		[Description (
+		  "A count of successfully transmitted frames on a particular "
+		  "interface for which transmission is inhibited by more than "
+		  "one collision. A frame that is counted by an instance of "
+		  "this object is not counted by the corresponding instance "
+		  "of the SingleCollisionFrames property."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsMultipleCollisionFrames"}: ToSubclass, 
+		   Counter: ToSubclass
+		  ] 
+    uint32 MultipleCollisionFrames;
+
+		[Description (
+		  "A count of times that the SQE TEST ERROR message is "
+		  "generated by the PLS sublayer for a particular interface. "
+		  "The SQE TEST ERROR message is defined in section "
+		  "7.2.2.2.4 of ANSI/IEEE 802.3-1985 and its generation is "
+		  "described in section 7.2.4.6 of the same document."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsSQETestErrors"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 SQETestErrors;
+	
+		[Description (
+		  "A count of frames for which the first transmission "
+		  "attempt on a particular interface is delayed because the "
+		  "medium is busy. The count represented by an instance of "
+		  "this object does not include frames involved in collisions."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsDeferredTransmissions"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 DeferredTransmissions;
+
+		[Description (
+		  "The number of times that a collision is detected on a "
+		  "particular interface later than 512 bit-times into the "
+		  "transmission of a packet. Five hundred and twelve bit-"
+		  "times corresponds to 51.2 microseconds on a 10 Mbit/s "
+		  "system. A (late) collision included in a count "
+		  "represented by an instance of this object is also "
+		  "considered as a (generic) collision for purposes of "
+		  "other collision-related statistics."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsLateCollisions"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 LateCollisions;
+	
+		[Description (
+		  "A count of frames for which transmission on a particular "
+		  "interface fails due to excessive collisions."): ToSubclass Amended,
+		 Mappingstrings {
+	   "MIB.IETF|EtherLike-MIB.dot3StatsExcessiveCollisions"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint32 ExcessiveCollisions;
+	
+		[Description (
+		  "The number of times that the carrier sense condition was "
+		  "lost or never asserted when attempting to transmit a frame "
+		  "on a particular interface. The count represented by an "
+		  "instance of this object is incremented at most once per "
+		  "transmission attempt, even if the carrier sense condition "
+		  "fluctuates during a transmission attempt."): ToSubclass Amended,
+		 Mappingstrings {
+			   "MIB.IETF|EtherLike-MIB.dot3StatsCarrierSenseErrors"}: ToSubclass, 
+		   Counter: ToSubclass
+		 ] 
+	uint32 CarrierSenseErrors;
+
+		[Description (
+		  "The total number of octets transmitted, including framing "
+		  "characters."): ToSubclass Amended,
+		 Mappingstrings {"MIB.IETF|RFC1213-MIB.ifOutOctets", 
+			   "MIF.DMTF|Network Adapter 802 Port|001.7"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+	uint64 OctetsTransmitted;
+
+		[Description (
+		  "The total number of octets received, including framing "
+		  "characters."): ToSubclass Amended,
+		 Mappingstrings {"MIB.IETF|RFC1213-MIB.ifInOctets",
+			   "MIF.DMTF|Network Adapter 802 Port|001.9"}: ToSubclass, 
+		   Counter: ToSubclass
+		] 
+    uint64 OctetsReceived;
+
+		[Description (
+		"An array of free-form strings to describe any problems detected during adapter "
+		"configuration, driver installation, or some other error."): Amended,
+		ModelCorrespondence {"IANet_VLAN.TroubleShootingSeverityLevels"}
+		]
+	string TroubleShootingProblems[];
+
+		[Description (
+		"TroubleShootingSeverityLevels indicate levels of severity for "
+		"problems in the TroubleShootingProblems array. Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"), 
+		ValueMap {"0", "1", "2"},
+		Values {"SeverityLow", "SeverityMedium", "SeverityHigh"}: Amended,
+		ModelCorrespondence {"IANet_VLAN.TroubleShootingProblems"}
+		]
+	uint32 TroubleShootingSeverityLevels[];
+
+		[Description (
+		"TroubleShootingCauses may contain possible causes for problems "
+		"in the TroubleShootingProblems array.  Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"),
+		ModelCorrespondence {"IANet_VLAN.TroubleShootingProblems"}
+		]
+	string TroubleShootingCauses[];
+
+		[Description (
+		"TroubleShootingSolutions offers possible solutions to "
+		"TroubleShootingProblems.  Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"),
+		ModelCorrespondence {"IANet_VLAN.TroubleShootingProblems"}
+		]
+	string TroubleShootingSolutions[];
+
+	[Description (
+	   "LastErrorCode captures the last error code reported by " 
+	   "the LogicalDevice."): ToSubclass Amended]
+    uint32 LastErrorCode;
+
+	  [Description (
+	   "ErrorDescription is a free-form string supplying more " 
+	   "information about the error recorded in LastErrorCode, and " 
+	   "information on any corrective actions that may be taken."): ToSubclass Amended]
+    string ErrorDescription;
+
+	[Description (
+	"PollStatus method could be used to get frequently changing VLAN capabilities."
+	):Amended, implemented 
+	]
+	uint32 PollStatus(
+	
+                [OUT] string	strIPAddress,
+                [OUT] uint64	PacketsTx,
+                [OUT] uint64	PacketsRx,
+                [OUT] uint64	ErrorsTx,
+                [OUT] uint64	ErrorsRx);
+};
+
+// ============================================================================
+// 802.1Q VLAN Service Class
+// ============================================================================
+		[dynamic, provider("NcsImp"), Description (
+         "If the NIC supports 802.1Q, an instance of this class will "
+         "be instantiated"):Amended,  LOCALE(0x409) ]
+class IANet_802dot1QVLANService : CIM_802dot1QVLANService
+{
+		[write, Description(
+		 "GVRP (GARP VLAN Registration Protocol) is used by workstations and "
+		 "switches to dynamically create, change and remove VLANs from across "
+		 "a network.  This protocol allows VLAN switches which support GVRP "
+		 "to determine which VLANs are active and to identify their switch ports."):Amended
+		]
+	boolean GVRPEnabled;
+		
+		[write, Description(
+		 "GVRP (GARP VLAN Registration Protocol) is used by workstations and "
+		 "switches to dynamically create, change and remove VLANs from across "
+		 "a network.  This protocol allows VLAN switches which support GVRP "
+		 "to determine which VLANs are active and to identify their switch ports."):Amended,
+		
+		  ValueMap { "100", "150", "200", "250", "300", "350", "400", "450",
+				   "500",  "550", "600", "650", "700", "750", "800", "850",
+				   "900",  "950", "1000" },
+
+
+		  Values { "100 ms", "150 ms", "200 ms", "250 ms", "300 ms", "350 ms", "400 ms", "450 ms",
+				   "500 ms",  "550 ms", "600 ms", "650 ms", "700 ms", "750 ms ", "800 ms", "850 ms",
+				   "900 ms",  "950 ms", "1000 ms" }:Amended ]
+	uint32 GVRPJoinTime;
+
+		[Description(
+		 "CreateVLAN is used to create a new VLAN for this service."):Amended,
+		 implemented
+		]
+
+	uint16 CreateVLAN( [in] uint32 VLANNumber, [in] string Name,
+					   [out] IANet_VLAN REF VLANpath );
+};
+
+// ===================================================================
+// IANet_Device802do1QVVLANServiceImplementation
+// ===================================================================
+   [Association,
+    Description (
+       "An association between a Service and how it is implemented. "
+       "The cardinality of this association is many-to-many. "
+       "A Service may be provided by more than one Logical"
+       "Device, operating in conjunction.  And, any Device may "
+       "provide more than one Service.  When multiple Devices are "
+       "associated with a single Service, it is assumed that these "
+       "elements operate in conjunction to provide the Service.  If "
+       "different implementations of a Service exist, each of these "
+       "implementations would result in individual instantiations "
+       "of the Service object.  These individual instantiations "
+       "would then have associations to the unique implementations."):Amended,  LOCALE(0x409)
+   ]
+class IANet_Device802dot1QVLANServiceImplementation : CIM_Dependency
+{
+      [Override ("Antecedent"),
+       Description ("The LogicalDevice."):Amended
+      ]
+   IANet_EthernetAdapter REF Antecedent;
+      [Override ("Dependent"),
+       Description ("The Service implemented using the LogicalDevice."):Amended
+      ]
+   IANet_802dot1QVLANService REF Dependent;
+};
+
+// ============================================================================
+// VLAN For class
+// ============================================================================
+		[dynamic, provider("NcsImp"), Association, Description(
+		 "The  IANet_VLAN used by the IANet_802dot1QVLANService."):Amended,  LOCALE(0x409) ]
+class IANet_VLANFor : CIM_VLANFor
+{
+};
+
+// ============================================================================
+// IP Protocol Endpoint class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_IPProtocolEndpoint objectifies "
+		 "the properties of an IP endpoint.  All of the needed properties "
+		 "of the ProtocolEndpoint object are inherited from CIM_IPProtocolEndpoint."):Amended,  LOCALE(0x409)
+	]
+class IANet_IPProtocolEndpoint : CIM_IPProtocolEndpoint
+{
+		[Description (
+         "DHCPAutoAssign is set to true if  DHCP or other "
+         "mechanism automatically assigns the IP address."):Amended ] 
+	Boolean DHCPAutoAssign;	
+
+		[Description (
+         "The IP address of the DHCP Server, "
+         "formatted according to the appropriate convention as "
+         "defined in the AddressType property of this class " 
+         " (e.g., 171.79.6.40)."):Amended ] 
+    string DHCPServerAddress;
+
+		[Description (
+         "An enumeration that describes the format of the address "
+         "property. Whenever possible, IPv4-compatible addresses "
+         "should be used instead of native IPv6 addresses (see "
+         "RFC 2373, section 2.5.4). In order to have a consistent "
+         "format for IPv4 addresses in a mixed IPv4/v6 environment, "
+         "all IPv4 addresses and both IPv4-compatible IPv6 addresses "
+         "and IPv4-mapped IPv6 addresses, per RFC 2373, section "
+         "2.5.4, should be formatted in standard IPv4 format. "
+         "However, this (the 2.2) version of the Network Common "
+         "Model will not explicitly support mixed IPv4/IPv6 "
+         "environments. This will be added in a future release."):Amended,
+         ValueMap { "0", "1", "2" },
+         Values { "Unknown", "IPv4", "IPv6" }:Amended ]
+    uint16 AddressType;
+	
+		[Description (
+         "Specifies the IP Address for the default gateway."):Amended ] 
+	string DefaultGateway;
+
+};
+
+// ============================================================================
+// SAP to SAP Dependency class
+// ============================================================================
+		[dynamic, provider("NcsImp"), Association, Description (
+    	 "IANet_SAPSAPDependency is an association between a IANet_VLAN "
+         "and a IANet_IPProtocolEndpoint indicating that "
+         "the latter is required in order for the former IANet_VLAN "
+         "to utilize the IP Protocol."):Amended,  LOCALE(0x409)
+		]
+class IANet_VLANProtocolDependency : CIM_SAPSAPDependency
+{
+		[Override ("Antecedent"), Description (
+         "The required IANet_VLAN."):Amended ] 
+    IANet_VLAN REF Antecedent;
+		[Override ("Dependent"), Description (
+         "The IANet_IPProtocolEndpoint that is dependent on an underlying "
+         "IANet_VLAN."):Amended ] 
+    IANet_IPProtocolEndpoint REF Dependent;
+};
+
+// ============================================================================
+// Device SAP Implementation class
+// ============================================================================
+		[Association, dynamic, provider("NcsImp"),
+		 Description (
+		 "An association between a IANet_ProtocolEndpoint and how "
+		 "it is implemented. Here, it is desired to associate the "
+		 "protocol endpoint with Network Adapter"):Amended,  LOCALE(0x409)
+		]
+class IANet_AdapterProtocolImplementation : CIM_DeviceSAPImplementation
+{
+		[Override ("Antecedent"),
+		 Description ("The Network Adapter providing the IP Protocol Endpoint."):Amended
+		]
+   IANet_EthernetAdapter REF Antecedent;
+		[Override ("Dependent"),
+		 Description ("The Protocol Endpoint implemented using the Network Adapter."):Amended
+		]
+   IANet_IPProtocolEndpoint REF Dependent;
+};
+
+// ============================================================================
+// Device Service Implementation class
+// ============================================================================
+		[Association,dynamic, provider("NcsImp"),
+		 Description (
+         "An association between a Service and how it is implemented. "
+         "The cardinality of this association is many-to-many. "
+         "A Service may be provided by more than one Logical"
+         "Device, operating in conjunction.  And, any Device may "
+         "provide more than one Service.  When multiple Devices are "
+         "associated with a single Service, it is assumed that these "
+         "elements operate in conjunction to provide the Service.  If "
+         "different implementations of a Service exist, each of these "
+         "implementations would result in individual instantiations "
+         "of the Service object.  These individual instantiations "
+         "would then have associations to the unique implementations."):Amended,  LOCALE(0x409)
+		]
+class IANet_Device802dot1QVLANServiceImplementation : CIM_DeviceServiceImplementation
+{
+	[Override ("Antecedent"),
+       Description ("The LogicalDevice."): ToSubclass Amended
+      ]
+    IANet_EthernetAdapter REF Antecedent;
+      [Override ("Dependent"),
+       Description ("The Service implemented using the LogicalDevice."): ToSubclass Amended
+      ]
+    IANet_802dot1QVLANService REF Dependent;
+	
+};
+
+// ============================================================================
+// Configuration class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_Configuration objectifies "
+		 "the properties of a configuration." ):Amended,  LOCALE(0x409)
+		]
+class IANet_Configuration : CIM_Configuration
+{
+	
+};
+
+
+
+
+// ============================================================================
+// PCI Device class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_PCIDevice class objectifies "
+		 "the controller aspects of a PCI Device.  The superclass is CIM_PCIDevice "
+		 "and as such the PCI properties of the device are inherited from the "
+		 "superclass.  With regard to the subclass, properties are added which "
+		 "locate the device in PCI configuration space.  Note that the network oriented properties "
+		 "of the device are covered in another class."):Amended,  LOCALE(0x409)
+		 ]
+class IANet_PCIDevice : CIM_PCIDevice
+{
+
+		[Override("SubsystemID"), Description ("The PCI device ID of the device") : ToSubclass Amended]
+   uint16 SubsystemID;
+		[Override("SubsystemVendorID"), Description (
+			"The PCI Vendor ID of the device"):Amended
+		]
+   uint16 SubsystemVendorID;
+  
+		[Description (
+			"The SubsystemSubID is also known as the SubDeviceID.  This further "
+			"identifies the device within its SubsystemID."
+		 ):Amended
+		]
+	uint16 SubsystemSubID;
+
+		[Description (
+			"The SubsystemSubVendorId is also known as the SubVendorID.  This identifies "
+			"the vendor within the Vendor ID.  This field is vendor specific."
+		 ):Amended
+		]
+	uint16 SubsystemSubVendorId;
+	
+	[Description (
+	"PCI bus number of the device."):Amended
+	]
+	uint8 BusNumber;
+
+
+	[Description (
+	"Number of the device on the bus."):Amended
+	]
+	uint8 DeviceNumber;
+
+	[Description (
+	"Identifies one of the eight possible functions implemented on the device."):Amended
+	]
+	uint8 FunctionNumber;
+
+	[Description (
+	"Identifies information about the device's location on the bus; the interpretation "
+	"of this information is bus-specific."):Amended
+	]
+	string DeviceLocation;
+	
+	[Description (
+	"Interrupt is the controller's assigned interrupt IRQ."):Amended
+	]
+	uint16 Interrupt;
+
+	[Description (
+	"StatusRegister tracks the status of PCI bus-related events."):Amended
+	]
+	uint16 StatusRegister;
+
+	[Description (
+	"SubClassCode register identifies a specific device sub-class "
+	"(e.g., Ethernet controller) within the basic function of the device "
+	"(e.g., Network controller)."):Amended
+	]	
+	uint8  SubClassCode;
+
+	[Description (
+	"RevisionID is the revision number of the NIC as obtained from "
+	"the NIC's EEPROM."):Amended
+	]
+	uint8 RevisionID;
+
+	[Description (
+	"SMBIOS string that identifies the system slot designation of "
+	"the slot on the motherboard."):Amended
+	]
+	string SlotDesignation;
+
+	[Description (
+	"SlotType identifies Type attribute of a System Slot. "
+	"For e.g. Other, Unknown, ISA, MCA EISA, PCI, etc. Note that "
+	"enumerated values are controlled by the DMTF."):Amended
+	]
+	uint8 SlotType;
+
+	[Description (
+	"SlotDataBusWidth identifies Data Bus Width attribute of a System Slot. "
+	"For e.g. 16 bit, 32 bit, 64 bit etc. Note that enumerated values are controlled "
+	"by the DMTF."):Amended
+	]
+	uint8 SlotDataBusWidth;
+
+	[Description (
+	"SlotCurrentUsage identifies Current Usage attribute of a System Slot. "
+	"For e.g. Available, In Use etc. Note that enumerated values are controlled "
+	"by the DMTF."):Amended
+	]
+	uint8 SlotCurrentUsage;
+
+	[Description (
+	"SlotLength identifies Slot Length attribute of a System Slot. "
+	"For e.g. Short Length, Long Length etc."):Amended
+	]	
+	uint8 SlotLength;
+
+	[Description (
+	"SlotID field of the System Slot structure provides a mechanism to correlate the "
+	"physical attributes of the slot to its logical access method (which varies based "
+	"on the Slot Type field)."):Amended,
+	ModelCorrespondence {"IANet_PCIDevice.SlotType"}
+	]	
+	uint8 SlotID;
+
+	[Description (
+	"SlotCharacteristics1 identifies Slot specific characteristics."):Amended
+	]	
+	uint8 SlotCharacteristics1;
+
+	[Description (
+	"SlotCharacteristics2 identifies Slot specific characteristics."):Amended
+	]	
+	uint8 SlotCharacteristics2;
+};
+
+// ============================================================================
+// IANet_EthernetPCIDevice
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANetPCIDevice class objectifies "
+		 "the controller aspects of the Intel Nic.  The superclass is IANet_PCIDevice "
+		 "and as such the PCI properties of the device are inherited from the "
+		 "superclass.  With regard to the subclass, properties are added which "
+		 "locate the device in PCI configuration space.  Other non-PCI related "
+		 "properties are also added.  Note that the network oriented properties "
+		 "of the device are covered in another class."):Amended,  LOCALE(0x409)
+		 ]
+class IANet_EthernetPCIDevice : IANet_PCIDevice 
+{
+	[Description (
+		 "PartNumber is the NIC's PBA manufacturing part number"):Amended
+	]
+   string PartNumber;
+
+	[Description (
+		 "PHYDevice indicates the particular PHY used on this NIC"):Amended,
+		 ValueMap{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
+			"13", "14", "15", "16", "50", "60", "70" },
+		 Values {
+		 /* 0 */ "No PHY detected", 
+		 /* 1 */ "Intel 82553 (PHY 100) A or B step",
+		 /* 2 */ "Intel 82553 (PHY 100) C step",
+		 /* 3 */ "Intel 82503 10Mps",
+		 /* 4 */ "National DP83840A (10BaseT and 100Base-TX)", 
+		 /* 5 */ "Seeq 80C240 - 100BASE-T4",
+		 /* 6 */ "Seeq 80C24 - 10Mps",
+	     /* 7 */ "Intel 82555 100Base-TX PHY", 
+		 /* 8 */ "Microlinear 10Mps", 
+		 /* 9 */ "Level One 10Mbps", 
+		 /* 10*/ "National DP83840 100Base-TX, C step", 
+		 /* 11*/ "ICS 100Base-TX PHY", 
+		 /* 12*/ "Gilad",
+		 /* 13*/ "Kinnereth", 
+		 /* 14*/ "Kinnereth Plus",
+		 /* 15*/ "Other",
+		 /* 16*/ "Unknown",
+		 /**********/
+		 /* 50*/ "Intel 82562 EH Phoneline PLC",
+		 /* 60*/ "Intel 82562 ET 100 Base-TX PHY",
+		 /* 70*/ "Intel 82562 EM 100 Base-TX PHY"
+		 }:Amended
+		]
+    uint16 PHYDevice;
+
+	[Description (
+	"OtherPhyDevice contains the name of the device if the PHYDevice has the value "
+	 "'Other'."):Amended
+	]
+    string OtherPhyDevice;
+
+	[Description (
+	"MediaType indicates the media which interfaces to this phy"):Amended,
+	ValueMap{"0", "1", "2", "3", "4"},
+	Values {"Unknown", "Copper", "Fiber or Backplane", "Phone Line", "Other"} : Amended
+	]
+    uint16 MediaType;
+
+	[Description (
+	"OtherMediaType contains the media type name of the device if the MediaType "
+	"has the value 'Other'."):Amended
+	]
+    string OtherMediaType;
+
+		[ 
+			ValueMap{
+			"0", 
+			"100", "101", "102", "103", "104", "105",
+			"200", "201", "202",
+			"1000", "1001", "1002","1003", "1004", "1005", "1006", "1007", 
+			"1008", "1009", "1010", "1011", "1012", "1013", "1014", 
+			"1015", "1016", "1017",
+			"10000"
+			},
+			Values {
+				"Unknown", 
+
+				/* 100 */
+				"8255X Controller",
+				"Intel 82557 Controller",
+				"Intel 82558 Controller", 
+				"Intel 82559 Controller", 
+				"Intel 82550 Controller",
+				"Intel 82551 Controller",
+
+				/* 200 */
+				"Intel(R) 82801BA I/O Controller Hub 2",
+				"ICH2",
+				"Intel(R) 82801BA I/O Controller Hub 2",
+
+				/* 1000 */
+				"8254X Controller",
+				"Intel 82542 Controller", 
+				"Intel 82543 Controller", 
+				"Intel 82543 PC Controller",
+				"Intel 82544 EI Controller",
+				"Intel 82544 PD Controller",
+				"Intel 82544 GC Controller",
+				"Intel 82540 EM Controller", 
+				"Intel 82545 EM Controller", 
+				"Intel 82546 EB Controller",
+				"Intel 82541 EI Controller",
+				"Intel 82540 EP Controller",
+				"Intel 82545 GM Controller",
+				"Intel 82541 ER Controller",
+				"Intel 82547 EI Controller",
+				
+				"Intel 82547 GI Controller",
+				"Intel 82541 GI Controller",
+				"Intel 82546 GB Controller",
+				/* 10000 */
+				"Intel 82597 EX Controller"
+			}:Amended
+		]
+	uint32 ControllerID;
+
+		[Description (
+		 "The speed of the bus"):Amended,
+		 Units("MHz"):Amended
+		]
+	uint32 BusSpeed;
+
+		[Description (
+		 "The width of the bus"):Amended,
+		 Units("bit"):Amended
+		]
+	uint32 BusWidth;
+
+		[Description (
+		 "The type of the bus"):Amended,
+		 ValueMap { "0", "1", "2", "3", "4", "5", "6", "7" },
+		 Values {"Unknown", "ISA", "Cardbus", "PCMCIA", "PCI", "PCI-X", "PCI Express", "USB"} : Amended
+		]
+	uint16 BusType;
+
+		[Description (
+		"An array of free-form strings to describe any problems detected during adapter "
+		"configuration, driver installation, or some other error."): Amended,
+		  ModelCorrespondence {"IANet_EthernetPCIDevice.TroubleShootingSeverityLevels"}
+		]
+	string TroubleShootingProblems[];
+
+		[Description (
+		"TroubleShootingSeverityLevels indicate levels of severity for "
+		"problems in the TroubleShootingProblems array. Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"), 
+		ValueMap {"0", "1", "2"},
+		Values {"SeverityLow", "SeverityMedium", "SeverityHigh"}: Amended,
+		  ModelCorrespondence {"IANet_EthernetPCIDevice.TroubleShootingProblems"}
+		]
+	uint32 TroubleShootingSeverityLevels[];
+
+		[Description (
+		"TroubleShootingCauses may contain possible causes for problems "
+		"in the TroubleShootingProblems array.  Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"),
+		ModelCorrespondence {"IANet_EthernetPCIDevice.TroubleShootingProblems"}
+		]
+	string TroubleShootingCauses[];
+
+		[Description (
+		"TroubleShootingSolutions offers possible solutions to "
+		"TroubleShootingProblems.  Note, each entry "
+		"of this array is related to the corresponding "
+		"array item in TroubleShootingProblems array."):Amended, 
+		ArrayType ("Indexed"),
+		ModelCorrespondence {"IANet_EthernetPCIDevice.TroubleShootingProblems"}
+		]
+	string TroubleShootingSolutions[];
+
+		[ Description (
+		"Manufacturer specifies the company that manufactured the network adapter"):Amended
+		]
+	string Manufacturer;	
+
+
+
+		[ Description (
+		"EEPROMVersion specifies the version of the EEPROM that is installed on the adapter. This may not be available for all adapters."):Amended
+		]
+	string EEPROMVersion;
+	
+
+};
+
+
+// ============================================================================
+// DeviceIdentity
+// ============================================================================
+		[dynamic, provider("NcsImp"), Association,
+		 Description ("IANetAdapterDevice associates the adapter class with "
+		 "the device, or controller.  In the case of a virtual adapter such as "
+		 "a team or a VLAN, IANet_EthernetAdapter will not have an associated "
+		 "device."):Amended,  LOCALE(0x409)
+		]
+class IANet_AdapterDevice : CIM_DeviceIdentity
+{
+		[Override ("SystemElement"), 
+		 Description (
+         "AdapterElement represents a reference to the Network Adapter "):Amended
+		]
+	IANet_EthernetAdapter ref SystemElement;
+		[Override ("SameElement"), 
+		 Description (
+		 "DeviceElement represents a reference to the Controller or Device "
+         "which supplies the hardware functionality."):Amended
+		]
+	IANet_EthernetPCIDevice ref SameElement;
+};
+
+// ============================================================================
+// Intel IANetSetting Abstract Base Class
+// ============================================================================
+		[Abstract, 
+		 Description("IANet_Setting objectifies instance related "
+		 "driver and network device settings. IANet_Setting is an "
+		 "Abstract superclass for a set of concrete classes of different "
+		 "types.  This set of classes allows open ended usage of a variable "
+		 "number of settings.  These can be different for different adapters, "
+		 "teams or VLANs "
+		 "and it may not always be possible to predict what parameters will "
+		 "be required."):Amended,  LOCALE(0x409)
+		]
+class IANet_Setting : CIM_Setting
+{
+		[Key,Description(
+		 "ParentId identifies the object that this parameter is for. " 
+		 "This is used to ensure that the parameters have unique keys - applications "
+		 "should use associations to link settings with managed elements.") : ToSubclass Amended
+		]
+	string ParentId;
+
+	[Key,Description(
+		 "ParentType identifies the type of object that this parameter is for. " 
+		 "This can take one of the following values:\n"
+		 "		VLAN - for VLAN settings\n"
+		 "		NIC - for Adapter settings\n"
+		 "		Team - for Team settings\n") :ToSubclass Amended]
+
+	string ParentType;
+
+		[Key,Description(
+		 "Caption contains a short name for the parameter that is used to "
+		 "uniquely identify the parameter for the user."):ToSubclass Amended]
+	string Caption;
+
+		[Description(
+		 "Description is a longer string that describes the parameter for the user.")
+		 :ToSubclass Amended
+		]
+
+     	string Description;
+
+		[Description(
+		 "MiniHelp is a help string for this setting."):ToSubclass Amended
+		]
+	string MiniHelp;
+
+	[Description (
+    "Expose level of setting. For example, based on the expose level "
+	"management application could determine whether this setting could be "
+	"exposed to the user.") : Amended,
+		ValueMap{"0", "1"}:ToSubclass,
+		Values {"Zero", "One"}:ToSubclass Amended
+	]	
+	uint32 ExposeLevel;
+
+		[Description(
+		 "Writable is true if the setting can be changed and false if the setting "
+		 "cannot be changed. If this attribute is NULL then the user needs to do a "
+		 "pre-check to see if the setting can be saved."):ToSubclass Amended
+		]
+	boolean Writable;
+	
+	[Description(
+		 "Some settings require a session to be set. If this is true then this "
+		 "setting requires a session. The setting will not be saved until the Apply "
+		 "method of IANet_NetService is called."):ToSubclass Amended
+		]
+	boolean RequiresSession;
+
+
+};
+
+// ============================================================================
+// Setting Int Class
+// ============================================================================
+
+		[dynamic, provider("NcsImp"), 
+		 Description("IANetSettingInt objectifies instance related "
+		 "driver and network device settings. IANet_SettingInt " 
+		 "specifically handles Integer settings. The following "
+		 "constraints are placed on the CurrentValue and default value:\n"
+		 "	min <= CurrentValue <= max\n"
+		 "	( CurrentValue - base ) is a multiple of step\n"):Amended,  LOCALE(0x409)]
+class IANet_SettingInt : IANet_Setting
+{
+		[Description(
+		 "Min is the minimum value that the integer can take."):Amended]
+	sint64 min;
+
+		[Description(
+		 "Max is the maximum value that the integer can take."):Amended]
+	sint64 max;
+
+		[Description(
+		 "Step is the granularity of the integer value."):Amended]
+	sint64 step;
+
+		[Description(
+		 "Base is the root from which the integer value may take values. i.e. "
+		 " CurrentValue - base is a multiple of step."):Amended]
+	uint64 base;
+
+		[Description(
+		 "DefaultValue is the initial value of the parameter."):Amended]	
+	sint64 DefaultValue;
+
+		[Write, Description(
+		 "CurrentValue is the actual value of the parameter - this is the only attribute that "
+		 "the user can change."):Amended]	
+	sint64 CurrentValue;
+
+		[Description(
+		 "Scale is unit of measurement to set or estimate series of marks "
+		 "or points at known intervals to measure value of the parameter."):Amended]	
+	sint64 Scale;
+	
+};
+
+// ============================================================================
+//  Setting Enum Class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_SettingEnum objectifies instance related "
+		 "driver and network device settings. IANet_SettingEnum " 
+		 "specifically handles Enumeration settings"):Amended,  LOCALE(0x409)
+		]
+class IANet_SettingEnum : IANet_Setting
+{
+		[Description(
+		 "PossibleValues is an array of the possible values allowed for the enum."):Amended
+		]	
+	sint64 PossibleValues[];
+		
+		[Description(
+		 "DescriptionMap describes what each value means."):Amended
+		]	
+	string DescriptionMap[];
+		
+		[write, Description(
+		 "CurrentValue is the current setting for this parameter."):Amended
+		]	 
+	sint64 CurrentValue;
+		
+		[Description(
+		 "DefaultValue is the initial setting for this value."):Amended
+		]
+	sint64 DefaultValue;
+};
+
+// ============================================================================
+//  Setting Slider Class
+// ============================================================================
+    [dynamic, provider("NcsImp"), 
+    Description("IANet_SettingSlider objectifies instance related "
+    "driver and network device settings. IANet_SettingSlider " 
+    "specifically handles Slider settings"):Amended,  LOCALE(0x409)
+    ]
+class IANet_SettingSlider : IANet_Setting
+{
+		[Description(
+		 "PossibleValues is an array of all the possible values.  The values "
+		 "should be arranged with the first value on the left of the slider and "
+		 "the last value on the right. "):Amended
+		]
+	sint64 PossibleValues[];
+		[write, Description(
+		 "CurrentValue is the current setting for this parameter."):Amended
+		] 
+	sint64 CurrentValue;
+
+		[Description(
+		 "DefaultValue is the initial setting for this parameter."):Amended
+		]
+	sint64 DefaultValue;
+		
+		[Description(
+		 "FirstLabel is the label that should be displayed on the left of the slider."):Amended
+		]
+	string FirstLabel;
+		[Description(
+		 "LastLabel is the label that should be displayed on the right of the slider."):Amended
+		]
+	string LastLabel;
+};
+
+// ============================================================================
+//  Setting Multi Selection Class
+// ============================================================================
+    [dynamic, provider("NcsImp"), 
+    Description("IANet_SettingMultiSelection objectifies instance related "
+    "driver and network device settings. IANet_SettingMultiSelection " 
+    "specifically handles Multi Selection settings."):Amended,  LOCALE(0x409)
+    ]
+
+class IANet_SettingMultiSelection : IANet_Setting
+{
+		[Description(
+		 "PossibleValues is an array of all the possible selections."):Amended
+		]
+	sint64 PossibleValues[];
+		[Description(
+		 "DescriptionMap is an array of descriptions of the possible selections."):Amended
+		]
+	string DescriptionMap[];
+		[write, Description(
+		 "Current value is a bit-wise OR of the currently chosen options from the "
+		 "possible values."):Amended
+		] 
+	sint64 CurrentValue;
+
+		[write, Description(
+		 "Default value is a bit-wise OR of the default options from the "
+		 "possible values."):Amended	
+		] 
+	sint64 DefaultValue;
+	
+};
+
+// ============================================================================
+//  Setting String Class
+// ============================================================================
+		[dynamic, provider("NcsImp"), 
+		 Description("IANet_SettingString objectifies instance related "
+		 "driver and network device settings. IANet_SettingString " 
+		 "specifically handles String settings."):Amended,  LOCALE(0x409)
+		]
+class IANet_SettingString : IANet_Setting
+{
+		[Description("MaxLength is the maximum length of the string."):Amended]
+	uint32  MaxLength;
+
+		[write, Description("CurrentString is the current value for the parameter."):Amended] 
+	string  CurrentValue;
+
+		[Description("DefaultString is the initial value for the parameter."):Amended]
+	string  DefaultValue;
+};
+
+// ===================================================================
+// Setting Context Class
+// ===================================================================
+        [dynamic, provider("NcsImp"), Association, Aggregation, Description (
+         "This relationship associates Configuration objects with "
+         "Setting objects. There may exist an arbitrary number of these "
+         "Associations, as needed, to supply the settings for a single "
+         "configuration"):Amended,  LOCALE(0x409)
+        ]
+class IANet_SettingContext : CIM_SettingContext
+{
+        [Override ("Context"), Aggregate, Description (
+         "The Configuration object that aggregates the Setting."):Amended ]
+   IANet_Configuration REF Context;
+        [Override ("Setting"), Description ("An aggregated Setting."):Amended]
+   IANet_Setting REF Setting;
+};
+
+// ===================================================================
+//   Adapter Configuration Class
+// ===================================================================
+        [dynamic, provider("NcsImp"), Association, Description (
+         "This association relates a Configuration object to one or "
+         "more ManagedSystemElements. The Configuration object "
+         "represents a certain behavior or a desired functional state "
+         "for the associated ManagedSystemElements."):Amended,  LOCALE(0x409) ]
+class IANet_AdapterConfiguration : CIM_ElementConfiguration
+{
+        [Override ("Element"), Description ("The logical or virtual network adapter"):Amended]
+   IANet_EthernetAdapter REF Element;
+        [Override, Description (
+         "The Configuration object that groups the Settings and "
+         "dependencies associated with the IANet_EthernetAdapter.") :Amended] 
+   IANet_Configuration REF Configuration;
+};
+
+// ===================================================================
+// VLAN Configuration class
+// ===================================================================
+        [dynamic, provider("NcsImp"), Association, Description (
+         "This association relates a Configuration object to one or "
+         "more ManagedSystemElements. The Configuration object "
+         "represents a certain behavior or a desired functional state "
+         "for the associated ManagedSystemElements."):Amended,  LOCALE(0x409) ]
+class IANet_VLANConfiguration: CIM_ElementConfiguration
+{
+        [Override ("Element"), Description ("The VLAN")]
+   IANet_VLAN REF Element;
+        [Override, Description (
+         "The Configuration object that groups the Settings and "
+         "dependencies associated with the IANet_VLAN.") :Amended] 
+   IANet_Configuration REF Configuration;
+};
+
+
+//**************************************************************************
+//* Class: IANet_BootAgent
+//* Derived from: CIM_BootService
+//**************************************************************************
+		[Description (
+		 "IANet_BootAgent encapsulates the parameters and settings of "
+		 " a NIC's PXE functionality."):Amended,  LOCALE(0x409)
+		 :  ToInstance ToSubClass, Dynamic, Provider ("NcsImp")]
+class IANet_BootAgent : CIM_BootService
+{
+	[read, Description (
+	"InvalidImageSignature is set true if boot agent has corrupted "
+	"flash image." ) : Amended 
+	]
+	boolean InvalidImageSignature;
+		
+	[read, Description (
+	"String describing boot agent version. e.g. 4.1.04"):Amended
+	]
+	string Version;
+
+	[read, Description (
+	"Boot agent version in the format 4.1.04"):Amended
+	]
+	uint32 VersionNumber; 
+
+	[read, Description (
+	"Indicates if install or upgrade to boot agent software is available."):Amended
+	]
+	boolean UpdateAvailable;
+
+	[read, Description (
+	"Boot Agent Flash Image type."):Amended,
+    ValueMap {"0","1", "3", "255"} , 
+    Values {"PXE", "PXE_EFI", "EFI", "Unknown"}: Amended
+	]
+	uint32 FlashImageType; 
+
+	[read, Description (
+	"Indicates if the Flash ROM on the NIC is enabled."): Amended
+	]
+	boolean FlashEnabled;
+
+	[Description (
+	"ProgramFlash will update the Flash ROM on the NIC.  This will cause "
+	"the NIC to stop communicating with the network while the flash is " 
+	"updated."):Amended, implemented
+	]
+	uint32 ProgramFlash( 
+		[IN,
+	       ValueMap {"0","1"} , 
+           Values {"Check Version", "Write Flash"}: Amended
+		] 
+		uint32 Action,
+		[IN]
+		uint8 NewFlashData[],
+		[OUT] 
+		string strErrorMessage,
+		[OUT,
+            ValueMap {"0", "1", "2", "3", "4", "5", "6"},
+            Values {"FoundImage", "UnsupportedImageFileType", "IncorrectChecksum",
+                    "InvalidChecksum", "NoFlashImage", "InvalidNicFile",
+                    "InvalidFlashImage"}
+		]
+		uint32 FlashRetCode
+		);
+
+	[Description (
+	"ReadFlash will read the Flash ROM on the NIC."):Amended, implemented
+	]
+	uint32 ReadFlash( [OUT] uint8 FlashData[] );
+
+};
+
+
+// ===================================================================
+// IANet_DeviceBootServiceImplementation 
+// ===================================================================
+   [dynamic, provider("NcsImp"), Association,
+    Description (
+       "An association between a Service and how it is implemented. "
+       "The cardinality of this association is many-to-many. "
+       "A Service may be provided by more than one Logical"
+       "Device, operating in conjunction.  And, any Device may "
+       "provide more than one Service.  When multiple Devices are "
+       "associated with a single Service, it is assumed that these "
+       "elements operate in conjunction to provide the Service.  If "
+       "different implementations of a Service exist, each of these "
+       "implementations would result in individual instantiations "
+       "of the Service object.  These individual instantiations "
+       "would then have associations to the unique implementations."):Amended,  LOCALE(0x409)
+   ]
+class IANet_DeviceBootServiceImplementation  : CIM_Dependency
+{
+      [Override ("Antecedent"),
+       Description ("The LogicalDevice."):Amended
+      ]
+   IANet_EthernetAdapter REF Antecedent;
+      [Override ("Dependent"),
+       Description ("The Service implemented using the LogicalDevice."):Amended
+      ]
+   IANet_BootAgent REF Dependent;
+};
+
+// ===================================================================
+// BootAgent Configuration class
+// ===================================================================
+        [dynamic, provider("NcsImp"), Association, Description (
+         "This association relates a Configuration object to one or "
+         "more ManagedSystemElements. The Configuration object "
+         "represents a certain behavior or a desired functional state "
+         "for the associated ManagedSystemElements."):Amended,  LOCALE(0x409) ]
+class IANet_BootAgentConfiguration: CIM_ElementConfiguration
+{
+        [Override ("Element"), Description ("The team"):Amended]
+   IANet_BootAgent REF Element;
+        [Override, Description (
+         "The Configuration object that groups the Settings and "
+         "dependencies associated with the IANet_TeamOfAdapter."):Amended ] 
+   IANet_Configuration REF Configuration;
+};
+
+
+/************************************************************************
+* Event classes
+\***********************************************************************/
+
+/////////////////////////////////////////////////////////////////////
+// Declare an instance of the __Win32Provider so as to "register" the
+// Nic Event provider
+/////////////////////////////////////////////////////////////////////
+instance of __Win32Provider as $Q
+{
+	Name  = "NcsWmiEventProv" ;
+	ClsId = "{E4E01430-7348-467D-B2B8-170D716EF5C4}";
+};
+
+// ============================================================================
+// 802.3 Adapter Event class
+// ============================================================================
+		[dynamic, provider("NcsEvent"),
+		 description("This class is used for 802.3 adapter specific events."):
+		 Amended,  LOCALE(0x409)
+		]
+class IANet_802dot3AdapterEvent:IANet_AdapterEvent
+{
+		[Description("IANet_LAD_AdapterEvent Events"):ToInstance Amended,
+		 Override("IANet_Event:EventType"),	read, 
+		 ValueMap {"1", "2", "3", "4", "5", "6","7","8", "9" },
+		 Values{
+			"Install", 
+			"Uninstall",
+			"Miniport error or disable",
+			"Setting change",
+			"Setting added",
+			"Setting deleted",
+			"Link status change",
+			"Hardware status change",
+			"Configuration change"
+		 }:ToInstance Amended
+		]
+	uint32 EventType;
+
+		[Description(
+		 "Status contains the new status that triggered the event. "
+		 "The meaning depends on the event type:\n"
+		 "	Install:\n"
+		 "		not used\n"
+		 "	Uninstall:\n"
+		 "		not used\n"
+		 "	Miniport error or disable:\n"
+		 "		'OK' if the error has recovered\n"
+		 "		'Error' if disabled or in error state\n"
+		 "	Setting change:\n"
+		 "		not used\n"
+		 "	Setting added:\n"
+		 "		not used\n"
+		 "	Setting deleted:\n"
+		 "		not used\n"
+		 "	Link status change:\n"
+		 "		'OK' if the link is up\n"
+		 "		'Error' if the link has gone down\n"
+		 "	Hardware status change:\n"
+		 "		'OK' if the error has recovered\n"
+		 "		'Error' there is a hardware error\n"
+		 ):ToInstance Amended,
+		 ValueMap {"0", "1"},
+		 Values{
+			"OK", 
+			"Error"}
+		]
+	uint32 Status;
+
+		[Description(
+		 "For a setting event, this contains the name of the setting that has changed."
+		 ):ToInstance Amended]
+	string SettingName;
+};
+
+
+// ============================================================================
+// 802.3 Team Event Class
+// ============================================================================
+		[dynamic, provider("NcsEvent"),
+		 description("This class is used for team specific events for 802.3 adapters.")
+		 :Amended,  LOCALE(0x409)
+		]
+class IANet_802dot3TeamEvent:IANet_TeamEvent
+{
+		[Description("IANet_802dot3TeamEvent Events"):ToInstance Amended,
+		 Override("IANet_Event:EventType"),	read, 
+		 ValueMap {"1", "2", "3", "4", "5", "6", "7","8"},
+		 Values{
+			"Install", 
+			"Uninstall",
+			"Miniport error or disable",
+			"Setting change",
+			"Team member added",
+			"Team member removed",
+			"Member status change",
+			"Configuration change"
+		  }:ToInstance Amended]
+	uint32 EventType;
+
+		[Description(
+		 "Other information contains extra information - this actual information "
+		 "depends on the event type:\n"
+		 "	Install:\n"
+		 "		N/A\n"
+		 "	Uninstall:\n"
+		 "		N/A\n"
+		 "	Miniport error or disable:\n"
+		 "		OK if error recovered\n"
+		 "		ERROR if disabled or in error state\n"
+		 "	Setting change:\n"
+		 "		the object path of the setting that has changed\n"
+		 "	Team member added:\n"
+		 "		key of adapter that was added\n"
+		 "	Team member removed:\n"
+		 "		key of adapter that was removed\n"
+		):ToInstance Amended]
+	uint32 Status;
+
+		[Description(
+		 "For a setting event, this contains the name of the setting that has changed"
+		 ):ToInstance Amended]
+	string SettingName;
+
+		[Description(
+		 "For a member event, this contains the path of the member that has changed"
+		 ):ToInstance Amended]
+	
+	IANet_EthernetAdapter REF MemberAdapterPath;
+
+};
+
+// ============================================================================
+// 802.3 VLAN Event class
+// ============================================================================
+		[dynamic, provider("NcsEvent"),
+		 description("This class is used for VLAN specific events for 802.3 adapters.")
+		 :Amended,  LOCALE(0x409)
+		]
+class IANet_802dot3VlanEvent:IANet_VlanEvent
+{
+		[Description("IANet_LAD_TeamEvent Events"):ToInstance Amended,
+		 Override("IANet_Event:EventType"),	read, 
+		 ValueMap {"1", "2", "3", "4", "5"},
+		 Values{
+			"Install", 
+			"Uninstall",
+			"Error or disable",
+			"Setting change",
+			"Configuration change"
+		 }:ToInstance Amended]
+	uint32 EventType;
+
+		[Description(
+		 "Other information contains extra information - this actual information "
+		 "depends on the event type:\n"
+		 "	Install :\n"
+		 "		N/A\n"
+		 "	Uninstall :\n"
+		 "		N/A\n"
+		 "	Error or disable:\n"
+		 "		OK if error recovered\n"
+		 "		ERROR if disabled or in error state\n"
+		 "	Parameter change:\n"
+		 "		the object path of the setting parameter that has changed\n"
+		 ):ToInstance Amended]
+	uint32 Status;
+
+		[Description(
+		 "For a setting event, this contains the name of the setting that has changed"
+		 ):ToInstance Amended]
+	string SettingName;
+
+};
+
+
+
+
+// ============================================================================
+// Event Provider Registration
+// ============================================================================
+instance of __EventProviderRegistration
+{
+	Provider = $Q;
+	EventQueryList = { 
+				"SELECT * FROM IANet_SessionEvent",
+				"SELECT * FROM IANet_802dot3AdapterEvent",
+				"SELECT * FROM IANet_802dot3TeamEvent",
+				"SELECT * FROM IANet_802dot3VlanEvent",
+				"SELECT * FROM IANet_InternalErrorEvent"
+	};
+};
+
+
+

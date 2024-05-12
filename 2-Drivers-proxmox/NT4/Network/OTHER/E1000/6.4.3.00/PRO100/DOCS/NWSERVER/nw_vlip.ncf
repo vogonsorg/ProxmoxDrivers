@@ -1,0 +1,54 @@
+# Example 4: 1 Adapter, 1 frametype, 2 VLANs, IP only.
+
+# A minimal VLAN example ...
+
+# In order to use iANS.LAN in VLAN mode, the adapter (or adapters for port 
+# aggregation modes) need to be connected to a "tagged" port on an IEEE 802.1Q 
+# compliant switch using matching VLAN id numbers.
+
+
+;load TCPIP.NLM.  Must be done before IP is bound.
+
+LOAD TCPIP
+
+; load the base driver for each frametype
+
+load ce1000 slot=5 frame=ethernet_ii    name=vlan_adapter_ii
+
+; load iANS and specify the VLAN id for each frametype and each VLAN the
+; server is supposed to be part of.  On a single team configuration "team=1"
+; is optional as that is the default setting.
+
+load iANS vlanid=5 frame=ethernet_ii name=vlan_5_ii team=1
+load iANS vlanid=6 frame=ethernet_ii name=vlan_6_ii team=1
+
+; After loading iANS for all the desired VLANs, bind iANS to the base driver
+; using the name that was defined when the base drivers were originally loaded.
+
+bind iANS vlan_adapter_ii team=1
+
+; Now the team can be created with an iANS commit command.
+
+load iANS commit team=1
+
+; and protocols can be bound to each instance (VLAN and frametype) of iANS in
+; the same manner as if they were being bound to a physical adapter.
+
+bind ip vlan_5_ii addr=145.5.52.1 mask=ff.ff.0.0
+bind ip vlan_6_ii addr=145.6.52.1 mask=ff.ff.0.0
+
+
+# Copyright (c) 2001, Intel Corporation. All rights reserved.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
+# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+# USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+# OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
